@@ -1,0 +1,16 @@
+var db = require('../db');
+
+var eventSchema = db.Schema({
+	name: { type: String, required: true },
+	description: { type: String, required: true },
+	type: { type: String, enum: ['summer', 'music'], required: true, default: 'summer'},
+	startDate: { type: Date, required: true },
+	endDate: { type: Date, required: true },
+	visibleFrom: { type: Date, required: false, default: Date.now },
+	visibleTo: { type: Date, required: false, default: Date.now },
+  info: { type: String, required: true }
+});
+
+var Event = db.model('Event', eventSchema);
+
+module.exports = Event;

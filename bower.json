@@ -1,0 +1,28 @@
+{
+  "name": "Jugendsommer",
+  "version": "0.0.1",
+  "description": "Event Registration Jugendsommer",
+  "main": "index.html",
+  "keywords": [
+    "event",
+    "registration",
+    "Jugendsommer",
+    "Bozen"
+  ],
+  "authors": [
+    "florian.edelmaier@gmail.com"
+  ],
+  "license": "MIT",
+  "homepage": "www.jugendsommer.com",
+  "private": true,
+  "dependencies": {
+    "angular": "~1.3.14",
+    "angular-route": "~1.3.14",
+    "angular-resource": "~1.3.14",
+    "toastr": "~2.1.0",
+    "bootstrap": "~3.3.2",
+    "angular-busy": "~4.1.2",
+    "modernizr": "~2.8.3",
+    "lodash": "~3.6.0"
+  }
+}

@@ -1,0 +1,59 @@
+<div class="container">
+	<div class="row">
+		<div class='col-sm-10'>
+			<h2 class='text-orange'>Details</h2>
+		</div>
+		<div class='col-sm-2' ng-show='iSvc.isAuthenticated()'>
+			<a class='btn btn-success btn-block' href="/#/newActivity" role="button">Neu</a>
+		</div>
+	</div>
+	<div id='alert_placeholder'></div>
+
+	<div cg-Busy='{promise:busyPromise,message:"Loading",backdrop:true,minDuration:500}'></div>
+
+	<ul class="list-group">
+		<li ng-repeat="activity in activities" class="list-group-item">
+			<div class='row'>
+				<div class='col-sm-1' ng-disabled='isReserveable(activity)'>
+					<img src='assets/detail-orange-medium.png'>
+				</div>
+				<div class='col-sm-10 act-status-container'>
+					<div class='row'>
+						<div class='col-sm-4'>
+					<strong>{{activity.name}}</strong>
+					<div class='text-info'>{{activity.startDate | date: 'dd/MM/yyyy'}} - {{activity.endDate | date: 'dd/MM/yyyy'}}</div>
+				</div>
+				<div class='col-sm-1'>
+					<button ng-class='{"btn-success": canReserve(activity), "btn-warning": canQueue(activity), "btn-danger": canNotReserve(activity), "act-status": 1 == 1, "active": 1 == 1}'><span class='badge'>{{activity.curParticipants}}<span></button>
+				</div>
+                <div class='act-status-txt'>{{statusMessage(activity)}}</div>
+				</div>
+				<div class='row'><div class='col-sm-10'>
+					<p>{{activity.description}}</p>
+				</div></div>
+				</div>
+				<div class'col-sm-1'>
+					<a href='/#/editActivity/{{activity._id}}' class='btn btn-default' role='button' ng-show='iSvc.isAuthorized("admin")'><img src='assets/edit.png' alt='Editieren'></a>
+					<a href='/#/registration/{{activity._id}}' class='btn btn-default' role='button' ng-show='iSvc.isAuthenticated() && !canNotReserve(activity)'><img src='assets/sign-green-small.png' alt='Anmeldung'></a>
+					<button type="button" class="btn btn-default" ng-hide='iSvc.isAuthenticated() && !canNotReserve(activity)' data-toggle="modal" data-target="#warningModal"><img src='assets/sign-green-small.png' alt='Anmeldung' /></button>
+				</div>
+			</div>
+		</li>
+	</ul>
+	<div class="modal fade" id="warningModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Achtung</h4>
+      </div>
+      <div class="modal-body">
+        Um sich Anmelden zu k&ouml;nnen, m&uuml;ssen sie als User eingeloggt und weiter freie Pl&auml;tze vorhanden sein!
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

@@ -1,0 +1,73 @@
+.toast-top-right {
+    top: 100px;
+}
+
+.text-orange {
+	color: orange;
+}
+
+.navbar-brand {
+	margin-bottom: 10px;
+}
+
+.navbar-brand > img {
+	width: 120px;
+}
+
+.navbar-nav li a {
+	height: 80px;
+	line-height: 60px;
+}
+
+.brand {
+	font-weight: bold;
+}
+
+.brand-orange {
+	color: orange;
+}
+
+.brand-black {
+	color: black;
+}
+
+.act-status-container {
+    height: 100%;
+}
+
+.act-status {
+    border: 1px solid LightGray;
+    font-weight: bolder;
+    color: gray;
+    padding: 6px;
+    text-align: center;
+}
+
+.act-status-txt {
+    width: 100%;
+    margin-left: 4px;
+    margin-top: 6px;
+    font-style: italic;
+    font-weight: bold;
+    text-align: left;
+    vertical-align: center;
+}
+
+.bgc-red {
+	background: #F64A4A;
+}
+
+.bgc-orange {
+	background: orange;
+}
+
+.bgc-green {
+	background: #11F33A;
+}
+
+.sel-base {
+   width: 180px;
+   height: 30px;
+   overflow: hidden;
+   border: 1px solid #ccc;
+}

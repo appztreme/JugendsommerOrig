@@ -1,0 +1,2 @@
+--recursive ./server/test/**/*.test.js
+--reporter spec
