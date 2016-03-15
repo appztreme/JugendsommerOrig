@@ -5,7 +5,6 @@ var requestSession = require('supertest-session');
 
 var curYear = new Date().getFullYear();
 
-
 function checkEventToBeEqual(res, ev) {
     expect(res.body.hasOwnProperty('name')).toBe(true);
     expect(res.body.name).toEqual(ev.name);
