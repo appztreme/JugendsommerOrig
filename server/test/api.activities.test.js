@@ -1,9 +1,10 @@
-var expect = require('expect');
-var request = require('supertest');
-var app = require('./../../app');
-var requestSession = require('supertest-session');
+'use strict';
+let expect = require('expect');
+let request = require('supertest');
+let app = require('./../../app');
+let requestSession = require('supertest-session');
 
-var curYear = new Date().getFullYear();
+const curYear = new Date().getFullYear();
 
 function checkActivityToBeEqual(res, activity) {
     expect(res.body.hasOwnProperty('name')).toBe(true);
@@ -21,9 +22,9 @@ function checkActivityToBeEqual(res, activity) {
     expect(res.body.hasOwnProperty('curParticipants')).toBe(true);
 };
 
-describe('Activity', function() {
-    describe('GET /activities for given eventId', function() {
-        it('should return 200 response', function(done) {
+describe('Activity', () => {
+    describe('GET /activities for given eventId', () => {
+        it('should return 200 response', done => {
             request(app).get('/api/activities')
                 .query({eventId: '111111111111111111111111'})
                 .end((err, res) => {
@@ -33,7 +34,7 @@ describe('Activity', function() {
                     done();
                 });
         });
-        it('should return collection of 2 entities', function(done) {
+        it('should return collection of 2 entities', done => {
             request(app).get('/api/activities')
                 .query({eventId: '111111111111111111111111'})
                 .end((err, res) => {
@@ -44,8 +45,8 @@ describe('Activity', function() {
                 });
         });
     });
-    describe('GET /activities with given activityId', function() {
-        it('should return 200 response', function(done) {
+    describe('GET /activities with given activityId', () => {
+        it('should return 200 response', done => {
             request(app).get('/api/activities')
                 .query({activityId: '111111111111111111111108'})
                 .end((err, res) => {
@@ -55,7 +56,7 @@ describe('Activity', function() {
                     done();
                 });
         });
-        it.skip('should return collection of 3 entities', function(done) {
+        it.skip('should return collection of 3 entities', done => {
             request(app).get('/api/activities')
                 .query({activityId: '111111111111111111111108'})
                 .end((err, res) => {
@@ -66,9 +67,9 @@ describe('Activity', function() {
                 });
         });
     });
-    describe('GET /activities/:id', function() {
-        it('should return an object with correct key and value pairs', function(done) {
-            var expectedActivity = {
+    describe('GET /activities/:id', () => {
+        it('should return an object with correct key and value pairs', done => {
+            const expectedActivity = {
                 name: 'activity2',
                 description: 'description activity2',
                 startDate: new Date(curYear,11,4),
@@ -86,8 +87,8 @@ describe('Activity', function() {
                 });
         });
     });
-    describe('POST /activities/', function() {
-        var newActivity = {
+    describe('POST /activities/', () => {
+        const newActivity = {
             name: 'activity post',
             description: 'description activity post',
             startDate: new Date(curYear,4,5),
@@ -96,9 +97,9 @@ describe('Activity', function() {
             maxParticipants: 4,
             queueSize: 2
         };
-        describe('authorized request', function() {
-            var testSession = requestSession(app);
-            before('login', function(done) {
+        describe('authorized request', () => {
+            let testSession = requestSession(app);
+            before('login', done => {
                 testSession.post('/api/login')
                     .send({username: 'admin', password: 'admin'})
                     .end((err, res) => {
@@ -106,7 +107,7 @@ describe('Activity', function() {
                         done();
                     });
             });
-            it('should insert new entry in db', function(done) {
+            it('should insert new entry in db', done => {
                 testSession.post('/api/activities')
                     .send(newActivity)
                     .end((err, res) => {
@@ -118,9 +119,9 @@ describe('Activity', function() {
                     });
             });
         });
-        describe('unauthorized request', function() {
-            var testSession = requestSession(app);
-            before('login', function(done) {
+        describe('unauthorized request', () => {
+            let testSession = requestSession(app);
+            before('login', done => {
                 testSession.post('/api/login')
                     .send({username: 'user', password: 'user'})
                     .end((err, res) => {
@@ -128,7 +129,7 @@ describe('Activity', function() {
                         done();
                     });
             });
-            it('should be refused', function(done) {
+            it('should be refused', done => {
                 testSession.post('/api/activities')
                     .send(newActivity)
                     .end((err, res) => {
@@ -139,8 +140,8 @@ describe('Activity', function() {
                     });
             });
         });
-        describe('unauthenticated request', function() {
-            it('should be refused', function(done) {
+        describe('unauthenticated request', () => {
+            it('should be refused', done => {
                 request(app).post('/api/activities')
                     .send(newActivity)
                     .end((err, res) => {
@@ -152,8 +153,8 @@ describe('Activity', function() {
             });
         });
     });
-    describe('PUT /activities/', function() {
-        var changedActivity = {
+    describe('PUT /activities/', () => {
+        const changedActivity = {
             _id: '111111111111111111111109',
             name: 'changed activity5',
             description: 'description changed activity5',
@@ -162,9 +163,9 @@ describe('Activity', function() {
             maxParticipants: 6,
             queueSize: 3
         };
-        describe('authorized request', function() {
-            var testSession = requestSession(app);
-            before('login', function(done) {
+        describe('authorized request', () => {
+            let testSession = requestSession(app);
+            before('login', done => {
                 testSession.post('/api/login')
                     .send({username: 'admin', password: 'admin'})
                     .end((err, res) => {
@@ -174,7 +175,7 @@ describe('Activity', function() {
                         done();
                     });
             });
-            it('should update existing entry', function(done) {
+            it('should update existing entry', done => {
                 testSession.put('/api/activities')
                     .send(changedActivity)
                     .end((err, res) => {
@@ -186,9 +187,9 @@ describe('Activity', function() {
                     });
             });
         });
-        describe('unauthorized request', function() {
-            var testSession = requestSession(app);
-            before('login', function(done) {
+        describe('unauthorized request', () => {
+            let testSession = requestSession(app);
+            before('login', done => {
                 testSession.post('/api/login')
                     .send({username: 'user', password: 'user'})
                     .end((err, res) => {
@@ -198,7 +199,7 @@ describe('Activity', function() {
                         done();
                     });
             });
-            it('should be refused', function(done) {
+            it('should be refused', done => {
                 testSession.put('/api/activities')
                     .send(changedActivity)
                     .end((err, res) => {
@@ -209,8 +210,8 @@ describe('Activity', function() {
                     });
             });
         });
-        describe('unauthenticated request', function() {
-            it('should be refused', function(done) {
+        describe('unauthenticated request', () => {
+            it('should be refused', done => {
                 request(app).put('/api/activities')
                     .send(changedActivity)
                     .end((err, res) => {

@@ -5,8 +5,8 @@ var curYear = new Date().getFullYear();
 
 db.events.remove({});
 db.activities.remove({});
-db.users.remove({});
 db.registrations.remove({});
+db.users.remove({});
 db.events.insert({
     _id: ObjectId('111111111111111111111111'),
     name: 'event1',
@@ -42,7 +42,7 @@ db.events.insert({
 });
 
 var eventsCnt = db.events.find().count();
-print("Events insertet: " + eventsCnt);
+print("Events inserted: " + eventsCnt);
 
 db.activities.insert({
     _id: ObjectId('111111111111111111111101'),
@@ -100,7 +100,7 @@ db.activities.insert({
 });
 
 var activitiesCnt = db.activities.find().count();
-print("Activities insertet: " + activitiesCnt);
+print("Activities inserted: " + activitiesCnt);
 
 db.registrations.insert({
     _id: ObjectId('111111111111111111111001'),
@@ -109,14 +109,33 @@ db.registrations.insert({
     firstNameParent: 'firstNameParent',
     lastNameParent: 'lastNameParent',
     emailParent: 'adfghi',
+    phoneNumberParent: '1234 / 5678',
     schoolChild: '1. Klasse',
+    birthdayChild: new Date(2010,11,9),
     activityId: ObjectId('111111111111111111111102'),
     healthChild: 'alles gut',
-    registrationDate: new Date(curYear, 5,5)
+    registrationDate: new Date(curYear, 5,5),
+    userId: ObjectId('111111111111111111110001')
+});
+
+db.registrations.insert({
+    _id: ObjectId('111111111111111111111002'),
+    firstNameChild: 'firstName2',
+    lastNameChild: 'lastName2',
+    firstNameParent: 'firstNameParent2',
+    lastNameParent: 'lastNameParent2',
+    emailParent: 'abcdefg',
+    phoneNumberParent: '9876 / 54321',
+    schoolChild: '2. Klasse',
+    birthdayChild: new Date(2008,9,1),
+    activityId: ObjectId('111111111111111111111102'),
+    healthChild: '-',
+    registrationDate: new Date(curYear, 7,12),
+    userId: ObjectId('111111111111111111110001')
 });
 
 var registrationsCnt = db.registrations.find().count();
-print("Registrations insertet: " + registrationsCnt);
+print("Registrations inserted: " + registrationsCnt);
 
 db.users.insert({
     _id: ObjectId('111111111111111111110001'),

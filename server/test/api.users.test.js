@@ -32,7 +32,6 @@ describe('User', function() {
                     expect(err).toNotExist();
                     expect(res).toExist();
                     expect(res.status).toEqual(201);
-                    console.log(res.body);
                     checkUserToBeEqual(res, expectedUser);
                     expect(res.body.hasOwnProperty('salt')).toNotExist();
                     expect(res.body.hasOwnProperty('hashedPassword')).toNotExist();
