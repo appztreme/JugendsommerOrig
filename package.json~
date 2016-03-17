@@ -41,9 +41,12 @@
     "passport-local": "^1.0.0"
   },
   "devDependencies": {
+    "chai": "^2.1.2",
+    "chai-as-promised": "^4.3.0",
     "expect": "^1.14.0",
     "gulp-angular-gettext": "^2.1.0",
     "mocha": "^2.4.5",
+    "protractor": "^2.0.0",
     "supertest": "^1.2.0",
     "supertest-session": "^2.0.1"
   }
