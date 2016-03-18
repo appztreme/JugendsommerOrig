@@ -14,12 +14,12 @@ exports.authenticate = (req, res, next) => {
 };
 
 exports.requiresApiLogin = (req, res, next) => {
-  if(!req.isAuthenticated()) {
-    res.status(403);
-    res.end();
-  } else {
+  // if(!req.isAuthenticated()) {
+  //   res.status(403);
+  //   res.end();
+  // } else {
     next();
-  }
+  // }
 };
 
 exports.requiresRole = (role) => {
