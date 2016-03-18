@@ -50,6 +50,9 @@ router.post('/', auth.requiresApiLogin, function(req, res, next) {
 	  birthdayChild: req.body.birthdayChild,
 	  schoolChild: req.body.schoolChild,
 	  healthChild: req.body.healthChild,
+		bandName: req.body.bandName,
+		instrument: req.body.instrument,
+		instrumentYears: req.body.instrumentYears,
 		nameContact1: req.body.nameContact1,
 	  telContact1: req.body.telContact1,
 	  nameContact2: req.body.nameContact2,
@@ -76,6 +79,9 @@ router.put('/', auth.requiresRole("admin"), function(req, res, next) {
 		reg.birthdayChild = req.body.birthdayChild;
 		reg.schoolChild = req.body.schoolChild;
 		reg.healthChild = req.body.healthChild;
+		reg.bandName = req.body.bandName;
+		reg.instrument = req.body.instrument;
+		reg.instrumentYears = req.body.instrumentYears;
 		reg.nameContact1 = req.body.nameContact1;
 		reg.telContact1 = req.body.telContact1;
 		reg.nameContact2 = req.body.nameContact2;

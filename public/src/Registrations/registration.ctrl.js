@@ -25,6 +25,9 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 			$scope.birthdayChild = $filter('date')(new Date(RegistrationCacheSvc.lastRegistration.birthdayChild), 'yyyy-MM-dd');
 			$scope.schoolChild = RegistrationCacheSvc.lastRegistration.schoolChild;
 			$scope.healthChild = RegistrationCacheSvc.lastRegistration.healthChild;
+			$scope.bandName = RegistrationCacheSvc.lastRegistration.bandName;
+			$scope.instrument = RegistrationCacheSvc.lastRegistration.instrument;
+			$scope.instrumentYears = RegistrationCacheSvc.lastRegistration.instrumentYears;
 			$scope.nameContact1 = RegistrationCacheSvc.lastRegistration.nameContact1;
 			$scope.telContact1 = RegistrationCacheSvc.lastRegistration.telContact1;
 			$scope.nameContact2 = RegistrationCacheSvc.lastRegistration.nameContact2;
@@ -44,6 +47,9 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 				birthdayChild: $scope.birthdayChild,
 				schoolChild: $scope.schoolChild,
 				healthChild: $scope.healthChild,
+				bandName: $scope.bandName,
+				instrument: $scope.instrument,
+				instrumentYears: $scope.instrumentYears,
 				nameContact1: $scope.nameContact1,
 				telContact1: $scope.telContact1,
 				nameContact2: $scope.nameContact2,
@@ -66,6 +72,9 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 				$scope.birthdayChild = null;
 				$scope.schoolChild = null;
 				$scope.healthChild = null;
+				$scope.bandName = null;
+				$scope.instrument = null;
+				$scope.instrumentYears = null;
 				$scope.nameContact1 = null;
 				$scope.telContact1 = null;
 				$scope.nameContact2 = null;
@@ -93,6 +102,9 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 		RegistrationCacheSvc.currentRegistration.birthdayChild = $scope.birthdayChild;
 		RegistrationCacheSvc.currentRegistration.schoolChild = $scope.schoolChild;
 		RegistrationCacheSvc.currentRegistration.healthChild = $scope.healthChild;
+		RegistrationCacheSvc.currentRegistration.bandName = $scope.bandName;
+		RegistrationCacheSvc.currentRegistration.instrument = $scope.instrument;
+		RegistrationCacheSvc.currentRegistration.instrumentYears = $scope.instrumentYears;
 		RegistrationCacheSvc.currentRegistration.nameContact1 = $scope.nameContact1;
 		RegistrationCacheSvc.currentRegistration.telContact1 = $scope.telContact1;
 		RegistrationCacheSvc.currentRegistration.nameContact2 = $scope.nameContact2;
@@ -111,6 +123,9 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 		}
 		$scope.schoolChild = RegistrationCacheSvc.currentRegistration.schoolChild;
 		$scope.healthChild = RegistrationCacheSvc.currentRegistration.healthChild;
+		$scope.bandName = RegistrationCacheSvc.currentRegistration.bandName;
+		$scope.instrument = RegistrationCacheSvc.currentRegistration.instrument;
+		$scope.instrumentYears = RegistrationCacheSvc.currentRegistration.instrumentYears;
 		$scope.nameContact1 = RegistrationCacheSvc.currentRegistration.nameContact1;
 		$scope.telContact1 = RegistrationCacheSvc.currentRegistration.telContact1;
 		$scope.nameContact2 = RegistrationCacheSvc.currentRegistration.nameContact2;
