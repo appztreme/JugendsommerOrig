@@ -9,6 +9,7 @@ app.controller('EventNewCtrl', function($scope, $location, EventsSvc, Notificati
 				name: $scope.name,
 				description: $scope.description,
 				type: $scope.type,
+				location: $scope.location,
 				startDate: $scope.startDate,
 				endDate: $scope.endDate,
 				visibleFrom: $scope.visibleFrom,
@@ -18,6 +19,7 @@ app.controller('EventNewCtrl', function($scope, $location, EventsSvc, Notificati
 				$scope.name = null;
 				$scope.description = null;
 				$scope.type = null;
+				$scope.location = null;
 				$scope.startDate = null;
 				$scope.endDate = null;
 				$scope.visibleFrom = null;

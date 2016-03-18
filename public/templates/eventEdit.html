@@ -27,6 +27,23 @@
 			</select>
 		</div>
 	</div>
+	<!-- LOCATION -->
+	<div class='form-group' ng-class='{ "has-error": eventForm.type.$invalid }'>
+		<label for='location' class='control-label col-sm-2'>Ort</label>
+		<div class='col-sm-10'>
+			<select name='location' class='sel-base form-control' ng-model='location'>
+				<option value='Deutschnofen'>Deutschnofen</option>
+				<option value='Jenesien'>Jenesien</option>
+				<option value='Karneid'>Karneid</option>
+				<option value='Mölten'>Mölten</option>
+				<option value='Ritten'>Ritten</option>
+				<option value='Tiers'>Tiers</option>
+				<option value='Welschnofen'>Welschnofen</option>
+				<option value='Hüttenlagerwoche'>Hüttenlagerwoche</option>
+				<option value='Tschögglberger Jungbläserwoche'>Tschögglberger Jungbläserwoche</option>
+			</select>
+		</div>
+	</div>
 	<!-- STARTDATE -->
 	<div class='form-group' ng-class='{ "has-error": eventForm.startDate.$invalid }'>
 		<label for='startDate' class='control-label col-sm-2'>Beginnt am</label>

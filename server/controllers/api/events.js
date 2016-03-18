@@ -27,6 +27,7 @@ router.post('/', auth.requiresRole("admin"), function(req, res, next) {
 		name: req.body.name,
 		description: req.body.description,
 		type: req.body.type,
+		location: req.body.location,
 		startDate: req.body.startDate,
 		endDate: req.body.endDate,
 		visibleFrom: req.body.visibleFrom,
@@ -45,6 +46,7 @@ router.put('/', auth.requiresRole("admin"), function(req, res, next) {
 		ev.name = req.body.name;
 		ev.description = req.body.description;
 		ev.type = req.body.type;
+		ev.location = req.body.location;
 		ev.startDate = req.body.startDate;
 		ev.endDate = req.body.endDate;
 		ev.visibleFrom = req.body.visibleFrom;

@@ -9,6 +9,7 @@ app.controller('EventEditCtrl', function($scope, $routeParams, $location, Notifi
 			$scope.event.name = $scope.name;
 			$scope.event.description = $scope.description;
 			$scope.event.type = $scope.type;
+			$scope.event.location = $scope.location;
 			$scope.event.startDate = $scope.startDate;
 			$scope.event.endDate = $scope.endDate;
 			$scope.event.visibleFrom = $scope.visibleFrom;
@@ -28,6 +29,7 @@ app.controller('EventEditCtrl', function($scope, $routeParams, $location, Notifi
 		$scope.name = ev.name;
 		$scope.description = ev.description;
 		$scope.type = ev.type;
+		$scope.location = ev.location;
 		$scope.startDate = new Date(ev.startDate);
 		$scope.endDate = new Date(ev.endDate);
 		$scope.visibleFrom = new Date(ev.visibleFrom);
