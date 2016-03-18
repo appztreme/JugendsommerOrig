@@ -4,16 +4,6 @@ app.controller('EventEditCtrl', function($scope, $routeParams, $location, Notifi
 
 	$scope.title = 'Programm &auml;ndern';
 
-	$scope.statusStartDate = { open: false }
-	$scope.statusEndDate = { open: false }
-	$scope.statusVisibleFrom = { open: false }
-	$scope.statusVisibleTo = { open: false }
-
-	$scope.openStartDate = function($event) { $scope.statusStartDate.open = true; };
-	$scope.openEndDate = function($event) { $scope.statusEndDate.open = true; }
-	$scope.openVisibleFrom = function($event) { $scope.statusVisibleFrom.open = true; }
-	$scope.openVisibleTo = function($event) { $scope.statusVisibleTo.open = true; }
-
 	$scope.save = function() {
 		if($scope.eventForm.$valid) {
 			$scope.event.name = $scope.name;

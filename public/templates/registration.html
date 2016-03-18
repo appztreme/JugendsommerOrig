@@ -3,10 +3,10 @@
 <button ng-show='hasCachedRegistration()' ng-click='updateFromCache()' class='btn btn-success bnt-lg col-sm-offset-2'>Daten von letzter Anmeldung verwenden</button>
 <form name='registrationForm' class='form-horizontal' novalidate ng-submit='save()'>
 	<div cg-Busy='{promise:busyPromise,message:"Loading",backdrop:true,minDuration:500}'></div>
-	
+
 	<div class='text-orange'><strong>Angaben Eltern:</strong></div>
 	<!-- FIRSTNAMEPARENT -->
-	<div class='form-group' ng-class='{ "has-error": registrationForm.firstNameParent.$invalid }'> 
+	<div class='form-group' ng-class='{ "has-error": registrationForm.firstNameParent.$invalid }'>
 	    <label for='firstNameParent' class='control-label col-sm-2'>Vorname</label>
 		<div class='col-sm-10'>
 			<input name='firstNameParent' type='text' ng-model='firstNameParent' required maxlength='100' class='form-control'></input>
@@ -27,7 +27,7 @@
 		</div>
 	</div>
 	<!-- EMAILPARENT -->
-	<div class='form-group' ng-class='{ "has-error": registrationForm.emailParent.$invalid }'> 
+	<div class='form-group' ng-class='{ "has-error": registrationForm.emailParent.$invalid }'>
 		<label for='emailParent' class='control-label col-sm-2'>Email</label>
 		<div class='col-sm-10'>
 			<input name='emailParent' type='email' ng-model='emailParent' required maxlength='200' class='form-control'></input>
@@ -35,7 +35,7 @@
 	</div>
 	<div class='text-orange'><strong>Angaben zum Kind:</strong></div>
 	<!-- FIRSTNAMECHILD -->
-	<div class='form-group' ng-class='{ "has-error": registrationForm.firstNameChild.$invalid }'> 
+	<div class='form-group' ng-class='{ "has-error": registrationForm.firstNameChild.$invalid }'>
 	    <label for='firstNameChild' class='control-label col-sm-2'>Vorname</label>
 		<div class='col-sm-10'>
 			<input name='firstNameChild' type='text' ng-model='firstNameChild' required maxlength='100' class='form-control'></input>
@@ -53,10 +53,7 @@
 		<label for='birthdayChild' class='control-label col-sm-2'>Geburtstag</label>
 		<div class='col-sm-10'>
 		<p class='input-group'>
-			<input name='birthdayChild' type='text' ng-model='birthdayChild' uib-datepicker-popup="dd.MM.yyyy" ng-required class='form-control' placeholder='JJJJ-MM-TT' is-open='statusBirthday.open'></input>
-			<span class='input-group-btn'>
-				<button type='button' class='btn btn-default' ng-click='openBirthday($event)'><i class='glyphicon glyphicon-calendar'></i></button>
-			</span>
+			<ng-datepicker ng-model='birthdayChild' view-format="DD.MM.YYYY"  locale='de' required></ng-datepicker>
 		</p>
 		</div>
 	</div>
@@ -83,7 +80,7 @@
 		</div>
 		<label for='telContact1' class='control-label col-sm-2'>Telefon1</label>
 		<div class='col-sm-4'>
-			<input name='telContact1' type='tel' maxlength='100' ng-model='telContact1' class='form-control'></input>	
+			<input name='telContact1' type='tel' maxlength='100' ng-model='telContact1' class='form-control'></input>
 		</div>
 	</div>
 	<!-- NAMECONTACT2 TELCONTACT2 -->

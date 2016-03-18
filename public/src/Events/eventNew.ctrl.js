@@ -3,16 +3,6 @@ var app = angular.module('js');
 app.controller('EventNewCtrl', function($scope, $location, EventsSvc, NotificationSvc) {
 	$scope.title = 'Neues Programm erstellen';
 
-	$scope.statusStartDate = { open: false }
-	$scope.statusEndDate = { open: false }
-	$scope.statusVisibleFrom = { open: false }
-	$scope.statusVisibleTo = { open: false }
-
-	$scope.openStartDate = function($event) { $scope.statusStartDate.open = true; }
-	$scope.openEndDate = function($event) { $scope.statusEndDate.open = true; }
-	$scope.openVisibleFrom = function($event) { $scope.statusVisibleFrom.open = true; }
-	$scope.openVisibleTo = function($event) { $scope.statusVisibleTo.open = true; }
-
 	$scope.save = function() {
 		if($scope.eventForm.$valid) {
 			EventsSvc.create({

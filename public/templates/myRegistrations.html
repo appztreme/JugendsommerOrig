@@ -5,6 +5,7 @@
 		<tr>
 			<th>Programm</th>
 			<th>Woche</th>
+			<th>Angenommen</th>
 			<th>Bezahlt</th>
 			<th>Vorname</th>
 			<th>Nachname</th>
@@ -17,6 +18,7 @@
 		<tr ng-repeat='reg in registrations | filter:filterReport(reg) | orderBy:colNameSort'>
 			<td>{{reg.activityId.eventId.name}}</td>
 			<td>{{reg.activityId.name}}</td>
+			<td class='bg-success'>{{formatBool(true)}}</td>
 			<td ng-class='{"bg-success": reg.isPaymentDone, "bg-danger": !reg.isPaymentDone}'>{{formatBool(reg.isPaymentDone)}}</td>
 			<td>{{reg.firstNameChild}}</td>
 			<td>{{reg.lastNameChild}}</td>

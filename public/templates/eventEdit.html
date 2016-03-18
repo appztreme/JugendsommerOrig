@@ -32,10 +32,7 @@
 		<label for='startDate' class='control-label col-sm-2'>Beginnt am</label>
 		<div class='col-sm-10'>
 		<p class='input-group'>
-			<input type='date' class='form-control' name='startDate' uib-datepicker-popup="dd.MM.yyyy" ng-model='startDate' ng-required is-open='statusStartDate.open'></input>
-			<span class='input-group-btn'>
-				<button type='button' class='btn btn-default' ng-click='openStartDate($event)'><i class='glyphicon glyphicon-calendar'></i></button>
-			</span>
+			<ng-datepicker ng-model='startDate' view-format="DD.MM.YYYY"  locale='de' required></ng-datepicker>
 		</p>
 		</div>
 	</div>
@@ -44,10 +41,7 @@
 		<label for='endDate' class='control-label col-sm-2'>Endet am</label>
 		<div class='col-sm-10'>
 		<p class='input-group'>
-			<input name='endDate' type='date' ng-model='endDate' uib-datepicker-popup="dd.MM.yyyy" ng-required class='form-control' is-open='statusEndDate.open'></input>
-			<span class='input-group-btn'>
-				<button type='button' class='btn btn-default' ng-click='openEndDate($event)'><i class='glyphicon glyphicon-calendar'></i></button>
-			</span>
+			<ng-datepicker ng-model='endDate' view-format="DD.MM.YYYY"  locale='de' required></ng-datepicker>
 		</p>
 		</div>
 	</div>
@@ -56,10 +50,7 @@
 		<label for='visibleFrom' class='control-label col-sm-2'>Anmeldung von</label>
 		<div class='col-sm-10'>
 		<p class='input-group'>
-			<input name='visibleFrom' type='date' ng-model='visibleFrom' ng-required uib-datepicker-popup="dd.MM.yyyy" class='form-control' is-open='statusVisibleFrom.open'></input>
-			<span class='input-group-btn'>
-				<button type='button' class='btn btn-default' ng-click='openVisibleFrom($event)'><i class='glyphicon glyphicon-calendar'></i></button>
-			</span>
+			<ng-datepicker ng-model='visibleFrom' view-format="DD.MM.YYYY"  locale='de' required></ng-datepicker>
 		</p>
 		</div>
 	</div>
@@ -68,10 +59,7 @@
 		<label for='visibleTo' class='control-label col-sm-2'>Anmeldung bis</label>
 		<div class='col-sm-10'>
 		<p class='input-group'>
-			<input name='visibleTo' type='date' ng-model='visibleTo' uib-datepicker-popup="dd.MM.yyyy" ng-required class='form-control' is-open='statusVisibleTo.open'></input>
-			<span class='input-group-btn'>
-				<button type='button' class='btn btn-default' ng-click='openVisibleTo($event)'><i class='glyphicon glyphicon-calendar'></i></button>
-			</span>
+			<ng-datepicker ng-model='visibleTo' view-format="DD.MM.YYYY"  locale='de' required></ng-datepicker>
 		</p>
 		</div>
 	</div>

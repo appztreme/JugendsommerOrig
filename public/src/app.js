@@ -1,4 +1,4 @@
-var app = angular.module('js', ['ngRoute', 'ngResource', 'cgBusy', 'ui.bootstrap']);
+var app = angular.module('js', ['ngRoute', 'ngResource', 'cgBusy','jkuri.datepicker']);
 
 app.config(['$routeProvider', '$httpProvider', function($routeProvider, $httpProvider) {
     $httpProvider.defaults.cache = false;

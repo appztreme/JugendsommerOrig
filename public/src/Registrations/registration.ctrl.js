@@ -4,9 +4,6 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 	RegistrationSvc.activityId = $routeParams.activityId;
 	$scope.activityId = $routeParams.activityId;
 
-	$scope.statusBirthday = { open: false }
-	$scope.openBirthday = function($event) { $scope.statusBirthday.open = true; }
-
 	$scope.busyPromise = RegistrationSvc.create();
 
 	$scope.isRegistrationAllowed = function() {

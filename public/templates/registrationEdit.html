@@ -60,7 +60,7 @@
 	<div class='form-group' ng-class='{ "has-error": registrationForm.birthdayChild.$invalid }'>
 		<label for='birthdayChild' class='control-label col-sm-2'>Geburtstag</label>
 		<div class='col-sm-10'>
-			<input name='birthdayChild' type='text' ng-model='birthdayChild' required class='form-control'placeholder='JJJJ-MM-TT'></input>
+			<ng-datepicker ng-model='birthdayChild' view-format="DD.MM.YYYY"  locale='de' required></ng-datepicker>
 		</div>
 	</div>
 	<!-- SCHOOLCHILD -->

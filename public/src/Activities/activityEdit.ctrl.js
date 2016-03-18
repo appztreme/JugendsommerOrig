@@ -3,12 +3,6 @@ var app = angular.module('js');
 app.controller('ActivityEditCtrl', function($scope, $routeParams, $location, NotificationSvc, ActivitiesSvc) {
 	$scope.title = 'Woche ändern';
 
-	$scope.statusStartDate = { open: false }
-	$scope.statusEndDate = { open: false }
-
-	$scope.openStartDate = function($event) { $scope.statusStartDate.open = true; }
-	$scope.openEndDate = function($event) { $scope.statusEndDate.open = true; }
-
 	$scope.save = function() {
 		if($scope.activityForm.$valid) {
 			$scope.activity.name = $scope.name;
