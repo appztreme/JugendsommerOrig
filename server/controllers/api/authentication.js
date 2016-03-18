@@ -24,7 +24,7 @@ exports.requiresApiLogin = (req, res, next) => {
 
 exports.requiresRole = (role) => {
   return function(req, res, next) {
-    if(!req.isAuthenticated() && req.user.roles.indexOf(role) === -1) {
+    if(!req.isAuthenticated() || req.user.roles.indexOf(role) === -1) {
       res.status(403);
       res.end();
     } else {

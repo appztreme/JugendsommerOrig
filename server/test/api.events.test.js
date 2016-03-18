@@ -12,6 +12,8 @@ function checkEventToBeEqual(res, ev) {
     expect(res.body.description).toEqual(ev.description);
     expect(res.body.hasOwnProperty('type')).toBe(true);
     expect(res.body.type).toEqual(ev.type);
+    expect(res.body.hasOwnProperty('location')).toBe(true);
+    expect(res.body.location).toEqual(ev.location);
     expect(res.body.hasOwnProperty('startDate')).toBe(true);
     expect(new Date(res.body.startDate)).toEqual(ev.startDate);
     expect(res.body.hasOwnProperty('endDate')).toBe(true);
@@ -51,6 +53,7 @@ describe('Event', function() {
                 name: 'event1',
                 description: 'description event1',
                 type: 'summer',
+                location: 'Jenesien',
                 startDate: new Date(curYear,11,1),
                 endDate: new Date(curYear,12,1),
                 visibleFrom: new Date(curYear,4,1),
@@ -72,6 +75,7 @@ describe('Event', function() {
             name:'eventPost',
             description:'description eventPost',
             type: 'music',
+            location: 'Jenesien',
             startDate: new Date(curYear,4,3),
             endDate: new Date(curYear,7,15),
             visibleFrom: new Date(curYear,1,1),
@@ -142,6 +146,7 @@ describe('Event', function() {
             name:'changed event',
             description:'description changed event',
             type: 'summer',
+            location: 'Karneid',
             startDate: new Date(curYear,5,12),
             endDate: new Date(curYear,9,21),
             visibleFrom: new Date(curYear,2,11),
