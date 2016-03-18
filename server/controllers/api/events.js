@@ -8,7 +8,7 @@ var startCurYear = new Date(curYear,1,1);
 router.get('/', function(req, res, next) {
 	Event.find()
 		.where('startDate').gte(startCurYear)
-		.sort({ startDate: 1 })
+		.sort({ location: 1, startDate: 1 })
 	  .exec(function(err, ev) {
 			if(err) { return next(err); }
 			res.json(ev);
