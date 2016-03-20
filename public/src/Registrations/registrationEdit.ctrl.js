@@ -15,6 +15,9 @@ app.controller('RegistrationEditCtrl', function($scope, $filter, $routeParams, $
 			$scope.registration.birthdayChild = $scope.birthdayChild;
 			$scope.registration.schoolChild = $scope.schoolChild;
 			$scope.registration.healthChild = $scope.healthChild;
+			$scope.registration.bandName = $scope.bandName;
+			$scope.registration.instrument = $scope.instrument;
+			$scope.registration.instrumentYears = $scope.instrumentYears;
 			$scope.registration.nameContact1 = $scope.nameContact1;
 			$scope.registration.telContact1 = $scope.telContact1;
 			$scope.registration.nameContact2 = $scope.nameContact2;
@@ -34,6 +37,9 @@ app.controller('RegistrationEditCtrl', function($scope, $filter, $routeParams, $
 				$scope.birthdayChild = null;
 				$scope.schoolChild = null;
 				$scope.healthChild = null;
+				$scope.bandName = null;
+				$scope.instrument = null;
+				$scope.instrumentYears = null;
 				$scope.nameContact1 = null;
 				$scope.telContact1 = null;
 				$scope.nameContact2 = null;
@@ -60,6 +66,9 @@ app.controller('RegistrationEditCtrl', function($scope, $filter, $routeParams, $
 		$scope.birthdayChild = $filter('date')(new Date(registration.birthdayChild), 'yyyy-MM-dd');
 		$scope.schoolChild = registration.schoolChild;
 		$scope.healthChild = registration.healthChild;
+		$scope.bandName = registration.bandName;
+		$scope.instrument = registration.instrument;
+		$scope.instrumentYears = registration.instrumentYears;
 		$scope.nameContact1 = registration.nameContact1;
 		$scope.telContact1 = registration.telContact1;
 		$scope.nameContact2 = registration.nameContact2;

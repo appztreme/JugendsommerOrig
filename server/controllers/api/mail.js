@@ -4,9 +4,13 @@ var server  = email.server.connect({});
 var htmlStart = "<html><body><p>Die Anmeldung f&uuml;r ";
 var htmlEnd = " f&uuml;r die Sommerprogramme des Jugenddienstes Bozen Land war erfolgreich.</p><p>Einzahlungsschein wird demn&auml;chst mittels email zugesandt.</p><p>Vielen Dank f&uuml;r die Anmeldung.</p></body></html>";
 
+var txtStart = "Die Anmeldung für ";
+var txtEnd = " für die Sommerprogramme des Jugenddienstes Bozen Land war erfolgreich. Einzahlungsschein wird demnächst mittels email zugesandt.";
+
+
 	exports.sendTxtMail = function(recipient, firstNameChild, lastNameChild) {
 		server.send({
-		text: "Anmeldebest�tigung",
+		text: txtStart + firstNameChild + " " + lastNameChild + txtEnd,
 		from: "info@jugenddienst.com",
 		to: recipient,
 		subject: "Anmeldung Jugendsommer",
