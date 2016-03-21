@@ -1,2 +1,2 @@
-require('./src/js/ngDatepicker.min.js');
+require('./src/js/ngDatepicker.js');
 module.exports = 'ng-datepicker';

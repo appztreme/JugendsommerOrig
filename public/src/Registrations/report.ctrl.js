@@ -6,7 +6,7 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 	$scope.filterReport = function(row) {
 		return function(row) {
 			if(!row) return false;
-			
+
 			if($scope.eventIdFilter && $scope.activityIdFilter)
 				return row.activityId._id === $scope.activityIdFilter;
 			else if($scope.eventIdFilter)
@@ -44,7 +44,7 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 	$scope.$watch('colNameSort', function() {
 		console.log($scope.colNameSort);
 	});
-	 
+
 	RegistrationSvc.find().success(function(registrations) {
 		$scope.registrations = registrations;
 		$scope.events = _.uniq(_.map($scope.registrations, function(reg) {
@@ -71,5 +71,5 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 			{dbName: "registrationDate", colName: "Anmeldedatum"},
 			{dbName: "isPaymentDone", colName: "Bezahlt"},
 			{dbName: "isEmailNotified", colName: "Benachrichtigt"});
-	});	
+	});
 });

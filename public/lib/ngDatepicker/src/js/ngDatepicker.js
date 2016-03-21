@@ -7,7 +7,7 @@ angular.module('jkuri.datepicker', [])
 		scope.format = attrs.format || 'YYYY-MM-DD';
 		scope.viewFormat = attrs.viewFormat || 'Do MMMM YYYY';
 		scope.locale = attrs.locale || 'en';
-		scope.firstWeekDaySunday = scope.$eval(attrs.firstWeekDaySunday) || false; 
+		scope.firstWeekDaySunday = scope.$eval(attrs.firstWeekDaySunday) || false;
 		scope.placeholder = attrs.placeholder || '';
 	};
 
@@ -32,7 +32,7 @@ angular.module('jkuri.datepicker', [])
 					month = date.month(),
 					year = date.year(),
 					n = 1;
-			
+
 				var firstWeekDay = scope.firstWeekDaySunday === true ? date.set('date', 2).day() : date.set('date', 1).day();
 				if (firstWeekDay !== 1) {
 					n -= firstWeekDay - 1;
@@ -67,6 +67,10 @@ angular.module('jkuri.datepicker', [])
 			scope.showCalendar = function () {
 				scope.calendarOpened = true;
 				generateCalendar(date);
+			};
+
+			scope.doNothing = function(event) {
+					event.preventDefault();
 			};
 
 			scope.closeCalendar = function () {
@@ -138,8 +142,8 @@ angular.module('jkuri.datepicker', [])
 			};
 
 		},
-		template: 
-		'<div><input type="text" ng-focus="showCalendar()" ng-value="viewValue" class="ng-datepicker-input" placeholder="{{ placeholder }}"></div>' +
+		template:
+		'<div><input type="text" ng-keydown="doNothing($event)" ng-focus="showCalendar()" ng-value="viewValue" class="ng-datepicker-input" placeholder="{{ placeholder }}"></div>' +
 		'<div class="ng-datepicker" ng-show="calendarOpened">' +
 		'  <div class="controls">' +
 		'    <div class="left">' +
@@ -147,7 +151,7 @@ angular.module('jkuri.datepicker', [])
 		'      <i class="fa fa-angle-left prev-month-btn" ng-click="prevMonth()"></i>' +
 		'    </div>' +
 		'    <span class="date" ng-bind="dateValue"></span>' +
-		'    <div class="right">' + 
+		'    <div class="right">' +
 		'      <i class="fa fa-angle-right next-month-btn" ng-click="nextMonth()"></i>' +
 		'      <i class="fa fa-forward next-year-btn" ng-click="nextYear()"></i>' +
 		'    </div>' +
@@ -166,4 +170,3 @@ angular.module('jkuri.datepicker', [])
 	};
 
 }]);
-
