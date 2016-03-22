@@ -12,6 +12,8 @@ var userSchema = db.Schema({
     roles: [String]
 });
 
+userSchema.index({userName: 1}, {unique: true});
+
 userSchema.methods = {
 	authenticate: function(passwordToMatch) {
 		return hashPwd(this.salt, passwordToMatch) === this.hashedPassword;
