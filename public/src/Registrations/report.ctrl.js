@@ -45,22 +45,22 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 		console.log($scope.colNameSort);
 	});
 
-	RegistrationSvc.find().success(function(registrations) {
-		$scope.registrations = registrations;
-		$scope.events = _.uniq(_.map($scope.registrations, function(reg) {
+	RegistrationSvc.getSelectionParams().success(function(params) {
+		$scope.events = _.uniq(_.map(params, function(p) {
 			return {
-				_id: reg.activityId.eventId._id,
-				name: reg.activityId.eventId.name
-			};
+				_id: p.eventId._id,
+				name: p.eventId.location + ' - ' + p.eventId.name
+			}
 		}), '_id');
 
-		$scope.allActivities = _.uniq(_.map($scope.registrations, function(reg) {
+		$scope.allActivities = _.uniq(_.map(params, function(p) {
 			return {
-				_id: reg.activityId._id,
-				parentId: reg.activityId.eventId._id,
-				name: reg.activityId.name
-			};
+				_id: p._id,
+				parentId: p.eventId._id,
+				name: p.name
+			}
 		}), '_id');
+
 		$scope.activities = undefined;
 
 		$scope.columns = new Array(
@@ -70,6 +70,35 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 			{dbName: "lastNameParents", colName: "Nachname Eltern"},
 			{dbName: "registrationDate", colName: "Anmeldedatum"},
 			{dbName: "isPaymentDone", colName: "Bezahlt"},
-			{dbName: "isEmailNotified", colName: "Benachrichtigt"});
+			{dbName: "isEmailNotified", colName: "Benachrichtigt"}
+		);
 	});
+
+	// RegistrationSvc.find().success(function(registrations) {
+	// 	$scope.registrations = registrations;
+	// 	$scope.events = _.uniq(_.map($scope.registrations, function(reg) {
+	// 		return {
+	// 			_id: reg.activityId.eventId._id,
+	// 			name: reg.activityId.eventId.name
+	// 		};
+	// 	}), '_id');
+	//
+	// 	$scope.allActivities = _.uniq(_.map($scope.registrations, function(reg) {
+	// 		return {
+	// 			_id: reg.activityId._id,
+	// 			parentId: reg.activityId.eventId._id,
+	// 			name: reg.activityId.name
+	// 		};
+	// 	}), '_id');
+	// 	$scope.activities = undefined;
+	//
+	// 	$scope.columns = new Array(
+	// 		{dbName: "firstNameChild" , colName: "Vorname"},
+	// 		{dbName: "lastNameChild", colName: "Nachname"},
+	// 		{dbName: "firstNameParents", colName: "Vorname Eltern"},
+	// 		{dbName: "lastNameParents", colName: "Nachname Eltern"},
+	// 		{dbName: "registrationDate", colName: "Anmeldedatum"},
+	// 		{dbName: "isPaymentDone", colName: "Bezahlt"},
+	// 		{dbName: "isEmailNotified", colName: "Benachrichtigt"});
+	// });
 });

@@ -20,6 +20,17 @@ router.get('/', auth.requiresRole("admin"), function(req, res, next) {
 	});
 });
 
+router.get('/selectableEventActivities', function(req, res, next) {
+		Activity.find()
+			.where('startDate').gte(startCurYear)
+			.populate('eventId', '_id name location')
+			.select('_id name eventId')
+			.exec(function(err, act) {
+				if(err) { return next(err); }
+				res.json(act);
+			});
+});
+
 router.get('/:registrationId', auth.requiresRole("admin"), function(req, res, next) {
 	Registration.findById(req.params.registrationId, function(err, registration) {
 		if(err) { return next(err); }

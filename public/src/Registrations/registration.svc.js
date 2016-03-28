@@ -9,6 +9,10 @@ app.service('RegistrationSvc', function($http) {
 		return $http.get('/api/registrations');
 	};
 
+	this.getSelectionParams = function() {
+		return $http.get('/api/registrations/selectableEventActivities');
+	};
+
 	this.findById = function(registrationId) {
 		return $http.get('/api/registrations/' + registrationId);
 	};
@@ -22,7 +26,7 @@ app.service('RegistrationSvc', function($http) {
 	};
 
 	this.create = function(reg) {
-		return $http.post('/api/registrations', reg);	
+		return $http.post('/api/registrations', reg);
 	};
 
 	this.update = function(reg) {
