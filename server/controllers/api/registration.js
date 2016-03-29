@@ -9,15 +9,30 @@ var deepPopulate = require('mongoose-deep-populate');
 var curYear = new Date().getFullYear();
 var startCurYear = new Date(curYear,1,1);
 
-router.get('/', auth.requiresRole("admin"), function(req, res, next) {
-	Registration.find()
+//router.get('/', auth.requiresRole("admin"), function(req, res, next) {
+router.get('/', function(req, res, next) {
+	var query = Registration.find()
 		.where('registrationDate').gte(startCurYear)
-		.deepPopulate('activityId.eventId')
-		.sort({ activityId: 1, lastNameChild: 1 , firstNameChild: 1})
-	  .exec(function(err, ev) {
+		.deepPopulate('activityId.eventId');
+	if(req.query.eventId)
+		query.where('activityId.eventId._id').equals(req.query.eventId);
+	if(req.query.activityId)
+		query.where('activityId._id').equals(req.query.activityId);
+
+	query.sort({ activityId: 1, lastNameChild: 1 , firstNameChild: 1})
+		.exec(function(err, reg) {
 			if(err) { return next(err); }
-			res.json(ev);
-	});
+			res.json(reg);
+		});
+
+	// Registration.find()
+	// 	.where('registrationDate').gte(startCurYear)
+	// 	.deepPopulate('activityId.eventId')
+	// 	.sort({ activityId: 1, lastNameChild: 1 , firstNameChild: 1})
+	//   .exec(function(err, ev) {
+	// 		if(err) { return next(err); }
+	// 		res.json(ev);
+	// });
 });
 
 router.get('/selectableEventActivities', function(req, res, next) {
