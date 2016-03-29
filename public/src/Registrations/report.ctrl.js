@@ -2,23 +2,25 @@ var app = angular.module('js');
 
 app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc) {
 	$scope.busyPromise = RegistrationSvc.find();
-
-	$scope.filterReport = function(row) {
-		return function(row) {
-			if(!row) return false;
-
-			if($scope.eventIdFilter && $scope.activityIdFilter)
-				return row.activityId._id === $scope.activityIdFilter;
-			else if($scope.eventIdFilter)
-				return row.activityId.eventId._id === $scope.eventIdFilter;
-			else
-				return true;
-		}
-	};
+    
+    $scope.getReportData = function() {
+      if(!$scope.activityIdFilter) return;
+      RegistrationSvc.find($scope.activityIdFilter)
+        .success(function (regs) {
+            $scope.registrations = regs;
+            $scope.emails = _.uniq(_.map($scope.registrations, function(r) {
+                return r.emailParent;
+            })).join(';');
+        });
+    };
 
 	$scope.canSelectActivity = function() {
 		return $scope.eventIdFilter;
 	};
+    
+    $scope.canLoadData = function() {
+      return $scope.activityIdFilter != null;  
+    };
 
 	$scope.editRegistration = function(registrationId) {
 		$location.path('editRegistration/' + registrationId);
@@ -73,32 +75,4 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 			{dbName: "isEmailNotified", colName: "Benachrichtigt"}
 		);
 	});
-
-	// RegistrationSvc.find().success(function(registrations) {
-	// 	$scope.registrations = registrations;
-	// 	$scope.events = _.uniq(_.map($scope.registrations, function(reg) {
-	// 		return {
-	// 			_id: reg.activityId.eventId._id,
-	// 			name: reg.activityId.eventId.name
-	// 		};
-	// 	}), '_id');
-	//
-	// 	$scope.allActivities = _.uniq(_.map($scope.registrations, function(reg) {
-	// 		return {
-	// 			_id: reg.activityId._id,
-	// 			parentId: reg.activityId.eventId._id,
-	// 			name: reg.activityId.name
-	// 		};
-	// 	}), '_id');
-	// 	$scope.activities = undefined;
-	//
-	// 	$scope.columns = new Array(
-	// 		{dbName: "firstNameChild" , colName: "Vorname"},
-	// 		{dbName: "lastNameChild", colName: "Nachname"},
-	// 		{dbName: "firstNameParents", colName: "Vorname Eltern"},
-	// 		{dbName: "lastNameParents", colName: "Nachname Eltern"},
-	// 		{dbName: "registrationDate", colName: "Anmeldedatum"},
-	// 		{dbName: "isPaymentDone", colName: "Bezahlt"},
-	// 		{dbName: "isEmailNotified", colName: "Benachrichtigt"});
-	// });
 });

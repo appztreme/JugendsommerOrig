@@ -8,8 +8,8 @@ if(process.env.NODE_ENV === 'test') {
 	});
 }
 else {
-	mongoose.connect('mongodb://localhost/jugendsommer_test', function() {
-		console.log('mongodb connected to test');
+	mongoose.connect('mongodb://localhost/jugendsommer', function() {
+		console.log('mongodb connected to production');
 	});
 }
 

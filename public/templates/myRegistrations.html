@@ -17,7 +17,7 @@
 			<th>Tel. Eltern</th>
 		</tr>
 		<tr ng-repeat='reg in registrations | filter:filterReport(reg) | orderBy:colNameSort'>
-			<td>{{reg.activityId.eventId.name}}</td>
+			<td>{{reg.activityId.eventId.location}} - {{reg.activityId.eventId.name}}</td>
 			<td>{{reg.activityId.name}}</td>
 			<td class='bg-success'>{{formatBool(true)}}</td>
 			<td ng-class='{"bg-success": reg.isPaymentDone, "bg-danger": !reg.isPaymentDone}'>{{formatBool(reg.isPaymentDone)}}</td>

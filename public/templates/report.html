@@ -1,12 +1,11 @@
 <div class='container'>
 	<div class='container col-sm-9'>
 	<div class='panel panel-default'>
-	<div class='panel-heading'>Filter</div>
+	<div class='panel-heading'>Filter</div> 
 	<div class='row panel-body'>
 		<label for='eventFilter' class='control-label col-sm-1'>Progr.:</label>
 		<div class='col-sm-3'>
 			<select id='eventFilter' class='sel-base' ng-model='eventIdFilter'>
-				<option value=''>Alle</option>
 				<option ng-repeat='event in events' value='{{event._id}}'>{{event.name}}</option>
 			</select>
 		</div>
@@ -17,6 +16,9 @@
 				<option ng-repeat='activity in activities' value='{{activity._id}}'>{{activity.name}}</option>
 			</select>
 		</div>
+        <div class='col-sm-1'>
+            <button type='button' class='btn btn-primary' ng-disabled="!canLoadData()" ng-click='getReportData()'>Laden</button>
+        </div>
 	</div>
 	</div>
 	</div>
@@ -57,11 +59,11 @@
 			<th>Tel. Kontakt2</th>
 			<th>Anmeldedatum</th>	
 		</tr>
-		<tr ng-repeat='reg in registrations | filter:filterReport(reg) | orderBy:colNameSort'>
+		<tr ng-repeat='reg in registrations | orderBy:colNameSort'>
 			<td><button class="btn glyphicon glyphicon-pencil" ng-disabled='!iSvc.isAuthorized("admin")' type="button" ng-click='editRegistration(reg._id)'></button></td>
 			<td><button type="button" class="btn glyphicon glyphicon-trash" ng-disabled='!iSvc.isAuthorized("admin")' ng-click='deleteRegistration(reg._id)'></button></td>
 			<!--<span class="glyphicon glyphicon-search" aria-hidden="true"></span>-->
-			<td>{{reg.activityId.eventId.name}}</td>
+			<td>{{reg.activityId.eventId.location}} - {{reg.activityId.eventId.name}}</td>
 			<td>{{reg.activityId.name}}</td>
 			<td>{{reg.firstNameChild}}</td>
 			<td>{{reg.lastNameChild}}</td>
@@ -81,4 +83,9 @@
 			<td>{{reg.registrationDate | date: 'dd/MM/yyyy : hh.mm.ss'}}</td>
 		</tr>
 	</table>
+    <br /> 
+    <div class='col-sm-6'>
+        <label for='uniqueEmail'><strong>Email-Adressen Eltern:</strong></label>
+        <textarea name='uniqueEmail' type='text' rows='4' class='form-control' ng-model='emails'></textarea>
+    </div>
 </div>

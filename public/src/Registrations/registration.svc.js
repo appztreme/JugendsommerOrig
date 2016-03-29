@@ -5,8 +5,11 @@ var app = angular.module('js');
  * communication with server
  */
 app.service('RegistrationSvc', function($http) {
-	this.find = function() {
-		return $http.get('/api/registrations');
+	this.find = function(activityId) {
+        var path = '/api/registrations';
+        if(activityId) { path = path + '?activityId=' + activityId; }
+        console.log("PFAD:", path)
+		return $http.get(path);
 	};
 
 	this.getSelectionParams = function() {
