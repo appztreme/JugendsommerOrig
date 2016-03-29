@@ -28,6 +28,7 @@ router.get('/selectableEventActivities', function(req, res, next) {
 			.where('startDate').gte(startCurYear)
 			.populate('eventId', '_id name location')
 			.select('_id name eventId')
+            .sort({'eventId.location': 1})
 			.exec(function(err, act) {
 				if(err) { return next(err); }
 				res.json(act);
