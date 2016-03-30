@@ -7,6 +7,7 @@ let check = require('./helper/checkResponseStatus');
 let loginHelper = require('./helper/loginAs');
 
 const curYear = new Date().getFullYear();
+const today = new Date();
 
 function checkRegistrationToBeEqual(res, reg) {
     expect(res.body.hasOwnProperty('firstNameParent')).toBe(true);
@@ -39,8 +40,14 @@ function checkRegistrationToBeEqual(res, reg) {
     expect(res.body.activityId).toEqual(reg.activityId);
     // //expect(res.body.hasOwnProperty('prevActivityId')).toBe(true);
     // expect(res.body.prevActivityId).toEqual(reg.prevActivityId);
+    const registrationDate = new Date(res.body.registrationDate);
+    const givenYear = reg.registrationDate ? reg.registrationDate.getFullYear() : curYear;
+    const givenMonth = reg.registrationDate ? reg.registrationDate.getMonth() : today.getMonth();
+    const givenDay = reg.registrationDate ? reg.registrationDate.getDay() : today.getDay();
     expect(res.body.hasOwnProperty('registrationDate')).toBe(true);
-    expect(new Date(res.body.registrationDate)).toEqual(reg.registrationDate);
+    expect(registrationDate.getFullYear()).toEqual(givenYear);
+    expect(registrationDate.getMonth()).toEqual(givenMonth);
+    expect(registrationDate.getDay()).toEqual(givenDay);
     expect(res.body.hasOwnProperty('isPaymentDone')).toBe(true);
     expect(res.body.isPaymentDone).toEqual(reg.isPaymentDone);
     expect(res.body.hasOwnProperty('isEmailNotified')).toBe(true);
@@ -48,6 +55,15 @@ function checkRegistrationToBeEqual(res, reg) {
     expect(res.body.hasOwnProperty('userId')).toBe(true);
     expect(res.body.userId).toEqual(reg.userId);
 };
+
+function checkActivityHasChanged(activityId, expectedNumber, done) {
+    request(app).get('/api/activities/' + activityId)
+        .end((err, res) => {
+          check.checkResponseStatus(err, res, 200);
+          expect(res.curParticipants).toEqual(expectedNumber);
+          done();
+        });
+}
 
 describe('Registrations', () => {
     describe('GET /registrations', () => {
@@ -149,7 +165,7 @@ describe('Registrations', () => {
 
       });
     });
-    describe.skip('POST /registrations', () => {
+    describe('POST /registrations', () => {
         const newRegistration = {
             firstNameChild: 'testFirstNameChild',
             lastNameChild: 'testLastNameChild',
@@ -158,10 +174,14 @@ describe('Registrations', () => {
             phoneNumberParent: '231 / 432987',
             emailParent: 'testMailParent',
             schoolChild: '1. Klasse',
+            bandName: 'band name',
+            instrument: 'flute',
+            instrumentYears: 'several',
             birthdayChild: new Date(2007,8,22),
-            activityId: '111111111111111111111102',
+            activityId: '111111111111111111111107',
             healthChild: 'Allergie',
-            registrationDate: new Date(curYear, 5,5),
+            isPaymentDone: false,
+            isEmailNotified: false,
             userId: '111111111111111111110001'
         };
         describe('authorized request', () => {

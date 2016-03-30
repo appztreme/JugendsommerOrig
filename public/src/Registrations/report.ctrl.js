@@ -1,8 +1,8 @@
 var app = angular.module('js');
 
-app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc) {
+app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc, ReportCacheSvc) {
 	$scope.busyPromise = RegistrationSvc.find();
-    
+
     $scope.getReportData = function() {
       if(!$scope.activityIdFilter) return;
       RegistrationSvc.find($scope.activityIdFilter)
@@ -17,9 +17,9 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 	$scope.canSelectActivity = function() {
 		return $scope.eventIdFilter;
 	};
-    
+
     $scope.canLoadData = function() {
-      return $scope.activityIdFilter != null;  
+      return $scope.activityIdFilter != null;
     };
 
 	$scope.editRegistration = function(registrationId) {
@@ -39,40 +39,59 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 
 	$scope.$watch('eventIdFilter', function() {
 		if(!$scope.eventIdFilter) return;
+		ReportCacheSvc.currentEventIdFilter = $scope.eventIdFilter;
 		$scope.activityIdFilter = undefined;
 		$scope.activities = _.filter($scope.allActivities, { parentId: $scope.eventIdFilter});
+	});
+	$scope.$watch('activityIdFilter', function() {
+		ReportCacheSvc.currentActivityIdFilter = $scope.activityIdFilter;
 	});
 
 	$scope.$watch('colNameSort', function() {
 		console.log($scope.colNameSort);
 	});
 
-	RegistrationSvc.getSelectionParams().success(function(params) {
-		$scope.events = _.uniq(_.map(params, function(p) {
-			return {
-				_id: p.eventId._id,
-				name: p.eventId.location + ' - ' + p.eventId.name
-			}
-		}), '_id');
+	if(ReportCacheSvc.hasSelectionData) {
+		$scope.events = ReportCacheSvc.events;
+		$scope.allActivities = ReportCacheSvc.allActivities;
+	} else {
+		RegistrationSvc.getSelectionParams().success(function(params) {
+			$scope.events = _.uniq(_.map(params, function(p) {
+				return {
+					_id: p.eventId._id,
+					name: p.eventId.location + ' - ' + p.eventId.name
+				}
+			}), '_id');
 
-		$scope.allActivities = _.uniq(_.map(params, function(p) {
-			return {
-				_id: p._id,
-				parentId: p.eventId._id,
-				name: p.name
-			}
-		}), '_id');
+			$scope.allActivities = _.uniq(_.map(params, function(p) {
+				return {
+					_id: p._id,
+					parentId: p.eventId._id,
+					name: p.name
+				}
+			}), '_id');
 
-		$scope.activities = undefined;
+			$scope.activities = undefined;
+			ReportCacheSvc.events = $scope.events;
+			ReportCacheSvc.allActivities = $scope.allActivities;
+		});
+	}
 
-		$scope.columns = new Array(
-			{dbName: "firstNameChild" , colName: "Vorname"},
-			{dbName: "lastNameChild", colName: "Nachname"},
-			{dbName: "firstNameParents", colName: "Vorname Eltern"},
-			{dbName: "lastNameParents", colName: "Nachname Eltern"},
-			{dbName: "registrationDate", colName: "Anmeldedatum"},
-			{dbName: "isPaymentDone", colName: "Bezahlt"},
-			{dbName: "isEmailNotified", colName: "Benachrichtigt"}
-		);
-	});
+	$scope.columns = new Array(
+		{dbName: "firstNameChild" , colName: "Vorname"},
+		{dbName: "lastNameChild", colName: "Nachname"},
+		{dbName: "firstNameParents", colName: "Vorname Eltern"},
+		{dbName: "lastNameParents", colName: "Nachname Eltern"},
+		{dbName: "registrationDate", colName: "Anmeldedatum"},
+		{dbName: "isPaymentDone", colName: "Bezahlt"},
+		{dbName: "isEmailNotified", colName: "Benachrichtigt"}
+	);
+
+	if(ReportCacheSvc.hasEventFilterParameter) {
+		$scope.eventIdFilter = ReportCacheSvc.currentEventIdFilter;
+	}
+	if(ReportCacheSvc.hasActivityFilterParameter) {
+		$scope.activityIdFilter = ReportCacheSvc.currentActivityIdFilter;
+		$scope.getReportData();
+	}
 });

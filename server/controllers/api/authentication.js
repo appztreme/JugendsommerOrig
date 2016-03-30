@@ -13,13 +13,13 @@ exports.authenticate = (req, res, next) => {
   auth(req, res, next);
 };
 
-exports.requiresApiLogin = (req, res, next) => {
-  // if(!req.isAuthenticated()) {
-  //   res.status(403);
-  //   res.end();
-  // } else {
+exports.requiresApiLogin = function (req, res, next) {
+  if(!req.isAuthenticated()) {
+    res.status(403);
+    res.end();
+  } else {
     next();
-  // }
+  }
 };
 
 exports.requiresRole = (role) => {

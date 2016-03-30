@@ -55,7 +55,8 @@ db.activities.insert({
     endDate: new Date(curYear,11,3),
     eventId: ObjectId('111111111111111111111111'),
     maxParticipants: 5,
-    queueSize: 3
+    queueSize: 3,
+    curParticipants: 0
 });
 
 db.activities.insert({
@@ -66,7 +67,8 @@ db.activities.insert({
     endDate: new Date(curYear,11,7),
     eventId: ObjectId('111111111111111111111111'),
     maxParticipants: 3,
-    queueSize: 1
+    queueSize: 1,
+    curParticipants: 2
 });
 
 db.activities.insert({
@@ -77,7 +79,8 @@ db.activities.insert({
     endDate: new Date(curYear,1,6),
     eventId: ObjectId('111111111111111111111112'),
     maxParticipants: 3,
-    queueSize: 1
+    queueSize: 1,
+    curParticipants: 1
 });
 
 db.activities.insert({
@@ -88,7 +91,8 @@ db.activities.insert({
     endDate: new Date(curYear,1,12),
     eventId: ObjectId('111111111111111111111112'),
     maxParticipants: 3,
-    queueSize: 1
+    queueSize: 1,
+    curParticipants: 0
 });
 
 db.activities.insert({
@@ -99,7 +103,8 @@ db.activities.insert({
     endDate: new Date(curYear-1,11,22),
     eventId: ObjectId('111111111111111111111112'),
     maxParticipants: 3,
-    queueSize: 1
+    queueSize: 1,
+    curParticipants: 0
 });
 
 var activitiesCnt = db.activities.find().count();
