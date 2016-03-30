@@ -18,9 +18,9 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 		return $scope.eventIdFilter;
 	};
 
-    $scope.canLoadData = function() {
-      return $scope.activityIdFilter != null;
-    };
+  $scope.canLoadData = function() {
+    return $scope.activityIdFilter != null;
+  };
 
 	$scope.editRegistration = function(registrationId) {
 		$location.path('editRegistration/' + registrationId);
@@ -38,7 +38,6 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 	};
 
 	$scope.filterActivities = function() {
-		//$scope.activityIdFilter = undefined;
 		$scope.activities = _.filter($scope.allActivities, { parentId: $scope.eventIdFilter});
 	};
 
@@ -53,12 +52,11 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 		$scope.registrations = undefined;
 	});
 
-	$scope.$watch('colNameSort', function() {
-		console.log($scope.colNameSort);
-	});
+	// $scope.$watch('colNameSort', function() {
+	// 	console.log($scope.colNameSort);
+	// });
 
 	if(ReportCacheSvc.hasSelectionData()) {
-		console.log("cache event", ReportCacheSvc.events);
 		$scope.events = ReportCacheSvc.events;
 		$scope.allActivities = ReportCacheSvc.allActivities;
 	} else {
