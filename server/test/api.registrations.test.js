@@ -27,7 +27,7 @@ function checkRegistrationToBeEqual(res, reg) {
     expect(res.body.schoolChild).toEqual(reg.schoolChild);
     expect(res.body.hasOwnProperty('healthChild')).toBe(true);
     expect(res.body.healthChild).toEqual(reg.healthChild);
-    // expect(res.body.hasOwnProperty('nameContact1')).toBe(true);
+    //expect(res.body.hasOwnProperty('nameContact1')).toBe(true);
     // expect(res.body.nameContact1).toEqual(reg.nameContact1);
     // expect(res.body.hasOwnProperty('telContact1')).toBe(true);
     // expect(res.body.telContact1).toEqual(reg.telContact1);
@@ -41,10 +41,10 @@ function checkRegistrationToBeEqual(res, reg) {
     // expect(res.body.prevActivityId).toEqual(reg.prevActivityId);
     expect(res.body.hasOwnProperty('registrationDate')).toBe(true);
     expect(new Date(res.body.registrationDate)).toEqual(reg.registrationDate);
-    // //expect(res.body.hasOwnProperty('isPaymentDone')).toBe(true);
-    // expect(res.body.isPaymentDone).toEqual(reg.isPaymentDone);
-    // //expect(res.body.hasOwnProperty('isEmailNotified')).toBe(true);
-    // expect(res.body.isEmailNotified).toEqual(reg.isEmailNotified);
+    expect(res.body.hasOwnProperty('isPaymentDone')).toBe(true);
+    expect(res.body.isPaymentDone).toEqual(reg.isPaymentDone);
+    expect(res.body.hasOwnProperty('isEmailNotified')).toBe(true);
+    expect(res.body.isEmailNotified).toEqual(reg.isEmailNotified);
     expect(res.body.hasOwnProperty('userId')).toBe(true);
     expect(res.body.userId).toEqual(reg.userId);
 };
@@ -61,12 +61,12 @@ describe('Registrations', () => {
                       done();
                   });
           });
-          it('should return collection of 2 entities', done => {
+            it('should return collection of 3 entities', done => {
               testSession.get('/api/registrations')
                   .end((err, res) => {
                       check.checkResponseStatus(err, res, 200);
                       expect(res.body).toBeA('array');
-                      expect(res.body.length).toEqual(2);
+                      expect(res.body.length).toEqual(3);
                       done();
                   });
           });
@@ -85,6 +85,8 @@ describe('Registrations', () => {
           activityId: '111111111111111111111102',
           healthChild: 'alles gut',
           registrationDate: new Date(curYear, 5,5),
+          isPaymentDone: false,
+          isEmailNotified: false,
           userId: '111111111111111111110001'
       };
       describe('authorized request', () => {

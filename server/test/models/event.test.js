@@ -31,6 +31,10 @@ describe('Event Model', () => {
         expect(ev.info).toExist();
         expect(ev.info).toEqual('test info');
     });
+    it('should have a type string', () => {
+        expect(ev.type).toExist();
+        expect(ev.type).toEqual('summer');
+    });
     it('should have a startDate date', () => {
         expect(ev.startDate).toExist();
         expect(ev.startDate).toEqual(new Date(2016,1,1));

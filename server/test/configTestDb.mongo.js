@@ -137,6 +137,25 @@ db.registrations.insert({
     userId: ObjectId('111111111111111111110001')
 });
 
+db.registrations.insert({
+    _id: ObjectId('111111111111111111111003'),
+    firstNameChild: 'firstName3',
+    lastNameChild: 'lastName3',
+    firstNameParent: 'firstNameParent3',
+    lastNameParent: 'lastNameParent3',
+    emailParent: 'abcgmx.at',
+    phoneNumberParent: '9876 / 54321',
+    schoolChild: '-',
+    birthdayChild: new Date(2009,7,8),
+    activityId: ObjectId('111111111111111111111107'),
+    healthChild: '-',
+    bandName: 'music band',
+    instrument: 'french horn',
+    instrumentYears: '4 Jahre',
+    registrationDate: new Date(curYear, 6,19),
+    userId: ObjectId('111111111111111111110001')
+});
+
 var registrationsCnt = db.registrations.find().count();
 print("Registrations inserted: " + registrationsCnt);
 

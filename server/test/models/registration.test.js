@@ -16,6 +16,9 @@ describe('Registration Model', () => {
           birthdayChild: new Date(2010,3,15),
           activityId: '111111111111111111111102',
           healthChild: '-',
+          bandName: 'band name',
+          instrument: 'bugle',
+          instrumentYears: '3 years',
           registrationDate: new Date(2016,7,12),
           nameContact1: 'contact1',
           telContact1: 'telContact1',
@@ -62,6 +65,18 @@ describe('Registration Model', () => {
     it('should have a healthChidl string', () => {
         expect(reg.healthChild).toExist();
         expect(reg.healthChild).toEqual('-');
+    });
+    it('should have a bandName string', () => {
+        expect(reg.bandName).toExist();
+        expect(reg.bandName).toEqual('band name');
+    });
+    it('should have an instrument string', () => {
+        expect(reg.instrument).toExist();
+        expect(reg.instrument).toEqual('bugle');
+    });
+    it('should have an instrumentYears string', () => {
+        expect(reg.instrumentYears).toExist();
+        expect(reg.instrumentYears).toEqual('3 years');
     });
     it('should have a nameContact1 string', () => {
         expect(reg.nameContact1).toExist();
