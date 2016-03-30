@@ -37,21 +37,28 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 		return "nein";
 	};
 
+	$scope.filterActivities = function() {
+		//$scope.activityIdFilter = undefined;
+		$scope.activities = _.filter($scope.allActivities, { parentId: $scope.eventIdFilter});
+	};
+
 	$scope.$watch('eventIdFilter', function() {
 		if(!$scope.eventIdFilter) return;
 		ReportCacheSvc.currentEventIdFilter = $scope.eventIdFilter;
-		$scope.activityIdFilter = undefined;
-		$scope.activities = _.filter($scope.allActivities, { parentId: $scope.eventIdFilter});
+		$scope.filterActivities();
+		$scope.registrations = undefined;
 	});
 	$scope.$watch('activityIdFilter', function() {
 		ReportCacheSvc.currentActivityIdFilter = $scope.activityIdFilter;
+		$scope.registrations = undefined;
 	});
 
 	$scope.$watch('colNameSort', function() {
 		console.log($scope.colNameSort);
 	});
 
-	if(ReportCacheSvc.hasSelectionData) {
+	if(ReportCacheSvc.hasSelectionData()) {
+		console.log("cache event", ReportCacheSvc.events);
 		$scope.events = ReportCacheSvc.events;
 		$scope.allActivities = ReportCacheSvc.allActivities;
 	} else {
@@ -87,10 +94,11 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 		{dbName: "isEmailNotified", colName: "Benachrichtigt"}
 	);
 
-	if(ReportCacheSvc.hasEventFilterParameter) {
+	if(ReportCacheSvc.hasEventFilterParameter()) {
 		$scope.eventIdFilter = ReportCacheSvc.currentEventIdFilter;
 	}
-	if(ReportCacheSvc.hasActivityFilterParameter) {
+	if(ReportCacheSvc.hasActivityFilterParameter()) {
+		$scope.filterActivities();
 		$scope.activityIdFilter = ReportCacheSvc.currentActivityIdFilter;
 		$scope.getReportData();
 	}

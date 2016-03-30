@@ -3,7 +3,8 @@ var app = angular.module('js');
 app.service('ReportCacheSvc', function() {
 
 	this.isNotEmptyCache = function() {
-		return !angular.isUndefined(this.lastEventIdFilter);
+		return !angular.isUndefined(this.currentEventIdFilter) &&
+					 !angular.isUndefined(this.currentActivityIdFilter);
 	};
 
 	this.hasEventFilterParameter = function() {
@@ -18,9 +19,6 @@ app.service('ReportCacheSvc', function() {
       return !angular.isUndefined(this.events) &&
              !angular.isUndefined(this.allActivities);
   };
-
-  this.lastActivityIdFilter = undefined;
-  this.lastEventIdFilter = undefined;
 
 	this.currentActivityIdFilter = undefined;
   this.currentEventIdFilter = undefined;
