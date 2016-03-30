@@ -46,10 +46,12 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 		ReportCacheSvc.currentEventIdFilter = $scope.eventIdFilter;
 		$scope.filterActivities();
 		$scope.registrations = undefined;
+		$scope.emails = undefined;
 	});
 	$scope.$watch('activityIdFilter', function() {
 		ReportCacheSvc.currentActivityIdFilter = $scope.activityIdFilter;
 		$scope.registrations = undefined;
+		$scope.emails = undefined;
 	});
 
 	// $scope.$watch('colNameSort', function() {
