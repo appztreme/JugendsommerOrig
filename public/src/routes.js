@@ -44,7 +44,7 @@ app.config(function($routeProvider) {
 		})
 		.when('/registration/:activityId', {
 			controller: 'RegistrationCtrl',
-			templateUrl: '../templates/registration.html'	
+			templateUrl: '../templates/registration.html'
 		})
 		.when('/editRegistration/:registrationId', {
 			controller: 'RegistrationEditCtrl',
@@ -52,14 +52,22 @@ app.config(function($routeProvider) {
 		})
 		.when('/login', {
 			controller: 'LoginCtrl',
-			templateUrl: '../templates/login.html'	
+			templateUrl: '../templates/login.html'
 		})
 		.when('/user', {
 			controller: 'UserNewCtrl',
-			templateUrl: '../templates/userNew.html'	
+			templateUrl: '../templates/userNew.html'
+		})
+		.when('/userToken', {
+			controller: 'UserTokenRequestCtrl',
+			templateUrl: '../templates/userTokenRequest.html'
+		})
+		.when('/userNewPwd', {
+			controller: 'UserUpdatePwdCtrl',
+			templateUrl: '../templates/userUpdatePwd.html'
 		})
 		.when('/agb/:activityId', {
 			controller: 'AgbEditCtrl',
-			templateUrl: '../templates/agbEdit.html'	
+			templateUrl: '../templates/agbEdit.html'
 		});
 });

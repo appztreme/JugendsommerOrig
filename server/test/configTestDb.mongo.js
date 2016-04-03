@@ -200,5 +200,17 @@ db.users.insert({
     roles: ['admin', 'fadmin']
 });
 
+db.users.insert({
+    _id: ObjectId('111111111111111111110004'),
+    firstName: 'testFirst',
+    lastName: 'testLast',
+    userTel: '1234/56789',
+    userEmail: 'florian.edelmaier@gmail.com',
+    userName: 'test',
+    hashedPassword: '3fb9421d0d206d6726a1bf476183b6d2281781f7', // user
+    salt: 'j3D+6LLnpmfebjVSCLWVF3G2dCgNvVO/ieVu6VjOiGj1/zGhiHa4Sc8NO7ojrl59oZ5qdVPoLNXHd0xqJ/kSGKQTsiVs5JbKHMxIff+JIfioByLfz2pbL37br3HKiQWCDNF//Orf2oa9vt7XElkhS7ZfVksmsSoAvkQji5Wce6c=',
+    roles: []
+});
+
 var userCnt = db.users.find().count();
 print("Users inserted: " + userCnt);

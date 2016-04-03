@@ -33,31 +33,29 @@ router.get('/:id', function(req, res, next) {
 });
 
 router.post('/updatePwd', (req, res, next) => {
-
-});
-
-router.post('/requestUserToken', (req, res, next) => {
-	var uName = req.body.userName;
 	User.findOne({userName: req.body.userName})
 		.exec((err, user) => {
 			if(err) { next(err); }
-			mail.sendUserTokenMail(user.userEmail, getUserToken(user));
-			res.status(202);
+			if(user.checkUserToken(req.body.userToken)) {
+				user.hashPassword(req.body.password);
+				user.save(function(errSave, userSave) {
+					if(err) { return next(err); }
+					res.status(201).end();
+				});
+			} else {
+					next(new Error("Security Token Mismatch"));
+			}
 		});
 });
 
-function getUserToken(user) {
-		if(user.hashedPassword.length >= 25)
-		{
-			return "" +
-						 user.hashedPassword[0] +
-			       user.hashedPassword[7] +
-						 user.hashedPassword[13] +
-						 user.hashedPassword[22];
-		} else {
-			return user.hashedPassword.substring(user.hashedPassword.length - 4);
-		}
-};
+router.post('/requestUserToken', (req, res, next) => {
+	User.findOne({userName: req.body.userName})
+		.exec((err, user) => {
+			if(err) { next(err); }
+			mail.sendUserTokenMail(user.userEmail, user.getUserToken());
+			res.status(202).end();
+		});
+});
 
 function createSalt() {
 	return crypto.randomBytes(128).toString('base64');

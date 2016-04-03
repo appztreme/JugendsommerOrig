@@ -1,0 +1,15 @@
+<div class='container'>
+<h2 class='text-orange'>Neuen Sicherheits-Code anfordern</h2>
+<h4>Für den angegebenen User-Namen wird Ihnen ein Sicherheits-Code auf die dem User hinterlegte Email-Adresse zugesendet, mit dem Sie ein neues Passwort vergeben können.</h4>
+<form name='eventForm' class='form-horizontal' novalidate ng-submit='sendTokenToUser(userName)'>
+  <div class='form-group' ng-class='{ "has-error": eventForm.userName.$invalid }'>
+	 <label for='userName' class='control-label col-sm-2'>User-Name</label>
+	 <div class='col-sm-10'>
+		  <input name='userName' type='text' ng-model='userName' class='form-control' required></input>
+	 </div>
+  </div>
+	<div class='col-sm-offset-2 col-sm-10'>
+		<input id='newUser_submit' class='btn btn-warning bnt-lg btn-block' type='submit' value='Absenden' ng-disabled='eventForm.$invalid'>
+	</div>
+</form>
+</div>

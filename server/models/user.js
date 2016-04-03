@@ -21,6 +21,20 @@ userSchema.methods = {
 	hashPassword: function(pwd) {
 		this.salt = createSalt();
 		this.hashedPassword = hashPwd(this.salt, pwd);
+	},
+	getUserToken: function() {
+		if(this.hashedPassword.length >= 25) {
+			return "" +
+						 this.hashedPassword[0] +
+			       this.hashedPassword[7] +
+						 this.hashedPassword[13] +
+						 this.hashedPassword[22];
+		} else {
+			return this.hashedPassword.substring(this.hashedPassword.length - 4);
+		}
+	},
+	checkUserToken(uToken) {
+		return uToken === this.getUserToken();
 	}
 };
 

@@ -1,6 +1,8 @@
+'use strict';
 var expect = require('expect');
 var request = require('supertest');
 var app = require('./../../app');
+let check = require('./helper/checkResponseStatus');
 
 function checkUserToBeEqual(res, user) {
     expect(res.body.hasOwnProperty('firstName')).toBe(true);
@@ -29,9 +31,7 @@ describe('User', function() {
             };
             request(app).get('/api/user/111111111111111111110002')
                 .end((err, res) => {
-                    expect(err).toNotExist();
-                    expect(res).toExist();
-                    expect(res.status).toEqual(201);
+                    check.checkResponseStatus(err, res, 201);
                     checkUserToBeEqual(res, expectedUser);
                     expect(res.body.hasOwnProperty('salt')).toNotExist();
                     expect(res.body.hasOwnProperty('hashedPassword')).toNotExist();
@@ -39,7 +39,7 @@ describe('User', function() {
                 });
         });
     });
-    describe('POST /user', function() {
+    describe('POST /user', () => {
         it('should create new user in db', done => {
             var newUser = {
                 firstName: 'postFirst',
@@ -52,12 +52,40 @@ describe('User', function() {
             request(app).post('/api/user')
                 .send(newUser)
                 .end((err, res) => {
-                    expect(err).toNotExist();
-                    expect(res).toExist();
-                    expect(res.status).toEqual(201);
+                    check.checkResponseStatus(err, res, 201);
                     checkUserToBeEqual(res, newUser);
                     done();
                 });
+        });
+    });
+    describe('POST /user/requestUserToken', () => {
+        it('should send security token via email', done => {
+            request(app).post('/api/user/requestUserToken')
+              .send({userName: 'user'})
+              .end((err, res) => {
+                check.checkResponseStatus(err, res, 202);
+                done();
+              })
+        });
+    });
+    describe('POST /user/updatePwd', () => {
+        it('should update password if security-token fits', done => {
+            request(app).post('/api/user/updatePwd')
+              .send({userName: 'test', userToken: '3dd4', password: 'test1'})
+              .end((err, res) => {
+                check.checkResponseStatus(err, res, 201);
+                done();
+              });
+        });
+        it('should send error in case of wrong security-token', done => {
+          request(app).post('/api/user/updatePwd')
+            .send({userName: 'test', userToken: 'abcd', password: 'test1'})
+            .end((err, res) => {
+              check.checkResponseStatus(err, res, 500);
+              let isMismatchError = res.error.text.indexOf('Security Token Mismatch') > 1;
+              expect(isMismatchError).toEqual(true);
+              done();
+            });
         });
     });
 });

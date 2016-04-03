@@ -11,4 +11,16 @@ app.service('UserSvc', function($http) {
 			pwd: pwd
 		});
 	};
+	this.updatePassword = function(userName, userToken, newPassword) {
+		return $http.post('/api/user/updatePwd', {
+			userName: userName,
+			userToken: userToken,
+			password: newPassword
+		});
+	};
+	this.sendUserTokenMail = function(userName) {
+		return $http.post('/api/user/requestUserToken', {
+			userName: userName
+		});
+	};
 });

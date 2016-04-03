@@ -52,4 +52,12 @@ describe('User Model', () => {
     it('can be authenticated with password', () => {
         expect(user.authenticate('test')).toBe(true);
     });
+    it('generates 4chars user token from the end of hashedPassword if hash < 25', () => {
+        user.hashedPassword = '12ab34cd56ef78gh910';
+        expect(user.getUserToken()).toEqual('h910');
+    });
+    it('generates 4chars user token from given pattern of hashedPassword if has >= 25', () => {
+       user.hashedPassword = '7422a98bd783f63a9e242adde9d20fff5d20ad7d';
+       expect(user.getUserToken()).toEqual('7b6d');
+    });
 });
