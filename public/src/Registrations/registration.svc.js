@@ -8,7 +8,6 @@ app.service('RegistrationSvc', function($http) {
 	this.find = function(activityId) {
         var path = '/api/registrations';
         if(activityId) { path = path + '?activityId=' + activityId; }
-        console.log("PFAD:", path)
 		return $http.get(path);
 	};
 
