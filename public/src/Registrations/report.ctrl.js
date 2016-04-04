@@ -4,8 +4,7 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 	$scope.busyPromise = RegistrationSvc.find();
 
     $scope.getReportData = function() {
-      if(!$scope.activityIdFilter) return;
-      RegistrationSvc.find($scope.activityIdFilter)
+      RegistrationSvc.find($scope.eventIdFilter, $scope.activityIdFilter)
         .success(function (regs) {
             $scope.registrations = regs;
             $scope.emails = _.uniq(_.map($scope.registrations, function(r) {
@@ -19,7 +18,8 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 	};
 
   $scope.canLoadData = function() {
-    return $scope.activityIdFilter != null;
+		return true;
+    //return $scope.activityIdFilter != null;
   };
 
 	$scope.editRegistration = function(registrationId) {

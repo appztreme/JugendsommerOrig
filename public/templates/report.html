@@ -1,18 +1,19 @@
 <div class='container'>
 	<div class='container col-sm-9'>
 	<div class='panel panel-default'>
-	<div class='panel-heading'>Filter</div> 
+	<div class='panel-heading'>Filter</div>
 	<div class='row panel-body'>
 		<label for='eventFilter' class='control-label col-sm-1'>Progr.:</label>
 		<div class='col-sm-3'>
 			<select id='eventFilter' class='sel-base' ng-model='eventIdFilter'>
+				<option value=''>Alle</option>
 				<option ng-repeat='event in events' value='{{event._id}}'>{{event.name}}</option>
 			</select>
 		</div>
 		<label for='activityFilter' class='control-label col-sm-1'>Woche:</label>
 		<div class='col-sm-3'>
 			<select id='activityFilter' class='sel-base' ng-model='activityIdFilter' ng-disabled='!canSelectActivity()'>
-				<opt<on value=''>Alle</option>
+				<option value=''>Alle</option>
 				<option ng-repeat='activity in activities' value='{{activity._id}}'>{{activity.name}}</option>
 			</select>
 		</div>
@@ -57,7 +58,7 @@
 			<th>Tel. Kontakt1</th>
 			<th>Kontak2</th>
 			<th>Tel. Kontakt2</th>
-			<th>Anmeldedatum</th>	
+			<th>Anmeldedatum</th>
 		</tr>
 		<tr ng-repeat='reg in registrations | orderBy:colNameSort'>
 			<td><button class="btn glyphicon glyphicon-pencil" ng-disabled='!iSvc.isAuthorized("admin")' type="button" ng-click='editRegistration(reg._id)'></button></td>
@@ -83,7 +84,7 @@
 			<td>{{reg.registrationDate | date: 'dd/MM/yyyy : hh.mm.ss'}}</td>
 		</tr>
 	</table>
-    <br /> 
+    <br />
     <div class='col-sm-6'>
         <label for='uniqueEmail'><strong>Email-Adressen Eltern:</strong></label>
         <textarea name='uniqueEmail' type='text' rows='4' class='form-control' ng-model='emails'></textarea>
