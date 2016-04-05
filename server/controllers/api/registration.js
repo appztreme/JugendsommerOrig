@@ -3,6 +3,7 @@ var Event = require('../../models/event');
 var Activity = require('../../models/activity');
 var auth = require('./authentication');
 var mail = require('./mail');
+var mongoose = require('mongoose');
 var router = require('express').Router();
 var deepPopulate = require('mongoose-deep-populate');
 
@@ -18,29 +19,54 @@ var queryReport = function(query, res) {
 		});
 };
 
-router.get('/', auth.requiresRole("admin"), function(req, res, next) {
-	var query = Registration.find()
-		.where('registrationDate').gte(startCurYear);
-	if(req.query.activityId)
-		query = query.where('activityId').equals(req.query.activityId);
-		queryReport(query, res);
-	if(req.query.eventId) {
-		Activity.find()
-			.where('eventId').equals(req.query.eventId)
-			.select({ __id: 1})
-			.exec(function(err, acts) {
-				if(err) { return next(err); }
-					query = query.where('activityId').in(acts);
-					queryReport(query, res);
-			});
-	}
+var getRegistrationsAll = function(res) {
+	Registration.find()
+		.where('registrationDate').gte(startCurYear)
+		.deepPopulate('activityId.eventId')
+		.sort({ activityId: 1, lastNameChild: 1, firstNameChild: 1})
+		.exec(function(err, reg) {
+			if(err) { return next(err); }
+			res.json(reg);
+		});
+};
 
-	// query.deepPopulate('activityId.eventId')
-  //       .sort({ activityId: 1, lastNameChild: 1, firstNameChild: 1})
-	// 	.exec(function(err, reg) {
-	// 		if(err) { return next(err); }
-	// 		res.json(reg);
-	// 	});
+var getRegistrationsByEventId = function(eventId, res) {
+	Activity.find()
+		.where('eventId').equals(eventId)
+		.select({ __id: 1})
+		.exec(function(err, acts) {
+			if(err) { return next(err); }
+				Registration.find()
+					.where('registrationDate').gte(startCurYear)
+					.where('activityId').in(acts)
+					.deepPopulate('activityId.eventId')
+					.sort({ activityId: 1, lastNameChild: 1, firstNameChild: 1})
+					.exec(function(err, reg) {
+						if(err) { return next(err); }
+						res.json(reg);
+					});
+		});
+};
+
+var getRegistrationsByActivityId = function(activityId, res) {
+	Registration.find()
+		.where('registrationDate').gte(startCurYear)
+		.where('activityId').equals(activityId)
+		.deepPopulate('activityId.eventId')
+		.sort({ activityId: 1, lastNameChild: 1, firstNameChild: 1})
+		.exec(function(err, reg) {
+			if(err) { return next(err); }
+			res.json(reg);
+		});
+};
+
+router.get('/', auth.requiresRole("admin"), function(req, res, next) {
+	if(!req.query.activityId && !req.query.eventId)
+		return getRegistrationsAll(res);
+	if(req.query.activityId)
+		return getRegistrationsByActivityId(req.query.activityId, res);
+	if(req.query.eventId)
+		return getRegistrationsByEventId(req.query.eventId, res);
 });
 
 router.get('/selectableEventActivities', function(req, res, next) {
@@ -69,7 +95,7 @@ router.delete('/:registrationId', auth.requiresRole("admin"), function(req, res,
 		Activity.findById(reg.activityId, function(err, activity) {
 			activity.curParticipants -= 1;
 			activity.save();
-			res.sendStatus(200);
+			res.status(200).json(reg);
 		});
 	});
 });

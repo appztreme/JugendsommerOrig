@@ -60,7 +60,7 @@ function checkActivityHasChanged(activityId, expectedNumber, done) {
     request(app).get('/api/activities/' + activityId)
         .end((err, res) => {
           check.checkResponseStatus(err, res, 200);
-          expect(res.curParticipants).toEqual(expectedNumber);
+          expect(res.body.curParticipants).toEqual(expectedNumber);
           done();
         });
 }
@@ -77,7 +77,7 @@ describe('Registrations', () => {
                       done();
                   });
           });
-            it('should return collection of 3 entities', done => {
+          it('should return collection of 3 entities', done => {
               testSession.get('/api/registrations')
                   .end((err, res) => {
                       check.checkResponseStatus(err, res, 200);
@@ -85,6 +85,24 @@ describe('Registrations', () => {
                       expect(res.body.length).toEqual(3);
                       done();
                   });
+          });
+          it('should return collection of 3 entities with eventId param', done => {
+              testSession.get('/api/registrations?eventId=111111111111111111111111')
+                .end((err, res) => {
+                    check.checkResponseStatus(err, res, 200);
+                    expect(res.body).toBeA('array');
+                    expect(res.body.length).toEqual(3);
+                    done();
+                });
+          });
+          it('should return collection of 3 entities with activityId param', done => {
+              testSession.get('/api/registrations?activityId=111111111111111111111102')
+                .end((err, res) => {
+                    check.checkResponseStatus(err, res, 200);
+                    expect(res.body).toBeA('array');
+                    expect(res.body.length).toEqual(3);
+                    done();
+                });
           });
       });
     });
@@ -138,31 +156,64 @@ describe('Registrations', () => {
           });
       });
     });
-    describe.skip('PUT /registrations', () => {
+    describe('PUT /registrations', () => {
+      const registration = {
+        _id: '111111111111111111111003',
+        firstNameChild: 'firstName3',
+        lastNameChild: 'lastName3',
+        firstNameParent: 'firstNameParent3',
+        lastNameParent: 'lastNameParent3',
+        emailParent: 'abcgmx.at',
+        phoneNumberParent: '9876 / 54321',
+        schoolChild: '-',
+        birthdayChild: new Date(2009,7,8),
+        activityId: '111111111111111111111101',
+        healthChild: '-',
+        bandName: 'music band',
+        instrument: 'french horn',
+        instrumentYears: '4 Jahre',
+        registrationDate: new Date(curYear, 6,19),
+        userId:'111111111111111111110001'
+      };
       describe('authorized request', () => {
         let testSession = requestSession(app);
-        before('login', done => {
-            testSession.post('/api/login')
-                .send({username: 'admin', password: 'admin'})
-                .end((err, res) => {
-                    expect(res.status).toEqual(200);
-                    done();
-                });
+        before('login', done => loginHelper.loginAs(testSession, 'admin', 'admin', done));
+        it('should update fields', done => {
+          testSession.put('/api/registrations')
+            .send(registration)
+            .end((err, res) => {
+              expect(err).toNotExist();
+              //expect(res).toExist();
+              //expect(res.status).toEqual(201);
+              //console.log('err:', err);
+              console.log('res:', res.body);
+             //check.checkResponseStatus(err, res, 201);
+          //     checkRegistrationToBeEqual(res, registration);
+              done();
+            });
         });
       });
       describe('unauthorized request', () => {
         let testSession = requestSession(app);
-        before('login', done => {
-            testSession.post('/api/login')
-                .send({username: 'admin', password: 'admin'})
-                .end((err, res) => {
-                    expect(res.status).toEqual(200);
-                    done();
-                });
-        });
+        before('login', done => loginHelper.loginAs(testSession, 'user', 'user', done));
+        it('should be refused', done => {
+          testSession.put('/api/registrations')
+            .send(registration)
+            .end((err, res) => {
+                check.checkResponseStatus(err, res, 403);
+                done();
+            });
+        })
       });
       describe('unauthenticated request', () => {
-
+        it('should be refused', done => {
+          request(app).put('/api/registrations')
+            .send(registration)
+            .end((err, res) => {
+                check.checkResponseStatus(err, res, 403);
+                done();
+            });
+        });
       });
     });
     describe('POST /registrations', () => {
@@ -193,7 +244,7 @@ describe('Registrations', () => {
                 .end((err, res) => {
                     check.checkResponseStatus(err, res, 201);
                     checkRegistrationToBeEqual(res, newRegistration);
-                    done();
+                    checkActivityHasChanged(res.body.activityId, 2, done);
                 });
           });
         });
@@ -216,7 +267,7 @@ describe('Registrations', () => {
             testSession.delete('/api/registrations/111111111111111111111002')
               .end((err, res) => {
                   check.checkResponseStatus(err, res, 200);
-                  done();
+                  checkActivityHasChanged(res.body.activityId, 1, done);
               });
         });
       });
@@ -238,7 +289,6 @@ describe('Registrations', () => {
                   check.checkResponseStatus(err, res, 403);
                   done();
               });
-
           });
       });
     });
