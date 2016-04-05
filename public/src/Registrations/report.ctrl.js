@@ -28,15 +28,15 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 		return "nein";
 	};
 
-	$scope.filterActivities = function() {
+	$scope.filterActivities = function(newActivityId) {
 		$scope.activities = _.filter($scope.allActivities, { parentId: $scope.eventIdFilter});
+		$scope.activityIdFilter = newActivityId;
 	};
 
 	$scope.$watch('eventIdFilter', function() {
 		if(!$scope.eventIdFilter) return;
 		ReportCacheSvc.currentEventIdFilter = $scope.eventIdFilter;
-		$scope.activityIdFilter = undefined;
-		$scope.filterActivities();
+		$scope.filterActivities(undefined);
 	});
 	$scope.$watch('activityIdFilter', function() {
 		ReportCacheSvc.currentActivityIdFilter = $scope.activityIdFilter;
@@ -84,8 +84,7 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 		$scope.eventIdFilter = ReportCacheSvc.currentEventIdFilter;
 	}
 	if(ReportCacheSvc.hasActivityFilterParameter()) {
-		$scope.filterActivities();
-		$scope.activityIdFilter = ReportCacheSvc.currentActivityIdFilter;
+		$scope.filterActivities(ReportCacheSvc.currentActivityIdFilter);
 		$scope.getReportData();
 	}
 });
