@@ -5,20 +5,20 @@
 	<div class='row panel-body'>
 		<label for='eventFilter' class='control-label col-sm-1'>Progr.:</label>
 		<div class='col-sm-3'>
-			<select id='eventFilter' class='sel-base' ng-model='eventIdFilter'>
-				<option value=''>Alle</option>
+			<select id='eventFilter' class='form-control' ng-model='eventIdFilter'>
+				<!--<option value='' selected='selected'>Alle</option>-->
 				<option ng-repeat='event in events' value='{{event._id}}'>{{event.name}}</option>
 			</select>
 		</div>
 		<label for='activityFilter' class='control-label col-sm-1'>Woche:</label>
 		<div class='col-sm-3'>
-			<select id='activityFilter' class='sel-base' ng-model='activityIdFilter' ng-disabled='!canSelectActivity()'>
-				<option value=''>Alle</option>
+			<select id='activityFilter' class='form-control' ng-model='activityIdFilter'>
+				<!--<option value='' selected='selected'>Alle</option>-->
 				<option ng-repeat='activity in activities' value='{{activity._id}}'>{{activity.name}}</option>
 			</select>
 		</div>
         <div class='col-sm-1'>
-            <button type='button' class='btn btn-primary' ng-disabled="!canLoadData()" ng-click='getReportData()'>Laden</button>
+            <button type='button' class='btn btn-primary' ng-click='getReportData()'>Laden</button>
         </div>
 	</div>
 	</div>

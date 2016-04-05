@@ -86,12 +86,12 @@ describe('Registrations', () => {
                       done();
                   });
           });
-          it('should return collection of 3 entities with eventId param', done => {
+          it('should return collection of 2 entities with eventId param', done => {
               testSession.get('/api/registrations?eventId=111111111111111111111111')
                 .end((err, res) => {
                     check.checkResponseStatus(err, res, 200);
                     expect(res.body).toBeA('array');
-                    expect(res.body.length).toEqual(3);
+                    expect(res.body.length).toEqual(2);
                     done();
                 });
           });
@@ -100,7 +100,7 @@ describe('Registrations', () => {
                 .end((err, res) => {
                     check.checkResponseStatus(err, res, 200);
                     expect(res.body).toBeA('array');
-                    expect(res.body.length).toEqual(3);
+                    expect(res.body.length).toEqual(2);
                     done();
                 });
           });

@@ -13,15 +13,6 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
         });
     };
 
-	$scope.canSelectActivity = function() {
-		return $scope.eventIdFilter;
-	};
-
-  $scope.canLoadData = function() {
-		return true;
-    //return $scope.activityIdFilter != null;
-  };
-
 	$scope.editRegistration = function(registrationId) {
 		$location.path('editRegistration/' + registrationId);
 	}
@@ -44,19 +35,14 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 	$scope.$watch('eventIdFilter', function() {
 		if(!$scope.eventIdFilter) return;
 		ReportCacheSvc.currentEventIdFilter = $scope.eventIdFilter;
+		$scope.activityIdFilter = undefined;
 		$scope.filterActivities();
-		$scope.registrations = undefined;
-		$scope.emails = undefined;
 	});
 	$scope.$watch('activityIdFilter', function() {
 		ReportCacheSvc.currentActivityIdFilter = $scope.activityIdFilter;
 		$scope.registrations = undefined;
 		$scope.emails = undefined;
 	});
-
-	// $scope.$watch('colNameSort', function() {
-	// 	console.log($scope.colNameSort);
-	// });
 
 	if(ReportCacheSvc.hasSelectionData()) {
 		$scope.events = ReportCacheSvc.events;
