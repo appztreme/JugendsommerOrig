@@ -173,6 +173,8 @@ describe('Registrations', () => {
         instrument: 'french horn',
         instrumentYears: '4 Jahre',
         registrationDate: new Date(curYear, 6,19),
+        isPaymentDone: true,
+        isEmailNotified: false,
         userId:'111111111111111111110001'
       };
       describe('authorized request', () => {
@@ -182,14 +184,10 @@ describe('Registrations', () => {
           testSession.put('/api/registrations')
             .send(registration)
             .end((err, res) => {
-              expect(err).toNotExist();
-              //expect(res).toExist();
-              //expect(res.status).toEqual(201);
-              //console.log('err:', err);
-              console.log('res:', res.body);
-             //check.checkResponseStatus(err, res, 201);
-          //     checkRegistrationToBeEqual(res, registration);
-              done();
+              check.checkResponseStatus(err, res, 201);
+              checkRegistrationToBeEqual(res, registration);
+              expect(res.body.hasOwnProperty('prevActivityId')).toBe(true);
+              checkActivityHasChanged(res.body.prevActivityId, 0, done);
             });
         });
       });
@@ -244,7 +242,7 @@ describe('Registrations', () => {
                 .end((err, res) => {
                     check.checkResponseStatus(err, res, 201);
                     checkRegistrationToBeEqual(res, newRegistration);
-                    checkActivityHasChanged(res.body.activityId, 2, done);
+                    checkActivityHasChanged(res.body.activityId, 1, done);
                 });
           });
         });

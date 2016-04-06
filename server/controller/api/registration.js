@@ -150,7 +150,6 @@ router.put('/', auth.requiresRole("admin"), function(req, res, next) {
 		reg.isPaymentDone = req.body.isPaymentDone;
 		reg.isEmailNotified = req.body.isEmailNotified;
 		reg.activityId = req.body.activityId;
-
 		reg.save(function(err, regDb) {
 			if(err) { return next(err); }
 			res.status(201).json(regDb);

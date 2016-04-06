@@ -1,6 +1,6 @@
 var express = require('express');
 var expect = require('chai');
-var eventCtrl = require('../../../../server/controllers/api/events');
+var eventCtrl = require('../../../../server/controller/api/events');
 var app = require('../../../../app');
 var request = require('supertest')(app);
 var router = express.Router();
@@ -18,7 +18,7 @@ describe.skip('server.controllers.api.events', function() {
 	/*
 			.end(function(err, events) {
 				expects(err).not.exist;
-				done();	
+				done();
 			});
 			*/
 	});

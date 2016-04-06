@@ -22,15 +22,15 @@ app.use(express.static(__dirname + "/public/lib"));
 app.use(express.static(__dirname + "/public/templates"));
 app.use(express.static(__dirname + "/public/build"));
 
-app.use('/', require('./server/controllers/static'));
-app.use('/api/events', require('./server/controllers/api/events'));
-app.use('/api/activities', require('./server/controllers/api/activities'));
-app.use('/api/registrations', require('./server/controllers/api/registration'));
-app.use('/api/myRegistrations', require('./server/controllers/api/myRegistration'));
-app.use('/api/login', require('./server/controllers/api/login'));
-app.use('/api/logout', require('./server/controllers/api/logout'));
-app.use('/api/user', require('./server/controllers/api/users'));
-app.use('/api/agb', require('./server/controllers/api/agb'));
+app.use('/', require('./server/controller/static'));
+app.use('/api/events', require('./server/routes/eventRoute'));
+app.use('/api/activities', require('./server/controller/api/activities'));
+app.use('/api/registrations', require('./server/controller/api/registration'));
+app.use('/api/myRegistrations', require('./server/controller/api/myRegistration'));
+app.use('/api/login', require('./server/controller/api/login'));
+app.use('/api/logout', require('./server/controller/api/logout'));
+app.use('/api/user', require('./server/routes/userRoute'));
+app.use('/api/agb', require('./server/controller/api/agb'));
 
 require('./server/passport.config')();
 
