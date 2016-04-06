@@ -1,16 +1,15 @@
-var Registration = require('../../models/registration');
-var Event = require('../../models/event');
-var Activity = require('../../models/activity');
-var auth = require('./authentication');
-var mail = require('./mail');
-var mongoose = require('mongoose');
-var router = require('express').Router();
-var deepPopulate = require('mongoose-deep-populate');
+'use strict';
+const Registration = require('./../models/registration');
+const Event = require('./../models/event');
+const Activity = require('./../models/activity');
+const mail = require('./mail');
+const mongoose = require('mongoose');
+const deepPopulate = require('mongoose-deep-populate');
 
-var curYear = new Date().getFullYear();
-var startCurYear = new Date(curYear,1,1);
+const curYear = new Date().getFullYear();
+const startCurYear = new Date(curYear,1,1);
 
-var queryReport = function(query, res) {
+let queryReport = (query, res) => {
 	query.deepPopulate('activityId.eventId')
 				.sort({ activityId: 1, lastNameChild: 1, firstNameChild: 1})
 				.exec(function(err, reg) {
@@ -19,7 +18,7 @@ var queryReport = function(query, res) {
 		});
 };
 
-var getRegistrationsAll = function(res) {
+let getRegistrationsAll = (res) => {
 	Registration.find()
 		.where('registrationDate').gte(startCurYear)
 		.deepPopulate('activityId.eventId')
@@ -30,7 +29,7 @@ var getRegistrationsAll = function(res) {
 		});
 };
 
-var getRegistrationsByEventId = function(eventId, res) {
+let getRegistrationsByEventId = (eventId, res) => {
 	Activity.find()
 		.where('eventId').equals(eventId)
 		.select({ __id: 1})
@@ -48,7 +47,7 @@ var getRegistrationsByEventId = function(eventId, res) {
 		});
 };
 
-var getRegistrationsByActivityId = function(activityId, res) {
+const getRegistrationsByActivityId = (activityId, res)  =>{
 	Registration.find()
 		.where('registrationDate').gte(startCurYear)
 		.where('activityId').equals(activityId)
@@ -60,16 +59,16 @@ var getRegistrationsByActivityId = function(activityId, res) {
 		});
 };
 
-router.get('/', auth.requiresRole("admin"), function(req, res, next) {
+exports.find = (req, res, next) => {
 	if(!req.query.activityId && !req.query.eventId)
 		return getRegistrationsAll(res);
 	if(req.query.activityId)
 		return getRegistrationsByActivityId(req.query.activityId, res);
 	if(req.query.eventId)
 		return getRegistrationsByEventId(req.query.eventId, res);
-});
+};
 
-router.get('/selectableEventActivities', function(req, res, next) {
+exports.getSelectableEventActivities = (req, res, next) => {
 		Activity.find()
 			.where('startDate').gte(startCurYear)
 			.populate('eventId', '_id name location')
@@ -79,17 +78,17 @@ router.get('/selectableEventActivities', function(req, res, next) {
 				if(err) { return next(err); }
 				res.json(act);
 			});
-});
+}
 
-router.get('/:registrationId', auth.requiresRole("admin"), function(req, res, next) {
+exports.findById = (req, res, next) => {
 	Registration.findById(req.params.registrationId, function(err, registration) {
 		if(err) { return next(err); }
 
 		res.json(registration);
 	});
-});
+};
 
-router.delete('/:registrationId', auth.requiresRole("admin"), function(req, res, next) {
+exports.delete = (req, res, next) => {
 	Registration.findByIdAndRemove(req.params.registrationId, function(err, reg) {
 		if(err) { return next(err); }
 		Activity.findById(reg.activityId, function(err, activity) {
@@ -98,9 +97,9 @@ router.delete('/:registrationId', auth.requiresRole("admin"), function(req, res,
 			res.status(200).json(reg);
 		});
 	});
-});
+};
 
-router.post('/', auth.requiresApiLogin, function(req, res, next) {
+exports.create = (req, res, next) => {
 	var reg = new Registration({
 		firstNameParent: req.body.firstNameParent,
 		lastNameParent: req.body.lastNameParent,
@@ -126,9 +125,9 @@ router.post('/', auth.requiresApiLogin, function(req, res, next) {
 		mail.sendTxtMail(regr.emailParent, regr.firstNameChild, regr.lastNameChild);
 		res.status(201).json(regr);
 	});
-});
+};
 
-router.put('/', auth.requiresRole("admin"), function(req, res, next) {
+exports.update = (req, res, next) => {
 	Registration.findById(req.body._id, function(err, reg) {
 		if(!reg) return next(new Error('Keine Registrierung im System mit id ' + req.body._id));
 		reg.firstNameParent = req.body.firstNameParent;
@@ -155,6 +154,4 @@ router.put('/', auth.requiresRole("admin"), function(req, res, next) {
 			res.status(201).json(regDb);
 		});
 	});
-});
-
-module.exports = router;
+};

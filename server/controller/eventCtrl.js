@@ -1,6 +1,5 @@
 'use strict';
 const Event = require('./../models/event');
-
 const curYear = new Date().getFullYear();
 const startCurYear = new Date(curYear,1,1);
 

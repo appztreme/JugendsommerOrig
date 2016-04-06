@@ -22,15 +22,15 @@ app.use(express.static(__dirname + "/public/lib"));
 app.use(express.static(__dirname + "/public/templates"));
 app.use(express.static(__dirname + "/public/build"));
 
-app.use('/', require('./server/controller/static'));
+app.use('/', require('./server/routes/staticRoute'));
 app.use('/api/events', require('./server/routes/eventRoute'));
-app.use('/api/activities', require('./server/controller/api/activities'));
-app.use('/api/registrations', require('./server/controller/api/registration'));
-app.use('/api/myRegistrations', require('./server/controller/api/myRegistration'));
-app.use('/api/login', require('./server/controller/api/login'));
-app.use('/api/logout', require('./server/controller/api/logout'));
+app.use('/api/activities', require('./server/routes/activityRoute'));
+app.use('/api/registrations', require('./server/routes/registrationRoute'));
+app.use('/api/myRegistrations', require('./server/routes/myRegistrationRoute'));
+app.use('/api/login', require('./server/routes/loginRoute'));
+app.use('/api/logout', require('./server/routes/logoutRoute'));
 app.use('/api/user', require('./server/routes/userRoute'));
-app.use('/api/agb', require('./server/controller/api/agb'));
+app.use('/api/agb', require('./server/routes/agbRoute'));
 
 require('./server/passport.config')();
 
