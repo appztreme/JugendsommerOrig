@@ -48,7 +48,6 @@ registrationSchema.post('save', function(reg) {
   // console.log(reg.prevActivityId);
   // console.log(reg.activityId);
   if(!reg.activityId.equals(reg.prevActivityId)) {
-    console.log("are not the same");
     if(reg.prevActivityId != undefined)
     {
       Activity.findById(reg.prevActivityId, function(err, oldActivity) {
