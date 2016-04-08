@@ -27,6 +27,7 @@ app.use('/api/events', require('./server/routes/eventRoute'));
 app.use('/api/activities', require('./server/routes/activityRoute'));
 app.use('/api/registrations', require('./server/routes/registrationRoute'));
 app.use('/api/myRegistrations', require('./server/routes/myRegistrationRoute'));
+app.use('/api/commitments', require('./server/routes/commitmentRoute'));
 app.use('/api/login', require('./server/routes/loginRoute'));
 app.use('/api/logout', require('./server/routes/logoutRoute'));
 app.use('/api/user', require('./server/routes/userRoute'));

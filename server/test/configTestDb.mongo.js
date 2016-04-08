@@ -164,6 +164,39 @@ db.registrations.insert({
 var registrationsCnt = db.registrations.find().count();
 print("Registrations inserted: " + registrationsCnt);
 
+db.commitments.insert({
+    _id: ObjectId('111111111111111111100001'),
+    name: 'commitment 1',
+    description: 'description commitment 1',
+    date: new Date(curYear,3,21),
+    amount: 88.90,
+    eventId: ObjectId('111111111111111111111111'),
+    userId: ObjectId('111111111111111111110003')
+});
+
+db.commitments.insert({
+    _id: ObjectId('111111111111111111100002'),
+    name: 'commitment 2',
+    description: 'description commitment 2',
+    date: new Date(curYear,11,1),
+    amount: 12.4,
+    eventId: ObjectId('111111111111111111111111'),
+    userId: ObjectId('111111111111111111110003')
+});
+
+db.commitments.insert({
+    _id: ObjectId('111111111111111111100003'),
+    name: 'commitment 3',
+    description: 'description commitment 3',
+    date: new Date(curYear,6,7),
+    amount: 119.10,
+    eventId: ObjectId('111111111111111111111112'),
+    userId: ObjectId('111111111111111111110003')
+});
+
+var commitmentsCnt = db.commitments.find().count();
+print("Commitments insertet: " + commitmentsCnt);
+
 db.users.insert({
     _id: ObjectId('111111111111111111110001'),
     firstName: 'userFirst',
