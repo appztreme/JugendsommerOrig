@@ -13,6 +13,21 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
         });
     };
 
+	var supressFilter = false;
+
+	$scope.clearEventSelection = function() {
+		$scope.eventIdFilter = undefined;
+		$scope.activityIdFilter = undefined;
+		$scope.registrations = undefined;
+		$scope.emails = undefined;
+	}
+
+	$scope.clearActivitySelection = function() {
+		$scope.activityIdFilter = undefined;
+		$scope.registrations = undefined;
+		$scope.emails = undefined;
+	}
+
 	$scope.editRegistration = function(registrationId) {
 		$location.path('editRegistration/' + registrationId);
 	}
@@ -28,15 +43,16 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 		return "nein";
 	};
 
-	$scope.filterActivities = function(newActivityId) {
+	$scope.filterActivities = function() {
+		$scope.activities = [];
 		$scope.activities = _.filter($scope.allActivities, { parentId: $scope.eventIdFilter});
-		$scope.activityIdFilter = newActivityId;
 	};
 
 	$scope.$watch('eventIdFilter', function() {
 		if(!$scope.eventIdFilter) return;
 		ReportCacheSvc.currentEventIdFilter = $scope.eventIdFilter;
-		$scope.filterActivities(undefined);
+		$scope.filterActivities();
+		$scope.activityIdFilter = undefined;
 	});
 	$scope.$watch('activityIdFilter', function() {
 		ReportCacheSvc.currentActivityIdFilter = $scope.activityIdFilter;
@@ -82,9 +98,9 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 
 	if(ReportCacheSvc.hasEventFilterParameter()) {
 		$scope.eventIdFilter = ReportCacheSvc.currentEventIdFilter;
-	}
+		}
 	if(ReportCacheSvc.hasActivityFilterParameter()) {
-		$scope.filterActivities(ReportCacheSvc.currentActivityIdFilter);
-		$scope.getReportData();
+		$scope.activityIdFilter = ReportCacheSvc.currentActivityIdFilter;
 	}
+	$scope.getReportData();
 });
