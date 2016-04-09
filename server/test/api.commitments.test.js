@@ -36,12 +36,12 @@ describe('Commitments', () => {
                   done();
               });
       });
-      it('should return collection of 3 entities', done => {
+      it('should return collection of 4 entities', done => {
           testSession.get('/api/commitments')
               .end((err, res) => {
                   check.checkResponseStatus(err, res, 200);
                   expect(res.body).toBeA('array');
-                  expect(res.body.length).toEqual(3);
+                  expect(res.body.length).toEqual(4);
                   done();
               });
       });
@@ -77,7 +77,47 @@ describe('Commitments', () => {
     });
   });
   describe('GET /commitments/:commitmentId', () => {
-
+    const expectedCommitment = {
+      _id: '111111111111111111100002',
+      name: 'commitment 2',
+      description: 'description commitment 2',
+      date: new Date(curYear,11,1),
+      amount: 12.4,
+      eventId: '111111111111111111111111',
+      userId: '111111111111111111110003'
+    };
+    describe('authorized request', () => {
+        const testSession = requestSession(app);
+        before('Login', done => loginHelper.loginAs(testSession,'fadmin','fadmin',done));
+        it('should return requested object', done => {
+          testSession.get('/api/commitments/111111111111111111100002')
+            .end((err, res) => {
+              check.checkResponseStatus(err, res, 200);
+              checkCommitmentToBeEqual(res, expectedCommitment);
+              done();
+            });
+        });
+    });
+    describe('unauthorized request', () => {
+      const testSession = requestSession(app);
+      before('Login', done => loginHelper.loginAs(testSession,'user','user',done));
+      it('should be refused', done => {
+        testSession.get('/api/commitments/111111111111111111100002')
+          .end((err, res) => {
+            check.checkResponseStatus(err, res, 403);
+            done();
+          });
+      });
+    });
+    describe('unauthenticated request', () => {
+      it('should be refused', done => {
+        request(app).get('/api/commitments/111111111111111111100002')
+          .end((err, res) => {
+            check.checkResponseStatus(err, res, 403);
+            done();
+          });
+      });
+    });
   });
   describe('POST /commitments', () => {
     const newCommitment = {
@@ -125,9 +165,82 @@ describe('Commitments', () => {
     });
   });
   describe('PUT /commitments', () => {
-
+      const changedCommitment = {
+        _id: '111111111111111111100003',
+        name: 'commitment 3 changed',
+        description: 'description commitment 3 changed',
+        date: new Date(curYear,9,1),
+        amount: 77.12,
+        eventId: '111111111111111111111112',
+        userId: '111111111111111111110003'
+      };
+    describe('authorized request', () => {
+      const testSession = requestSession(app);
+      before('Login', done => loginHelper.loginAs(testSession,'fadmin','fadmin',done));
+      it('should update object in db', done => {
+        testSession.put('/api/commitments')
+          .send(changedCommitment)
+          .end((err, res) => {
+            check.checkResponseStatus(err, res, 201);
+            checkCommitmentToBeEqual(res, changedCommitment);
+            done();
+          });
+      });
+    });
+    describe('unauthorized request', () => {
+      const testSession = requestSession(app);
+      before('Login', done => loginHelper.loginAs(testSession,'user','user',done));
+      it('should be refused', done => {
+        testSession.put('/api/commitments')
+          .send(changedCommitment)
+          .end((err, res) => {
+            check.checkResponseStatus(err, res, 403);
+            done();
+          });
+      });
+    });
+    describe('unauthenticated request', () => {
+      it('should be refused', done => {
+        request(app).put('/api/commitments')
+          .send(changedCommitment)
+          .end((err, res) => {
+            check.checkResponseStatus(err, res, 403);
+            done();
+          });
+      });
+    });
   });
   describe('DELETE /commitments', () => {
-
+    describe('authorized request', () => {
+      const testSession = requestSession(app);
+      before('Login', done => loginHelper.loginAs(testSession,'admin','admin',done));
+      it('should delete object from db', done => {
+        testSession.delete('/api/commitments/111111111111111111100004')
+          .end((err, res) => {
+            check.checkResponseStatus(err, res, 200);
+            done();
+          });
+      });
+    });
+    describe('unauthorized request', () => {
+      const testSession = requestSession(app);
+      before('Login', done => loginHelper.loginAs(testSession,'user','user',done));
+      it('should be refused', done => {
+        testSession.delete('/api/commitments/111111111111111111100004')
+          .end((err, res) => {
+            check.checkResponseStatus(err, res, 403);
+            done();
+          });
+      });
+    });
+    describe('unauthenticated request', () => {
+      it('should be refused', done => {
+      request(app).delete('/api/commitments/111111111111111111100004')
+        .end((err, res) => {
+          check.checkResponseStatus(err, res, 403);
+          done();
+        });
+      });
+    });
   });
 });

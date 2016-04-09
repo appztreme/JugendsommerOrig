@@ -7,6 +7,7 @@ db.events.remove({});
 db.activities.remove({});
 db.registrations.remove({});
 db.users.remove({});
+db.commitments.remove({});
 db.events.insert({
     _id: ObjectId('111111111111111111111111'),
     name: 'event1',
@@ -194,6 +195,16 @@ db.commitments.insert({
     userId: ObjectId('111111111111111111110003')
 });
 
+db.commitments.insert({
+    _id: ObjectId('111111111111111111100004'),
+    name: 'commitment 4',
+    description: 'description commitment 4',
+    date: new Date(curYear,5,14),
+    amount: 66.89,
+    eventId: ObjectId('111111111111111111111112'),
+    userId: ObjectId('111111111111111111110003')
+});
+
 var commitmentsCnt = db.commitments.find().count();
 print("Commitments insertet: " + commitmentsCnt);
 
@@ -218,7 +229,7 @@ db.users.insert({
     userName: 'admin',
     hashedPassword: 'ca6a0cca16b21299724f71ef2fb23321ea5f1d6f', // admin
     salt: 'Kn6OJvtD2fDxN8LSqr2C/QGVvuvhfTOBJQY7osU94AHCQu/6Ux0s1DrFThYDq8d+wsscYglbW/2ggbsEX0nWE3AFSeIp/wkENBzcsR7jx1o5FS9GlEaaDL6TEuo+3Q1YKyTnBSUxgHqe4MORX5nRD9W9imQkwnO62gzZpFMLIOo=',
-    roles: ['admin']
+    roles: ['admin','fadmin']
 });
 
 db.users.insert({
@@ -230,7 +241,7 @@ db.users.insert({
     userName: 'fadmin',
     hashedPassword: '4a2d5a39e8354192ad3563c2518be5b2c1c23976', // fadmin
     salt: 'rVYhanL+gUoZjI3cR4mEfTUvzFoj7OFYFHtKonqQProuolDIPzzmFqgoo6xCkTvPj55bcTf9cJNM4oRcSG2+OpQ1lPl9Kuv0Ljfs5rIJ3ak/u2jL7lShF8QZYAYjEd5ewh7Dgb7JE1ax00pd5ol7vMqkTzsEbPjl9pCwiUd/LxQ=',
-    roles: ['admin', 'fadmin']
+    roles: ['fadmin']
 });
 
 db.users.insert({
