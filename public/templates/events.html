@@ -25,9 +25,10 @@
 					<p>{{event.description}}</p>
 				</div>
 				<div class='col-sm-2'>
-					<a href='/#/activities/{{event._id}}' class='btn btn-default' role='button'><img src='assets/arrow-green-small.png' alt='Details'></a>
-					<a href='/#/eventInfo/{{event._id}}' class="btn btn-default" role'button'><img src='assets/info-orange-small.png' alt='Information' ng-show='true'></a>
-					<a href='/#/editEvent/{{event._id}}' class='btn btn-default' role='button' ng-show='iSvc.isAuthorized("admin")'><img src='assets/edit.png' alt='Editieren'></a>
+					<a href='/#/activities/{{event._id}}' class='btn btn-large btn-success' role='button'><span class='glyphicon glyphicon-triangle-right'></span></a>
+					<a href='/#/eventInfo/{{event._id}}' class="btn btn-large btn-warning" role'button'><span class='glyphicon glyphicon-search'></span></a>
+					<a href='/#/editEvent/{{event._id}}' class='btn btn-large btn-info' role='button' ng-show='iSvc.isAuthorized("admin")'><span class='glyphicon glyphicon-pencil'></span></a>
+					<a href='/#/' class='btn btn-large btn-info' role='button' ng-show='iSvc.isAuthorized("fadmin")'><span class='glyphicon glyphicon-usd'></span></a>
 				</div>
 			</div>
 		</li>
