@@ -42,7 +42,9 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 	};
 
 	$scope.filterActivities = function() {
-		$scope.activities = _.filter($scope.allActivities, { parentId: $scope.eventIdFilter});
+		$scope.activities = [];
+		$scope.activities = _.sortBy(_.filter($scope.allActivities, { parentId: $scope.eventIdFilter}),
+			function(a) { return a.name;	});
 	};
 
 	$scope.updateEventFilter = function(isReload) {

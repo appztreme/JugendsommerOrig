@@ -1,29 +1,39 @@
 <div class='container'>
-	<div class='container col-sm-10'>
+	<div class='container col-sm-9'>
 	<div class='panel panel-default'>
 	<div class='panel-heading'>Filter</div>
-	<div class='row panel-body'>
-		<label for='eventFilter' class='control-label col-sm-1'>Progr.:</label>
-		<div class='col-sm-3 form-group'>
-			<select id='eventFilter' class='form-control' ng-model='eventIdFilter' ng-change='updateEventFilter(false)'>
-				<option ng-repeat='event in events' value='{{event._id}}'>{{event.name}}</option>
-			</select>
+	<div class='panel-body'>
+		<div class='row'>
+			<label for='eventFilter' class='control-label col-sm-2'>Progr.:</label>
+			<div class='col-sm-5 input-group'>
+				<select id='eventFilter' class='form-control' ng-model='eventIdFilter' ng-change='updateEventFilter(false)'>
+					<option ng-repeat='event in events' value='{{event._id}}'>{{event.name}}</option>
+				</select>
+				<span class="input-group-btn">
+					<button class='btn btn-info' ng-click='clearEventSelection()'>
+						<span class="glyphicon glyphicon-remove"></span>
+					</button>
+				</span>
+			</div>
 		</div>
-		<div class='col-sm-1 form-group'>
-			<div class='btn btn-info' ng-click='clearEventSelection()'><span class="glyphicon glyphicon-remove"></span></div>
+		<div class='row' style='margin-top:10px'>
+			<label for='activityFilter' class='control-label col-sm-2'>Woche:</label>
+			<div class='col-sm-5 input-group'>
+				<select id='activityFilter' class='form-control' ng-model='activityIdFilter' ng-change='updateActivityFilter(false)'>
+					<option ng-repeat='activity in activities' value='{{activity._id}}'>{{activity.name}}</option>
+				</select>
+				<span class='input-group-btn'>
+					<button class='btn btn-info' ng-click='clearActivitySelection()'>
+						<span class="glyphicon glyphicon-remove"></span>
+					</button>
+				</span>
+			</div>
 		</div>
-		<label for='activityFilter' class='control-label col-sm-1'>Woche:</label>
-		<div class='col-sm-3 form-group'>
-			<select id='activityFilter' class='form-control' ng-model='activityIdFilter' ng-change='updateActivityFilter(false)'>
-				<option ng-repeat='activity in activities' value='{{activity._id}}'>{{activity.name}}</option>
-			</select>
+		<div class="row" style='margin-top:10px'>
+    	<div class='col-sm-offset-2 col-sm-4'>
+      	<button type='button' class='btn btn-primary btn-block' ng-click='getReportData()'>Laden</button>
+  		</div>
 		</div>
-		<div class='col-sm-1 form-group'>
-			<div class='btn btn-info' ng-click='clearActivitySelection()'><span class="glyphicon glyphicon-remove"></span></div>
-		</div>
-    <div class='col-sm-1'>
-      <button type='button' class='btn btn-primary' ng-click='getReportData()'>Laden</button>
-  	</div>
 	</div>
 	</div>
 	</div>
