@@ -3,17 +3,15 @@ var app = angular.module('js');
 app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc, ReportCacheSvc) {
 	$scope.busyPromise = RegistrationSvc.find();
 
-    $scope.getReportData = function() {
-      RegistrationSvc.find($scope.eventIdFilter, $scope.activityIdFilter)
-        .success(function (regs) {
+  $scope.getReportData = function() {
+    RegistrationSvc.find($scope.eventIdFilter, $scope.activityIdFilter)
+				.success(function (regs) {
             $scope.registrations = regs;
             $scope.emails = _.uniq(_.map($scope.registrations, function(r) {
                 return r.emailParent;
             })).join(';');
-        });
-    };
-
-	var supressFilter = false;
+    });
+  };
 
 	$scope.clearEventSelection = function() {
 		$scope.eventIdFilter = undefined;
@@ -44,21 +42,21 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 	};
 
 	$scope.filterActivities = function() {
-		$scope.activities = [];
 		$scope.activities = _.filter($scope.allActivities, { parentId: $scope.eventIdFilter});
 	};
 
-	$scope.$watch('eventIdFilter', function() {
-		if(!$scope.eventIdFilter) return;
+	$scope.updateEventFilter = function(isReload) {
 		ReportCacheSvc.currentEventIdFilter = $scope.eventIdFilter;
+		if(!isReload) { $scope.activityIdFilter = undefined; }
 		$scope.filterActivities();
-		$scope.activityIdFilter = undefined;
-	});
-	$scope.$watch('activityIdFilter', function() {
-		ReportCacheSvc.currentActivityIdFilter = $scope.activityIdFilter;
+		$scope.updateActivityFilter(isReload);
+	}
+
+	$scope.updateActivityFilter = function(isCalledInternallyFromReload) {
+		if(!isCalledInternallyFromReload) { ReportCacheSvc.currentActivityIdFilter = $scope.activityIdFilter; }
 		$scope.registrations = undefined;
 		$scope.emails = undefined;
-	});
+	}
 
 	if(ReportCacheSvc.hasSelectionData()) {
 		$scope.events = ReportCacheSvc.events;
@@ -98,9 +96,13 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 
 	if(ReportCacheSvc.hasEventFilterParameter()) {
 		$scope.eventIdFilter = ReportCacheSvc.currentEventIdFilter;
-		}
+		$scope.updateEventFilter(true);
+	}
 	if(ReportCacheSvc.hasActivityFilterParameter()) {
 		$scope.activityIdFilter = ReportCacheSvc.currentActivityIdFilter;
+		$scope.updateActivityFilter(false);
 	}
-	$scope.getReportData();
+	if(ReportCacheSvc.hasEventFilterParameter() || ReportCacheSvc.hasActivityFilterParameter()) {
+		$scope.getReportData();
+	}
 });
