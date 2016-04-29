@@ -53,6 +53,28 @@
     vertical-align: center;
 }
 
+.btn-main {
+  line-height: normal;
+  font-size: 40px;
+  padding: 10px 10px;
+  color: orange;
+}
+
+.btn-main a:link, .btn-main a:visited, .btn-main a:hover, .btn-main a:active {
+    color: orange;
+    text-decoration: none;
+}
+
+.btn-xlarge {
+    margin-top: 2px;
+    padding: 6px 12px;
+    font-size: 20px; //change this to your desired size
+    line-height: normal;
+    -webkit-border-radius: 5px;
+       -moz-border-radius: 5px;
+            border-radius: 5px;
+}
+
 .bgc-red {
 	background: #F64A4A;
 }

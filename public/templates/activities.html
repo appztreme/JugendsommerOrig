@@ -15,7 +15,9 @@
 		<li ng-repeat="activity in activities" class="list-group-item">
 			<div class='row'>
 				<div class='col-sm-1' ng-disabled='isReserveable(activity)'>
-					<img src='assets/detail-orange-medium.png'>
+					<div class='btn-main'>
+					<span class='glyphicon glyphicon-calendar'></span>
+				</div>
 				</div>
 				<div class='col-sm-10 act-status-container'>
 					<div class='row'>
@@ -33,9 +35,9 @@
 				</div></div>
 				</div>
 				<div class'col-sm-1'>
-					<a href='/#/editActivity/{{activity._id}}' class='btn btn-default' role='button' ng-show='iSvc.isAuthorized("admin")'><img src='assets/edit.png' alt='Editieren'></a>
-					<a href='/#/registration/{{activity._id}}' class='btn btn-default' role='button' ng-show='iSvc.isAuthenticated() && !canNotReserve(activity)'><img src='assets/sign-green-small.png' alt='Anmeldung'></a>
-					<button type="button" class="btn btn-default" ng-hide='iSvc.isAuthenticated() && !canNotReserve(activity)' data-toggle="modal" data-target="#warningModal"><img src='assets/sign-green-small.png' alt='Anmeldung' /></button>
+					<a href='/#/editActivity/{{activity._id}}' class='btn btn-xlarge btn-info' role='button' ng-show='iSvc.isAuthorized("admin")'><span class='glyphicon glyphicon-pencil'></span></a>
+					<a href='/#/registration/{{activity._id}}' class='btn btn-xlarge btn-success' role='button' ng-show='iSvc.isAuthenticated() && !canNotReserve(activity)'><span class='glyphicon glyphicon-new-window'></span></a>
+					<button type="button" class="btn btn-xlarge btn-success" ng-hide='iSvc.isAuthenticated() && !canNotReserve(activity)' data-toggle="modal" data-target="#warningModal"><span class='glyphicon glyphicon-new-window'></button>
 				</div>
 			</div>
 		</li>

@@ -14,10 +14,12 @@
 		<li ng-repeat='event in events' class='list-group-item'>
 		<div class='row'>
 				<div class='col-sm-1'>
+					<div class='btn-main'>
 					<a href='/#/activities/{{event._id}}' role='button'>
-						<img ng-show='event.type === "summer"' src='assets/calendar-orange-medium.png'>
-						<img ng-show='event.type === "music"' src='assets/music-orange-medium.png'>
+						<span ng-show='event.type === "summer"' class='glyphicon glyphicon-certificate'></span>
+						<span ng-show='event.type === "music"' class='glyphicon glyphicon-music'></span>
 					</a>
+				</div>
 				</div>
 				<div class='col-sm-9'>
 					<strong>{{event.location}} - {{event.name}}</strong>
@@ -25,10 +27,10 @@
 					<p>{{event.description}}</p>
 				</div>
 				<div class='col-sm-2'>
-					<a href='/#/activities/{{event._id}}' class='btn btn-large btn-success' role='button'><span class='glyphicon glyphicon-triangle-right'></span></a>
-					<a href='/#/eventInfo/{{event._id}}' class="btn btn-large btn-warning" role'button'><span class='glyphicon glyphicon-search'></span></a>
-					<a href='/#/editEvent/{{event._id}}' class='btn btn-large btn-info' role='button' ng-show='iSvc.isAuthorized("admin")'><span class='glyphicon glyphicon-pencil'></span></a>
-					<a href='/#/' class='btn btn-large btn-info' role='button' ng-show='iSvc.isAuthorized("fadmin")'><span class='glyphicon glyphicon-usd'></span></a>
+					<a href='/#/activities/{{event._id}}' class='btn btn-xlarge btn-success' role='button'><span class='glyphicon glyphicon-triangle-right'></span></a>
+					<a href='/#/eventInfo/{{event._id}}' class="btn btn-xlarge btn-warning" role'button'><span class='glyphicon glyphicon-search'></span></a>
+					<a href='/#/editEvent/{{event._id}}' class='btn btn-xlarge btn-info' role='button' ng-show='iSvc.isAuthorized("admin")'><span class='glyphicon glyphicon-pencil'></span></a>
+					<a href='/#/' class='btn btn-xlarge btn-primary' role='button' ng-show='iSvc.isAuthorized("fadmin")'><span class='glyphicon glyphicon-usd'></span></a>
 				</div>
 			</div>
 		</li>
