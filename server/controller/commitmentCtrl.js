@@ -28,11 +28,27 @@ const getCommitmentsByEventId = (eventId, res)  =>{
 		});
 };
 
+const getCommitmentsByUserId = (userId, res) => {
+	Commitment.find()
+		.where('date').gte(startCurYear)
+		.where('userId').equals(userId)
+		.populate('eventId')
+		.sort({ eventId: 1, date: 1})
+		exec(function(err, coms) {
+			if(err) { return next(err); }
+			res.json(coms);
+		});
+};
+
 exports.find = (req, res, next) => {
-	if(!req.query.eventId)
+	if(!req.query.eventId && !req.query.userId)
 		return getCommitmentsAll(res);
-	else
-		return getCommitmentsByEventId(req.query.eventId, res);
+	else {
+		if(req.query.eventId)
+			return getCommitmentsByEventId(req.query.eventId, res);
+		else(req.query.userId)
+			return getCommitmentsByUserId(req.query.userId, res);
+	}
 };
 
 exports.findById = (req, res, next) => {

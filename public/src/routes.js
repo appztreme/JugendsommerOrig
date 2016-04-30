@@ -18,6 +18,10 @@ app.config(function($routeProvider) {
 			controller: 'MyRegistrationsCtrl',
 			templateUrl: '../templates/myRegistrations.html'
 		})
+		.when('/myCommitments', {
+			controller: 'MyCommitmentsCtrl',
+			templateUrl: '../templates/myCommitments.html'
+		})
 		.when('/newEvent', {
 			controller: 'EventNewCtrl',
 			templateUrl: '../templates/eventEdit.html'
