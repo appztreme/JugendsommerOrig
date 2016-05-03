@@ -80,6 +80,15 @@
 		</p>
 		</div>
 	</div>
+	<!-- BUDGET -->
+	<div class='form-group' ng-class='{ "has-error": eventForm.budget.$invalid }'>
+		<label for='budget' class='control-label col-sm-2'>Budget</label>
+		<div class='col-sm-10'>
+			<p class='input-group'>
+				<input type='number' ng-model='budget' min='0' step='0.01' required></input>
+			</p>
+		</div>
+	</div>
 	<!-- INFO -->
 	<div class='form-group' ng-class='{ "has-error": eventForm.info.$invalid }'>
 		<label for='info' class='control-label col-sm-2'>Info</label>

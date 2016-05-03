@@ -30,11 +30,19 @@ exports.create = (req, res, next) => {
 		endDate: req.body.endDate,
 		visibleFrom: req.body.visibleFrom,
 		visibleTo: req.body.visibleTo,
+		budget: req.body.budget,
 	  info: req.body.info
 	});
 	ev.save(function(err, ev) {
 		if(err) { return next(err); }
 		res.status(201).json(ev);
+	});
+};
+
+exports.delete = (req, res, next) => {
+	Event.findByIdAndRemove(req.params.eventId, function(err, ev) {
+		if(err) { return next(err); }
+		res.status(200).json(ev);
 	});
 };
 
@@ -49,6 +57,7 @@ exports.update = (req, res, next) => {
 		ev.endDate = req.body.endDate;
 		ev.visibleFrom = req.body.visibleFrom;
 		ev.visibleTo = req.body.visibleTo;
+		ev.budget = req.body.budget;
 		ev.info = req.body.info;
 
 		ev.save(function(erre, eve) {

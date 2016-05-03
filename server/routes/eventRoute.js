@@ -11,4 +11,6 @@ router.post('/', auth.requiresRole("admin"), EventController.create);
 
 router.put('/', auth.requiresRole("admin"), EventController.update);
 
+router.delete('/', auth.requiresRole("admin"), EventController.delete);
+
 module.exports = router;

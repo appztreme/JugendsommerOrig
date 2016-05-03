@@ -29,6 +29,7 @@
 				<li><a id='nav_link_programme' href='/#/'>Programm</a></li>
 				<li ng-show='iSvc.isAuthenticated()'><a id='nav_link_myres' href='/#/myRegistrations'>Meine Reservierungen</a></li>
 				<li ng-show='iSvc.isAuthorized("fadmin")'><a href='/#/myCommitments'>Meine Rechnungen</a></li>
+				<li ng-show='iSvc.isAuthorized("fadmin")'><a href='/#/'>Fahrtkosten</a></li>
         <li ng-show='iSvc.isAuthorized("admin")'><a href='/#/report'>Report</a></li>
 			</ul>
 		    <div ng-include src='"templates/login.html"'></div>

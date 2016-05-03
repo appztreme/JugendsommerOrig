@@ -18,21 +18,32 @@
 		</div>
 	</div>
 	<!-- DATE -->
-	<div class='form-group' ng-class='{ "has-error": comForm.startDate.$invalid }'>
+	<div class='form-group' ng-class='{ "has-error": comForm.date.$invalid }'>
 		<label for='date' class='control-label col-sm-2'>Datum</label>
 		<div class='col-sm-10'>
 		<p class='input-group'>
-			<ng-datepicker ng-model='startDate' view-format="DD.MM.YYYY"  locale='de' required></ng-datepicker>
+			<ng-datepicker ng-model='date' view-format="DD.MM.YYYY" locale='de' required></ng-datepicker>
 		</p>
 		</div>
 	</div>
 	<!-- AMOUNT -->
-	<div class='form-group' ng-class='{ "has-error": comForm.endDate.$invalid }'>
+	<div class='form-group' ng-class='{ "has-error": comForm.amount.$invalid }'>
 		<label for='amount' class='control-label col-sm-2'>Betrag</label>
 		<div class='col-sm-10'>
 		<p class='input-group'>
-			<intput type="number" ng-model='amount' min="1" step="any" required></input>
+			<input type="number" ng-model='amount' min="0.1" step="0.01" required></input>
 		</p>
+		</div>
+	</div>
+	<!-- PAYMENT -->
+	<div class='form-group'>
+		<label class='control-label col-sm-2'></label>
+		<div class='col-sm-10'>
+			<p class='input-group'>
+				<label class='checkbox-inline'><input type='checkbox' ng-model='isPaymentDone' />Bezahlt</label>
+				<label class='checkbox-inline'><input type='checkbox' ng-model='isPaymentJDDone' />Bezahlt JD</label>
+				<label class='checkbox-inline'><input type='checkbox' ng-model='willBill' />Rechnung JD</label>
+			</p>
 		</div>
 	</div>
 
