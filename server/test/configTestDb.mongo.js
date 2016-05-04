@@ -18,6 +18,7 @@ db.events.insert({
     endDate: new Date(curYear,12,1),
     visibleFrom: new Date(curYear,4,1),
     visibleTo: new Date(curYear,10,1),
+    budget: 3500,
     info: 'info for event1'
 });
 db.events.insert({
@@ -30,6 +31,7 @@ db.events.insert({
     endDate: new Date(curYear,3,1),
     visibleFrom: new Date(curYear,1,1),
     visibleTo: new Date(curYear,10,1),
+    budget: 2045,
     info: 'info for event2'
 });
 db.events.insert({
@@ -42,6 +44,7 @@ db.events.insert({
     endDate: new Date(curYear-1,3,1),
     visibleFrom: new Date(curYear-1,1,1),
     visibleTo: new Date(curYear-1,10,1),
+    budget: 1000,
     info: 'info for event9'
 });
 

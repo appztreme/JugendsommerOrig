@@ -22,6 +22,8 @@ function checkEventToBeEqual(res, ev) {
     expect(new Date(res.body.visibleFrom)).toEqual(ev.visibleFrom);
     expect(res.body.hasOwnProperty('visibleTo')).toBe(true);
     expect(new Date(res.body.visibleTo)).toEqual(ev.visibleTo);
+    expect(res.body.hasOwnProperty('budget')).toBe(true);
+    expect(res.body.budget).toEqual(ev.budget);
     expect(res.body.hasOwnProperty('info')).toBe(true);
     expect(res.body.info).toEqual(ev.info);
 };
@@ -58,6 +60,7 @@ describe('Event', function() {
                 endDate: new Date(curYear,12,1),
                 visibleFrom: new Date(curYear,4,1),
                 visibleTo: new Date(curYear,10,1),
+                budget: 3500,
                 info: 'info for event1'
             };
             request(app).get('/api/events/111111111111111111111111')
@@ -80,6 +83,7 @@ describe('Event', function() {
             endDate: new Date(curYear,7,15),
             visibleFrom: new Date(curYear,1,1),
             visibleTo: new Date(curYear,11,1),
+            budget: 501,
             info: 'info for eventPost'
         };
         describe('authorized request', function() {
@@ -151,6 +155,7 @@ describe('Event', function() {
             endDate: new Date(curYear,9,21),
             visibleFrom: new Date(curYear,2,11),
             visibleTo: new Date(curYear,12,3),
+            budget: 750,
             info: 'info for changed event'
         };
         describe('authorized request', function() {
