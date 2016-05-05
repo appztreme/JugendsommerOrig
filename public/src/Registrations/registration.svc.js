@@ -35,4 +35,12 @@ app.service('RegistrationSvc', function($http) {
 	this.update = function(reg) {
 		return $http.put('/api/registrations', reg);
 	};
+
+	this.updateIsPaymentDone = function(registrationId, isPaymentDone) {
+		console.log('IsPaymentDone', registrationId.toString() + ' ' + isPaymentDone);
+	};
+
+	this.updateIsEmailNotified = function(registrationId, isEmailNotified) {
+		console.log('IsEmailNotified', registrationId.toString() + ' ' + isEmailNotified);
+	}
 });

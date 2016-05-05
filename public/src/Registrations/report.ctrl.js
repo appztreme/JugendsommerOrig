@@ -1,7 +1,7 @@
 var app = angular.module('js');
 
 app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc, ReportCacheSvc) {
-	$scope.busyPromise = RegistrationSvc.find();
+	$scope.busyPromise = RegistrationSvc.find() || RegistrationSvc.updateIsPaymentDone;
 
   $scope.getReportData = function() {
     RegistrationSvc.find($scope.eventIdFilter, $scope.activityIdFilter)
@@ -58,6 +58,26 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 		if(!isCalledInternallyFromReload) { ReportCacheSvc.currentActivityIdFilter = $scope.activityIdFilter; }
 		$scope.registrations = undefined;
 		$scope.emails = undefined;
+	}
+
+	$scope.updateIsPaymentDone = function(id, isPaymentDone) {
+		RegistrationSvc.updateIsPaymentDone(id, isPaymentDone);
+		// .error(function(err) {
+		// 	NotificationSvc.warn(e);
+		// })
+		// .success(function(success) {
+		// 	NotificationSvc.notify('Anmeldung geändert');
+		// });
+	}
+
+	$scope.updateIsEmailNotified = function(id, isEmailNotified) {
+		RegistrationSvc.updateIsEmailNotified(id, isEmailNotified);
+		// .error(function(err) {
+		// 		NotificationSvc.warn(e);
+		// })
+		// .success(function(success) {
+		// 	NotificationSvc.notify('Anmeldung geändert');
+		// });
 	}
 
 	if(ReportCacheSvc.hasSelectionData()) {

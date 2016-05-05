@@ -155,3 +155,25 @@ exports.update = (req, res, next) => {
 		});
 	});
 };
+
+exports.updateIsPaymentDone = (req, res, next) => {
+	Registration.findById(req.body._id, function(err, reg) {
+		if(!reg) return next(new Error('Keine Registrierung im System mit id ' + req.body._id));
+		reg.isPaymentDone = req.body.isPaymentDone;
+		reg.save(function(err, regDb) {
+			if(err) { return next(err); }
+			res.status(201).json(regDb);
+		});
+	});
+};
+
+exports.updateIsEmailNotified = (req, res, next) => {
+	Registration.findById(req.body._id, function(err, reg) {
+		if(!reg) return next(new Error('Keine Registrierung im System mit id ' + req.body._id));
+		reg.isEmailNotified = req.body.isEmailNotified;
+		reg.save(function(err, regDb) {
+			if(err) { return next(err); }
+			res.status(201).json(regDb);
+		});
+	});
+};
