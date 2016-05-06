@@ -37,10 +37,12 @@ app.service('RegistrationSvc', function($http) {
 	};
 
 	this.updateIsPaymentDone = function(registrationId, isPaymentDone) {
-		console.log('IsPaymentDone', registrationId.toString() + ' ' + isPaymentDone);
+		var update = { _id: registrationId, isPaymentDone: isPaymentDone };
+		return $http.put('/api/registrations/updateIsPaymentDone', update);
 	};
 
 	this.updateIsEmailNotified = function(registrationId, isEmailNotified) {
-		console.log('IsEmailNotified', registrationId.toString() + ' ' + isEmailNotified);
+		var update = { _id: registrationId, isEmailNotified: isEmailNotified };
+		return $http.put('/api/registrations/updateIsEmailNotified', update);
 	}
 });

@@ -10,8 +10,8 @@ const commitmentSchema = db.Schema({
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   eventId: { type: mongoose.Schema.Types.ObjectId, ref: 'Event', required: true },
 	isPaymentDone: { type: Boolean, required: true, default: false },
-  willBillArrive: { type: Boolean, required: true, default: false },
-
+	isPaymentJDDone: { type: Boolean, required: true, default: false },
+  isInvoice: { type: Boolean, required: true, default: false }
 });
 
 var Commitment = db.model('Commitment', commitmentSchema);

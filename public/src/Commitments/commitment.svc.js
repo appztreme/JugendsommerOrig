@@ -26,6 +26,7 @@ app.service('CommitmentSvc', function($http) {
 	};
 
 	this.create = function(com) {
+		console.log("COM:", com);
 		return $http.post('/api/commitments', com);
 	};
 

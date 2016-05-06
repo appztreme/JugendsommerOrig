@@ -65,7 +65,10 @@ exports.create = (req, res, next) => {
 		date: req.body.date,
 		amount: req.body.amount,
 		eventId: req.body.eventId,
-		userId: req.body.userId
+		userId: req.body.userId,
+		isPaymentDone: req.body.isPaymentDone,
+		isPaymentJDDone: req.body.isPaymentJDDone,
+		isInvoice: req.body.isInvoice
 	});
 	commitment.save((err, com) => {
 		if(err) { return next(err); }
@@ -82,6 +85,9 @@ exports.update = (req, res, next) => {
 		com.amount = req.body.amount;
 		com.eventId = req.body.eventId;
 		com.userId = req.body.userId;
+		com.isPaymentDone = req.body.isPaymentDone;
+		com.isPaymentJDDone = req.body.isPaymentJDDone;
+		com.isInvoice = req.body.isInvoice;
 		com.save(function(err, comDb) {
 			if(err) { return next(err); }
 			res.status(201).json(comDb);

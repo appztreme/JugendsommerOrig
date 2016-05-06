@@ -15,4 +15,8 @@ router.post('/', auth.requiresApiLogin, RegistrationController.create);
 
 router.put('/', auth.requiresRole("admin"), RegistrationController.update);
 
+router.put('/updateIsPaymentDone', auth.requiresRole("admin"), RegistrationController.updateIsPaymentDone);
+
+router.put('/updateIsEmailNotified', auth.requiresRole("admin"), RegistrationController.updateIsEmailNotified);
+
 module.exports = router;

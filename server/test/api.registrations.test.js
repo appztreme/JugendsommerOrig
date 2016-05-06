@@ -213,6 +213,82 @@ describe('Registrations', () => {
             });
         });
       });
+      describe('PUT /registrations/updateIsPaymentDone', () => {
+        describe('authorized request', () => {
+          let testSession = requestSession(app);
+          before('login', done => loginHelper.loginAs(testSession, 'admin', 'admin', done));
+          it('should update isPaymentDone', done => {
+            testSession.put('/api/registrations/updateIsPaymentDone')
+              .send({ _id: '111111111111111111111001', isPaymentDone: true })
+              .end((err, res) => {
+                check.checkResponseStatus(err, res, 201);
+                expect(res.body.hasOwnProperty('isPaymentDone')).toEqual(true);
+                expect(res.body.isPaymentDone).toEqual(true);
+                done();
+              });
+          });
+        });
+        describe('unauthorized request', () => {
+          let testSession = requestSession(app);
+          before('login', done => loginHelper.loginAs(testSession, 'fadmin', 'fadmin', done));
+          it('should be refused', done => {
+            testSession.put('/api/registrations/updateIsPaymentDone')
+              .send({_id: '111111111111111111111001', isPaymentDone: true})
+              .end((err, res) => {
+                check.checkResponseStatus(err, res, 403);
+                done();
+              });
+          });
+        });
+        describe('unauthenticated request', () => {
+          it('should be refused', done => {
+            request(app).put('/api/registrations/updateIsPaymentDone')
+              .send({_id: '111111111111111111111001', isPaymentDone: true})
+              .end((err, res) => {
+                check.checkResponseStatus(err, res, 403);
+                done();
+              });
+          });
+        });
+      });
+      describe('PUT /registrations/updateIsEmailNotified', () => {
+        describe('authorized request', () => {
+          let testSession = requestSession(app);
+          before('login', done => loginHelper.loginAs(testSession, 'admin', 'admin', done));
+          it('should update isEmailNotified', done => {
+            testSession.put('/api/registrations/updateIsEmailNotified')
+              .send({ _id: '111111111111111111111001', isEmailNotified: true})
+              .end((err, res) => {
+                check.checkResponseStatus(err, res, 201);
+                expect(res.body.hasOwnProperty('isEmailNotified')).toEqual(true);
+                expect(res.body.isEmailNotified).toEqual(true);
+                done();
+              });
+          });
+        });
+        describe('unauthorized request', () => {
+          let testSession = requestSession(app);
+          before('login', done => loginHelper.loginAs(testSession, 'fadmin', 'fadmin', done));
+          it('should be refused', done => {
+            testSession.put('/api/registrations/updateIsEmailNotified')
+              .send({_id: '111111111111111111111001', isEmailNotified: true})
+              .end((err, res) => {
+                check.checkResponseStatus(err, res, 403);
+                done();
+              });
+          });
+        });
+        describe('unauthenticated request', () => {
+          it('should be refused', done => {
+            request(app).put('/api/registrations/updateIsEmailNotified')
+              .send({_id: '111111111111111111111001', isEmailNotified: true})
+              .end((err, res) => {
+                check.checkResponseStatus(err, res, 403);
+                done();
+              });
+          });
+        });
+      });
     });
     describe('POST /registrations', () => {
         const newRegistration = {

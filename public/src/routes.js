@@ -22,7 +22,7 @@ app.config(function($routeProvider) {
 			controller: 'MyCommitmentsCtrl',
 			templateUrl: '../templates/myCommitments.html'
 		})
-		.when('/newCommitment', {
+		.when('/newCommitment/:eventId', {
 			controller: 'CommitmentNewCtrl',
 			templateUrl: '../templates/commitmentEdit.html'
 		})

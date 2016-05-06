@@ -1,6 +1,6 @@
 var app = angular.module('js');
 
-app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc, ReportCacheSvc) {
+app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc, NotificationSvc, ReportCacheSvc) {
 	$scope.busyPromise = RegistrationSvc.find() || RegistrationSvc.updateIsPaymentDone;
 
   $scope.getReportData = function() {
@@ -61,23 +61,23 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 	}
 
 	$scope.updateIsPaymentDone = function(id, isPaymentDone) {
-		RegistrationSvc.updateIsPaymentDone(id, isPaymentDone);
-		// .error(function(err) {
-		// 	NotificationSvc.warn(e);
-		// })
-		// .success(function(success) {
-		// 	NotificationSvc.notify('Anmeldung geändert');
-		// });
+		RegistrationSvc.updateIsPaymentDone(id, isPaymentDone)
+		.error(function(err) {
+			NotificationSvc.warn(err);
+		})
+		.success(function(success) {
+			NotificationSvc.notify('Anmeldung geändert');
+		});
 	}
 
 	$scope.updateIsEmailNotified = function(id, isEmailNotified) {
-		RegistrationSvc.updateIsEmailNotified(id, isEmailNotified);
-		// .error(function(err) {
-		// 		NotificationSvc.warn(e);
-		// })
-		// .success(function(success) {
-		// 	NotificationSvc.notify('Anmeldung geändert');
-		// });
+		RegistrationSvc.updateIsEmailNotified(id, isEmailNotified)
+		.error(function(err) {
+				NotificationSvc.warn(err);
+		})
+		.success(function(success) {
+			NotificationSvc.notify('Anmeldung geändert');
+		});
 	}
 
 	if(ReportCacheSvc.hasSelectionData()) {
