@@ -175,7 +175,10 @@ db.commitments.insert({
     date: new Date(curYear,3,21),
     amount: 88.90,
     eventId: ObjectId('111111111111111111111111'),
-    userId: ObjectId('111111111111111111110003')
+    userId: ObjectId('111111111111111111110003'),
+    isPaymentDone: true,
+    isPaymentJDDone: false,
+    isInvoice: false
 });
 
 db.commitments.insert({
@@ -185,7 +188,10 @@ db.commitments.insert({
     date: new Date(curYear,11,1),
     amount: 12.4,
     eventId: ObjectId('111111111111111111111111'),
-    userId: ObjectId('111111111111111111110003')
+    userId: ObjectId('111111111111111111110003'),
+    isPaymentDone: false,
+    isPaymentJDDone: true,
+    isInvoice: false
 });
 
 db.commitments.insert({
@@ -195,7 +201,10 @@ db.commitments.insert({
     date: new Date(curYear,6,7),
     amount: 119.10,
     eventId: ObjectId('111111111111111111111112'),
-    userId: ObjectId('111111111111111111110003')
+    userId: ObjectId('111111111111111111110003'),
+    isPaymentDone: false,
+    isPaymentJDDone: false,
+    isInvoice: true
 });
 
 db.commitments.insert({
@@ -205,7 +214,10 @@ db.commitments.insert({
     date: new Date(curYear,5,14),
     amount: 66.89,
     eventId: ObjectId('111111111111111111111112'),
-    userId: ObjectId('111111111111111111110003')
+    userId: ObjectId('111111111111111111110003'),
+    isPaymentDone: true,
+    isPaymentJDDone: false,
+    isInvoice: false
 });
 
 var commitmentsCnt = db.commitments.find().count();

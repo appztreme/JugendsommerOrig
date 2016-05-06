@@ -9,7 +9,9 @@ app.controller('MyCommitmentsCtrl', function($scope, $location, $route, Commitme
 	};
 
 	CommitmentSvc.findByUser(IdentitySvc.currentUser._id).success(function(commitments) {
-		$scope.commitments = commitments;
-		$scope.user = IdentitySvc.currentUser;
+		$scope.sum = Math.round(_.reduce(commitments, function(sum, object) {
+			return sum + object.amount;
+		}, 0) * 100) / 100;
+		$scope.commitments = _.values(_.groupBy(commitments, "eventId._id"));
 	});
 });

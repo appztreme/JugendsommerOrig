@@ -5,50 +5,15 @@ const Event = require('./../models/event');
 const curYear = new Date().getFullYear();
 const startCurYear = new Date(curYear,1,1);
 
-const getCommitmentsAll = (res) => {
-	Commitment.find()
-		.where('date').gte(startCurYear)
-		.populate('eventId')
-		.sort({ eventId: 1, date: 1})
-		.exec(function(err, coms) {
-			if(err) { return next(err); }
-			res.json(coms);
-		});
-};
-
-const getCommitmentsByEventId = (eventId, res)  =>{
-	Commitment.find()
-		.where('date').gte(startCurYear)
-		.where('eventId').equals(eventId)
-		.populate('eventId')
-		.sort({ eventId: 1, date: 1 })
-		.exec(function(err, coms) {
-			if(err) { return next(err); }
-			res.json(coms);
-		});
-};
-
-const getCommitmentsByUserId = (userId, res) => {
-	Commitment.find()
-		.where('date').gte(startCurYear)
-		.where('userId').equals(userId)
-		.populate('eventId')
-		.sort({ eventId: 1, date: 1})
-		exec(function(err, coms) {
-			if(err) { return next(err); }
-			res.json(coms);
-		});
-};
-
 exports.find = (req, res, next) => {
-	if(!req.query.eventId && !req.query.userId)
-		return getCommitmentsAll(res);
-	else {
-		if(req.query.eventId)
-			return getCommitmentsByEventId(req.query.eventId, res);
-		else(req.query.userId)
-			return getCommitmentsByUserId(req.query.userId, res);
-	}
+	Commitment.find()
+		.where('date').gte(startCurYear)
+		.populate('eventId')
+		.sort({ eventId: 1, date: 1})
+		.exec(function(err, coms) {
+			if(err) { return next(err); }
+			res.json(coms);
+		});
 };
 
 exports.findById = (req, res, next) => {
@@ -56,6 +21,30 @@ exports.findById = (req, res, next) => {
 		if(err) { return next(err); }
 		res.json(commitment);
 	});
+};
+
+exports.findByUserId = (req, res, next) => {
+	Commitment.find()
+		.where('date').gte(startCurYear)
+		.where('userId').equals(req.params.userId)
+		.populate('eventId')
+		.sort({ eventId: 1, date: 1})
+		.exec(function(err, coms) {
+			if(err) { return next(err); }
+			res.json(coms);
+		});
+};
+
+exports.findByEventId = (req, res, next) => {
+	Commitment.find()
+		.where('date').gte(startCurYear)
+		.where('eventId').equals(req.params.eventId)
+		.populate('eventId')
+		.sort({ eventId: 1, date: 1 })
+		.exec(function(err, coms) {
+			if(err) { return next(err); }
+			res.json(coms);
+		});
 };
 
 exports.create = (req, res, next) => {
@@ -70,8 +59,9 @@ exports.create = (req, res, next) => {
 		isPaymentJDDone: req.body.isPaymentJDDone,
 		isInvoice: req.body.isInvoice
 	});
+	console.log(commitment);
 	commitment.save((err, com) => {
-		if(err) { return next(err); }
+		if(err) { console.log(err); return next(err); }
 		res.status(201).json(com);
 	});
 };

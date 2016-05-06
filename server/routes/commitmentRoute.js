@@ -9,6 +9,10 @@ router.get('/selectableEventActivities', CommitmentController.getSelectableEvent
 
 router.get('/:commitmentId', auth.requiresRole("fadmin"), CommitmentController.findById);
 
+router.get('/byUser/:userId', auth.requiresRole("fadmin"), CommitmentController.findByUserId);
+
+router.get('/byEvent/:eventId', auth.requiresRole("admin"), CommitmentController.findByEventId);
+
 router.delete('/:commitmentId', auth.requiresRole("admin"), CommitmentController.delete);
 
 router.post('/', auth.requiresRole("fadmin"), CommitmentController.create);

@@ -2,6 +2,11 @@ var app = angular.module('js');
 
 app.controller('CommitmentNewCtrl', function($scope, $routeParams, $location, NotificationSvc, IdentitySvc, CommitmentSvc) {
 	$scope.title = 'Rechnung hinzufügen';
+	//Default values
+	$scope.amount = 1.1;
+	$scope.isPaymentDone = false;
+	$scope.isPaymentJDDone = false;
+	$scope.isInvoice = false;
 
 	$scope.save = function() {
 		if($scope.name && $scope.amount && $scope.date) {

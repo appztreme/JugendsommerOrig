@@ -1,1 +1,47 @@
-<div>hallo</div>
+<div class='container'>
+	<h2 class='text-orange'>Rechnungen</h2>
+	<div cg-Busy='{promise:busyPromise,message:"Loading",backdrop:true,minDuration:500}'></div>
+	<table class='table table-striped table-bordered'>
+		<thead>
+		<tr>
+			<th>Programm</th>
+			<th>Name</th>
+			<th>Begründung</th>
+			<th>Datum</th>
+			<th>Betrag</th>
+			<th>Bezahlt</th>
+			<th>Bezahlt JD</th>
+			<th>Rechnung JD</th>
+		</tr>
+		<thead>
+    <tbody ng-repeat='grp in commitments'>
+			<tr>
+				<td colspan="4" class="bg-info">Event</td>
+				<td align="right" class="bg-info"></td>
+				<td colspan="3" class="bg-info"></td>
+			</tr>
+		  <tr ng-repeat='com in grp'>
+        <td>{{com.eventId.name}}</td>
+			  <td>{{com.name}}</td>
+			  <td>{{com.description}}</td>
+			  <td>{{com.date | date: 'dd/MM/yyyy'}}</td>
+        <td align="right">{{com.amount}}</td>
+        <td align="center" ng-class='{"bg-success": com.isPaymentDone, "bg-info": !com.isPaymentDone}'>{{formatBool(com.isPaymentDone)}}</td>
+        <td align="center" ng-class='{"bg-success": com.isPaymentJDDone, "bg-info": !com.isPaymentJDDone}'>{{formatBool(com.isPaymentJDDone)}}</td>
+        <td align="center" ng-class='{"bg-success": com.isInvoice, "bg-info": !com.isInvoice}'>{{formatBool(com.isInvoice)}}</td>
+		  </tr>
+			<tr>
+				<td colspan="4">Summe:</td>
+				<td align="right">xxx</td>
+				<td colspan="3"></td>
+			</tr>
+    </tbody>
+		<tfoot>
+			<tr>
+				<td colspan="4">Gesamtsumme</td>
+				<td align="right">{{sum}}</td>
+				<td colspan="3"></td>
+			</tr>
+		</tfoot>
+	</table>
+</div>

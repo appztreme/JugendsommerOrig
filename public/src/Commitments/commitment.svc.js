@@ -18,7 +18,7 @@ app.service('CommitmentSvc', function($http) {
 	};
 
 	this.findByUser = function(userId) {
-		return $http.get('/api/commitments/' + userId);
+		return $http.get('/api/commitments/byUser/' + userId);
 	};
 
 	this.delete = function(commitmentId) {
@@ -26,7 +26,6 @@ app.service('CommitmentSvc', function($http) {
 	};
 
 	this.create = function(com) {
-		console.log("COM:", com);
 		return $http.post('/api/commitments', com);
 	};
 

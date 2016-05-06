@@ -46,7 +46,7 @@ describe('Commitments', () => {
               });
       });
       it('should return collection of 2 entities with eventId param', done => {
-          testSession.get('/api/commitments?eventId=111111111111111111111111')
+          testSession.get('/api/commitments/byEvent/111111111111111111111111')
             .end((err, res) => {
                 check.checkResponseStatus(err, res, 200);
                 expect(res.body).toBeA('array');
@@ -76,6 +76,41 @@ describe('Commitments', () => {
       });
     });
   });
+  describe('GET /commitments/byUser/:userId', () => {
+    describe('authorized request', () => {
+      let testSession = requestSession(app);
+      before('login', done => loginHelper.loginAs(testSession, 'fadmin', 'fadmin', done));
+      it('should return collection of 4 entities with userId param', done => {
+          testSession.get('/api/commitments/byUser/111111111111111111110003')
+            .end((err, res) => {
+                check.checkResponseStatus(err, res, 200);
+                expect(res.body).toBeA('array');
+                expect(res.body.length).toEqual(4);
+                done();
+            });
+      })
+    });
+    describe('unauthorized request', () => {
+      let testSession = requestSession(app);
+      before('login', done => loginHelper.loginAs(testSession, 'admin', 'admin', done));
+      it('should be refused', done => {
+        request(app).get('/api/commitments/byUser/111111111111111111110003')
+          .end((err, res) => {
+            check.checkResponseStatus(err, res, 403);
+            done();
+          });
+      });
+    });
+    describe('unauthenticated request', () => {
+      it('should be refused', done => {
+        request(app).get('/api/commitments/byUser/111111111111111111110003')
+          .end((err, res) => {
+            check.checkResponseStatus(err, res, 403);
+            done();
+          });
+      });
+    });
+  });
   describe('GET /commitments/:commitmentId', () => {
     const expectedCommitment = {
       _id: '111111111111111111100002',
@@ -84,7 +119,10 @@ describe('Commitments', () => {
       date: new Date(curYear,11,1),
       amount: 12.4,
       eventId: '111111111111111111111111',
-      userId: '111111111111111111110003'
+      userId: '111111111111111111110003',
+      isPaymentDone: false,
+      isPaymentJDDone: false,
+      isInvoice: true
     };
     describe('authorized request', () => {
         const testSession = requestSession(app);
@@ -126,7 +164,10 @@ describe('Commitments', () => {
       amount: 344.53,
       date: new Date(curYear,5,5),
       eventId: '111111111111111111111112',
-      userId: '111111111111111111110003'
+      userId: '111111111111111111110003',
+      isPaymentDone: false,
+      isPaymentJDDone: true,
+      isInvoice: false
     };
     describe('authorized request', () => {
       let testSession = requestSession(app);
@@ -172,7 +213,10 @@ describe('Commitments', () => {
         date: new Date(curYear,9,1),
         amount: 77.12,
         eventId: '111111111111111111111112',
-        userId: '111111111111111111110003'
+        userId: '111111111111111111110003',
+        isPaymentDone: true,
+        isPaymentJDDone: false,
+        isInvoice: false
       };
     describe('authorized request', () => {
       const testSession = requestSession(app);
