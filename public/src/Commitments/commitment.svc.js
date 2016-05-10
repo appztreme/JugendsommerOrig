@@ -5,8 +5,12 @@ var app = angular.module('js');
  * communication with server
  */
 app.service('CommitmentSvc', function($http) {
-	this.find = function(eventId) {
+	this.findByEventId = function(eventId) {
 		return $http.get('/api/commitments' + eventId);
+	};
+
+	this.find = function() {
+		return $http.get('/api/commitments');
 	};
 
 	this.getSelectionParams = function() {
