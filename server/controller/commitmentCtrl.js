@@ -9,6 +9,7 @@ exports.find = (req, res, next) => {
 	Commitment.find()
 		.where('date').gte(startCurYear)
 		.populate('eventId')
+		.populate('userId')
 		.sort({ eventId: 1, date: 1})
 		.exec(function(err, coms) {
 			if(err) { return next(err); }
@@ -28,6 +29,7 @@ exports.findByUserId = (req, res, next) => {
 		.where('date').gte(startCurYear)
 		.where('userId').equals(req.params.userId)
 		.populate('eventId')
+		.populate('userId')
 		.sort({ eventId: 1, date: 1})
 		.exec(function(err, coms) {
 			if(err) { return next(err); }

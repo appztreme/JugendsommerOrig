@@ -13,17 +13,18 @@
 			<th>Bezahlt</th>
 			<th>Bezahlt JD</th>
 			<th>Rechnung JD</th>
+			<th>Benutzer</th>
 		</tr>
 		<thead>
     <tbody ng-repeat='grp in commitments'>
 			<tr>
-				<td colspan="4" class="bgc-orange-light"><strong>{{grp[0].name}}</strong></td>
-        <td class="bgc-orange-light"><strong>Budget:</strong></td>
+				<td colspan="4" class="bg-warning"><i><strong>{{grp[0].eventId.location}} - {{grp[0].eventId.name}}</strong></i></td>
+        <td class="bg-warning"><strong>Budget:</strong></td>
 				<td align="right" class="bg-primary"><strong>{{grp[0].eventId.budget}}</strong></td>
-				<td colspan="3" class="bgc-orange-light"></td>
+				<td colspan="4" class="bg-warning"></td>
 			</tr>
 		  <tr ng-repeat='com in grp'>
-        <td><button class="btn glyphicon glyphicon-pencil" ng-disabled='!iSvc.isAuthorized("fadmin")' type="button" ng-click='editcommitment(com._id)'></button></td>
+        <td><button class="btn glyphicon glyphicon-pencil" ng-disabled='!iSvc.isAuthorized("fadmin")' type="button" ng-click='editCommitment(com._id)'></button></td>
   			<td><button type="button" class="btn glyphicon glyphicon-trash" ng-disabled='!iSvc.isAuthorized("admin")' ng-click='deleteCommitment(com._id)'></button></td>
 			  <td>{{com.name}}</td>
 			  <td>{{com.description}}</td>
@@ -32,6 +33,7 @@
         <td align="center" ng-class='{"bg-info": com.isPaymentDone}'>{{formatBool(com.isPaymentDone)}}</td>
         <td align="center" ng-class='{"bg-info": com.isPaymentJDDone}'>{{formatBool(com.isPaymentJDDone)}}</td>
         <td align="center" ng-class='{"bg-info": com.isInvoice}'>{{formatBool(com.isInvoice)}}</td>
+				<td>{{com.userId.firstName}} {{com.userId.lastName}}</td>
 		  </tr>
 			<tr>
 				<td colspan="5"><strong>Summe:</strong></td>
@@ -39,13 +41,14 @@
 				<td align="right"><strong>{{sumGrpIsPaymentDone(grp)}}</strong></td>
         <td align="right"><strong>{{sumGrpIsPaymentJDDone(grp)}}</strong></td>
         <td align="right"><strong>{{sumGrpIsInvoice(grp)}}</strong></td>
+				<td></td>
 			</tr>
     </tbody>
 		<tfoot>
 			<tr>
 				<td colspan="5"><strong>Gesamtsumme:</strong></td>
 				<td align="right"><strong>{{sum}}</strong></td>
-				<td colspan="3"></td>
+				<td colspan="4"></td>
 			</tr>
 		</tfoot>
 	</table>

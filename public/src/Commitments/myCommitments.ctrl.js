@@ -9,11 +9,13 @@ app.controller('MyCommitmentsCtrl', function($scope, $location, $route, Commitme
 	};
 
 	$scope.editCommitment = function(id) {
-
+		$location.path('editCommitment/' + id);
 	};
 
 	$scope.deleteCommitment = function(id) {
-
+		CommitmentSvc.delete(id).then(function(err, com) {
+			$route.reload();
+		});
 	};
 
 	$scope.isOverBudget = function(grpArray) {
@@ -40,7 +42,7 @@ app.controller('MyCommitmentsCtrl', function($scope, $location, $route, Commitme
 		return $scope.sumGrp(ar, function(acc, item) { return (item.isInvoice) ? acc + item.amount : acc; });
 	};
 
-	if(IdentitySvc.isAuthorized("fadmin") && !IdentityService.isAuthorized("admin")) {
+	if(IdentitySvc.isFAdmin() && !IdentitySvc.isAdmin()) {
 		CommitmentSvc.findByUser(IdentitySvc.currentUser._id).success(function(commitments) {
 			$scope.sum = Math.round(_.reduce(commitments, function(sum, object) {
 				return sum + object.amount;
@@ -52,9 +54,10 @@ app.controller('MyCommitmentsCtrl', function($scope, $location, $route, Commitme
 				acc[key].push(com);
 				return acc;
 			}, {});
+			console.log(commitments);
 		});
 	}
-	if(IdentitySvc.isAuthorized("admin") {
+	if(IdentitySvc.isAdmin()) {
 		CommitmentSvc.find().success(function(commitments) {
 			$scope.sum = Math.round(_.reduce(commitments, function(sum, object) {
 				return sum + object.amount;
@@ -62,9 +65,9 @@ app.controller('MyCommitmentsCtrl', function($scope, $location, $route, Commitme
 
 			$scope.commitments = _.reduce(commitments, function(acc, com) {
 				var key = com.eventId._id;
-				acc[key] = acc[key] || [];
-				acc[key].push(com);
-				return acc;
+			 acc[key] = acc[key] || [];
+		   acc[key].push(com);
+			 return acc;
 			}, {});
 		});
 	}

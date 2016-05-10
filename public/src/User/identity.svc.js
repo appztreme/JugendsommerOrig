@@ -4,9 +4,13 @@ app.factory('IdentitySvc', function() {
 
 	return {
 		currentUser: undefined,
-		
+
 		isAdmin:  function() {
 			return !!this.currentUser && this.currentUser.roles.indexOf("admin") > -1;
+		},
+
+		isFAdmin: function() {
+			return !!this.currentUser && this.currentUser.roles.indexOf("fadmin") > -1;
 		},
 
 		isAuthenticated: function() {
