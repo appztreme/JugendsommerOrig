@@ -12,6 +12,7 @@ app.controller('CommitmentNewCtrl', function($scope, $routeParams, $location, No
 		if($scope.name && $scope.amount && $scope.date) {
 			CommitmentSvc.create({
 				name: $scope.name,
+				type: $scope.type,
 				description: $scope.description,
 				date: $scope.date,
 				amount: $scope.amount,
@@ -24,6 +25,7 @@ app.controller('CommitmentNewCtrl', function($scope, $routeParams, $location, No
 				$scope.name = null;
 				$scope.description = null;
 				$scope.date = null;
+				$scope.type = null;
 				$scope.amount = 0;
 				$scope.isPaymentDone = false;
 				$scope.isPaymentJDDone = false;

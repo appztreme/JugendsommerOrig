@@ -30,7 +30,8 @@ exports.create = (req, res, next) => {
 		endDate: req.body.endDate,
 		visibleFrom: req.body.visibleFrom,
 		visibleTo: req.body.visibleTo,
-		budget: req.body.budget,
+		budgetFood: req.body.budgetFood,
+		budgetBusiness: req.body.budgetBusiness,
 	  info: req.body.info
 	});
 	ev.save(function(err, ev) {
@@ -57,7 +58,8 @@ exports.update = (req, res, next) => {
 		ev.endDate = req.body.endDate;
 		ev.visibleFrom = req.body.visibleFrom;
 		ev.visibleTo = req.body.visibleTo;
-		ev.budget = req.body.budget;
+		ev.budgetFood = req.body.budgetFood;
+		ev.budgetBusiness = req.body.budgetBusiness;
 		ev.info = req.body.info;
 
 		ev.save(function(erre, eve) {

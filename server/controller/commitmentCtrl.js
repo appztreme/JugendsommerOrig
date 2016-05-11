@@ -54,6 +54,7 @@ exports.create = (req, res, next) => {
 		name: req.body.name,
 		description: req.body.description,
 		date: req.body.date,
+		type: req.body.type,
 		amount: req.body.amount,
 		eventId: req.body.eventId,
 		userId: req.body.userId,
@@ -74,6 +75,7 @@ exports.update = (req, res, next) => {
 		com.name = req.body.name;
 		com.description = req.body.description;
 		com.date = req.body.date;
+		com.type = req.body.type;
 		com.amount = req.body.amount;
 		com.eventId = req.body.eventId;
 		com.userId = req.body.userId;

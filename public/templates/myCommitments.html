@@ -5,7 +5,7 @@
 		<thead>
 		<tr>
 			<th></th>
-      <th></th>
+      <th>Type</th>
 			<th>Name</th>
 			<th>Begründung</th>
 			<th>Datum</th>
@@ -20,13 +20,14 @@
 			<tr>
 				<td colspan="4" class="bg-warning"><i><strong>{{grp[0].eventId.location}} - {{grp[0].eventId.name}}</strong></i></td>
         <td class="bg-warning"><strong>Budget:</strong></td>
-				<td align="right" class="bg-primary"><strong>{{grp[0].eventId.budget}}</strong></td>
+				<td align="right" class="bg-primary"><strong>{{grp[0].eventId.budgetBusiness}}</strong></td>
 				<td colspan="4" class="bg-warning"></td>
 			</tr>
-		  <tr ng-repeat='com in grp'>
+		  <tr ng-repeat='com in grp["business"]'>
         <td><button class="btn glyphicon glyphicon-pencil" ng-disabled='!iSvc.isAuthorized("fadmin")' type="button" ng-click='editCommitment(com._id)'></button></td>
   			<td><button type="button" class="btn glyphicon glyphicon-trash" ng-disabled='!iSvc.isAuthorized("admin")' ng-click='deleteCommitment(com._id)'></button></td>
-			  <td>{{com.name}}</td>
+				<td>{{com.type}}</td>
+				<td>{{com.name}}</td>
 			  <td>{{com.description}}</td>
 			  <td>{{com.date | date: 'dd/MM/yyyy'}}</td>
         <td align="right">{{com.amount}}</td>

@@ -19,7 +19,7 @@ app.controller('MyCommitmentsCtrl', function($scope, $location, $route, Commitme
 	};
 
 	$scope.isOverBudget = function(grpArray) {
-		return $scope.sumGrp(grpArray) > grpArray[0].eventId.budget;
+		return $scope.sumGrp(grpArray) > grpArray[0].eventId.budgetBusiness;
 	};
 
 	$scope.sumGrp = function(ar, reducer) {
@@ -49,10 +49,18 @@ app.controller('MyCommitmentsCtrl', function($scope, $location, $route, Commitme
 			}, 0) * 100) / 100;
 
 			$scope.commitments = _.reduce(commitments, function(acc, com) {
-				var key = com.eventId._id;
-				acc[key] = acc[key] || [];
-				acc[key].push(com);
-				return acc;
+				var key1 = com.eventId._id;
+				var key2 = com.type;
+				console.log('key1', key1);
+				console.log('key2', key2);
+				//acc[key1] = acc[key1] || [];
+				acc[key1] = acc[key1] || {};
+				console.log('first',acc);
+			 	acc[key1][key2] = acc[key1][key2] || [{ 'business': [], 'food': []}];
+				console.log('second', acc);
+				acc[key1][key2].push(com);
+		   	//acc[key1].push(com);
+			 	return acc;
 			}, {});
 			console.log(commitments);
 		});
@@ -64,10 +72,18 @@ app.controller('MyCommitmentsCtrl', function($scope, $location, $route, Commitme
 			}, 0) * 100) / 100;
 
 			$scope.commitments = _.reduce(commitments, function(acc, com) {
-				var key = com.eventId._id;
-			 acc[key] = acc[key] || [];
-		   acc[key].push(com);
-			 return acc;
+				var key1 = com.eventId._id;
+				var key2 = com.type;
+				console.log('key1', key1);
+				console.log('key2', key2);
+				//acc[key1] = acc[key1] || [];
+				acc[key1] = acc[key1] || {};
+				console.log('first',acc);
+			 	acc[key1][key2] = acc[key1][key2] || [{ 'business': [], 'food': []}];
+				console.log('second', acc);
+				acc[key][key2].push(com);
+		   	//acc[key1].push(com);
+			 	return acc;
 			}, {});
 		});
 	}

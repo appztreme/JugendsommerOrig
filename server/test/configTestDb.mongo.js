@@ -18,7 +18,8 @@ db.events.insert({
     endDate: new Date(curYear,12,1),
     visibleFrom: new Date(curYear,4,1),
     visibleTo: new Date(curYear,10,1),
-    budget: 3500,
+    budgetBusiness: 3500,
+    budgetFood: 200,
     info: 'info for event1'
 });
 db.events.insert({
@@ -31,7 +32,8 @@ db.events.insert({
     endDate: new Date(curYear,3,1),
     visibleFrom: new Date(curYear,1,1),
     visibleTo: new Date(curYear,10,1),
-    budget: 2045,
+    budgetBusiness: 2045,
+    budgetFood: 20,
     info: 'info for event2'
 });
 db.events.insert({
@@ -44,7 +46,8 @@ db.events.insert({
     endDate: new Date(curYear-1,3,1),
     visibleFrom: new Date(curYear-1,1,1),
     visibleTo: new Date(curYear-1,10,1),
-    budget: 1000,
+    budgetBusiness: 1000,
+    budgetFood: 2,
     info: 'info for event9'
 });
 
@@ -173,6 +176,7 @@ db.commitments.insert({
     name: 'commitment 1',
     description: 'description commitment 1',
     date: new Date(curYear,3,21),
+    type: 'business',
     amount: 88.90,
     eventId: ObjectId('111111111111111111111111'),
     userId: ObjectId('111111111111111111110003'),
@@ -186,6 +190,7 @@ db.commitments.insert({
     name: 'commitment 2',
     description: 'description commitment 2',
     date: new Date(curYear,11,1),
+    type: 'food',
     amount: 12.4,
     eventId: ObjectId('111111111111111111111111'),
     userId: ObjectId('111111111111111111110003'),
@@ -199,6 +204,7 @@ db.commitments.insert({
     name: 'commitment 3',
     description: 'description commitment 3',
     date: new Date(curYear,6,7),
+    type: 'business',
     amount: 119.10,
     eventId: ObjectId('111111111111111111111112'),
     userId: ObjectId('111111111111111111110003'),
@@ -212,6 +218,7 @@ db.commitments.insert({
     name: 'commitment 4',
     description: 'description commitment 4',
     date: new Date(curYear,5,14),
+    type: 'food',
     amount: 66.89,
     eventId: ObjectId('111111111111111111111112'),
     userId: ObjectId('111111111111111111110003'),

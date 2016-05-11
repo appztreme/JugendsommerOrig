@@ -9,6 +9,7 @@ describe('Commitment Model', () => {
             name: 'test name',
             description: 'test description',
             date: new Date(2016,1,1),
+            type: 'business',
             amount: 75.80,
             eventId: '111111111111111111111111',
             userId: '111111111111111111110003'
@@ -28,6 +29,10 @@ describe('Commitment Model', () => {
     it('should have a date Date', () => {
         expect(commitment.date).toExist();
         expect(commitment.date).toEqual(new Date(2016,1,1));
+    });
+    it('should have a type string', () => {
+      expect(commitment.type).toExist();
+      expect(commitment.type).toEqual('business');
     });
     it('should have an event reference', () => {
         expect(commitment.eventId).toExist();

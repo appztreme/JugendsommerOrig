@@ -13,7 +13,8 @@ describe('Event Model', () => {
             endDate: new Date(2016,3,5),
             visibleFrom: new Date(2016,1,1),
             visibleTo: new Date(2016,7,5),
-            budget: 1500,
+            budgetBusiness: 1500,
+            budgetFood: 2000,
             info: 'test info'
         });
     });
@@ -32,9 +33,13 @@ describe('Event Model', () => {
         expect(ev.info).toExist();
         expect(ev.info).toEqual('test info');
     });
-    it('should have a budget value', () => {
-        expect(ev.budget).toExist();
-        expect(ev.budget).toEqual(1500);
+    it('should have a budgetBusiness value', () => {
+        expect(ev.budgetBusiness).toExist();
+        expect(ev.budgetBusiness).toEqual(1500);
+    });
+    it('should have a budgetFood value', () => {
+        expect(ev.budgetFood).toExist();
+        expect(ev.budgetFood).toEqual(2000);
     });
     it('should have a type string', () => {
         expect(ev.type).toExist();

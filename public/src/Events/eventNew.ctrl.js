@@ -14,7 +14,8 @@ app.controller('EventNewCtrl', function($scope, $location, EventsSvc, Notificati
 				endDate: $scope.endDate,
 				visibleFrom: $scope.visibleFrom,
 				visibleTo: $scope.visibleTo,
-				budget: $scope.budget,
+				budgetBusiness: $scope.budgetBusiness,
+				budgetFood: $scope.budgetFood,
 				info: $scope.info
 			}).success(function(ev) {
 				$scope.name = null;
@@ -25,7 +26,8 @@ app.controller('EventNewCtrl', function($scope, $location, EventsSvc, Notificati
 				$scope.endDate = null;
 				$scope.visibleFrom = null;
 				$scope.visibleTo = null;
-				$scope.budget = 0;
+				$scope.budgetBusiness = 0;
+				$scope.budgetFood = 0;
 				$scope.info = null;
 
 				NotificationSvc.notify('Neues Programm erfolgreich gespeichert');

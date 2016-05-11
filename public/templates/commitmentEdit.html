@@ -26,6 +26,18 @@
 		</p>
 		</div>
 	</div>
+	<!-- TYPE -->
+	<div class='form-group' ng-class='{ "has-error": comForm.type.$invalid }'>
+		<label for='type' class='control-label col-sm-2'>Typ</label>
+		<div class='col-sm-10'>
+		<p class='input-group'>
+			<select name='type' class='sel-base form-control' ng-model='type'>
+				<option value='business'>Sachkosten</option>
+				<option value='food'>Essen</option>
+			</select>
+		</p>
+		</div>
+	</div>
 	<!-- AMOUNT -->
 	<div class='form-group' ng-class='{ "has-error": comForm.amount.$invalid }'>
 		<label for='amount' class='control-label col-sm-2'>Betrag</label>
@@ -41,9 +53,9 @@
 		<label class='control-label col-sm-2'></label>
 		<div class='col-sm-10'>
 			<p class='input-group'>
-				<label class='option'><input type='radio' name='payment' ng-model-options="{allowInvalid: true}" style='margin-right:10px;margin-left:15px' ng-model='isPaymentDone' />Bezahlt</label>
-				<label class='option'><input type='radio' name='payment' ng-model-options="{allowInvalid: true}" style='margin-right:10px;margin-left:15px' ng-model='isPaymentJDDone' />Bezahlt JD</label>
-				<label class='option'><input type='radio' name='payment' ng-model-options="{allowInvalid: true}" style='margin-right:10px;margin-left:15px' ng-model='isInvoice' />Rechnung JD</label>
+				<label class='checkbox-inline'><input type='checkbox' name='payment' ng-model='isPaymentDone' />Bezahlt</label>
+				<label class='checkbox-inline'><input type='checkbox' name='payment' ng-model='isPaymentJDDone' />Bezahlt JD</label>
+				<label class='checkbox-inline'><input type='checkbox' name='payment' ng-model='isInvoice' />Rechnung JD</label>
 			</p>
 		</div
 	</div>

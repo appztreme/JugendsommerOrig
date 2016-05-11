@@ -16,6 +16,8 @@ function checkCommitmentToBeEqual(res, com) {
     expect(res.body.description).toEqual(com.description);
     expect(res.body.hasOwnProperty('date')).toBe(true);
     expect(new Date(res.body.date)).toEqual(com.date);
+    expect(res.body.hasOwnProperty('type')).toBe(true);
+    expect(res.body.type).toEqual(com.type);
     expect(res.body.hasOwnProperty('amount')).toBe(true);
     expect(res.body.amount).toEqual(com.amount);
     expect(res.body.hasOwnProperty('eventId')).toBe(true);
@@ -118,6 +120,7 @@ describe('Commitments', () => {
       description: 'description commitment 2',
       date: new Date(curYear,11,1),
       amount: 12.4,
+      type: 'food',
       eventId: '111111111111111111111111',
       userId: '111111111111111111110003',
       isPaymentDone: false,
@@ -163,6 +166,7 @@ describe('Commitments', () => {
       description: 'test description 1',
       amount: 344.53,
       date: new Date(curYear,5,5),
+      type: 'business',
       eventId: '111111111111111111111112',
       userId: '111111111111111111110003',
       isPaymentDone: false,
@@ -212,6 +216,7 @@ describe('Commitments', () => {
         description: 'description commitment 3 changed',
         date: new Date(curYear,9,1),
         amount: 77.12,
+        type: 'food',
         eventId: '111111111111111111111112',
         userId: '111111111111111111110003',
         isPaymentDone: true,
