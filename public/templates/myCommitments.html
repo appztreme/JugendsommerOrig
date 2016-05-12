@@ -25,7 +25,7 @@
 			</tr>
 			<!-- HEAD BUSINESS -->
 			<tr>
-				<td colspan="2"><span class="caret"></span></td>
+				<td colspan="2"><span class="caret" ng-click="toggleVisibility(grp['business'])"></span></td>
 				<td colspan="2" class="bg-warning"><i><strong>Sachkosten</strong></i></td>
         <td class="bg-warning"><strong>Budget:</strong></td>
 				<td align="right" class="bg-primary"><strong>{{grp['business'][0].eventId.budgetBusiness}}</strong></td>
@@ -56,7 +56,7 @@
 			</tr>
 			<!-- HEADER FOOD -->
 			<tr>
-				<td colspan="2"><span class="caret"></span></td>
+				<td colspan="2"><span class="caret" ng-click="toggleVisibility(grp['food'])"></span></td>
 				<td colspan="2" class="bg-warning"><i><strong>Essenskosten</strong></i></td>
         <td class="bg-warning"><strong>Budget:</strong></td>
 				<td align="right" class="bg-primary"><strong>{{grp['food'][0].eventId.budgetFood}}</strong></td>
