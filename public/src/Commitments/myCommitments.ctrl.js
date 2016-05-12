@@ -18,8 +18,24 @@ app.controller('MyCommitmentsCtrl', function($scope, $location, $route, Commitme
 		});
 	};
 
-	$scope.isOverBudget = function(grpArray) {
-		return $scope.sumGrp(grpArray) > grpArray[0].eventId.budgetBusiness;
+	$scope.calcBudgetSum = function(grp) {
+		var sum = 0;
+		if(grp['business'])
+			sum += grp['business'][0].eventId.budgetBusiness;
+		if(grp['food'])
+			sum += grp['food'][0].eventId.budgetFood;
+		return sum;
+	};
+
+	$scope.toggleVisibility = function(grpArray) {
+		_.forEach(grpArray, function(value) { value['isHidden'] = !value['isHidden']});
+	};
+
+	$scope.isOverBudget = function(grpArray, type) {
+		if (type === 'business')
+				return $scope.sumGrpAll(grpArray) > grpArray[0].eventId.budgetBusiness;
+		if (type === 'food')
+				return $scope.sumGrpAll(grpArray) > grpArray[0].eventId.budgetFood;
 	};
 
 	$scope.sumGrp = function(ar, reducer) {
@@ -28,6 +44,11 @@ app.controller('MyCommitmentsCtrl', function($scope, $location, $route, Commitme
 
 	$scope.sumGrpAll = function(ar) {
 		return $scope.sumGrp(ar, function(acc, item) { return acc + item.amount; });
+	};
+
+	$scope.sumGrpTypes = function(grp) {
+		return Math.round(($scope.sumGrpAll(grp["food"]) +
+		                   $scope.sumGrpAll(grp["business"]))*100)/100;
 	};
 
 	$scope.sumGrpIsPaymentDone = function(ar) {
@@ -42,6 +63,15 @@ app.controller('MyCommitmentsCtrl', function($scope, $location, $route, Commitme
 		return $scope.sumGrp(ar, function(acc, item) { return (item.isInvoice) ? acc + item.amount : acc; });
 	};
 
+	$scope.getEventName = function(grp) {
+		if(grp.hasOwnProperty('business'))
+			return grp['business'][0].eventId.location + ' - ' + grp['business'][0].eventId.name;
+		else if (grp.hasOwnProperty('food'))
+			return grp['food'][0].eventId.location + ' - ' + grp['food'][0].eventId.name;
+
+		return "";
+	}
+
 	if(IdentitySvc.isFAdmin() && !IdentitySvc.isAdmin()) {
 		CommitmentSvc.findByUser(IdentitySvc.currentUser._id).success(function(commitments) {
 			$scope.sum = Math.round(_.reduce(commitments, function(sum, object) {
@@ -51,18 +81,12 @@ app.controller('MyCommitmentsCtrl', function($scope, $location, $route, Commitme
 			$scope.commitments = _.reduce(commitments, function(acc, com) {
 				var key1 = com.eventId._id;
 				var key2 = com.type;
-				console.log('key1', key1);
-				console.log('key2', key2);
-				//acc[key1] = acc[key1] || [];
 				acc[key1] = acc[key1] || {};
-				console.log('first',acc);
-			 	acc[key1][key2] = acc[key1][key2] || [{ 'business': [], 'food': []}];
-				console.log('second', acc);
+			 	acc[key1][key2] = acc[key1][key2] || [];
+				com['isHidden'] = true;
 				acc[key1][key2].push(com);
-		   	//acc[key1].push(com);
 			 	return acc;
 			}, {});
-			console.log(commitments);
 		});
 	}
 	if(IdentitySvc.isAdmin()) {
@@ -74,15 +98,10 @@ app.controller('MyCommitmentsCtrl', function($scope, $location, $route, Commitme
 			$scope.commitments = _.reduce(commitments, function(acc, com) {
 				var key1 = com.eventId._id;
 				var key2 = com.type;
-				console.log('key1', key1);
-				console.log('key2', key2);
-				//acc[key1] = acc[key1] || [];
 				acc[key1] = acc[key1] || {};
-				console.log('first',acc);
-			 	acc[key1][key2] = acc[key1][key2] || [{ 'business': [], 'food': []}];
-				console.log('second', acc);
+			 	acc[key1][key2] = acc[key1][key2] || [];
+				com['isHidden'] = true;
 				acc[key][key2].push(com);
-		   	//acc[key1].push(com);
 			 	return acc;
 			}, {});
 		});

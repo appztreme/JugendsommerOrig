@@ -1,3 +1,11 @@
+.tbl_hide {
+  display: none;
+}
+
+.tbl_show {
+  display: inline;
+}
+
 .toast-top-right {
     top: 100px;
 }
