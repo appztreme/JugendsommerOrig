@@ -6,6 +6,11 @@
   display: table-row;
 }
 
+.btn_report_collapse {
+  width: 25px;
+  height: 25px;
+}
+
 .toast-top-right {
     top: 100px;
 }

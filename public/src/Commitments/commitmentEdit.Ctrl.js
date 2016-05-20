@@ -1,18 +1,19 @@
 var app = angular.module('js');
 
-app.controller('CommitmentEditCtrl', function($scope, $location, NotificationSvc, ActivitiesSvc) {
+app.controller('CommitmentEditCtrl', function($scope, $routeParams, $location, IdentitySvc, NotificationSvc, CommitmentSvc) {
 	$scope.title = 'Rechnung editieren';
 
 	$scope.save = function() {
 		if($scope.name && $scope.amount && $scope.date) {
-			CommitmentSvc.create({
+			CommitmentSvc.update({
+				_id: $scope._id,
 				name: $scope.name,
 				type: $scope.type,
 				description: $scope.description,
 				date: $scope.date,
 				amount: $scope.amount,
 				userId: IdentitySvc.currentUser._id,
-				eventId: $routeParams.eventId,
+				eventId: $scope.eventId,
 				isPaymentDone: $scope.isPaymentDone,
 				isPaymentJDDone: $scope.isPaymentJDDone,
 				isInvoice: $scope.isInvoice
@@ -33,13 +34,16 @@ app.controller('CommitmentEditCtrl', function($scope, $location, NotificationSvc
 	};
 
 	CommitmentSvc.findById($routeParams.commitmentId).success(function(com) {
+		$scope._id = com._id;
 		$scope.name = com.name;
 		$scope.description = com.description;
 		$scope.type = com.type;
 		$scope.amount = com.amount;
+		$scope.eventId = com.eventId;
+		$scope.userId = com.userId;
 		$scope.date = new Date(com.date);
 		$scope.isPaymentDone = com.isPaymentDone;
 		$scope.isPaymentJDDone = com.isPaymentJDDone;
-		$scope.isInvoice = isInvoice;
+		$scope.isInvoice = com.isInvoice;
 	});
 });

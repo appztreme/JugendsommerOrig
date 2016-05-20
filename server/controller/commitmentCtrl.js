@@ -70,6 +70,7 @@ exports.create = (req, res, next) => {
 };
 
 exports.update = (req, res, next) => {
+	console.warn(req.body);
 	Commitment.findById(req.body._id, (err, com) => {
 		if(!com) return next(new Error('Keine Rechnung im System mit id ' + req.body._id));
 		com.name = req.body.name;
@@ -82,6 +83,7 @@ exports.update = (req, res, next) => {
 		com.isPaymentDone = req.body.isPaymentDone;
 		com.isPaymentJDDone = req.body.isPaymentJDDone;
 		com.isInvoice = req.body.isInvoice;
+		console.log(com);
 		com.save(function(err, comDb) {
 			if(err) { return next(err); }
 			res.status(201).json(comDb);

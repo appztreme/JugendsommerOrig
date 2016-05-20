@@ -26,7 +26,7 @@ app.config(function($routeProvider) {
 			controller: 'CommitmentNewCtrl',
 			templateUrl: '../templates/commitmentEdit.html'
 		})
-		.when('/editCommitment', {
+		.when('/editCommitment/:commitmentId', {
 			controller: 'CommitmentEditCtrl',
 			templateUrl: '../templates/commitmentEdit.html'
 		})
