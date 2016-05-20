@@ -20,12 +20,12 @@
 			<tr>
 				<th colspan="4" class="bg-warning"><i><strong>{{getEventName(grp)}}</strong></i></th>
         <th class="bg-warning"><strong>Gesamtbudget:</strong></th>
-				<th align="right" class="bg-primary"><strong>{{calcBudgetSum(grp)*1}}</strong></th>
+				<th align="right" class="bg-primary" style="text-align: right;"><strong>{{calcBudgetSum(grp)*1}}</strong></th>
 				<th colspan="4" class="bg-warning"></th>
 			</tr>
 			<!-- HEAD BUSINESS -->
 			<tr>
-				<td colspan="2"><span class="caret" ng-click="toggleVisibility(grp['business'])"></span></td>
+				<td colspan="2"><button class="btn btn-default glyphicon glyphicon-resize-full" ng-click="toggleVisibility(grp['business'])"></button></td>
 				<td colspan="2" class="bg-warning"><i><strong>Sachkosten</strong></i></td>
         <td class="bg-warning"><strong>Budget:</strong></td>
 				<td align="right" class="bg-primary"><strong>{{grp['business'][0].eventId.budgetBusiness}}</strong></td>
@@ -56,7 +56,7 @@
 			</tr>
 			<!-- HEADER FOOD -->
 			<tr>
-				<td colspan="2"><span class="caret" ng-click="toggleVisibility(grp['food'])"></span></td>
+				<td colspan="2"><button class="btn btn-default glyphicon glyphicon-resize-full" ng-click="toggleVisibility(grp['food'])"></button></td>
 				<td colspan="2" class="bg-warning"><i><strong>Essenskosten</strong></i></td>
         <td class="bg-warning"><strong>Budget:</strong></td>
 				<td align="right" class="bg-primary"><strong>{{grp['food'][0].eventId.budgetFood}}</strong></td>

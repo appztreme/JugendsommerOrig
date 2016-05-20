@@ -3,7 +3,7 @@
 }
 
 .tbl_show {
-  display: inline;
+  display: table-row;
 }
 
 .toast-top-right {
