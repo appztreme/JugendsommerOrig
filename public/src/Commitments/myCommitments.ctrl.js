@@ -12,6 +12,10 @@ app.controller('MyCommitmentsCtrl', function($scope, $location, $route, Commitme
 		$location.path('editCommitment/' + id);
 	};
 
+	$scope.editTravelExpenses = function(id) {
+		$location.path('editTravelExpenses/' + id);
+	};
+
 	$scope.deleteCommitment = function(id) {
 		CommitmentSvc.delete(id).then(function(err, com) {
 			$route.reload();
@@ -33,9 +37,9 @@ app.controller('MyCommitmentsCtrl', function($scope, $location, $route, Commitme
 
 	$scope.isOverBudget = function(grpArray, type) {
 		if (type === 'business')
-				return $scope.sumGrpAll(grpArray) > grpArray[0].eventId.budgetBusiness;
+				return $scope.sumGrpAll(grpArray) > ((grpArray && grpArray.length > 0) ? grpArray[0].eventId.budgetBusiness : 0);
 		if (type === 'food')
-				return $scope.sumGrpAll(grpArray) > grpArray[0].eventId.budgetFood;
+				return $scope.sumGrpAll(grpArray) > ((grpArray && grpArray.length > 0) ? grpArray[0].eventId.budgetFood : 0);
 	};
 
 	$scope.sumGrp = function(ar, reducer) {
@@ -68,7 +72,8 @@ app.controller('MyCommitmentsCtrl', function($scope, $location, $route, Commitme
 			return grp['business'][0].eventId.location + ' - ' + grp['business'][0].eventId.name;
 		else if (grp.hasOwnProperty('food'))
 			return grp['food'][0].eventId.location + ' - ' + grp['food'][0].eventId.name;
-
+		else if (grp.hasOwnProperty('travel'))
+			return grp['travel'][0].eventId.location + ' - ' + grp['travel'][0].eventId.name;
 		return "";
 	}
 
@@ -101,7 +106,7 @@ app.controller('MyCommitmentsCtrl', function($scope, $location, $route, Commitme
 				acc[key1] = acc[key1] || {};
 			 	acc[key1][key2] = acc[key1][key2] || [];
 				com['isHidden'] = true;
-				acc[key][key2].push(com);
+				acc[key1][key2].push(com);
 			 	return acc;
 			}, {});
 		});

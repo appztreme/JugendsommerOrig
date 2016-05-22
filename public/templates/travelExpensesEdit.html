@@ -1,0 +1,54 @@
+<!-- FORM EVENT EDIT-->
+<div class='container'>
+<h2 class='text-orange'>{{title}}</h2>
+<form name='comForm' class='form-horizontal' novalidate ng-submit='save()'>
+
+	<!-- NAME -->
+	<div class='form-group' ng-class='{ "has-error": comForm.name.$invalid }'>
+    	<label for='name' class='control-label col-sm-2'>Name</label>
+		<div class='col-sm-10'>
+			<input name='name' type='text' ng-model='name' required class='form-control'></input>
+		</div>
+	</div>
+	<!-- DESCRIPTION -->
+	<div class='form-group' ng-class='{ "has-error": comForm.description.$invalid }'>
+		<label for='description' class='control-label col-sm-2'>Information</label>
+		<div class='col-sm-10'>
+			<textarea name='description' type='text' ng-model='description' class='form-control' rows='3' placehoder='Begründung eintragen' required ></textarea>
+		</div>
+	</div>
+	<!-- DATE -->
+	<div class='form-group' ng-class='{ "has-error": comForm.date.$invalid }'>
+		<label for='date' class='control-label col-sm-2'>Datum</label>
+		<div class='col-sm-10'>
+		<p class='input-group'>
+			<ng-datepicker ng-model='date' view-format="DD.MM.YYYY" locale='de' required></ng-datepicker>
+		</p>
+		</div>
+	</div>
+  <!-- KILOMETERS -->
+	<div class='form-group' ng-class='{ "has-error": comForm.kilometers.$invalid }'>
+		<label for='kilometers' class='control-label col-sm-2'>Kilometer</label>
+		<div class='col-sm-2'>
+		<p class='input-group'>
+				<input type="number" text-align='right' ng-model='kilometers' ng-change='onKilometeresChanged()' value="0" min="0.1" step="0.01"></input>
+		</p>
+		</div>
+	</div>
+	<!-- AMOUNT -->
+	<div class='form-group' ng-class='{ "has-error": comForm.amount.$invalid }'>
+		<label for='amount' class='control-label col-sm-2'>Betrag</label>
+		<div class='col-sm-2'>
+		<p class='input-group'>
+				<input type="number" text-align='right' ng-model='amount' disabled required aria-describedby="basic-addon-euro"></input>
+				<span class="input-group-addon" id="basic-addon-euro">€</span>
+		</p>
+		</div>
+	</div>
+
+	<div class='col-sm-offset-2 col-sm-10'>
+		<input class='btn btn-success bnt-lg btn-block' type='submit' value='Speichern' ng-disabled='comForm.$invalid'>
+	</div>
+
+</form>
+</div>

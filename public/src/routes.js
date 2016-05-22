@@ -30,6 +30,14 @@ app.config(function($routeProvider) {
 			controller: 'CommitmentEditCtrl',
 			templateUrl: '../templates/commitmentEdit.html'
 		})
+		.when('/newTravelExpenses/:eventId', {
+			controller: 'TravelExpensesNewCtrl',
+			templateUrl: '../templates/travelExpensesEdit.html'
+		})
+		.when('/editTravelExpenses/:commitmentId', {
+			controller: 'TravelExpensesEditCtrl',
+			templateUrl: '../templates/travelExpensesEdit.html'
+		})
 		.when('/newEvent', {
 			controller: 'EventNewCtrl',
 			templateUrl: '../templates/eventEdit.html'

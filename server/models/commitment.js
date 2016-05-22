@@ -6,7 +6,7 @@ const commitmentSchema = db.Schema({
 	name: { type: String, required: true },
 	description: { type: String, required: true },
 	date: { type: Date, required: true, default: Date.now },
-		type: { type: String, enum: ['food', 'business'], required: true, default: 'business'},
+		type: { type: String, enum: ['food', 'business', 'travel'], required: true, default: 'business'},
   amount: { type: Number, required: true },
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   eventId: { type: mongoose.Schema.Types.ObjectId, ref: 'Event', required: true },
