@@ -14,6 +14,7 @@
 				<th>Bezahlt JD</th>
 				<th>Rechnung JD</th>
 				<th>Benutzer</th>
+				<th>Abgerechnet</th>
 			</tr>
 		</thead>
 		<tbody ng-repeat='grp in commitments'>
@@ -21,7 +22,7 @@
 				<th colspan="4" class="bg-warning"><i><strong>{{getEventName(grp)}}</strong></i></th>
         <th class="bg-warning"><strong>Gesamtbudget:</strong></th>
 				<th align="right" class="bg-primary" style="text-align: right;"><strong>{{calcBudgetSum(grp)*1}}</strong></th>
-				<th colspan="4" class="bg-warning"></th>
+				<th colspan="5" class="bg-warning"></th>
 			</tr>
 			<!-- HEAD BUSINESS -->
 			<tr>
@@ -29,7 +30,7 @@
 				<td colspan="2" class="bg-warning"><i><strong>Sachkosten</strong></i></td>
         <td class="bg-warning"><strong>Budget:</strong></td>
 				<td align="right" class="bg-primary"><strong>{{grp['business'][0].eventId.budgetBusiness}}</strong></td>
-				<td colspan="4" class="bg-warning"></td>
+				<td colspan="5" class="bg-warning"></td>
 			</tr>
 			<!-- MAIN BUSINESS -->
 			<tr ng-repeat='com in grp["business"]' ng-class='{"tbl_hide": com.isHidden, "tbl_show": !com.isHidden}'>
@@ -43,6 +44,7 @@
         <td align="center" ng-class='{"bg-info": com.isPaymentJDDone}'>{{formatBool(com.isPaymentJDDone)}}</td>
         <td align="center" ng-class='{"bg-info": com.isInvoice}'>{{formatBool(com.isInvoice)}}</td>
 				<td>{{com.userId.firstName}} {{com.userId.lastName}}</td>
+				<td align="center" ng-class='{"bg-success": com.isCleared, "bg-danger": !com.isCleared}'>{{formatBool(com.isCleared)}}</td>
 			</tr>
 			<!-- FOOTER BUSINESS -->
 			<tr>
@@ -52,7 +54,7 @@
 				<td align="right"><strong>{{sumGrpIsPaymentDone(grp["business"])}}</strong></td>
         <td align="right"><strong>{{sumGrpIsPaymentJDDone(grp["business"])}}</strong></td>
         <td align="right"><strong>{{sumGrpIsInvoice(grp["business"])}}</strong></td>
-				<td></td>
+				<td colspan="2"></td>
 			</tr>
 			<!-- HEADER FOOD -->
 			<tr>
@@ -60,7 +62,7 @@
 				<td colspan="2" class="bg-warning"><i><strong>Essenskosten</strong></i></td>
         <td class="bg-warning"><strong>Budget:</strong></td>
 				<td align="right" class="bg-primary"><strong>{{grp['food'][0].eventId.budgetFood}}</strong></td>
-				<td colspan="4" class="bg-warning"></td>
+				<td colspan="5" class="bg-warning"></td>
 			</tr>
 			<!-- MAIN FOOD -->
 			<tr ng-repeat='com in grp["food"]' ng-class='{"tbl_hide": com.isHidden, "tbl_show": !com.isHidden}'>
@@ -74,6 +76,7 @@
         <td align="center" ng-class='{"bg-info": com.isPaymentJDDone}'>{{formatBool(com.isPaymentJDDone)}}</td>
         <td align="center" ng-class='{"bg-info": com.isInvoice}'>{{formatBool(com.isInvoice)}}</td>
 				<td>{{com.userId.firstName}} {{com.userId.lastName}}</td>
+				<td align="center" ng-class='{"bg-success": com.isCleared, "bg-danger": !com.isCleared}'>{{formatBool(com.isCleared)}}</td>
 			</tr>
       <!-- FOOTER FOOD -->
 			<tr>
@@ -83,7 +86,7 @@
 				<td align="right"><strong>{{sumGrpIsPaymentDone(grp["food"])}}</strong></td>
         <td align="right"><strong>{{sumGrpIsPaymentJDDone(grp["food"])}}</strong></td>
         <td align="right"><strong>{{sumGrpIsInvoice(grp["food"])}}</strong></td>
-				<td></td>
+				<td colspan="2"></td>
 			</tr>
       <!-- HEAD TRAVEL -->
 			<tr>
@@ -91,7 +94,7 @@
 				<td colspan="2" class="bg-warning"><i><strong>Fahrtkosten</strong></i></td>
         <td class="bg-warning"></td>
 				<td align="right" class="bg-primary"></td>
-				<td colspan="4" class="bg-warning"></td>
+				<td colspan="5" class="bg-warning"></td>
 			</tr>
 			<!-- MAIN TRAVEL -->
 			<tr ng-repeat='com in grp["travel"]' ng-class='{"tbl_hide": com.isHidden, "tbl_show": !com.isHidden}'>
@@ -105,6 +108,7 @@
         <td align="center"></td>
         <td align="center"></td>
 				<td>{{com.userId.firstName}} {{com.userId.lastName}}</td>
+				<td></td>
 			</tr>
 			<!-- FOOTER TRAVEL -->
 			<tr>
@@ -114,19 +118,19 @@
 				<td align="right"></td>
         <td align="right"></td>
         <td align="right"></td>
-				<td></td>
+				<td colspan="2"></td>
 			</tr>
       <tr>
 				<td colspan="5"><strong>Summe:</strong></td>
 				<td align="right"><strong>{{sumGrpTypes(grp)}}</strong></td>
-				<td colspan="4"></td>
+				<td colspan="5"></td>
 			</tr>
 		</tbody>
 		<tfoot>
 			<tr>
 				<td colspan="5"><strong>Gesamtsumme:</strong></td>
 				<td align="right"><strong>{{sum}}</strong></td>
-				<td colspan="4"></td>
+				<td colspan="5"></td>
 			</tr>
 		</tfoot>
 	</table>
