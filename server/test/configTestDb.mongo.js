@@ -20,7 +20,8 @@ db.events.insert({
     visibleTo: new Date(curYear,10,1),
     budgetBusiness: 3500,
     budgetFood: 200,
-    info: 'info for event1'
+    info: 'info for event1',
+    isInternal: false,
 });
 db.events.insert({
     _id: ObjectId('111111111111111111111112'),
@@ -34,7 +35,23 @@ db.events.insert({
     visibleTo: new Date(curYear,10,1),
     budgetBusiness: 2045,
     budgetFood: 20,
-    info: 'info for event2'
+    info: 'info for event2',
+    isInternal: false,
+});
+db.events.insert({
+    _id: ObjectId('111111111111111111111113'),
+    name: 'event3',
+    type: 'music',
+    location: 'Tiers',
+    description: 'description event3',
+    startDate: new Date(curYear,4,1),
+    endDate: new Date(curYear,6,1),
+    visibleFrom: new Date(curYear,1,1),
+    visibleTo: new Date(curYear,11,1),
+    budgetBusiness: 999,
+    budgetFood: 143,
+    info: 'info for event3',
+    isInternal: true,
 });
 db.events.insert({
     _id: ObjectId('111111111111111111111119'),
@@ -48,7 +65,8 @@ db.events.insert({
     visibleTo: new Date(curYear-1,10,1),
     budgetBusiness: 1000,
     budgetFood: 2,
-    info: 'info for event9'
+    info: 'info for event9',
+    isInternal: false,
 });
 
 var eventsCnt = db.events.find().count();

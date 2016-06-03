@@ -1,7 +1,10 @@
+'use strict';
 var expect = require('expect');
 var request = require('supertest');
 var app = require('./../../app');
 var requestSession = require('supertest-session');
+let check = require('./helper/checkResponseStatus');
+let loginHelper = require('./helper/loginAs');
 
 var curYear = new Date().getFullYear();
 
@@ -50,6 +53,43 @@ describe('Event', function() {
                     done();
                 });
         });
+    });
+    describe('GET /events/asAdmin', () => {
+      describe('authorized request', () => {
+        let testSession = requestSession(app);
+        before('Login', done => loginHelper.loginAs(testSession, 'admin', 'admin', done));
+        it('should return 200 response and collection of 3 entities', function(done) {
+            testSession.get('/api/events/asAdmin')
+                .end((err, res) => {
+                    check.checkResponseStatus(err, res, 200);
+                    expect(res.body).toExist;
+                    expect(res.body).toBeA('array');
+                    expect(res.body.length).toEqual(3);
+                    done();
+                });
+        });
+      });
+      describe('unauthorized request', () => {
+        let testSession = requestSession(app);
+        before('Login', done => loginHelper.loginAs(testSession, 'user', 'user', done));
+        it('should be refused', function(done) {
+            testSession.get('/api/events/asAdmin')
+                .end((err, res) => {
+                    check.checkResponseStatus(err, res, 403);
+                    done();
+                });
+        });
+      });
+      describe('unauthenticated request', () => {
+          it('should be refused', done => {
+            request(app)
+              .get('/api/events/asAdmin')
+              .end((err, res) => {
+                check.checkResponseStatus(err, res, 403);
+                done();
+              });
+          });
+      });
     });
     describe('GET /events/:id', function() {
         it('should be an object with correct key and value pairs', function(done) {

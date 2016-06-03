@@ -3,7 +3,7 @@ var app = angular.module('js');
 app.controller('TravelExpensesEditCtrl', function($scope, $routeParams, $location, IdentitySvc, NotificationSvc, CommitmentSvc) {
 	$scope.title = 'fahrkostenabrechnung';
 
-  $scope.subsidyRate = 1.5;
+  $scope.subsidyRate = 0.15;
 
   $scope.onKilometeresChanged = function() {
     $scope.amount = $scope.kilometers * $scope.subsidyRate;

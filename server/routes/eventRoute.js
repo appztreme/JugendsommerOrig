@@ -5,6 +5,8 @@ const EventController = require('./../controller/eventCtrl');
 
 router.get('/', EventController.findByCurrentYear);
 
+router.get('/asAdmin', auth.requiresRole("admin"), EventController.findByCurrentYearAdmin);
+
 router.get('/:eventId', EventController.findByEventId);
 
 router.post('/', auth.requiresRole("admin"), EventController.create);

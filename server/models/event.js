@@ -11,7 +11,8 @@ var eventSchema = db.Schema({
 	visibleTo: { type: Date, required: false, default: Date.now },
 	budgetBusiness: { type: Number, required: true, default: 0 },
 	budgetFood: { type: Number, required: true, default: 0 },
-  info: { type: String, required: true }
+  info: { type: String, required: true },
+	isInternal: { type: Boolean, required: true, default: false },
 });
 
 var Event = db.model('Event', eventSchema);

@@ -6,6 +6,17 @@ const startCurYear = new Date(curYear,1,1);
 exports.findByCurrentYear = (req, res, next) => {
 	Event.find()
 		.where('startDate').gte(startCurYear)
+		.where('isInternal').equals(false)
+		.sort({ location: 1, startDate: 1 })
+	  .exec(function(err, ev) {
+			if(err) { return next(err); }
+			res.json(ev);
+	});
+};
+
+exports.findByCurrentYearAdmin = (req, res, next) => {
+	Event.find()
+		.where('startDate').gte(startCurYear)
 		.sort({ location: 1, startDate: 1 })
 	  .exec(function(err, ev) {
 			if(err) { return next(err); }

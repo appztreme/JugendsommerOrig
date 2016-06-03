@@ -5,16 +5,16 @@
 
 	<!-- NAME -->
 	<div class='form-group' ng-class='{ "has-error": comForm.name.$invalid }'>
-    	<label for='name' class='control-label col-sm-2'>Name</label>
+    	<label for='name' class='control-label col-sm-2'>Betreuer</label>
 		<div class='col-sm-10'>
 			<input name='name' type='text' ng-model='name' required class='form-control'></input>
 		</div>
 	</div>
 	<!-- DESCRIPTION -->
 	<div class='form-group' ng-class='{ "has-error": comForm.description.$invalid }'>
-		<label for='description' class='control-label col-sm-2'>Information</label>
+		<label for='description' class='control-label col-sm-2'>Strecke</label>
 		<div class='col-sm-10'>
-			<textarea name='description' type='text' ng-model='description' class='form-control' rows='3' placehoder='Begründung eintragen' required ></textarea>
+			<textarea name='description' type='text' ng-model='description' class='form-control' rows='3' placehoder='Strecke eintragen'></textarea>
 		</div>
 	</div>
 	<!-- DATE -->
@@ -22,7 +22,7 @@
 		<label for='date' class='control-label col-sm-2'>Datum</label>
 		<div class='col-sm-10'>
 		<p class='input-group'>
-			<ng-datepicker ng-model='date' view-format="DD.MM.YYYY" locale='de' required></ng-datepicker>
+			<ng-datepicker ng-model='date' view-format="DD.MM.YYYY" locale='de'></ng-datepicker>
 		</p>
 		</div>
 	</div>

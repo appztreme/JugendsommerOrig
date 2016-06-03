@@ -15,7 +15,8 @@ describe('Event Model', () => {
             visibleTo: new Date(2016,7,5),
             budgetBusiness: 1500,
             budgetFood: 2000,
-            info: 'test info'
+            info: 'test info',
+            isInternal: true
         });
     });
     it('should have a defined Schema', () => {
@@ -60,5 +61,9 @@ describe('Event Model', () => {
     it('should hava a visibleTo date', () => {
         expect(ev.visibleTo).toExist();
         expect(ev.visibleTo).toEqual(new Date(2016,7,5));
+    });
+    it('should have a isInternal flag', () => {
+      expect(ev.isInternal).toExist();
+      expect(ev.isInternal).toEqual(true);
     });
 });

@@ -83,7 +83,7 @@ exports.update = (req, res, next) => {
 		com.isPaymentDone = req.body.isPaymentDone;
 		com.isPaymentJDDone = req.body.isPaymentJDDone;
 		com.isInvoice = req.body.isInvoice;
-		console.log(com);
+		// console.log(com);
 		com.save(function(err, comDb) {
 			if(err) { return next(err); }
 			res.status(201).json(comDb);
