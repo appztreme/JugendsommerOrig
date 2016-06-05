@@ -1,6 +1,6 @@
 var app = angular.module('js');
 
-app.controller('MyCommitmentsCtrl', function($scope, $location, $route, CommitmentSvc, IdentitySvc) {
+app.controller('MyCommitmentsCtrl', function($scope, $location, $route, NotificationSvc, CommitmentSvc, IdentitySvc) {
 	$scope.busyPromise = CommitmentSvc.findByUser(IdentitySvc.currentUser._id);
 
 	$scope.formatBool = function(b) {
@@ -75,7 +75,42 @@ app.controller('MyCommitmentsCtrl', function($scope, $location, $route, Commitme
 		else if (grp.hasOwnProperty('travel'))
 			return grp['travel'][0].eventId.location + ' - ' + grp['travel'][0].eventId.name;
 		return "";
-	}
+	};
+
+	$scope.loadCommitmentsByEvent = function() {
+		if(!$scope.eventIdFilter) return;
+		CommitmentSvc.find().success(function(commitments) {
+			$scope.sum = Math.round(_.reduce(commitments, function(sum, object) {
+				return sum + object.amount;
+			}, 0) * 100) / 100;
+
+			$scope.commitments = _.reduce(commitments, function(acc, com) {
+				var key1 = com.eventId._id;
+				var key2 = com.type;
+				acc[key1] = acc[key1] || {};
+			 	acc[key1][key2] = acc[key1][key2] || [];
+				com['isHidden'] = true;
+				acc[key1][key2].push(com);
+			 	return acc;
+			}, {});
+		});
+	};
+
+	$scope.loadEvents = function() {
+			CommitmentSvc.getSelectionParams()
+				.error(function(err) {
+					NotificationSvc.warn(err);
+				})
+				.success(function(evs) {
+					console.log(evs);
+					$scope.events = _.map(evs, function(ev) {
+						return {
+							_id: ev._id,
+							name: ev.location + ' - ' + ev.name
+						}
+					});
+				});
+	};
 
 	if(IdentitySvc.isFAdmin() && !IdentitySvc.isAdmin()) {
 		CommitmentSvc.findByUser(IdentitySvc.currentUser._id).success(function(commitments) {
@@ -95,20 +130,6 @@ app.controller('MyCommitmentsCtrl', function($scope, $location, $route, Commitme
 		});
 	}
 	if(IdentitySvc.isAdmin()) {
-		CommitmentSvc.find().success(function(commitments) {
-			$scope.sum = Math.round(_.reduce(commitments, function(sum, object) {
-				return sum + object.amount;
-			}, 0) * 100) / 100;
-
-			$scope.commitments = _.reduce(commitments, function(acc, com) {
-				var key1 = com.eventId._id;
-				var key2 = com.type;
-				acc[key1] = acc[key1] || {};
-			 	acc[key1][key2] = acc[key1][key2] || [];
-				com['isHidden'] = true;
-				acc[key1][key2].push(com);
-			 	return acc;
-			}, {});
-		});
+		$scope.loadEvents();
 	}
 });

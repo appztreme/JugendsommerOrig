@@ -5,7 +5,9 @@ const CommitmentController = require('./../controller/commitmentCtrl');
 
 router.get('/', auth.requiresRole("admin"), CommitmentController.find);
 
-router.get('/selectableEventActivities', CommitmentController.getSelectableEvents);
+router.get('/selectableEvents', CommitmentController.getSelectableEvents);
+
+router.get('/summary', auth.requiresRole("admin"), CommitmentController.getSummary);
 
 router.get('/:commitmentId', auth.requiresRole("fadmin"), CommitmentController.findById);
 

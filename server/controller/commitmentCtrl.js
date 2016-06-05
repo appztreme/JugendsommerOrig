@@ -62,7 +62,7 @@ exports.create = (req, res, next) => {
 		isPaymentJDDone: req.body.isPaymentJDDone,
 		isInvoice: req.body.isInvoice
 	});
-	console.log(commitment);
+	//console.log(commitment);
 	commitment.save((err, com) => {
 		if(err) { console.log(err); return next(err); }
 		res.status(201).json(com);
@@ -70,7 +70,6 @@ exports.create = (req, res, next) => {
 };
 
 exports.update = (req, res, next) => {
-	console.warn(req.body);
 	Commitment.findById(req.body._id, (err, com) => {
 		if(!com) return next(new Error('Keine Rechnung im System mit id ' + req.body._id));
 		com.name = req.body.name;
@@ -101,10 +100,40 @@ exports.delete = (req, res, next) => {
 exports.getSelectableEvents = (req, res, next) => {
 		Event.find()
 			.where('startDate').gte(startCurYear)
-			.select('_id name')
+			.select('_id location name')
       .sort({'eventId.location': 1})
 			.exec(function(err, evs) {
 				if(err) { return next(err); }
 				res.json(evs);
 			});
-}
+};
+
+exports.getSummary = (req, res, next) => {
+		Commitment.aggregate([
+				{ $match:
+					{ date: { $gte: startCurYear } }
+				},
+				{ $group:
+				{ _id:
+					{
+						eventId: "$eventId",
+						type: "$type",
+					},
+		 		sum: { $sum: "$amount" }
+				}
+			},
+			{ $group:
+				{ _id: "$_id.eventId",
+					sumFood:     { $max: {$cond: [ { $eq: ['$_id.type', 'food'    ] }, '$sum', 0]} },
+					sumBusiness: { $max: {$cond: [ { $eq: ['$_id.type', 'business'] }, '$sum', 0]} },
+					sumTravel:   { $max: {$cond: [ { $eq: ['$_id.type', 'travel'  ] }, '$sum', 0]} },
+				}
+			}
+		], function(err, ag) {
+			if(err) { return next(err); }
+			Event.populate(ag, {path: "_id"}, function(err2, ag2) {
+						if(err2) { return next(err2); }
+						res.json(ag2);
+				});
+		});
+};
