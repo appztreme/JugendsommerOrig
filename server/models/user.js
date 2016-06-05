@@ -1,4 +1,5 @@
 var db = require('../db');
+var mongoose = require('mongoose');
 var crypto = require('crypto');
 
 var userSchema = db.Schema({
@@ -9,7 +10,8 @@ var userSchema = db.Schema({
 		userName: { type: String, required: true },
     hashedPassword: { type: String, required: true },
     salt: { type: String },
-    roles: [String]
+    roles: [String],
+		eventId: { type: mongoose.Schema.Types.ObjectId, ref: 'Event', required: false },
 });
 
 userSchema.index({userName: 1}, {unique: true});

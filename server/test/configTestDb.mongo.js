@@ -281,7 +281,8 @@ db.users.insert({
     userName: 'fadmin',
     hashedPassword: '4a2d5a39e8354192ad3563c2518be5b2c1c23976', // fadmin
     salt: 'rVYhanL+gUoZjI3cR4mEfTUvzFoj7OFYFHtKonqQProuolDIPzzmFqgoo6xCkTvPj55bcTf9cJNM4oRcSG2+OpQ1lPl9Kuv0Ljfs5rIJ3ak/u2jL7lShF8QZYAYjEd5ewh7Dgb7JE1ax00pd5ol7vMqkTzsEbPjl9pCwiUd/LxQ=',
-    roles: ['fadmin']
+    roles: ['fadmin'],
+    eventId: ObjectId('111111111111111111111112'),
 });
 
 db.users.insert({

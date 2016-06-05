@@ -25,7 +25,7 @@ exports.create = (req, res, next) => {
 
 exports.findById = (req, res, next) => {
 	User.findOne({_id: req.params.id})
-			.select('_id firstName lastName userTel userEmail userName roles')
+			.select('_id firstName lastName userTel userEmail userName roles eventId')
 			.exec(function(err, user) {
 		if(err) { next(err); }
 		res.status(201).json(user);

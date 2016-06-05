@@ -11,7 +11,8 @@ describe('User Model', () => {
             userEmail: 'xxx',
             userTel: '123 456',
             userName: 'userName',
-            roles: ['admin']
+            roles: ['admin'],
+            eventId: '111111111111111111111102'
         });
     });
     it('should have a defined Schema', () => {
@@ -41,6 +42,10 @@ describe('User Model', () => {
         expect(user.roles).toExist();
         expect(user.roles).toBeA('array');
         expect(user.roles.indexOf('admin') >= 0).toBe(true);
+    });
+    it('should have a event reference', () => {
+        expect(user.eventId).toExist();
+        expect(user.eventId.toString()).toEqual('111111111111111111111102');
     });
     it('should create a hashedPassword and salt', () => {
         expect(user.salt).toNotExist();

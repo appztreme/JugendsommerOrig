@@ -19,6 +19,13 @@ app.factory('IdentitySvc', function() {
 
 		isAuthorized: function(role) {
 			return !!this.currentUser && this.currentUser.roles.indexOf(role) > -1;
-		}
+		},
+
+		isAuthorizedForEvent: function(role, eventId) {
+			var check = this.isAuthorized(role) &&
+				this.currentUser.eventId && this.currentUser.eventId.toString() === eventId.toString();
+			console.log(check, this.currentUser, eventId);
+			return check;
+		},
 	};
 });
