@@ -1,6 +1,6 @@
 var app = angular.module('js');
 
-app.controller('MyCommitmentsCtrl', function($scope, $location, $route, NotificationSvc, CommitmentSvc, IdentitySvc) {
+app.controller('MyCommitmentsCtrl', function($scope, $location, $route, NotificationSvc, CommitmentSvc, MyCommitmentsCacheSvc, IdentitySvc) {
 	$scope.busyPromise = CommitmentSvc.findByUser(IdentitySvc.currentUser._id);
 
 	$scope.formatBool = function(b) {
@@ -35,6 +35,10 @@ app.controller('MyCommitmentsCtrl', function($scope, $location, $route, Notifica
 		_.forEach(grpArray, function(value) { value['isHidden'] = !value['isHidden']});
 	};
 
+	$scope.updateEventFilter = function() {
+		MyCommitmentsCacheSvc.currentEventIdFilter = $scope.eventIdFilter;
+	}
+
 	$scope.isOverBudget = function(grpArray, type) {
 		if (type === 'business')
 				return $scope.sumGrpAll(grpArray) > ((grpArray && grpArray.length > 0) ? grpArray[0].eventId.budgetBusiness : 0);
@@ -45,6 +49,15 @@ app.controller('MyCommitmentsCtrl', function($scope, $location, $route, Notifica
 	$scope.sumGrp = function(ar, reducer) {
 		return Math.round(_.reduce(ar, reducer, 0) * 100) / 100;
 	};
+
+	$scope.formatDec = function(amount) {
+		return Math.round(amount * 100) / 100;
+	};
+
+	$scope.sumSummaryBy = function(prop1, prop2) {
+		var sum = _.reduce($scope.summaries, function(s,i) {return s + ((prop2) ? i[prop1][prop2] : i[prop1]);}, 0);
+		return $scope.formatDec(sum);
+	}
 
 	$scope.sumGrpAll = function(ar) {
 		return $scope.sumGrp(ar, function(acc, item) { return acc + item.amount; });
@@ -79,7 +92,7 @@ app.controller('MyCommitmentsCtrl', function($scope, $location, $route, Notifica
 
 	$scope.loadCommitmentsByEvent = function() {
 		if(!$scope.eventIdFilter) return;
-		CommitmentSvc.find().success(function(commitments) {
+		CommitmentSvc.findByEvent($scope.eventIdFilter).success(function(commitments) {
 			$scope.sum = Math.round(_.reduce(commitments, function(sum, object) {
 				return sum + object.amount;
 			}, 0) * 100) / 100;
@@ -131,5 +144,13 @@ app.controller('MyCommitmentsCtrl', function($scope, $location, $route, Notifica
 	}
 	if(IdentitySvc.isAdmin()) {
 		$scope.loadEvents();
+		CommitmentSvc.getAdminSummary()
+			.success(function(summaries) {
+				$scope.summaries = summaries;
+			});
+		if(MyCommitmentsCacheSvc.hasEventFilterParameter()) {
+			$scope.eventIdFilter = MyCommitmentsCacheSvc.currentEventIdFilter;
+			$scope.loadCommitmentsByEvent();
+		}
 	}
 });

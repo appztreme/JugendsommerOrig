@@ -8,7 +8,7 @@
 		<div class='row'>
 			<div class='col-sm-9 input-group'>
 				<div class='col-sm-5'>
-				<select id='eventFilter' class='form-control' ng-model='eventIdFilter'>
+				<select id='eventFilter' class='form-control' ng-model='eventIdFilter' ng-change="updateEventFilter()">
 					<option ng-repeat='event in events' value='{{event._id}}'>{{event.name}}</option>
 				</select>
 			</div>
@@ -50,7 +50,9 @@
 				<td colspan="2" class="bg-warning"><i><strong>Sachkosten</strong></i></td>
         <td class="bg-warning"><strong>Budget:</strong></td>
 				<td align="right" class="bg-primary"><strong>{{grp['business'][0].eventId.budgetBusiness}}</strong></td>
-				<td colspan="5" class="bg-warning"></td>
+				<td class="bg-warning" colspan="2"><strong>Restbetrag:</strong></td>
+				<td align="right" class="bg-warning"><strong>{{fomratDec(grp['business'][0].eventId.budgetBusiness - sumGrpAll(grp["business"]))}}</strong></td>
+				<td colspan="2" class="bg-warning"></td>
 			</tr>
 			<!-- MAIN BUSINESS -->
 			<tr ng-repeat='com in grp["business"]' ng-class='{"tbl_hide": com.isHidden, "tbl_show": !com.isHidden}'>
@@ -82,7 +84,9 @@
 				<td colspan="2" class="bg-warning"><i><strong>Essenskosten</strong></i></td>
         <td class="bg-warning"><strong>Budget:</strong></td>
 				<td align="right" class="bg-primary"><strong>{{grp['food'][0].eventId.budgetFood}}</strong></td>
-				<td colspan="5" class="bg-warning"></td>
+				<td class="bg-warning" colspan="2"><strong>Restbetrag:</strong></td>
+				<td align="right" class="bg-warning"><strong>{{formatDec(grp['food'][0].eventId.budgetFood - sumGrpAll(grp["food"]))}}</strong></td>
+				<td colspan="2" class="bg-warning"></td>
 			</tr>
 			<!-- MAIN FOOD -->
 			<tr ng-repeat='com in grp["food"]' ng-class='{"tbl_hide": com.isHidden, "tbl_show": !com.isHidden}'>
@@ -146,12 +150,57 @@
 				<td colspan="5"></td>
 			</tr>
 		</tbody>
-		<tfoot>
+		<!--<tfoot>
 			<tr>
 				<td colspan="5"><strong>Gesamtsumme:</strong></td>
 				<td align="right"><strong>{{sum}}</strong></td>
 				<td colspan="5"></td>
 			</tr>
-		</tfoot>
+		</tfoot>-->
 	</table>
+
+	<div ng-show='iSvc.isAuthorized("admin")'>
+		<h4 class='text-orange'>Gesamtsübersicht</h4>
+		<table class='table table-bordered'>
+			<thead>
+				<tr>
+					<th>Programm</th>
+					<th>Budget</th>
+					<th>Budget Sachkosten</th>
+					<th>Budget Essen</th>
+					<th>Summe Sachkosten</th>
+					<th>Summe Essen</th>
+					<th>Summe Fahrtkosten</th>
+					<th>Summe Ausgaben</th>
+					<th>Restbetrag</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat='summary in summaries'>
+					<td align="center"><strong>{{summary._id.location}} - {{summary._id.name}}</strong></td>
+					<td align="right">{{formatDec(summary._id.budgetBusiness + summary._id.budgetFood)}}</td>
+					<td align="right">{{formatDec(summary._id.budgetBusiness)}}</td>
+					<td align="right">{{formatDec(summary._id.budgetFood)}}</td>
+					<td align="right">{{formatDec(summary.sumBusiness)}}</td>
+					<td align="right">{{formatDec(summary.sumFood)}}</td>
+					<td align="right">{{formatDec(summary.sumTravel)}}</td>
+					<td align="right">{{formatDec(summary.sumBusiness + summary.sumFood)}}</td>
+					<td align="right">{{formatDec(summary._id.budgetBusiness + summary._id.budgetFood - summary.sumBusiness - summary.sumFood)}}</td>
+				</tr>
+			</tbody>
+			<tfoot>
+				<tr>
+					<td align="center" class="bg-warning"><strong>Summe:</strong></td>
+					<td align="right" class="bg-warning"><strong>{{sumSummaryBy('_id','budgetBusiness') + sumSummaryBy('_id','budgetFood')}}</strong></td>
+					<td align="right" class="bg-warning"><strong>{{sumSummaryBy('_id','budgetBusiness')}}</strong></td>
+					<td align="right" class="bg-warning"><strong>{{sumSummaryBy('_id','budgetFood')}}</strong></td>
+					<td align="right" class="bg-warning"><strong>{{sumSummaryBy('sumBusiness')}}</strong></td>
+					<td align="right" class="bg-warning"><strong>{{sumSummaryBy('sumFood')}}</strong></td>
+					<td align="right" class="bg-warning"><strong>{{sumSummaryBy('sumTravel')}}</strong></td>
+					<td align="right" class="bg-warning"><strong>{{sumSummaryBy('sumBusiness') + sumSummaryBy('sumFood')}}</strong></td>
+					<td align="right" class="bg-warning"><strong>{{formatDec(sumSummaryBy('_id','budgetBusiness')+sumSummaryBy('_id','budgetFood')-sumSummaryBy('sumBusiness')-sumSummaryBy('sumFood'))}}</strong></td>
+				</tr>
+			</tfoot>
+		</table>
+	</div>
 </div>

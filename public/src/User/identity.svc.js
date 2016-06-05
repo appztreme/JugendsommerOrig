@@ -24,7 +24,6 @@ app.factory('IdentitySvc', function() {
 		isAuthorizedForEvent: function(role, eventId) {
 			var check = this.isAuthorized(role) &&
 				this.currentUser.eventId && this.currentUser.eventId.toString() === eventId.toString();
-			console.log(check, this.currentUser, eventId);
 			return check;
 		},
 	};

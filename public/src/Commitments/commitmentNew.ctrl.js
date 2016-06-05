@@ -7,6 +7,7 @@ app.controller('CommitmentNewCtrl', function($scope, $routeParams, $location, No
 	$scope.isPaymentDone = false;
 	$scope.isPaymentJDDone = false;
 	$scope.isInvoice = false;
+	$scope.isCleared = false;
 
 	$scope.save = function() {
 		if($scope.name && $scope.amount && $scope.date) {
@@ -20,7 +21,8 @@ app.controller('CommitmentNewCtrl', function($scope, $routeParams, $location, No
 				eventId: $routeParams.eventId,
 				isPaymentDone: $scope.isPaymentDone,
 				isPaymentJDDone: $scope.isPaymentJDDone,
-				isInvoice: $scope.isInvoice
+				isInvoice: $scope.isInvoice,
+				isCleared: $scope.isCleared
 			}).success(function(commitment) {
 				$scope.name = null;
 				$scope.description = null;
@@ -30,6 +32,7 @@ app.controller('CommitmentNewCtrl', function($scope, $routeParams, $location, No
 				$scope.isPaymentDone = false;
 				$scope.isPaymentJDDone = false;
 				$scope.isInvoice = false;
+				$scope.isCleared = false;	
 			}).then(function() {
 				NotificationSvc.notify('Rechnung erfolgreich erstellt');
 				$location.path('/');

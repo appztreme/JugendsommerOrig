@@ -29,6 +29,10 @@ app.service('CommitmentSvc', function($http) {
 		return $http.get('/api/commitments/byUser/' + userId);
 	};
 
+	this.findByEvent = function(eventId) {
+		return $http.get('/api/commitments/byEvent/' + eventId);
+	};
+
 	this.delete = function(commitmentId) {
 		return $http.delete('/api/commitments/' + commitmentId);
 	};
