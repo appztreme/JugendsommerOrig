@@ -12,6 +12,8 @@ const today = new Date();
 function checkCommitmentToBeEqual(res, com) {
     expect(res.body.hasOwnProperty('name')).toBe(true);
     expect(res.body.name).toEqual(com.name);
+    expect(res.body.hasOwnProperty('index')).toBe(true);
+    expect(res.body.index).toEqual(com.index);
     expect(res.body.hasOwnProperty('description')).toBe(true);
     expect(res.body.description).toEqual(com.description);
     expect(res.body.hasOwnProperty('date')).toBe(true);
@@ -117,6 +119,7 @@ describe('Commitments', () => {
     const expectedCommitment = {
       _id: '111111111111111111100002',
       name: 'commitment 2',
+      index: 2,
       description: 'description commitment 2',
       date: new Date(curYear,11,1),
       amount: 12.4,
@@ -171,7 +174,8 @@ describe('Commitments', () => {
       userId: '111111111111111111110003',
       isPaymentDone: false,
       isPaymentJDDone: true,
-      isInvoice: false
+      isInvoice: false,
+      isCleared: false,
     };
     describe('authorized request', () => {
       let testSession = requestSession(app);
@@ -181,6 +185,7 @@ describe('Commitments', () => {
           .send(newCommitment)
           .end((err, res) => {
             check.checkResponseStatus(err, res, 201);
+            newCommitment.index = 4; //to test auto creation of index value
             checkCommitmentToBeEqual(res,newCommitment);
             done();
           });
@@ -213,6 +218,7 @@ describe('Commitments', () => {
       const changedCommitment = {
         _id: '111111111111111111100003',
         name: 'commitment 3 changed',
+        index: 3,
         description: 'description commitment 3 changed',
         date: new Date(curYear,9,1),
         amount: 77.12,
@@ -221,7 +227,8 @@ describe('Commitments', () => {
         userId: '111111111111111111110003',
         isPaymentDone: true,
         isPaymentJDDone: false,
-        isInvoice: false
+        isInvoice: false,
+        isCleared: true,
       };
     describe('authorized request', () => {
       const testSession = requestSession(app);

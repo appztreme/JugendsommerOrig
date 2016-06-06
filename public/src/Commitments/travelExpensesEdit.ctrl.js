@@ -22,7 +22,8 @@ app.controller('TravelExpensesEditCtrl', function($scope, $routeParams, $locatio
 				eventId: $scope.eventId,
 				isPaymentDone: $scope.isPaymentDone,
 				isPaymentJDDone: $scope.isPaymentJDDone,
-				isInvoice: $scope.isInvoice
+				isInvoice: $scope.isInvoice,
+				isCleared: $scope.isCleared,
 			}).success(function(commitment) {
 				$scope.name = null;
 				$scope.description = null;
@@ -33,6 +34,7 @@ app.controller('TravelExpensesEditCtrl', function($scope, $routeParams, $locatio
 				$scope.isPaymentDone = false;
 				$scope.isPaymentJDDone = false;
 				$scope.isInvoice = false;
+				$scope.isCleared = false;
 			}).then(function() {
 				NotificationSvc.notify('Rechnung erfolgreich editiert');
 				$location.path('/myCommitments');
@@ -52,6 +54,7 @@ app.controller('TravelExpensesEditCtrl', function($scope, $routeParams, $locatio
 		$scope.isPaymentDone = com.isPaymentDone;
 		$scope.isPaymentJDDone = com.isPaymentJDDone;
 		$scope.isInvoice = com.isInvoice;
+		$scope.isCleared = com.isCleared;
     $scope.kilometers = $scope.amount / $scope.subsidyRate;
 	});
 });

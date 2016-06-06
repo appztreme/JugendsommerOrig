@@ -192,6 +192,7 @@ print("Registrations inserted: " + registrationsCnt);
 db.commitments.insert({
     _id: ObjectId('111111111111111111100001'),
     name: 'commitment 1',
+    index: 1,
     description: 'description commitment 1',
     date: new Date(curYear,3,21),
     type: 'business',
@@ -206,6 +207,7 @@ db.commitments.insert({
 db.commitments.insert({
     _id: ObjectId('111111111111111111100002'),
     name: 'commitment 2',
+    index: 2,
     description: 'description commitment 2',
     date: new Date(curYear,11,1),
     type: 'food',
@@ -220,6 +222,7 @@ db.commitments.insert({
 db.commitments.insert({
     _id: ObjectId('111111111111111111100003'),
     name: 'commitment 3',
+    index: 3,
     description: 'description commitment 3',
     date: new Date(curYear,6,7),
     type: 'business',
@@ -234,6 +237,7 @@ db.commitments.insert({
 db.commitments.insert({
     _id: ObjectId('111111111111111111100004'),
     name: 'commitment 4',
+    index: 4,
     description: 'description commitment 4',
     date: new Date(curYear,5,14),
     type: 'food',

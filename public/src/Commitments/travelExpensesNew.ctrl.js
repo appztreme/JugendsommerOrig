@@ -10,6 +10,7 @@ app.controller('TravelExpensesNewCtrl', function($scope, $routeParams, $location
 	$scope.isPaymentDone = false;
 	$scope.isPaymentJDDone = false;
 	$scope.isInvoice = false;
+	$scope.isCleared = false;
 
   $scope.onKilometeresChanged = function() {
     $scope.amount = $scope.kilometers * $scope.subsidyRate;
@@ -27,7 +28,8 @@ app.controller('TravelExpensesNewCtrl', function($scope, $routeParams, $location
 				eventId: $routeParams.eventId,
 				isPaymentDone: $scope.isPaymentDone,
 				isPaymentJDDone: $scope.isPaymentJDDone,
-				isInvoice: $scope.isInvoice
+				isInvoice: $scope.isInvoice,
+				isCleared: $scope.isCleared,
 			}).success(function(commitment) {
 				$scope.name = null;
 				$scope.description = null;
@@ -37,6 +39,7 @@ app.controller('TravelExpensesNewCtrl', function($scope, $routeParams, $location
 				$scope.isPaymentDone = false;
 				$scope.isPaymentJDDone = false;
 				$scope.isInvoice = false;
+				$scope.isCleared = false;
 			}).then(function() {
 				NotificationSvc.notify('Rechnung erfolgreich erstellt');
 				$location.path('/');

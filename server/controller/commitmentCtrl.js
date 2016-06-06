@@ -42,6 +42,7 @@ exports.findByEventId = (req, res, next) => {
 		.where('date').gte(startCurYear)
 		.where('eventId').equals(req.params.eventId)
 		.populate('eventId')
+		.populate('userId')
 		.sort({ eventId: 1, date: 1 })
 		.exec(function(err, coms) {
 			if(err) { return next(err); }
@@ -119,6 +120,9 @@ exports.getSummary = (req, res, next) => {
 					{
 						eventId: "$eventId",
 						type: "$type",
+						isPaymentDone: "$isPaymentDone",
+	          isInvoice: "$isInvoice",
+	          isCleared: "$isCleared",
 					},
 		 		sum: { $sum: "$amount" }
 				}
@@ -128,6 +132,8 @@ exports.getSummary = (req, res, next) => {
 					sumFood:     { $max: {$cond: [ { $eq: ['$_id.type', 'food'    ] }, '$sum', 0]} },
 					sumBusiness: { $max: {$cond: [ { $eq: ['$_id.type', 'business'] }, '$sum', 0]} },
 					sumTravel:   { $max: {$cond: [ { $eq: ['$_id.type', 'travel'  ] }, '$sum', 0]} },
+					sumPaymentOpen: { $sum: {$cond: [ {$and: [ { $eq: ['$_id.isPaymentDone', true] }, { $eq: ['$_id.isCleared', false] }, ]}, '$sum', 0 ]} },
+					sumInvoiceOpen: { $sum: {$cond: [ {$and: [ { $eq: ['$_id.isInvoice', true] }, { $eq: ['$_id.isCleared', false] }, ]}, '$sum', 0 ]} },
 				}
 			}
 		], function(err, ag) {

@@ -31,6 +31,8 @@ function checkEventToBeEqual(res, ev) {
     expect(res.body.budgetFood).toEqual(ev.budgetFood);
     expect(res.body.hasOwnProperty('info')).toBe(true);
     expect(res.body.info).toEqual(ev.info);
+    expect(res.body.hasOwnProperty('isInternal')).toBe(true);
+    expect(res.body.isInternal).toEqual(ev.isInternal);
 };
 
 describe('Event', function() {
@@ -104,7 +106,8 @@ describe('Event', function() {
                 visibleTo: new Date(curYear,10,1),
                 budgetBusiness: 3500,
                 budgetFood: 200,
-                info: 'info for event1'
+                info: 'info for event1',
+                isInternal: false,
             };
             request(app).get('/api/events/111111111111111111111111')
                 .end((err, res) => {
@@ -128,7 +131,8 @@ describe('Event', function() {
             visibleTo: new Date(curYear,11,1),
             budgetBusiness: 501,
             budgetFood: 26,
-            info: 'info for eventPost'
+            info: 'info for eventPost',
+            isInternal: true,
         };
         describe('authorized request', function() {
             var testSession = requestSession(app);
@@ -201,7 +205,8 @@ describe('Event', function() {
             visibleTo: new Date(curYear,12,3),
             budgetBusiness: 750,
             budgetFood: 890,
-            info: 'info for changed event'
+            info: 'info for changed event',
+            isInternal: false,
         };
         describe('authorized request', function() {
             var testSession = requestSession(app);
