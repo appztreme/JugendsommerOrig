@@ -17,6 +17,7 @@ app.controller('EventEditCtrl', function($scope, $routeParams, $location, Notifi
 			$scope.event.budgetBusiness = $scope.budgetBusiness;
 			$scope.event.budgetFood = $scope.budgetFood;
 			$scope.event.info = $scope.info;
+			$scope.event.isInternal = $scope.isInternal;
 
 			EventsSvc.update($scope.event)
 			.then(function(ev) {
@@ -39,5 +40,6 @@ app.controller('EventEditCtrl', function($scope, $routeParams, $location, Notifi
 		$scope.budgetBusiness = ev.budgetBusiness;
 		$scope.budgetFood = ev.budgetFood;
 		$scope.info = ev.info;
+		$scope.isInternal = ev.isInternal;
 	});
 });

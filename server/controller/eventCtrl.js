@@ -43,7 +43,8 @@ exports.create = (req, res, next) => {
 		visibleTo: req.body.visibleTo,
 		budgetFood: req.body.budgetFood,
 		budgetBusiness: req.body.budgetBusiness,
-	  info: req.body.info
+	  info: req.body.info,
+		isInternal: req.body.isInternal
 	});
 	ev.save(function(err, ev) {
 		if(err) { return next(err); }
@@ -72,6 +73,7 @@ exports.update = (req, res, next) => {
 		ev.budgetFood = req.body.budgetFood;
 		ev.budgetBusiness = req.body.budgetBusiness;
 		ev.info = req.body.info;
+		ev.isInternal = req.body.isInternal;
 
 		ev.save(function(erre, eve) {
 			if(erre) next(erre);

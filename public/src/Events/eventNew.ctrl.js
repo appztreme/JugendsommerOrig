@@ -2,6 +2,8 @@ var app = angular.module('js');
 
 app.controller('EventNewCtrl', function($scope, $location, EventsSvc, NotificationSvc) {
 	$scope.title = 'Neues Programm erstellen';
+	// default values
+	$scope.isInternal = false;
 
 	$scope.save = function() {
 		if($scope.eventForm.$valid) {
@@ -16,7 +18,8 @@ app.controller('EventNewCtrl', function($scope, $location, EventsSvc, Notificati
 				visibleTo: $scope.visibleTo,
 				budgetBusiness: $scope.budgetBusiness,
 				budgetFood: $scope.budgetFood,
-				info: $scope.info
+				info: $scope.info,
+				isInternal: $scope.isInternal,
 			}).success(function(ev) {
 				$scope.name = null;
 				$scope.description = null;
@@ -29,6 +32,7 @@ app.controller('EventNewCtrl', function($scope, $location, EventsSvc, Notificati
 				$scope.budgetBusiness = 0;
 				$scope.budgetFood = 0;
 				$scope.info = null;
+				$scope.isInternal = false;
 
 				NotificationSvc.notify('Neues Programm erfolgreich gespeichert');
 
