@@ -28,7 +28,7 @@ commitmentSchema.pre('save', function(next) {
     	.exec(function(err, doc)
     	{
         var max = (doc && doc.index) ? doc.index : 0;
-        com.index = max;
+        com.index = max + 1;
 				console.log("new index is:", com.index);
 				next();
     	});

@@ -185,7 +185,7 @@ describe('Commitments', () => {
           .send(newCommitment)
           .end((err, res) => {
             check.checkResponseStatus(err, res, 201);
-            newCommitment.index = 4; //to test auto creation of index value
+            newCommitment.index = 5; //to test auto creation of index value
             checkCommitmentToBeEqual(res,newCommitment);
             done();
           });
