@@ -31,6 +31,12 @@ app.controller('MyCommitmentsCtrl', function($scope, $location, $route, Notifica
 		return sum;
 	};
 
+	$scope.hasCleared = function(grp) {
+		var hasCleared = false;
+		_.forEach(grp, function(value) { if(!value.isCleared) { hasCleared = true; }});
+		return hasCleared;
+	};
+
 	$scope.toggleVisibility = function(grpArray) {
 		_.forEach(grpArray, function(value) { value['isHidden'] = !value['isHidden']});
 	};

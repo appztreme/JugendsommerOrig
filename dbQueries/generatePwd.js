@@ -1,6 +1,6 @@
 var crypto = require('crypto');
 
-var pwd = "azdBuV9J";
+var pwd = "aadLs73J";
 
 function createSalt() {
 	return crypto.randomBytes(128).toString('base64');

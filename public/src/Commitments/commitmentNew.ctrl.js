@@ -4,6 +4,7 @@ app.controller('CommitmentNewCtrl', function($scope, $routeParams, $location, No
 	$scope.title = 'Rechnung hinzufügen';
 	//Default values
 	$scope.amount = 1.1;
+	$scope.type = 'business';
 	$scope.isPaymentDone = false;
 	$scope.isPaymentJDDone = false;
 	$scope.isInvoice = false;
@@ -32,7 +33,7 @@ app.controller('CommitmentNewCtrl', function($scope, $routeParams, $location, No
 				$scope.isPaymentDone = false;
 				$scope.isPaymentJDDone = false;
 				$scope.isInvoice = false;
-				$scope.isCleared = false;	
+				$scope.isCleared = false;
 			}).then(function() {
 				NotificationSvc.notify('Rechnung erfolgreich erstellt');
 				$location.path('/');

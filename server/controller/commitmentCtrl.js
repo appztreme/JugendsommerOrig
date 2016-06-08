@@ -132,8 +132,8 @@ exports.getSummary = (req, res, next) => {
 					sumFood:     { $max: {$cond: [ { $eq: ['$_id.type', 'food'    ] }, '$sum', 0]} },
 					sumBusiness: { $max: {$cond: [ { $eq: ['$_id.type', 'business'] }, '$sum', 0]} },
 					sumTravel:   { $max: {$cond: [ { $eq: ['$_id.type', 'travel'  ] }, '$sum', 0]} },
-					sumPaymentOpen: { $sum: {$cond: [ {$and: [ { $eq: ['$_id.isPaymentDone', true] }, { $eq: ['$_id.isCleared', false] }, ]}, '$sum', 0 ]} },
-					sumInvoiceOpen: { $sum: {$cond: [ {$and: [ { $eq: ['$_id.isInvoice', true] }, { $eq: ['$_id.isCleared', false] }, ]}, '$sum', 0 ]} },
+					sumPaymentOpen: { $max: {$cond: [ {$and: [ { $eq: ['$_id.isPaymentDone', true] }, { $eq: ['$_id.isCleared', false] }, ]}, '$sum', 0 ]} },
+					sumInvoiceOpen: { $max: {$cond: [ {$and: [ { $eq: ['$_id.isInvoice', true] }, { $eq: ['$_id.isCleared', false] }, ]}, '$sum', 0 ]} },
 				}
 			}
 		], function(err, ag) {

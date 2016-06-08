@@ -41,8 +41,10 @@
 		<tbody ng-repeat='grp in commitments'>
 			<tr>
 				<th colspan="5" class="bg-warning"><i><strong>{{getEventName(grp)}}</strong></i></th>
-        <th class="bg-warning"><strong>Gesamtbudget:</strong></th>
-				<th align="right" class="bg-primary" style="text-align: right;"><strong>{{calcBudgetSum(grp)*1}}</strong></th>
+        <th class="bg-warning" ng-show='iSvc.isAuthorized("admin")'><strong>Gesamtbudget:</strong></th>
+				<th class="bg-warning" ng-show='!iSvc.isAuthorized("admin")'></th>
+				<th class="bg-warning" ng-show='!iSvc.isAuthorized("admin")'></th>
+				<th align="right" ng-show='iSvc.isAuthorized("admin")' class="bg-primary" style="text-align: right;"><strong>{{calcBudgetSum(grp)*1}}</strong></th>
 				<th colspan="5" class="bg-warning"></th>
 			</tr>
 			<!-- HEAD BUSINESS -->
@@ -51,14 +53,15 @@
 				<td colspan="3" class="bg-warning"><i><strong>Sachkosten</strong></i></td>
         <td class="bg-warning"><strong>Budget:</strong></td>
 				<td align="right" class="bg-primary"><strong>{{grp['business'][0].eventId.budgetBusiness}}</strong></td>
-				<td class="bg-warning" colspan="2"><strong>Restbetrag:</strong></td>
+				<td class="bg-warning" colspan="2"><strong>Restbudget:</strong></td>
 				<td align="right" class="bg-warning"><strong>{{formatDec(grp['business'][0].eventId.budgetBusiness - sumGrpAll(grp["business"]))}}</strong></td>
-				<td colspan="2" class="bg-warning"></td>
+				<td class="bg-warning"></td>
+				<td align="center" ng-class='{"bg-danger": hasCleared(grp["business"]), "bg-success": !hasCleared(grp["business"])}'>{{formatBool(!hasCleared(grp["business"]))}}</td>
 			</tr>
 			<!-- MAIN BUSINESS -->
 			<tr ng-repeat='com in grp["business"]' ng-class='{"tbl_hide": com.isHidden, "tbl_show": !com.isHidden}'>
 				<td><button class="btn glyphicon glyphicon-pencil" ng-disabled='!iSvc.isAuthorized("fadmin")' type="button" ng-click='editCommitment(com._id)'></button></td>
-  			<td><button type="button" class="btn glyphicon glyphicon-trash" ng-disabled='!iSvc.isAuthorized("admin")' ng-click='deleteCommitment(com._id)'></button></td>
+  			<td><button type="button" class="btn glyphicon glyphicon-trash" align="center" ng-disabled='!iSvc.isAuthorized("admin")' ng-click='deleteCommitment(com._id)'></button></td>
 				<td>{{com.index}}</td>
 				<td>{{com.name}}</td>
 			  <td>{{com.description}}</td>
@@ -81,17 +84,18 @@
 				<td colspan="2"></td>
 			</tr>
 			<!-- HEADER FOOD -->
-			<tr>
+			<tr ng-show='iSvc.isAuthorized("admin")'>
 				<td colspan="2"><button class="btn btn-default glyphicon glyphicon-resize-full" ng-click="toggleVisibility(grp['food'])"></button></td>
 				<td colspan="3" class="bg-warning"><i><strong>Essenskosten</strong></i></td>
         <td class="bg3warning"><strong>Budget:</strong></td>
 				<td align="right" class="bg-primary"><strong>{{grp['food'][0].eventId.budgetFood}}</strong></td>
-				<td class="bg-warning" colspan="2"><strong>Restbetrag:</strong></td>
+				<td class="bg-warning" colspan="2"><strong>Restbudget	:</strong></td>
 				<td align="right" class="bg-warning"><strong>{{formatDec(grp['food'][0].eventId.budgetFood - sumGrpAll(grp["food"]))}}</strong></td>
-				<td colspan="2" class="bg-warning"></td>
+				<td class="bg-warning"></td>
+				<td align="center" ng-class='{"bg-danger": hasCleared(grp["food"]), "bg-success": !hasCleared(grp["food"])}'>{{formatBool(!hasCleared(grp["food"]))}}</td>
 			</tr>
 			<!-- MAIN FOOD -->
-			<tr ng-repeat='com in grp["food"]' ng-class='{"tbl_hide": com.isHidden, "tbl_show": !com.isHidden}'>
+			<tr ng-repeat='com in grp["food"]' ng-class='{"tbl_hide": com.isHidden, "tbl_show": !com.isHidden}' ng-show='iSvc.isAuthorized("admin")'>
 				<td><button class="btn glyphicon glyphicon-pencil" ng-disabled='!iSvc.isAuthorized("fadmin")' type="button" ng-click='editCommitment(com._id)'></button></td>
   			<td><button type="button" class="btn glyphicon glyphicon-trash" ng-disabled='!iSvc.isAuthorized("admin")' ng-click='deleteCommitment(com._id)'></button></td>
 				<td>{{com.index}}</td>
@@ -106,7 +110,7 @@
 				<td align="center" ng-class='{"bg-success": com.isCleared, "bg-danger": !com.isCleared}'>{{formatBool(com.isCleared)}}</td>
 			</tr>
       <!-- FOOTER FOOD -->
-			<tr>
+			<tr ng-show='iSvc.isAuthorized("admin")'>
 				<td colspan="2"></td>
 				<td colspan="4"><strong>Summe:</strong></td>
 				<td align="right" ng-class='{"bg-success": !isOverBudget(grp["food"], "food"), "bg-danger": isOverBudget(grp["food"], "food")}'><strong>{{sumGrpAll(grp["food"])}}</strong></td>
@@ -121,7 +125,8 @@
 				<td colspan="3" class="bg-warning"><i><strong>Fahrtkosten</strong></i></td>
         <td class="bg-warning"></td>
 				<td align="right" class="bg-primary"></td>
-				<td colspan="5" class="bg-warning"></td>
+				<td colspan="4" class="bg-warning"></td>
+				<td align="center" ng-class='{"bg-danger": hasCleared(grp["travel"]), "bg-success": !hasCleared(grp["travel"])}'>{{formatBool(!hasCleared(grp["travel"]))}}</td>
 			</tr>
 			<!-- MAIN TRAVEL -->
 			<tr ng-repeat='com in grp["travel"]' ng-class='{"tbl_hide": com.isHidden, "tbl_show": !com.isHidden}'>
@@ -177,8 +182,8 @@
 					<th>Summe Fahrtkosten</th>
 					<th>Summe Ausgaben</th>
 					<th>Restbetrag</th>
-					<!--<th>Bezahlt offen</th>
-					<th>Rechnungen offen</th>-->
+					<th>Bezahlt offen</th>
+					<th>Rechnungen offen</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -192,8 +197,8 @@
 					<td align="right">{{formatDec(summary.sumTravel)}}</td>
 					<td align="right">{{formatDec(summary.sumBusiness + summary.sumFood)}}</td>
 					<td align="right">{{formatDec(summary._id.budgetBusiness + summary._id.budgetFood - summary.sumBusiness - summary.sumFood)}}</td>
-					<!--<td align="right">{{formatDec(summary.sumPaymentOpen)}}</td>
-					<td align="right">{{formatDec(summary.sumInvoiceOpen)}}</td>-->
+					<td align="right">{{formatDec(summary.sumPaymentOpen)}}</td>
+					<td align="right">{{formatDec(summary.sumInvoiceOpen)}}</td>
 				</tr>
 			</tbody>
 			<tfoot>
@@ -207,6 +212,8 @@
 					<td align="right" class="bg-warning"><strong>{{sumSummaryBy('sumTravel')}}</strong></td>
 					<td align="right" class="bg-warning"><strong>{{sumSummaryBy('sumBusiness') + sumSummaryBy('sumFood')}}</strong></td>
 					<td align="right" class="bg-warning"><strong>{{formatDec(sumSummaryBy('_id','budgetBusiness')+sumSummaryBy('_id','budgetFood')-sumSummaryBy('sumBusiness')-sumSummaryBy('sumFood'))}}</strong></td>
+					<td align="right" class="bg-warning"><strong>{{sumSummaryBy('sumPaymentOpen')}}</strong></td>
+					<td align="right" class="bg-warning"><strong>{{sumSummaryBy('sumInvoiceOpen')}}</strong></td>
 				</tr>
 			</tfoot>
 		</table>

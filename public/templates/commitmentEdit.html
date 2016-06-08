@@ -27,7 +27,7 @@
 		</div>
 	</div>
 	<!-- TYPE -->
-	<div class='form-group' ng-class='{ "has-error": comForm.type.$invalid }'>
+	<div class='form-group' ng-class='{ "has-error": comForm.type.$invalid }' ng-show='iSvc.isAuthorized("admin")'>
 		<label for='type' class='control-label col-sm-2'>Typ</label>
 		<div class='col-sm-10'>
 		<p class='input-group'>
@@ -60,13 +60,13 @@
 		</div
 	</div>
 	<!-- ISCLEARED -->
-	<div class='form-group'>
+	<div class='form-group' ng-show='iSvc.isAuthorized("admin")'>
 		<label class='control-label col-sm-2'></label>
 		<div class='col-sm-10'>
 			<p class='input-group'>
 				<label class='checkbox-inline'><input type='checkbox' ng-model='isCleared' />abgerechnet</label>
 			</p>
-		</div
+		</div>
 	</div>
 
 	<div class='col-sm-offset-2 col-sm-10'>
