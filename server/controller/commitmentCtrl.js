@@ -3,7 +3,7 @@ const Commitment = require('./../models/commitment');
 const Event = require('./../models/event');
 
 const curYear = new Date().getFullYear();
-const startCurYear = new Date(curYear-1,12,31);
+const startCurYear = new Date(curYear + "-1-1");
 
 exports.find = (req, res, next) => {
 	Commitment.find()

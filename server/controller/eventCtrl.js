@@ -1,7 +1,7 @@
 'use strict';
 const Event = require('./../models/event');
 const curYear = new Date().getFullYear();
-const startCurYear = new Date(curYear,1,1);
+const startCurYear = new Date(curYear+"-1-1");
 
 exports.findByCurrentYear = (req, res, next) => {
 	Event.find()
