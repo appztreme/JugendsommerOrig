@@ -12,7 +12,7 @@ app.controller('CommitmentEditCtrl', function($scope, $routeParams, $location, I
 				description: $scope.description,
 				date: $scope.date,
 				amount: $scope.amount,
-				userId: IdentitySvc.currentUser._id,
+				userId: $scope.userId,
 				eventId: $scope.eventId,
 				isPaymentDone: $scope.isPaymentDone,
 				isPaymentJDDone: $scope.isPaymentJDDone,

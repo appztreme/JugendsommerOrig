@@ -3,7 +3,7 @@ const Commitment = require('./../models/commitment');
 const Event = require('./../models/event');
 
 const curYear = new Date().getFullYear();
-const startCurYear = new Date(curYear,1,1);
+const startCurYear = new Date(curYear-1,12,31);
 
 exports.find = (req, res, next) => {
 	Commitment.find()
@@ -62,9 +62,8 @@ exports.create = (req, res, next) => {
 		isPaymentDone: req.body.isPaymentDone,
 		isPaymentJDDone: req.body.isPaymentJDDone,
 		isInvoice: req.body.isInvoice,
-		isCleared: req.body.isCleared,
+		isCleared: (req.body.isPaymentJDDone) ? true : req.body.isCleared,
 	});
-	//console.log(commitment);
 	commitment.save((err, com) => {
 		if(err) { console.log(err); return next(err); }
 		res.status(201).json(com);
@@ -80,7 +79,7 @@ exports.update = (req, res, next) => {
 		com.type = req.body.type;
 		com.amount = req.body.amount;
 		com.eventId = req.body.eventId;
-		com.userId = req.body.userId;
+		//com.userId = req.body.userId; // do not change initial user
 		com.isPaymentDone = req.body.isPaymentDone;
 		com.isPaymentJDDone = req.body.isPaymentJDDone;
 		com.isInvoice = req.body.isInvoice;
