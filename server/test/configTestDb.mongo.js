@@ -8,6 +8,8 @@ db.activities.remove({});
 db.registrations.remove({});
 db.users.remove({});
 db.commitments.remove({});
+db.lendings.remove({});
+
 db.events.insert({
     _id: ObjectId('111111111111111111111111'),
     name: 'event1',
@@ -251,6 +253,49 @@ db.commitments.insert({
 
 var commitmentsCnt = db.commitments.find().count();
 print("Commitments insertet: " + commitmentsCnt);
+
+db.resources.insert({
+  _id: ObjectId('111111111111111111000001'),
+  name: 'resource 1',
+  description: 'description of resource 1',
+  type: 'xxx'
+});
+
+db.resources.insert({
+  _id: ObjectId('111111111111111111000002'),
+  name: 'resource 2',
+  description: 'description of resource 2',
+  type: 'xxx'
+});
+
+db.resources.insert({
+  _id: ObjectId('111111111111111111000003'),
+  name: 'resource 3',
+  description: 'description of resource 3',
+  type: 'xyz'
+});
+
+var resourcesCnt = db.resources.find().count();
+print("Resources inserted: " + resourcesCnt);
+
+db.lendings.insert({
+  _id: ObjectId('111111111111111110000001'),
+  eventId: ObjectId('111111111111111111111111'),
+  userId: ObjectId('111111111111111111110003'),
+  resourceId: ObjectId('111111111111111111000001'),
+  date: new Date('2016-06-16')
+});
+
+db.lendings.insert({
+  _id: ObjectId('111111111111111110000002'),
+  eventId: ObjectId('111111111111111111111111'),
+  userId: ObjectId('111111111111111111110003'),
+  resourceId: ObjectId('111111111111111111000003'),
+  date: new Date('2016-06-17')
+});
+
+var lendingsCnt = db.lendings.find().count();
+print("Lendings inserted: " + lendingsCnt);
 
 db.users.insert({
     _id: ObjectId('111111111111111111110001'),

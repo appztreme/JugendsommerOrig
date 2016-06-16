@@ -32,6 +32,8 @@ app.use('/api/login', require('./server/routes/loginRoute'));
 app.use('/api/logout', require('./server/routes/logoutRoute'));
 app.use('/api/user', require('./server/routes/userRoute'));
 app.use('/api/agb', require('./server/routes/agbRoute'));
+app.use('/api/resources', require('./server/routes/resourceRoute'));
+app.use('/api/lendings', require('./server/routes/lendingRoute'));
 
 require('./server/passport.config')();
 
