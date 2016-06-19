@@ -90,6 +90,10 @@ app.config(function($routeProvider) {
 			controller: 'UserUpdatePwdCtrl',
 			templateUrl: '../templates/userUpdatePwd.html'
 		})
+		.when('/newLending/:eventId', {
+			controller: 'LendingNewCtrl',
+			templateUrl: '../templates/lendingNew.html'
+		})
 		.when('/agb/:activityId', {
 			controller: 'AgbEditCtrl',
 			templateUrl: '../templates/agbEdit.html'

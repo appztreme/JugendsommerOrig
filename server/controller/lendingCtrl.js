@@ -25,6 +25,8 @@ exports.findByDateAndUser = (req, res, next) => {
 exports.findByUser = (req, res, next) => {
   Lending.find()
     .where('userId').equals(req.query.userId)
+    .populate('resourceId')
+    .populate('eventId')
     .sort({ date: 1 })
     .exec((err, lendings) => {
       if(err) { return next(err); }
@@ -37,13 +39,15 @@ exports.create = (req, res, next) => {
     .where('type').equals(req.body.type)
     .exec((err, resources) => {
       if(err) { return next(err); }
-        Lending.find({resourceId: {$in: resources}})
+        Lending.find({resourceId: {$in: resources}, date: req.body.date})
+        .select({_id: 0, resourceId: 1})
         .exec((err2, lendings) => {
           if(err2) { return next(err2); }
           let resource2BookId = undefined;
-          lendings.forEach(lend => {
-            if(lend.date !== req.body.date) {
-              resource2BookId = lend.resourceId;
+          var reducedL = lendings.map(a => a.resourceId.toString());
+          resources.forEach(res => {
+            if(reducedL.indexOf(res._id.toString()) === -1) {
+              resource2BookId = res._id;
               return;
             }
           });
@@ -59,7 +63,7 @@ exports.create = (req, res, next) => {
                 res.status(201).json(l);
               });
           } else {
-            res.status(409).send({message: 'Alle Materialien dieses Types sind schon gebucht.'});
+            res.status(409).json({message: 'Alle Materialien dieses Types sind schon gebucht.'});
           }
         });
     });

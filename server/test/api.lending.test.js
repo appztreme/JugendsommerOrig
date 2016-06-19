@@ -175,7 +175,7 @@ describe('LENDING', function() {
               expect(err).toNotExist();
               expect(res).toExist();
               expect(res.status).toEqual(409);
-              expect(res.body.hasOwnProperty('message')).toBeTrue();
+              expect(res.body.hasOwnProperty('message')).toBe(true);
               expect(res.body.message).toEqual('Alle Materialien dieses Types sind schon gebucht.');
               done();
           });
