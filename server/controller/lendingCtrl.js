@@ -5,6 +5,8 @@ const Resource = require('./../models/resource');
 exports.findByDate = (req, res, next) => {
   Lending.find()
     .where('date').equals(req.query.date)
+    .populate('resourceId')
+    .populate('eventId')
     .exec((err, lendings) => {
       if(err) { return next(err); }
       res.json(lendings);
@@ -15,6 +17,8 @@ exports.findByDateAndUser = (req, res, next) => {
   Lending.find()
     .where('date').equals(req.query.date)
     .where('userId').equals(req.query.userId)
+    .populate('resourceId')
+    .populate('eventId')
     .sort({ date: 1 })
     .exec((err, lendings) => {
       if(err) { return next(err); }

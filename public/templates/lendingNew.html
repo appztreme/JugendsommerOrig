@@ -34,7 +34,8 @@
   </div>
   <h2 class="text-orange">Meine Materialien</h2>
   <div class="list-group">
-    <div ng-repeat='lend in myLendings' class="list-group-item">
+    <div ng-repeat='lend in myLendings' class="list-group-item list-group-item-warning">
+      <span class="glyphicon glyphicon-check" style="margin-right:3px;"></span>
       <span class="list-group-item-heading"><strong>{{lend.resourceId.name}}</strong></span>
       <span class="list-group-item-text">{{lend.date | date: 'dd/MM/yyyy'}} {{lend.eventId.location}} - {{lend.eventId.name}}</span>
     </div>
