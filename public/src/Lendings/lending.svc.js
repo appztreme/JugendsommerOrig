@@ -1,6 +1,14 @@
 var app = angular.module('js');
 
 app.service('LendingSvc', function($http) {
+	this.delete = function(lendId) {
+		return $http.delete('/api/lendings/' + lendId);
+	};
+
+	this.find = function() {
+		return $http.get('/api/lendings/');
+	};
+
 	this.findByUser = function(userId) {
 		return $http.get('/api/lendings/user/', { params: { userId: userId}});
 	};

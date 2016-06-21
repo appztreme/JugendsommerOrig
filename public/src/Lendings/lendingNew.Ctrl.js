@@ -32,8 +32,8 @@ app.controller('LendingNewCtrl', function($scope, $routeParams, $route, $templat
 
   LendingSvc.findByUser(IdentitySvc.currentUser._id)
     .success(function(lends) {
-      $scope.myLendings = lends;
-      console.log(lends);
+      $scope.myLendings = lends.sort();
+      //console.log(lends);
     });
 
 });

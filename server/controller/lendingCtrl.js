@@ -2,6 +2,20 @@
 const Lending = require('./../models/lending');
 const Resource = require('./../models/resource');
 
+const curYear = new Date().getFullYear();
+const startCurYear = new Date(curYear+"-1-1");
+
+exports.find = (req, res, next) => {
+  Lending.find()
+    .where('date').gte(startCurYear)
+    .populate('resourceId')
+    .populate('eventId')
+    .exec((err, lendings) => {
+      if(err) { return next(err); }
+      res.json(lendings);
+    });
+};
+
 exports.findByDate = (req, res, next) => {
   Lending.find()
     .where('date').equals(req.query.date)
@@ -29,6 +43,7 @@ exports.findByDateAndUser = (req, res, next) => {
 exports.findByUser = (req, res, next) => {
   Lending.find()
     .where('userId').equals(req.query.userId)
+    .where('date').gte(startCurYear)
     .populate('resourceId')
     .populate('eventId')
     .sort({ date: 1 })
@@ -36,6 +51,13 @@ exports.findByUser = (req, res, next) => {
       if(err) { return next(err); }
       res.json(lendings);
     });
+};
+
+exports.delete = (req, res, next) => {
+	Lending.findByIdAndRemove(req.params.lendingId, function(err, len) {
+		if(err) { return next(err); }
+		res.status(200).json(len);
+	});
 };
 
 exports.create = (req, res, next) => {

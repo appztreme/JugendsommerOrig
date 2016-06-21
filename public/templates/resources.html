@@ -2,6 +2,7 @@
   <h2 class='text-orange'>{{title}}</h2>
   <div class="panel panel-default">
     <div class="panel-heading">Material abfragen</div>
+    <div cg-Busy='{promise:busyPromise,message:"Loading",backdrop:true,minDuration:500}'></div>
     <div class="panel-body">
       <form name='resForm' class='form-horizontal' novalidate ng-submit='search()'>
       	<!-- DATE -->
@@ -22,6 +23,15 @@
       		</p>
       		</div>
       	</div>
+        <!-- ALL LENDINGS -->
+      	<div class='form-group' ng-show='iSvc.isAuthorized("admin")'>
+      		<label for='all' class='control-label col-sm-2'>Alle Reservierungen</label>
+      		<div class='col-sm-10'>
+      		<p class='input-group'>
+      			<input type='checkbox' ng-model='all'></input>
+      		</p>
+      		</div>
+      	</div>
       	<div class='col-sm-offset-2 col-sm-10'>
       		<input class='btn btn-success bnt-lg btn-block' type='submit' value='Suchen' ng-disabled='resForm.$invalid'>
       	</div>
@@ -35,6 +45,7 @@
       <span class="glyphicon glyphicon-check" style="margin-right:3px;"></span>
       <span class="list-group-item-heading"><strong>{{lend.resourceId.name}}</strong></span>
       <span class="list-group-item-text">{{lend.date | date: 'dd/MM/yyyy'}} {{lend.eventId.location}} - {{lend.eventId.name}}</span>
+      <button type="button" class="glyphicon glyphicon-trash pull-right" ng-show='iSvc.isAuthorized("admin")' ng-click="delete(lend._id)"></button> 
     </div>
 </div>
 </div>

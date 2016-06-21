@@ -8,6 +8,47 @@ let loginHelper = require('./helper/loginAs');
 
 
 describe('LENDING', function() {
+  describe('GET /lendings/', function() {
+      describe('authorized request', function() {
+          var testSession = requestSession(app);
+          before('login', done => loginHelper.loginAs(testSession, 'admin', 'admin', done));
+          it('should return 2 lendings', function(done) {
+              testSession.get('/api/lendings/')
+                  .end((err, res) => {
+                      expect(err).toNotExist();
+                      expect(res).toExist();
+                      expect(res.status).toEqual(200);
+                      expect(res.body).toBeA('array');
+                      expect(res.body.length).toEqual(2);
+                      done();
+                  });
+          });
+      });
+      describe('unauthorized request', function() {
+          var testSession = requestSession(app);
+          before('login', done => loginHelper.loginAs(testSession, 'fadmin', 'fadmin', done));
+          it('should be refused', function(done) {
+              testSession.get('/api/lendings/')
+                  .end((err, res) => {
+                      expect(err).toNotExist();
+                      expect(res).toExist();
+                      expect(res.status).toEqual(403);
+                      done();
+                  });
+          });
+      });
+      describe('unauthenticated request', function() {
+          it('should be refused', function(done) {
+              request(app).get('/api/lendings/')
+                  .end((err, res) => {
+                      expect(err).toNotExist();
+                      expect(res).toExist();
+                      expect(res.status).toEqual(403);
+                      done();
+                  });
+          });
+      });
+  });
   describe('GET /lendings/date', function() {
       describe('authorized request', function() {
           var testSession = requestSession(app);
@@ -140,6 +181,7 @@ describe('LENDING', function() {
           });
       });
   });
+
   describe('POST /lendings', () => {
     describe('free resource', () => {
       var testSession = requestSession(app);
@@ -216,6 +258,39 @@ describe('LENDING', function() {
               done();
           });
       });
+    });
+  });
+  describe('DELETE /lendings', () => {
+    describe('authorized request', () => {
+      let testSession = requestSession(app);
+      before('login', done => loginHelper.loginAs(testSession, 'admin', 'admin', done));
+      it('should delete entity', done => {
+          testSession.delete('/api/lendings/111111111111111110000002')
+            .end((err, res) => {
+                check.checkResponseStatus(err, res, 200);
+                done();
+            });
+      });
+    });
+    describe('unauthorized request', () => {
+      let testSession = requestSession(app);
+      before('login', done => loginHelper.loginAs(testSession, 'user', 'user', done));
+      it('should be refused', done => {
+          testSession.delete('/api/lendings/111111111111111110000002')
+            .end((err, res) => {
+                check.checkResponseStatus(err, res, 403);
+                done();
+            });
+      });
+    });
+    describe('unauthenticated request', () => {
+        it('should be refused', done => {
+          request(app).delete('/api/lendings/111111111111111110000002')
+            .end((err, res) => {
+                check.checkResponseStatus(err, res, 403);
+                done();
+            });
+        });
     });
   });
 });
