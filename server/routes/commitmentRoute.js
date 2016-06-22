@@ -21,4 +21,6 @@ router.post('/', auth.requiresRole("fadmin"), CommitmentController.create);
 
 router.put('/', auth.requiresRole("fadmin"), CommitmentController.update);
 
+router.put('/isCleared', auth.requiresRole("admin"), CommitmentController.updateIsCleared);
+
 module.exports = router;

@@ -266,6 +266,47 @@ describe('Commitments', () => {
       });
     });
   });
+  describe('PUT /commitments/isCleared', () => {
+      const changedCommitment = {
+        _id: '111111111111111111100003',
+        isCleared: false,
+      };
+    describe('authorized request', () => {
+      const testSession = requestSession(app);
+      before('Login', done => loginHelper.loginAs(testSession,'admin','admin',done));
+      it('should update object in db', done => {
+        testSession.put('/api/commitments/isCleared')
+          .send(changedCommitment)
+          .end((err, res) => {
+            check.checkResponseStatus(err, res, 201);
+            expect(res.body.isCleared).toEqual(false);
+            done();
+          });
+      });
+    });
+    describe('unauthorized request', () => {
+      const testSession = requestSession(app);
+      before('Login', done => loginHelper.loginAs(testSession,'user','user',done));
+      it('should be refused', done => {
+        testSession.put('/api/commitments/isCleared')
+          .send(changedCommitment)
+          .end((err, res) => {
+            check.checkResponseStatus(err, res, 403);
+            done();
+          });
+      });
+    });
+    describe('unauthenticated request', () => {
+      it('should be refused', done => {
+        request(app).put('/api/commitments/isCleared')
+          .send(changedCommitment)
+          .end((err, res) => {
+            check.checkResponseStatus(err, res, 403);
+            done();
+          });
+      });
+    });
+  });
   describe('DELETE /commitments', () => {
     describe('authorized request', () => {
       const testSession = requestSession(app);

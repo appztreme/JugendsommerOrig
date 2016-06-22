@@ -91,6 +91,17 @@ exports.update = (req, res, next) => {
 	});
 };
 
+exports.updateIsCleared = (req, res, next) => {
+	Commitment.findById(req.body._id, function(err, com) {
+		if(!com) return next(new Error('Keine Rechnung im System mit id ' + req.body._id));
+		com.isCleared = req.body.isCleared;
+		com.save(function(err, comDb) {
+			if(err) { return next(err); }
+			res.status(201).json(comDb);
+		});
+	});
+};
+
 exports.delete = (req, res, next) => {
 	Commitment.findByIdAndRemove(req.params.commitmentId, (err, reg) => {
 		if(err) { return next(err); }
