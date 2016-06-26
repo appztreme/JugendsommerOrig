@@ -16,6 +16,16 @@ app.controller('MyCommitmentsCtrl', function($scope, $location, $route, Notifica
 		$location.path('editTravelExpenses/' + id);
 	};
 
+	$scope.updateIsCleared = function(id, isCleared) {
+		CommitmentSvc.updateIsCleared(id, isCleared)
+		.error(function(err) {
+			NotificationSvc.warn(err);
+		})
+		.success(function(success) {
+			NotificationSvc.notify('Abrechnung geändert');
+		});
+	}
+
 	$scope.deleteCommitment = function(id) {
 		CommitmentSvc.delete(id).then(function(err, com) {
 			$route.reload();

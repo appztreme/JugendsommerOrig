@@ -2,7 +2,7 @@ var app = angular.module('js');
 
 app.controller('ResourcesCtrl', function($scope, $location, $route, NotificationSvc, IdentitySvc, LendingSvc) {
 	$scope.title = 'Materialübersicht';
-	$scope.busyPromise = LendingSvc.findByDate();
+	$scope.busyPromise = LendingSvc.delete();
 
 	$scope.onlyMy = false;
 	$scope.all = false;
@@ -12,6 +12,9 @@ app.controller('ResourcesCtrl', function($scope, $location, $route, Notification
 			.success(function(len) {
 				NotificationSvc.notify("Erfolgreich gelöscht");
 				$scope.lendings.splice($scope.lendings.indexOf(len), 1);
+			})
+			.error(function(err) {
+				NotificationSvc.warn(err);
 			});
 	}
 

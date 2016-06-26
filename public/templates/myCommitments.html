@@ -71,7 +71,7 @@
         <td align="center" ng-class='{"bg-info": com.isPaymentJDDone}'>{{formatBool(com.isPaymentJDDone)}}</td>
         <td align="center" ng-class='{"bg-info": com.isInvoice}'>{{formatBool(com.isInvoice)}}</td>
 				<td>{{com.userId.lastName}}</td>
-				<td align="center" ng-class='{"bg-success": com.isCleared, "bg-danger": !com.isCleared}'>{{formatBool(com.isCleared)}}</td>
+				<td align="center" ng-class='{"bg-success": com.isCleared, "bg-danger": !com.isCleared}'><input ng-show='iSvc.isAuthorized("admin")' type='checkbox' ng-model='com.isCleared' ng-change='updateIsCleared(com._id, com.isCleared)' style='margin-right:8px' />{{formatBool(com.isCleared)}}</td>
 			</tr>
 			<!-- FOOTER BUSINESS -->
 			<tr>
@@ -107,7 +107,7 @@
         <td align="center" ng-class='{"bg-info": com.isPaymentJDDone}'>{{formatBool(com.isPaymentJDDone)}}</td>
         <td align="center" ng-class='{"bg-info": com.isInvoice}'>{{formatBool(com.isInvoice)}}</td>
 				<td>{{com.userId.lastName}}</td>
-				<td align="center" ng-class='{"bg-success": com.isCleared, "bg-danger": !com.isCleared}'>{{formatBool(com.isCleared)}}</td>
+				<td align="center" ng-class='{"bg-success": com.isCleared, "bg-danger": !com.isCleared}'><input ng-show='iSvc.isAuthorized("admin")' type='checkbox' ng-model='com.isCleared' ng-change='updateIsCleared(com._id, com.isCleared)' style='margin-right:8px' />{{formatBool(com.isCleared)}}</td>
 			</tr>
       <!-- FOOTER FOOD -->
 			<tr ng-show='iSvc.isAuthorized("admin")'>

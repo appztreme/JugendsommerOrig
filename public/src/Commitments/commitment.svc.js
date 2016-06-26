@@ -44,4 +44,8 @@ app.service('CommitmentSvc', function($http) {
 	this.update = function(com) {
 		return $http.put('/api/commitments', com);
 	};
+
+	this.updateIsCleared = function(id, isCleared) {
+		return $http.put('/api/commitments/isCleared', { _id: id, isCleared: isCleared });
+	};
 });
