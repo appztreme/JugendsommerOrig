@@ -13,7 +13,7 @@ router.get('/:commitmentId', auth.requiresRole("fadmin"), CommitmentController.f
 
 router.get('/byUser/:userId', auth.requiresRole("fadmin"), CommitmentController.findByUserId);
 
-router.get('/byEvent/:eventId', auth.requiresRole("admin"), CommitmentController.findByEventId);
+router.get('/byEvent/:eventId', auth.requiresRole("fadmin"), CommitmentController.findByEventId);
 
 router.delete('/:commitmentId', auth.requiresRole("admin"), CommitmentController.delete);
 

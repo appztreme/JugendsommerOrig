@@ -142,7 +142,7 @@ app.controller('MyCommitmentsCtrl', function($scope, $location, $route, Notifica
 	};
 
 	if(IdentitySvc.isFAdmin() && !IdentitySvc.isAdmin()) {
-		CommitmentSvc.findByUser(IdentitySvc.currentUser._id).success(function(commitments) {
+		CommitmentSvc.findByEvent(IdentitySvc.currentUser.eventId).success(function(commitments) {
 			$scope.sum = Math.round(_.reduce(commitments, function(sum, object) {
 				return sum + object.amount;
 			}, 0) * 100) / 100;
