@@ -141,7 +141,7 @@
         <td align="center"></td>
         <td align="center"></td>
 				<td>{{com.userId.lastName}}</td>
-				<td></td>
+                <td align="center" ng-class='{"bg-success": com.isCleared, "bg-danger": !com.isCleared}'><input ng-show='iSvc.isAuthorized("admin")' type='checkbox' ng-model='com.isCleared' ng-change='updateIsCleared(com._id, com.isCleared)' style='margin-right:8px' />{{formatBool(com.isCleared)}}</td>
 			</tr>
 			<!-- FOOTER TRAVEL -->
 			<tr>
