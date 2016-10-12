@@ -5,7 +5,7 @@ const EventController = require('./../controller/eventCtrl');
 
 router.get('/', EventController.findByCurrentYear);
 
-router.get('/:type', EventController.findByCurrentYearAndType);
+router.get('/type/:type', EventController.findByCurrentYearAndType);
 
 router.get('/asAdmin', auth.requiresRole("admin"), EventController.findByCurrentYearAdmin);
 

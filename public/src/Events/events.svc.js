@@ -18,7 +18,7 @@ app.service('EventsSvc', function($http) {
 	};
 
 	this.findByType = function(type) {
-		return $http.get(EVENT_SVC_PATH + type);
+		return $http.get(EVENT_SVC_PATH + 'type/' + type);
 	}
 
 	this.findAsAdmin = function() {
