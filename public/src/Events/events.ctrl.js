@@ -14,16 +14,15 @@ app.controller('EventsCtrl', function($scope, $location, EventsSvc, IdentitySvc)
 		});
 	} else {
 		var loc = $location.search();
-		console.log("type",loc);
-		if(loc.type) {
-			console.log("type query path");
-			EventsSvc.findByType(loc.type).success(function(evs) {
+		var filter = EventsSvc.getUpdatedFilter(loc.type);
+		//console.log("type",filter);
+		if(filter) {
+			EventsSvc.findByType(filter).success(function(evs) {
 				$scope.events = evs;
 			});
 		}
 		else
 			EventsSvc.find().success(function(evs) {
-				console.log("found events", evs);
 				$scope.events = evs;
 			});
 	}
