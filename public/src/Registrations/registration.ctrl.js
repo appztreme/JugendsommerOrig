@@ -6,6 +6,16 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 
 	$scope.busyPromise = RegistrationSvc.create();
 
+	RegistrationSvc.getEventType($routeParams.activityId)
+		.error(function(err) {
+			$scope.type = 'summer';
+			console.log($scope.type);
+		})
+		.success(function(activity) {
+			$scope.type = activity.eventId.type;
+			console.log($scope.type);
+		})
+
 	$scope.isRegistrationAllowed = function() {
 		return $scope.registrationForm.$valid && $scope.acceptAGB;
 	};

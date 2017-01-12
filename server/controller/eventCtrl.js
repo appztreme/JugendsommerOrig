@@ -1,18 +1,29 @@
 'use strict';
 const Event = require('./../models/event');
+const Activity = require('./../models/activity');
 const curYear = new Date().getFullYear();
 const startCurYear = new Date(curYear+"-1-1");
 
 exports.findByCurrentYear = (req, res, next) => {
 	Event.find()
 		.where('startDate').gte(startCurYear)
-		.where('isInternal').equals(false)	
+		.where('isInternal').equals(false)
 		.sort({ location: 1, startDate: 1 })
 	  .exec(function(err, ev) {
 			if(err) { return next(err); }
 			res.json(ev);
 	});
 };
+
+exports.getTypeByActivity = (req, res, next) => {
+	Activity.findById(req.params.activityId)
+		.populate('eventId', '_id type')
+		.select('eventId')
+		.exec(function(err, type) {
+			if(err) { return next(err); }
+			res.json(type);
+		});
+}
 
 exports.findByCurrentYearAndType = (req, res, next) => {
 	Event.find()

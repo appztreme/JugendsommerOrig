@@ -7,6 +7,8 @@ router.get('/', EventController.findByCurrentYear);
 
 router.get('/type/:type', EventController.findByCurrentYearAndType);
 
+router.get('/typeByActivity/:activityId', EventController.getTypeByActivity);
+
 router.get('/asAdmin', auth.requiresRole("admin"), EventController.findByCurrentYearAdmin);
 
 router.get('/:eventId', EventController.findByEventId);

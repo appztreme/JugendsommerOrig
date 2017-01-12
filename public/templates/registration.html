@@ -4,7 +4,8 @@
 <form name='registrationForm' class='form-horizontal' novalidate ng-submit='save()'>
 	<div cg-Busy='{promise:busyPromise,message:"Loading",backdrop:true,minDuration:500}'></div>
 
-	<div class='text-orange'><strong>Angaben Eltern:</strong></div>
+	<div ng-show='type === "summer" || type === "music"' class='text-orange'><strong>Angaben Eltern:</strong></div>
+	<div ng-show='type === "spiritnight"' class='text-orange'><strong>Angaben Begleitperson:</strong></div>
 	<!-- FIRSTNAMEPARENT -->
 	<div class='form-group' ng-class='{ "has-error": registrationForm.firstNameParent.$invalid }'>
 	    <label for='firstNameParent' class='control-label col-sm-2'>Vorname</label>
@@ -33,7 +34,8 @@
 			<input name='emailParent' type='email' ng-model='emailParent' required maxlength='200' class='form-control'></input>
 		</div>
 	</div>
-	<div class='text-orange'><strong>Angaben zum Kind:</strong></div>
+	<div ng-show='type === "summer" || type === "music"' class='text-orange'><strong>Angaben zum Kind:</strong></div>
+	<div ng-show='type === "spiritnight"' class='text-orange'><strong>Angaben zum Firmling:</strong></div>
 	<!-- FIRSTNAMECHILD -->
 	<div class='form-group' ng-class='{ "has-error": registrationForm.firstNameChild.$invalid }'>
 	    <label for='firstNameChild' class='control-label col-sm-2'>Vorname</label>
@@ -71,10 +73,10 @@
 			<textarea name='healthChild' ng-model='healthChild' rows='3' maxlength='350' class='form-control'></textarea>
 		</div>
 	</div>
-	<div class="panel panel-default">
+	<div ng-show='type === "music"' class="panel panel-default">
 	<!-- JUNGBLÄSERWOCHE -->
-  <div class="panel-heading text-orange"><strong>Auszufüllen nur bei Anmeldung für die Tschögglberger Jungbläserwochen</strong></div>
-  <div class="panel-body">
+  <div ng-show='type == "music"' class="panel-heading text-orange"><strong>Auszufüllen nur bei Anmeldung für die Tschögglberger Jungbläserwochen</strong></div>
+  <div ng-show='type == "music"' class="panel-body">
 		<div class='form-group' ng-class='{ "has-error": registrationForm.bandName.$invalid }'>
 			<label for='bandName' class='control-label col-sm-2'>Musikkapelle</label>
 			<div class='col-sm-10'>
@@ -95,9 +97,9 @@
 		</div>
   </div>
 </div>
-	<div class='text-orange'><strong>Notfallkontakte:</strong></div>
+	<div ng-show='type === "summer" || type === "music"' class='text-orange'><strong>Notfallkontakte:</strong></div>
 	<!-- NAMECONTACT1 TELCONTACT1 -->
-	<div class='form-group'>
+	<div ng-show='type === "summer" || type === "music"' class='form-group'>
 		<label for='nameContact1' class='control-label col-sm-2'>Name1</label>
 		<div class='col-sm-4'>
 			<input name='nameContact1' type='text' maxlength='250' ng-model='nameContact1' class='form-control'></input>
@@ -108,7 +110,7 @@
 		</div>
 	</div>
 	<!-- NAMECONTACT2 TELCONTACT2 -->
-	<div class='form-group'>
+	<div ng-show='type === "summer" || type === "music"' class='form-group'>
 		<label for='nameContact2' class='control-label col-sm-2'>Name2</label>
 		<div class='col-sm-4'>
 			<input name='nameContact2' type='text' maxlength='250' ng-model='nameContact2' class='form-control'></input>
