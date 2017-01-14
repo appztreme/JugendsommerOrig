@@ -14,6 +14,7 @@ app.controller('CommitmentEditCtrl', function($scope, $routeParams, $location, I
 				amount: $scope.amount,
 				userId: $scope.userId,
 				eventId: $scope.eventId,
+				activityId: $scope.activityId,
 				isPaymentDone: $scope.isPaymentDone,
 				isPaymentJDDone: $scope.isPaymentJDDone,
 				isInvoice: $scope.isInvoice,
@@ -42,6 +43,7 @@ app.controller('CommitmentEditCtrl', function($scope, $routeParams, $location, I
 		$scope.type = com.type;
 		$scope.amount = com.amount;
 		$scope.eventId = com.eventId;
+		$scope.activityId = com.activityId;
 		$scope.userId = com.userId;
 		$scope.date = new Date(com.date);
 		$scope.isPaymentDone = com.isPaymentDone;

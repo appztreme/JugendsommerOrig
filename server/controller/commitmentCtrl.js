@@ -58,6 +58,7 @@ exports.create = (req, res, next) => {
 		type: req.body.type,
 		amount: req.body.amount,
 		eventId: req.body.eventId,
+		activityId: req.body.activityId,
 		userId: req.body.userId,
 		isPaymentDone: req.body.isPaymentDone,
 		isPaymentJDDone: req.body.isPaymentJDDone,
@@ -79,6 +80,7 @@ exports.update = (req, res, next) => {
 		com.type = req.body.type;
 		com.amount = req.body.amount;
 		com.eventId = req.body.eventId;
+		com.activityId = req.body.activityId;
 		//com.userId = req.body.userId; // do not change initial user
 		com.isPaymentDone = req.body.isPaymentDone;
 		com.isPaymentJDDone = req.body.isPaymentJDDone;

@@ -9,6 +9,7 @@ app.controller('CommitmentNewCtrl', function($scope, $routeParams, $location, No
 	$scope.isPaymentJDDone = false;
 	$scope.isInvoice = false;
 	$scope.isCleared = false;
+	$scope.activityId = null;
 
 	$scope.save = function() {
 		if($scope.name && $scope.amount && $scope.date) {
@@ -20,6 +21,7 @@ app.controller('CommitmentNewCtrl', function($scope, $routeParams, $location, No
 				amount: $scope.amount,
 				userId: IdentitySvc.currentUser._id,
 				eventId: $routeParams.eventId,
+				activityId: $scope.activityId,
 				isPaymentDone: $scope.isPaymentDone,
 				isPaymentJDDone: $scope.isPaymentJDDone,
 				isInvoice: $scope.isInvoice,
