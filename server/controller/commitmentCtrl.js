@@ -1,6 +1,7 @@
 'use strict';
 const Commitment = require('./../models/commitment');
 const Event = require('./../models/event');
+const Activity = require('./../models/activity');
 
 const curYear = new Date().getFullYear();
 const startCurYear = new Date(curYear + "-1-1");
@@ -115,12 +116,24 @@ exports.getSelectableEvents = (req, res, next) => {
 		Event.find()
 			.where('startDate').gte(startCurYear)
 			.select('_id location name')
-      .sort({'eventId.location': 1})
+      		.sort({'eventId.location': 1})
 			.exec(function(err, evs) {
 				if(err) { return next(err); }
 				res.json(evs);
 			});
 };
+
+exports.getSelectableActivities = (req, res, next) => {
+		Activity.find()
+			.where('eventId').equals(req.params.eventId)
+			.select('_id name')
+			.sort({'startDate': 1})
+			.exec(function(err, acts) {
+				// console.log("xxx", err, acts);
+				if(err) { return next(err); }
+				res.json(acts);
+			});
+}
 
 exports.getSummary = (req, res, next) => {
 		Commitment.aggregate([

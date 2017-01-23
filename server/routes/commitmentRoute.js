@@ -7,6 +7,8 @@ router.get('/', auth.requiresRole("admin"), CommitmentController.find);
 
 router.get('/selectableEvents', CommitmentController.getSelectableEvents);
 
+router.get('/selectableActivities/:eventId', CommitmentController.getSelectableActivities);
+
 router.get('/summary', auth.requiresRole("admin"), CommitmentController.getSummary);
 
 router.get('/:commitmentId', auth.requiresRole("fadmin"), CommitmentController.findById);

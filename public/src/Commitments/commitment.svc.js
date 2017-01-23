@@ -17,6 +17,10 @@ app.service('CommitmentSvc', function($http) {
 		return $http.get('/api/commitments/selectableEvents');
 	};
 
+	this.getActivities = function(eventId) {
+		return $http.get('/api/commitments/selectableActivities/' + eventId);
+	}
+
 	this.getAdminSummary = function() {
 		return $http.get('/api/commitments/summary');
 	};

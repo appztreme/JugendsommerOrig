@@ -11,6 +11,12 @@ app.controller('CommitmentNewCtrl', function($scope, $routeParams, $location, No
 	$scope.isCleared = false;
 	$scope.activityId = null;
 
+	CommitmentSvc.getActivities($routeParams.eventId)
+		.success(function(activities) {
+			console.log("activity sel:", activities);
+			$scope.activities = activities;
+		});
+
 	$scope.save = function() {
 		if($scope.name && $scope.amount && $scope.date) {
 			CommitmentSvc.create({

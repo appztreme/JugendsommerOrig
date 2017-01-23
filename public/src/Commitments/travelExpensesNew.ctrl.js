@@ -3,10 +3,10 @@ var app = angular.module('js');
 app.controller('TravelExpensesNewCtrl', function($scope, $routeParams, $location, NotificationSvc, IdentitySvc, CommitmentSvc) {
 	$scope.title = 'Fahrtkostenabrechnung';
 	//Default values
-  $scope.kilometers = 0;
-  $scope.subsidyRate = 0.15;
+  	$scope.kilometers = 0;
+  	$scope.subsidyRate = 0.15;
 	$scope.amount = 0;
-  $scope.type = 'travel';
+  	$scope.type = 'travel';
 	$scope.isPaymentDone = false;
 	$scope.isPaymentJDDone = false;
 	$scope.isInvoice = false;

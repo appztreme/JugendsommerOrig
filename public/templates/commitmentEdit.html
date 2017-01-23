@@ -26,6 +26,17 @@
 		</p>
 		</div>
 	</div>
+	<!-- ACTIVITY -->
+	<div class='form-group' ng-class='{ "has-error": comForm.activityId.$invalid }'>
+		<label for='activityId' class='control-label col-sm-2'>Woche</label>
+		<div class='col-sm-10'>
+			<p class='input-group'>
+				<select name='activityId' class='sel-base form-control' ng-model='activityId'>
+					<option ng-repeat='activity in activities' value='{{activity._id}}'>{{activity.name}}</option>
+				</select>
+			</p>
+		</div>
+	</div>
 	<!-- TYPE -->
 	<div class='form-group' ng-class='{ "has-error": comForm.type.$invalid }' ng-show='iSvc.isAuthorized("admin")'>
 		<label for='type' class='control-label col-sm-2'>Typ</label>
