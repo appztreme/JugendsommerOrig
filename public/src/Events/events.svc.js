@@ -6,23 +6,20 @@ var app = angular.module('js');
 app.service('EventsSvc', function($http) {
 	var EVENT_SVC_PATH = '/api/events/';
 
-	var filter = undefined;
-
-	this.getUpdatedFilter = function(f) {
-		if(f) { filter = f; }
-		return filter;
-	};
-
 	this.find = function() {
 		return $http.get(EVENT_SVC_PATH);
 	};
+
+	this.findByLocation = function(loc) {
+		return $http.get(EVENT_SVC_PATH + 'location/' + loc);
+	}
 
 	this.findByType = function(type) {
 		return $http.get(EVENT_SVC_PATH + 'type/' + type);
 	}
 
-	this.findAsAdmin = function() {
-		return $http.get(EVENT_SVC_PATH + 'asAdmin');
+	this.findAsAdmin = function(loc) {
+		return $http.get(EVENT_SVC_PATH + 'asAdmin/location/' + loc);
 	}
 
 	this.findById = function(eventId) {

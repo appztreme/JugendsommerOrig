@@ -5,11 +5,15 @@ const EventController = require('./../controller/eventCtrl');
 
 router.get('/', EventController.findByCurrentYear);
 
+router.get('/selection', EventController.getGeoSelection);
+
+router.get('/location/:location', EventController.findByCurrentYearAndLocation);
+
 router.get('/type/:type', EventController.findByCurrentYearAndType);
 
 router.get('/typeByActivity/:activityId', EventController.getTypeByActivity);
 
-router.get('/asAdmin', auth.requiresRole("admin"), EventController.findByCurrentYearAdmin);
+router.get('/asAdmin/location/:location', auth.requiresRole("admin"), EventController.findByCurrentYearAndLocationAdmin);
 
 router.get('/:eventId', EventController.findByEventId);
 

@@ -19,6 +19,29 @@
 	color: orange;
 }
 
+.invisible-link:hover {
+    text-decoration: none;
+}
+.invisible-link {
+    color: white !important;
+}
+
+.bg-darkorange {
+    background-color: orange;
+}
+
+.card-orange {
+    width:250px;
+    float:left;
+    margin-right:10px;
+    margin-top:10px;
+    padding: 15px;
+    background-color: rgba(255,165,0,.80);
+    color: white;
+    border-right:3px solid orange;
+    border-bottom:3px solid orange;
+}
+
 .navbar-brand {
 	margin-bottom: 10px;
 }

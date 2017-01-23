@@ -1,0 +1,24 @@
+<div class='container'>
+<h2 class='text-orange'>{{title}}</h2>
+
+<div ng-repeat='loc in locations'>
+    <div class='card-orange'>
+        <a class='invisible-link' href='#/events/{{loc._id}}'>
+        <div class='panel-header'>
+                <h3><strong>{{loc._id}}</strong>
+                <h5>Programme: <span class='badge bg-darkorange'>{{loc.countEvents}}</span></h5></h3>
+                <hr />
+        </div>
+        <div class='panel-body'>
+            <div ng-repeat='t in loc.distinctTypes'>
+                <span ng-show='t === "summer"' class='glyphicon glyphicon-certificate pull-left' style='font-size:25px;margin-right:10px'></span>
+                <span ng-show='t === "music"' class='glyphicon glyphicon-music pull-left' style='font-size:25px;margin-right:10px'></span>
+                <span ng-show='t === "spiritnight"' class='glyphicon glyphicon-education pull-left' style='font-size:25px;margin-right:10px'></span>
+                <span ng-show='t === "club"' class='glyphicon glyphicon-home pull-left' style='font-size:25px;margin-right:10px'></span>
+            </div>
+        </div>
+        </a>
+    </div>
+</div>
+
+</div>

@@ -15,6 +15,23 @@ exports.findByCurrentYear = (req, res, next) => {
 	});
 };
 
+exports.getGeoSelection = (req, res, next) => {
+	Event.aggregate([
+		{ $match:
+			{ $and: [ {startDate: { $gte: startCurYear }}, {isInternal: false} ] }
+		},
+		{ $group:
+			{ _id: "$location",
+			  countEvents: { $sum: 1 },
+			  distinctTypes: { $addToSet: "$type"}
+		    }
+		},
+		{ $sort: {_id: 1}}
+	], function(er, result) {
+		return res.json(result);
+	});
+}
+
 exports.getTypeByActivity = (req, res, next) => {
 	Activity.findById(req.params.activityId)
 		.populate('eventId', '_id type')
@@ -25,6 +42,29 @@ exports.getTypeByActivity = (req, res, next) => {
 		});
 }
 
+exports.findByCurrentYearAndLocation = (req, res, next) => {
+	Event.find()
+		.where('startDate').gte(startCurYear)
+		.where('isInternal').equals(false)
+		.where('location').equals(req.params.location)
+		.sort({ startDate: 1 })
+	.exec(function(err, ev) {
+		if(err) { return next(err); }
+		res.json(ev);
+	});
+}
+
+exports.findByCurrentYearAndLocationAdmin = (req, res, next) => {
+	Event.find()
+		.where('startDate').gte(startCurYear)
+		.where('location').equals(req.params.location)
+		.sort({ startDate: 1 })
+	  .exec(function(err, ev) {
+			if(err) { return next(err); }
+			res.json(ev);
+	});
+};
+
 exports.findByCurrentYearAndType = (req, res, next) => {
 	Event.find()
 		.where('startDate').gte(startCurYear)
@@ -34,16 +74,6 @@ exports.findByCurrentYearAndType = (req, res, next) => {
 	.exec(function(err, ev) {
 		if(err) { return next(err); }
 		res.json(ev);
-	});
-};
-
-exports.findByCurrentYearAdmin = (req, res, next) => {
-	Event.find()
-		.where('startDate').gte(startCurYear)
-		.sort({ location: 1, startDate: 1 })
-	  .exec(function(err, ev) {
-			if(err) { return next(err); }
-			res.json(ev);
 	});
 };
 

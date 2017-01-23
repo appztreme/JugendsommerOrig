@@ -3,6 +3,10 @@ var app = angular.module('js');
 app.config(function($routeProvider) {
 	$routeProvider
 		.when('/', {
+			controller: 'GeoSelectionCtrl',
+			templateUrl: '../templates/selection.html'
+		})
+		.when('/events/:location', {
 			controller: 'EventsCtrl',
 			templateUrl: '../templates/events.html'
 		})
