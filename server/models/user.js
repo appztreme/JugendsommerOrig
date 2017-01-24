@@ -5,12 +5,12 @@ var crypto = require('crypto');
 var userSchema = db.Schema({
 		firstName: { type: String, required: true },
 		lastName: { type: String, required: true },
-    userTel: { type: String, required: true },
+    	userTel: { type: String, required: true },
 		userEmail: { type: String, required: true },
 		userName: { type: String, required: true },
-    hashedPassword: { type: String, required: true },
-    salt: { type: String },
-    roles: [String],
+    	hashedPassword: { type: String, required: true },
+    	salt: { type: String },
+    	roles: [String],
 		eventId: { type: mongoose.Schema.Types.ObjectId, ref: 'Event', required: false },
 });
 
