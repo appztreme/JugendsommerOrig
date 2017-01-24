@@ -4,7 +4,7 @@
 <form name='registrationForm' class='form-horizontal' novalidate ng-submit='save()'>
 	<div cg-Busy='{promise:busyPromise,message:"Loading",backdrop:true,minDuration:500}'></div>
 
-	<div ng-show='type === "summer" || type === "music"' class='text-orange'><strong>Angaben Eltern:</strong></div>
+	<div ng-show='type === "summer" || type === "music" || type === "club"' class='text-orange'><strong>Angaben Eltern:</strong></div>
 	<div ng-show='type === "spiritnight"' class='text-orange'><strong>Angaben Begleitperson:</strong></div>
 	<!-- FIRSTNAMEPARENT -->
 	<div class='form-group' ng-class='{ "has-error": registrationForm.firstNameParent.$invalid }'>
@@ -34,7 +34,7 @@
 			<input name='emailParent' type='email' ng-model='emailParent' required maxlength='200' class='form-control'></input>
 		</div>
 	</div>
-	<div ng-show='type === "summer" || type === "music"' class='text-orange'><strong>Angaben zum Kind:</strong></div>
+	<div ng-show='type === "summer" || type === "music" || type === "club"' class='text-orange'><strong>Angaben zum Kind:</strong></div>
 	<div ng-show='type === "spiritnight"' class='text-orange'><strong>Angaben zum Firmling:</strong></div>
 	<!-- FIRSTNAMECHILD -->
 	<div class='form-group' ng-class='{ "has-error": registrationForm.firstNameChild.$invalid }'>
@@ -71,6 +71,22 @@
 		<label for='healthChild' class='control-label col-sm-2'>Gesundheitliche Probleme</label>
 		<div class='col-sm-10'>
 			<textarea name='healthChild' ng-model='healthChild' rows='3' maxlength='350' class='form-control'></textarea>
+		</div>
+	</div>
+	<!-- ADDRESSCHILD -->
+	<div class='form-group' ng-class='{ "has-error": registrationForm.addressChild.$invalid }'>
+		<label for='addressChild' class='control-label col-sm-2'>Adresse</label>
+		<div class='col-sm-10'>
+			<input name='addressChild' type='text' ng-model='addressChild' required maxlength='100' class='form-control'></input>
+		</div>
+	</div>
+	<!-- CITYCHILD -->
+	<div class='form-group' ng-class='{ "has-error": registrationForm.cityChild.$invalid }'>
+		<label for='cityChild' class='control-label col-sm-2'>Wohnort</label>
+		<div class='col-sm-10'>
+			<select name='cityChild' class='sel-base form-control' ng-model='cityChild'>
+				<option ng-repeat="city in cities" value='{{city}}'>{{city}}</option>
+			</select>
 		</div>
 	</div>
 	<div ng-show='type === "music"' class="panel panel-default">

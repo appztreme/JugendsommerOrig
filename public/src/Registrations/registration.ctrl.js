@@ -6,6 +6,11 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 
 	$scope.busyPromise = RegistrationSvc.create();
 
+	RegistrationSvc.getCities()
+		.success(function(cities) {
+			$scope.cities = cities;
+		});
+
 	RegistrationSvc.getEventType($routeParams.activityId)
 		.error(function(err) {
 			$scope.type = 'summer';
@@ -14,7 +19,7 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 		.success(function(activity) {
 			$scope.type = activity.eventId.type;
 			console.log($scope.type);
-		})
+		});
 
 	$scope.isRegistrationAllowed = function() {
 		return $scope.registrationForm.$valid && $scope.acceptAGB;
@@ -35,6 +40,8 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 			$scope.birthdayChild = $filter('date')(new Date(RegistrationCacheSvc.lastRegistration.birthdayChild), 'yyyy-MM-dd');
 			$scope.schoolChild = RegistrationCacheSvc.lastRegistration.schoolChild;
 			$scope.healthChild = RegistrationCacheSvc.lastRegistration.healthChild;
+			$scope.addressChild = RegistrationCacheSvc.lastRegistration.addressChild;
+			$scope.cityChild = RegistrationCacheSvc.lastRegistration.cityChild;
 			$scope.bandName = RegistrationCacheSvc.lastRegistration.bandName;
 			$scope.instrument = RegistrationCacheSvc.lastRegistration.instrument;
 			$scope.instrumentYears = RegistrationCacheSvc.lastRegistration.instrumentYears;
@@ -57,6 +64,8 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 				birthdayChild: $scope.birthdayChild,
 				schoolChild: $scope.schoolChild,
 				healthChild: $scope.healthChild,
+				addressChild: $scope.addressChild,
+				cityChild: $scope.cityChild,
 				bandName: $scope.bandName,
 				instrument: $scope.instrument,
 				instrumentYears: $scope.instrumentYears,
@@ -82,6 +91,7 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 				$scope.birthdayChild = null;
 				$scope.schoolChild = null;
 				$scope.healthChild = null;
+				$scope.addressChild = null;
 				$scope.bandName = null;
 				$scope.instrument = null;
 				$scope.instrumentYears = null;
@@ -112,6 +122,8 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 		RegistrationCacheSvc.currentRegistration.birthdayChild = $scope.birthdayChild;
 		RegistrationCacheSvc.currentRegistration.schoolChild = $scope.schoolChild;
 		RegistrationCacheSvc.currentRegistration.healthChild = $scope.healthChild;
+		RegistrationCacheSvc.currentRegistration.addressChild = $scope.addressChild;
+		RegistrationCacheSvc.currentRegistration.cityChild = $scope.cityChild;
 		RegistrationCacheSvc.currentRegistration.bandName = $scope.bandName;
 		RegistrationCacheSvc.currentRegistration.instrument = $scope.instrument;
 		RegistrationCacheSvc.currentRegistration.instrumentYears = $scope.instrumentYears;
@@ -133,6 +145,8 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 		}
 		$scope.schoolChild = RegistrationCacheSvc.currentRegistration.schoolChild;
 		$scope.healthChild = RegistrationCacheSvc.currentRegistration.healthChild;
+		$scope.addressChild = RegistrationCacheSvc.currentRegistration.addressChild;
+		$scope.cityChild = RegistrationCacheSvc.currentRegistration.cityChild;
 		$scope.bandName = RegistrationCacheSvc.currentRegistration.bandName;
 		$scope.instrument = RegistrationCacheSvc.currentRegistration.instrument;
 		$scope.instrumentYears = RegistrationCacheSvc.currentRegistration.instrumentYears;

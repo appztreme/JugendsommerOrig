@@ -12,6 +12,10 @@ app.service('RegistrationSvc', function($http) {
 		return $http.get(path);
 	};
 
+	this.getCities = function() {
+		return $http.get('/api/locations/cities');
+	}
+
 	this.getEventType = function(activityId) {
 		return $http.get('/api/events/typeByActivity/' + activityId);
 	};

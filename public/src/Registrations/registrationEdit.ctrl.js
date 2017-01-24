@@ -4,6 +4,11 @@ app.controller('RegistrationEditCtrl', function($scope, $filter, $routeParams, $
 
 	$scope.busyPromise = RegistrationSvc.findById();
 
+	RegistrationSvc.getCities()
+		.success(function(cities) {
+			$scope.cities = cities;
+		});
+
 	$scope.save = function() {
 		if($scope.registrationForm.$valid) {
 			$scope.registration.firstNameParent = $scope.firstNameParent;
@@ -15,6 +20,8 @@ app.controller('RegistrationEditCtrl', function($scope, $filter, $routeParams, $
 			$scope.registration.birthdayChild = $scope.birthdayChild;
 			$scope.registration.schoolChild = $scope.schoolChild;
 			$scope.registration.healthChild = $scope.healthChild;
+			$scope.registration.addressChild = $scope.addressChild;
+			$scope.registration.cityChild = $scope.cityChild;
 			$scope.registration.bandName = $scope.bandName;
 			$scope.registration.instrument = $scope.instrument;
 			$scope.registration.instrumentYears = $scope.instrumentYears;
@@ -37,6 +44,7 @@ app.controller('RegistrationEditCtrl', function($scope, $filter, $routeParams, $
 				$scope.birthdayChild = null;
 				$scope.schoolChild = null;
 				$scope.healthChild = null;
+				$scope.addressChild = null;
 				$scope.bandName = null;
 				$scope.instrument = null;
 				$scope.instrumentYears = null;
@@ -66,6 +74,8 @@ app.controller('RegistrationEditCtrl', function($scope, $filter, $routeParams, $
 		$scope.birthdayChild = $filter('date')(new Date(registration.birthdayChild), 'yyyy-MM-dd');
 		$scope.schoolChild = registration.schoolChild;
 		$scope.healthChild = registration.healthChild;
+		$scope.addressChild = registration.addressChild;
+		$scope.cityChild = registration.cityChild;
 		$scope.bandName = registration.bandName;
 		$scope.instrument = registration.instrument;
 		$scope.instrumentYears = registration.instrumentYears;
