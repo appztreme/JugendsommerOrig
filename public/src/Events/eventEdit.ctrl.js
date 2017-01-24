@@ -27,6 +27,10 @@ app.controller('EventEditCtrl', function($scope, $routeParams, $location, Notifi
 		}
 	};
 
+	EventsSvc.getLocations().success(function(locs) {
+		$scope.locations = locs;
+	});
+
 	EventsSvc.findById($routeParams.eventId).success(function(ev) {
 		$scope.event = ev;
 		$scope.name = ev.name;

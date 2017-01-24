@@ -6,6 +6,10 @@ var app = angular.module('js');
 app.service('EventsSvc', function($http) {
 	var EVENT_SVC_PATH = '/api/events/';
 
+	this.getLocations = function() {
+		return $http.get('/api/locations/events');
+	}
+
 	this.find = function() {
 		return $http.get(EVENT_SVC_PATH);
 	};

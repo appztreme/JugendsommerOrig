@@ -5,6 +5,10 @@ app.controller('EventNewCtrl', function($scope, $location, EventsSvc, Notificati
 	// default values
 	$scope.isInternal = false;
 
+	EventsSvc.getLocations().success(function(locs) {
+		$scope.locations = locs;
+	});
+
 	$scope.save = function() {
 		if($scope.eventForm.$valid) {
 			EventsSvc.create({
