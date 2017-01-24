@@ -59,11 +59,14 @@
 			<th>Woche</th>
 			<th>Vorname</th>
 			<th>Nachname</th>
+			<th>FrühBetreuung</th>
 			<th>Einzahlung</th>
 			<th>Benachrichtigt</th>
 			<th>Geburtstag</th>
 			<th>Schulstufe</th>
 			<th>Gesundheit</th>
+			<th>Adresse</th>
+			<th>Ort</th>
 			<th>Vorname Eltern</th>
 			<th>Nachname Eltern</th>
 			<th>Email Eltern</th>
@@ -82,11 +85,14 @@
 			<td>{{reg.activityId.name}}</td>
 			<td>{{reg.firstNameChild}}</td>
 			<td>{{reg.lastNameChild}}</td>
+			<td>{{formatBool(reg.needsPreCare)}}</td>
 			<td ng-class='{"bg-success": reg.isPaymentDone, "bg-danger": !reg.isPaymentDone}'><input type='checkbox' ng-model='reg.isPaymentDone' ng-change='updateIsPaymentDone(reg._id, reg.isPaymentDone)' style='margin-right:8px' />{{formatBool(reg.isPaymentDone)}}</td>
 			<td ng-class='{"bg-success": reg.isEmailNotified, "bg-danger": !reg.isEmailNotified}'><input type='checkbox' ng-model='reg.isEmailNotified' ng-change='updateIsEmailNotified(reg._id, reg.isEmailNotified)' style='margin-right:8px' />{{formatBool(reg.isEmailNotified)}}</td>
 			<td>{{reg.birthdayChild | date: 'dd/MM/yyyy'}}</td>
 			<td>{{reg.schoolChild}}</td>
 			<td>{{reg.healthChild}}</td>
+			<td>{{reg.addressChild}}</td>
+			<td>{{reg.cityChild}}</td>
 			<td>{{reg.firstNameParent}}</td>
 			<td>{{reg.lastNameParent}}</td>
 			<td><a href='mailto:{{reg.emailParent}}'>{{reg.emailParent}}</a></td>

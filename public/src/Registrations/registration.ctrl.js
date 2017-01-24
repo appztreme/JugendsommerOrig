@@ -49,6 +49,7 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 			$scope.telContact1 = RegistrationCacheSvc.lastRegistration.telContact1;
 			$scope.nameContact2 = RegistrationCacheSvc.lastRegistration.nameContact2;
 			$scope.telContact2 =  RegistrationCacheSvc.lastRegistration.telContact2;
+			$scope.needsPreCare = RegistrationCacheSvc.lastRegistration.needsPreCare;
 		}
 	};
 
@@ -74,7 +75,8 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 				nameContact2: $scope.nameContact2,
 				telContact2: $scope.telContact2,
 				activityId: RegistrationSvc.activityId,
-				userId: IdentitySvc.currentUser._id
+				userId: IdentitySvc.currentUser._id,
+				needsPreCare: $scope.needsPreCare
 			})
 			.error(function(err) {
 				if(err.indexOf('duplicate key error index') > -1) {
@@ -99,6 +101,7 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 				$scope.telContact1 = null;
 				$scope.nameContact2 = null;
 				$scope.telContact2 = null;
+				$scope.needsPreCare = false
 				RegistrationCacheSvc.lastRegistration = reg;
 			}).then(function() {
 				NotificationSvc.notify('Anmeldung erfolgreich gespeichert');
@@ -131,6 +134,7 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 		RegistrationCacheSvc.currentRegistration.telContact1 = $scope.telContact1;
 		RegistrationCacheSvc.currentRegistration.nameContact2 = $scope.nameContact2;
 		RegistrationCacheSvc.currentRegistration.telContact2 =  $scope.telContact2;
+		RegistrationCacheSvc.currentRegistration.needsPreCare = $scope.needsPreCare;
 	};
 
 	if(RegistrationCacheSvc.hasCurrentRegistration()) {
@@ -154,6 +158,7 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 		$scope.telContact1 = RegistrationCacheSvc.currentRegistration.telContact1;
 		$scope.nameContact2 = RegistrationCacheSvc.currentRegistration.nameContact2;
 		$scope.telContact2 =  RegistrationCacheSvc.currentRegistration.telContact2;
+		$scope.needsPreCare = RegistrationCacheSvc.currentRegistration.needsPreCare;
 		RegistrationCacheSvc.currentRegistration = undefined;
 	}
 });

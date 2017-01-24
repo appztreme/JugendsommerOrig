@@ -7,13 +7,22 @@ var htmlEnd = " f&uuml;r die Sommerprogramme des Jugenddienstes Bozen Land war e
 var txtStart = "Die Anmeldung für ";
 var txtEnd = " für die Sommerprogramme des Jugenddienstes Bozen Land war erfolgreich. Einzahlungsschein wird demnächst mittels email zugesandt.";
 
+function getTypeString(type) {
+	switch (type) {
+		case 'summer': return 'Jugendsommer'; break;
+		case 'music': return 'Musikwoche'; break;
+		case 'spiritnight': return 'SpiritNight'; break;
+		case 'club': return 'Jugendraum'; break;
+		default: return 'Jugendsommer';
+	}
+}
 
-exports.sendTxtMail = function(recipient, firstNameChild, lastNameChild) {
+exports.sendTxtMail = function(recipient, firstNameChild, lastNameChild, type) {
 		server.send({
 		text: txtStart + firstNameChild + " " + lastNameChild + txtEnd,
 		from: "info@jugenddienst.com",
 		to: recipient,
-		subject: "Anmeldung Jugendsommer",
+		subject: "Anmeldung " + getTypeString(type),
 		attachments: { data: htmlStart + firstNameChild + " " + lastNameChild + htmlEnd,
 			       alternative: true }
 	}, function(err, message) {console.log(err||message); });

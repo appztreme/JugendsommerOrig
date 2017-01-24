@@ -122,7 +122,7 @@ exports.create = (req, res, next) => {
 	});
 	reg.save(function(err, regr) {
 		if(err) { return next(err); }
-		mail.sendTxtMail(regr.emailParent, regr.firstNameChild, regr.lastNameChild);
+		mail.sendTxtMail(regr.emailParent, regr.firstNameChild, regr.lastNameChild, regr.type);
 		res.status(201).json(regr);
 	});
 };

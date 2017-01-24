@@ -28,6 +28,7 @@ var registrationSchema = db.Schema({
   	registrationDate: { type: Date, required: false, default: Date.now },
   	isPaymentDone: { type: Boolean, required: true, default: false },
   	isEmailNotified: { type: Boolean, required: true, default: false },
+	needsPreCare: { type: Boolean, required: true, default: false },
   	userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: false }
 });
 

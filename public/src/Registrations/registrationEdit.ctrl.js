@@ -32,6 +32,7 @@ app.controller('RegistrationEditCtrl', function($scope, $filter, $routeParams, $
 			$scope.registration.activityId = $scope.activityId;
 			$scope.registration.isPaymentDone = $scope.isPaymentDone;
 			$scope.registration.isEmailNotified = $scope.isEmailNotified;
+			$scope.registration.needsPreCare = $scope.needsPreCare;
 
 			RegistrationSvc.update( $scope.registration
 			).success(function(reg) {
@@ -55,6 +56,7 @@ app.controller('RegistrationEditCtrl', function($scope, $filter, $routeParams, $
 				$scope.activityId = null;
 				$scope.isPaymentDone = false;
 				$scope.isEmailNotified = false;
+				$scope.needsPreCare = false;
 			})
 			.then(function() {
 				NotificationSvc.notify('Aenderungen erfolgreich gespeichert');
@@ -86,6 +88,7 @@ app.controller('RegistrationEditCtrl', function($scope, $filter, $routeParams, $
 		$scope.activityId = registration.activityId;
 		$scope.isPaymentDone = registration.isPaymentDone;
 		$scope.isEmailNotified = registration.isEmailNotified;
+		$scope.needsPreCare = registration.needsPreCare;
 
 		ActivitiesSvc.findAllSiblingsByActivityId(registration.activityId).success(function(activities) {
 			$scope.activities = activities;
