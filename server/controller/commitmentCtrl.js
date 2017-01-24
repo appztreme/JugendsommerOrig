@@ -43,6 +43,7 @@ exports.findByEventId = (req, res, next) => {
 		.where('date').gte(startCurYear)
 		.where('eventId').equals(req.params.eventId)
 		.populate('eventId')
+		.populate('activityId')
 		.populate('userId')
 		.sort({ eventId: 1, date: 1 })
 		.exec(function(err, coms) {
@@ -127,9 +128,8 @@ exports.getSelectableActivities = (req, res, next) => {
 		Activity.find()
 			.where('eventId').equals(req.params.eventId)
 			.select('_id name')
-			.sort({'startDate': 1})
+			.sort({'name': 1})
 			.exec(function(err, acts) {
-				// console.log("xxx", err, acts);
 				if(err) { return next(err); }
 				res.json(acts);
 			});
@@ -146,8 +146,8 @@ exports.getSummary = (req, res, next) => {
 						eventId: "$eventId",
 						type: "$type",
 						isPaymentDone: "$isPaymentDone",
-	          isInvoice: "$isInvoice",
-	          isCleared: "$isCleared",
+	          			isInvoice: "$isInvoice",
+	          			isCleared: "$isCleared",
 					},
 		 		sum: { $sum: "$amount" }
 				}

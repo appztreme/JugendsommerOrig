@@ -50,5 +50,10 @@ app.controller('CommitmentEditCtrl', function($scope, $routeParams, $location, I
 		$scope.isPaymentJDDone = com.isPaymentJDDone;
 		$scope.isInvoice = com.isInvoice;
 		$scope.isCleared = com.isCleared;
+
+		CommitmentSvc.getActivities(com.eventId)
+			.success(function(activities) {
+				$scope.activities = activities;
+			});
 	});
 });

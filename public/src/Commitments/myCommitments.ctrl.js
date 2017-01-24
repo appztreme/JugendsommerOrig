@@ -112,7 +112,7 @@ app.controller('MyCommitmentsCtrl', function($scope, $location, $route, Notifica
 			$scope.sum = Math.round(_.reduce(commitments, function(sum, object) {
 				return sum + object.amount;
 			}, 0) * 100) / 100;
-
+			console.log(commitments);
 			$scope.commitments = _.reduce(commitments, function(acc, com) {
 				var key1 = com.eventId._id;
 				var key2 = com.type;

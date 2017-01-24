@@ -13,7 +13,6 @@ app.controller('CommitmentNewCtrl', function($scope, $routeParams, $location, No
 
 	CommitmentSvc.getActivities($routeParams.eventId)
 		.success(function(activities) {
-			console.log("activity sel:", activities);
 			$scope.activities = activities;
 		});
 
