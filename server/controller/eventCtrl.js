@@ -32,6 +32,40 @@ exports.getGeoSelection = (req, res, next) => {
 	});
 }
 
+exports.getGeoSelectionSummer = (req, res, next) => {
+	Event.aggregate([
+		{ $match:
+			{ $and: [ {startDate: { $gte: startCurYear }}, {isInternal: false}, {type: { $in: ['summer', 'music']}} ] }
+		},
+		{ $group:
+			{ _id: "$location",
+			  countEvents: { $sum: 1 },
+			  distinctTypes: { $addToSet: "$type"}
+		    }
+		},
+		{ $sort: {_id: 1}}
+	], function(er, result) {
+		return res.json(result);
+	});
+}
+
+exports.getTypeSelection = (req, res, next) => {
+	Event.aggregate([
+		{ $match:
+			{ $and: [ {startDate: { $gte: startCurYear }}, {isInternal: false}, {type: { $nin: ['summer', 'music']}} ] }
+		},
+		{ $group:
+			{ _id: "$type",
+			  countEvents: { $sum: 1 },
+			  distinctTypes: { $addToSet: "$type"}
+		    }
+		},
+		{ $sort: {_id: 1}}
+	], function(er, result) {
+		return res.json(result);
+	});
+}
+
 exports.getTypeByActivity = (req, res, next) => {
 	Activity.findById(req.params.activityId)
 		.populate('eventId', '_id type')

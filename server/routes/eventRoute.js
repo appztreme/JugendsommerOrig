@@ -7,6 +7,10 @@ router.get('/', EventController.findByCurrentYear);
 
 router.get('/selection', EventController.getGeoSelection);
 
+router.get('/selection/summer', EventController.getGeoSelectionSummer);
+
+router.get('/selection/type', EventController.getTypeSelection);
+
 router.get('/location/:location', EventController.findByCurrentYearAndLocation);
 
 router.get('/type/:type', EventController.findByCurrentYearAndType);
