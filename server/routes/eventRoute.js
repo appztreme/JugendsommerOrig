@@ -19,6 +19,8 @@ router.get('/typeByActivity/:activityId', EventController.getTypeByActivity);
 
 router.get('/asAdmin/location/:location', auth.requiresRole("admin"), EventController.findByCurrentYearAndLocationAdmin);
 
+router.get('/asAdmin/type/:type', auth.requiresRole("admin"), EventController.findByCurrentYearAndTypeAdmin);
+
 router.get('/:eventId', EventController.findByEventId);
 
 router.post('/', auth.requiresRole("admin"), EventController.create);

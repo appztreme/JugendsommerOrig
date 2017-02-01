@@ -9,12 +9,26 @@ app.controller('EventsCtrl', function($scope, $routeParams, $location, EventsSvc
 
 	//onload section
 	if(IdentitySvc.isAdmin()) {
-		EventsSvc.findAsAdmin($routeParams.location).success(function(evs) {
-			$scope.events = evs;
-		});
-	} else {
-		EventsSvc.findByLocation($routeParams.location).success(function(evs) {
+		if(['club', 'spiritnight'].indexOf($routeParams.location) !== -1) {
+			EventsSvc.findByTypeAsAdmin($routeParams.location).success(function(evs) {
 				$scope.events = evs;
-		});
+			});
+		}
+		else {
+			EventsSvc.findByLocationAsAdmin($routeParams.location).success(function(evs) {
+				$scope.events = evs;
+			});
+		}
+	} else {
+		if(['club', 'spiritnight'].indexOf($routeParams.location) !== -1) {
+			EventsSvc.findByType($routeParams.location).success(function(evs) {
+				$scope.events = evs;
+			});
+		}
+		else {
+			EventsSvc.findByLocation($routeParams.location).success(function(evs) {
+					$scope.events = evs;
+			});
+		}
 	}
 });

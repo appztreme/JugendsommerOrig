@@ -111,6 +111,17 @@ exports.findByCurrentYearAndType = (req, res, next) => {
 	});
 };
 
+exports.findByCurrentYearAndTypeAdmin = (req, res, next) => {
+	Event.find()
+		.where('startDate').gte(startCurYear)
+		.where('type').equals(req.params.type)
+		.sort({ location: 1, startDate: 1 })
+	.exec(function(err, ev) {
+		if(err) { return next(err); }
+		res.json(ev);
+	});
+};
+
 exports.findByEventId = (req, res, next) => {
 	Event.findById(req.params.eventId, function(err, ev) {
 		if(err) { return next(err); }
