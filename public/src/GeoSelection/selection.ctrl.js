@@ -26,7 +26,7 @@ app.controller('GeoSelectionCtrl', function($scope, $location, GeoSvc) {
         });
     }
     else {
-        GeoSvc.getSummerSelection().success(function(sel) {
+        GeoSvc.getSelection().success(function(sel) {
             addNameProp(sel);
             $scope.locations = sel;
         });

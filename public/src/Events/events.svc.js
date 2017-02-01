@@ -22,12 +22,20 @@ app.service('EventsSvc', function($http) {
 		return $http.get(EVENT_SVC_PATH + 'type/' + type);
 	}
 
+	this.findBySummerLocation = function(loc) {
+		return $http.get(EVENT_SVC_PATH + 'location/summer/' + loc);
+	}
+
 	this.findByLocationAsAdmin = function(loc) {
 		return $http.get(EVENT_SVC_PATH + 'asAdmin/location/' + loc);
 	}
 
 	this.findByTypeAsAdmin = function(type) {
 		return $http.get(EVENT_SVC_PATH + 'asAdmin/type/' + type);
+	}
+
+	this.findBySummerLocationAsAdmin = function(loc) {
+		return $http.get(EVENT_SVC_PATH + 'asAdmin/location/summer/' + loc);
 	}
 
 	this.findById = function(eventId) {

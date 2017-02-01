@@ -88,12 +88,37 @@ exports.findByCurrentYearAndLocation = (req, res, next) => {
 	});
 }
 
+exports.findByCurrentYearAndLocationSummer = (req, res, next) => {
+	Event.find()
+		.where('startDate').gte(startCurYear)
+		.where('location').equals(req.params.location)
+		.where('isInternal').equals(false)
+		.where('type').in(['summer', 'music'])
+		.sort({ startDate: 1 })
+	  	.exec(function(err, ev) {
+			if(err) { return next(err); }
+			res.json(ev);
+	});
+}
+
+exports.findByCurrentYearAndLocationSummerAdmin = (req, res, next) => {
+	Event.find()
+		.where('startDate').gte(startCurYear)
+		.where('location').equals(req.params.location)
+		.where('type').in(['summer', 'music'])
+		.sort({ startDate: 1 })
+	  	.exec(function(err, ev) {
+			if(err) { return next(err); }
+			res.json(ev);
+	});
+}
+
 exports.findByCurrentYearAndLocationAdmin = (req, res, next) => {
 	Event.find()
 		.where('startDate').gte(startCurYear)
 		.where('location').equals(req.params.location)
 		.sort({ startDate: 1 })
-	  .exec(function(err, ev) {
+	  	.exec(function(err, ev) {
 			if(err) { return next(err); }
 			res.json(ev);
 	});

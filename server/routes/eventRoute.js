@@ -15,9 +15,13 @@ router.get('/location/:location', EventController.findByCurrentYearAndLocation);
 
 router.get('/type/:type', EventController.findByCurrentYearAndType);
 
+router.get('/location/summer/:location', EventController.findByCurrentYearAndLocationSummer);
+
 router.get('/typeByActivity/:activityId', EventController.getTypeByActivity);
 
 router.get('/asAdmin/location/:location', auth.requiresRole("admin"), EventController.findByCurrentYearAndLocationAdmin);
+
+router.get('/asAdmin/location/summer/:location', auth.requiresRole("admin"), EventController.findByCurrentYearAndLocationSummerAdmin);
 
 router.get('/asAdmin/type/:type', auth.requiresRole("admin"), EventController.findByCurrentYearAndTypeAdmin);
 
