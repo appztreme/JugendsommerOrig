@@ -74,14 +74,14 @@
 		</div>
 	</div>
 	<!-- ADDRESSCHILD -->
-	<div class='form-group' ng-class='{ "has-error": registrationForm.addressChild.$invalid }'>
+	<div ng-show='type !== "spiritnight"' class='form-group' ng-class='{ "has-error": registrationForm.addressChild.$invalid }'>
 		<label for='addressChild' class='control-label col-sm-2'>Adresse</label>
 		<div class='col-sm-10'>
 			<input name='addressChild' type='text' ng-model='addressChild' required maxlength='100' class='form-control'></input>
 		</div>
 	</div>
 	<!-- CITYCHILD -->
-	<div class='form-group' ng-class='{ "has-error": registrationForm.cityChild.$invalid }'>
+	<div ng-show='type !== "spiritnight"' class='form-group' ng-class='{ "has-error": registrationForm.cityChild.$invalid }'>
 		<label for='cityChild' class='control-label col-sm-2'>Gemeinde</label>
 		<div class='col-sm-10'>
 			<select name='cityChild' class='sel-base form-control' ng-model='cityChild'>
@@ -90,7 +90,7 @@
 		</div>
 	</div>
 	<!-- NEEDSPRECARE -->
-	<div ng-show='type == "summer"' class='col-sm-offset-2 col-sm4'>
+	<div ng-show='type === "summer" || type === "music"' class='col-sm-offset-2 col-sm4'>
 		<input type='checkbox' name='needsPreCare' ng-model='needsPreCare'><strong>  Ich wünsche eine Beaufsichtigung meines Kindes von 08.00 - 09.00 Uhr (+15 Euro die Woche)</input>
 	</div>
 	<br />
