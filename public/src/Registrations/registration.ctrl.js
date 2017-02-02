@@ -6,24 +6,6 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 
 	$scope.busyPromise = RegistrationSvc.create();
 
-	RegistrationSvc.getCities()
-		.success(function(cities) {
-			console.log("CITIES", cities);
-			$scope.cities = cities;
-		}).error(function(err) {
-			console.log("city load error", err);
-		});
-
-	RegistrationSvc.getEventType($routeParams.activityId)
-		.error(function(err) {
-			$scope.type = 'summer';
-			console.log($scope.type);
-		})
-		.success(function(activity) {
-			$scope.type = activity.eventId.type;
-			console.log($scope.type);
-		});
-
 	$scope.isRegistrationAllowed = function() {
 		return $scope.registrationForm.$valid && $scope.acceptAGB;
 	};
@@ -139,6 +121,24 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 		RegistrationCacheSvc.currentRegistration.telContact2 =  $scope.telContact2;
 		RegistrationCacheSvc.currentRegistration.needsPreCare = $scope.needsPreCare;
 	};
+
+	RegistrationSvc.getCities()
+		.success(function(cities) {
+			console.log("CITIES", cities);
+			$scope.cities = cities;
+		}).error(function(err) {
+			console.log("city load error", err);
+		});
+
+	RegistrationSvc.getEventType($routeParams.activityId)
+		.error(function(err) {
+			$scope.type = 'summer';
+			console.log('error', $scope.type);
+		})
+		.success(function(activity) {
+			$scope.type = activity.eventId.type;
+			console.log($scope.type);
+		});
 
 	if(RegistrationCacheSvc.hasCurrentRegistration()) {
 		$scope.firstNameParent = RegistrationCacheSvc.currentRegistration.firstNameParent;
