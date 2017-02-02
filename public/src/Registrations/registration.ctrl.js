@@ -6,122 +6,6 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 
 	$scope.busyPromise = RegistrationSvc.create();
 
-	$scope.isRegistrationAllowed = function() {
-		return $scope.registrationForm.$valid && $scope.acceptAGB;
-	};
-
-	$scope.hasCachedRegistration = function() {
-		return RegistrationCacheSvc.isNotEmptyCache();
-	};
-
-	$scope.updateFromCache = function() {
-		if(RegistrationCacheSvc.isNotEmptyCache()) {
-			$scope.firstNameParent = RegistrationCacheSvc.lastRegistration.firstNameParent;
-			$scope.lastNameParent =  RegistrationCacheSvc.lastRegistration.lastNameParent;
-			$scope.phoneNumberParent = RegistrationCacheSvc.lastRegistration.phoneNumberParent;
-			$scope.emailParent = RegistrationCacheSvc.lastRegistration.emailParent;
-			$scope.firstNameChild = RegistrationCacheSvc.lastRegistration.firstNameChild;
-			$scope.lastNameChild = RegistrationCacheSvc.lastRegistration.lastNameChild;
-			$scope.birthdayChild = $filter('date')(new Date(RegistrationCacheSvc.lastRegistration.birthdayChild), 'yyyy-MM-dd');
-			$scope.schoolChild = RegistrationCacheSvc.lastRegistration.schoolChild;
-			$scope.healthChild = RegistrationCacheSvc.lastRegistration.healthChild;
-			$scope.addressChild = RegistrationCacheSvc.lastRegistration.addressChild;
-			$scope.cityChild = RegistrationCacheSvc.lastRegistration.cityChild;
-			$scope.bandName = RegistrationCacheSvc.lastRegistration.bandName;
-			$scope.instrument = RegistrationCacheSvc.lastRegistration.instrument;
-			$scope.instrumentYears = RegistrationCacheSvc.lastRegistration.instrumentYears;
-			$scope.nameContact1 = RegistrationCacheSvc.lastRegistration.nameContact1;
-			$scope.telContact1 = RegistrationCacheSvc.lastRegistration.telContact1;
-			$scope.nameContact2 = RegistrationCacheSvc.lastRegistration.nameContact2;
-			$scope.telContact2 =  RegistrationCacheSvc.lastRegistration.telContact2;
-			$scope.needsPreCare = RegistrationCacheSvc.lastRegistration.needsPreCare;
-		}
-	};
-
-	$scope.save = function() {
-		if($scope.registrationForm.$valid) {
-			RegistrationSvc.create({
-				firstNameParent: $scope.firstNameParent,
-				lastNameParent: $scope.lastNameParent,
-				phoneNumberParent: $scope.phoneNumberParent,
-				emailParent: $scope.emailParent,
-				firstNameChild: $scope.firstNameChild,
-				lastNameChild: $scope.lastNameChild,
-				birthdayChild: $scope.birthdayChild,
-				schoolChild: $scope.schoolChild,
-				healthChild: $scope.healthChild,
-				addressChild: $scope.addressChild,
-				cityChild: $scope.cityChild,
-				bandName: $scope.bandName,
-				instrument: $scope.instrument,
-				instrumentYears: $scope.instrumentYears,
-				nameContact1: $scope.nameContact1,
-				telContact1: $scope.telContact1,
-				nameContact2: $scope.nameContact2,
-				telContact2: $scope.telContact2,
-				activityId: RegistrationSvc.activityId,
-				userId: IdentitySvc.currentUser._id,
-				needsPreCare: $scope.needsPreCare
-			})
-			.error(function(err) {
-				if(err.indexOf('duplicate key error index') > -1) {
-					NotificationSvc.warn("Doppelte Anmeldungen pro Veranstaltung sind nicht möglich");
-				}
-			})
-			.success(function(reg) {
-				$scope.firstNameParent = null;
-				$scope.lastNameParent = null;
-				$scope.phoneNumberParent = null;
-				$scope.emailParent = null;
-				$scope.firstNameChild = null;
-				$scope.lastNameChild = null;
-				$scope.birthdayChild = null;
-				$scope.schoolChild = null;
-				$scope.healthChild = null;
-				$scope.addressChild = null;
-				$scope.bandName = null;
-				$scope.instrument = null;
-				$scope.instrumentYears = null;
-				$scope.nameContact1 = null;
-				$scope.telContact1 = null;
-				$scope.nameContact2 = null;
-				$scope.telContact2 = null;
-				$scope.needsPreCare = false
-				RegistrationCacheSvc.lastRegistration = reg;
-			}).then(function() {
-				NotificationSvc.notify('Anmeldung erfolgreich gespeichert');
-				$location.path('/');
-			});
-		}
-	};
-
-	$scope.$watch(function()  { $scope.setCurrentRegistration(); }, null);
-
-	$scope.setCurrentRegistration = function() {
-		if(!RegistrationCacheSvc.hasCurrentRegistration()) {
-			RegistrationCacheSvc.currentRegistration = {};
-		}
-		RegistrationCacheSvc.currentRegistration.firstNameParent = $scope.firstNameParent;
-		RegistrationCacheSvc.currentRegistration.lastNameParent =  $scope.lastNameParent;
-		RegistrationCacheSvc.currentRegistration.phoneNumberParent = $scope.phoneNumberParent;
-		RegistrationCacheSvc.currentRegistration.emailParent = $scope.emailParent;
-		RegistrationCacheSvc.currentRegistration.firstNameChild = $scope.firstNameChild;
-		RegistrationCacheSvc.currentRegistration.lastNameChild = $scope.lastNameChild;
-		RegistrationCacheSvc.currentRegistration.birthdayChild = $scope.birthdayChild;
-		RegistrationCacheSvc.currentRegistration.schoolChild = $scope.schoolChild;
-		RegistrationCacheSvc.currentRegistration.healthChild = $scope.healthChild;
-		RegistrationCacheSvc.currentRegistration.addressChild = $scope.addressChild;
-		RegistrationCacheSvc.currentRegistration.cityChild = $scope.cityChild;
-		RegistrationCacheSvc.currentRegistration.bandName = $scope.bandName;
-		RegistrationCacheSvc.currentRegistration.instrument = $scope.instrument;
-		RegistrationCacheSvc.currentRegistration.instrumentYears = $scope.instrumentYears;
-		RegistrationCacheSvc.currentRegistration.nameContact1 = $scope.nameContact1;
-		RegistrationCacheSvc.currentRegistration.telContact1 = $scope.telContact1;
-		RegistrationCacheSvc.currentRegistration.nameContact2 = $scope.nameContact2;
-		RegistrationCacheSvc.currentRegistration.telContact2 =  $scope.telContact2;
-		RegistrationCacheSvc.currentRegistration.needsPreCare = $scope.needsPreCare;
-	};
-
 	$scope.type = $routeParams.type;
 	$scope.cities = ['Afing', 'Deutschnofen', 'Jenesien', 'Karneid', 'Mölten', 'Neustift', 'Ritten', 'Sarntal', 'Tiers', 'Vöran', 'Welschnofen', 'Andere'];
 	// RegistrationSvc.getCities()
@@ -142,28 +26,148 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 	// 		console.log($scope.type);
 	// 	});
 
-	if(RegistrationCacheSvc.hasCurrentRegistration()) {
-		$scope.firstNameParent = RegistrationCacheSvc.currentRegistration.firstNameParent;
-		$scope.lastNameParent =  RegistrationCacheSvc.currentRegistration.lastNameParent;
-		$scope.phoneNumberParent = RegistrationCacheSvc.currentRegistration.phoneNumberParent;
-		$scope.emailParent = RegistrationCacheSvc.currentRegistration.emailParent;
-		$scope.firstNameChild = RegistrationCacheSvc.currentRegistration.firstNameChild;
-		$scope.lastNameChild = RegistrationCacheSvc.currentRegistration.lastNameChild;
-		if(RegistrationCacheSvc.currentRegistration.birthdayChild){
-		$scope.birthdayChild = $filter('date')(new Date(RegistrationCacheSvc.currentRegistration.birthdayChild), 'yyyy-MM-dd');
+	$scope.isRegistrationAllowed = function() {
+		return $scope.registrationForm.$valid && $scope.data.acceptAGB;
+	};
+
+	$scope.hasCachedRegistration = function() {
+		return RegistrationCacheSvc.isNotEmptyCache();
+	};
+
+	$scope.updateFromCache = function() {
+		if(RegistrationCacheSvc.isNotEmptyCache()) {
+			$scope.data.firstNameParent = RegistrationCacheSvc.lastRegistration.firstNameParent;
+			$scope.data.lastNameParent =  RegistrationCacheSvc.lastRegistration.lastNameParent;
+			$scope.data.phoneNumberParent = RegistrationCacheSvc.lastRegistration.phoneNumberParent;
+			$scope.data.emailParent = RegistrationCacheSvc.lastRegistration.emailParent;
+			$scope.data.firstNameChild = RegistrationCacheSvc.lastRegistration.firstNameChild;
+			$scope.data.lastNameChild = RegistrationCacheSvc.lastRegistration.lastNameChild;
+			$scope.data.birthdayChild = $filter('date')(new Date(RegistrationCacheSvc.lastRegistration.birthdayChild), 'yyyy-MM-dd');
+			$scope.data.schoolChild = RegistrationCacheSvc.lastRegistration.schoolChild;
+			$scope.data.healthChild = RegistrationCacheSvc.lastRegistration.healthChild;
+			$scope.data.addressChild = RegistrationCacheSvc.lastRegistration.addressChild;
+			$scope.data.cityChild = RegistrationCacheSvc.lastRegistration.cityChild;
+			$scope.data.bandName = RegistrationCacheSvc.lastRegistration.bandName;
+			$scope.data.instrument = RegistrationCacheSvc.lastRegistration.instrument;
+			$scope.data.instrumentYears = RegistrationCacheSvc.lastRegistration.instrumentYears;
+			$scope.data.nameContact1 = RegistrationCacheSvc.lastRegistration.nameContact1;
+			$scope.data.telContact1 = RegistrationCacheSvc.lastRegistration.telContact1;
+			$scope.data.nameContact2 = RegistrationCacheSvc.lastRegistration.nameContact2;
+			$scope.data.telContact2 =  RegistrationCacheSvc.lastRegistration.telContact2;
+			$scope.data.needsPreCare = RegistrationCacheSvc.lastRegistration.needsPreCare;
 		}
-		$scope.schoolChild = RegistrationCacheSvc.currentRegistration.schoolChild;
-		$scope.healthChild = RegistrationCacheSvc.currentRegistration.healthChild;
-		$scope.addressChild = RegistrationCacheSvc.currentRegistration.addressChild;
-		$scope.cityChild = RegistrationCacheSvc.currentRegistration.cityChild;
-		$scope.bandName = RegistrationCacheSvc.currentRegistration.bandName;
-		$scope.instrument = RegistrationCacheSvc.currentRegistration.instrument;
-		$scope.instrumentYears = RegistrationCacheSvc.currentRegistration.instrumentYears;
-		$scope.nameContact1 = RegistrationCacheSvc.currentRegistration.nameContact1;
-		$scope.telContact1 = RegistrationCacheSvc.currentRegistration.telContact1;
-		$scope.nameContact2 = RegistrationCacheSvc.currentRegistration.nameContact2;
-		$scope.telContact2 =  RegistrationCacheSvc.currentRegistration.telContact2;
-		$scope.needsPreCare = RegistrationCacheSvc.currentRegistration.needsPreCare;
+	};
+
+	$scope.save = function() {
+		if($scope.registrationForm.$valid) {
+			RegistrationSvc.create({
+				firstNameParent: $scope.data.firstNameParent,
+				lastNameParent: $scope.data.lastNameParent,
+				phoneNumberParent: $scope.data.phoneNumberParent,
+				emailParent: $scope.data.emailParent,
+				firstNameChild: $scope.data.firstNameChild,
+				lastNameChild: $scope.data.lastNameChild,
+				birthdayChild: $scope.data.birthdayChild,
+				schoolChild: $scope.data.schoolChild,
+				healthChild: $scope.data.healthChild,
+				addressChild: $scope.data.addressChild,
+				cityChild: $scope.data.cityChild,
+				bandName: $scope.data.bandName,
+				instrument: $scope.data.instrument,
+				instrumentYears: $scope.data.instrumentYears,
+				nameContact1: $scope.data.nameContact1,
+				telContact1: $scope.data.telContact1,
+				nameContact2: $scope.data.nameContact2,
+				telContact2: $scope.data.telContact2,
+				activityId: RegistrationSvc.activityId,
+				userId: IdentitySvc.currentUser._id,
+				needsPreCare: $scope.data.needsPreCare
+			})
+			.error(function(err) {
+				if(err.indexOf('duplicate key error index') > -1) {
+					NotificationSvc.warn("Doppelte Anmeldungen pro Veranstaltung sind nicht möglich");
+				}
+			})
+			.success(function(reg) {
+				$scope.data.firstNameParent = null;
+				$scope.data.lastNameParent = null;
+				$scope.data.phoneNumberParent = null;
+				$scope.data.emailParent = null;
+				$scope.data.firstNameChild = null;
+				$scope.data.lastNameChild = null;
+				$scope.data.birthdayChild = null;
+				$scope.data.schoolChild = null;
+				$scope.data.healthChild = null;
+				$scope.data.addressChild = null;
+				$scope.data.bandName = null;
+				$scope.data.instrument = null;
+				$scope.data.instrumentYears = null;
+				$scope.data.nameContact1 = null;
+				$scope.data.telContact1 = null;
+				$scope.data.nameContact2 = null;
+				$scope.data.telContact2 = null;
+				$scope.data.needsPreCare = false
+				RegistrationCacheSvc.lastRegistration = reg;
+			}).then(function() {
+				NotificationSvc.notify('Anmeldung erfolgreich gespeichert');
+				$location.path('/');
+			});
+		}
+	};
+
+	// $scope.$watch(function()  { $scope.setCurrentRegistration(); }, null);
+	$scope.$watch(function(scope) { return(scope.data) }, function(newValue, oldValue) {
+		setCurrentRegistration(newValue);
+	});
+
+	const setCurrentRegistration = function(newValue) {
+		if(!RegistrationCacheSvc.hasCurrentRegistration()) {
+			RegistrationCacheSvc.currentRegistration = {};
+		}
+		console.log("changed value", newValue);
+		// RegistrationCacheSvc.currentRegistration.firstNameParent = $scope.data.firstNameParent;
+		// RegistrationCacheSvc.currentRegistration.lastNameParent =  $scope.data.lastNameParent;
+		// RegistrationCacheSvc.currentRegistration.phoneNumberParent = $scope.data.phoneNumberParent;
+		// RegistrationCacheSvc.currentRegistration.emailParent = $scope.data.emailParent;
+		// RegistrationCacheSvc.currentRegistration.firstNameChild = $scope.data.firstNameChild;
+		// RegistrationCacheSvc.currentRegistration.lastNameChild = $scope.data.lastNameChild;
+		// RegistrationCacheSvc.currentRegistration.birthdayChild = $scope.data.birthdayChild;
+		// RegistrationCacheSvc.currentRegistration.schoolChild = $scope.data.schoolChild;
+		// RegistrationCacheSvc.currentRegistration.healthChild = $scope.data.healthChild;
+		// RegistrationCacheSvc.currentRegistration.addressChild = $scope.data.addressChild;
+		// RegistrationCacheSvc.currentRegistration.cityChild = $scope.data.cityChild;
+		// RegistrationCacheSvc.currentRegistration.bandName = $scope.data.bandName;
+		// RegistrationCacheSvc.currentRegistration.instrument = $scope.data.instrument;
+		// RegistrationCacheSvc.currentRegistration.instrumentYears = $scope.data.instrumentYears;
+		// RegistrationCacheSvc.currentRegistration.nameContact1 = $scope.data.nameContact1;
+		// RegistrationCacheSvc.currentRegistration.telContact1 = $scope.data.telContact1;
+		// RegistrationCacheSvc.currentRegistration.nameContact2 = $scope.data.nameContact2;
+		// RegistrationCacheSvc.currentRegistration.needsPreCare = $scope.data.needsPreCare;
+		// RegistrationCacheSvc.currentRegistration.telContact2 =  $scope.data.telContact2;
+	};
+
+	if(RegistrationCacheSvc.hasCurrentRegistration()) {
+		$scope.data.firstNameParent = RegistrationCacheSvc.currentRegistration.firstNameParent;
+		$scope.data.lastNameParent =  RegistrationCacheSvc.currentRegistration.lastNameParent;
+		$scope.data.phoneNumberParent = RegistrationCacheSvc.currentRegistration.phoneNumberParent;
+		$scope.data.emailParent = RegistrationCacheSvc.currentRegistration.emailParent;
+		$scope.data.firstNameChild = RegistrationCacheSvc.currentRegistration.firstNameChild;
+		$scope.data.lastNameChild = RegistrationCacheSvc.currentRegistration.lastNameChild;
+		if(RegistrationCacheSvc.currentRegistration.birthdayChild){
+		$scope.data.birthdayChild = $filter('date')(new Date(RegistrationCacheSvc.currentRegistration.birthdayChild), 'yyyy-MM-dd');
+		}
+		$scope.data.schoolChild = RegistrationCacheSvc.currentRegistration.schoolChild;
+		$scope.data.healthChild = RegistrationCacheSvc.currentRegistration.healthChild;
+		$scope.data.addressChild = RegistrationCacheSvc.currentRegistration.addressChild;
+		$scope.data.cityChild = RegistrationCacheSvc.currentRegistration.cityChild;
+		$scope.data.bandName = RegistrationCacheSvc.currentRegistration.bandName;
+		$scope.data.instrument = RegistrationCacheSvc.currentRegistration.instrument;
+		$scope.data.instrumentYears = RegistrationCacheSvc.currentRegistration.instrumentYears;
+		$scope.data.nameContact1 = RegistrationCacheSvc.currentRegistration.nameContact1;
+		$scope.data.telContact1 = RegistrationCacheSvc.currentRegistration.telContact1;
+		$scope.data.nameContact2 = RegistrationCacheSvc.currentRegistration.nameContact2;
+		$scope.data.telContact2 =  RegistrationCacheSvc.currentRegistration.telContact2;
+		$scope.data.needsPreCare = RegistrationCacheSvc.currentRegistration.needsPreCare;
 		RegistrationCacheSvc.currentRegistration = undefined;
 	}
 });

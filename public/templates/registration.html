@@ -10,28 +10,28 @@
 	<div class='form-group' ng-class='{ "has-error": registrationForm.firstNameParent.$invalid }'>
 	    <label for='firstNameParent' class='control-label col-sm-2'>Vorname</label>
 		<div class='col-sm-10'>
-			<input name='firstNameParent' type='text' ng-model='firstNameParent' required maxlength='100' class='form-control'></input>
+			<input name='firstNameParent' type='text' ng-model='data.firstNameParent' required maxlength='100' class='form-control'></input>
 		</div>
 	</div>
 	<!-- LASTNAMEPARENT -->
 	<div class='form-group' ng-class='{ "has-error": registrationForm.lastNameParent.$invalid }'>
 		<label for='lastNameParent' class='control-label col-sm-2'>Familienname</label>
 		<div class='col-sm-10'>
-			<input name='lastNameParent' type='text' ng-model='lastNameParent' class='form-control' required maxlenght='100'></input>
+			<input name='lastNameParent' type='text' ng-model='data.lastNameParent' class='form-control' required maxlenght='100'></input>
 		</div>
 	</div>
 	<!-- PHONENUMBERPARENT -->
 	<div class='form-group' ng-class='{ "has-error": registrationForm.phoneNumberParent.$invalid }'>
 		<label for='phoneNumberParent' class='control-label col-sm-2'>Tel</label>
 		<div class='col-sm-10'>
-			<input name='phoneNumberParent' type='tel' ng-model='phoneNumberParent' required maxlength='150' class='form-control'></input>
+			<input name='phoneNumberParent' type='tel' ng-model='data.phoneNumberParent' required maxlength='150' class='form-control'></input>
 		</div>
 	</div>
 	<!-- EMAILPARENT -->
 	<div class='form-group' ng-class='{ "has-error": registrationForm.emailParent.$invalid }'>
 		<label for='emailParent' class='control-label col-sm-2'>Email</label>
 		<div class='col-sm-10'>
-			<input name='emailParent' type='email' ng-model='emailParent' required maxlength='200' class='form-control'></input>
+			<input name='emailParent' type='email' ng-model='data.emailParent' required maxlength='200' class='form-control'></input>
 		</div>
 	</div>
 	<div ng-show='type === "summer" || type === "music" || type === "club"' class='text-orange'><strong>Angaben zum Kind:</strong></div>
@@ -40,14 +40,14 @@
 	<div class='form-group' ng-class='{ "has-error": registrationForm.firstNameChild.$invalid }'>
 	    <label for='firstNameChild' class='control-label col-sm-2'>Vorname</label>
 		<div class='col-sm-10'>
-			<input name='firstNameChild' type='text' ng-model='firstNameChild' required maxlength='100' class='form-control'></input>
+			<input name='firstNameChild' type='text' ng-model='data.firstNameChild' required maxlength='100' class='form-control'></input>
 		</div>
 	</div>
 	<!-- LASTNAMECHILD -->
 	<div class='form-group' ng-class='{ "has-error": registrationForm.lastNameChild.$invalid }'>
 		<label for='lastNameChild' class='control-label col-sm-2'>Familienname</label>
 		<div class='col-sm-10'>
-			<input name='lastNameChild' type='text' ng-model='lastNameChild' class='form-control' required maxlenght='100'></input>
+			<input name='lastNameChild' type='text' ng-model='data.lastNameChild' class='form-control' required maxlenght='100'></input>
 		</div>
 	</div>
 	<!-- BIRTHDAYCHILD -->
@@ -55,7 +55,7 @@
 		<label for='birthdayChild' class='control-label col-sm-2'>Geburtstag</label>
 		<div class='col-sm-10'>
 		<p class='input-group'>
-			<ng-datepicker ng-model='birthdayChild' view-format="DD.MM.YYYY"  locale='de' required></ng-datepicker>
+			<ng-datepicker ng-model='data.birthdayChild' view-format="DD.MM.YYYY"  locale='de' required></ng-datepicker>
 		</p>
 		</div>
 	</div>
@@ -63,35 +63,35 @@
 	<div class='form-group' ng-class='{ "has-error": registrationForm.schoolChild.$invalid }'>
 		<label for='schoolChild' class='control-label col-sm-2'>Besuchte Klasse</label>
 		<div class='col-sm-10'>
-			<input name='schoolChild' type='text' ng-model='schoolChild' required maxlength='100' class='form-control'></input>
+			<input name='schoolChild' type='text' ng-model='data.schoolChild' required maxlength='100' class='form-control'></input>
 		</div>
 	</div>
 	<!-- HEALTHCHILD -->
 	<div class='form-group' ng-class='{ "has-error": registrationForm.healthChild.$invalid }'>
 		<label for='healthChild' class='control-label col-sm-2'>Gesundheitliche Probleme</label>
 		<div class='col-sm-10'>
-			<textarea name='healthChild' ng-model='healthChild' rows='3' maxlength='350' class='form-control'></textarea>
+			<textarea name='healthChild' ng-model='data.healthChild' rows='3' maxlength='350' class='form-control'></textarea>
 		</div>
 	</div>
 	<!-- ADDRESSCHILD -->
 	<div ng-show='type !== "spiritnight"' class='form-group' ng-class='{ "has-error": registrationForm.addressChild.$invalid }'>
 		<label for='addressChild' class='control-label col-sm-2'>Adresse</label>
 		<div class='col-sm-10'>
-			<input name='addressChild' type='text' ng-model='addressChild' required maxlength='100' class='form-control'></input>
+			<input name='addressChild' type='text' ng-model='data.addressChild' required maxlength='100' class='form-control'></input>
 		</div>
 	</div>
 	<!-- CITYCHILD -->
 	<div ng-show='type !== "spiritnight"' class='form-group' ng-class='{ "has-error": registrationForm.cityChild.$invalid }'>
 		<label for='cityChild' class='control-label col-sm-2'>Gemeinde</label>
 		<div class='col-sm-10'>
-			<select name='cityChild' class='sel-base form-control' ng-model='cityChild'>
+			<select name='cityChild' class='sel-base form-control' ng-model='data.cityChild'>
 				<option ng-repeat="city in cities" value='{{city}}'>{{city}}</option>
 			</select>
 		</div>
 	</div>
 	<!-- NEEDSPRECARE -->
 	<div ng-show='type === "summer" || type === "music"' class='col-sm-offset-2 col-sm4'>
-		<input type='checkbox' name='needsPreCare' ng-model='needsPreCare'><strong>  Ich wünsche eine Beaufsichtigung meines Kindes von 08.00 - 09.00 Uhr (+15 Euro die Woche)</input>
+		<input type='checkbox' name='needsPreCare' ng-model='data.needsPreCare'><strong>  Ich wünsche eine Beaufsichtigung meines Kindes von 08.00 - 09.00 Uhr (+15 Euro die Woche)</input>
 	</div>
 	<br />
 	<div ng-show='type === "music"' class="panel panel-default">
@@ -101,19 +101,19 @@
 		<div class='form-group' ng-class='{ "has-error": registrationForm.bandName.$invalid }'>
 			<label for='bandName' class='control-label col-sm-2'>Musikkapelle</label>
 			<div class='col-sm-10'>
-				<input name='bandName' type='text' ng-model='bandName' maxlength="100" class='form-control'></textarea>
+				<input name='bandName' type='text' ng-model='data.bandName' maxlength="100" class='form-control'></textarea>
 			</div>
 		</div>
 		<div class='form-group' ng-class='{ "has-error": registrationForm.instrument.$invalid }'>
 			<label for='instrument' class='control-label col-sm-2'>Instrument</label>
 			<div class='col-sm-10'>
-				<input name='instrument' type='text' ng-model='instrument' maxlength="100" class='form-control'></textarea>
+				<input name='instrument' type='text' ng-model='data.instrument' maxlength="100" class='form-control'></textarea>
 			</div>
 		</div>
 		<div class='form-group' ng-class='{ "has-error": registrationForm.bandName.$invalid }'>
 			<label for='instrumentYears' class='control-label col-sm-2'>Ausbildungsjahr</label>
 			<div class='col-sm-10'>
-				<input name='instrumentYears' type='text' ng-model='instrumentYears' maxlength="100" class='form-control'></textarea>
+				<input name='instrumentYears' type='text' ng-model='data.instrumentYears' maxlength="100" class='form-control'></textarea>
 			</div>
 		</div>
   </div>
@@ -123,27 +123,27 @@
 	<div ng-show='type === "summer" || type === "music"' class='form-group'>
 		<label for='nameContact1' class='control-label col-sm-2'>Name1</label>
 		<div class='col-sm-4'>
-			<input name='nameContact1' type='text' maxlength='250' ng-model='nameContact1' class='form-control'></input>
+			<input name='nameContact1' type='text' maxlength='250' ng-model='data.nameContact1' class='form-control'></input>
 		</div>
 		<label for='telContact1' class='control-label col-sm-2'>Telefon1</label>
 		<div class='col-sm-4'>
-			<input name='telContact1' type='tel' maxlength='100' ng-model='telContact1' class='form-control'></input>
+			<input name='telContact1' type='tel' maxlength='100' ng-model='data.telContact1' class='form-control'></input>
 		</div>
 	</div>
 	<!-- NAMECONTACT2 TELCONTACT2 -->
 	<div ng-show='type === "summer" || type === "music"' class='form-group'>
 		<label for='nameContact2' class='control-label col-sm-2'>Name2</label>
 		<div class='col-sm-4'>
-			<input name='nameContact2' type='text' maxlength='250' ng-model='nameContact2' class='form-control'></input>
+			<input name='nameContact2' type='text' maxlength='250' ng-model='data.nameContact2' class='form-control'></input>
 		</div>
 		<label for='telContact2' class='control-label col-sm-2'>Telefon2</label>
 		<div class='col-sm-4'>
-			<input name='telContact2' type='tel' maxlength='100' ng-model='telContact2' class='form-control'></input>
+			<input name='telContact2' type='tel' maxlength='100' ng-model='data.telContact2' class='form-control'></input>
 		</div>
 	</div>
 
 	<div class='col-sm-offset-2 col-sm4'>
-		<input type='checkbox' name='agb' ng-model='acceptAGB'><strong>  Ich akzeptiere die <a href='/#/agb/{{activityId}}'>allgemeinen Gesch&auml;ftsbedingungen</a></strong></input>
+		<input type='checkbox' name='agb' ng-model='data.acceptAGB'><strong>  Ich akzeptiere die <a href='/#/agb/{{activityId}}'>allgemeinen Gesch&auml;ftsbedingungen</a></strong></input>
 	</div>
 
 	<div class='col-sm-offset-2 col-sm-10' style='margin-top:15px;'>
