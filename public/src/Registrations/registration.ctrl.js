@@ -8,7 +8,10 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 
 	RegistrationSvc.getCities()
 		.success(function(cities) {
+			console.log("CITIES", cities);
 			$scope.cities = cities;
+		}).error(function(err) {
+			console.log("city load error", err);
 		});
 
 	RegistrationSvc.getEventType($routeParams.activityId)
