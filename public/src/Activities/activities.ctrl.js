@@ -3,6 +3,8 @@ var app = angular.module('js');
 app.controller('ActivitiesCtrl', function($scope, $routeParams, ActivitiesSvc) {
 	$scope.busyPromise = ActivitiesSvc.findByEventId($routeParams.eventId);
 
+	$scope.type = $routeParams.type;
+
     $scope.canReserve = function(activity) {
         return activity.curParticipants < activity.maxParticipants;
     };
@@ -29,6 +31,6 @@ app.controller('ActivitiesCtrl', function($scope, $routeParams, ActivitiesSvc) {
 
 	ActivitiesSvc.eventId = $routeParams.eventId;
 	ActivitiesSvc.findByEventId($routeParams.eventId).then(function(response) {
-		$scope.activities = response.data;	
+		$scope.activities = response.data;
 	});
 });

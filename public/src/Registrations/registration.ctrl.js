@@ -122,6 +122,7 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 		RegistrationCacheSvc.currentRegistration.needsPreCare = $scope.needsPreCare;
 	};
 
+	$scope.type = $routeParams.type;
 	$scope.cities = ['Afing', 'Deutschnofen', 'Jenesien', 'Karneid', 'Mölten', 'Neustift', 'Ritten', 'Sarntal', 'Tiers', 'Vöran', 'Welschnofen', 'Andere'];
 	// RegistrationSvc.getCities()
 	// 	.success(function(cities) {
@@ -131,15 +132,15 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 	// 		console.log("city load error", err);
 	// 	});
 
-	RegistrationSvc.getEventType($routeParams.activityId)
-		.error(function(err) {
-			$scope.type = 'summer';
-			console.log('error', $scope.type);
-		})
-		.success(function(activity) {
-			$scope.type = activity.eventId.type;
-			console.log($scope.type);
-		});
+	// RegistrationSvc.getEventType($routeParams.activityId)
+	// 	.error(function(err) {
+	// 		$scope.type = 'summer';
+	// 		console.log('error', $scope.type);
+	// 	})
+	// 	.success(function(activity) {
+	// 		$scope.type = activity.eventId.type;
+	// 		console.log($scope.type);
+	// 	});
 
 	if(RegistrationCacheSvc.hasCurrentRegistration()) {
 		$scope.firstNameParent = RegistrationCacheSvc.currentRegistration.firstNameParent;

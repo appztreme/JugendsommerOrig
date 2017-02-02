@@ -15,7 +15,7 @@
 		<div class='row'>
 				<div class='col-sm-1'>
 					<div class='btn-main'>
-					<a href='/#/activities/{{event._id}}' role='button'>
+					<a href='/#/activities/{{event._id}}?type={{event.type}}' role='button'>
 						<span ng-show='event.type === "summer"' class='glyphicon glyphicon-certificate'></span>
 						<span ng-show='event.type === "music"' class='glyphicon glyphicon-music'></span>
 						<span ng-show='event.type === "spiritnight"' class='glyphicon glyphicon-education'></span>
@@ -29,7 +29,7 @@
 					<p>{{event.description}}</p>
 				</div>
 				<div class='col-sm-2'>
-					<a href='/#/activities/{{event._id}}' class='btn btn-xlarge btn-success' role='button'><span class='glyphicon glyphicon-triangle-right'></span></a>
+					<a href='/#/activities/{{event._id}}?type={{event.type}}' class='btn btn-xlarge btn-success' role='button'><span class='glyphicon glyphicon-triangle-right'></span></a>
 					<a href='/#/eventInfo/{{event._id}}' class="btn btn-xlarge btn-warning" role'button'><span class='glyphicon glyphicon-search'></span></a>
 					<a href='/#/editEvent/{{event._id}}' class='btn btn-xlarge btn-info' role='button' ng-show='iSvc.isAuthorized("admin")'><span class='glyphicon glyphicon-pencil'></span></a>
 					<a href='/#/newCommitment/{{event._id}}' class='btn btn-xlarge btn-primary' role='button' ng-show='iSvc.isAuthorized("admin") || iSvc.isAuthorizedForEvent("fadmin", event._id)'><span class='glyphicon glyphicon-usd'></span></a>
