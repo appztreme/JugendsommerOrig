@@ -16,6 +16,7 @@ app.controller('GeoSelectionCtrl', function($scope, $location, GeoSvc) {
     if(host.indexOf("jugendsommer") !== -1) {
         GeoSvc.getSummerSelection().success(function(sel) {
             addNameProp(sel);
+            console.log(sel);
             $scope.locations = sel;
         });
     }
