@@ -8,6 +8,7 @@
 			<th>Woche</th>
 			<th>Angenommen</th>
 			<th>Bezahlt</th>
+			<th>FrühBetreuung</th>
 			<th>Vorname</th>
 			<th>Nachname</th>
 			<th>Geburtstag</th>
@@ -21,6 +22,7 @@
 			<td>{{reg.activityId.name}}</td>
 			<td class='bg-success'>{{formatBool(true)}}</td>
 			<td ng-class='{"bg-success": reg.isPaymentDone, "bg-danger": !reg.isPaymentDone}'>{{formatBool(reg.isPaymentDone)}}</td>
+			<td>{{formatBool(reg.needsPreCare)}}</td>
 			<td>{{reg.firstNameChild}}</td>
 			<td>{{reg.lastNameChild}}</td>
 			<td>{{reg.birthdayChild | date: 'dd/MM/yyyy'}}</td>

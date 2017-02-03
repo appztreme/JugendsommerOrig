@@ -118,6 +118,9 @@ exports.create = (req, res, next) => {
 	  nameContact2: req.body.nameContact2,
 	  telContact2: req.body.telContact2,
 	  activityId: req.body.activityId,
+	  addressChild: req.body.addressChild,
+	  cityChild: req.body.cityChild,
+	  needsPreCare: req.body.needsPreCare,
     userId: req.body.userId
 	});
 	reg.save(function(err, regr) {
@@ -149,6 +152,9 @@ exports.update = (req, res, next) => {
 		reg.isPaymentDone = req.body.isPaymentDone;
 		reg.isEmailNotified = req.body.isEmailNotified;
 		reg.activityId = req.body.activityId;
+		reg.addressChild = req.body.addressChild;
+		reg.cityChild = req.body.cityChild;
+		reg.needsPreCare = req.body.needsPreCare;
 		reg.save(function(err, regDb) {
 			if(err) { return next(err); }
 			res.status(201).json(regDb);
