@@ -4,7 +4,7 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 	RegistrationSvc.activityId = $routeParams.activityId;
 	$scope.activityId = $routeParams.activityId;
 
-	$scope.busyPromise = RegistrationSvc.create();
+	// $scope.busyPromise = RegistrationSvc.create();
 
 	$scope.type = $routeParams.type;
 	$scope.cities = ['Deutschnofen', 'Jenesien', 'Karneid', 'Mölten', 'Ritten', 'Sarntal', 'Tiers', 'Vöran', 'Welschnofen', 'Andere'];
