@@ -8,6 +8,7 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 
 	$scope.type = $routeParams.type;
 	$scope.cities = ['Deutschnofen', 'Jenesien', 'Karneid', 'Mölten', 'Ritten', 'Sarntal', 'Tiers', 'Vöran', 'Welschnofen', 'Andere'];
+	$scope.cityChild = 'Deutschnofen';
 	// RegistrationSvc.getCities()
 	// 	.success(function(cities) {
 	// 		console.log("CITIES", cities);
@@ -36,7 +37,7 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 			$scope.schoolChild = RegistrationCacheSvc.lastRegistration.schoolChild;
 			$scope.healthChild = RegistrationCacheSvc.lastRegistration.healthChild;
 			$scope.addressChild = RegistrationCacheSvc.lastRegistration.addressChild;
-			$scopecityChild = RegistrationCacheSvc.lastRegistration.cityChild;
+			$scope.cityChild = RegistrationCacheSvc.lastRegistration.cityChild;
 			$scope.bandName = RegistrationCacheSvc.lastRegistration.bandName;
 			$scope.instrument = RegistrationCacheSvc.lastRegistration.instrument;
 			$scope.instrumentYears = RegistrationCacheSvc.lastRegistration.instrumentYears;

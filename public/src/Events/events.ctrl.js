@@ -28,15 +28,26 @@ app.controller('EventsCtrl', function($scope, $routeParams, $location, EventsSvc
 			});
 		}
 		else {
-			if(host.indexOf('jugendsommer') !== -1) {
-				EventsSvc.findBySummerLocationAsAdmin($routeParams.location).success(function(evs) {
-					$scope.events = evs;
-				});
-			} else {
-				EventsSvc.findByLocationAsAdmin($routeParams.location).success(function(evs) {
-					$scope.events = evs;
-				});
-			}
+			if($routeParams.location === "Deutschnofen") $scope.events = eventsDeutschnofen;
+			else if($routeParams.location === "Hüttenlagerwoche") $scope.events = eventsHuettenlager;
+			else if($routeParams.location === "Jenesien") $scope.events = eventsJenesien;
+			else if($routeParams.location === "Karneid") $scope.events = eventsKarneid;
+			else if($routeParams.location === "Mölten") $scope.events = eventsMoelten;
+			else if($routeParams.location === "Ritten") $scope.events = eventsRitten;
+			else if($routeParams.location === "Sarntal") $scope.events = eventsSarntal;
+			else if($routeParams.location === "SpaceCamp") $scope.events = eventsSpaceCamp;
+			else if($routeParams.location === "Tiers") $scope.events = eventsTiers;
+			else if($routeParams.location === "Tschögglberger Jungbläserwoche") $scope.events = eventsBlaeserwoche;
+			else if($routeParams.location === "Welschnofen") $scope.events = eventsWelschnofen;
+			// if(host.indexOf('jugendsommer') !== -1) {
+			// 	EventsSvc.findBySummerLocationAsAdmin($routeParams.location).success(function(evs) {
+			// 		$scope.events = evs;
+			// 	});
+			// } else {
+			// 	EventsSvc.findByLocationAsAdmin($routeParams.location).success(function(evs) {
+			// 		$scope.events = evs;
+			// 	});
+			// }
 		}
 	} else {
 		if(['club', 'spiritnight'].indexOf($routeParams.location) !== -1) {

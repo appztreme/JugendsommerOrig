@@ -31,12 +31,12 @@ app.controller('GeoSelectionCtrl', function($scope, $location, GeoSvc) {
         //     $scope.locations = sel;
         // });
     }
-    else if(host.indexOf("jd-bozenland") !== -1) {
-        GeoSvc.getTypeSelection().success(function(sel) {
-            addNameProp(sel);
-            $scope.locations = sel;
-        });
-    }
+    // else if(host.indexOf("jd-bozenland") !== -1) {
+    //     GeoSvc.getTypeSelection().success(function(sel) {
+    //         addNameProp(sel);
+    //         $scope.locations = sel;
+    //     });
+    // }
     else {
         $scope.locations = [{_id: 'Deutschnofen', name: 'Deutschnofen', countEvents: 5, distinctTypes: ['summer']},
                          {_id: 'Hüttenlagerwoche', name: 'Hüttenlagerwoche', countEvents: 1, distinctTypes: ['summer']},
