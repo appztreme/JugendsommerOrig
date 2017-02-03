@@ -9,6 +9,7 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 	$scope.type = $routeParams.type;
 	$scope.cities = ['Deutschnofen', 'Jenesien', 'Karneid', 'Mölten', 'Ritten', 'Sarntal', 'Tiers', 'Vöran', 'Welschnofen', 'Andere'];
 	$scope.cityChild = 'Deutschnofen';
+	$scope.needsPreCare = false;
 	// RegistrationSvc.getCities()
 	// 	.success(function(cities) {
 	// 		console.log("CITIES", cities);
