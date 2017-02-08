@@ -6,10 +6,10 @@
 		<div class='form-group'>
 			<input id='login_pwd' type='password' class='form-control' ng-model='password' placeholder='Passwort'>
 		</div>
-		<button class='btn btn-warning' ng-click='signin(username, password)'>Anmelden</button>
-		<a id='login_newUser' href='/#/user' class='btn btn-warning' role='button'>Neuer User</a>
+		<button class='btn btn-warning' ng-click='signin(username, password)'>{{'LOGIN.LOGIN' | translate}}</button>
+		<a id='login_newUser' href='/#/user' class='btn btn-warning' role='button'>{{'LOGIN.NEW' | translate}}</a>
 		<br />
-		<a href='/#/userToken' class='btn btn-link' role='button'>Passwort vergessen?</a>
+		<a href='/#/userToken' class='btn btn-link' role='button'>{{'LOGIN.PWDNEW' | translate}}</a>
 	</form>
 
 	<ul class='nav navbar-nav navbar-right' ng-show='identity.isAuthenticated()'>

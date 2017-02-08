@@ -82,6 +82,10 @@ app.config(function($routeProvider) {
 			controller: 'LoginCtrl',
 			templateUrl: '../templates/login.html'
 		})
+		.when('/lang', {
+			controller: 'LangCtrl',
+			templateUrl: '../templates/lang.html'
+		})
 		.when('/user', {
 			controller: 'UserNewCtrl',
 			templateUrl: '../templates/userNew.html'

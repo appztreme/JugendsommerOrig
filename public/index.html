@@ -8,7 +8,7 @@
 	<link rel='stylesheet' href='lib/toastr/toastr.min.css' type='text/css'>
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 	<link rel='stylesheet' href='lib/ngDatepicker/src/css/ngDatepicker.css'>
-  <link rel='stylesheet' href='css/app.css' type='text/css'>
+    <link rel='stylesheet' href='css/app.css' type='text/css'>
 	<script src='lib/modernizr/modernizr.js'></script>
 	<meta name='viewport' content='width=device-width, initial-scale=1'>
 	<meta charset='UTF-8'>
@@ -17,20 +17,21 @@
 	<meta name='author' content='Florian Edelmaier'>
 </head>
 <body ng-app='js' ng-controller='ApplicationCtrl'>
-	<nav class='navbar navbar-default'>
+	<nav class='navbar navbar-default'>		
 		<div class='container'>
+			<div ng-include src='"templates/lang.html"'></div>
 			<div class='navbar-header'>
 				<a class='navbar-brand' href='http://www.jugenddienst.it/home_jd_bozen-land.html'>
 					<img src='assets/jdb.gif' alt='Jugenddienst Bozen'>
 				</a>
 			</div>
 			<ul class='nav navbar-nav'>
-				<li><a id='nav_link_info' href='/#/info'>Info</a></li>
-				<li><a id='nav_link_programme' href='/#/'>Programm</a></li>
-				<li ng-show='iSvc.isAuthenticated()'><a id='nav_link_myres' href='/#/myRegistrations'>Meine Reservierungen</a></li>
-				<li ng-show='iSvc.isAuthorized("fadmin")'><a href='/#/myCommitments'>Meine Rechnungen</a></li>
-        <li ng-show='iSvc.isAuthorized("admin")'><a href='/#/report'>Report</a></li>
-        <li ng-show='iSvc.isAuthorized("fadmin")'><a href='/#/resources'>Material</a></li>
+				<li><a id='nav_link_info' href='/#/info'>{{'NAV.INFO' | translate}}</a></li>
+				<li><a id='nav_link_programme' href='/#/'>{{'NAV.PROGRAM' | translate}}</a></li>
+				<li ng-show='iSvc.isAuthenticated()'><a id='nav_link_myres' href='/#/myRegistrations'>{{'NAV.MYRES' | translate}}</a></li>
+				<li ng-show='iSvc.isAuthorized("fadmin")'><a href='/#/myCommitments'>{{'NAV.MYCOMMITS' | translate}}</a></li>
+                <li ng-show='iSvc.isAuthorized("admin")'><a href='/#/report'>{{'NAV.REPORT' | translate}}</a></li>
+                <li ng-show='iSvc.isAuthorized("fadmin")'><a href='/#/resources'>{{'NAV.LENDINGS' | translate}}</a></li>
 			</ul>
 		    <div ng-include src='"templates/login.html"'></div>
 		</div>
@@ -43,10 +44,11 @@
 	<script src='lib/angular-resource/angular-resource.min.js'></script>
 	<script src='lib/angular-busy/dist/angular-busy.min.js'></script>
 	<script src='lib/angular-gettext/dist/angular-gettext.min.js'></script>
+	<script src='lib/angular-translate/angular-translate.min.js'></script>
 	<script src='lib/jquery/dist/jquery.min.js'></script>
 	<script src='lib/bootstrap/dist/js/bootstrap.min.js'></script>
-  <script src='lib/toastr/toastr.min.js'></script>
-  <script src='lib/lodash/lodash.min.js'></script>
+    <script src='lib/toastr/toastr.min.js'></script>
+    <script src='lib/lodash/lodash.min.js'></script>
 	<script src='lib/moment/min/moment-with-locales.min.js'></script>
 	<script src='lib/ngDatepicker/src/js/ngDatepicker.js'></script>
 	<script src='build/app.js'></script>

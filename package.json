@@ -1,4 +1,4 @@
-        {
+{
   "name": "Jugendsommer",
   "version": "0.0.1",
   "description": "Event Registration Jugenddienst Bozen",
@@ -38,7 +38,8 @@
     "mongoose": "^3.8.24",
     "mongoose-deep-populate": "^1.0.2",
     "passport": "^0.2.2",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "redis": "^2.6.5"
   },
   "devDependencies": {
     "expect": "^1.14.0",
