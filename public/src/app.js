@@ -15,7 +15,8 @@ app.config(['$routeProvider', '$httpProvider', '$translateProvider', function($r
             MYRES: 'Meine Reservierungen',
             MYCOMMITS: 'Meine Rechnungen',
             REPORT: 'Report',
-            LENDINGS: 'Material'
+            LENDINGS: 'Material',
+            USERSEARCH: 'User'
         },
         LOGIN: {
             USER: 'User',
@@ -33,7 +34,8 @@ app.config(['$routeProvider', '$httpProvider', '$translateProvider', function($r
             MYRES: '_itMeine Reservierungen',
             MYCOMMITS: '_itMeine Rechnungen',
             REPORT: 'it_Report',
-            LENDINGS: '_itMaterial'
+            LENDINGS: '_itMaterial',
+            USERSEARCH: 'User'
         },
         LOGIN: {
             USER: 'User',

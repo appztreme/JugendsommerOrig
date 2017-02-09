@@ -98,6 +98,14 @@ app.config(function($routeProvider) {
 			controller: 'UserUpdatePwdCtrl',
 			templateUrl: '../templates/userUpdatePwd.html'
 		})
+		.when('/userRolesSearch', {
+			controller: 'UserRolesSearchCtrl',
+			templateUrl: '../templates/userRolesSearch.html'
+		})
+		.when('/userRolesUpdate/:userId', {
+			controller: 'UserRolesUpdateCtrl',
+			templateUrl: '../templates/userRolesUpdate.html'
+		})
 		.when('/newLending/:eventId', {
 			controller: 'LendingNewCtrl',
 			templateUrl: '../templates/lendingNew.html'

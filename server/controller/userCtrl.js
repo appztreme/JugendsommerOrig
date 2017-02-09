@@ -32,6 +32,32 @@ exports.findById = (req, res, next) => {
 	});
 };
 
+exports.search = (req, res, next) => {
+	User.find({ $or: [
+			{firstName: {'$regex': req.params.txt }},
+			{lastName: {'$regex': req.params.txt }},
+			{userName: {'$regex': req.params.txt }}
+		]})
+		.select('_id firstName lastName userName userEmail roles eventId')
+		.exec(function(err, users) {
+			if(err) { next(err); }
+			res.json(users);
+		});
+}
+
+exports.updateRoles = (req, res, next) => {
+	User.findById(req.body._id)
+		.exec((err, user) => {
+			if(err) { next(err); }
+			user.roles = req.body.roles;
+			user.eventId = req.body.eventId;
+			user.save(function(err, userSaved) {
+				if(err) { next(err); }
+				res.status(200).json(userSaved);
+			});
+		});
+}
+
 exports.updatePwd = (req, res, next) => {
 	User.findOne({userName: req.body.userName})
 		.exec((err, user) => {

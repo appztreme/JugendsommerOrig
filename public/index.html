@@ -17,7 +17,7 @@
 	<meta name='author' content='Florian Edelmaier'>
 </head>
 <body ng-app='js' ng-controller='ApplicationCtrl'>
-	<nav class='navbar navbar-default'>		
+	<nav class='navbar navbar-default'>
 		<div class='container'>
 			<div ng-include src='"templates/lang.html"'></div>
 			<div class='navbar-header'>
@@ -32,6 +32,7 @@
 				<li ng-show='iSvc.isAuthorized("fadmin")'><a href='/#/myCommitments'>{{'NAV.MYCOMMITS' | translate}}</a></li>
                 <li ng-show='iSvc.isAuthorized("admin")'><a href='/#/report'>{{'NAV.REPORT' | translate}}</a></li>
                 <li ng-show='iSvc.isAuthorized("fadmin")'><a href='/#/resources'>{{'NAV.LENDINGS' | translate}}</a></li>
+				<li ng-show='iSvc.isAuthorized("admin")'><a href='/#/userRolesSearch'>{{'NAV.USERSEARCH' | translate}}</a></li>
 			</ul>
 		    <div ng-include src='"templates/login.html"'></div>
 		</div>
