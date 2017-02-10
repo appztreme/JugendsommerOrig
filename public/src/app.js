@@ -29,12 +29,12 @@ app.config(['$routeProvider', '$httpProvider', '$translateProvider', function($r
 
     $translateProvider.translations('it', {
         NAV: {
-            INFO: 'it_Info',
-            PROGRAM: 'it_InfoProgramm',
-            MYRES: '_itMeine Reservierungen',
-            MYCOMMITS: '_itMeine Rechnungen',
-            REPORT: 'it_Report',
-            LENDINGS: '_itMaterial',
+            INFO: 'Info',
+            PROGRAM: 'Programm',
+            MYRES: 'Meine Reservierungen',
+            MYCOMMITS: 'Meine Rechnungen',
+            REPORT: 'Report',
+            LENDINGS: 'Material',
             USERSEARCH: 'User'
         },
         LOGIN: {

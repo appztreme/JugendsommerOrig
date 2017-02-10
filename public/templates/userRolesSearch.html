@@ -1,4 +1,17 @@
 <div class='container'>
-<h2 class='text-orange'>User suchen</h2>
-
+<form class="form-inline">
+    <div class="form-group" novalidate ng-submit='search()'>
+        <label for='searchTerm' class='control-label col-sm-2'>Suchbegriff</label>
+        <input type="text" ng-model='searchTerm' class="form-control col-sm-offset-2 col-sm-3" id="searchTerm" />
+     </div>
+     <button type="submit" class="btn btn-success btn-default">Suchen</button>
+</form>
+<h2 class="text-orange">Such-Ergebnisse</h2>
+<div class="list-group">
+  <div ng-repeat='user in searchResult' class="list-group-item list-group-item-warning">
+    <span class="glyphicon glyphicon-user" style="margin-right:3px;"></span>
+    <span class="list-group-item-heading"><strong>{{user.firstName}} {{user.lastName}}</strong></span>
+    <p class="list-group-item-text">Email: {{user.userEmail}} | User-Name: {{user.userName}}</p>
+  </div>
+</div>
 </div>

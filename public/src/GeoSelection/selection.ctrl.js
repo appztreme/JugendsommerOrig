@@ -31,28 +31,17 @@ app.controller('GeoSelectionCtrl', function($scope, $location, GeoSvc) {
         //     $scope.locations = sel;
         // });
     }
-    // else if(host.indexOf("jd-bozenland") !== -1) {
-    //     GeoSvc.getTypeSelection().success(function(sel) {
-    //         addNameProp(sel);
-    //         $scope.locations = sel;
-    //     });
-    // }
+    else if(host.indexOf("jd-bozenland") !== -1) {
+        GeoSvc.getTypeSelection().success(function(sel) {
+            addNameProp(sel);
+            $scope.locations = sel;
+        });
+    }
     else {
-        $scope.locations = [{_id: 'Deutschnofen', name: 'Deutschnofen', countEvents: 5, distinctTypes: ['summer']},
-                         {_id: 'Hüttenlagerwoche', name: 'Hüttenlagerwoche', countEvents: 1, distinctTypes: ['summer']},
-                         {_id: 'Jenesien', name: 'Jenesien', countEvents: 3, distinctTypes: ['summer']},
-                         {_id: 'Karneid', name: 'Karneid', countEvents: 1, distinctTypes: ['summer']},
-                         {_id: 'Mölten', name: 'Mölten', countEvents: 2, distinctTypes: ['summer']},
-                         {_id: 'Ritten', name: 'Ritten', countEvents: 4, distinctTypes: ['summer']},
-                         {_id: 'Sarntal', name: 'Sarntal', countEvents: 1, distinctTypes: ['summer']},
-                         {_id: 'SpaceCamp', name: 'SpaceCamp', countEvents: 1, distinctTypes: ['summer']},
-                         {_id: 'Tiers', name: 'Tiers', countEvents: 2, distinctTypes: ['summer']},
-                         {_id: 'Tschögglberger Jungbläserwoche', name: 'Tschögglberger Jungbläserwoche', countEvents: 1, distinctTypes: ['music']},
-                         {_id: 'Welschnofen', name: 'Welschnofen', countEvents: 2, distinctTypes: ['summer']}
-                     ];
-        // GeoSvc.getSelection().success(function(sel) {
-        //     addNameProp(sel);
-        //     $scope.locations = sel;
-        // });
+        GeoSvc.getSelection().success(function(sel) {
+            console.log("res", sel);
+            addNameProp(sel);
+            $scope.locations = sel;
+        });
     }
 });

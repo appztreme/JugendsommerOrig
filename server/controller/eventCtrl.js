@@ -1,7 +1,7 @@
 'use strict';
 const Event = require('./../models/event');
 const Activity = require('./../models/activity');
-const cache = require('./../cache');
+// const cache = require('./../cache');
 
 const curYear = new Date().getFullYear();
 const startCurYear = new Date(curYear+"-1-1");
@@ -18,11 +18,11 @@ exports.findByCurrentYear = (req, res, next) => {
 };
 
 exports.getGeoSelection = (req, res, next) => {
-	console.log("URL", req.url);
-	cache.get(req.url, function(err, cacheResult) {
-		if(cacheResult != null) return res.json(cacheResult);
-		else {
-			console.log("run from db");
+	// console.log("URL", req.url);
+	// cache.get(req.url, function(err, cacheResult) {
+	// 	if(cacheResult != null) return res.json(cacheResult);
+	// 	else {
+	// 		console.log("run from db");
 			Event.aggregate([
 				{ $match:
 					{ $and: [ {startDate: { $gte: startCurYear }}, {isInternal: false} ] }
@@ -35,11 +35,11 @@ exports.getGeoSelection = (req, res, next) => {
 				},
 				{ $sort: {_id: 1}}
 			], function(er, result) {
-				cache.set(req.url, result);
+				// cache.set(req.url, result);
 				return res.json(result);
 			});
-		}
-	});
+	// 	}
+	// });
 }
 
 exports.getGeoSelectionSummer = (req, res, next) => {
