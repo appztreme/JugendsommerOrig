@@ -100,6 +100,7 @@ exports.delete = (req, res, next) => {
 };
 
 exports.create = (req, res, next) => {
+	console.log("new reg:", req.body);
 	var reg = new Registration({
 		firstNameParent: req.body.firstNameParent,
 		lastNameParent: req.body.lastNameParent,

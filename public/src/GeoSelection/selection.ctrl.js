@@ -38,6 +38,10 @@ app.controller('GeoSelectionCtrl', function($scope, $location, GeoSvc) {
         });
     }
     else {
+        // GeoSvc.getTypeSelection().success(function(sel) {
+        //     addNameProp(sel);
+        //     $scope.locations = sel;
+        // });
         GeoSvc.getSelection().success(function(sel) {
             console.log("res", sel);
             addNameProp(sel);
