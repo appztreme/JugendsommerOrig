@@ -19,7 +19,7 @@ function getTypeString(type) {
 	}
 }
 
-function getTypeBody(type) {
+function getTypeBody(type, firstNameChild, lastNameChild) {
 	switch (type) {
 		case 'summer':
 		case 'music':
@@ -41,7 +41,7 @@ exports.sendTxtMail = function(recipient, firstNameChild, lastNameChild, type) {
 		from: "info@jugenddienst.com",
 		to: recipient,
 		subject: "Anmeldung " + getTypeString(type),
-		attachments: { data: getTypeBody(type),
+		attachments: { data: getTypeBody(type, firstNameChild, lastNameChild),
 			       alternative: true }
 	}, function(err, message) {console.log(err||message); });
 };
