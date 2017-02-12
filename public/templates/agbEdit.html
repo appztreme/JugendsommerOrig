@@ -1,6 +1,6 @@
 <div class='container'>
 <h2 class='text-orange'>Allgemeine Gesch&auml;tsbedingungen</h2>
-<p>
+<div ng-show='type === "summer" || type === "music" || type === "club"'>
 	<ol>
 	<li>Die Eltern bzw. Erziehungsberechtigten &uuml;bernehmen die Verantwortung f&uuml;r den Hin- und R&uuml;ckweg des Kindes zu den jeweiligen Programmen. Untertags werden die Jugendlichen von den Betreuer/innen beaufsichtigt.</li>
 	<li>Versicherung: Alle Teilnehmer/innen sind &uuml;ber die Versicherung AGJD (Arbeitsgemeinschaft der Jugenddienste) Haftpflicht versichert.</li>
@@ -8,9 +8,19 @@
 	<li>Die Eltern bzw. Erziehungsberechtigten erkl&auml;ren sich mit Disziplinar-ma&szlig;nahmen der Betreuer/innen einverstanden: Bei wiederholten Verst&ouml;&szlig;en gegen Vereinbarungen und nach R&uuml;cksprache mit dem Elternhaus werden die Jugendlichen nach Hause geschickt.</li>
 	<li>Aufgrund der Privacy-Bestimmungen sind wir verpflichtet, die Eltern um Erlaubnis zu fragen, Fotos und Videos von den Kindern machen zu d&uuml;rfen und einzelne davon im Sinne der T&auml;tigkeit des Vereins (z.B. Presseaussendungen, Informationsbrosch&uuml;ren, Internetauftritte) ver&ouml;ffentlichen zu d&uuml;rfen.</li>
 	</ol>
-</p>
+</div>
+<div ng-show='type === "spiritnight"'>
+	<ol>
+		<li>Die Begleitpersonen sind für die Firmlinge w&auml;hrend der gesamten Veranstaltung verantwortlich.</li>
+		<li>Versicherung: Alle Teilnehmer/innen sind über die Versicherung AGJD (Arbeitsgemeinschaft der Jugenddienste) Haftpflicht versichert; Achtung nicht Unfall versichert.</li>
+		<li>Die Kosten belaufen sich auf 12 Euro pro Teilnehmer und müssen vorab f&uuml;r die gesamte Pfarrei/Gruppe dem Kloster &uuml;berwiesen werden. Die Rechnungsdaten hierfür folgen mittels E-mail.</li>
+		<li>Die Begleitpersonen zeigen sich für einen reibungslosen Ablauf verantwortlich. Hierf&uuml;r muss die gemeldete Gruppe immer in Begleitung eines Betreuers sein (Vollj&auml;hrig) und ein respektvolles Benehmen wird vorausgesetzt.</li>
+		<li>Aufgrund der Privacy-Bestimmungen sind wir verpflichtet, die Eltern/Begleitpersonen um Erlaubnis zu fragen, Fotos/Videos/Interviews von den Kindern/Betreuern machen zu d&uuml;rfen und einzelne davon im Sinne der T&auml;tigkeit des Vereins (z.B. Presseaussendungen, Informationsbroschüren, Internetauftritte) ver&ouml;ffentlichen zu d&uuml;rfen.</li>
+		<li>Der Start der Spiritnight ist pünktlich um 16.30 Uhr. Bitte um pünktliches Erscheinen.</li>
+		<li>Die Hin- und R&uuml;ckfahrt muss eigenst&auml;ndig von jeder Pfarrei organisiert werden.</li>
+	</ol>
+</div>
 <div class='col-sm-12'>
-	<a href='/#/registration/{{activityId}}' class='btn btn-warning' role='button'>Zur&uuml;ck</a>
+	<a href='/#/registration/{{activityId}}?type={{type}}' class='btn btn-warning' role='button'>Zur&uuml;ck</a>
 </div>
 </div>
-
