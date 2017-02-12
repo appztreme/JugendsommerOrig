@@ -80,6 +80,8 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 		});
 	}
 
+	var host = $location.$$host.toLowerCase();
+
 	if(ReportCacheSvc.hasSelectionData()) {
 		$scope.events = ReportCacheSvc.events;
 		$scope.allActivities = ReportCacheSvc.allActivities;
@@ -88,9 +90,13 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 			$scope.events = _.uniq(_.map(params, function(p) {
 				return {
 					_id: p.eventId._id,
-					name: p.eventId.location + ' - ' + p.eventId.name
+					name: p.eventId.location + ' - ' + p.eventId.name,
+					type: p.eventId.type
 				}
 			}), '_id');
+
+			if(host.indexOf("jugendsommer") !== -1) $scope.events = _.filter($scope.events, function(value) { return value.type === "summer" || value.type === "music" });
+			if(host.indexOf("localhost") !== -1) $scope.events = _.filter($scope.events, function(value) { return value.type === "spiritnight" || value.type === "club" });
 
 			$scope.allActivities = _.uniq(_.map(params, function(p) {
 				return {

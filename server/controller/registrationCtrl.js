@@ -71,7 +71,7 @@ exports.find = (req, res, next) => {
 exports.getSelectableEventActivities = (req, res, next) => {
 		Activity.find()
 			.where('startDate').gte(startCurYear)
-			.populate('eventId', '_id name location')
+			.populate('eventId', '_id name location type')
 			.select('_id name eventId')
             .sort({'eventId.location': 1})
 			.exec(function(err, act) {
