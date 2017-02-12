@@ -41,7 +41,7 @@ exports.sendTxtMail = function(recipient, firstNameChild, lastNameChild, type) {
 		from: "info@jugenddienst.com",
 		to: recipient,
 		subject: "Anmeldung " + getTypeString(type),
-		attachments: { data: htmlStart + firstNameChild + " " + lastNameChild + htmlEnd,
+		attachments: { data: getTypeBody(type),
 			       alternative: true }
 	}, function(err, message) {console.log(err||message); });
 };
