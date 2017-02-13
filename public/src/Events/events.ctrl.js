@@ -18,10 +18,11 @@ app.controller('EventsCtrl', function($scope, $routeParams, $location, EventsSvc
 
 	//$scope.busyPromise = EventsSvc.find();
 	var host = $location.$$host.toLowerCase();
+	var url = $location.url();
 	if(host.indexOf("jugendsommer") !== -1) $scope.title = "Sommer-Programme";
 	else if(host.indexOf("jd-bozenland") !== -1) {
-		if(host.indexOf("spiritnight") !== -1) $scope.title ="Spiritnights";
-		else if(host.indexOf("club") !== -1) $scope.title = "Jugendtreffs";
+		if(url.indexOf("spiritnight") !== -1) $scope.title ="Spiritnights";
+		else if(url.indexOf("club") !== -1) $scope.title = "Jugendtreffs";
 		else $scope.title = "Programme";
 	}
 	else $scope.title = "Programme";
