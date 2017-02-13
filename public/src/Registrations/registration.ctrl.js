@@ -74,7 +74,8 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 				telContact2: $scope.telContact2,
 				activityId: RegistrationSvc.activityId,
 				userId: IdentitySvc.currentUser._id,
-				needsPreCare: $scope.needsPreCare
+				needsPreCare: $scope.needsPreCare,
+				type: $scope.type
 			})
 			.error(function(err) {
 				if(err.indexOf('duplicate key error index') > -1) {

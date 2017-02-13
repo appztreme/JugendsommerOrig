@@ -16,9 +16,15 @@ app.controller('EventsCtrl', function($scope, $routeParams, $location, EventsSvc
 	const eventsBlaeserwoche = [{"_id":"587cfc7ee59c3d94cd4c2d4e","name":"Tschöggelberger Jungbläserwoche","description":"1. Klasse Mittelschule - 1. Klasse Oberschule, des gesamten Einzugsgebietes des Jugenddienstes Bozen-Land. Die Jungmusikanten vom Tschögglberg haben bei der Anmeldung Vorrang.","startDate":"2017-08-16T00:00:00.000Z","endDate":"2017-08-26T00:00:00.000Z","info":"Der Kostenbeitrag für das gesamte Projekt beläuft sich auf 140 Euro pro TeilnehmerIn. Falls zwei Kinder einer Familie an diesem Programm teilnehmen, muss für das zweite Kind nur mehr 130 Euro bezahlt werden.","__v":0,"isInternal":false,"budgetFood":0,"budgetBusiness":0,"visibleTo":"2017-07-01T00:00:00.000Z","visibleFrom":"2017-02-03T00:00:00.000Z","location":"Tschögglberger Jungbläserwoche","type":"music","$$hashKey":"object:1400"}];
 	const eventsWelschnofen = [{"_id":"587cef8b04ca82f0b1b526e3","name":"Kindersommer Welschnofen","description":"GrundschülerInnen 1. - 4. Klasse","startDate":"2017-07-24T00:00:00.000Z","endDate":"2017-08-11T00:00:00.000Z","info":"Der Kostenbeitrag für eine Woche beläuft sich auf 70 Euro. Falls zwei Kinder einer Familie an diesem Programm teilnehmen, muss für das zweite Kind nur mehr 60 Euro pro Woche bezahlt werden.","__v":0,"isInternal":false,"budgetFood":0,"budgetBusiness":0,"visibleTo":"2017-07-01T00:00:00.000Z","visibleFrom":"2017-02-03T00:00:00.000Z","location":"Welschnofen","type":"summer","$$hashKey":"object:1493"},{"_id":"587cf1d804ca82f0b1b526e7","name":"Jugendsommer Welschnofen","description":"5. Klasse Grundschule - 3. Klasse Mittelschule","startDate":"2017-07-24T00:00:00.000Z","endDate":"2017-08-11T00:00:00.000Z","info":"Der Kostenbeitrag für eine Woche beläuft sich auf 70 Euro. Falls zwei Kinder einer Familie an diesem Programm teilnehmen, muss für das zweite Kind nur mehr 60 Euro pro Woche bezahlt werden.","__v":0,"isInternal":false,"budgetFood":0,"budgetBusiness":0,"visibleTo":"2017-07-01T00:00:00.000Z","visibleFrom":"2017-02-03T00:00:00.000Z","location":"Welschnofen","type":"summer","$$hashKey":"object:1494"}];
 
-
 	//$scope.busyPromise = EventsSvc.find();
 	var host = $location.$$host.toLowerCase();
+	if(host.indexOf("jugendsommer") !== -1) $scope.title = "Sommer-Programme";
+	else if(host.indexOf("jd-bozenland") !== -1) {
+		if(host.indexOf("spiritnight") !== -1) $scope.title ="Spiritnights";
+		else if(host.indexOf("club") !== -1) $scope.title = "Jugendtreffs";
+		else $scope.title = "Programme";
+	}
+	else $scope.title = "Programme";
 
 	//onload section
 	if(IdentitySvc.isAdmin()) {
