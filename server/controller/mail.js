@@ -36,12 +36,13 @@ function getTypeBody(type, firstNameChild, lastNameChild) {
 }
 
 exports.sendTxtMail = function(recipient, firstNameChild, lastNameChild, type) {
+		var body = getTypeBody(type, firstNameChild, lastNameChild);
 		server.send({
 		text: txtStart + firstNameChild + " " + lastNameChild + txtEnd,
 		from: "info@jugenddienst.com",
 		to: recipient,
 		subject: "Anmeldung " + getTypeString(type),
-		attachments: { data: getTypeBody(type, firstNameChild, lastNameChild),
+		attachments: { data: body,
 			       alternative: true }
 	}, function(err, message) {console.log(err||message); });
 };
