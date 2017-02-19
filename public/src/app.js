@@ -1,6 +1,12 @@
 var app = angular.module('js', ['ngRoute','ngResource','cgBusy','jkuri.datepicker','pascalprecht.translate']);
 
-app.config(['$routeProvider', '$httpProvider', '$translateProvider', function($routeProvider, $httpProvider, $translateProvider) {
+var env = {};
+// Import variables if present (from env.js)
+if(window) { Object.assign(env, window.__env); }
+
+app.constant('conf', env);
+
+app.config(['$routeProvider', '$httpProvider', '$translateProvider', 'conf', function($routeProvider, $httpProvider, $translateProvider, conf) {
     $httpProvider.defaults.cache = false;
     if (!$httpProvider.defaults.headers.get) {
       $httpProvider.defaults.headers.get = {};
@@ -8,43 +14,8 @@ app.config(['$routeProvider', '$httpProvider', '$translateProvider', function($r
     // disable IE ajax request caching
     $httpProvider.defaults.headers.get['If-Modified-Since'] = '0';
 
-    $translateProvider.translations('de', {
-        NAV: {
-            INFO: 'Info',
-            PROGRAM: 'Programm',
-            MYRES: 'Meine Reservierungen',
-            MYCOMMITS: 'Meine Rechnungen',
-            REPORT: 'Report',
-            LENDINGS: 'Material',
-            USERSEARCH: 'User'
-        },
-        LOGIN: {
-            USER: 'User',
-            PWD: 'Passwort',
-            LOGIN: 'Anmelden',
-            NEW: 'Neuer User',
-            PWDNEW: 'Passort vergessen'
-        }
-    });
-
-    $translateProvider.translations('it', {
-        NAV: {
-            INFO: 'Info',
-            PROGRAM: 'Programm',
-            MYRES: 'Meine Reservierungen',
-            MYCOMMITS: 'Meine Rechnungen',
-            REPORT: 'Report',
-            LENDINGS: 'Material',
-            USERSEARCH: 'User'
-        },
-        LOGIN: {
-            USER: 'User',
-            PWD: 'Passwort',
-            LOGIN: 'Anmelden',
-            NEW: 'Neuer User',
-            PWDNEW: 'Passort vergessen'
-        }
-    });
+    $translateProvider.translations('de', conf.translations.de);
+    $translateProvider.translations('it', conf.translations.it);
     $translateProvider.useSanitizeValueStrategy('escape');
     $translateProvider.preferredLanguage('de');
 }]);

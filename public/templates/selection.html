@@ -1,12 +1,12 @@
 <div class='container'>
-<h2 class='text-orange'>{{title}}</h2>
+<h2 class='text-orange'>{{'SELECTION.TITLE' | translate}}</h2>
 
 <div ng-repeat='loc in locations'>
     <div class='card-orange'>
         <a class='invisible-link' href='#/events/{{loc._id}}'>
         <div class='panel-header'>
                 <h3><strong>{{loc.name}}</strong>
-                <h5>Programme: <span class='badge bg-darkorange'>{{loc.countEvents}}</span></h5></h3>
+                <h5>{{'SELECTION.PROGRAM' | translate}}: <span class='badge bg-darkorange'>{{loc.countEvents}}</span></h5></h3>
                 <hr />
         </div>
         <div class='panel-body'>

@@ -9,13 +9,20 @@ app.controller('EventNewCtrl', function($scope, $location, EventsSvc, Notificati
 		$scope.locations = locs;
 	});
 
+	function getItalianLocation(name) {
+		return $scope.locations.
+	}
+
 	$scope.save = function() {
 		if($scope.eventForm.$valid) {
 			EventsSvc.create({
 				name: $scope.name,
+				name_it: $scope.name_it,
 				description: $scope.description,
+				description_it: $scope.description_it,
 				type: $scope.type,
 				location: $scope.location,
+				location_it: $scope.locations
 				startDate: $scope.startDate,
 				endDate: $scope.endDate,
 				visibleFrom: $scope.visibleFrom,
@@ -23,10 +30,13 @@ app.controller('EventNewCtrl', function($scope, $location, EventsSvc, Notificati
 				budgetBusiness: $scope.budgetBusiness,
 				budgetFood: $scope.budgetFood,
 				info: $scope.info,
+				info_it: $scope.info_it,
 				isInternal: $scope.isInternal,
 			}).success(function(ev) {
 				$scope.name = null;
+				$scope.name_it = null;
 				$scope.description = null;
+				$scope.description_it = null;
 				$scope.type = null;
 				$scope.location = null;
 				$scope.startDate = null;
@@ -36,6 +46,7 @@ app.controller('EventNewCtrl', function($scope, $location, EventsSvc, Notificati
 				$scope.budgetBusiness = 0;
 				$scope.budgetFood = 0;
 				$scope.info = null;
+				$scope.info_it = null;
 				$scope.isInternal = false;
 
 				NotificationSvc.notify('Neues Programm erfolgreich gespeichert');

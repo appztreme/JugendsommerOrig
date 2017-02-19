@@ -1,23 +1,16 @@
 var app = angular.module('js');
 
-app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $location, NotificationSvc, RegistrationSvc, RegistrationCacheSvc, IdentitySvc) {
+app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $location, NotificationSvc, RegistrationSvc, RegistrationCacheSvc, IdentitySvc, conf) {
 	RegistrationSvc.activityId = $routeParams.activityId;
 	$scope.activityId = $routeParams.activityId;
 
 	// $scope.busyPromise = RegistrationSvc.create();
 
 	$scope.type = $routeParams.type;
-	$scope.cities = ['Deutschnofen', 'Jenesien', 'Karneid', 'Mölten', 'Ritten', 'Sarntal', 'Tiers', 'Vöran', 'Welschnofen', 'Andere'];
+	$scope.cities = conf.cities;
 	$scope.addressChild = ' ';
 	$scope.cityChild = 'Deutschnofen';
 	$scope.needsPreCare = false;
-	// RegistrationSvc.getCities()
-	// 	.success(function(cities) {
-	// 		console.log("CITIES", cities);
-	// 		$scope.cities = cities;
-	// 	}).error(function(err) {
-	// 		console.log("city load error", err);
-	// 	});
 
 	$scope.isRegistrationAllowed = function() {
 		return $scope.registrationForm.$valid && $scope.acceptAGB;

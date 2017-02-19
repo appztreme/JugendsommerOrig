@@ -10,11 +10,25 @@
 			<input name='name' type='text' ng-model='name' required class='form-control'></input>
 		</div>
 	</div>
+	<!-- NAME_IT -->
+	<div class='form-group' ng-class='{ "has-error": eventForm.name_it.$invalid }'>
+    	<label for='name_it' class='control-label col-sm-2'>Name IT</label>
+		<div class='col-sm-10'>
+			<input name='name_it' type='text' ng-model='name_it' required class='form-control'></input>
+		</div>
+	</div>
 	<!-- DESCRIPTION -->
 	<div class='form-group' ng-class='{ "has-error": eventForm.description.$invalid }'>
 		<label for='description' class='control-label col-sm-2'>Beschreibung</label>
 		<div class='col-sm-10'>
 			<textarea name='description' type='text' ng-model='description' class='form-control' rows='3' placehoder='Beschreibung eintragen' required ></textarea>
+		</div>
+	</div>
+	<!-- DESCRIPTION_IT -->
+	<div class='form-group' ng-class='{ "has-error": eventForm.description_it.$invalid }'>
+		<label for='description_it' class='control-label col-sm-2'>Beschreibung IT</label>
+		<div class='col-sm-10'>
+			<textarea name='description_it' type='text' ng-model='description_it' class='form-control' rows='3' placehoder='Beschreibung eintragen' required ></textarea>
 		</div>
 	</div>
 	<!-- TYPE -->
@@ -34,7 +48,7 @@
 		<label for='location' class='control-label col-sm-2'>Ort</label>
 		<div class='col-sm-10'>
 			<select name='location' class='sel-base form-control' ng-model='location'>
-				<option ng-repeat="loc in locations" value='{{loc}}'>{{loc}}</option>
+				<option ng-repeat="loc in locations" value='{{loc.name}}'>{{loc.name}}</option>
 			</select>
 		</div>
 	</div>
@@ -97,6 +111,13 @@
 		<label for='info' class='control-label col-sm-2'>Info</label>
 		<div class='col-sm-10'>
 			<textarea name='info' type='text' ng-model='info' required class='form-control' rows='3'></textarea>
+		</div>
+	</div>
+	<!-- INFO_IT -->
+	<div class='form-group' ng-class='{ "has-error": eventForm.info_it.$invalid }'>
+		<label for='info_it' class='control-label col-sm-2'>Info</label>
+		<div class='col-sm-10'>
+			<textarea name='info_it' type='text' ng-model='info_it' required class='form-control' rows='3'></textarea>
 		</div>
 	</div>
 	<!-- ISINTERNAL -->

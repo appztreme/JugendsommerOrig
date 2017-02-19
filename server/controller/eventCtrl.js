@@ -167,16 +167,20 @@ exports.findByEventId = (req, res, next) => {
 exports.create = (req, res, next) => {
 	var ev = new Event({
 		name: req.body.name,
+		name_it: req.body.name_it,
 		description: req.body.description,
+		description_it: req.body.description_it,
 		type: req.body.type,
 		location: req.body.location,
+		location_it: req.body.location_it,
 		startDate: req.body.startDate,
 		endDate: req.body.endDate,
 		visibleFrom: req.body.visibleFrom,
 		visibleTo: req.body.visibleTo,
 		budgetFood: req.body.budgetFood,
 		budgetBusiness: req.body.budgetBusiness,
-	  info: req.body.info,
+	  	info: req.body.info,
+		info_it: req.body.info_it,
 		isInternal: req.body.isInternal
 	});
 	ev.save(function(err, ev) {
@@ -196,9 +200,12 @@ exports.update = (req, res, next) => {
 	Event.findById(req.body._id, function(err, ev) {
 		if(!ev) return next(new Error('Kein Event im System mit id ' + req.body._id));
 		ev.name = req.body.name;
+		ev.name_it = req.body.name_it;
 		ev.description = req.body.description;
+		ev.description_it = req.body.description_it;
 		ev.type = req.body.type;
 		ev.location = req.body.location;
+		ev.location_it = req.body.location_it;
 		ev.startDate = req.body.startDate;
 		ev.endDate = req.body.endDate;
 		ev.visibleFrom = req.body.visibleFrom;
@@ -206,6 +213,7 @@ exports.update = (req, res, next) => {
 		ev.budgetFood = req.body.budgetFood;
 		ev.budgetBusiness = req.body.budgetBusiness;
 		ev.info = req.body.info;
+		ev.info_it = req.body.info_it;
 		ev.isInternal = req.body.isInternal;
 
 		ev.save(function(erre, eve) {

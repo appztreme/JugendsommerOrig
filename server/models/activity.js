@@ -3,7 +3,9 @@ var mongoose = require('mongoose');
 
 var Activity = db.model('Activity', {
 	name: { type: String, required: true },
+	name_it: { type: String, required: false },
 	description: { type: String, required: true },
+	description_it: { type: String, required: false },
 	startDate: { type: Date, required: true },
 	endDate: { type: Date, required: true },
     eventId: { type: mongoose.Schema.Types.ObjectId, ref: 'Event', required: true },
