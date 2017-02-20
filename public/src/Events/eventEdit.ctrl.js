@@ -34,7 +34,9 @@ app.controller('EventEditCtrl', function($scope, $routeParams, $location, Notifi
 	EventsSvc.findById($routeParams.eventId).success(function(ev) {
 		$scope.event = ev;
 		$scope.name = ev.name;
+		$scope.name_it = ev.name_it;
 		$scope.description = ev.description;
+		$scope.description_it = ev.description_it;
 		$scope.type = ev.type;
 		$scope.location = ev.location;
 		$scope.startDate = new Date(ev.startDate);

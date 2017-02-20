@@ -56,7 +56,7 @@ exports.update = (req, res, next) => {
 	Activity.findById(req.body._id, function(err, activity) {
 		if(!activity) return next(new Error('Keine Activity im System mit id ' + req.body._id));
 		activity.name = req.body.name;
-		activity.name_it = req.body.name;
+		activity.name_it = req.body.name_it;
 		activity.description = req.body.description;
 		activity.description_it = req.body.description_it;
 		activity.startDate = req.body.startDate;

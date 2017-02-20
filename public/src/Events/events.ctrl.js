@@ -32,7 +32,7 @@ app.controller('EventsCtrl', function($scope, $routeParams, $location, EventsSvc
 			if(host.indexOf('jugendsommer') !== -1) {
 				EventsSvc.findBySummerLocation($routeParams.location).success(function(evs) {
 					$scope.events = evs;
-				})
+				});
 			} else {
 				EventsSvc.findByLocation($routeParams.location).success(function(evs) {
 					$scope.events = evs;

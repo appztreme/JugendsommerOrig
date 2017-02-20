@@ -10,7 +10,7 @@ app.controller('EventNewCtrl', function($scope, $location, EventsSvc, Notificati
 	});
 
 	function getItalianLocation(name) {
-		return $scope.locations.
+		//return $scope.locations.
 	}
 
 	$scope.save = function() {
@@ -22,7 +22,7 @@ app.controller('EventNewCtrl', function($scope, $location, EventsSvc, Notificati
 				description_it: $scope.description_it,
 				type: $scope.type,
 				location: $scope.location,
-				location_it: $scope.locations
+				location_it: $scope.location,
 				startDate: $scope.startDate,
 				endDate: $scope.endDate,
 				visibleFrom: $scope.visibleFrom,
