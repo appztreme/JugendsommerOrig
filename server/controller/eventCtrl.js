@@ -197,6 +197,7 @@ exports.delete = (req, res, next) => {
 };
 
 exports.update = (req, res, next) => {
+	console.log("Body update", req.body);
 	Event.findById(req.body._id, function(err, ev) {
 		if(!ev) return next(new Error('Kein Event im System mit id ' + req.body._id));
 		ev.name = req.body.name;

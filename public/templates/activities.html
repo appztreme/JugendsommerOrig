@@ -1,7 +1,7 @@
 <div class="container">
 	<div class="row">
 		<div class='col-sm-10'>
-			<h2 class='text-orange'>Details</h2>
+			<h2 class='text-orange'>{{'ACTIVITIES.TITLE' | translate}}</h2>
 		</div>
 			<div class='col-sm-2' ng-show='iSvc.isAuthorized("admin")'>
 			<a class='btn btn-success btn-block' href="/#/newActivity" role="button">Neu</a>
@@ -47,11 +47,9 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Achtung</h4>
+        <h4 class="modal-title" id="myModalLabel">{{"ACTIVITIES.WARNINGTITLE" | translate}}</h4>
       </div>
-      <div class="modal-body">
-        Um sich Anmelden zu k&ouml;nnen, m&uuml;ssen sie als User eingeloggt und weiter freie Pl&auml;tze vorhanden sein!
-      </div>
+      <div class="modal-body">{{"ACTIVITIES.WARNING" | translate}}</div>
       <div class="modal-footer">
         <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
       </div>

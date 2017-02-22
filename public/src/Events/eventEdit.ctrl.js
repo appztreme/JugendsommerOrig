@@ -2,14 +2,17 @@ var app = angular.module('js');
 
 app.controller('EventEditCtrl', function($scope, $routeParams, $location, NotificationSvc, EventsSvc) {
 
-	$scope.title = 'Programm &auml;ndern';
+	$scope.title = 'Programm ändern';
 
 	$scope.save = function() {
 		if($scope.eventForm.$valid) {
 			$scope.event.name = $scope.name;
+			$scope.event.name_it = $scope.name_it;
 			$scope.event.description = $scope.description;
+			$scope.event.description_it = $scope.description_it;
 			$scope.event.type = $scope.type;
 			$scope.event.location = $scope.location;
+			$scope.event.location_it = $scope.location;
 			$scope.event.startDate = $scope.startDate;
 			$scope.event.endDate = $scope.endDate;
 			$scope.event.visibleFrom = $scope.visibleFrom;
@@ -17,6 +20,7 @@ app.controller('EventEditCtrl', function($scope, $routeParams, $location, Notifi
 			$scope.event.budgetBusiness = $scope.budgetBusiness;
 			$scope.event.budgetFood = $scope.budgetFood;
 			$scope.event.info = $scope.info;
+			$scope.event.info_it = $scope.info_it;
 			$scope.event.isInternal = $scope.isInternal;
 
 			EventsSvc.update($scope.event)
@@ -39,6 +43,7 @@ app.controller('EventEditCtrl', function($scope, $routeParams, $location, Notifi
 		$scope.description_it = ev.description_it;
 		$scope.type = ev.type;
 		$scope.location = ev.location;
+		$scope.location_it = ev.location_it;
 		$scope.startDate = new Date(ev.startDate);
 		$scope.endDate = new Date(ev.endDate);
 		$scope.visibleFrom = new Date(ev.visibleFrom);
@@ -46,6 +51,7 @@ app.controller('EventEditCtrl', function($scope, $routeParams, $location, Notifi
 		$scope.budgetBusiness = ev.budgetBusiness;
 		$scope.budgetFood = ev.budgetFood;
 		$scope.info = ev.info;
+		$scope.info_it = ev.info_it;
 		$scope.isInternal = ev.isInternal;
 	});
 });
