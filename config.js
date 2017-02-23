@@ -15,5 +15,8 @@ module.exports = {
         {"name": 'Hüttenlagerwoche',        "name_it": 'Hüttenlagerwoche'},
         {"name": 'Tschögglberger Jungbläserwoche', "name_it": 'Tschögglberger Jungbläserwoche'}
     ],
-    "cities": ['Deutschnofen', 'Jenesien', 'Karneid', 'Mölten', 'Ritten', 'Sarntal', 'Tiers', 'Vöran', 'Welschnofen', 'Andere']
+    "cities": ['Deutschnofen', 'Jenesien', 'Karneid', 'Mölten', 'Ritten', 'Sarntal', 'Tiers', 'Vöran', 'Welschnofen', 'Andere'],
+    "db_test": "'mongodb://localhost/jugendsommer_test",
+    "db_prod": "mongodb://localhost/jugendsommer",
+    "port": 82
 }

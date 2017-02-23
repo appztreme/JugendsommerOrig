@@ -1,14 +1,14 @@
 'use strict';
-
 var mongoose = require('mongoose');
+var config = require('./../config');
 
 if(process.env.NODE_ENV === 'test') {
-	mongoose.connect('mongodb://localhost/jugendsommer_test', function() {
+	mongoose.connect(config.db_test, function() {
 		console.log('mongodb connected to test instance');
 	});
 }
 else {
-	mongoose.connect('mongodb://localhost/jugendsommer', function() {
+	mongoose.connect(config.db_prod, function() {
 		console.log('mongodb connected to production');
 	});
 }
