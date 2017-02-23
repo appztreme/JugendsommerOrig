@@ -1,58 +1,58 @@
 <div class='container'>
-<h2 class='text-orange'>{{"REGISTRATION.TITLE" | translate}}</h2>
-<button ng-show='hasCachedRegistration()' ng-click='updateFromCache()' class='btn btn-success bnt-lg col-sm-offset-2'>{{"REGISTRATION.LABEL_LOAD_PREVIOUS"}}</button>
+<h2 class='text-orange'>{{"RESERVATION.TITLE" | translate}}</h2>
+<button ng-show='hasCachedRegistration()' ng-click='updateFromCache()' class='btn btn-success bnt-lg col-sm-offset-2'>{{"RESERVATION.LABEL_LOAD_PREVIOUS"}}</button>
 <form name='registrationForm' class='form-horizontal' novalidate ng-submit='save()'>
 	<div cg-Busy='{promise:busyPromise,message:"Loading",backdrop:true,minDuration:500}'></div>
 
-	<div ng-show='type === "summer" || type === "music" || type === "club"' class='text-orange'><strong>{{"REGISTRATION.HEADER_SUMMER_PARENT" | translate}}</strong></div>
-	<div ng-show='type === "spiritnight"' class='text-orange'><strong>{{"REGISTRATION.HEADER_SPIRIT_PARENT" | translate}}</strong></div>
+	<div ng-show='type === "summer" || type === "music" || type === "club"' class='text-orange'><strong>{{"RESERVATION.HEADER_SUMMER_PARENT" | translate}}</strong></div>
+	<div ng-show='type === "spiritnight"' class='text-orange'><strong>{{"RESERVATION.HEADER_SPIRIT_PARENT" | translate}}</strong></div>
 	<!-- FIRSTNAMEPARENT -->
 	<div class='form-group' ng-class='{ "has-error": registrationForm.firstNameParent.$invalid }'>
-	    <label for='firstNameParent' class='control-label col-sm-2'>{{"REGISTRATION.LABEL_FIRSTNAME_PARENT" | translate}}</label>
+	    <label for='firstNameParent' class='control-label col-sm-2'>{{"RESERVATION.LABEL_FIRSTNAME_PARENT" | translate}}</label>
 		<div class='col-sm-10'>
 			<input name='firstNameParent' type='text' ng-model='firstNameParent' required maxlength='100' class='form-control'></input>
 		</div>
 	</div>
 	<!-- LASTNAMEPARENT -->
 	<div class='form-group' ng-class='{ "has-error": registrationForm.lastNameParent.$invalid }'>
-		<label for='lastNameParent' class='control-label col-sm-2'>{{"REGISTRATION.LABEL_LASTNAME_PARENT" | translate}}</label>
+		<label for='lastNameParent' class='control-label col-sm-2'>{{"RESERVATION.LABEL_LASTNAME_PARENT" | translate}}</label>
 		<div class='col-sm-10'>
 			<input name='lastNameParent' type='text' ng-model='lastNameParent' class='form-control' required maxlenght='100'></input>
 		</div>
 	</div>
 	<!-- PHONENUMBERPARENT -->
 	<div class='form-group' ng-class='{ "has-error": registrationForm.phoneNumberParent.$invalid }'>
-		<label for='phoneNumberParent' class='control-label col-sm-2'>{{"REGISTRATION.LABEL_TEL_PARENT" | translate}}</label>
+		<label for='phoneNumberParent' class='control-label col-sm-2'>{{"RESERVATION.LABEL_TEL_PARENT" | translate}}</label>
 		<div class='col-sm-10'>
 			<input name='phoneNumberParent' type='tel' ng-model='phoneNumberParent' required maxlength='150' class='form-control'></input>
 		</div>
 	</div>
 	<!-- EMAILPARENT -->
 	<div class='form-group' ng-class='{ "has-error": registrationForm.emailParent.$invalid }'>
-		<label for='emailParent' class='control-label col-sm-2'>{{"REGISTRATION.LABEL_MAIL_PARENT" | translate}}</label>
+		<label for='emailParent' class='control-label col-sm-2'>{{"RESERVATION.LABEL_MAIL_PARENT" | translate}}</label>
 		<div class='col-sm-10'>
 			<input name='emailParent' type='email' ng-model='emailParent' required maxlength='200' class='form-control'></input>
 		</div>
 	</div>
-	<div ng-show='type === "summer" || type === "music" || type === "club"' class='text-orange'><strong>{{"REGISTRATION.HEADER_SUMMER_CHILD" | translate}}</strong></div>
-	<div ng-show='type === "spiritnight"' class='text-orange'><strong>{{"REGISTRATION.HEADER_SPIRIT_CHILD" | translate}}</strong></div>
+	<div ng-show='type === "summer" || type === "music" || type === "club"' class='text-orange'><strong>{{"RESERVATION.HEADER_SUMMER_CHILD" | translate}}</strong></div>
+	<div ng-show='type === "spiritnight"' class='text-orange'><strong>{{"RESERVATION.HEADER_SPIRIT_CHILD" | translate}}</strong></div>
 	<!-- FIRSTNAMECHILD -->
 	<div class='form-group' ng-class='{ "has-error": registrationForm.firstNameChild.$invalid }'>
-	    <label for='firstNameChild' class='control-label col-sm-2'>{{"REGISTRATION.LABEL_FIRSTNAME_CHILD" | translate}}</label>
+	    <label for='firstNameChild' class='control-label col-sm-2'>{{"RESERVATION.LABEL_FIRSTNAME_CHILD" | translate}}</label>
 		<div class='col-sm-10'>
 			<input name='firstNameChild' type='text' ng-model='firstNameChild' required maxlength='100' class='form-control'></input>
 		</div>
 	</div>
 	<!-- LASTNAMECHILD -->
 	<div class='form-group' ng-class='{ "has-error": registrationForm.lastNameChild.$invalid }'>
-		<label for='lastNameChild' class='control-label col-sm-2'>{{"REGISTRATION.LABEL_LASTNAME_CHILD" | translate}}</label>
+		<label for='lastNameChild' class='control-label col-sm-2'>{{"RESERVATION.LABEL_LASTNAME_CHILD" | translate}}</label>
 		<div class='col-sm-10'>
 			<input name='lastNameChild' type='text' ng-model='lastNameChild' class='form-control' required maxlenght='100'></input>
 		</div>
 	</div>
 	<!-- BIRTHDAYCHILD -->
 	<div class='form-group' ng-class='{ "has-error": registrationForm.birthdayChild.$invalid }'>
-		<label for='birthdayChild' class='control-label col-sm-2'>{{"REGISTRATION.LABEL_BIRTHDAY_CHILD" | translate}}</label>
+		<label for='birthdayChild' class='control-label col-sm-2'>{{"RESERVATION.LABEL_BIRTHDAY_CHILD" | translate}}</label>
 		<div class='col-sm-10'>
 		<p class='input-group'>
 			<ng-datepicker ng-model='birthdayChild' view-format="DD.MM.YYYY"  locale='de' required></ng-datepicker>
@@ -61,28 +61,28 @@
 	</div>
 	<!-- SCHOOLCHILD -->
 	<div class='form-group' ng-class='{ "has-error": registrationForm.schoolChild.$invalid }'>
-		<label for='schoolChild' class='control-label col-sm-2'>{{"REGISTRATION.LABEL_SCHOOL_CHILD" | translate}}</label>
+		<label for='schoolChild' class='control-label col-sm-2'>{{"RESERVATION.LABEL_SCHOOL_CHILD" | translate}}</label>
 		<div class='col-sm-10'>
 			<input name='schoolChild' type='text' ng-model='schoolChild' required maxlength='100' class='form-control'></input>
 		</div>
 	</div>
 	<!-- HEALTHCHILD -->
 	<div class='form-group' ng-class='{ "has-error": registrationForm.healthChild.$invalid }'>
-		<label for='healthChild' class='control-label col-sm-2'>{{"REGISTRATION.LABEL_HEALTH_CHILD" | translate}}</label>
+		<label for='healthChild' class='control-label col-sm-2'>{{"RESERVATION.LABEL_HEALTH_CHILD" | translate}}</label>
 		<div class='col-sm-10'>
 			<textarea name='healthChild' ng-model='healthChild' rows='3' maxlength='350' class='form-control'></textarea>
 		</div>
 	</div>
 	<!-- ADDRESSCHILD -->
 	<div ng-show='type !== "spiritnight"' class='form-group' ng-class='{ "has-error": registrationForm.addressChild.$invalid }'>
-		<label for='addressChild' class='control-label col-sm-2'>{{"REGISTRATION.LABEL_ADDRESS_CHILD" | translate}}</label>
+		<label for='addressChild' class='control-label col-sm-2'>{{"RESERVATION.LABEL_ADDRESS_CHILD" | translate}}</label>
 		<div class='col-sm-10'>
 			<input name='addressChild' type='text' ng-model='addressChild' maxlength='100' class='form-control'></input>
 		</div>
 	</div>
 	<!-- CITYCHILD -->
 	<div ng-show='type !== "spiritnight"' class='form-group' ng-class='{ "has-error": registrationForm.cityChild.$invalid }'>
-		<label for='cityChild' class='control-label col-sm-2'>{{"REGISTRATION.LABEL_CITY_CHILD" | translate}}</label>
+		<label for='cityChild' class='control-label col-sm-2'>{{"RESERVATION.LABEL_CITY_CHILD" | translate}}</label>
 		<div class='col-sm-10'>
 			<select name='cityChild' class='sel-base form-control' ng-model='cityChild'>
 				<option ng-repeat="city in cities" value='{{city}}'>{{city}}</option>
@@ -91,59 +91,59 @@
 	</div>
 	<!-- NEEDSPRECARE -->
 	<div ng-show='type === "summer" || type === "music"' class='col-sm-offset-2 col-sm4'>
-		<input type='checkbox' name='needsPreCare' ng-model='needsPreCare'><strong>{{"REGISTRATION.LABEL_PRECARE_CHILD" | translate}}</input>
+		<input type='checkbox' name='needsPreCare' ng-model='needsPreCare'><strong>{{"RESERVATION.LABEL_PRECARE_CHILD" | translate}}</input>
 	</div>
 	<br />
 	<div ng-show='type === "music"' class="panel panel-default">
 	<!-- JUNGBLÄSERWOCHE -->
-  <div ng-show='type == "music"' class="panel-heading text-orange"><strong>{{"REGISTRATION.HEADER_MUSIC" | translate}}</strong></div>
+  <div ng-show='type == "music"' class="panel-heading text-orange"><strong>{{"RESERVATION.HEADER_MUSIC" | translate}}</strong></div>
   <div ng-show='type == "music"' class="panel-body">
 		<div class='form-group' ng-class='{ "has-error": registrationForm.bandName.$invalid }'>
-			<label for='bandName' class='control-label col-sm-2'>{{"REGISTRATION.LABEL_BANDNAME_CHILD" | translate}}</label>
+			<label for='bandName' class='control-label col-sm-2'>{{"RESERVATION.LABEL_BANDNAME_CHILD" | translate}}</label>
 			<div class='col-sm-10'>
 				<input name='bandName' type='text' ng-model='bandName' maxlength="100" class='form-control'></textarea>
 			</div>
 		</div>
 		<div class='form-group' ng-class='{ "has-error": registrationForm.instrument.$invalid }'>
-			<label for='instrument' class='control-label col-sm-2'>{{"REGISTRATION.LABEL_INSTRUMENT_CHILD" | translate}}</label>
+			<label for='instrument' class='control-label col-sm-2'>{{"RESERVATION.LABEL_INSTRUMENT_CHILD" | translate}}</label>
 			<div class='col-sm-10'>
 				<input name='instrument' type='text' ng-model='instrument' maxlength="100" class='form-control'></textarea>
 			</div>
 		</div>
 		<div class='form-group' ng-class='{ "has-error": registrationForm.bandName.$invalid }'>
-			<label for='instrumentYears' class='control-label col-sm-2'>{{"REGISTRATION.LABEL_YEARSINSTRUMENT_CHILD" | translate}}</label>
+			<label for='instrumentYears' class='control-label col-sm-2'>{{"RESERVATION.LABEL_YEARSINSTRUMENT_CHILD" | translate}}</label>
 			<div class='col-sm-10'>
 				<input name='instrumentYears' type='text' ng-model='instrumentYears' maxlength="100" class='form-control'></textarea>
 			</div>
 		</div>
   </div>
 </div>
-	<div ng-show='type === "summer" || type === "music"' class='text-orange'><strong>{{"REGISTRATION.HEADER_CONTACT" | translate}}</strong></div>
+	<div ng-show='type === "summer" || type === "music"' class='text-orange'><strong>{{"RESERVATION.HEADER_CONTACT" | translate}}</strong></div>
 	<!-- NAMECONTACT1 TELCONTACT1 -->
 	<div ng-show='type === "summer" || type === "music"' class='form-group'>
-		<label for='nameContact1' class='control-label col-sm-2'>{{"REGISTRATION.LABEL_NAME_CONTACT1" | translate}}</label>
+		<label for='nameContact1' class='control-label col-sm-2'>{{"RESERVATION.LABEL_NAME_CONTACT1" | translate}}</label>
 		<div class='col-sm-4'>
 			<input name='nameContact1' type='text' maxlength='250' ng-model='nameContact1' class='form-control'></input>
 		</div>
-		<label for='telContact1' class='control-label col-sm-2'>{{"REGISTRATION.LABEL_TEL_CONTACT1" | translate}}</label>
+		<label for='telContact1' class='control-label col-sm-2'>{{"RESERVATION.LABEL_TEL_CONTACT1" | translate}}</label>
 		<div class='col-sm-4'>
 			<input name='telContact1' type='tel' maxlength='100' ng-model='telContact1' class='form-control'></input>
 		</div>
 	</div>
 	<!-- NAMECONTACT2 TELCONTACT2 -->
 	<div ng-show='type === "summer" || type === "music"' class='form-group'>
-		<label for='nameContact2' class='control-label col-sm-2'>{{"REGISTRATION.LABEL_NAME_CONTACT2" | translate}}</label>
+		<label for='nameContact2' class='control-label col-sm-2'>{{"RESERVATION.LABEL_NAME_CONTACT2" | translate}}</label>
 		<div class='col-sm-4'>
 			<input name='nameContact2' type='text' maxlength='250' ng-model='nameContact2' class='form-control'></input>
 		</div>
-		<label for='telContact2' class='control-label col-sm-2'>{{"REGISTRATION.LABEL_TEL_CONTACT2" | translate}}</label>
+		<label for='telContact2' class='control-label col-sm-2'>{{"RESERVATION.LABEL_TEL_CONTACT2" | translate}}</label>
 		<div class='col-sm-4'>
 			<input name='telContact2' type='tel' maxlength='100' ng-model='telContact2' class='form-control'></input>
 		</div>
 	</div>
 
 	<div class='col-sm-offset-2 col-sm4'>
-		<input type='checkbox' name='agb' ng-model='acceptAGB'><strong>{{"REGISTRATION.LABEL_TERMS1" | translate}}<a href='/#/agb/{{activityId}}?type={{type}}'>{{"REGISTRATION.LABEL_TERMS2" | translate}}</a></strong></input>
+		<input type='checkbox' name='agb' ng-model='acceptAGB'><strong>{{"RESERVATION.LABEL_TERMS1" | translate}}<a href='/#/agb/{{activityId}}?type={{type}}'>{{"RESERVATION.LABEL_TERMS2" | translate}}</a></strong></input>
 	</div>
 
 	<div class='col-sm-offset-2 col-sm-10' style='margin-top:15px;'>
