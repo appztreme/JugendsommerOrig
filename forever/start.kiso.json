@@ -30,5 +30,5 @@
     "script": "server.js",
     "sourceDir": "./../",
     "args": ["--port", "4003"]
-  },
+  }
 ]
