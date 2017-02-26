@@ -1,0 +1,34 @@
+[
+  {
+    "uid": "kiso1",
+    "append": true,
+    "watch": true,
+    "script": "server.js",
+    "sourceDir": "./../",
+    "args": ["--port", "4000"]
+  },
+  {
+    "uid": "kiso2",
+    "append": true,
+    "watch": true,
+    "script": "server.js",
+    "sourceDir": "./../",
+    "args": ["--port", "4001"]
+  },
+  {
+    "uid": "kiso3",
+    "append": true,
+    "watch": true,
+    "script": "server.js",
+    "sourceDir": "./../",
+    "args": ["--port", "4002"]
+  },
+  {
+    "uid": "kiso4",
+    "append": true,
+    "watch": true,
+    "script": "server.js",
+    "sourceDir": "./../",
+    "args": ["--port", "4003"]
+  },
+]
