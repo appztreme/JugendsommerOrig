@@ -1,13 +1,21 @@
 var app = angular.module('js');
 
-app.controller('GeoSelectionCtrl', function($scope, $location, GeoSvc) {
+app.controller('GeoSelectionCtrl', function($scope, $location, GeoSvc, $rootScope, $translate) {
     $scope.busyPromise = GeoSvc.getSelection();
     var host = $location.$$host.toLowerCase();
 
+    $scope.lang = $translate.proposedLanguage() || $translate.user();
+
+    $rootScope.$on('$translateChangeSuccess', function() {
+        $scope.lang = $translate.proposedLanguage() || $translate.user();
+    });
+
     const addNameProp = function (ar) {
         for(var i = 0; i < ar.length; i++) {
-            if(ar[i]._id === 'club') ar[i].name = "Jugendtreff";
-            else ar[i].name = ar[i]._id;
+            if(ar[i].name === 'club') {
+                ar[i].name = "Jugendtreff";
+                ar[i].name_id = "Jugendtreff";
+            }
         }
     }
 
@@ -25,7 +33,6 @@ app.controller('GeoSelectionCtrl', function($scope, $location, GeoSvc) {
     }
     else {
         GeoSvc.getSelection().success(function(sel) {
-            // console.log("res", sel);
             addNameProp(sel);
             $scope.locations = sel;
         });

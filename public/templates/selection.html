@@ -5,8 +5,9 @@
     <div class='card-orange'>
         <a class='invisible-link' href='#/events/{{loc._id}}'>
         <div class='panel-header'>
-                <h3><strong>{{loc.name}}</strong>
-                <h5>{{'SELECTION.PROGRAM' | translate}}: <span class='badge bg-darkorange'>{{loc.countEvents}}</span></h5></h3>
+                <h3 ng-show="lang == 'de'"><strong>{{loc.name}}</strong></h3>
+                <h3 ng-show="lang == 'it'"><strong>{{loc.name_it}}</strong></h3>
+                <h5>{{'SELECTION.PROGRAM' | translate}}: <span class='badge bg-darkorange'>{{loc.countEvents}}</span></h5>
                 <hr />
         </div>
         <div class='panel-body'>

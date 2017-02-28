@@ -29,6 +29,8 @@ exports.getGeoSelection = (req, res, next) => {
 				},
 				{ $group:
 					{ _id: "$location",
+					  name: { $first: "$location" },
+					  name_it: { $first: "$location_it" },
 					  countEvents: { $sum: 1 },
 					  distinctTypes: { $addToSet: "$type"}
 				    }
@@ -49,6 +51,8 @@ exports.getGeoSelectionSummer = (req, res, next) => {
 		},
 		{ $group:
 			{ _id: "$location",
+		      name: { $first: "$location" },
+  			  name_it: { $first: "$location_it" },
 			  countEvents: { $sum: 1 },
 			  distinctTypes: { $addToSet: "$type"}
 		    }
@@ -66,6 +70,8 @@ exports.getTypeSelection = (req, res, next) => {
 		},
 		{ $group:
 			{ _id: "$type",
+			  name: { $first: "$type" },
+			  name_it: { $first: "$type" },
 			  countEvents: { $sum: 1 },
 			  distinctTypes: { $addToSet: "$type"}
 		    }
