@@ -24,9 +24,11 @@
 				</div>
 				</div>
 				<div class='col-sm-9'>
-					<strong>{{event.location}} - {{event.name}}</strong>
+					<strong ng-show="lang == 'de'">{{event.location}} - {{event.name}}</strong>
+					<strong ng-show="lang == 'it'">{{event.location_it}} - {{event.name_it}}</strong>
 					<div class='text-info'>{{event.startDate | date: 'dd/MM/yyyy'}} - {{event.endDate | date: 'dd/MM/yyyy'}}</div>
-					<p>{{event.description}}</p>
+					<p ng-show="lang == 'de'">{{event.description}}</p>
+					<p ng-show="lang == 'it'">{{event.description_it}}</p>
 				</div>
 				<div class='col-sm-2'>
 					<a href='/#/activities/{{event._id}}?type={{event.type}}' class='btn btn-xlarge btn-success' role='button'><span class='glyphicon glyphicon-triangle-right'></span></a>
