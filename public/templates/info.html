@@ -1,4 +1,4 @@
-<div class='container'>
+<div ng-show="!isKiso" class='container'>
 	<p>Der <mark>Jugenddienst Bozen-Land</mark> ist eine Fachstelle zur subsidi&auml;ren Unterst&uuml;tzung und F&ouml;rderung von Personen, Gruppen, Vereine, Verb&auml;nde und Institutionen, die im Arbeitsfeld der, bildungsm&auml;&szlig;igen und freizeitorientierten Jugendarbeit t&auml;tig sind. Zudem dient er als gesellschaftlicher und politischer Interessensvertreter sowie als Ansprechpartner f&uuml;r Anliegen von Kindern und Jugendlichen.</p>
 	<h3>Unsere Aufgaben</h3>
 	<ul>
@@ -20,4 +20,10 @@
 	<p>Seit Jahren setzt der <mark>Jugenddienst Bozen-Land</mark> dabei auf ein Team welches aus p&auml;dagogischem Fachpersonal, gepaart mit jugendlicher Frische, besteht. Diese Kombination hat sich bew&auml;hrt und ist der Garant f&uuml;r viele tolle Sommerprogramme.</p>
 	<h3>Infohotline:</h3>
 	<strong>G&uuml;nther Reichhalter</strong> (Tel. <a href='tel:+393408136941'>+393408136941</a>)
+</div>
+<div ng-show="isKiso && lang == 'de'" class='container'>
+	Freier Text
+</div>
+<div ng-show="isKiso && lang == 'it'" class='container'>
+	Freier Text IT
 </div>
