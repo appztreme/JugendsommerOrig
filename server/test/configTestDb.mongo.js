@@ -93,7 +93,9 @@ print("Events inserted: " + eventsCnt);
 db.activities.insert({
     _id: ObjectId('111111111111111111111101'),
     name: 'activity1',
+    name_it: 'activity1 it',
     description: 'description activity1',
+    description_it: 'descriptioni de activity1',
     startDate: new Date(curYear,11,1),
     endDate: new Date(curYear,11,3),
     eventId: ObjectId('111111111111111111111111'),
@@ -105,7 +107,9 @@ db.activities.insert({
 db.activities.insert({
     _id: ObjectId('111111111111111111111102'),
     name: 'activity2',
+    name_it: 'activity2 it',
     description: 'description activity2',
+    description_it: 'descriptioni de activity2',
     startDate: new Date(curYear,11,4),
     endDate: new Date(curYear,11,7),
     eventId: ObjectId('111111111111111111111111'),
@@ -117,7 +121,9 @@ db.activities.insert({
 db.activities.insert({
     _id: ObjectId('111111111111111111111107'),
     name: 'activity3',
+    name_it: 'activity3 it',
     description: 'description activity3',
+    description_it: 'descriptioni de activity3',
     startDate: new Date(curYear,1,2),
     endDate: new Date(curYear,1,6),
     eventId: ObjectId('111111111111111111111112'),
@@ -129,7 +135,9 @@ db.activities.insert({
 db.activities.insert({
     _id: ObjectId('111111111111111111111108'),
     name: 'activity4',
+    name_it: 'activity4 it',
     description: 'description activity4',
+    description_it: 'descriptioni de activity4',
     startDate: new Date(curYear,1,8),
     endDate: new Date(curYear,1,12),
     eventId: ObjectId('111111111111111111111112'),
@@ -141,7 +149,9 @@ db.activities.insert({
 db.activities.insert({
     _id: ObjectId('111111111111111111111109'),
     name: 'activity5',
+    name_it: 'activity5 it',
     description: 'description activity5',
+    description_it: 'descriptioni de activity5',
     startDate: new Date(curYear-1,11,20),
     endDate: new Date(curYear-1,11,22),
     eventId: ObjectId('111111111111111111111112'),

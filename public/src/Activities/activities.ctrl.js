@@ -1,9 +1,15 @@
 var app = angular.module('js');
 
-app.controller('ActivitiesCtrl', function($scope, $routeParams, ActivitiesSvc) {
+app.controller('ActivitiesCtrl', function($scope, $routeParams, ActivitiesSvc, $rootScope, $translate) {
 	$scope.busyPromise = ActivitiesSvc.findByEventId($routeParams.eventId);
 
 	$scope.type = $routeParams.type;
+
+	$scope.lang = $translate.proposedLanguage() || $translate.user();
+
+    $rootScope.$on('$translateChangeSuccess', function() {
+        $scope.lang = $translate.proposedLanguage() || $translate.user();
+    });
 
     $scope.canReserve = function(activity) {
         return activity.curParticipants < activity.maxParticipants;
@@ -18,12 +24,15 @@ app.controller('ActivitiesCtrl', function($scope, $routeParams, ActivitiesSvc) {
         return activity.curParticipants >= (activity.maxParticipants + activity.queueSize);
     };
 
-    $scope.statusMessage = function(activity) {
-        if($scope.canReserve(activity)) return "Anmeldungen für " + activity.maxParticipants + " Plätze";
-        if($scope.canQueue(activity)) return "Nur mehr Anmeldung auf Warteliste möglich!";
-        if($scope.canNotReserve(activity)) return "Ausgebucht. Keine Anmeldung mehr möglich";
-    };
+	$scope.getCountObj = function(activity) {
+		return { count: activity.maxParticipants };
+	}
 
+    // $scope.statusMessage = function(activity) {
+    //     if($scope.canReserve(activity)) return "Anmeldungen für " + activity.maxParticipants + " Plätze";
+    //     if($scope.canQueue(activity)) return "Nur mehr Anmeldung auf Warteliste möglich!";
+    //     if($scope.canNotReserve(activity)) return "Ausgebucht. Keine Anmeldung mehr möglich";
+    // };
 
     $scope.IsReserveable = function(activity) {
 	return !iSvc.isAuthenticated() || canNotReserve(activity);

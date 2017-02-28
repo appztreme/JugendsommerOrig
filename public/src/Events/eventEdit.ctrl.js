@@ -12,7 +12,7 @@ app.controller('EventEditCtrl', function($scope, $routeParams, $location, Notifi
 			$scope.event.description_it = $scope.description_it;
 			$scope.event.type = $scope.type;
 			$scope.event.location = $scope.location;
-			$scope.event.location_it = $scope.location;
+			$scope.event.location_it = getItalianLocation($scope.location);
 			$scope.event.startDate = $scope.startDate;
 			$scope.event.endDate = $scope.endDate;
 			$scope.event.visibleFrom = $scope.visibleFrom;
@@ -34,6 +34,14 @@ app.controller('EventEditCtrl', function($scope, $routeParams, $location, Notifi
 	EventsSvc.getLocations().success(function(locs) {
 		$scope.locations = locs;
 	});
+
+	function getItalianLocation(name) {
+		for(var i = 0; i < $scope.locations.length; i++) {
+			if($scope.locations[i].name === name)
+				return $scope.locations[i].name_it;
+		}
+		return name;
+	}
 
 	EventsSvc.findById($routeParams.eventId).success(function(ev) {
 		$scope.event = ev;
