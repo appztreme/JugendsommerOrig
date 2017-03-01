@@ -2,6 +2,8 @@
 var mongoose = require('mongoose');
 var config = require('./../config');
 
+mongoose.Promise = global.Promise;
+
 if(process.env.NODE_ENV === 'test') {
 	mongoose.connect(config.db_test, function() {
 		console.log('mongodb connected to test instance');

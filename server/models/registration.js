@@ -1,6 +1,5 @@
 var db = require('../db');
 var mongoose = require('mongoose');
-//var deepPopulate = require('mongoose-deep-populate');
 var Activity = require('./activity');
 var config = require('../../config');
 
@@ -31,8 +30,6 @@ var registrationSchema = db.Schema({
 	needsPreCare: { type: Boolean, required: true, default: false },
   	userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: false }
 });
-
-//registrationSchema.plugin(deepPopulate, {});
 
 registrationSchema.index({firstNameChild: 1, lastNameChild: 1, activityId: 1}, {unique: true});
 
