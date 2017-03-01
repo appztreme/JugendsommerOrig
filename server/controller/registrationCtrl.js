@@ -4,13 +4,12 @@ const Event = require('./../models/event');
 const Activity = require('./../models/activity');
 const mail = require('./mail');
 const mongoose = require('mongoose');
-const deepPopulate = require('mongoose-deep-populate');
 
 const curYear = new Date().getFullYear();
 const startCurYear = new Date(curYear,1,1);
 
 let queryReport = (query, res) => {
-	query.deepPopulate('activityId.eventId')
+	query.populate({path:'activityId', populate:{path:'eventId'}})
 				.sort({ activityId: 1, lastNameChild: 1, firstNameChild: 1})
 				.exec(function(err, reg) {
 					if(err) { return next(err); }
@@ -21,7 +20,7 @@ let queryReport = (query, res) => {
 let getRegistrationsAll = (res) => {
 	Registration.find()
 		.where('registrationDate').gte(startCurYear)
-		.deepPopulate('activityId.eventId')
+		.populate({path:'activityId', populate:{path:'eventId'}})
 		.sort({ activityId: 1, lastNameChild: 1, firstNameChild: 1})
 		.exec(function(err, reg) {
 			if(err) { return next(err); }
@@ -38,7 +37,7 @@ let getRegistrationsByEventId = (eventId, res) => {
 				Registration.find()
 					.where('registrationDate').gte(startCurYear)
 					.where('activityId').in(acts)
-					.deepPopulate('activityId.eventId')
+					.populate({path:'activityId', populate:{path:'eventId'}})
 					.sort({ activityId: 1, lastNameChild: 1, firstNameChild: 1})
 					.exec(function(err, reg) {
 						if(err) { return next(err); }
@@ -51,7 +50,7 @@ const getRegistrationsByActivityId = (activityId, res)  =>{
 	Registration.find()
 		.where('registrationDate').gte(startCurYear)
 		.where('activityId').equals(activityId)
-		.deepPopulate('activityId.eventId')
+		.populate({path:'activityId', populate:{path:'eventId'}})
 		.sort({ activityId: 1, lastNameChild: 1, firstNameChild: 1})
 		.exec(function(err, reg) {
 			if(err) { return next(err); }
