@@ -16,29 +16,34 @@
 			<div class='row'>
 				<div class='col-sm-1' ng-disabled='isReserveable(activity)'>
 					<div class='btn-main'>
-					<span class='glyphicon glyphicon-calendar'></span>
-				</div>
+						<span class='glyphicon glyphicon-calendar'></span>
+					</div>
 				</div>
 				<div class='col-sm-10 act-status-container'>
 					<div class='row'>
 						<div class='col-sm-4'>
-					<strong>{{activity.name}}</strong>
-					<div class='text-info'>{{activity.startDate | date: 'dd/MM/yyyy'}} - {{activity.endDate | date: 'dd/MM/yyyy'}}</div>
+							<strong ng-show="lang == 'de'">{{activity.name}}</strong>
+							<strong ng-show="lang == 'it'">{{activity.name_it}}</strong>
+							<div class='text-info'>{{activity.startDate | date: 'dd/MM/yyyy'}} - {{activity.endDate | date: 'dd/MM/yyyy'}}</div>
+						</div>
+						<div class='col-sm-1'>
+							<button ng-class='{"btn-success": canReserve(activity), "btn-warning": canQueue(activity), "btn-danger": canNotReserve(activity), "act-status": 1 == 1, "active": 1 == 1}'><span class='badge'>{{activity.curParticipants}}<span></button>
+						</div>
+                		<div ng-show="canReserve(activity)" class='act-status-txt'>{{'ACTIVITIES.STATUS_RESERVATION' | translate:getCountObj(activity) }}</div>
+						<div ng-show="canQueue(activity)" class='act-status-txt'>{{'ACTIVITIES.STATUS_LIMIT' | translate}}</div>
+						<div ng-show="canNotReserve(activity)" class='act-status-txt'>{{'ACTIVITIES.STATUS_COMPLETE' | translate}}</div>
+					</div>
+					<div class='row'><div class='col-sm-10'>
+						<p ng-show="lang == 'de'">{{activity.description}}</p>
+						<p ng-show="lang == 'it'">{{activity.description_it}}</p>
+					</div>
 				</div>
-				<div class='col-sm-1'>
-					<button ng-class='{"btn-success": canReserve(activity), "btn-warning": canQueue(activity), "btn-danger": canNotReserve(activity), "act-status": 1 == 1, "active": 1 == 1}'><span class='badge'>{{activity.curParticipants}}<span></button>
-				</div>
-                <div class='act-status-txt'>{{statusMessage(activity)}}</div>
-				</div>
-				<div class='row'><div class='col-sm-10'>
-					<p>{{activity.description}}</p>
-				</div></div>
-				</div>
-				<div class'col-sm-1'>
-					<a href='/#/editActivity/{{activity._id}}' class='btn btn-xlarge btn-info' role='button' ng-show='iSvc.isAuthorized("admin")'><span class='glyphicon glyphicon-pencil'></span></a>
-					<a href='/#/registration/{{activity._id}}?type={{type}}' class='btn btn-xlarge btn-success' role='button' ng-show='iSvc.isAuthenticated() && !canNotReserve(activity)'><span class='glyphicon glyphicon-user'></span></a>
-					<button type="button" class="btn btn-xlarge btn-success" ng-hide='iSvc.isAuthenticated() && !canNotReserve(activity)' data-toggle="modal" data-target="#warningModal"><span class='glyphicon glyphicon-user'></button>
-				</div>
+			</div>
+			<div class'col-sm-1'>
+				<a href='/#/editActivity/{{activity._id}}' class='btn btn-xlarge btn-info' role='button' ng-show='iSvc.isAuthorized("admin")'><span class='glyphicon glyphicon-pencil'></span></a>
+				<a href='/#/registration/{{activity._id}}?type={{type}}' class='btn btn-xlarge btn-success' role='button' ng-show='iSvc.isAuthenticated() && !canNotReserve(activity)'><span class='glyphicon glyphicon-user'></span></a>
+				<button type="button" class="btn btn-xlarge btn-success" ng-hide='iSvc.isAuthenticated() && !canNotReserve(activity)' data-toggle="modal" data-target="#warningModal"><span class='glyphicon glyphicon-user'></button>
+			</div>
 			</div>
 		</li>
 	</ul>
