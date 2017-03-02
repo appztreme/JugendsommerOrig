@@ -1,7 +1,7 @@
-var db = require('../db');
-var config = require('../../config');
+const db = require('../db');
+const config = require('../../config');
 
-var locs = config.validLocations.map(function(l){ return l.name});
+const locs = config.validLocations.map(function(l){ return l.name});
 
 var eventSchema = db.Schema({
 	name: { type: String, required: true },
@@ -17,7 +17,7 @@ var eventSchema = db.Schema({
 	visibleTo: { type: Date, required: false, default: Date.now },
 	budgetBusiness: { type: Number, required: true, default: 0 },
 	budgetFood: { type: Number, required: true, default: 0 },
-  	info: { type: String, required: true },
+	info: { type: String, required: true },
 	info_it: { type: String, required: true },
 	isInternal: { type: Boolean, required: true, default: false },
 });

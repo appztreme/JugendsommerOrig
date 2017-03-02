@@ -99,29 +99,29 @@ exports.delete = (req, res, next) => {
 };
 
 exports.create = (req, res, next) => {
-	console.log("new reg:", req.body);
+	//console.log("new reg:", req.body);
 	var reg = new Registration({
 		firstNameParent: req.body.firstNameParent,
 		lastNameParent: req.body.lastNameParent,
-	  phoneNumberParent: req.body.phoneNumberParent,
-	  emailParent: req.body.emailParent,
-	  firstNameChild: req.body.firstNameChild,
-	  lastNameChild: req.body.lastNameChild,
-	  birthdayChild: req.body.birthdayChild,
-	  schoolChild: req.body.schoolChild,
-	  healthChild: req.body.healthChild,
+		phoneNumberParent: req.body.phoneNumberParent,
+		emailParent: req.body.emailParent,
+		firstNameChild: req.body.firstNameChild,
+		lastNameChild: req.body.lastNameChild,
+		birthdayChild: req.body.birthdayChild,
+		schoolChild: req.body.schoolChild,
+		healthChild: req.body.healthChild,
 		bandName: req.body.bandName,
 		instrument: req.body.instrument,
 		instrumentYears: req.body.instrumentYears,
 		nameContact1: req.body.nameContact1,
-	  telContact1: req.body.telContact1,
-	  nameContact2: req.body.nameContact2,
-	  telContact2: req.body.telContact2,
-	  activityId: req.body.activityId,
-	  addressChild: req.body.addressChild,
-	  cityChild: req.body.cityChild,
-	  needsPreCare: req.body.needsPreCare,
-    userId: req.body.userId
+		telContact1: req.body.telContact1,
+		nameContact2: req.body.nameContact2,
+		telContact2: req.body.telContact2,
+		activityId: req.body.activityId,
+		addressChild: req.body.addressChild,
+		cityChild: req.body.cityChild,
+		needsPreCare: req.body.needsPreCare,
+		userId: req.body.userId
 	});
 	reg.save(function(err, regr) {
 		if(err) { return next(err); }

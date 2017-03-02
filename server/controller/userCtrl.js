@@ -1,8 +1,8 @@
 'use strict';
-var User = require('./../models/user');
-var router = require('express').Router();
-var crypto = require('crypto');
-var mail = require('./mail.js');
+const User = require('./../models/user');
+const router = require('express').Router();
+const crypto = require('crypto');
+const mail = require('./mail.js');
 
 exports.create = (req, res, next) => {
 	let salt = createSalt();

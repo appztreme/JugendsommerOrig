@@ -6,15 +6,38 @@ const Activity = require('./../models/activity');
 const curYear = new Date().getFullYear();
 const startCurYear = new Date(curYear+"-1-1");
 
-exports.findByCurrentYear = (req, res, next) => {
-	Event.find()
-		.where('startDate').gte(startCurYear)
-		.where('isInternal').equals(false)
-		.sort({ location: 1, startDate: 1 })
-	  .exec(function(err, ev) {
-			if(err) { return next(err); }
-			res.json(ev);
-	});
+exports.findByCurrentYear = async(req, res, next) => {
+	try {
+		let ev = await Event.find()
+			.where('startDate').gte(startCurYear)
+			.where('isInternal').equals(false)
+			.sort({ location: 1, startDate: 1 })
+			.exec();
+		return res.json(ev);
+	} catch(err) { return next(err); }
+};
+
+exports.findByCurrentYearAndLocation = async(req, res, next) => {
+	try {
+		let ev = await Event.find()
+			.where('startDate').gte(startCurYear)
+			.where('isInternal').equals(false)
+			.where('location').equals(req.params.location)
+			.sort({ startDate: 1 })
+			.exec();
+		return res.json(ev);
+	} catch(err) { return next(err); }
+};
+
+exports.findByCurrentYearAndLocationAdmin = async(req, res, next) => {
+	try {
+		let ev = await Event.find()
+			.where('startDate').gte(startCurYear)
+			.where('location').equals(req.params.location)
+			.sort({ startDate: 1 })
+		  	.exec();
+		return res.json(ev);
+	} catch(err) { return next(err); }
 };
 
 exports.getGeoSelection = (req, res, next) => {
@@ -92,18 +115,6 @@ exports.getTypeByActivity = (req, res, next) => {
 		});
 }
 
-exports.findByCurrentYearAndLocation = (req, res, next) => {
-	Event.find()
-		.where('startDate').gte(startCurYear)
-		.where('isInternal').equals(false)
-		.where('location').equals(req.params.location)
-		.sort({ startDate: 1 })
-	.exec(function(err, ev) {
-		if(err) { return next(err); }
-		res.json(ev);
-	});
-}
-
 exports.findByCurrentYearAndLocationSummer = (req, res, next) => {
 	Event.find()
 		.where('startDate').gte(startCurYear)
@@ -128,17 +139,6 @@ exports.findByCurrentYearAndLocationSummerAdmin = (req, res, next) => {
 			res.json(ev);
 	});
 }
-
-exports.findByCurrentYearAndLocationAdmin = (req, res, next) => {
-	Event.find()
-		.where('startDate').gte(startCurYear)
-		.where('location').equals(req.params.location)
-		.sort({ startDate: 1 })
-	  	.exec(function(err, ev) {
-			if(err) { return next(err); }
-			res.json(ev);
-	});
-};
 
 exports.findByCurrentYearAndType = (req, res, next) => {
 	Event.find()
