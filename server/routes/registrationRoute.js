@@ -5,9 +5,9 @@ const RegistrationController = require('./../controller/registrationCtrl');
 
 router.get('/', auth.requiresRole("admin"), RegistrationController.find);
 
-router.get('/selectableEventActivities', RegistrationController.getSelectableEventActivities);
-
 router.get('/:registrationId', auth.requiresRole("admin"), RegistrationController.findById);
+
+router.get('/selectableEventActivities', RegistrationController.getSelectableEventActivities);
 
 router.delete('/:registrationId', auth.requiresRole("admin"), RegistrationController.delete);
 

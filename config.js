@@ -18,5 +18,6 @@ module.exports = {
     "cities": ['Deutschnofen', 'Jenesien', 'Karneid', 'Mölten', 'Ritten', 'Sarntal', 'Tiers', 'Vöran', 'Welschnofen', 'Andere'],
     "db_test": "mongodb://localhost/jugendsommer_test",
     "db_prod": "mongodb://localhost/jugendsommer",
-    "port": 3000
+    "port": 3000,
+    "caching": true
 }
