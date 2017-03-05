@@ -4,6 +4,9 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 	RegistrationSvc.activityId = $routeParams.activityId;
 	$scope.activityId = $routeParams.activityId;
 
+	var host = $location.$$host.toLowerCase();
+	$scope.isKiso = host.indexOf('kiso') !== -1;
+
 	// $scope.busyPromise = RegistrationSvc.create();
 
 	$scope.type = $routeParams.type;

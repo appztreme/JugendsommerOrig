@@ -1,7 +1,8 @@
 'use strict';
 const Event = require('./../models/event');
 const Activity = require('./../models/activity');
-// const cache = require('./../cache');
+const cache = require('./../cache');
+const config = require('./../../config');
 
 const curYear = new Date().getFullYear();
 const startCurYear = new Date(curYear+"-1-1");
@@ -40,31 +41,56 @@ exports.findByCurrentYearAndLocationAdmin = async(req, res, next) => {
 	} catch(err) { return next(err); }
 };
 
-exports.getGeoSelection = (req, res, next) => {
-	// console.log("URL", req.url);
-	// cache.get(req.url, function(err, cacheResult) {
-	// 	if(cacheResult != null) return res.json(cacheResult);
-	// 	else {
-	// 		console.log("run from db");
-			Event.aggregate([
-				{ $match:
-					{ $and: [ {startDate: { $gte: startCurYear }}, {isInternal: false} ] }
-				},
-				{ $group:
-					{ _id: "$location",
-					  name: { $first: "$location" },
-					  name_it: { $first: "$location_it" },
-					  countEvents: { $sum: 1 },
-					  distinctTypes: { $addToSet: "$type"}
-				    }
-				},
-				{ $sort: {_id: 1}}
-			], function(er, result) {
-				// cache.set(req.url, result);
-				return res.json(result);
+exports.getTypeByActivity = async(req, res, next) => {
+	try {
+		let types = await Activity.findById(req.params.activityId)
+			.populate('eventId', '_id type')
+			.select('eventId')
+			.exec();
+		return res.json(type);
+	} catch(err) { return next(err); }
+}
+
+const groupByLocationQuery = () => {
+	return Event.aggregate([
+			{ $match:
+				{ $and: [ {startDate: { $gte: startCurYear }}, {isInternal: false} ] }
+			},
+			{ $group:
+				{ _id: "$location",
+					name: { $first: "$location" },
+					name_it: { $first: "$location_it" },
+					countEvents: { $sum: 1 },
+					distinctTypes: { $addToSet: "$type"}
+				}
+			},
+			{ $sort: {_id: 1}}
+		]);
+};
+
+exports.getGeoSelection = async(req, res, next) => {
+	try {
+		/*if(config.caching) {
+			cache.get(req.url, function(err, cachedValue) {
+				if(cachedValue !== null) return res.json(cachedValue);
+				else {
+					console.log("no cache");
+					groupByLocationQuery().exec()
+						.then(err, sel => {
+							console.log("cb", err, sel);
+							cache.set(req.url, sel);
+							res.json(sel);
+						});
+					cache.set(req.url, sel);
+					return res.json(sel);
+				}
 			});
-	// 	}
-	// });
+		}
+		else {*/
+		let sel = await groupByLocationQuery().exec();
+		return res.json(sel);
+		//}
+	} catch(err) { return next(err); }
 }
 
 exports.getGeoSelectionSummer = (req, res, next) => {
@@ -103,16 +129,6 @@ exports.getTypeSelection = (req, res, next) => {
 	], function(er, result) {
 		return res.json(result);
 	});
-}
-
-exports.getTypeByActivity = (req, res, next) => {
-	Activity.findById(req.params.activityId)
-		.populate('eventId', '_id type')
-		.select('eventId')
-		.exec(function(err, type) {
-			if(err) { return next(err); }
-			res.json(type);
-		});
 }
 
 exports.findByCurrentYearAndLocationSummer = (req, res, next) => {
