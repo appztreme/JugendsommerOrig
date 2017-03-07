@@ -1,6 +1,6 @@
 <div class='container'>
 <h2 class='text-orange'>{{"RESERVATION.TITLE" | translate}}</h2>
-<button ng-show='hasCachedRegistration()' ng-click='updateFromCache()' class='btn btn-success bnt-lg col-sm-offset-2'>{{"RESERVATION.LABEL_LOAD_PREVIOUS"}}</button>
+<button ng-show='hasCachedRegistration()' ng-click='updateFromCache()' class='btn btn-success bnt-lg col-sm-offset-2'>{{"RESERVATION.LABEL_LOAD_PREVIOUS" | translate}}</button>
 <form name='registrationForm' class='form-horizontal' novalidate ng-submit='save()'>
 	<div cg-Busy='{promise:busyPromise,message:"Loading",backdrop:true,minDuration:500}'></div>
 

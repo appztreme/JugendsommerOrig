@@ -67,16 +67,16 @@ exports.find = (req, res, next) => {
 		return getRegistrationsByEventId(req.query.eventId, res);
 };
 
-exports.getSelectableEventActivities = (req, res, next) => {
-		Activity.find()
+exports.getSelectableEventActivities = async(req, res, next) => {
+	try {
+		let acts = await Activity.find()
 			.where('startDate').gte(startCurYear)
-			.populate('eventId', '_id name location type')
+			.populate('eventId', '_id name location')
 			.select('_id name eventId')
             .sort({'eventId.location': 1})
-			.exec(function(err, act) {
-				if(err) { return next(err); }
-				res.json(act);
-			});
+			.exec();
+		res.json(acts);
+	} catch(err) { next(err); }
 }
 
 exports.findById = (req, res, next) => {
@@ -125,7 +125,9 @@ exports.create = (req, res, next) => {
 	});
 	reg.save(function(err, regr) {
 		if(err) { return next(err); }
-		mail.sendTxtMail(regr.emailParent, regr.firstNameChild, regr.lastNameChild, req.body.type);
+		var host = req.get('host');
+		var isKiso = host.indexOf('kiso') !== -1;
+		mail.sendTxtMail(regr.emailParent, regr.firstNameChild, regr.lastNameChild, req.body.type, isKiso);
 		res.status(201).json(regr);
 	});
 };

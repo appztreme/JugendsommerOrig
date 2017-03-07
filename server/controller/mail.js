@@ -11,6 +11,9 @@ var txtSpiritnight = "Vielen Dank für die Teilnahme an der SpiritNight 2017! Bi
 var txtStart = "Die Anmeldung für ";
 var txtEnd = " für die Sommerprogramme des Jugenddienstes Bozen Land war erfolgreich. Einzahlungsschein wird demnächst mittels email zugesandt.";
 
+var htmlKiso = "<html><body>Vielen Dank für die Anmeldung Ihres Kindes zum KISO 2017!<br />Sie erhalten innerhalb der n√§chsten Tage eine Rückmeldung vom Jugenddienst Bozen zu Ihrem Anmeldestand.<br />Falls das Gruppenlimit für die betreffende Woche bereits erreicht sein sollte, kommt Ihr Kind auf die Warteliste.<br />Freundliche Grüße,<br />das Jugenddienst Bozen Team<br /><br />Ringraziamo per l'iscrizione di suo/a figlio/a al KISO 2017!<br />Nei prossimi giorni lo Jugenddienst Bozen<br />Le invierà una risposta sullo stato di iscrizione. Se i posti disponibli per la settimana interessata dovessero già essere esauriti, suo/a figlio/a sarà messo/a sulla lista d'attesa.<br />Cordiali saluti,<br />l'equipe dello Jugenddienst Bozen";
+var textKiso = "Vielen Dank für die Anmeldung Ihres Kindes zum KISO 2017!\r\nSie erhalten innerhalb der nächsten Tage eine Rückmeldung vom Jugenddienst Bozen zu Ihrem Anmeldestand.\r\nFalls das Gruppenlimit für die betreffende Woche bereits erreicht sein sollte, kommt Ihr Kind auf die Warteliste.\r\nFreundliche Grüße, das Jugenddienst Bozen Team \r\n\r\nRingraziamo per l’iscrizione di suo/a figlio/a al KISO 2017!\r\nNei prossimi giorni lo Jugenddienst Bozen Le invierà una risposta sullo stato di iscrizione. Se i posti disponibli per la settimana interessata dovessero già essere esauriti, suo/a figlio/a sarà messo/a sulla lista d‘attesa.\r\nCordiali saluti,\r\nl’equipe dello Jugenddienst Bozen";
+
 function getTypeString(type) {
 	switch (type) {
 		case 'summer': return 'Jugendsommer'; break;
@@ -21,41 +24,50 @@ function getTypeString(type) {
 	}
 }
 
-function getTypeText(type, firstNameChild, lastNameChild) {
-	switch (type) {
-		case 'summer':
-		case 'music':
-		case 'club':
-			return txtStart + firstNameChild + " " + lastNameChild + txtEnd;
-			break;
-		case 'spiritnight':
-			return txtSpiritnight;
-			break;
-		default:
-			return txtStart + firstNameChild + " " + lastNameChild + txtEnd;
-			break;
+function getTypeText(type, firstNameChild, lastNameChild, isKiso) {
+	if(isKiso) {
+		return textKiso;
+	} else {
+		switch (type) {
+			case 'summer':
+			case 'music':
+			case 'club':
+				return txtStart + firstNameChild + " " + lastNameChild + txtEnd;
+				break;
+			case 'spiritnight':
+				return txtSpiritnight;
+				break;
+			default:
+				return txtStart + firstNameChild + " " + lastNameChild + txtEnd;
+				break;
+		}
 	}
 }
 
-function getTypeBody(type, firstNameChild, lastNameChild) {
-	switch (type) {
-		case 'summer':
-		case 'music':
-		case 'club':
-			return htmlStart + firstNameChild + " " + lastNameChild + htmlEnd;
-			break;
-		case 'spiritnight':
-			return htmlSpiritnight;
-			break;
-		default:
-			return htmlStart + firstNameChild + " " + lastNameChild + htmlEnd;
-			break;
+function getTypeBody(type, firstNameChild, lastNameChild, isKiso) {
+	if(isKiso) {
+		return htmlKiso;
+	} else {
+		switch (type) {
+			case 'summer':
+			case 'music':
+			case 'club':
+				return htmlStart + firstNameChild + " " + lastNameChild + htmlEnd;
+				break;
+			case 'spiritnight':
+				return htmlSpiritnight;
+				break;
+			default:
+				return htmlStart + firstNameChild + " " + lastNameChild + htmlEnd;
+				break;
+		}
 	}
 }
 
-exports.sendTxtMail = function(recipient, firstNameChild, lastNameChild, type) {
-		var body = getTypeBody(type, firstNameChild, lastNameChild);
-		var text = getTypeText(type, firstNameChild, lastNameChild);
+exports.sendTxtMail = function(recipient, firstNameChild, lastNameChild, type, isKiso) {
+		var body = getTypeBody(type, firstNameChild, lastNameChild, isKiso);
+		var text = getTypeText(type, firstNameChild, lastNameChild, isKiso);
+		console.log("email", body, text);
 		server.send({
 		text: text,
 		from: "info@jugenddienst.com",
