@@ -127,7 +127,7 @@
             "HEADER_SPIRIT_CHILD": "Angaben zum Firmling:",
             "HEADER_SUMMER_CHILD": "dati bambino/a",
             "HEADER_MUSIC": "Auszufüllen nur bei Anmeldung für die Jungbläserwochen",
-            "HEADER_CONTACT": "Notfallkontakte",
+            "HEADER_CONTACT": "Contatti di emergenza",
             "LABEL_LOAD_PREVIOUS": "usare i dati dell'ultima iscrizione",
             "LABEL_FIRSTNAME_PARENT": "nome",
             "LABEL_LASTNAME_PARENT": "cognome",
