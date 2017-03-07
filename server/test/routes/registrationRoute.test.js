@@ -7,7 +7,7 @@ const route = require('./../../routes/registrationRoute');
 const auth = require('./../../routes/authentication');
 const controller = require('./../../controller/registrationCtrl');
 
-describe.only('REGISTRATION route', () => {
+describe('REGISTRATION route', () => {
     describe('GET /', () => {
         it('should be a GET route', () => {
             expect(route).toHaveRoute('GET', '/');

@@ -87,6 +87,7 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 		$scope.allActivities = ReportCacheSvc.allActivities;
 	} else {
 		RegistrationSvc.getSelectionParams().success(function(params) {
+			//console.log("xxx", params);
 			$scope.events = _.uniq(_.map(params, function(p) {
 				return {
 					_id: p.eventId._id,
@@ -95,8 +96,8 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 				}
 			}), '_id');
 
-			if(host.indexOf("jugendsommer") !== -1) $scope.events = _.filter($scope.events, function(value) { return value.type === "summer" || value.type === "music" });
-			if(host.indexOf("jd-bozenland") !== -1) $scope.events = _.filter($scope.events, function(value) { return value.type === "spiritnight" || value.type === "club" });
+			// if(host.indexOf("jugendsommer") !== -1) $scope.events = _.filter($scope.events, function(value) { return value.type === "summer" || value.type === "music" });
+			// if(host.indexOf("jd-bozenland") !== -1) $scope.events = _.filter($scope.events, function(value) { return value.type === "spiritnight" || value.type === "club" });
 
 			$scope.allActivities = _.uniq(_.map(params, function(p) {
 				return {

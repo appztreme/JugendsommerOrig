@@ -2,6 +2,8 @@
 const Registration = require('./../models/registration');
 const Event = require('./../models/event');
 const Activity = require('./../models/activity');
+
+const ActivityRepo = require('./../repositories/activity');
 const mail = require('./mail');
 const mongoose = require('mongoose');
 
@@ -69,14 +71,9 @@ exports.find = (req, res, next) => {
 
 exports.getSelectableEventActivities = async(req, res, next) => {
 	try {
-		let acts = await Activity.find()
-			.where('startDate').gte(startCurYear)
-			.populate('eventId', '_id name location')
-			.select('_id name eventId')
-            .sort({'eventId.location': 1})
-			.exec();
+		let acts = await ActivityRepo.getSelectableEventActivities();
 		res.json(acts);
-	} catch(err) { next(err); }
+	} catch(err) { console.log("ERR", err); next(err); }
 }
 
 exports.findById = (req, res, next) => {
