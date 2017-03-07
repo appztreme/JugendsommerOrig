@@ -3,6 +3,7 @@ var app = angular.module('js');
 app.controller('EventsCtrl', function($scope, $routeParams, $location, EventsSvc, IdentitySvc, $rootScope, $translate) {
 	//$scope.busyPromise = EventsSvc.find();
 	var host = $location.$$host.toLowerCase();
+	$scope.isKiso = host.indexOf('kiso') !== -1
 
 	$scope.lang = $translate.proposedLanguage() || $translate.user();
 

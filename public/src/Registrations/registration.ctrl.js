@@ -10,9 +10,9 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 	// $scope.busyPromise = RegistrationSvc.create();
 
 	$scope.type = $routeParams.type;
-	$scope.cities = conf.cities;
+	$scope.cities = $scope.isKiso ? conf.cities_kiso : conf.cities_jdbl;
 	$scope.addressChild = ' ';
-	$scope.cityChild = 'Deutschnofen';
+	$scope.cityChild = $scope.isKiso ? 'Bozen': 'Deutschnofen';
 	$scope.needsPreCare = false;
 
 	$scope.isRegistrationAllowed = function() {

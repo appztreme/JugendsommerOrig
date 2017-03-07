@@ -7,10 +7,22 @@
 			<input id='name' type='text' ng-model='name' class='form-control' required></input>
 		</div>
 	</div>
+	<div class='form-group' ng-class='{ "has-error": activityForm.name_it.$invalid }'>
+		<label for='name_it' class='control-label col-sm-2'>Name IT</label>
+		<div class='col-sm-10'>
+			<input id='name_it' type='text' ng-model='name_it' class='form-control' required></input>
+		</div>
+	</div>
 	<div class='form-group' ng-class='{ "has-error": activityForm.description.$invalid }'>
 		<label for='description' class='control-label col-sm-2'>Beschreibung</label>
 		<div class='col-sm-10'>
 			<textarea id='description' type='text' ng-model='description' class='form-control' rows='3' placehoder='Beschreibung eintragen' required></textarea>
+		</div>
+	</div>
+	<div class='form-group' ng-class='{ "has-error": activityForm.description_it.$invalid }'>
+		<label for='description_it' class='control-label col-sm-2'>Beschreibung IT</label>
+		<div class='col-sm-10'>
+			<textarea id='description_it' type='text' ng-model='description_it' class='form-control' rows='3' placehoder='Beschreibung eintragen' required></textarea>
 		</div>
 	</div>
 	<div class='form-group' ng-class='{ "has-error": activityForm.startDate.$invalid }'>

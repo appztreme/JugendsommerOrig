@@ -26,7 +26,7 @@
             "TITLE": "Programme"
         },
         "ACTIVITIES": {
-            "TITLE": "Details",
+            "TITLE": "Unsere Wochen",
             "STATUS_RESERVATION": "Anmeldungen für {{count}} Plätze",
             "STATUS_LIMIT": "Nur mehr Anmeldung auf Warteliste möglich!",
             "STATUS_COMPLETE": "Ausgebucht. Keine Anmeldung mehr möglich",
@@ -43,7 +43,7 @@
             "HEADER_SPIRIT_CHILD": "Angaben zum Firmling:",
             "HEADER_SUMMER_CHILD": "Angaben zum Kind:",
             "HEADER_MUSIC": "Auszufüllen nur bei Anmeldung für die Jungbläserwochen",
-            "HEAER_CONTACT": "Notfallkontakte",
+            "HEADER_CONTACT": "Notfallkontakte",
             "LABEL_LOAD_PREVIOUS": "Daten von letzter Anmeldung verwenden",
             "LABEL_FIRSTNAME_PARENT": "Vorname",
             "LABEL_LASTNAME_PARENT": "Familienname",
@@ -52,7 +52,7 @@
             "LABEL_FIRSTNAME_CHILD": "Vorname",
             "LABEL_LASTNAME_CHILD": "Familienname",
             "LABEL_BIRTHDAY_CHILD": "Geburtstag",
-            "LABEL_SCHOOL_CHILD": "Besuchte Klasse",
+            "LABEL_SCHOOL_CHILD": "Besuchte Klasse 2016/17",
             "LABEL_HEALTH_CHILD": "Gesundheitliche Probleme/Hinweise",
             "LABEL_ADDRESS_CHILD": "Adresse",
             "LABEL_CITY_CHILD": "Gemeinde",
@@ -127,7 +127,7 @@
             "HEADER_SPIRIT_CHILD": "Angaben zum Firmling:",
             "HEADER_SUMMER_CHILD": "dati bambino/a",
             "HEADER_MUSIC": "Auszufüllen nur bei Anmeldung für die Jungbläserwochen",
-            "HEAER_CONTACT": "Notfallkontakte",
+            "HEADER_CONTACT": "Notfallkontakte",
             "LABEL_LOAD_PREVIOUS": "usare i dati dell'ultima iscrizione",
             "LABEL_FIRSTNAME_PARENT": "nome",
             "LABEL_LASTNAME_PARENT": "cognome",
@@ -154,7 +154,7 @@
         },
         "MYRESERVATION": {
             "TITLE": "iscrizioni confermate",
-            "NOTE": "Einzahlungsschein wird mittels Email bis Ende April zugesandt. Vielen Dank für Ihre Anmeldung.",
+            "NOTE": "Il bollettino per il pagamento verrà inviato entro fine aprile. Grazie per l'iscrizione!",
             "LABEL_EVENT": "programma",
             "LABEL_ACTIVITY": "settimana",
             "LABEL_ACCEPT": "accettato",
@@ -169,5 +169,6 @@
             "LABEL_TEL_PARENT": "telefono genitore"
         }
     };
-    window.__env.cities = ['Deutschnofen', 'Jenesien', 'Karneid', 'Mölten', 'Ritten', 'Sarntal', 'Tiers', 'Vöran', 'Welschnofen', 'Andere'];
+    window.__env.cities_jdbl = ['Deutschnofen', 'Jenesien', 'Karneid', 'Mölten', 'Ritten', 'Sarntal', 'Tiers', 'Vöran', 'Welschnofen', 'Andere'];
+    window.__env.cities_kiso = ['Bozen', 'Andere'];
 }(this));
