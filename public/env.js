@@ -18,6 +18,17 @@
             "NEW": "Neuer User",
             "PWDNEW": "Passwort vergessen"
         },
+        "USER_NEW": {
+            "TITLE": "Neuen User erstellen / Angaben zu den Eltern",
+            "LABEL_FIRSTNAME": "Vorname",
+            "LABEL_LASTNAME": "Nachname",
+            "LABEL_TEL": "Tel",
+            "LABEL_EMAIL": "Email",
+            "LABEL_USERNAME": "User-Name",
+            "LABEL_PWD": "Passwort",
+            "NOTE": "Bitte merken Sie sich Ihren User-Namen und Passwort für die spätere Nutzung",
+            "BUTTON_ADD": "Hinzufügen"
+        },
         "SELECTION": {
             "TITLE": "Wo wir tätig sind",
             "PROGRAM": "Programme"
@@ -70,7 +81,7 @@
         },
         "MYRESERVATION": {
             "TITLE": "Erfolgreiche Reservierungen",
-            "NOTE": "Einzahlungsschein wird mittels Email bis Ende April zugesandt. Vielen Dank für Ihre Anmeldung.",
+            "NOTE": "Einzahlungsschein wird innerhalb von fünf Tagen zugesandt. Vielen Dank für Ihre Anmeldung.",
             "LABEL_EVENT": "Programm",
             "LABEL_ACTIVITY": "Woche",
             "LABEL_ACCEPT": "Angenommen",
@@ -100,7 +111,18 @@
             "PWD": "Password",
             "LOGIN": "Accesso",
             "NEW": "Nuovo utente",
-            "PWDNEW": "Password vergessen"
+            "PWDNEW": "password dimenticata"
+        },
+        "USER_NEW": {
+            "TITLE": "Crea nuovo account",
+            "LABEL_FIRSTNAME": "nome",
+            "LABEL_LASTNAME": "cognome",
+            "LABEL_TEL": "numero telefono",
+            "LABEL_EMAIL": "e-mail",
+            "LABEL_USERNAME": "user-Name",
+            "LABEL_PWD": "password",
+            "NOTE": "Ricordarsi il nome utente e la password per l’accesso!",
+            "BUTTON_ADD": "creare"
         },
         "SELECTION": {
             "TITLE": "Le nostre settimane",
@@ -153,8 +175,8 @@
             "LABEL_REGISTER": "iscrizione"
         },
         "MYRESERVATION": {
-            "TITLE": "iscrizioni confermate",
-            "NOTE": "Il bollettino per il pagamento verrà inviato entro fine aprile. Grazie per l'iscrizione!",
+            "TITLE": "Iscrizioni confermate",
+            "NOTE": "Il bollettino per il pagamento verrà inviato entro cinque giorni. Grazie per l'iscrizione!",
             "LABEL_EVENT": "programma",
             "LABEL_ACTIVITY": "settimana",
             "LABEL_ACCEPT": "accettato",

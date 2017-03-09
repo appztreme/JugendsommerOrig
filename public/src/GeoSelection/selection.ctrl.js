@@ -10,6 +10,8 @@ app.controller('GeoSelectionCtrl', function($scope, $location, GeoSvc, $rootScop
         $scope.lang = $translate.proposedLanguage() || $translate.user();
     });
 
+    $scope.isKiso = host.indexOf('kiso.bz.it') !== -1;
+
     const addNameProp = function (ar) {
         for(var i = 0; i < ar.length; i++) {
             if(ar[i].name === 'club') {

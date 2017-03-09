@@ -1,47 +1,47 @@
 <div class='container'>
-<h2 class='text-orange'>Neuen User erstellen / Angaben zu den Eltern</h2>
+<h2 class='text-orange'>{{'USER_NEW.TITLE' | translate}}</h2>
 <form name='eventForm' class='form-horizontal' novalidate ng-submit='addUser(firstName, lastName, userTel, userEmail, userName, pwd)'>
     <div class='form-group' ng-class='{ "has-error": eventForm.firstName.$invalid }'>
-    <label for='firstName' class='control-label col-sm-2'>Vorname</label>
+    <label for='firstName' class='control-label col-sm-2'>{{'USER_NEW.LABEL_FIRSTNAME' | translate}}</label>
 	<div class='col-sm-10'>
 		<input name='firstName' type='text' ng-model='firstName' required class='form-control'></input>
 	</div>
 </div>
 <div class='form-group' ng-class='{ "has-error": eventForm.lastName.$invalid }'>
-	<label for='lastName' class='control-label col-sm-2'>Nachname</label>
+	<label for='lastName' class='control-label col-sm-2'>{{'USER_NEW.LABEL_LASTNAME' | translate}}</label>
 	<div class='col-sm-10'>
 		<input name='lastName' type='text' ng-model='lastName' class='form-control' required></input>
 	</div>
 </div>
 <div class='form-group' ng-class='{ "has-error": eventForm.userTel.$invalid }'>
-	<label for='userTel' class='control-label col-sm-2'>Tel</label>
+	<label for='userTel' class='control-label col-sm-2'>{{'USER_NEW.LABEL_TEL' | translate}}</label>
 	<div class='col-sm-10'>
 		<input name='userTel' type='text' ng-model='userTel' class='form-control' required></input>
 	</div>
 </div>
 <div class='form-group' ng-class='{ "has-error": eventForm.userEmail.$invalid }'>
-  <label for='userEmail' class='control-label col-sm-2'>Email</label>
+  <label for='userEmail' class='control-label col-sm-2'>{{'USER_NEW.LABEL_EMAIL' | translate}}</label>
   <div class='col-sm-10'>
     <input name='userEmail' type='text' ng-model='userEmail', class='form-control' required></input>
   </div>
 </div>
 <div class='form-group' ng-class='{ "has-error": eventForm.userName.$invalid }'>
-	<label for='userName' class='control-label col-sm-2'>User-Name</label>
+	<label for='userName' class='control-label col-sm-2'>{{'USER_NEW.LABEL_USERNAME' | translate}}</label>
 	<div class='col-sm-10'>
 		<input name='userName' type='text' ng-model='userName' class='form-control' required></input>
 	</div>
 </div>
 <div class='form-group' ng-class='{ "has-error": eventForm.pwd.$invalid }'>
-	<label for='pwd' class='control-label col-sm-2'>Passwort</label>
+	<label for='pwd' class='control-label col-sm-2'>{{'USER_NEW.LABEL_PWD' | translate}}</label>
 	<div class='col-sm-10'>
 		<input name='pwd' type='password' ng-model='pwd' class='form-control' required></input>
 	</div>
 </div>
 <div class='col-sm-offset-2 col-sm-10'>
-    <h3><span class='label label-default'>Bitte merken Sie sich Ihren User-Namen und Passwort für spätere Nutzung.</span></h3>
+    <h3><span class='label label-default'>{{'USER_NEW.NOTE' | translate}}</span></h3>
 </div>
 <div class='col-sm-offset-2 col-sm-10'>
-	<input id='newUser_submit' class='btn btn-warning bnt-lg btn-block' type='submit' value='Hinzuf&uuml;gen' ng-disabled='eventForm.$invalid'>
+	<input id='newUser_submit' class='btn btn-warning bnt-lg btn-block' type='submit' translate-attr="{value: 'USER_NEW.BUTTON_ADD'}" ng-disabled='eventForm.$invalid'>
 </div>
 </form>
 </div>
