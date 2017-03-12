@@ -23,7 +23,7 @@ app.service('UserSvc', function($http) {
 	this.search = function(term) {
 		return $http.get('/api/user/search/' + term);
 	}
-	this.updateRoles = function(id, roles, eventId, location) {
+	this.updateRoles = function(id, eventId, location, roles) {
 		return $http.post('/api/user/updateRoles', {
 			id: id,
 			roles: roles,
