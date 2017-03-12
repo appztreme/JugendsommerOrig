@@ -68,22 +68,24 @@ exports.sendTxtMail = function(recipient, firstNameChild, lastNameChild, type, i
 		var body = getTypeBody(type, firstNameChild, lastNameChild, isKiso);
 		var text = getTypeText(type, firstNameChild, lastNameChild, isKiso);
         var fromEmail = isKiso ? 'kiso@jd.bz.it' : 'info@jugenddienst.com';
-		//console.log("email", body, text);
+		var subjectEmail = isKiso ? 'Anmeldung / Iscrizione KiSo Kindersommer 2017' : 'Anmeldung ' + getTypeString(type);
 		server.send({
 		text: text,
 		from: fromEmail,
 		to: recipient,
-		subject: "Anmeldung " + getTypeString(type),
+		subject: subjectEmail,
 		attachments: { data: body,
 			       alternative: true }
 	}, function(err, message) {console.log(err||message); });
 };
 
-exports.sendUserTokenMail = function(recipient, userToken) {
+exports.sendUserTokenMail = function(recipient, userToken, isKiso) {
+	var fromEmail = isKiso ? 'kiso@jd.bz.it' : 'info@jugenddienst.com';
+	var subjectEmail = isKiso ? 'Passwortänderung/Modifica password kiso@jd.bz.it' : 'Passwortänderung Jugendsommer.com';
 	server.send({
-		from: "info@jugenddienst.com",
+		from: fromEmail,
 		to: recipient,
-		subject: "Passwortänderung Jugendsommer.com",
-		text: "Der Sicherheits-Code zum Zurücksetzen Ihres Passwortes lautet: " + userToken
+		subject: subjectEmail,
+		text: "Der Sicherheits-Code zum Zurücksetzen Ihres Passwortes lautet: " + userToken + '\r\n\r\n' + "Il Suo codice di sicurezza per la modifica del password é " + userToken
 	}, function(err, message) { console.log(err||message); });
 }

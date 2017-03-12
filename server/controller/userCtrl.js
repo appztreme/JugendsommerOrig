@@ -74,7 +74,9 @@ exports.requestUserToken = (req, res, next) => {
 	User.findOne({userName: req.body.userName})
 		.exec((err, user) => {
 			if(err) { next(err); }
-			mail.sendUserTokenMail(user.userEmail, user.getUserToken());
+			var host = req.get('host');
+			var isKiso = host.indexOf('kiso') !== -1;
+			mail.sendUserTokenMail(user.userEmail, user.getUserToken(), isKiso);
 			res.status(202).end();
 		});
 };
