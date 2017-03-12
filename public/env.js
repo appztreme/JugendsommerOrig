@@ -32,6 +32,18 @@
             "NOTE": "Bitte merken Sie sich Ihren User-Namen und Passwort für die spätere Nutzung",
             "BUTTON_ADD": "Hinzufügen"
         },
+        "LOST_PWD": {
+            "TITLE1": "Neuen Sicherheits-Code anfordern",
+            "NOTE1": "Für den angegebenen User-Namen wird Ihnen ein Sicherheits-Code auf die dem User hinterlegte Email-Adresse zugesendet, mit dem Sie ein neues Passwort vergeben können",
+            "LABEL_USERNAME1": "User-Name",
+            "BUTTON_SUBMIT1": "Absenden",
+            "TITLE2": "Neues Password vergeben",
+            "NOTE2": "Bitte verwenden Sie den Sicherheits-Code, der Ihnen per Email zugesandt wurde.",
+            "LABEL_USERNAME2": "User-Name",
+            "LABEL_SECURITY_CODE2": "Sicherheits-Code",
+            "LABEL_PASSWORD2": "Passwort",
+            "BUTTON_SUBMIT2": "Ändern"
+        },
         "SELECTION": {
             "TITLE": "Wo wir tätig sind",
             "PROGRAM": "Programme"
@@ -132,6 +144,18 @@
             "LABEL_PWD": "password",
             "NOTE": "Ricordarsi il nome utente e la password per l’accesso!",
             "BUTTON_ADD": "creare"
+        },
+        "LOST_PWD": {
+            "TITLE1": "Richiesta nuovo codice di sicurezza",
+            "NOTE1": "Le sará inviato un codice di sicurezza all’indirizzo mail indicato, con il quale potrá scegliersi una nuova password",
+            "LABEL_USERNAME1": "Nome utente",
+            "BUTTON_SUBMIT1": "Invio",
+            "TITLE2": "Assegnare nuova password",
+            "NOTE2": "Si prega di inserire il codice di sicurezza inviato via mail",
+            "LABEL_USERNAME2": "Nome utente",
+            "LABEL_SECURITY_CODE2": "Codice di sicurezza",
+            "LABEL_PASSWORD2": "Password",
+            "BUTTON_SUBMIT2": "Cambio password"
         },
         "SELECTION": {
             "TITLE": "Le nostre settimane",
