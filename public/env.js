@@ -16,7 +16,10 @@
             "PWD": "Passwort",
             "LOGIN": "Anmelden",
             "NEW": "Neuer User",
-            "PWDNEW": "Passwort vergessen"
+            "PWDNEW": "Passwort vergessen",
+            "MSG_LOGIN_SUCCESS": "Sie haben sich erfolgreich angemeldet",
+            "MSG_LOGOUT_SUCCESS": "Sie haben sich erfolgreich abgemeldet",
+            "MSG_LOGIN_NOTFOUND": "Ihre User Passwort Kombination konnte nicht gefunden werden. Legen Sie einen neuen User an."
         },
         "USER_NEW": {
             "TITLE": "Neuen User erstellen / Angaben zu den Eltern",
@@ -77,11 +80,14 @@
             "LABEL_TEL_CONTACT2": "Telefon 2",
             "LABEL_TERMS1": "  Ich akzeptiere die ",
             "LABEL_TERMS2": "allgemeinen Geschäftsbedingungen",
-            "LABEL_REGISTER": "Anmelden"
+            "LABEL_REGISTER": "Anmelden",
+            "BUTTON_SUBMIT": "Anmelden",
+            "MSG_SUCCESS": "Anmeldung erfolgreich gespeichert",
+            "MSG_NO_DUPLICATES": "Doppelte Anmeldungen pro Veranstaltung sind nicht möglich"
         },
         "MYRESERVATION": {
             "TITLE": "Erfolgreiche Reservierungen",
-            "NOTE": "Einzahlungsschein wird innerhalb von fünf Tagen zugesandt. Vielen Dank für Ihre Anmeldung.",
+            "NOTE": "Zahlungsaufforderung wird innerhalb von fünf Tagen zugesandt. Danke für Ihre Reservierung.",
             "LABEL_EVENT": "Programm",
             "LABEL_ACTIVITY": "Woche",
             "LABEL_ACCEPT": "Angenommen",
@@ -111,7 +117,10 @@
             "PWD": "Password",
             "LOGIN": "Accesso",
             "NEW": "Nuovo utente",
-            "PWDNEW": "password dimenticata"
+            "PWDNEW": "password dimenticata",
+            "MSG_LOGIN_SUCCESS": "Login avvenuto con successo",
+            "MSG_LOGOUT_SUCCESS": "Logout avvenuto con successo",
+            "MSG_LOGIN_NOTFOUND": "Password o utente non trovato. Crearsi un nuovo utente."
         },
         "USER_NEW": {
             "TITLE": "Crea nuovo account",
@@ -143,17 +152,17 @@
             "BACK": "indietro"
         },
         "RESERVATION": {
-            "TITLE": "iscrizione",
+            "TITLE": "Iscrizione",
             "HEADER_SPIRIT_PARENT": "Angaben Begleitperson:",
-            "HEADER_SUMMER_PARENT": "dati genitori:",
+            "HEADER_SUMMER_PARENT": "Dati genitori:",
             "HEADER_SPIRIT_CHILD": "Angaben zum Firmling:",
-            "HEADER_SUMMER_CHILD": "dati bambino/a",
+            "HEADER_SUMMER_CHILD": "Dati bambino/a",
             "HEADER_MUSIC": "Auszufüllen nur bei Anmeldung für die Jungbläserwochen",
             "HEADER_CONTACT": "Contatti di emergenza",
             "LABEL_LOAD_PREVIOUS": "usare i dati dell'ultima iscrizione",
             "LABEL_FIRSTNAME_PARENT": "nome",
             "LABEL_LASTNAME_PARENT": "cognome",
-            "LABEL_TEL_PARENT": "numero telefono",
+            "LABEL_TEL_PARENT": "numero di telefono",
             "LABEL_MAIL_PARENT": "e-mail",
             "LABEL_FIRSTNAME_CHILD": "nome",
             "LABEL_LASTNAME_CHILD": "cognome",
@@ -172,11 +181,14 @@
             "LABEL_TEL_CONTACT2": "telefono 2",
             "LABEL_TERMS1": "  accetto ",
             "LABEL_TERMS2": "termini e condizioni",
-            "LABEL_REGISTER": "iscrizione"
+            "LABEL_REGISTER": "iscrizione",
+            "BUTTON_SUBMIT": "Invio iscrizione",
+            "MSG_SUCCESS": "Iscrizione salvata con successo",
+            "MSG_NO_DUPLICATES": "Non sono possibili iscrizione doppie per la stessa settimana"
         },
         "MYRESERVATION": {
-            "TITLE": "Iscrizioni confermate",
-            "NOTE": "Il bollettino per il pagamento verrà inviato entro cinque giorni. Grazie per l'iscrizione!",
+            "TITLE": "Prenotazioni confermate",
+            "NOTE": "L‘avviso di pagamento verrà inviato entro cinque giorni. Grazie per la sua prenotazione!",
             "LABEL_EVENT": "programma",
             "LABEL_ACTIVITY": "settimana",
             "LABEL_ACCEPT": "accettato",

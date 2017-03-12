@@ -67,10 +67,11 @@ function getTypeBody(type, firstNameChild, lastNameChild, isKiso) {
 exports.sendTxtMail = function(recipient, firstNameChild, lastNameChild, type, isKiso) {
 		var body = getTypeBody(type, firstNameChild, lastNameChild, isKiso);
 		var text = getTypeText(type, firstNameChild, lastNameChild, isKiso);
-		console.log("email", body, text);
+        var fromEmail = isKiso ? 'kiso@jd.bz.it' : 'info@jugenddienst.com';
+		//console.log("email", body, text);
 		server.send({
 		text: text,
-		from: "info@jugenddienst.com",
+		from: fromEmail,
 		to: recipient,
 		subject: "Anmeldung " + getTypeString(type),
 		attachments: { data: body,

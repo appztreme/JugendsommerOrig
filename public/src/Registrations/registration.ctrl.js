@@ -1,11 +1,30 @@
 var app = angular.module('js');
 
-app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $location, NotificationSvc, RegistrationSvc, RegistrationCacheSvc, IdentitySvc, conf) {
+app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $location, NotificationSvc, RegistrationSvc, RegistrationCacheSvc, IdentitySvc, conf, $rootScope, $translate) {
 	RegistrationSvc.activityId = $routeParams.activityId;
 	$scope.activityId = $routeParams.activityId;
 
 	var host = $location.$$host.toLowerCase();
 	$scope.isKiso = host.indexOf('kiso') !== -1;
+
+	//default values
+	$scope.msgSuccess = 'Anmeldung erfolgreich gespeichert';
+	$scope.msgNoDuplicates = 'Doppelte Anmeldungen pro Veranstaltung sind nicht möglich';
+
+	$scope.lang = $translate.proposedLanguage() || $translate.user();
+
+    $rootScope.$on('$translateChangeSuccess', function() {
+        $scope.lang = $translate.proposedLanguage() || $translate.user();
+
+		$translate(['RESERVATION.MSG_SUCCESS', 'RESERVATION.MSG_NO_DUPLICATES'])
+			.then(function (translations) {
+    			$scope.msgSuccess = translations['RESERVATION.MSG_SUCCESS'];
+    			$scope.msgNoDuplicates = translations['RESERVATION.MSG_NO_DUPLICATES'];
+  			}, function (translationIds) {
+				$scope.msgSuccess = translationIds.reservation_msg_success;
+    			$scope.msgNoDuplicates = translationIds.reservation_msg_no_duplicates;
+  			});
+    });
 
 	// $scope.busyPromise = RegistrationSvc.create();
 
@@ -75,7 +94,7 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 			})
 			.error(function(err) {
 				if(err.indexOf('duplicate key error index') > -1) {
-					NotificationSvc.warn("Doppelte Anmeldungen pro Veranstaltung sind nicht möglich");
+					NotificationSvc.warn($scope.msgNoDuplicates);
 				}
 			})
 			.success(function(reg) {
@@ -99,7 +118,7 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 				$scope.needsPreCare = false
 				RegistrationCacheSvc.lastRegistration = reg;
 			}).then(function() {
-				NotificationSvc.notify('Anmeldung erfolgreich gespeichert');
+				NotificationSvc.notify($scope.msgSuccess);
 				$location.path('/');
 			});
 		}
