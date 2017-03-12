@@ -8,13 +8,13 @@
   <div class="panel-body">
 		<div class="panel">
 			<div class="panel-heading">
-				<input id="fadmin" name="role" type="radio" ng-model="isFadmin" value="true" ng-change="updateRole('fadmin')"/>
+				<input id="fadmin" name="role" type="radio" ng-model="curRole" value="fadmin" />
 				<label for="fadmin" style="margin-left: 5px">Programm-Admin</label>
 			</div>
 			<div class="panel-body">
 				<label for='events' class='col-sm-1'>Programm</label>
 				<div class='col-sm-4'>
-					<select name='events' class='sel-base form-control' ng-model='event'>
+					<select name='events' class='sel-base form-control' ng-model='user.eventId'>
 						<option ng-repeat="ev in events" value='{{ev._id}}'>{{ev.location}} - {{ev.name}}</option>
 					</select>
 				</div>
@@ -22,7 +22,7 @@
 		</div>
 		<div class="panel">
 			<div class="panel-heading">
-				<input id="ladmin" name="role" type="radio" ng-model="isLadmin" value="true" ng-change="updateRole('ladmin')"/>
+				<input id="ladmin" name="role" type="radio" ng-model="curRole" value="ladmin" />
 				<label for="ladmin" style="margin-left: 5px">Ort-Admin</label>
 			</div>
 			<div class="panel-body">
@@ -36,11 +36,14 @@
 		</div>
 		<div class="panel">
 			<div class="panel-heading">
-				<input id="admin" name="role" type="radio" ng-model="isAdmin" ng-change="updateRole('admin')" />
+				<input id="admin" name="role" type="radio" ng-model="curRole" value="admin" />
 				<label for="admin" style="margin-left: 5px">Super-Admin</label>
 			</div>
 		</div>
   </div>
-	<div class="panel-footer">UserName: <strong>{{user.userName}}</strong></div>
+	<div class="panel-footer">
+		<button type="button" class="btn btn-success" ng-click="save()">Speichern</button>
+		<a href="/#/userRolesSearch" type="button" class="btn btn-warning">Cancel</a>
+	</div>
 </div>
 </div>

@@ -32,21 +32,16 @@ exports.findById = async(req, res, next) => {
 	catch(err) { next(err); }
 };
 
-exports.search = (req, res, next) => {
-	User.find({ $or: [
-			{firstName: {'$regex': req.params.txt }},
-			{lastName: {'$regex': req.params.txt }},
-			{userName: {'$regex': req.params.txt }}
-		]})
-		.select('_id firstName lastName userName userEmail roles eventId')
-		.exec(function(err, users) {
-			if(err) { next(err); }
-			res.json(users);
-		});
+exports.search = async(req, res, next) => {
+	try {
+		let users = await repo.search(req.params.txt);
+		res.json(users);
+	}
+	catch(err) { next(err); }
 }
 
 exports.updateRoles = (req, res, next) => {
-	User.findById(req.body._id)
+	User.findById(req.body.id)
 		.exec((err, user) => {
 			if(err) { next(err); }
 			user.roles = req.body.roles;

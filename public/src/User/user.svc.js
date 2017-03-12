@@ -23,11 +23,12 @@ app.service('UserSvc', function($http) {
 	this.search = function(term) {
 		return $http.get('/api/user/search/' + term);
 	}
-	this.updateRolws = function(_id, roles, eventId) {
+	this.updateRoles = function(id, roles, eventId, location) {
 		return $http.post('/api/user/updateRoles', {
-			_id: _id,
+			id: id,
 			roles: roles,
-			eventId: eventId
+			eventId: eventId,
+			location: location
 		});
 	};
 	this.updatePassword = function(userName, userToken, newPassword) {
