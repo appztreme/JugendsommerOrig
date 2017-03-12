@@ -3,6 +3,7 @@ const User = require('./../models/user');
 const router = require('express').Router();
 const crypto = require('crypto');
 const mail = require('./mail.js');
+const repo = require('./../repositories/user');
 
 exports.create = (req, res, next) => {
 	let salt = createSalt();
@@ -23,13 +24,12 @@ exports.create = (req, res, next) => {
  	});
 };
 
-exports.findById = (req, res, next) => {
-	User.findOne({_id: req.params.id})
-			.select('_id firstName lastName userTel userEmail userName roles eventId')
-			.exec(function(err, user) {
-		if(err) { next(err); }
-		res.status(201).json(user);
-	});
+exports.findById = async(req, res, next) => {
+	try {
+		let user = await repo.findById(req.params.id);
+		res.json(user);
+	}
+	catch(err) { next(err); }
 };
 
 exports.search = (req, res, next) => {
@@ -51,6 +51,7 @@ exports.updateRoles = (req, res, next) => {
 			if(err) { next(err); }
 			user.roles = req.body.roles;
 			user.eventId = req.body.eventId;
+			user.location = req.body.location;
 			user.save(function(err, userSaved) {
 				if(err) { next(err); }
 				res.status(200).json(userSaved);

@@ -1,26 +1,46 @@
 <div class='container'>
 <h2 class='text-orange'>User Rollen verwalten</h2>
-<!--<form name='eventForm' class='form-horizontal' novalidate ng-submit='updatePwd(userName, token, pwd)'>
-  <div class='form-group' ng-class='{ "has-error": eventForm.userName.$invalid }'>
-	<label for='userName' class='control-label col-sm-2'>User-Name</label>
-	<div class='col-sm-10'>
-	<input name='userName' type='text' ng-model='userName' class='form-control' required></input>
-	</div>
+<div class="panel panel-warning">
+  <div class="panel-heading">
+		<span class="glyphicon glyphicon-user" style="margin-right:3px;"></span>
+    <h3 class="panel-title">{{user.firstName}} {{user.lastName}}</h3>
   </div>
-  <div class='form-group' ng-class='{ "has-error": eventForm.token.$invalid }'>
-	<label for='token' class='control-label col-sm-2'>Sicherheits-Code</label>
-	<div class='col-sm-10'>
-	<input name='token' type='text' ng-model='token' class='form-control' required></input>
-	</div>
+  <div class="panel-body">
+		<div class="panel">
+			<div class="panel-heading">
+				<input id="fadmin" name="role" type="radio" ng-model="isFadmin" value="true" ng-change="updateRole('fadmin')"/>
+				<label for="fadmin" style="margin-left: 5px">Programm-Admin</label>
+			</div>
+			<div class="panel-body">
+				<label for='events' class='col-sm-1'>Programm</label>
+				<div class='col-sm-4'>
+					<select name='events' class='sel-base form-control' ng-model='event'>
+						<option ng-repeat="ev in events" value='{{ev._id}}'>{{ev.location}} - {{ev.name}}</option>
+					</select>
+				</div>
+			</div>
+		</div>
+		<div class="panel">
+			<div class="panel-heading">
+				<input id="ladmin" name="role" type="radio" ng-model="isLadmin" value="true" ng-change="updateRole('ladmin')"/>
+				<label for="ladmin" style="margin-left: 5px">Ort-Admin</label>
+			</div>
+			<div class="panel-body">
+				<label for='location' class='col-sm-1'>Ort</label>
+				<div class='col-sm-4'>
+					<select name='location' class='sel-base form-control' ng-model='location'>
+						<option ng-repeat="loc in locations" value='{{loc.name}}'>{{loc.name}}</option>
+					</select>
+				</div>
+			</div>
+		</div>
+		<div class="panel">
+			<div class="panel-heading">
+				<input id="admin" name="role" type="radio" ng-model="isAdmin" ng-change="updateRole('admin')" />
+				<label for="admin" style="margin-left: 5px">Super-Admin</label>
+			</div>
+		</div>
   </div>
-  <div class='form-group' ng-class='{ "has-error": eventForm.pwd.$invalid }'>
-	<label for='pwd' class='control-label col-sm-2'>Passwort</label>
-	<div class='col-sm-10'>
-	<input name='pwd' type='password' ng-model='pwd' class='form-control' required></input>
-	</div>
-  </div>
-	<div class='col-sm-offset-2 col-sm-10'>
-		<input id='newUser_submit' class='btn btn-warning bnt-lg btn-block' type='submit' value='&Auml;ndern' ng-disabled='eventForm.$invalid'>
-	</div>
-</form>-->
+	<div class="panel-footer">UserName: <strong>{{user.userName}}</strong></div>
+</div>
 </div>

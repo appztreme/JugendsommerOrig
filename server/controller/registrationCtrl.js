@@ -73,7 +73,7 @@ exports.getSelectableEventActivities = async(req, res, next) => {
 	try {
 		let acts = await ActivityRepo.getSelectableEventActivities();
 		res.json(acts);
-	} catch(err) { console.log("ERR", err); next(err); }
+	} catch(err) { next(err); }
 }
 
 exports.findById = (req, res, next) => {

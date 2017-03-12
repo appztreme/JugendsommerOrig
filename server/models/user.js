@@ -12,6 +12,7 @@ var userSchema = db.Schema({
     	salt: { type: String },
     	roles: [String],
 		eventId: { type: mongoose.Schema.Types.ObjectId, ref: 'Event', required: false },
+		location: { type: String, required: false }
 });
 
 userSchema.index({userName: 1}, {unique: true});

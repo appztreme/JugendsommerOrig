@@ -11,6 +11,15 @@ app.service('UserSvc', function($http) {
 			pwd: pwd
 		});
 	};
+	this.getLocations = function() {
+		return $http.get('/api/locations/events');
+	};
+	this.getEvents = function() {
+		return $http.get('/api/events');
+	};
+	this.findById = function(id) {
+		return $http.get('/api/user/' + id);
+	};
 	this.search = function(term) {
 		return $http.get('/api/user/search/' + term);
 	}
