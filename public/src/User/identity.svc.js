@@ -26,5 +26,11 @@ app.factory('IdentitySvc', function() {
 				this.currentUser.eventId && this.currentUser.eventId.toString() === eventId.toString();
 			return check;
 		},
+
+		isAuthorizedForLocation: function(role, location) {
+			var check = this.isAuthorized(role) &&
+				this.currentUser.location && this.currentUser.location === location;
+			return check;
+		}
 	};
 });
