@@ -1,20 +1,16 @@
 var app = angular.module('js');
 
-app.controller('AgbEditCtrl', function($scope, $routeParams, $location, AgbsSvc, NotificationSvc) {
+app.controller('AgbEditCtrl', function($scope, $routeParams, $location, AgbsSvc, NotificationSvc, $rootScope, $translate) {
 	$scope.activityId = $routeParams.activityId;
 	$scope.type = $routeParams.type;
-	// console.log("type:", $routeParams.type);
+	
+	var host = $location.$$host.toLowerCase();
+    $scope.isKiso = true; //host.indexOf('kiso') !== -1;
 
-	// $scope.updateAgb = function() {
-	// 	AgbsSvc.update($scope.agb).success(function(agb) {
-	// 	}).then(function() {
-	//
-	// 		NotificationSvc.notify('Aenderung erfolgreich gespeichert');
-	// 	});
-	// };
+	$scope.lang = $translate.proposedLanguage() || $translate.user();
 
-	// AgbsSvc.find().success(function(agbs) {
-	// 	$scope.agb = agbs[0];
-	// });
+    $rootScope.$on('$translateChangeSuccess', function() {
+        $scope.lang = $translate.proposedLanguage() || $translate.user();
+    });
 
 });
