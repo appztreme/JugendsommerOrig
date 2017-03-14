@@ -15,6 +15,12 @@
 	<meta name='description' content='Event Registration Jugenddienst'>
 	<meta name='keywords' content='Jugendsommer Programme Anmeldung Jugenddienst'>
 	<meta name='author' content='Florian Edelmaier'>
+	<script>
+		if(location.hostname.indexOf('kiso') !== -1) document.title = 'Kindersommer';
+		else if(location.hostname.indexOf('jugendsommer') !== -1) document.title = 'Jugendsommer';
+		else if(location.hostname.indexOf('jd-bozenland') !== -1) document.title = 'Jugenddienst';
+		else if(location.hostname.indexOf('localhost') !== -1) document.title = 'Test';
+	</script>
 </head>
 <body ng-app='js' ng-controller='ApplicationCtrl'>
 	<nav class='navbar navbar-default'>

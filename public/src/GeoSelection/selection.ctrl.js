@@ -34,14 +34,9 @@ app.controller('GeoSelectionCtrl', function($scope, $location, GeoSvc, $rootScop
         });
     }
     else {
-        $scope.locations = [{_id: "Bozen",
-            countEvents: 1,
-            name: "Bozen",
-            name_it: "Bolzano",
-            distinctTypes: ["summer"]}];
-        // GeoSvc.getSelection().success(function(sel) {
-        //     addNameProp(sel);
-        //     $scope.locations = sel;
-        // });
+        GeoSvc.getSelection().success(function(sel) {
+            addNameProp(sel);
+            $scope.locations = sel;
+        });
     }
 });
