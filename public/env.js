@@ -46,7 +46,8 @@
         },
         "SELECTION": {
             "TITLE": "Wo wir tätig sind",
-            "PROGRAM": "Programme"
+            "PROGRAM": "Programme",
+            "INFO": "Bitte lesen Sie sich vor der Anmeldung aufmerksam unsere Allgemeinen Geschäftsbedingungen durch!",
         },
         "EVENTS": {
             "TITLE": "Programme"
@@ -159,7 +160,8 @@
         },
         "SELECTION": {
             "TITLE": "Le nostre settimane",
-            "PROGRAM": "programmi"
+            "PROGRAM": "programmi",
+            "INFO": "Preghiamo di leggere attentamente le nostre condizioni generali prima di effettuare l’iscrizione"
         },
         "EVENTS": {
             "TITLE": "programmi"

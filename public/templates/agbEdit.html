@@ -22,7 +22,8 @@
 	</ol>
 </div>
 <div class='col-sm-12'>
-	<a href='/#/registration/{{activityId}}?type={{type}}' class='btn btn-warning' role='button'>Zur&uuml;ck</a>
+	<a ng-show="activityId === '1'" href='/#/' class='btn btn-warning' role='button'>Zur&uuml;ck</a>
+	<a ng-show="activityId !== '1'" href='/#/registration/{{activityId}}?type={{type}}' class='btn btn-warning' role='button'>Zur&uuml;ck</a>
 </div>
 </div>
 <div ng-show="isKiso && lang == 'de'">
@@ -67,7 +68,8 @@
 		</li>
 	</ol>
 	<div class='col-sm-12'>
-		<a href='/#/registration/{{activityId}}?type={{type}}' class='btn btn-warning' role='button'>Zur&uuml;ck</a>
+		<a ng-show="activityId === '1'" href='/#/' class='btn btn-warning' role='button'>Zur&uuml;ck</a>
+		<a ng-show="activityId !== '1'" href='/#/registration/{{activityId}}?type={{type}}' class='btn btn-warning' role='button'>Zur&uuml;ck</a>
 	</div>
 </div>
 <div ng-show="isKiso && lang == 'it'">
@@ -111,7 +113,8 @@
 		</li>
 	</ol>
 	<div class='col-sm-12'>
-		<a href='/#/registration/{{activityId}}?type={{type}}' class='btn btn-warning' role='button'>indietro</a>
+		<a ng-show="activityId === '1'" href='/#/' class='btn btn-warning' role='button'>indietro</a>
+		<a ng-show="activityId !== '1'" href='/#/registration/{{activityId}}?type={{type}}' class='btn btn-warning' role='button'>indietro</a>
 	</div>
 </div>
 </div>
