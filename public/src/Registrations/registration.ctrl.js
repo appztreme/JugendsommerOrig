@@ -30,7 +30,7 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 
 	$scope.type = $routeParams.type;
 	$scope.cities = $scope.isKiso ? conf.cities_kiso : conf.cities_jdbl;
-	$scope.addressChild = ' ';
+	//$scope.addressChild = ' ';
 	$scope.cityChild = $scope.isKiso ? 'Bozen': 'Deutschnofen';
 	$scope.needsPreCare = false;
 
@@ -78,7 +78,7 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 				birthdayChild: $scope.birthdayChild,
 				schoolChild: $scope.schoolChild,
 				healthChild: $scope.healthChild,
-				addressChild: $scope.addressChild,
+				addressChild: $scope.addressChild ? $scope.addressChild : 'Addresse',
 				cityChild: $scope.cityChild,
 				bandName: $scope.bandName,
 				instrument: $scope.instrument,
