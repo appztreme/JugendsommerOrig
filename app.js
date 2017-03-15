@@ -35,6 +35,7 @@ app.use('/api/agb', require('./server/routes/agbRoute'));
 app.use('/api/resources', require('./server/routes/resourceRoute'));
 app.use('/api/lendings', require('./server/routes/lendingRoute'));
 app.use('/api/locations', require('./server/routes/locationRoute'));
+app.use('/api/contact', require('./server/routes/contactRoute'));
 
 require('./server/passport.config')();
 
