@@ -20,9 +20,15 @@ app.service('ReportCacheSvc', function() {
              !angular.isUndefined(this.allActivities);
   };
 
+  this.hasLastVerticalScrollPosition = function() {
+    return !angular.isUndefined(this.lastVerticalScrollPosition);
+  }
+
 	this.currentActivityIdFilter = undefined;
   this.currentEventIdFilter = undefined;
 
   this.events = undefined;
   this.allActivities = undefined;
+
+  this.lastVerticalScrollPosition = undefined;
 });
