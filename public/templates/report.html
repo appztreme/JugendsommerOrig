@@ -29,6 +29,18 @@
 				</span>
 			</div>
 		</div>
+		<div class='row' style='margin-top:10px'>
+			<label for='nameFilter' class='control-label col-sm-2'>Nachname:</label>
+			<div class='col-sm-5 input-group'>
+				<input id='nameFilter' type='text' ng-model='nameFilter' />
+			</div>
+		</div>
+		<div class='row' style='margin-top:10px'>
+			<label for='yearFilter' class='control-label col-sm-2'>Jahr:</label>
+			<div class='col-sm-5 input-group'>
+				<input name='yearFilter' type='number' ng-model='yearFilter' min='2015' step='1' />
+			</div>
+		</div>
 		<div class="row" style='margin-top:10px'>
     	<div class='col-sm-offset-2 col-sm-4'>
       	<button type='button' class='btn btn-primary btn-block' ng-click='getReportData()'>Laden</button>

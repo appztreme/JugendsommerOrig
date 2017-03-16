@@ -3,6 +3,9 @@ var app = angular.module('js');
 app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc, NotificationSvc, ReportCacheSvc) {
 	$scope.busyPromise = RegistrationSvc.find() || RegistrationSvc.updateIsPaymentDone;
 
+	// default values
+	$scope.yearFilter = (new Date()).getFullYear();
+
   $scope.getReportData = function() {
     RegistrationSvc.find($scope.eventIdFilter, $scope.activityIdFilter)
 				.success(function (regs) {

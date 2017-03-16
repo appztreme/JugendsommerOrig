@@ -5,10 +5,18 @@ var app = angular.module('js');
  * communication with server
  */
 app.service('RegistrationSvc', function($http) {
-	this.find = function(eventId, activityId) {
+	this.find = function(eventId, activityId, year, name) {
         var path = '/api/registrations';
         if(!angular.isUndefined(activityId)) { path = path + '?activityId=' + activityId; }
-				if(!angular.isUndefined(eventId) && angular.isUndefined(activityId)) { path = path + '?eventId=' + eventId; }
+		if(!angular.isUndefined(eventId) && angular.isUndefined(activityId)) { path = path + '?eventId=' + eventId; }
+		if(!angular.isUndefined(year)) {
+			if(path.indexOf('?') !== -1) path = path + '?year=' + year;
+			else path = path + '&year=' + year;
+		}
+		if(!angular.isUndefined(name)) {
+			if(path.indexOf('?') !== -1) path = path + '?name=' + name;
+			else path = path + '&name=' + name;
+		}
 		return $http.get(path);
 	};
 
