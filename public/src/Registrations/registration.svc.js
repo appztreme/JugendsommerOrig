@@ -7,17 +7,12 @@ var app = angular.module('js');
 app.service('RegistrationSvc', function($http) {
 	this.find = function(eventId, activityId, year, name) {
         var path = '/api/registrations';
-        if(!angular.isUndefined(activityId)) { path = path + '?activityId=' + activityId; }
-		if(!angular.isUndefined(eventId) && angular.isUndefined(activityId)) { path = path + '?eventId=' + eventId; }
-		if(!angular.isUndefined(year)) {
-			if(path.indexOf('?') !== -1) path = path + '?year=' + year;
-			else path = path + '&year=' + year;
-		}
-		if(!angular.isUndefined(name)) {
-			if(path.indexOf('?') !== -1) path = path + '?name=' + name;
-			else path = path + '&name=' + name;
-		}
-		return $http.get(path);
+		var params = {};
+		if(!angular.isUndefined(eventId) && angular.isUndefined(activityId)) params.eventId = eventId;
+		if(!angular.isUndefined(activityId)) params.activityId = activityId;
+		if(!angular.isUndefined(year)) params.year = year;
+		if(!angular.isUndefined(name)) params.name = name;
+		return $http.get(path, { params: params });
 	};
 
 	this.getCities = function() {

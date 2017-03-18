@@ -1,20 +1,23 @@
 var app = angular.module('js');
 
 app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc, NotificationSvc, ReportCacheSvc) {
-	$scope.busyPromise = RegistrationSvc.find() || RegistrationSvc.updateIsPaymentDone;
+	$scope.busyPromise = RegistrationSvc.find() || RegistrationSvc.updateIsPaymentDone();
 
 	// default values
 	$scope.yearFilter = (new Date()).getFullYear();
 
-  $scope.getReportData = function() {
-    RegistrationSvc.find($scope.eventIdFilter, $scope.activityIdFilter)
+  	$scope.getReportData = function() {
+    	RegistrationSvc.find($scope.eventIdFilter, $scope.activityIdFilter, $scope.yearFilter, $scope.nameFilter)
 				.success(function (regs) {
-            $scope.registrations = regs;
-            $scope.emails = _.uniq(_.map($scope.registrations, function(r) {
-                return r.emailParent;
-            })).join(';');
-    });
-  };
+            		$scope.registrations = regs;
+            		$scope.emails = _.uniq(_.map($scope.registrations, function(r) {
+                		return r.emailParent;
+            		})).join(';');
+    			});
+	//.error(function(err) {
+	//	console.log("error", err);
+	//})
+  	};
 
 	$scope.clearEventSelection = function() {
 		$scope.eventIdFilter = undefined;
@@ -25,6 +28,12 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 
 	$scope.clearActivitySelection = function() {
 		$scope.activityIdFilter = undefined;
+		$scope.registrations = undefined;
+		$scope.emails = undefined;
+	}
+
+	$scope.clearNameSelection = function() {
+		$scope.nameFilter = undefined;
 		$scope.registrations = undefined;
 		$scope.emails = undefined;
 	}

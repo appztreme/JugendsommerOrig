@@ -4,69 +4,19 @@ const Event = require('./../models/event');
 const Activity = require('./../models/activity');
 
 const ActivityRepo = require('./../repositories/activity');
+const RegistrationRepo = require('./../repositories/registration');
 const mail = require('./mail');
 const mongoose = require('mongoose');
 
 const curYear = new Date().getFullYear();
 const startCurYear = new Date(curYear,1,1);
 
-let queryReport = (query, res) => {
-	query.populate({path:'activityId', populate:{path:'eventId'}})
-				.sort({ activityId: 1, lastNameChild: 1, firstNameChild: 1})
-				.exec(function(err, reg) {
-					if(err) { return next(err); }
-					res.json(reg);
-		});
-};
-
-let getRegistrationsAll = (res) => {
-	Registration.find()
-		.where('registrationDate').gte(startCurYear)
-		.populate({path:'activityId', populate:{path:'eventId'}})
-		.sort({ activityId: 1, lastNameChild: 1, firstNameChild: 1})
-		.exec(function(err, reg) {
-			if(err) { return next(err); }
-			res.json(reg);
-		});
-};
-
-let getRegistrationsByEventId = (eventId, res) => {
-	Activity.find()
-		.where('eventId').equals(eventId)
-		.select({ __id: 1})
-		.exec(function(err, acts) {
-			if(err) { return next(err); }
-				Registration.find()
-					.where('registrationDate').gte(startCurYear)
-					.where('activityId').in(acts)
-					.populate({path:'activityId', populate:{path:'eventId'}})
-					.sort({ activityId: 1, lastNameChild: 1, firstNameChild: 1})
-					.exec(function(err, reg) {
-						if(err) { return next(err); }
-						res.json(reg);
-					});
-		});
-};
-
-const getRegistrationsByActivityId = (activityId, res)  =>{
-	Registration.find()
-		.where('registrationDate').gte(startCurYear)
-		.where('activityId').equals(activityId)
-		.populate({path:'activityId', populate:{path:'eventId'}})
-		.sort({ activityId: 1, lastNameChild: 1, firstNameChild: 1})
-		.exec(function(err, reg) {
-			if(err) { return next(err); }
-			res.json(reg);
-		});
-};
-
-exports.find = (req, res, next) => {
-	if(!req.query.activityId && !req.query.eventId)
-		return getRegistrationsAll(res);
-	if(req.query.activityId)
-		return getRegistrationsByActivityId(req.query.activityId, res);
-	if(req.query.eventId)
-		return getRegistrationsByEventId(req.query.eventId, res);
+exports.find = async(req, res, next) => {
+	try {
+		let result = await RegistrationRepo.filter(req.query.year, req.query.name, req.query.activityId, req.query.eventId);
+		res.json(result);
+	}
+	catch(err) { next(err); }
 };
 
 exports.getSelectableEventActivities = async(req, res, next) => {

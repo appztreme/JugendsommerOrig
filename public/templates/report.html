@@ -32,13 +32,18 @@
 		<div class='row' style='margin-top:10px'>
 			<label for='nameFilter' class='control-label col-sm-2'>Nachname:</label>
 			<div class='col-sm-5 input-group'>
-				<input id='nameFilter' type='text' ng-model='nameFilter' />
+				<input id='nameFilter' class='form-control' type='text' ng-model='nameFilter' />
+				<span class='input-group-btn'>
+					<button class='btn btn-info' ng-click='clearNameSelection()'>
+						<span class='glyphicon glyphicon-remove'></span>
+					</button>
+				</span>
 			</div>
 		</div>
 		<div class='row' style='margin-top:10px'>
 			<label for='yearFilter' class='control-label col-sm-2'>Jahr:</label>
 			<div class='col-sm-5 input-group'>
-				<input name='yearFilter' type='number' ng-model='yearFilter' min='2015' step='1' />
+				<input name='yearFilter' class='form-control' type='number' ng-model='yearFilter' min='2015' step='1' />
 			</div>
 		</div>
 		<div class="row" style='margin-top:10px'>
