@@ -17,6 +17,7 @@ app.controller('EventEditCtrl', function($scope, $routeParams, $location, Notifi
 			$scope.event.endDate = $scope.endDate;
 			$scope.event.visibleFrom = $scope.visibleFrom;
 			$scope.event.visibleTo = $scope.visibleTo;
+			$scope.event.deadline = $scope.deadline;
 			$scope.event.budgetBusiness = $scope.budgetBusiness;
 			$scope.event.budgetFood = $scope.budgetFood;
 			$scope.event.info = $scope.info;
@@ -56,6 +57,7 @@ app.controller('EventEditCtrl', function($scope, $routeParams, $location, Notifi
 		$scope.endDate = new Date(ev.endDate);
 		$scope.visibleFrom = new Date(ev.visibleFrom);
 		$scope.visibleTo = new Date(ev.visibleTo);
+		$scope.deadline = new Date(ev.deadline);
 		$scope.budgetBusiness = ev.budgetBusiness;
 		$scope.budgetFood = ev.budgetFood;
 		$scope.info = ev.info;

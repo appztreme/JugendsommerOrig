@@ -199,6 +199,7 @@ exports.create = (req, res, next) => {
 		endDate: req.body.endDate,
 		visibleFrom: req.body.visibleFrom,
 		visibleTo: req.body.visibleTo,
+		deadline: req.body.deadline,
 		budgetFood: req.body.budgetFood,
 		budgetBusiness: req.body.budgetBusiness,
 	  	info: req.body.info,
@@ -233,6 +234,7 @@ exports.update = (req, res, next) => {
 		ev.endDate = req.body.endDate;
 		ev.visibleFrom = req.body.visibleFrom;
 		ev.visibleTo = req.body.visibleTo;
+		ev.deadline = req.body.deadline;
 		ev.budgetFood = req.body.budgetFood;
 		ev.budgetBusiness = req.body.budgetBusiness;
 		ev.info = req.body.info;

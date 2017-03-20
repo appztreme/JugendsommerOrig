@@ -15,6 +15,7 @@ var eventSchema = db.Schema({
 	endDate: { type: Date, required: true },
 	visibleFrom: { type: Date, required: false, default: Date.now },
 	visibleTo: { type: Date, required: false, default: Date.now },
+	deadline: { type: Date, required: false },
 	budgetBusiness: { type: Number, required: true, default: 0 },
 	budgetFood: { type: Number, required: true, default: 0 },
 	info: { type: String, required: true },

@@ -31,6 +31,7 @@ app.controller('EventNewCtrl', function($scope, $location, EventsSvc, Notificati
 				endDate: $scope.endDate,
 				visibleFrom: $scope.visibleFrom,
 				visibleTo: $scope.visibleTo,
+				deadline: $scope.deadline,
 				budgetBusiness: $scope.budgetBusiness,
 				budgetFood: $scope.budgetFood,
 				info: $scope.info,
@@ -47,6 +48,7 @@ app.controller('EventNewCtrl', function($scope, $location, EventsSvc, Notificati
 				$scope.endDate = null;
 				$scope.visibleFrom = null;
 				$scope.visibleTo = null;
+				$scope.deadline = null;
 				$scope.budgetBusiness = 0;
 				$scope.budgetFood = 0;
 				$scope.info = null;
