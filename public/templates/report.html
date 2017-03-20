@@ -96,9 +96,9 @@
 			<th>Anmeldedatum</th>
 		</tr>
 		<tr ng-repeat='reg in registrations | orderBy:colNameSort'>
-			<td><button class="btn glyphicon glyphicon-pencil" ng-disabled='!iSvc.isAuthorized("admin")' type="button" ng-click='editRegistration(reg._id)'></button></td>
-			<td><button type="button" class="btn glyphicon glyphicon-trash" ng-disabled='!iSvc.isAuthorized("admin")' ng-click='deleteRegistration(reg._id)'></button></td>
-			<td></td>
+			<td ng-class='{"bg-warning": isOnWait(reg)}'><button class="btn glyphicon glyphicon-pencil" ng-disabled='!iSvc.isAuthorized("admin")' type="button" ng-click='editRegistration(reg._id)'></button></td>
+			<td ng-class='{"bg-warning": isOnWait(reg)}'><button type="button" class="btn glyphicon glyphicon-trash" ng-disabled='!iSvc.isAuthorized("admin")' ng-click='deleteRegistration(reg._id)'></button></td>
+			<td ng-class='{"bg-warning": isOnWait(reg)}'></td>
 			<td>{{reg.activityId.eventId.location}} - {{reg.activityId.eventId.name}}</td>
 			<td>{{reg.activityId.name}}</td>
 			<td>{{reg.firstNameChild}}</td>

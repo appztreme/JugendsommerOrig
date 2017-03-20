@@ -3,6 +3,8 @@ var app = angular.module('js');
 app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc, NotificationSvc, ReportCacheSvc) {
 	$scope.busyPromise = RegistrationSvc.find() || RegistrationSvc.updateIsPaymentDone();
 
+	var host = $location.$$host.toLowerCase();
+
 	// default values
 	$scope.yearFilter = (new Date()).getFullYear();
 
@@ -50,6 +52,10 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 		});
 	};
 
+	$scope.isOnWait = function(reg) {
+		return reg.activityId.maxParticipants <= $scope.registrations.indexOf(reg);
+	}
+
 	$scope.formatBool = function(b) {
 		if(b) return "ja";
 		return "nein";
@@ -93,8 +99,6 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 			NotificationSvc.notify('Anmeldung geändert');
 		});
 	}
-
-	var host = $location.$$host.toLowerCase();
 
 	if(ReportCacheSvc.hasSelectionData()) {
 		$scope.events = ReportCacheSvc.events;

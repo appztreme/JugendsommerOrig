@@ -13,7 +13,12 @@ const startCurYear = new Date(curYear,1,1);
 
 exports.find = async(req, res, next) => {
 	try {
-		let result = await RegistrationRepo.filter(req.query.year, req.query.name, req.query.activityId, req.query.eventId);
+		let activityIds = undefined;
+		if(req.query.eventId) {
+			let ids = await ActivityRepo.getActivityIdsForEvent(req.query.eventId);
+			activityIds = ids.map(function(v,i) { return v._id; });
+		}
+		let result = await RegistrationRepo.filter(req.query.year, req.query.name, req.query.activityId, activityIds);
 		res.json(result);
 	}
 	catch(err) { next(err); }

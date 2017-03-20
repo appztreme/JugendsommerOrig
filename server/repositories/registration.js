@@ -9,21 +9,22 @@ exports.getSelectableEventActivities = () => {
 
 }
 
-exports.filter = (year, name, activityId, eventId) => {
+exports.filter = (year, name, activityId, activityIds) => {
     const minDate = new Date(year + "-1-1");
     const maxDate = new Date(year + "-12-31");
-    let query = Registration.find();
-    // if(name) query = query.or([
-    //     {lastNameChild:  {'$regex': { name }}},
-    //     {lastNameParent: {'$regex': { name }}}
-    // ]);   
+    let query = undefined;
+    if(name) query = Registration.find({ $or: [
+            {lastNameChild:  {'$regex': name }},
+            {lastNameParent: {'$regex': name }}
+        ]});
+    else query = Registration.find();
+
     if(activityId) query = query.where('activityId').equals(activityId);
-    //if(name) query = query.where('lastNameChild').regex(name);
-    if(eventId) query = query.populate({path:'activityId', populate:{path:'eventId', match:{ _id: eventId }}});
-    else query = query.populate({path:'activityId', populate:{path:'eventId'}});
+    if(activityIds) query = query.where('activityId').in(activityIds);
 
     return query
         .where('registrationDate').gte(minDate).lte(maxDate)
+        .populate({path:'activityId', populate:{path:'eventId'}})
 		.sort({ activityId: 1, registrationDate: 1, lastNameChild: 1, firstNameChild: 1})
 		.exec();
 }

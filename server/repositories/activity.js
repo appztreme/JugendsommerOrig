@@ -12,3 +12,10 @@ exports.getSelectableEventActivities = () => {
             .sort({'eventId.location': 1})
 			.exec();
 }
+
+exports.getActivityIdsForEvent = (eventId) => {
+	return Activity.find()
+			.where('eventId').equals(eventId)
+			.select('_id')
+			.exec();
+}
