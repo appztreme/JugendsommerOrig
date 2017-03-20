@@ -56,6 +56,11 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 		return reg.activityId.maxParticipants <= $scope.registrations.indexOf(reg);
 	}
 
+	$scope.isAfterDeadline = function(reg) {
+		console.log("after deadline", reg.activityId.eventId.deadline, reg.registrationDate);
+		return reg.activityId.eventId.deadline < reg.registrationDate;
+	}
+
 	$scope.formatBool = function(b) {
 		if(b) return "ja";
 		return "nein";
