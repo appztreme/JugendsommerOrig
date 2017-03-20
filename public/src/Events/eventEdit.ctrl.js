@@ -57,7 +57,7 @@ app.controller('EventEditCtrl', function($scope, $routeParams, $location, Notifi
 		$scope.endDate = new Date(ev.endDate);
 		$scope.visibleFrom = new Date(ev.visibleFrom);
 		$scope.visibleTo = new Date(ev.visibleTo);
-		$scope.deadline = new Date(ev.deadline);
+		$scope.deadline = ev.deadline ? new Date(ev.deadline) : undefined;
 		$scope.budgetBusiness = ev.budgetBusiness;
 		$scope.budgetFood = ev.budgetFood;
 		$scope.info = ev.info;
