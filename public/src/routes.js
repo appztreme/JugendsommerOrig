@@ -70,6 +70,10 @@ app.config(function($routeProvider) {
 			controller: 'ActivityEditCtrl',
 			templateUrl: '../templates/activityEdit.html'
 		})
+		.when('/eventRegistrations/:eventId', {
+			controller: 'EventRegistrationCtrl',
+			templateUrl: '../templates/eventRegistration.html'
+		})
 		.when('/registration/:activityId', {
 			controller: 'RegistrationCtrl',
 			templateUrl: '../templates/registration.html'

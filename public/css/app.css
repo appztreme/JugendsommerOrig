@@ -134,11 +134,20 @@
    border: 1px solid #ccc;
 }
 
-.tbl-serial {
+.tbl-serial3 {
   counter-reset: serial-number;  /* Set the serial number counter to 0 */
 }
 
-.tbl-serial td:nth-child(3):before {
+.tbl-serial3 td:nth-child(3):before {
+  counter-increment: serial-number;  /* Increment the serial number counter */
+  content: counter(serial-number);  /* Display the counter */
+}
+
+.tbl-serial1 {
+  counter-reset: serial-number;  /* Set the serial number counter to 0 */
+}
+
+.tbl-serial1 td:nth-child(1):before {
   counter-increment: serial-number;  /* Increment the serial number counter */
   content: counter(serial-number);  /* Display the counter */
 }

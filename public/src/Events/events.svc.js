@@ -14,6 +14,19 @@ app.service('EventsSvc', function($http) {
 		return $http.get(EVENT_SVC_PATH);
 	};
 
+	this.getSelectionParams = function() {
+		return $http.get('/api/registrations/selectableEventActivities');
+	};
+
+	this.findRegistrations = function(activityId, eventId) {
+        var path = '/api/registrations';
+		var params = {};
+		if(!angular.isUndefined(eventId) && angular.isUndefined(activityId)) params.eventId = eventId;
+		if(!angular.isUndefined(activityId)) params.activityId = activityId;
+		params.year = (new Date()).getFullYear();
+		return $http.get(path, { params: params });
+	};
+
 	this.findByLocation = function(loc) {
 		return $http.get(EVENT_SVC_PATH + 'location/' + loc);
 	}
