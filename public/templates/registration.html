@@ -89,6 +89,16 @@
 			</select>
 		</div>
 	</div>
+	<!--TSHIRTSIZE -->
+	<div ng-show='type === "summer"' class='form-group' ng-class='{ "has-error": registrationForm.tShirtSize.$invalid}'>
+		<label for='tShirtSize' class='control-label col-sm-2'>{{"RESERVATION.LABEL_T_SHIRT_SIZE" | translate}}</label>
+		<div class='col-sm-10'>
+			<select name='tShirtSize' class='sel-base form-control' ng-model='tShirtSize'>
+				<option ng-show="lang === 'de'" ng-repeat="size in tShirtSizes" value='{{size.name}}'>{{size.name}}</option>
+				<option ng-show="lang === 'it'" ng-repeat="size in tShirtSizes" value='{{size.name}}'>{{size.name_it}}</option>
+			</select>
+		</div>
+	</div>
 	<!-- NEEDSPRECARE -->
 	<div ng-show='!isKiso && (type === "summer" || type === "music")' class='col-sm-offset-2 col-sm4'>
 		<input type='checkbox' name='needsPreCare' ng-model='needsPreCare'><strong>{{"RESERVATION.LABEL_PRECARE_CHILD" | translate}}</input>

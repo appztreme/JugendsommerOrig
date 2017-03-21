@@ -94,8 +94,8 @@
 		</div>
 	</div>
 	<!--TSHIRTSIZE -->
-	<div ng-show='type === "summer"' class='form-group' ng-class='{ "has-error": registrationForm.tShirtSize.$invalid}'>
-		<label for='tShirtSize' class='control-label col-sm-2'></label>
+	<div class='form-group' ng-class='{ "has-error": registrationForm.tShirtSize.$invalid}'>
+		<label for='tShirtSize' class='control-label col-sm-2'>T-Shirt-Size</label>
 		<div class='col-sm-10'>
 			<select name='tShirtSize' class='sel-base form-control' ng-model='tShirtSize'>
 				<option ng-repeat="size in tShirtSizes" value='{{size.name}}'>{{size.name}}</option>

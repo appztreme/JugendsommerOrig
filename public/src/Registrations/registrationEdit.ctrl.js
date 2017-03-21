@@ -4,6 +4,7 @@ app.controller('RegistrationEditCtrl', function($scope, $filter, $routeParams, $
 
 	//$scope.busyPromise = RegistrationSvc.findById;
 	$scope.cities = $scope.isKiso ? conf.cities_kiso : conf.cities_jdbl;
+	$scope.tShirtSizes = conf.tSizes;
 
 	$scope.save = function() {
 		if($scope.registrationForm.$valid) {
@@ -18,6 +19,7 @@ app.controller('RegistrationEditCtrl', function($scope, $filter, $routeParams, $
 			$scope.registration.healthChild = $scope.healthChild;
 			$scope.registration.addressChild = $scope.addressChild;
 			$scope.registration.cityChild = $scope.cityChild;
+			$scope.registration.tShirtSize = $scope.tShirtSize;
 			$scope.registration.bandName = $scope.bandName;
 			$scope.registration.instrument = $scope.instrument;
 			$scope.registration.instrumentYears = $scope.instrumentYears;
@@ -42,6 +44,7 @@ app.controller('RegistrationEditCtrl', function($scope, $filter, $routeParams, $
 				$scope.schoolChild = null;
 				$scope.healthChild = null;
 				$scope.addressChild = null;
+				$scope.tShirtSize = null;
 				$scope.bandName = null;
 				$scope.instrument = null;
 				$scope.instrumentYears = null;
@@ -74,7 +77,7 @@ app.controller('RegistrationEditCtrl', function($scope, $filter, $routeParams, $
 		$scope.healthChild = registration.healthChild;
 		$scope.addressChild = registration.addressChild;
 		$scope.cityChild = registration.cityChild;
-		$scope.
+		$scope.tShirtSize = registration.tShirtSize;
 		$scope.bandName = registration.bandName;
 		$scope.instrument = registration.instrument;
 		$scope.instrumentYears = registration.instrumentYears;

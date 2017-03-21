@@ -30,7 +30,7 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 
 	$scope.type = $routeParams.type;
 	$scope.cities = $scope.isKiso ? conf.cities_kiso : conf.cities_jdbl;
-	//$scope.addressChild = ' ';
+	$scope.tShirtSizes = conf.tSizes;
 	$scope.cityChild = $scope.isKiso ? 'Bozen': 'Deutschnofen';
 	$scope.needsPreCare = false;
 
@@ -55,6 +55,7 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 			$scope.healthChild = RegistrationCacheSvc.lastRegistration.healthChild;
 			$scope.addressChild = RegistrationCacheSvc.lastRegistration.addressChild;
 			$scope.cityChild = RegistrationCacheSvc.lastRegistration.cityChild;
+			$scope.tShirtSize = RegistrationCacheSvc.lastRegistration.tShirtSize;
 			$scope.bandName = RegistrationCacheSvc.lastRegistration.bandName;
 			$scope.instrument = RegistrationCacheSvc.lastRegistration.instrument;
 			$scope.instrumentYears = RegistrationCacheSvc.lastRegistration.instrumentYears;
@@ -80,6 +81,7 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 				healthChild: $scope.healthChild,
 				addressChild: $scope.addressChild ? $scope.addressChild : 'Addresse',
 				cityChild: $scope.cityChild,
+				tShirtSize: $scope.tShirtSize,
 				bandName: $scope.bandName,
 				instrument: $scope.instrument,
 				instrumentYears: $scope.instrumentYears,
@@ -183,11 +185,18 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 			RegistrationCacheSvc.currentRegistration = {};
 		}
 		RegistrationCacheSvc.currentRegistration.addressChild = newValue;
-	});$scope.$watch('cityChild', function(newValue, oldValue) {
+	});
+	$scope.$watch('cityChild', function(newValue, oldValue) {
 		if(!RegistrationCacheSvc.hasCurrentRegistration()) {
 			RegistrationCacheSvc.currentRegistration = {};
 		}
 		RegistrationCacheSvc.currentRegistration.cityChild = newValue;
+	});
+	$scope.$watch('tShirtSize', function(newValue, oldValue) {
+		if(!RegistrationCacheSvc.hasCurrentRegistration()) {
+			RegistrationCacheSvc.currentRegistration = {};
+		}
+		RegistrationCacheSvc.currentRegistration.tShirtSize = newValue;
 	});
 	$scope.$watch('bandName', function(newValue, oldValue) {
 		if(!RegistrationCacheSvc.hasCurrentRegistration()) {
@@ -252,6 +261,7 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 		$scope.healthChild = RegistrationCacheSvc.currentRegistration.healthChild;
 		$scope.addressChild = RegistrationCacheSvc.currentRegistration.addressChild;
 		$scope.cityChild = RegistrationCacheSvc.currentRegistration.cityChild;
+		$scope.tShirtSize = RegistrationCacheSvc.currentRegistration.tShirtSize;
 		$scope.bandName = RegistrationCacheSvc.currentRegistration.bandName;
 		$scope.instrument = RegistrationCacheSvc.currentRegistration.instrument;
 		$scope.instrumentYears = RegistrationCacheSvc.currentRegistration.instrumentYears;
