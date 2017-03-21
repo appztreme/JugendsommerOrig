@@ -62,6 +62,7 @@ exports.create = (req, res, next) => {
 		birthdayChild: req.body.birthdayChild,
 		schoolChild: req.body.schoolChild,
 		healthChild: req.body.healthChild,
+		tShirtSize: req.body.tShirtSize,
 		bandName: req.body.bandName,
 		instrument: req.body.instrument,
 		instrumentYears: req.body.instrumentYears,
@@ -96,6 +97,7 @@ exports.update = (req, res, next) => {
 		reg.birthdayChild = req.body.birthdayChild;
 		reg.schoolChild = req.body.schoolChild;
 		reg.healthChild = req.body.healthChild;
+		reg.tShirtSize = req.body.tShirtSize;
 		reg.bandName = req.body.bandName;
 		reg.instrument = req.body.instrument;
 		reg.instrumentYears = req.body.instrumentYears;

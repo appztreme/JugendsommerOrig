@@ -74,6 +74,7 @@ app.controller('RegistrationEditCtrl', function($scope, $filter, $routeParams, $
 		$scope.healthChild = registration.healthChild;
 		$scope.addressChild = registration.addressChild;
 		$scope.cityChild = registration.cityChild;
+		$scope.
 		$scope.bandName = registration.bandName;
 		$scope.instrument = registration.instrument;
 		$scope.instrumentYears = registration.instrumentYears;

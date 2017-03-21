@@ -3,6 +3,9 @@ var mongoose = require('mongoose');
 var Activity = require('./activity');
 var config = require('../../config');
 
+const  tSizes = config.tSizes.map(function(s){ return s.name});
+const locs = config.validLocations.map(function(l){return l.name});
+
 var registrationSchema = db.Schema({
 	firstNameParent: { type: String, required: true },
 	lastNameParent: { type: String, required: true },
@@ -15,6 +18,7 @@ var registrationSchema = db.Schema({
  	healthChild: { type: String, required: false },
 	addressChild: { type: String, required: true, default: 'Adresse'},
 	cityChild: { type: String, enum: config.cities, required: true, default: 'Jenesien' },
+  tShirtSize: { type: String, enum: tSizes, required: false },
 	bandName: { type: String, required: false },
 	instrument: { type: String, required: false },
 	instrumentYears: { type: String, required: false },
