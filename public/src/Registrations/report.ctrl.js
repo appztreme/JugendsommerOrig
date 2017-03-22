@@ -152,12 +152,7 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 	if(ReportCacheSvc.hasEventFilterParameter() || ReportCacheSvc.hasActivityFilterParameter()) {
 		$scope.getReportData();
 		if(ReportCacheSvc.hasLastVerticalScrollPosition()) {
-			console.log("last scroll pos", ReportCacheSvc.lastVerticalScrollPosition);
-			window.scrollTo(0, ReportCacheSvc.lastVerticalScrollPosition);
+			window.scroll(0,ReportCacheSvc.lastVerticalScrollPosition);
 		}
 	}
-
-	// if(ReportCacheSvc.hasLastVerticalScrollPosition()) {
-	// 	window.scrollTo(0, ReportCacheSvc.lastVerticalScrollPosition);
-	// }
 });
