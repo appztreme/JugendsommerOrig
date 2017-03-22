@@ -57,7 +57,6 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 	}
 
 	$scope.isAfterDeadline = function(reg) {
-		console.log("after deadline", reg.activityId.eventId.deadline, reg.registrationDate);
 		return reg.activityId.eventId.deadline < reg.registrationDate;
 	}
 
@@ -152,9 +151,13 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 	}
 	if(ReportCacheSvc.hasEventFilterParameter() || ReportCacheSvc.hasActivityFilterParameter()) {
 		$scope.getReportData();
+		if(ReportCacheSvc.hasLastVerticalScrollPosition()) {
+			console.log("last scroll pos", ReportCacheSvc.lastVerticalScrollPosition);
+			window.scrollTo(0, ReportCacheSvc.lastVerticalScrollPosition);
+		}
 	}
 
-	if(ReportCacheSvc.hasLastVerticalScrollPosition()) {
-		window.scrollTo(0, ReportCacheSvc.lastVerticalScrollPosition);
-	}
+	// if(ReportCacheSvc.hasLastVerticalScrollPosition()) {
+	// 	window.scrollTo(0, ReportCacheSvc.lastVerticalScrollPosition);
+	// }
 });
