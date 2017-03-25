@@ -2,7 +2,7 @@
 
 const contactRepo = require('./../repositories/contact');
 
-exports.save = async(req, res, next) => {
+exports.create = async(req, res, next) => {
     try {
         let c = await contactRepo.save(req.body.firstName, req.body.lastName, req.body.phoneNumber, req.body.email, req.body.type);
         res.json(c);
