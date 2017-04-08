@@ -6,7 +6,7 @@ const contactSchema = db.Schema({
 	lastName: { type: String, required: true },
 	email: { type: String, required: false },
 	phoneNumber: { type: String, required: false },
-    type: { type: String, enum: ['Betreuer', 'Kontakt'], required: true, default: 'Betreuer'}
+    type: { type: String, required: true }
 });
 
 contactSchema.index({firstName: 1, lastName: 1}, {unique: true});

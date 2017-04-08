@@ -4,4 +4,62 @@
 			<h2 class='text-orange'>{{title}}</h2>
 		</div>
 	</div>
+
+    <div class='panel panel-success'>
+        <div class='panel-heading'><strong>Neuer Kontakt</strong><button class="btn btn-default btn-xs glyphicon glyphicon-resize-full pull-right" ng-click="toggleVisibility()"></div>
+        <div class='panel-body' ng-show='isNewContactFormVisible'>
+        <form class='form-horizontal' name='contactForm' novalidate ng-submit='saveContact()'>
+        <div class='form-group' ng-class='{ "has-error": contactForm.firstName.$invalid }'>
+            <label for='firstName' class='col-sm-2 control-label'>Vorname: </label>
+            <div class='col-sm-8'>
+                <input type="text" ng-model='firstName' class='form-control' id='firstName' required maxlength='100' />
+            </div>
+        </div>
+        <div class='form-group' ng-class='{ "has-error": contactForm.lastName.$invalid }'>
+            <label for='lastName' class='col-sm-2 control-label'>Nachname: </label>
+            <div class='col-sm-8'>
+                <input type='text' ng-model='lastName' class='form-control' id='lastName' />
+            </div>
+        </div>
+        <div class='form-group' ng-class='{ "has-error": contactForm.phoneNumber.$invalid }'>
+            <label for='phoneNumber' class='control-label col-sm-2'>Tel: </label>
+            <div class='col-sm-8'>
+                <input type='tel' ng-model='phoneNumber' class='form-control' id='phoneNumber' />
+            </div>
+        </div>
+        <div class='form-group' ng-class='{ "has-error": contactForm.email.$invalid }'>
+            <label for='email' class='control-label col-sm-2'>Email: </label>
+            <div class='col-sm-8'>
+                <input type='email' ng-model='email' class='form-control' id='email' maxlength="200" />
+            </div>
+        </div>
+        <div class='form-group' ng-class='{ "has-error": contactForm.type.$invalid }'>
+            <label for='type' class='control-label col-sm-2'>Type: </label>
+            <div class='col-sm-8'>
+                <input type='text' ng-model='type' class='form-control' id='type' required maxlength='120' />
+            </div>
+        </div>
+        <button type='submit' class="btn btn-success btn-default col-sm-4">Neu & Hinzufügen</button>
+    </form>
+    </div>
+    </div>
+
+    <form class="form-inline">
+        <div class="form-group" novalidate ng-submit='search()'>
+            <label for='searchTerm' class='control-label'>Suchbegriff: </label>
+            <input type="text" ng-model='searchTerm' class="form-control" id="searchTerm" />
+        </div>
+        <button type="submit" ng-click="add()" class="btn btn-success btn-default">Hinzufügen</button>
+    </form>
+    <br />
+
+    <div class="list-group">
+        <div ng-repeat='contact in assignedContacts' class="list-group-item list-group-item-warning">
+            <!--<a href="/#/userRolesUpdate/{{user._id}}" class="invisible-ling text-warning">-->
+                <span class="glyphicon glyphicon-user" style="margin-right:3px;"></span>
+                <span class="list-group-item-heading"><strong>{{contact.lastName}} {{contact.firstName}}</strong></span>
+                <p class="list-group-item-text">{{contact.type}} | Email: {{contact.email}} | Tel: {{contact.phoneNumber}}</p>
+            <!--</a>-->
+        </div>
+    </div>
 </div>

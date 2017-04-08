@@ -44,7 +44,7 @@ exports.delete = (id) => {
 
 exports.getContacts = (id) => {
 	return Event.findById(id)
-		.populate('contacts.contactId')
+		.populate('contacts')
 		.select('_id contacts');
 }
 

@@ -32,6 +32,13 @@ exports.findById = async(req, res, next) => {
     catch(err) { next(err); }
 }
 
+exports.findAll = async(req, res, next) => {
+    try {
+        let contacts = await contactRepo.findAll();
+        res.json(contacts);
+    } catch(err) { next(err); }
+}
+
 exports.search = async(req, res, next) => {
     try {
         let result = await contactRepo.search(req.params.txt);
