@@ -96,6 +96,13 @@ exports.findByEventId = async(req, res, next) => {
 	} catch(err) { return next(err); }
 }
 
+exports.getContactsForEvent = async(req, res, next) => {
+	try {
+		let cs = await EventRepo.getContacts(req.params.eventId);
+		return res.json(cs);
+	} catch(err) { return next(err); }
+}
+
 exports.create = (req, res, next) => {
 	var ev = new Event({
 		name: req.body.name,

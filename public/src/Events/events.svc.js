@@ -18,6 +18,10 @@ app.service('EventsSvc', function($http) {
 		return $http.get('/api/registrations/selectableEventActivities');
 	};
 
+	this.getContacts = function(eventId) {
+		return $http.get(EVENT_SVC_PATH + 'contacts/' + eventId);
+	}
+
 	this.findRegistrations = function(activityId, eventId) {
         var path = '/api/registrations';
 		var params = {};

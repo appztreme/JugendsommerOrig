@@ -42,6 +42,12 @@ exports.delete = (id) => {
     return Event.findByIdAndRemove(id);
 }
 
+exports.getContacts = (id) => {
+	return Event.findById(id)
+		.populate('contacts.contactId')
+		.select('_id contacts');
+}
+
 exports.groupByLocation = () => {
     return Event.aggregate([
 			{ $match:

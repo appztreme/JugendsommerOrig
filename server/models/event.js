@@ -1,5 +1,6 @@
 const db = require('../db');
 const config = require('../../config');
+const mongoose = require('mongoose');
 
 const locs = config.validLocations.map(function(l){ return l.name});
 
@@ -21,6 +22,7 @@ var eventSchema = db.Schema({
 	info: { type: String, required: true },
 	info_it: { type: String, required: true },
 	isInternal: { type: Boolean, required: true, default: false },
+	contacts: [ { contactId: { type: mongoose.Schema.Types.ObjectId, ref: 'Contact' } } ]
 });
 
 var Event = db.model('Event', eventSchema);

@@ -28,6 +28,7 @@ db.events.insert({
     info: 'info for event1',
     info_it: 'informationi de evento1',
     isInternal: false,
+    contacts: ['111111111111111100000001', '111111111111111100000002']
 });
 db.events.insert({
     _id: ObjectId('111111111111111111111112'),
@@ -235,6 +236,36 @@ db.registrations.insert({
 
 var registrationsCnt = db.registrations.find().count();
 print("Registrations inserted: " + registrationsCnt);
+
+db.contacts.insert({
+    _id: ObjectId('111111111111111100000001'),
+    firstName: 'contact1FirstName',
+    lastName: 'contact2FirstName',
+    phoneNumber: '123 / 456 789',
+    email: 'contact1@gmx.at',
+    type: 'Betreuer' 
+});
+
+db.contacts.insert({
+    _id: ObjectId('111111111111111100000002'),
+    firstName: 'contact2FirstName',
+    lastName: 'contact2LastName',
+    phoneNumber: '234 / 567 890',
+    email: 'contact2@gmx.at',
+    type: 'Kontakt'
+});
+
+db.contacts.insert({
+    _id: ObjectId('111111111111111100000003'),
+    firstName: 'contact3FirtName',
+    lastName: 'contact3LastName',
+    phoneNumber: '345 / 678 901',
+    email: 'contact3@gmx.at',
+    type: 'Kontakt'
+})
+
+var contactsCnt = db.contacts.find().count();
+print("Contacts inserted: " + contactsCnt);
 
 db.commitments.insert({
     _id: ObjectId('111111111111111111100001'),
