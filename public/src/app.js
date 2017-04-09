@@ -1,4 +1,4 @@
-var app = angular.module('js', ['ngRoute','ngResource','cgBusy','jkuri.datepicker','pascalprecht.translate']);
+var app = angular.module('js', ['ngRoute','ngResource','cgBusy','jkuri.datepicker','pascalprecht.translate','angular-szn-autocomplete']);
 
 var env = {};
 // Import variables if present (from env.js)

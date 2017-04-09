@@ -1,0 +1,26 @@
+{
+	"name": "angular-szn-autocomplete",
+	"version": "1.0.3",
+	"description": "An AngularJS directive to display suggestions while typing into text input.",
+	"main": "src/angular-szn-autocomplete.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/jirikuchta/angular-szn-autocomplete.git"
+	},
+	"keywords": [
+		"angular",
+		"angularjs",
+		"autocomplete",
+		"suggest",
+		"typeahead",
+		"directive"
+	],
+	"author": "Jiri Kuchta",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/jirikuchta/angular-szn-autocomplete/issues"
+	}
+}
