@@ -58,6 +58,7 @@
             <!--<a href="/#/userRolesUpdate/{{user._id}}" class="invisible-ling text-warning">-->
                 <span class="glyphicon glyphicon-user" style="margin-right:3px;"></span>
                 <span class="list-group-item-heading"><strong>{{contact.lastName}} {{contact.firstName}}</strong></span>
+                <span class="glyphicon glyphicon-remove pull-right" style="margin-bottom:15px" ng-click="removeContact(contact._id)"></span>
                 <p class="list-group-item-text">{{contact.type}} | Email: {{contact.email}} | Tel: {{contact.phoneNumber}}</p>
             <!--</a>-->
         </div>

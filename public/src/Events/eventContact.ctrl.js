@@ -42,7 +42,7 @@ app.controller('EventContactCtrl', function($scope, $routeParams, $route, $locat
             type: $scope.type
        })
        .success(function(c) {
-            EventsSvc.updateContacts($routeParams.eventId, c._id)
+            EventsSvc.addContact($routeParams.eventId, c._id)
                 .success(function(ev) {
                     NotificationSvc.notify("Kontakt wurde erfolgreich gespeichert");
                     $route.reload();
@@ -61,12 +61,23 @@ app.controller('EventContactCtrl', function($scope, $routeParams, $route, $locat
     }
 
     $scope.addContact = function() {
-        EventsSvc.updateContacts($routeParams.eventId, $scope.searchResultId)
+        EventsSvc.addContact($routeParams.eventId, $scope.searchResultId)
             .success(function(ev) {
                 NotificationSvc.notify("Kontakt wurde gespeichert");
             })
             .error(function(err) {
                 NotificationSvc.warn("Kontakt konnte nicht gespeichert werden");
+            });
+        $route.reload();
+    }
+
+    $scope.removeContact = function(contactId) {
+        EventsSvc.removeContact($routeParams.eventId, contactId)
+            .success(function(ev) {
+                NotificationSvc.notify("Kontakt wurde entfernt");
+            })
+            .error(function(err) {
+                NotificationSvc.warn("Kontakt konnte nicht entfernt werden");
             });
         $route.reload();
     }

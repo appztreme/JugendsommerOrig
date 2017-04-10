@@ -35,6 +35,8 @@ router.put('/', auth.requiresRole("admin"), EventController.update);
 
 router.delete('/', auth.requiresRole("admin"), EventController.delete);
 
-router.patch('/contacts', auth.requiresRole("admin"), EventController.updateContacts);
+router.patch('/contacts/add', auth.requiresRole("admin"), EventController.addContact);
+
+router.patch('/contacts/remove', auth.requiresRole("admin"), EventController.removeContact);
 
 module.exports = router;

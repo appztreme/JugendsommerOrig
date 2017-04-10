@@ -165,17 +165,22 @@ exports.update = (req, res, next) => {
 	});
 };
 
-exports.updateContacts = async(req, res, next) => {
+exports.addContact = async(req, res, next) => {
 	try {
 		let ev = await EventRepo.findById(req.body.eventId);
 		ev.contacts.push(req.body.contactId);
-		if(ev) {
-			ev.save(function(errE, evE) {
-				if(errE) next(errE);
-				res.status(200).json(evE);
-			});
-		}
-		return res.status(500);
+		await ev.save();
+		res.status(200).json(ev);
+	}
+	catch(err) { return next(err); }
+}
+
+exports.removeContact = async(req, res, next) => {
+	try {
+		let ev = await EventRepo.findById(req.body.eventId);
+		ev.contacts.splice(ev.contacts.indexOf(req.body.contactId), 1);
+		await ev.save();
+		res.status(200).json(ev);
 	}
 	catch(err) { return next(err); }
 }
