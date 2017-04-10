@@ -73,5 +73,9 @@ app.service('EventsSvc', function($http) {
 
 	this.updateContacts = function(eventId, contactId) {
 		return $http.patch(EVENT_SVC_PATH + 'contacts', { eventId: eventId, contactId: contactId });
+	};
+
+	this.createContact = function(c) {
+		return $http.post('/api/contact', c);
 	}
 });

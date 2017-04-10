@@ -33,24 +33,45 @@ app.controller('EventContactCtrl', function($scope, $routeParams, $route, $locat
     }
 
     $scope.saveContact = function() {
-        console.log('contact will save');
+        console.log($scope.firstName, $scope.lastName, $scope.phoneNumber, $scope.email, $scope.type);
+       EventsSvc.createContact({
+            firstName: $scope.firstName,
+            lastName: $scope.lastName,
+            phoneNumber: $scope.phoneNumber,
+            email: $scope.email,
+            type: $scope.type
+       })
+       .success(function(c) {
+            EventsSvc.updateContacts($routeParams.eventId, c._id)
+                .success(function(ev) {
+                    NotificationSvc.notify("Kontakt wurde erfolgreich gespeichert");
+                    $route.reload();
+                })
+                .error(function(errC) {
+                    NotificationSvc.warn("Kontakt konnte nicht hinzugefügt werden");
+                });
+       })
+       .error(function(err) {
+            if(err.indexOf('duplicate key error index') > -1) {
+				NotificationSvc.warn("Kontakt " + $scope.firstName + " " + $scope.lastName + " existiert bereits");
+			} else {
+                NotificationSvc.warn("Kontakt konnte nicht gespeichert werden");
+            }
+       });
     }
 
     $scope.addContact = function() {
-        console.log("add contact", $scope.searchResultId);
         EventsSvc.updateContacts($routeParams.eventId, $scope.searchResultId)
             .success(function(ev) {
                 NotificationSvc.notify("Kontakt wurde gespeichert");
             })
             .error(function(err) {
-                console.log(err);
                 NotificationSvc.warn("Kontakt konnte nicht gespeichert werden");
             });
         $route.reload();
     }
 
     EventsSvc.getAllContacts().success(function(cs) {
-        console.log(cs)
         $scope.allContacts = cs;
     });
 
