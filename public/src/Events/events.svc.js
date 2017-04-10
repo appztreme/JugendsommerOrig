@@ -70,4 +70,8 @@ app.service('EventsSvc', function($http) {
 	this.update = function(ev) {
 		return $http.put(EVENT_SVC_PATH, ev);
 	};
+
+	this.updateContacts = function(eventId, contactId) {
+		return $http.patch(EVENT_SVC_PATH + 'contacts', { eventId: eventId, contactId: contactId });
+	}
 });

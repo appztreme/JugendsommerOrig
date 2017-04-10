@@ -167,10 +167,13 @@ exports.update = (req, res, next) => {
 
 exports.updateContacts = async(req, res, next) => {
 	try {
-		let ev = await EventRepo.findById(req.params.eventId);
+		let ev = await EventRepo.findById(req.body.eventId);
+		ev.contacts.push(req.body.contactId);
 		if(ev) {
-			
-			return res.status(200).json(ev);
+			ev.save(function(errE, evE) {
+				if(errE) next(errE);
+				res.status(200).json(evE);
+			});
 		}
 		return res.status(500);
 	}

@@ -1,19 +1,24 @@
 var app = angular.module('js');
 
-app.controller('EventContactCtrl', function($scope, $routeParams, $location, NotificationSvc, EventsSvc) {
+app.controller('EventContactCtrl', function($scope, $routeParams, $route, $location, NotificationSvc, EventsSvc) {
 
 	$scope.title = 'Kontakte verwalten';
 
     $scope.options = {
         shadowInput: false,
         highlightFirst: true,       
-        searchMethod: "search"
+        searchMethod: "search",
+        onSelect: "onContactSelect"
     };
 
     $scope.isNewContactFormVisible = false;
 
     $scope.toggleVisibility = function() {
         $scope.isNewContactFormVisible = !$scope.isNewContactFormVisible;
+    }
+
+    $scope.onContactSelect = function(sel) {
+        $scope.searchResultId = sel.id;
     }
 
     $scope.search = function(query, deferred) {
@@ -31,6 +36,19 @@ app.controller('EventContactCtrl', function($scope, $routeParams, $location, Not
         console.log('contact will save');
     }
 
+    $scope.addContact = function() {
+        console.log("add contact", $scope.searchResultId);
+        EventsSvc.updateContacts($routeParams.eventId, $scope.searchResultId)
+            .success(function(ev) {
+                NotificationSvc.notify("Kontakt wurde gespeichert");
+            })
+            .error(function(err) {
+                console.log(err);
+                NotificationSvc.warn("Kontakt konnte nicht gespeichert werden");
+            });
+        $route.reload();
+    }
+
     EventsSvc.getAllContacts().success(function(cs) {
         console.log(cs)
         $scope.allContacts = cs;
@@ -40,14 +58,3 @@ app.controller('EventContactCtrl', function($scope, $routeParams, $location, Not
         $scope.assignedContacts = c.contacts;
     });
 });
-
-angular.module("contactTemplate.html", []).run(["$templateCache", function($templateCache) {
-		$templateCache.put("contactTemplate.html",
-			'<ul ng-show="show" class="szn-autocomplete-results">\n' +
-				'<li szn-autocomplete-result ng-repeat="result in results" ng-class="{selected: highlightIndex == $index}">\n' +
-                           '<div><span view-as-html="result.value | sznAutocompleteBoldMatch:query"></span></span></div>\n' +
-					'<p view-as-html="result.perex"></p>\n' +                   
-				'</li>\n' +
-			'</ul>'
-		);
-	}]);
