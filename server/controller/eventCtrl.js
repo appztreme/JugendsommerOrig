@@ -73,6 +73,13 @@ exports.getGeoSelection = async(req, res, next) => {
 	} catch(err) { return next(err); }
 }
 
+exports.getGeoSelectionAdmin = async(req, res, next) => {
+	try {
+		let sel = await EventRepo.groupByLocationAdmin();
+		return res.json(sel);
+	} catch(err) { return next(err); }
+}
+
 exports.getGeoSelectionSummer = async(req, res, next) => {
 	try {
 		let sel = await EventRepo.groupByLocationSummer();
@@ -81,9 +88,25 @@ exports.getGeoSelectionSummer = async(req, res, next) => {
 	catch(err) { return next(err); }
 }
 
+exports.getGeoSelectionSummerAdmin = async(req, res, next) => {
+	try {
+		let sel = await EventRepo.groupByLocationSummerAdmin();
+		return res.json(sel);
+	}
+	catch(err) { return next(err); }
+}
+
 exports.getTypeSelection = async(req, res, next) => {
 	try {
 		let sel = await EventRepo.groupByType();
+		return res.json(sel);
+	}
+	catch(err) { return next(err); }
+}
+
+exports.getTypeSelectionAdmin = async(req, res, next) => {
+	try {
+		let sel = await EventRepo.groupByTypeAdmin();
 		return res.json(sel);
 	}
 	catch(err) { return next(err); }

@@ -1,6 +1,6 @@
 var app = angular.module('js');
 
-app.controller('GeoSelectionCtrl', function($scope, $location, GeoSvc, $rootScope, $translate) {
+app.controller('GeoSelectionCtrl', function($scope, $location, GeoSvc, $rootScope, $translate, IdentitySvc) {
     $scope.busyPromise = GeoSvc.getSelection();
     var host = $location.$$host.toLowerCase();
 
@@ -22,21 +22,42 @@ app.controller('GeoSelectionCtrl', function($scope, $location, GeoSvc, $rootScop
     }
 
     if(host.indexOf("jugendsommer") !== -1) {
-        GeoSvc.getSummerSelection().success(function(sel) {
-            addNameProp(sel);
-            $scope.locations = sel;
-        });
+        if(IdentitySvc.isAdmin()) {
+            GeoSvc.getSummerSelectionAdmin().success(function(sel) {
+                addNameProp(sel);
+                $scope.locations = sel;
+            });
+        } else {
+            GeoSvc.getSummerSelection().success(function(sel) {
+                addNameProp(sel);
+                $scope.locations = sel;
+            });
+        }
     }
     else if(host.indexOf("jd-bozenland") !== -1) {
-        GeoSvc.getTypeSelection().success(function(sel) {
-            addNameProp(sel);
-            $scope.locations = sel;
-        });
+        if(IdentitySvc.isAdmin()) {
+            GeoSvc.getTypeSelectionAdmin().success(function(sel) {
+                addNameProp(sel);
+                $scope.locations = sel;
+            });
+        } else {
+            GeoSvc.getTypeSelection().success(function(sel) {
+                addNameProp(sel);
+                $scope.locations = sel;
+            });
+        }
     }
     else {
-        GeoSvc.getSelection().success(function(sel) {
-            addNameProp(sel);
-            $scope.locations = sel;
-        });
+        if(IdentitySvc.isAdmin()) {
+            GeoSvc.getSelectionAdmin().success(function(sel) {
+                addNameProp(sel);
+                $scope.locations = sel;
+            });
+        } else {
+            GeoSvc.getSelection().success(function(sel) {
+                addNameProp(sel);
+                $scope.locations = sel;
+            });
+        }
     }
 });

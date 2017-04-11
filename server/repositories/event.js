@@ -66,6 +66,23 @@ exports.groupByLocation = () => {
 		]).exec();
 }
 
+exports.groupByLocationAdmin = () => {
+    return Event.aggregate([
+			{ $match:
+				{ startDate: { $gte: startCurYear } }
+			},
+			{ $group:
+				{ _id: "$location",
+					name: { $first: "$location" },
+					name_it: { $first: "$location_it" },
+					countEvents: { $sum: 1 },
+					distinctTypes: { $addToSet: "$type"}
+				}
+			},
+			{ $sort: {_id: 1}}
+		]).exec();
+}
+
 exports.groupByLocationSummer = () => {
     return Event.aggregate([
 		{ $match:
@@ -83,10 +100,44 @@ exports.groupByLocationSummer = () => {
     ]).exec();
 }
 
+exports.groupByLocationSummerAdmin = () => {
+    return Event.aggregate([
+		{ $match:
+			{ $and: [ {startDate: { $gte: startCurYear }}, {type: { $in: ['summer', 'music']}} ] }
+		},
+		{ $group:
+			{ _id: "$location",
+		      name: { $first: "$location" },
+  			  name_it: { $first: "$location_it" },
+			  countEvents: { $sum: 1 },
+			  distinctTypes: { $addToSet: "$type"}
+		    }
+		},
+		{ $sort: {_id: 1}}
+    ]).exec();
+}
+
 exports.groupByType = () => {
     return Event.aggregate([
 		{ $match:
 			{ $and: [ {startDate: { $gte: startCurYear }}, {isInternal: false}, {type: { $nin: ['summer', 'music']}} ] }
+		},
+		{ $group:
+			{ _id: "$type",
+			  name: { $first: "$type" },
+			  name_it: { $first: "$type" },
+			  countEvents: { $sum: 1 },
+			  distinctTypes: { $addToSet: "$type"}
+		    }
+		},
+		{ $sort: {_id: 1}}
+    ]).exec();
+}
+
+exports.groupByTypeAdmin = () => {
+    return Event.aggregate([
+		{ $match:
+			{ $and: [ {startDate: { $gte: startCurYear }}, {type: { $nin: ['summer', 'music']}} ] }
 		},
 		{ $group:
 			{ _id: "$type",

@@ -7,9 +7,15 @@ router.get('/', EventController.findByCurrentYear);
 
 router.get('/selection', EventController.getGeoSelection);
 
+router.get('/asAdmin/selection', auth.requiresRole("admin"), EventController.getGeoSelectionAdmin);
+
 router.get('/selection/summer', EventController.getGeoSelectionSummer);
 
+router.get('/asAdmin/selection/summer', auth.requiresRole("admin"), EventController.getGeoSelectionSummerAdmin);
+
 router.get('/selection/type', EventController.getTypeSelection);
+
+router.get('/asAdmin/selection/type', auth.requiresRole("admin"), EventController.getTypeSelectionAdmin);
 
 router.get('/location/:location', EventController.findByCurrentYearAndLocation);
 
