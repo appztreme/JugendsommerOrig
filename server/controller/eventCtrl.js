@@ -168,6 +168,7 @@ exports.update = (req, res, next) => {
 exports.addContact = async(req, res, next) => {
 	try {
 		let ev = await EventRepo.findById(req.body.eventId);
+		if(!ev.contacts) ev.contacts = [];
 		ev.contacts.push(req.body.contactId);
 		await ev.save();
 		res.status(200).json(ev);
