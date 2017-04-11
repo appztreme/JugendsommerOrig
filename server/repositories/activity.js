@@ -19,3 +19,13 @@ exports.getActivityIdsForEvent = (eventId) => {
 			.select('_id')
 			.exec();
 }
+
+exports.findById = (id) => {
+    return Activity.findById(id);
+}
+
+exports.getContacts = (id) => {
+	return Activity.findById(id)
+		.populate('contacts')
+		.select('_id contacts');
+}

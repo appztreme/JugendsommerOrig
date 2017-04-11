@@ -11,7 +11,8 @@ var Activity = db.model('Activity', {
     eventId: { type: mongoose.Schema.Types.ObjectId, ref: 'Event', required: true },
 	maxParticipants: { type: Number, required: true },
     curParticipants: { type: Number, required: true, default: 0 },
-    queueSize: { type: Number, required: true }
+    queueSize: { type: Number, required: true },
+	contacts: [ { type: mongoose.Schema.Types.ObjectId, ref: 'Contact' } ]
 });
 
 module.exports = Activity;

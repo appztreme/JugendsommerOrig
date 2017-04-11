@@ -1,5 +1,6 @@
 'use strict';
 const Activity = require('./../models/activity');
+const ActivityRepo = require('./../repositories/activity');
 
 exports.find = (req, res, next) => {
 	// get all activities for a given event
@@ -69,4 +70,32 @@ exports.update = (req, res, next) => {
 			res.status(201).json(activity);
 		});
 	});
-};
+}
+
+exports.getContactsForActivity = async(req, res, next) => {
+	try {
+		let cs = await ActivityRepo.getContacts(req.params.activityId);
+		return res.json(cs);
+	} catch(err) { return next(err); }
+}
+
+exports.addContact = async(req, res, next) => {
+	try {
+		let act = await ActivityRepo.findById(req.body.activityId);
+		if(!act.contacts) act.contacts = [];
+		act.contacts.push(req.body.contactId);
+		await act.save();
+		res.status(200).json(act);
+	}
+	catch(err) { return next(err); }
+}
+
+exports.removeContact = async(req, res, next) => {
+	try {
+		let act = await ActivityRepo.findById(req.body.activityId);
+		act.contacts.splice(act.contacts.indexOf(req.body.contactId), 1);
+		await act.save();
+		res.status(200).json(act);
+	}
+	catch(err) { return next(err); }
+}

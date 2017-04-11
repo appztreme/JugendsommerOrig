@@ -62,6 +62,10 @@ app.config(function($routeProvider) {
 			controller: 'EventContactCtrl',
 			templateUrl: '../templates/eventContacts.html'
 		})
+		.when('/activityContacts/:activityId', {
+			controller: 'ActivityContactCtrl',
+			templateUrl: '../templates/activityContacts.html'
+		})
 		.when('/activities/:eventId', {
 			controller: 'ActivitiesCtrl',
 			templateUrl: '../templates/activities.html'
