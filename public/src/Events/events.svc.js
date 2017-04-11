@@ -22,6 +22,10 @@ app.service('EventsSvc', function($http) {
 		return $http.get(EVENT_SVC_PATH + 'contacts/' + eventId);
 	}
 
+	this.getContactsForEvent = function(eventId) {
+		return $http.get('/api/activities/contacts/event/' + eventId);
+	}
+
 	this.getAllContacts = function() {
 		return $http.get('/api/contact');
 	}

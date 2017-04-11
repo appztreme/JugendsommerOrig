@@ -25,7 +25,7 @@ router.get('/asAdmin/location/summer/:location', auth.requiresRole("admin"), Eve
 
 router.get('/asAdmin/type/:type', auth.requiresRole("admin"), EventController.findByCurrentYearAndTypeAdmin);
 
-router.get('/contacts/:eventId', auth.requiresRole("admin"), EventController.getContactsForEvent);
+router.get('/contacts/:eventId', EventController.getContactsForEvent);
 
 router.get('/:eventId', EventController.findByEventId);
 

@@ -79,6 +79,13 @@ exports.getContactsForActivity = async(req, res, next) => {
 	} catch(err) { return next(err); }
 }
 
+exports.getContactsForEvent = async(req, res, next) => {
+	try {
+		let cs = await ActivityRepo.getContactsForEvent(req.params.eventId);
+		return res.json(cs);
+	} catch(err) { return next(err); }
+}
+
 exports.addContact = async(req, res, next) => {
 	try {
 		let act = await ActivityRepo.findById(req.body.activityId);

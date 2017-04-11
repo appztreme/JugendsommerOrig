@@ -5,7 +5,7 @@
 		</div>
 	</div>
 
-    <div class='panel panel-success'>
+    <div class='panel panel-success' ng-show="iSvc.isAuthorized('admin')">
         <div class='panel-heading'><strong>Neuer Kontakt</strong><button class="btn btn-default btn-xs glyphicon glyphicon-resize-full pull-right" ng-click="toggleVisibility()"></div>
         <div class='panel-body' ng-show='isNewContactFormVisible'>
         <form class='form-horizontal' name='contactForm' novalidate ng-submit='saveContact()'>
@@ -44,7 +44,7 @@
     </div>
     </div>
 
-    <form class="form-inline">
+    <form class="form-inline" ng-show="iSvc.isAuthorized('admin')">
         <div class="form-group" novalidate ng-submit='search()'>
             <label for='searchTerm' class='control-label'>Suchbegriff: </label>
             <input type="text" ng-model='searchResult' class="form-control" id="searchTerm" szn-autocomplete='options' highlight-first="true" />
@@ -58,9 +58,21 @@
             <!--<a href="/#/userRolesUpdate/{{user._id}}" class="invisible-ling text-warning">-->
                 <span class="glyphicon glyphicon-user" style="margin-right:3px;"></span>
                 <span class="list-group-item-heading"><strong>{{contact.lastName}} {{contact.firstName}}</strong></span>
-                <span class="glyphicon glyphicon-remove pull-right" style="margin-bottom:15px" ng-click="removeContact(contact._id)"></span>
+                <span class="glyphicon glyphicon-remove pull-right" style="margin-bottom:15px" ng-show="iSvc.isAuthorized('admin')" ng-click="removeContact(contact._id)"></span>
                 <p class="list-group-item-text">{{contact.type}} | Email: {{contact.email}} | Tel: {{contact.phoneNumber}}</p>
             <!--</a>-->
+        </div>
+    </div>
+
+    <div class="list-group">
+        <div ng-repeat="activity in activityContacts" class="list-group-item disabled">
+            <span class="glyphicon glyphicon-calendar" style="margin-right:3px"></span>
+            <span class="list-group-item-heading"><strong>{{activity.name}}</strong></span>
+            <div ng-repeat="contact in activity.contacts" class="list-group-item list-group-item-warning">
+                <span class="glyphicon glyphicon-user" style="margin-right:3px"></span>
+                <span class="list-group-item-heading"><strong>{{contact.lastName}} {{contact.firstName}}</strong></span>
+                <p class="list-group-item-text">{{contact.type}} | Email: {{contact.email}} | Tel: {{contact.phoneNumber}}</p>
+            </div>
         </div>
     </div>
 </div>

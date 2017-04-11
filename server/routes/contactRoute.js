@@ -7,7 +7,7 @@ router.post('/', auth.requiresRole("admin"), ContactController.create);
 
 router.put('/', auth.requiresRole("admin"), ContactController.update);
 
-router.get('/', auth.requiresRole("admin"), ContactController.findAll);
+router.get('/', ContactController.findAll);
 
 router.get('/:id', auth.requiresRole("admin"), ContactController.findById);
 

@@ -29,3 +29,10 @@ exports.getContacts = (id) => {
 		.populate('contacts')
 		.select('_id contacts');
 }
+
+exports.getContactsForEvent = (eventId) => {
+	return Activity.find({ 'eventId': eventId})
+		.populate('contacts')
+		.select('_id name contacts')
+		.sort({'name': 1})
+}

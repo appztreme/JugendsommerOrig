@@ -89,4 +89,9 @@ app.controller('EventContactCtrl', function($scope, $routeParams, $route, $locat
     EventsSvc.getContacts($routeParams.eventId).success(function(c) {
         $scope.assignedContacts = c.contacts;
     });
+
+    EventsSvc.getContactsForEvent($routeParams.eventId).success(function(cs) {
+        console.log("activity", cs);
+        $scope.activityContacts = cs;
+    });
 });

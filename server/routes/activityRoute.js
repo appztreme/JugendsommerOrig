@@ -9,6 +9,8 @@ router.get('/:activityId', ActivityController.findById);
 
 router.get('/contacts/:activityId', auth.requiresRole("admin"), ActivityController.getContactsForActivity);
 
+router.get('/contacts/event/:eventId', ActivityController.getContactsForEvent);
+
 router.post('/', auth.requiresRole("admin"), ActivityController.create);
 
 router.put('/', auth.requiresRole("admin"), ActivityController.update);
