@@ -28,7 +28,8 @@ db.events.insert({
     info: 'info for event1',
     info_it: 'informationi de evento1',
     isInternal: false,
-    contacts: ['111111111111111100000001', '111111111111111100000002']
+    contacts: ['111111111111111100000001', '111111111111111100000002'],
+    contactRels: [{contact: ObjectId('111111111111111100000001'), role: 'Teamleiter'}, {contact: ObjectId('111111111111111100000002'), role: 'Betreuer'}]
 });
 db.events.insert({
     _id: ObjectId('111111111111111111111112'),

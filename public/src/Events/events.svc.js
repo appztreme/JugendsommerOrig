@@ -75,12 +75,12 @@ app.service('EventsSvc', function($http) {
 		return $http.put(EVENT_SVC_PATH, ev);
 	};
 
-	this.addContact = function(eventId, contactId) {
-		return $http.patch(EVENT_SVC_PATH + 'contacts/add', { eventId: eventId, contactId: contactId });
+	this.addContact = function(eventId, contactId, role) {
+		return $http.patch(EVENT_SVC_PATH + 'contacts/add', { eventId: eventId, contactId: contactId, role: role });
 	};
 
-	this.removeContact = function(eventId, contactId) {
-		return $http.patch(EVENT_SVC_PATH + 'contacts/remove', { eventId: eventId, contactId: contactId });
+	this.removeContact = function(eventId, contactId, role) {
+		return $http.patch(EVENT_SVC_PATH + 'contacts/remove', { eventId: eventId, contactId: contactId, role: role });
 	}
 
 	this.createContact = function(c) {

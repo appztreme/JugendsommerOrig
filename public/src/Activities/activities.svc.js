@@ -29,12 +29,12 @@ app.service('ActivitiesSvc', function($http) {
 		return $http.get('/api/contact');
 	}
 
-	this.addContact = function(activityId, contactId) {
-		return $http.patch('/api/activities/contacts/add', { activityId: activityId, contactId: contactId });
+	this.addContact = function(activityId, contactId, role) {
+		return $http.patch('/api/activities/contacts/add', { activityId: activityId, contactId: contactId, role: role });
 	};
 
-	this.removeContact = function(activityId, contactId) {
-		return $http.patch('/api/activities/contacts/remove', { activityId: activityId, contactId: contactId });
+	this.removeContact = function(activityId, contactId, role) {
+		return $http.patch('/api/activities/contacts/remove', { activityId: activityId, contactId: contactId, role: role });
 	}
 
 	this.createContact = function(c) {

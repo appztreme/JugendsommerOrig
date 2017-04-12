@@ -33,16 +33,15 @@ app.controller('ActivityContactCtrl', function($scope, $routeParams, $route, $lo
     }
 
     $scope.saveContact = function() {
-        console.log($scope.firstName, $scope.lastName, $scope.phoneNumber, $scope.email, $scope.type);
+        //console.log($scope.firstName, $scope.lastName, $scope.phoneNumber, $scope.email, $scope.role);
         ActivitiesSvc.createContact({
             firstName: $scope.firstName,
             lastName: $scope.lastName,
             phoneNumber: $scope.phoneNumber,
-            email: $scope.email,
-            type: $scope.type
+            email: $scope.email
        })
        .success(function(c) {
-            ActivitiesSvc.addContact($routeParams.activityId, c._id)
+            ActivitiesSvc.addContact($routeParams.activityId, c._id, $scope.role)
                 .success(function(act) {
                     NotificationSvc.notify("Kontakt wurde erfolgreich gespeichert");
                     $route.reload();
@@ -61,7 +60,7 @@ app.controller('ActivityContactCtrl', function($scope, $routeParams, $route, $lo
     }
 
     $scope.addContact = function() {
-        ActivitiesSvc.addContact($routeParams.activityId, $scope.searchResultId)
+        ActivitiesSvc.addContact($routeParams.activityId, $scope.searchResultId, $scope.contactRole)
             .success(function(act) {
                 NotificationSvc.notify("Kontakt wurde gespeichert");
             })
@@ -71,8 +70,8 @@ app.controller('ActivityContactCtrl', function($scope, $routeParams, $route, $lo
         $route.reload();
     }
 
-    $scope.removeContact = function(contactId) {
-        ActivitiesSvc.removeContact($routeParams.activityId, contactId)
+    $scope.removeContact = function(contactId, role) {
+        ActivitiesSvc.removeContact($routeParams.activityId, contactId, role)
             .success(function(act) {
                 NotificationSvc.notify("Kontakt wurde entfernt");
             })
@@ -87,6 +86,6 @@ app.controller('ActivityContactCtrl', function($scope, $routeParams, $route, $lo
     });
 
     ActivitiesSvc.getContacts($routeParams.activityId).success(function(c) {
-        $scope.assignedContacts = c.contacts;
+        $scope.assignedContacts = c.contactRels;
     });
 });

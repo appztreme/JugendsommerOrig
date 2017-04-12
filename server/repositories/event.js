@@ -44,9 +44,9 @@ exports.delete = (id) => {
 
 exports.getContacts = (id) => {
 	return Event.findById(id)
-		.populate('contacts')
-		.populate({ path: 'activityId', populate: { path: 'contacts' } })
-		.select('_id contacts');
+		.populate('contactRels.contact')
+		//.populate({ path: 'activityId', populate: { path: 'contacts' } })
+		.select('_id contactRels');
 }
 
 exports.groupByLocation = () => {

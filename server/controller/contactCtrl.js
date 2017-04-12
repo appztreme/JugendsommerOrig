@@ -17,7 +17,6 @@ exports.update = async(req, res, next) => {
         cOrig.lastName = req.body.lastName;
         cOrig.email = req.body.email;
         cOrig.phoneNumber = req.body.phoneNumber;
-        cOrig.type = req.body.type;
         let cNew = await cOrig.save();
         res.json(cNew);
     }

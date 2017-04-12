@@ -191,8 +191,8 @@ exports.update = (req, res, next) => {
 exports.addContact = async(req, res, next) => {
 	try {
 		let ev = await EventRepo.findById(req.body.eventId);
-		if(!ev.contacts) ev.contacts = [];
-		ev.contacts.push(req.body.contactId);
+		//if(!ev.contacts) ev.contacts = [];
+		ev.contactRels.push({contact: req.body.contactId, role: req.body.role});
 		await ev.save();
 		res.status(200).json(ev);
 	}
@@ -202,7 +202,7 @@ exports.addContact = async(req, res, next) => {
 exports.removeContact = async(req, res, next) => {
 	try {
 		let ev = await EventRepo.findById(req.body.eventId);
-		ev.contacts.splice(ev.contacts.indexOf(req.body.contactId), 1);
+		ev.contactRels.splice(ev.contactRels.findIndex(i => i.contact === req.body.contactId && i.role === req.body.role), 1);
 		await ev.save();
 		res.status(200).json(ev);
 	}

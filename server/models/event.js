@@ -22,7 +22,8 @@ var eventSchema = db.Schema({
 	info: { type: String, required: true },
 	info_it: { type: String, required: true },
 	isInternal: { type: Boolean, required: true, default: false },
-	contacts: [ { type: mongoose.Schema.Types.ObjectId, ref: 'Contact' } ]
+	contacts: [ { type: mongoose.Schema.Types.ObjectId, ref: 'Contact' } ],
+	contactRels: [ { contact: { type: mongoose.Schema.Types.ObjectId, ref: 'Contact'}, role: { type: String, required: true } }]
 });
 
 var Event = db.model('Event', eventSchema);

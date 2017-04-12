@@ -26,13 +26,13 @@ exports.findById = (id) => {
 
 exports.getContacts = (id) => {
 	return Activity.findById(id)
-		.populate('contacts')
-		.select('_id contacts');
+		.populate('contactRels.contact')
+		.select('_id contactRels');
 }
 
 exports.getContactsForEvent = (eventId) => {
 	return Activity.find({ 'eventId': eventId})
-		.populate('contacts')
-		.select('_id name contacts')
+		.populate('contactRels.contact')
+		.select('_id name contactRels')
 		.sort({'name': 1})
 }

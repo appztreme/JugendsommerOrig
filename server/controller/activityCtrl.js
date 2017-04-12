@@ -90,7 +90,7 @@ exports.addContact = async(req, res, next) => {
 	try {
 		let act = await ActivityRepo.findById(req.body.activityId);
 		if(!act.contacts) act.contacts = [];
-		act.contacts.push(req.body.contactId);
+		act.contactRels.push({ contact: req.body.contactId, role: req.body.role });
 		await act.save();
 		res.status(200).json(act);
 	}
@@ -100,7 +100,7 @@ exports.addContact = async(req, res, next) => {
 exports.removeContact = async(req, res, next) => {
 	try {
 		let act = await ActivityRepo.findById(req.body.activityId);
-		act.contacts.splice(act.contacts.indexOf(req.body.contactId), 1);
+		act.contactRels.splice(act.contactRels.findIndex(i => i.contact === req.body.contactId && i.role === req.body.role), 1);
 		await act.save();
 		res.status(200).json(act);
 	}

@@ -33,16 +33,15 @@ app.controller('EventContactCtrl', function($scope, $routeParams, $route, $locat
     }
 
     $scope.saveContact = function() {
-        console.log($scope.firstName, $scope.lastName, $scope.phoneNumber, $scope.email, $scope.type);
+       //console.log($scope.firstName, $scope.lastName, $scope.phoneNumber, $scope.email, $scope.type);
        EventsSvc.createContact({
             firstName: $scope.firstName,
             lastName: $scope.lastName,
             phoneNumber: $scope.phoneNumber,
-            email: $scope.email,
-            type: $scope.type
+            email: $scope.email
        })
        .success(function(c) {
-            EventsSvc.addContact($routeParams.eventId, c._id)
+            EventsSvc.addContact($routeParams.eventId, c._id, $scope.role)
                 .success(function(ev) {
                     NotificationSvc.notify("Kontakt wurde erfolgreich gespeichert");
                     $route.reload();
@@ -61,7 +60,7 @@ app.controller('EventContactCtrl', function($scope, $routeParams, $route, $locat
     }
 
     $scope.addContact = function() {
-        EventsSvc.addContact($routeParams.eventId, $scope.searchResultId)
+        EventsSvc.addContact($routeParams.eventId, $scope.searchResultId, $scope.contactRole)
             .success(function(ev) {
                 NotificationSvc.notify("Kontakt wurde gespeichert");
             })
@@ -71,8 +70,8 @@ app.controller('EventContactCtrl', function($scope, $routeParams, $route, $locat
         $route.reload();
     }
 
-    $scope.removeContact = function(contactId) {
-        EventsSvc.removeContact($routeParams.eventId, contactId)
+    $scope.removeContact = function(contactId, role) {
+        EventsSvc.removeContact($routeParams.eventId, contactId, role)
             .success(function(ev) {
                 NotificationSvc.notify("Kontakt wurde entfernt");
             })
@@ -87,11 +86,10 @@ app.controller('EventContactCtrl', function($scope, $routeParams, $route, $locat
     });
 
     EventsSvc.getContacts($routeParams.eventId).success(function(c) {
-        $scope.assignedContacts = c.contacts;
+        $scope.assignedContacts = c.contactRels;
     });
 
     EventsSvc.getContactsForEvent($routeParams.eventId).success(function(cs) {
-        console.log("activity", cs);
         $scope.activityContacts = cs;
     });
 });

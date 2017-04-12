@@ -12,7 +12,8 @@ var Activity = db.model('Activity', {
 	maxParticipants: { type: Number, required: true },
     curParticipants: { type: Number, required: true, default: 0 },
     queueSize: { type: Number, required: true },
-	contacts: [ { type: mongoose.Schema.Types.ObjectId, ref: 'Contact' } ]
+	contacts: [ { type: mongoose.Schema.Types.ObjectId, ref: 'Contact' } ],
+	contactRels: [ { contact: { type: mongoose.Schema.Types.ObjectId, ref: 'Contact'}, role: { type: String, required: true } }]
 });
 
 module.exports = Activity;
