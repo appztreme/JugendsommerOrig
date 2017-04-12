@@ -9,7 +9,7 @@ const queryDefault = Event.find().where('startDate').gte(startCurYear);
 
 exports.findByCurrentYear = () => {
     return queryDefault
-			.where('isInternal').equals(false)
+			//.where('isInternal').equals(false)
 			.sort({ location: 1, startDate: 1 })
 			.exec();
 }

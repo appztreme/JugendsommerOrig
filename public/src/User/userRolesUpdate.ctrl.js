@@ -31,6 +31,7 @@ app.controller('UserRolesUpdateCtrl', function($scope, $location, UserSvc, $rout
 
 	UserSvc.getEvents()
 		.success(function(events) {
+			console.log("events", events);
 			$scope.events = events;
 		});
     UserSvc.getLocations()
