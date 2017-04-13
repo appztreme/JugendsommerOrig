@@ -47,11 +47,11 @@ app.controller('UserRolesUpdateCtrl', function($scope, $location, UserSvc, $rout
 			if(user.roles.indexOf('admin') !== -1) $scope.curRole = 'admin';
 			if(user.location) $scope.location = user.location;
 
-			if(user.eventId) {
-				for(var ev in $scope.events) {
-					var evObj = $scope.events[ev];
-					if(evObj._id === user.eventId._id) { $scope.event = evObj; console.log("sel ev", $scope.event); break; }
-				}
-			}
+			// if(user.eventId) {
+			// 	for(var ev in $scope.events) {
+			// 		var evObj = $scope.events[ev];
+			// 		if(evObj._id === user.eventId._id) { $scope.event = evObj; console.log("sel ev", $scope.event); break; }
+			// 	}
+			// }
 		});
 });
