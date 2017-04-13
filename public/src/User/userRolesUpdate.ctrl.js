@@ -2,8 +2,8 @@ var app = angular.module('js');
 
 app.controller('UserRolesUpdateCtrl', function($scope, $location, UserSvc, $routeParams, NotificationSvc) {
 	$scope.save = function() {
-		//console.log("event", $scope.event);
-		UserSvc.updateRoles($scope.user._id, JSON.parse($scope.event)._id, $scope.location, $scope.user.roles)
+		console.log("event", $scope.event);
+		UserSvc.updateRoles($scope.user._id, $scope.event, $scope.location, $scope.user.roles)
 			.error(function(err) {
 				NotificationSvc.warn("err");
 			})
@@ -42,6 +42,7 @@ app.controller('UserRolesUpdateCtrl', function($scope, $location, UserSvc, $rout
 	UserSvc.findById($routeParams.userId)
 		.success(function(user) {
 			$scope.user = user;
+			//console.log("user", user);
 			if(user.roles.indexOf('fadmin') !== -1) $scope.curRole = 'fadmin';
 			if(user.roles.indexOf('ladmin') !== -1) $scope.curRole = 'ladmin';
 			if(user.roles.indexOf('admin') !== -1) $scope.curRole = 'admin';

@@ -15,7 +15,7 @@
 				<label for='events' class='col-sm-1'>Programm</label>
 				<div class='col-sm-4'>
 					<select name='events' class='sel-base form-control' ng-model='event'>
-						<option ng-repeat="ev in events" value='{{ev}}'>{{ev.location}} - {{ev.name}}</option>
+						<option ng-repeat="ev in events" value='{{ev._id}}'>{{ev.location}} - {{ev.name}}</option>
 					</select>
 				</div>
 			</div>

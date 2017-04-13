@@ -8,8 +8,8 @@ const startCurYear = new Date(curYear+"-1-1");
 const queryDefault = Event.find().where('startDate').gte(startCurYear);
 
 exports.findByCurrentYear = () => {
-    return queryDefault
-			//.where('isInternal').equals(false)
+    return Event.find()
+			.where('startDate').gte(startCurYear)
 			.sort({ location: 1, startDate: 1 })
 			.exec();
 }

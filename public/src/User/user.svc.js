@@ -24,6 +24,7 @@ app.service('UserSvc', function($http) {
 		return $http.get('/api/user/search/' + term);
 	}
 	this.updateRoles = function(id, eventId, location, roles) {
+		console.log('svc', id, eventId, location, roles);
 		return $http.post('/api/user/updateRoles', {
 			id: id,
 			roles: roles,
