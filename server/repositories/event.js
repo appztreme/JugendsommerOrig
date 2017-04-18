@@ -5,8 +5,6 @@ const Event = require('./../models/event');
 const curYear = new Date().getFullYear();
 const startCurYear = new Date(curYear+"-1-1");
 
-const queryDefault = Event.find().where('startDate').gte(startCurYear);
-
 exports.findByCurrentYear = () => {
     return Event.find()
 			.where('startDate').gte(startCurYear)
@@ -15,23 +13,34 @@ exports.findByCurrentYear = () => {
 }
 
 exports.findByCurrentYearAndLocation = (location, asAdmin = false) => {
-    let query = queryDefault.where('location').equals(location);
-    if(!asAdmin) query = query.where('isInternal').equals(false);
-    return query.sort({ startDate: 1 }).exec();
+    return Event.find()
+			.where('startDate').gte(startCurYear)
+			.where('location').equals(location)
+			.sort({ startDate: 1 })
+			.exec();
+    //if(!asAdmin) query = query.where('isInternal').equals(false);
+    //return query.sort({ startDate: 1 }).exec();
 }
 
 exports.findByCurrentYearAndLocationSummer = (location, asAdmin = false) => {
-    let query = queryDefault
-        .where('location').equals(location)
-        .where('type').in(['summer', 'music']);
-    if(!asAdmin) query = query.where('isInternal').equals(false);
-    return query.sort({ startDate: 1 }).exec();
+    return Event.find()
+			.where('startDate').gte(startCurYear)
+       		.where('location').equals(location)
+       		.where('type').in(['summer', 'music'])
+			.sort({ startDate: 1 })
+			.exec();
+    //if(!asAdmin) query = query.where('isInternal').equals(false);
+    //return query.sort({ startDate: 1 }).exec();
 }
 
 exports.findByCurrentYearAndType = (type, asAdmin = false) => {
-    let query = queryDefault.where('type').equals(type);
-	if(!asAdmin) query = query.where('isInternal').equals(false)
-	return query.sort({ location: 1, startDate: 1 }).exec();
+    return Event.find()
+			.where('startDate').gte(startCurYear)
+			.where('type').equals(type)
+			.sort({ location: 1, startDate: 1 })
+			.exec();
+	//if(!asAdmin) query = query.where('isInternal').equals(false)
+	//return query.sort({ location: 1, startDate: 1 }).exec();
 }
 
 exports.findById = (id) => {
@@ -45,7 +54,6 @@ exports.delete = (id) => {
 exports.getContacts = (id) => {
 	return Event.findById(id)
 		.populate('contactRels.contact')
-		//.populate({ path: 'activityId', populate: { path: 'contacts' } })
 		.select('_id contactRels');
 }
 
