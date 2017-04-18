@@ -54,11 +54,8 @@ app.controller('GeoSelectionCtrl', function($scope, $location, GeoSvc, $rootScop
                 $scope.locations = sel;
             });
         } else {
-            console.log("yyy");
             GeoSvc.getSelection().success(function(sel) {
-                console.log("abcdef")
                 addNameProp(sel);
-                console.log("result geosel", sel);
                 $scope.locations = sel;
             }).error(function(err) { console.log("err", err)});
         }

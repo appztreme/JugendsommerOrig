@@ -13,34 +13,32 @@ exports.findByCurrentYear = () => {
 }
 
 exports.findByCurrentYearAndLocation = (location, asAdmin = false) => {
-    return Event.find()
+    let query = Event.find()
 			.where('startDate').gte(startCurYear)
-			.where('location').equals(location)
-			.sort({ startDate: 1 })
-			.exec();
-    //if(!asAdmin) query = query.where('isInternal').equals(false);
-    //return query.sort({ startDate: 1 }).exec();
+			.where('location').equals(location);
+    if(!asAdmin) query = query.where('isInternal').equals(false);
+    return query.sort({ startDate: 1 }).exec();
 }
 
 exports.findByCurrentYearAndLocationSummer = (location, asAdmin = false) => {
-    return Event.find()
+    let query = Event.find()
 			.where('startDate').gte(startCurYear)
        		.where('location').equals(location)
        		.where('type').in(['summer', 'music'])
 			.sort({ startDate: 1 })
 			.exec();
-    //if(!asAdmin) query = query.where('isInternal').equals(false);
-    //return query.sort({ startDate: 1 }).exec();
+    if(!asAdmin) query = query.where('isInternal').equals(false);
+    return query.sort({ startDate: 1 }).exec();
 }
 
 exports.findByCurrentYearAndType = (type, asAdmin = false) => {
-    return Event.find()
+    let query = Event.find()
 			.where('startDate').gte(startCurYear)
 			.where('type').equals(type)
 			.sort({ location: 1, startDate: 1 })
 			.exec();
-	//if(!asAdmin) query = query.where('isInternal').equals(false)
-	//return query.sort({ location: 1, startDate: 1 }).exec();
+	if(!asAdmin) query = query.where('isInternal').equals(false)
+	return query.sort({ location: 1, startDate: 1 }).exec();
 }
 
 exports.findById = (id) => {
