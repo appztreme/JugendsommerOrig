@@ -13,7 +13,7 @@ app.controller('TravelExpensesNewCtrl', function($scope, $routeParams, $location
 	$scope.isCleared = false;
 
   $scope.onKilometeresChanged = function() {
-    $scope.amount = $scope.kilometers * $scope.subsidyRate;
+    $scope.amount = Math.round($scope.kilometers * $scope.subsidyRate * 100) / 100;
   }
 
 	$scope.save = function() {
