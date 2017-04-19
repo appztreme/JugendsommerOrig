@@ -66,8 +66,13 @@ app.controller('MyCommitmentsCtrl', function($scope, $location, $route, Notifica
 		return Math.round(_.reduce(ar, reducer, 0) * 100) / 100;
 	};
 
+	$scope.withTwoDecPlaces = function(amount) {
+		return amount.toFixed(2);
+	}
+
 	$scope.formatDec = function(amount) {
-		return parseFloat(Math.round(amount * 100) / 100).toFixed(2);
+		// return parseFloat(Math.round(amount * 100) / 100).toFixed(2);
+		return parseFloat(Math.round(amount * 100) / 100);
 	};
 
 	$scope.sumSummaryBy = function(prop1, prop2) {

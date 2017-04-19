@@ -193,31 +193,31 @@
 			<tbody>
 				<tr ng-repeat='summary in summaries'>
 					<td align="center"><strong>{{summary._id.location}} - {{summary._id.name}}</strong></td>
-					<td align="right">{{formatDec(summary._id.budgetBusiness + summary._id.budgetFood)}}</td>
-					<td align="right">{{formatDec(summary._id.budgetBusiness)}}</td>
-					<td align="right">{{formatDec(summary._id.budgetFood)}}</td>
-					<td align="right">{{formatDec(summary.sumBusiness)}}</td>
-					<td align="right">{{formatDec(summary.sumFood)}}</td>
-					<td align="right">{{formatDec(summary.sumTravel)}}</td>
-					<td align="right">{{formatDec(summary.sumBusiness + summary.sumFood)}}</td>
-					<td align="right">{{formatDec(summary._id.budgetBusiness + summary._id.budgetFood - summary.sumBusiness - summary.sumFood)}}</td>
-					<td align="right">{{formatDec(summary.sumPaymentOpen)}}</td>
-					<td align="right">{{formatDec(summary.sumInvoiceOpen)}}</td>
+					<td align="right">{{withTwoDecPlaces(formatDec(summary._id.budgetBusiness + summary._id.budgetFood))}}</td>
+					<td align="right">{{withTwoDecPlaces(formatDec(summary._id.budgetBusiness))}}</td>
+					<td align="right">{{withTwoDecPlaces(formatDec(summary._id.budgetFood))}}</td>
+					<td align="right">{{withTwoDecPlaces(formatDec(summary.sumBusiness))}}</td>
+					<td align="right">{{withTwoDecPlaces(formatDec(summary.sumFood))}}</td>
+					<td align="right">{{withTwoDecPlaces(formatDec(summary.sumTravel))}}</td>
+					<td align="right">{{withTwoDecPlaces(formatDec(summary.sumBusiness + summary.sumFood))}}</td>
+					<td align="right">{{withTwoDecPlaces(formatDec(summary._id.budgetBusiness + summary._id.budgetFood - summary.sumBusiness - summary.sumFood))}}</td>
+					<td align="right">{{withTwoDecPlaces(formatDec(summary.sumPaymentOpen))}}</td>
+					<td align="right">{{withTwoDecPlaces(formatDec(summary.sumInvoiceOpen))}}</td>
 				</tr>
 			</tbody>
 			<tfoot>
 				<tr>
 					<td align="center" class="bg-warning"><strong>Summe:</strong></td>
-					<td align="right" class="bg-warning"><strong>{{sumSummaryBy('_id','budgetBusiness') + sumSummaryBy('_id','budgetFood')}}</strong></td>
-					<td align="right" class="bg-warning"><strong>{{sumSummaryBy('_id','budgetBusiness')}}</strong></td>
-					<td align="right" class="bg-warning"><strong>{{sumSummaryBy('_id','budgetFood')}}</strong></td>
-					<td align="right" class="bg-warning"><strong>{{sumSummaryBy('sumBusiness')}}</strong></td>
-					<td align="right" class="bg-warning"><strong>{{sumSummaryBy('sumFood')}}</strong></td>
-					<td align="right" class="bg-warning"><strong>{{sumSummaryBy('sumTravel')}}</strong></td>
-					<td align="right" class="bg-warning"><strong>{{sumSummaryBy('sumBusiness') + sumSummaryBy('sumFood')}}</strong></td>
-					<td align="right" class="bg-warning"><strong>{{formatDec(sumSummaryBy('_id','budgetBusiness')+sumSummaryBy('_id','budgetFood')-sumSummaryBy('sumBusiness')-sumSummaryBy('sumFood'))}}</strong></td>
-					<td align="right" class="bg-warning"><strong>{{sumSummaryBy('sumPaymentOpen')}}</strong></td>
-					<td align="right" class="bg-warning"><strong>{{sumSummaryBy('sumInvoiceOpen')}}</strong></td>
+					<td align="right" class="bg-warning"><strong>{{withTwoDecPlaces(sumSummaryBy('_id','budgetBusiness') + sumSummaryBy('_id','budgetFood'))}}</strong></td>
+					<td align="right" class="bg-warning"><strong>{{withTwoDecPlaces(sumSummaryBy('_id','budgetBusiness'))}}</strong></td>
+					<td align="right" class="bg-warning"><strong>{{withTwoDecPlaces(sumSummaryBy('_id','budgetFood'))}}</strong></td>
+					<td align="right" class="bg-warning"><strong>{{withTwoDecPlaces(sumSummaryBy('sumBusiness'))}}</strong></td>
+					<td align="right" class="bg-warning"><strong>{{withTwoDecPlaces(sumSummaryBy('sumFood'))}}</strong></td>
+					<td align="right" class="bg-warning"><strong>{{withTwoDecPlaces(sumSummaryBy('sumTravel'))}}</strong></td>
+					<td align="right" class="bg-warning"><strong>{{withTwoDecPlaces(sumSummaryBy('sumBusiness') + sumSummaryBy('sumFood'))}}</strong></td>
+					<td align="right" class="bg-warning"><strong>{{withTwoDecPlaces(formatDec(sumSummaryBy('_id','budgetBusiness')+sumSummaryBy('_id','budgetFood')-sumSummaryBy('sumBusiness')-sumSummaryBy('sumFood')))}}</strong></td>
+					<td align="right" class="bg-warning"><strong>{{withTwoDecPlaces(sumSummaryBy('sumPaymentOpen'))}}</strong></td>
+					<td align="right" class="bg-warning"><strong>{{withTwoDecPlaces(sumSummaryBy('sumInvoiceOpen'))}}</strong></td>
 				</tr>
 			</tfoot>
 		</table>
