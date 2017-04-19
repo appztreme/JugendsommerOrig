@@ -122,6 +122,10 @@ app.config(function($routeProvider) {
 			controller: 'LendingNewCtrl',
 			templateUrl: '../templates/lendingNew.html'
 		})
+		.when('/payment', {
+			controller: 'PaymentCtrl',
+			templateUrl: '../templates/payment.html'
+		})
 		.when('/agb/:activityId', {
 			controller: 'AgbEditCtrl',
 			templateUrl: '../templates/agbEdit.html'

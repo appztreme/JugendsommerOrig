@@ -8,6 +8,8 @@
             "MYRES": "Meine Reservierungen",
             "MYCOMMITS": "Meine Rechnungen",
             "REPORT": "Report",
+            "RESERVATIONS": "Anmeldungen",
+            "PAYMENT": "Auszahlung",
             "LENDINGS": "Material",
             "USERSEARCH": "User"
         },
@@ -123,6 +125,8 @@
             "MYRES": "Le mie prenotazioni",
             "MYCOMMITS": "Le mie fatture",
             "REPORT": "Report",
+            "RESERVATIONS": "Prenotazioni",
+            "PAYMENT": "Computo",
             "LENDINGS": "Materiale",
             "USERSEARCH": "Utente"
         },
