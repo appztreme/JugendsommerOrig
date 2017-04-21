@@ -1,5 +1,10 @@
 'use strict';
 const Contact = require('./../models/contact');
+const Activity = require('./../models/activity');
+const Event = require('./../models/event');
+
+const curYear = new Date().getFullYear();
+const startCurYear = new Date(curYear+"-1-1");
 
 exports.findById = (id) => {
     return Contact.findById(id)
@@ -29,4 +34,10 @@ exports.search = (searchToken) => {
 			{lastName: {'$regex': searchTerm }}
 		]})
 		.exec();
+}
+
+exports.findRelationsForCurrentYear = () => {
+    return Activity.find()
+        .populate({path: 'contactRels.contacts', populate: {path: 'eventId', populate: {path: 'contactRels.contacts'}}})
+        .exec();
 }

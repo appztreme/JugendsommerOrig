@@ -9,6 +9,8 @@ router.put('/', auth.requiresRole("admin"), ContactController.update);
 
 router.get('/', ContactController.findAll);
 
+router.get('/payments', auth.requiresRole("admin"), ContactController.reportPayments);
+
 router.get('/:id', auth.requiresRole("admin"), ContactController.findById);
 
 router.get('/search/:txt', auth.requiresRole("admin"), ContactController.search);

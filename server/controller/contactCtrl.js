@@ -45,3 +45,11 @@ exports.search = async(req, res, next) => {
     }
     catch(err) { next(err); }
 }
+
+exports.reportPayments = async(req, res, next) => {
+    try {
+        let result = await contactRepo.findRelationsForCurrentYear();
+        res.json(result);
+    }
+    catch(err) { next(err); }
+}
