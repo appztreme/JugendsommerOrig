@@ -37,7 +37,13 @@ exports.search = (searchToken) => {
 }
 
 exports.findRelationsForCurrentYear = () => {
+    // return Activity.aggregate([
+    //    { $match:
+	// 			{ startDate: { $gte: startCurYear } }
+	// 		}, 
+    // ]).exec();
     return Activity.find()
-        .populate({path: 'contactRels.contacts', populate: {path: 'eventId', populate: {path: 'contactRels.contacts'}}})
+        .populate('contactRels.contact')
+        .populate({ path: 'eventId', populate:{ path: 'contactRels.contact' } })
         .exec();
 }
