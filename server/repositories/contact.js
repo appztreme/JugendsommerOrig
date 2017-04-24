@@ -37,13 +37,39 @@ exports.search = (searchToken) => {
 }
 
 exports.findRelationsForCurrentYear = () => {
-    // return Activity.aggregate([
-    //    { $match:
-	// 			{ startDate: { $gte: startCurYear } }
-	// 		}, 
-    // ]).exec();
-    return Activity.find()
-        .populate('contactRels.contact')
-        .populate({ path: 'eventId', populate:{ path: 'contactRels.contact' } })
-        .exec();
+    return Event.aggregate([
+        { $match:
+			{ $and: [ {startDate: { $gte: startCurYear }} ] }
+		},
+        { $lookup:
+            { from: 'activities', localField: '_id', foreignField: 'eventId', as: 'activities' }
+        },
+        // { $unwind: '$activities.contactRels' },
+        // { $lookup:
+        //     { from: 'contacts', localField: 'activities.contactRels.contact', foreignField: '_id', as: 'activities.contactRels.cont' }
+        // },
+        { $unwind: '$contactRels' },
+        { $lookup:
+            { from: 'contacts', localField: 'contactRels.contact', foreignField: '_id', as: 'contactRels.cont' }
+        },
+        { $project:
+            {
+                _id: 0,
+                eventName: { $concat: ["location", " ", "name"] },
+                "contactRels.contact": { $arrayElemAt: ["$contactRels.cont",0] },
+                "activities._id": 1,
+                "activities.name": 1,
+                "activities.contactRels": 1
+            }
+        },
+        // { $lookup:
+        //     { from: 'contacts', localField: 'contactRels.contact', foreignField: '_id', as: 'c' }
+        // }
+    ]).exec();
+    // return Activity.find()
+    //     .where('startDate').gte(startCurYear)
+    //     .populate('contactRels.contact')
+    //     .populate({ path: 'eventId', select: 'location name contactRels', populate:{ path: 'contactRels.contact' } })
+    //     .select('eventId name contactRels')
+    //     .exec();
 }
