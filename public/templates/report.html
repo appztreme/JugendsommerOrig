@@ -58,10 +58,17 @@
 	<div class='panel panel-default'>
 	<div class='panel-heading'>Sortierung</div>
 	<div class='row panel-body'>
-		<div class='col-sm-3'>
+		<div class='col-sm-2'>
 			<select id='colSorter' class='sel-base' ng-model='colNameSort'>
 				<option ng-repeat='col in columns' value='{{col.dbName}}'>{{col.colName}}</option>
 			</select>
+		</div>
+		<div class='row panel-body'>
+		<div class='col-sm-2'>
+			<select id='colSorter2' class='sel-base' ng-model='colNameSort2'>
+				<option ng-repeat='col in columns' value='{{col.dbName}}'>{{col.colName}}</option>
+			</select>
+		</div>
 		</div>
 	</div>
 	</div>
@@ -95,7 +102,7 @@
 			<th>Tel. Kontakt2</th>
 			<th>Anmeldedatum</th>
 		</tr>
-		<tr ng-repeat='reg in registrations | orderBy:colNameSort'>
+		<tr ng-repeat='reg in registrations | orderBy:[colNameSort,colNameSort2]'>
 			<td ng-class='{"bg-warning": isOnWait(reg), "bg-danger": isAfterDeadline(reg)}'><button class="btn glyphicon glyphicon-pencil" ng-disabled='!iSvc.isAuthorized("admin")' type="button" ng-click='editRegistration(reg._id)'></button></td>
 			<td ng-class='{"bg-warning": isOnWait(reg), "bg-danger": isAfterDeadline(reg)}'><button type="button" class="btn glyphicon glyphicon-trash" ng-disabled='!iSvc.isAuthorized("admin")' ng-click='deleteRegistration(reg._id)'></button></td>
 			<td ng-class='{"bg-warning": isOnWait(reg), "bg-danger": isAfterDeadline(reg)}'></td>
