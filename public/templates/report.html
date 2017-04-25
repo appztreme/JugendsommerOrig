@@ -58,18 +58,21 @@
 	<div class='panel panel-default'>
 	<div class='panel-heading'>Sortierung</div>
 	<div class='row panel-body'>
-		<div class='col-sm-2'>
+		<div class='col-sm-3'>
+			<label>Sortierung1</label>
 			<select id='colSorter' class='sel-base' ng-model='colNameSort'>
 				<option ng-repeat='col in columns' value='{{col.dbName}}'>{{col.colName}}</option>
 			</select>
 		</div>
-		<div class='row panel-body'>
-		<div class='col-sm-2'>
+	</div>
+	<div class='row panel-body'>
+		<div class='col-sm-3'>
+			<label>Sortierung2</label>
 			<select id='colSorter2' class='sel-base' ng-model='colNameSort2'>
 				<option ng-repeat='col in columns' value='{{col.dbName}}'>{{col.colName}}</option>
 			</select>
 		</div>
-		</div>
+	</div>
 	</div>
 	</div>
 	</div>
