@@ -31,8 +31,22 @@ function requiresRole(role) {
     }
 }
 
+function requiresOneRoleOutOf(roles) {
+    return (req, res, next) => {
+      let hasRole = false;
+      roles.forEach(r => {
+        if(req.user.roles.indexOf(r) !== -1) hasRole = true;
+      });
+      if(!req.isAuthenticated() || !hasRole) {
+        res.status(403);
+        res.end();
+      } else { next(); }
+    }
+}
+
 module.exports = {
     authenticate,
     requiresApiLogin,
-    requiresRole
+    requiresRole,
+    requiresOneRoleOutOf
 };
