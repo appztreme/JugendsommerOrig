@@ -13,6 +13,8 @@ var txtEnd = " für die Sommerprogramme des Jugenddienstes Bozen Land war erfolg
 
 var htmlKiso = "<html><body>Vielen Dank für die Anmeldung Ihres Kindes zum KISO 2017!<br />Sie erhalten innerhalb der n√§chsten Tage eine Rückmeldung vom Jugenddienst Bozen zu Ihrem Anmeldestand.<br />Falls das Gruppenlimit für die betreffende Woche bereits erreicht sein sollte, kommt Ihr Kind auf die Warteliste.<br />Freundliche Grüße,<br />das Jugenddienst Bozen Team<br /><br />Ringraziamo per l'iscrizione di suo/a figlio/a al KISO 2017!<br />Nei prossimi giorni lo Jugenddienst Bozen<br />Le invierà una risposta sullo stato di iscrizione. Se i posti disponibli per la settimana interessata dovessero già essere esauriti, suo/a figlio/a sarà messo/a sulla lista d'attesa.<br />Cordiali saluti,<br />l'equipe dello Jugenddienst Bozen";
 var textKiso = "Vielen Dank für die Anmeldung Ihres Kindes zum KISO 2017!\r\nSie erhalten innerhalb der nächsten Tage eine Rückmeldung vom Jugenddienst Bozen zu Ihrem Anmeldestand.\r\nFalls das Gruppenlimit für die betreffende Woche bereits erreicht sein sollte, kommt Ihr Kind auf die Warteliste.\r\nFreundliche Grüße, das Jugenddienst Bozen Team \r\n\r\nRingraziamo per l’iscrizione di suo/a figlio/a al KISO 2017!\r\nNei prossimi giorni lo Jugenddienst Bozen Le invierà una risposta sullo stato di iscrizione. Se i posti disponibli per la settimana interessata dovessero già essere esauriti, suo/a figlio/a sarà messo/a sulla lista d‘attesa.\r\nCordiali saluti,\r\nl’equipe dello Jugenddienst Bozen";
+var htmlJumpRun = "<html><body>Vielen Dank für die Anmeldung Ihres Kindes zum Jump&Run 2017!<br />Sie erhalten innerhalb der n√§chsten Tage eine Rückmeldung vom Jugenddienst Bozen zu Ihrem Anmeldestand.<br />Falls das Gruppenlimit für die betreffende Woche bereits erreicht sein sollte, kommt Ihr Kind auf die Warteliste.<br />Freundliche Grüße,<br />das Jugenddienst Bozen Team<br /><br />Ringraziamo per l'iscrizione di suo/a figlio/a al Jump&Run 2017!<br />Nei prossimi giorni lo Jugenddienst Bozen<br />Le invierà una risposta sullo stato di iscrizione. Se i posti disponibli per la settimana interessata dovessero già essere esauriti, suo/a figlio/a sarà messo/a sulla lista d'attesa.<br />Cordiali saluti,<br />l'equipe dello Jugenddienst Bozen";
+var textJumpRun = "Vielen Dank für die Anmeldung Ihres Kindes zum Jump&Run 2017!\r\nSie erhalten innerhalb der nächsten Tage eine Rückmeldung vom Jugenddienst Bozen zu Ihrem Anmeldestand.\r\nFalls das Gruppenlimit für die betreffende Woche bereits erreicht sein sollte, kommt Ihr Kind auf die Warteliste.\r\nFreundliche Grüße, das Jugenddienst Bozen Team \r\n\r\nRingraziamo per l’iscrizione di suo/a figlio/a al Jump&Run 2017!\r\nNei prossimi giorni lo Jugenddienst Bozen Le invierà una risposta sullo stato di iscrizione. Se i posti disponibli per la settimana interessata dovessero già essere esauriti, suo/a figlio/a sarà messo/a sulla lista d‘attesa.\r\nCordiali saluti,\r\nl’equipe dello Jugenddienst Bozen";
 
 function getTypeString(type) {
 	switch (type) {
@@ -20,13 +22,17 @@ function getTypeString(type) {
 		case 'music': return 'Musikwoche'; break;
 		case 'spiritnight': return 'SpiritNight'; break;
 		case 'club': return 'Jugendraum'; break;
+		case 'jumprun': return 'Jump&Run'; break;
 		default: return 'Jugendsommer';
 	}
 }
 
 function getTypeText(type, firstNameChild, lastNameChild, isKiso) {
 	if(isKiso) {
-		return textKiso;
+		if(type === 'jumprun')
+			return textJumpRun;
+		else
+			return textKiso;
 	} else {
 		switch (type) {
 			case 'summer':
@@ -46,7 +52,10 @@ function getTypeText(type, firstNameChild, lastNameChild, isKiso) {
 
 function getTypeBody(type, firstNameChild, lastNameChild, isKiso) {
 	if(isKiso) {
-		return htmlKiso;
+		if(type === 'jumprun')
+			return htmlJumpRun;
+		else
+			return htmlKiso;
 	} else {
 		switch (type) {
 			case 'summer':
@@ -69,6 +78,7 @@ exports.sendTxtMail = function(recipient, firstNameChild, lastNameChild, type, i
 		var text = getTypeText(type, firstNameChild, lastNameChild, isKiso);
         var fromEmail = isKiso ? 'kiso@jd.bz.it' : 'info@jugenddienst.com';
 		var subjectEmail = isKiso ? 'Anmeldung / Iscrizione KiSo Kindersommer 2017' : 'Anmeldung ' + getTypeString(type);
+		console.log("mail", text, body);
 		server.send({
 		text: text,
 		from: fromEmail,

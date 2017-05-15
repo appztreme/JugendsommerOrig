@@ -9,7 +9,7 @@ var eventSchema = db.Schema({
 	name_it: { type: String, required: false },
 	description: { type: String, required: true },
 	description_it: { type: String, required: false },
-	type: { type: String, enum: ['summer', 'music', 'spiritnight', 'club'], required: true, default: 'summer'},
+	type: { type: String, enum: ['summer', 'music', 'spiritnight', 'club', 'jumprun'], required: true, default: 'summer'},
 	location: { type: String, enum: locs, required: true, default: 'Jenesien' },
 	location_it: { type: String, required: false},
 	startDate: { type: Date, required: true },
