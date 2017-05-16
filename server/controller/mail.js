@@ -73,12 +73,19 @@ function getTypeBody(type, firstNameChild, lastNameChild, isKiso) {
 	}
 }
 
+function getKisoSubject(type) {
+	if(type === 'jumprun') {
+		return 'Anmeldung / Iscrizione ' + getTypeString(type);
+	}
+	return 'Anmeldung / Iscrizione KiSo Kindersommer 2017'
+}
+
 exports.sendTxtMail = function(recipient, firstNameChild, lastNameChild, type, isKiso) {
 		var body = getTypeBody(type, firstNameChild, lastNameChild, isKiso);
 		var text = getTypeText(type, firstNameChild, lastNameChild, isKiso);
         var fromEmail = isKiso ? 'kiso@jd.bz.it' : 'info@jugenddienst.com';
-		var subjectEmail = isKiso ? 'Anmeldung / Iscrizione KiSo Kindersommer 2017' : 'Anmeldung ' + getTypeString(type);
-		console.log("mail", text, body);
+		var subjectEmail = isKiso ? getKisoSubject(type) : 'Anmeldung ' + getTypeString(type);
+		// console.log("mail subject", subjectEmail);
 		server.send({
 		text: text,
 		from: fromEmail,
