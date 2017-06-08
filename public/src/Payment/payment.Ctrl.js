@@ -35,18 +35,18 @@ app.controller('PaymentCtrl', function($scope, IdentitySvc, PaymentSvc) {
 				$scope.emailsLeader = _.trim(_.uniq(_.map($scope.relations, function(r) {
 					if(r.type === 'TeamleiterIn' || r.type === 'TeamleiterIn 24h' || r.type === 'TeamleiterIn 0.5' || r.type === 'TeamleiterIn 24h 0.5') {
                 		return r.email;
-					} else return '#';
-            	})).join(';'), '#;');
+					} else return '';
+            	})).join(';'), ';');
 				$scope.emailsCaregiver = _.trim(_.uniq(_.map($scope.relations, function(r) {
 					if(r.type === 'BetreuerIn' || r.type === 'BetreuerIn 24h') {
                 		return r.email;
-					} else return '#';
-            	})).join(';'), '#;');
+					} else return '';
+            	})).join(';'), ';');
 				$scope.emailsTrainee = _.trim(_.uniq(_.map($scope.relations, function(r) {
                 	if(r.type === 'PraktikantIn' || r.type === 'PraktikantIn 24h') {
                 		return r.email;
-					} else return '#';
-            	})).join(';'), '#;');
+					} else return '';
+            	})).join(';'), ';');
 			});
 	}
 });

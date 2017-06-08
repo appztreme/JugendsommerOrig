@@ -56,8 +56,8 @@ const relationComparer = (a, b) => {
     if(a.lastName > b.lastName) return 1;
     if(a.firstName > b.firstName) return -1;
     if(a.firstName < b.firstName) return 1;
-    if(a.startDate > b.startDate) return -1;
-    if(a.startDate < b.startDate) return 1;
+    if(a.startDate > b.startDate) return 1;
+    if(a.startDate < b.startDate) return -1;
     return 0;
 }
 
