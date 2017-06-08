@@ -14,7 +14,8 @@ app.controller('PaymentCtrl', function($scope, IdentitySvc, PaymentSvc) {
 	}
 
 	$scope.getReportData = function() {
-		$scope.clearNameSelection();
+		scope.relations = [];
+		$scope.sumAmount = 0;
 		PaymentSvc.find()
 			.success(function(result) {
 				if($scope.nameFilter) {
