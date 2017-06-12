@@ -103,6 +103,7 @@
 			<th>Tel. Kontakt1</th>
 			<th>Kontak2</th>
 			<th>Tel. Kontakt2</th>
+			<th>T-Shirt</th>
 			<th>Anmeldedatum</th>
 		</tr>
 		<tr ng-repeat='reg in registrations | orderBy:[colNameSort,colNameSort2]'>
@@ -129,6 +130,7 @@
 			<td>{{reg.telContact1}}</td>
 			<td>{{reg.nameContact2}}</td>
 			<td>{{reg.telContact2}}</td>
+			<td>{{reg.tShirtSize}}</td>
 			<td>{{reg.registrationDate | date: 'dd/MM/yyyy : hh.mm.ss'}}</td>
 		</tr>
 	</table>
