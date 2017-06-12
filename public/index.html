@@ -53,7 +53,7 @@
     				</a>
     				<ul class="dropdown-menu">
 						<li ng-show='iSvc.isAuthorized("admin")'><a href='/#/report'>{{'NAV.RESERVATIONS' | translate}}</a></li>
-						<li ng-show='iSvc.isAuthorized("admin")'><a href='/#/payment'>{{'NAV.PAYMENT' | translate}}</a></li>
+						<li ng-show='iSvc.isAuthorized("admin") && !isKiso'><a href='/#/payment'>{{'NAV.PAYMENT' | translate}}</a></li>
     				</ul>
 				</li>
                 <li ng-show='iSvc.isAuthorized("fadmin")'><a href='/#/resources'>{{'NAV.LENDINGS' | translate}}</a></li>
