@@ -52,6 +52,20 @@ exports.findByEventId = (req, res, next) => {
 		});
 };
 
+exports.findByAmount = (req, res, next) => {
+	Commitment.find()
+		.where('date').gte(startCurYear)
+		.where('amount').equals(req.params.amount)
+		.populate('eventId')
+		.populate('activityId')
+		.populate('userId')
+		.sort({eventId: 1, date: 1})
+		.exec(function(err, coms)  {
+			if(err) { return next(err); }
+			res.json(coms);
+		})
+}
+
 exports.create = (req, res, next) => {
 	var commitment = new Commitment({
 		name: req.body.name,

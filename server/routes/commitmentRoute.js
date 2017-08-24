@@ -17,6 +17,8 @@ router.get('/byUser/:userId', auth.requiresRole("fadmin"), CommitmentController.
 
 router.get('/byEvent/:eventId', auth.requiresRole("fadmin"), CommitmentController.findByEventId);
 
+router.get('/byAmount/:amount', auth.requiresRole("fadmin"), CommitmentController.findByAmount);
+
 router.delete('/:commitmentId', auth.requiresRole("admin"), CommitmentController.delete);
 
 router.post('/', auth.requiresRole("fadmin"), CommitmentController.create);
