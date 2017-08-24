@@ -13,7 +13,7 @@
 					<option ng-repeat='event in events' value='{{event._id}}'>{{event.name}}</option>
 				</select>
 				</div>
-				<div class='col-sm-5'>
+				<div class='col-sm-5' ng-show='iSvc.isAuthorized("admin")'>
 				<label for='amountFilter'>Betrag</label>
 				<input id='amountFilter' type='number' class='form-control' ng-model='amountFilter'>
 				</div>
