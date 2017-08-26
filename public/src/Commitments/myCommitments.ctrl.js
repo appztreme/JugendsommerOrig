@@ -111,6 +111,26 @@ app.controller('MyCommitmentsCtrl', function($scope, $location, $route, Notifica
 		return "";
 	};
 
+	$scope.loadCommitmentsByAmount = function() {
+		console.log("filter", $scope.amountFilter);
+		if(!$scope.amountFilter) return;
+		CommitmentSvc.findByAmount($scope.amountFilter).success(function(commitments) {
+			$scope.sum = Math.round(_.reduce(commitments, function(sum, object) {
+				return sum + object.amount;
+			}, 0) * 100) / 100;
+			// console.log("com", commitments);
+			$scope.commitments = _.reduce(commitments, function(acc, com) {
+				var key1 = com.eventId._id;
+				var key2 = com.type;
+				acc[key1] = acc[key1] || {};
+			 	acc[key1][key2] = acc[key1][key2] || [];
+				com['isHidden'] = false;
+				acc[key1][key2].push(com);
+			 	return acc;
+			}, {});
+		})
+	}
+
 	$scope.loadCommitmentsByEvent = function() {
 		if(!$scope.eventIdFilter) return;
 		CommitmentSvc.findByEvent($scope.eventIdFilter).success(function(commitments) {
@@ -124,16 +144,7 @@ app.controller('MyCommitmentsCtrl', function($scope, $location, $route, Notifica
 				acc[key1] = acc[key1] || {};
 			 	acc[key1][key2] = acc[key1][key2] || [];
 				com['isHidden'] = true;
-				if($scope.amountFilter) {
-					if(parseInt($scope.amountFilter, 10) === parseInt(com.amount, 10)) {
-						com['isHidden'] = false;
-						acc[key1][key2].push(com);
-					}
-				}
-				else {
-					com['isHidden'] = true;
-					acc[key1][key2].push(com);
-				}
+				acc[key1][key2].push(com);
 			 	return acc;
 			}, {});
 		});

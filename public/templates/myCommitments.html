@@ -13,16 +13,23 @@
 					<option ng-repeat='event in events' value='{{event._id}}'>{{event.name}}</option>
 				</select>
 				</div>
-				<div class='col-sm-5' ng-show='iSvc.isAuthorized("admin")'>
-				<label for='amountFilter'>Betrag</label>
-				<input id='amountFilter' type='number' class='form-control' ng-model='amountFilter'>
-				</div>
 			</div>
 			<div class='col-sm-3' style='margin-top: 3px; margin-bottom: 3px'>
 				<button type='button' class='btn btn-primary btn-block' ng-click='loadCommitmentsByEvent()'>Laden</button>
 			</div>
 		</div>
+		<div class='row' ng-show='iSvc.isAuthorized("admin")'>
+			<div class='col-sm-9 input-group'>
+				<div class='col-sm-5'>
+				<label for='amountFilter'>Betrag</label>
+				<input id='amountFilter' type='number' class='form-control' ng-model='amountFilter'>
+				</div>
+			</div>
+			<div class='col-sm-3' style='margin-top: 3px; margin-bottom: 3px'>
+				<button type='button' class='btn btn-primary btn-block' ng-click='loadCommitmentsByAmount()'>Suchen</button>
+			</div>
 		</div>
+	</div>
 	</div>
 	</div>
 
