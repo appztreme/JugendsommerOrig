@@ -7,7 +7,7 @@
 	<link rel='stylesheet' href='lib/bootstrap/dist/css/bootstrap.min.css' type='text/css'>
 	<link rel='stylesheet' href='lib/angular-busy/dist/angular-busy.min.css' type='text/css'>
 	<link rel='stylesheet' href='lib/toastr/toastr.min.css' type='text/css'>
-	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css">
 	<link rel='stylesheet' href='lib/ngDatepicker/src/css/ngDatepicker.css'>
     <link rel='stylesheet' href='css/app.css' type='text/css'>
 	<script src='lib/modernizr/modernizr.js'></script>
@@ -26,6 +26,7 @@
 <body ng-app='js' ng-controller='ApplicationCtrl'>
 	<nav class='navbar navbar-default'>
 		<div class='container'>
+			<div class='row'>
 			<div ng-include src='"templates/lang.html"'></div>
 			<div ng-show="!isKiso" class='navbar-header'>
 				<a class='navbar-brand' href='http://www.jugenddienst.it/home_jd_bozen-land.html'>
@@ -41,6 +42,7 @@
 				<a class='navbar-brand' href='http://www.jugenddienst.it/Jugenddienst_Bozen.html'>
 					<img src='assets/jdb.png' alt='Jugenddienst Bozen'>
 				</a>
+			</div>
 			</div>
 			<ul class='nav navbar-nav'>
 				<li><a id='nav_link_info' href='/#/info'>{{'NAV.INFO' | translate}}</a></li>
