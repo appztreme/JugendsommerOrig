@@ -142,6 +142,7 @@ exports.create = (req, res, next) => {
 		deadline: req.body.deadline,
 		budgetFood: req.body.budgetFood,
 		budgetBusiness: req.body.budgetBusiness,
+		feePerWeek: req.body.feePerWeek,
 	  	info: req.body.info,
 		info_it: req.body.info_it,
 		isInternal: req.body.isInternal

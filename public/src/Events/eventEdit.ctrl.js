@@ -20,6 +20,7 @@ app.controller('EventEditCtrl', function($scope, $routeParams, $location, Notifi
 			$scope.event.deadline = $scope.deadline;
 			$scope.event.budgetBusiness = $scope.budgetBusiness;
 			$scope.event.budgetFood = $scope.budgetFood;
+			$scope.event.feePerWeek = $scope.feePerWeek;
 			$scope.event.info = $scope.info;
 			$scope.event.info_it = $scope.info_it;
 			$scope.event.isInternal = $scope.isInternal;
@@ -60,6 +61,7 @@ app.controller('EventEditCtrl', function($scope, $routeParams, $location, Notifi
 		$scope.deadline = ev.deadline ? new Date(ev.deadline) : undefined;
 		$scope.budgetBusiness = ev.budgetBusiness;
 		$scope.budgetFood = ev.budgetFood;
+		$scope.feePerWeek = ev.feePerWeek;
 		$scope.info = ev.info;
 		$scope.info_it = ev.info_it;
 		$scope.isInternal = ev.isInternal;

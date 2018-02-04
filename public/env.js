@@ -1,5 +1,16 @@
 (function (window) {
     window.__env = window.__env || {};
+    window.__env.cities_jdbl = ['Deutschnofen', 'Jenesien', 'Karneid', 'Mölten', 'Ritten', 'Sarntal', 'Tiers', 'Vöran', 'Welschnofen', 'Andere'];
+    window.__env.cities_kiso = ['Bozen', 'Andere'];
+    window.__env.tSizes = [
+        {"name": '3-4 Jahre/89-104cm',             "name_it": '3-4 anni/89-104cm'},
+        {"name": '5-6 Jahre/110-116cm',            "name_it": '5-6 anni/110-116cm'},
+        {"name": '7-8 Jahre/122-128cm',            "name_it": '7-8 anni/122-128cm'},
+        {"name": '9-10 Jahre/134-140cm',           "name_it": '9-10 anni/134-140cm'},
+        {"name": '11-12 Jahre/146-152cm',          "name_it": '11-12 anni/146-152cm'},
+        {"name": 'Erwachsenengröße S',             "name_it": 'Misura adulti S'},
+        {"name": 'Erwachsenengröße M',             "name_it": 'Misura adulti M'},
+    ];
     window.__env.translations = window.__env.translations || {};
     window.__env.translations.de = {
         "NAV": {
@@ -235,15 +246,4 @@
             "LABEL_TEL_PARENT": "telefono genitore"
         }
     };
-    window.__env.cities_jdbl = ['Deutschnofen', 'Jenesien', 'Karneid', 'Mölten', 'Ritten', 'Sarntal', 'Tiers', 'Vöran', 'Welschnofen', 'Andere'];
-    window.__env.cities_kiso = ['Bozen', 'Andere'];
-    window.__env.tSizes = [
-        {"name": '3-4 Jahre/89-104cm',             "name_it": '3-4 anni/89-104cm'},
-        {"name": '5-6 Jahre/110-116cm',            "name_it": '5-6 anni/110-116cm'},
-        {"name": '7-8 Jahre/122-128cm',            "name_it": '7-8 anni/122-128cm'},
-        {"name": '9-10 Jahre/134-140cm',           "name_it": '9-10 anni/134-140cm'},
-        {"name": '11-12 Jahre/146-152cm',          "name_it": '11-12 anni/146-152cm'},
-        {"name": 'Erwachsenengröße S',             "name_it": 'Misura adulti S'},
-        {"name": 'Erwachsenengröße M',             "name_it": 'Misura adulti M'},
-    ];
 }(this));

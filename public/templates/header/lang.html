@@ -1,0 +1,13 @@
+
+<div ng-controller="LangCtrl" style="border:0px dashed gray">
+    <div class='btn btn-lg'
+         ng-show="curLang === 'de'"
+         ng-click="setLang('it')" >
+        <img src='assets/Italy.png' style='height:35px' />
+    </div>
+    <div class='btn btn-lg'
+         ng-show="curLang === 'it'"
+         ng-click="setLang('de')" >
+        <img  src='assets/Germany.png' style='height:35px' />
+    </div>
+</div>

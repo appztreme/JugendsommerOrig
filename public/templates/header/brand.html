@@ -1,0 +1,23 @@
+
+<div ng-controller="BrandCtrl" class='navbar-brand'>
+    <div ng-show="patformSvc.isJDBL() || platformSvc.isJugendsommer()">
+		<a class='navbar-brand' href='http://www.jugenddienst.it/home_jd_bozen-land.html'>
+			<img src='assets/jd-logo.png' alt='Jugenddienst Bozen-Land' style='height:55px;'>
+		</a>
+	</div>
+	<div ng-show="platformSvc.isKiso()">
+		<a class='navbar-brand' href='https://www.kiso.bz.it/#/'>
+			<img src='assets/jd-logo.png' alt='kiso' style='height:55px;'>
+		</a>
+	</div>
+	<div ng-show="platformSvc.isKiso()">
+		<a class='navbar-brand' href='http://www.jugenddienst.it/Jugenddienst_Bozen.html'>
+			<img src='assets/jd-logo.png' alt='Jugenddienst Bozen' style='height:55px;'>
+		</a>
+    </div>
+    <div ng-show="platformSvc.isTest()">
+        <a href='http://www.jugenddienst.it/home_jd_bozen-land.html'>
+            <img src='assets/jd-logo.png' alt='Jugenddienst Bozen-Land' style='height:55px;'>
+        </a>
+    </div>
+</div>

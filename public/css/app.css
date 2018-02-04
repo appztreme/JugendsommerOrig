@@ -43,17 +43,18 @@
 }
 
 .navbar-brand {
-	margin-bottom: 10px;
+    padding-top: 0px;
+	margin-bottom: 0px;
 }
 
-.navbar-brand > img {
+/* .navbar-brand > img {
 	width: 120px;
-}
+} */
 
-.navbar-nav li a {
+/* .navbar-nav li a {
 	height: 80px;
 	line-height: 60px;
-}
+} */
 
 .brand {
 	font-weight: bold;

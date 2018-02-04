@@ -16,51 +16,27 @@
 	<meta name='description' content='Event Registration Jugenddienst'>
 	<meta name='keywords' content='Jugendsommer Programme Anmeldung Jugenddienst'>
 	<meta name='author' content='Florian Edelmaier'>
-	<script>
-		if(location.hostname.indexOf('kiso') !== -1) document.title = 'Kindersommer';
-		else if(location.hostname.indexOf('jugendsommer') !== -1) document.title = 'Jugendsommer';
-		else if(location.hostname.indexOf('jd-bozenland') !== -1) document.title = 'Jugenddienst';
-		else if(location.hostname.indexOf('localhost') !== -1) document.title = 'Test';
-	</script>
 </head>
 <body ng-app='js' ng-controller='ApplicationCtrl'>
-	<nav class='navbar navbar-default'>
-		<div class='container'>
-			<div ng-include src='"templates/lang.html"'></div>
-			<div ng-show="!isKiso" class='navbar-header'>
-				<a class='navbar-brand' href='http://www.jugenddienst.it/home_jd_bozen-land.html'>
-					<img src='assets/jdbl.gif' alt='Jugenddienst Bozen-Land'>
-				</a>
-			</div>
-			<div ng-show="isKiso" class='navbar-header'>
-				<a class='navbar-brand' href='https://www.kiso.bz.it/#/'>
-					<img src='assets/kiso.png' alt='kiso' style='height:50px;width:50px'>
-				</a>
-			</div>
-			<div ng-show="isKiso" class='navbar-header'>
-				<a class='navbar-brand' href='http://www.jugenddienst.it/Jugenddienst_Bozen.html'>
-					<img src='assets/jdb.png' alt='Jugenddienst Bozen'>
-				</a>
-			</div>
-			<ul class='nav navbar-nav'>
-				<li><a id='nav_link_info' href='/#/info'>{{'NAV.INFO' | translate}}</a></li>
-				<li><a id='nav_link_programme' href='/#/'>{{'NAV.PROGRAM' | translate}}</a></li>
-				<li ng-show='iSvc.isAuthenticated()'><a id='nav_link_myres' href='/#/myRegistrations'>{{'NAV.MYRES' | translate}}</a></li>
-				<li ng-show='iSvc.isAuthorized("fadmin")'><a href='/#/myCommitments'>{{'NAV.MYCOMMITS' | translate}}</a></li>
-				<li ng-show='iSvc.isAuthorized("admin")' class="dropdown">
-					<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-      					{{'NAV.REPORT' | translate}} <span class="caret"></span>
-    				</a>
-    				<ul class="dropdown-menu">
-						<li ng-show='iSvc.isAuthorized("admin")'><a href='/#/report'>{{'NAV.RESERVATIONS' | translate}}</a></li>
-						<li ng-show='iSvc.isAuthorized("admin") && !isKiso'><a href='/#/payment'>{{'NAV.PAYMENT' | translate}}</a></li>
-    				</ul>
-				</li>
-                <li ng-show='iSvc.isAuthorized("fadmin")'><a target='_blank' href='http://www2.jugendsommer.com/'>{{'NAV.LENDINGS' | translate}}</a></li>
-				<li ng-show='iSvc.isAuthorized("admin")'><a href='/#/userRolesSearch'>{{'NAV.USERSEARCH' | translate}}</a></li>
-			</ul>
-		    <div ng-include src='"templates/login.html"'></div>
+	<nav class='navbar navbar-default'
+		 role='navigation'
+		 style='margin-bottom:0px;border-bottom:0px solid gray'>
+		<div style='float:left' ng-include src='"templates/header/lang.html"'></div>
+		<div style='float:left' ng-include src='"templates/header/brand.html"'></div>
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#mainnav" aria-expanded="false">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
 		</div>
+		<div ng-include src='"templates/header/menu.html"'></div>
+	</nav>
+	<nav class='navbar navbar-default'
+		 role='navigation'
+		 style='margin-top:0px;border-top:0px solid gray'>
+		<div ng-include src='"templates/header/login.html"'></div>
 	</nav>
 
 	<div ng-view></div>
