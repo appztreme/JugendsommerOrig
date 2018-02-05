@@ -1,0 +1,10 @@
+
+<div class='col-sm-offset-2 col-sm4'>
+    <input type='checkbox' name='agb' ng-model='acceptAGB'><strong>{{"RESERVATION.LABEL_TERMS1" | translate}}<a href='/#/agb/{{activityId}}?type={{type}}'>{{"RESERVATION.LABEL_TERMS2" | translate}}</a></strong></input>
+</div>
+
+<div class='col-sm-offset-2 col-sm-8' style='margin-top:15px;'>
+    <input class='btn btn-success bnt-lg btn-block' ng-click='save()' translate-attr="{value: 'RESERVATION.BUTTON_SUBMIT'}" ng-disabled='!isRegistrationAllowed()'>
+</div>
+
+<button ng-click="setState(3)">LOG</button>

@@ -7,7 +7,7 @@
 -> Kind mit Beeinträchtigung + Beschreibung
 -> Anmeldeschluss: keine Zahlen sichtbar, Anmeldung nicht mehr möglich (außer admin)
 -> email: Daten der Anmeldung -> email-Adresse
--> Preise pro Programm hinterlegen
+- [x] Preise pro Programm hinterlegen
 -> Anmeldung pro Programm mit Auswahl der Wochen
 -> User kann Basisdaten editieren
 -> link im email auf Programm

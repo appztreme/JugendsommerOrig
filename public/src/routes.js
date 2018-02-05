@@ -82,13 +82,13 @@ app.config(function($routeProvider) {
 			controller: 'EventRegistrationCtrl',
 			templateUrl: '../templates/eventRegistration.html'
 		})
-		.when('/registration/:activityId', {
+		.when('/registration/:eventId', {
 			controller: 'RegistrationCtrl',
-			templateUrl: '../templates/registration.html'
+			templateUrl: '../templates/registration/registration.html'
 		})
 		.when('/editRegistration/:registrationId', {
 			controller: 'RegistrationEditCtrl',
-			templateUrl: '../templates/registrationEdit.html'
+			templateUrl: '../templates/registration/registrationEdit.html'
 		})
 		.when('/login', {
 			controller: 'LoginCtrl',
@@ -126,7 +126,7 @@ app.config(function($routeProvider) {
 			controller: 'PaymentCtrl',
 			templateUrl: '../templates/payment.html'
 		})
-		.when('/agb/:activityId', {
+		.when('/agb/:eventId', {
 			controller: 'AgbEditCtrl',
 			templateUrl: '../templates/agbEdit.html'
 		});

@@ -51,38 +51,49 @@ exports.delete = (req, res, next) => {
 };
 
 exports.create = (req, res, next) => {
-	//console.log("new reg:", req.body);
-	var reg = new Registration({
-		firstNameParent: req.body.firstNameParent,
-		lastNameParent: req.body.lastNameParent,
-		phoneNumberParent: req.body.phoneNumberParent,
-		emailParent: req.body.emailParent,
-		firstNameChild: req.body.firstNameChild,
-		lastNameChild: req.body.lastNameChild,
-		birthdayChild: req.body.birthdayChild,
-		schoolChild: req.body.schoolChild,
-		healthChild: req.body.healthChild,
-		tShirtSize: req.body.tShirtSize,
-		bandName: req.body.bandName,
-		instrument: req.body.instrument,
-		instrumentYears: req.body.instrumentYears,
-		nameContact1: req.body.nameContact1,
-		telContact1: req.body.telContact1,
-		nameContact2: req.body.nameContact2,
-		telContact2: req.body.telContact2,
-		activityId: req.body.activityId,
-		addressChild: req.body.addressChild,
-		cityChild: req.body.cityChild,
-		needsPreCare: req.body.needsPreCare,
-		userId: req.body.userId
-	});
-	reg.save(function(err, regr) {
-		if(err) { return next(err); }
+	var regs = [];
+	for (var i = 0; i < req.body.activityId.length; i++) {
+		var reg = new Registration({
+			firstNameParent: req.body.firstNameParent,
+			lastNameParent: req.body.lastNameParent,
+			phoneNumberParent: req.body.phoneNumberParent,
+			emailParent: req.body.emailParent,
+			firstNameChild: req.body.firstNameChild,
+			lastNameChild: req.body.lastNameChild,
+			birthdayChild: req.body.birthdayChild,
+			schoolChild: req.body.schoolChild,
+			healthChild: req.body.healthChild,
+			tShirtSize: req.body.tShirtSize,
+			bandName: req.body.bandName,
+			instrument: req.body.instrument,
+			instrumentYears: req.body.instrumentYears,
+			nameContact1: req.body.nameContact1,
+			telContact1: req.body.telContact1,
+			nameContact2: req.body.nameContact2,
+			telContact2: req.body.telContact2,
+			activityId: req.body.activityId[i],
+			addressChild: req.body.addressChild,
+			cityChild: req.body.cityChild,
+			needsPreCare: req.body.needsPreCare,
+			userId: req.body.userId
+		});
+		regs.push(reg);
+		// reg.save(function(err, regr) {
+		// 	if(err) { return next(err); }
+		// 	var host = req.get('host');
+		// 	var isKiso = host.indexOf('kiso') !== -1;
+		// 	mail.sendTxtMail(regr.emailParent, regr.firstNameChild, regr.lastNameChild, req.body.type, isKiso);
+		// 	regs.push(regr);
+		// 	if(i === activityId.length) res.status(201).json(regs);
+		// });	
+	}
+	Registration.create(regs, function(error, docs) {
+		if(error) { return next(error); }
 		var host = req.get('host');
 		var isKiso = host.indexOf('kiso') !== -1;
-		mail.sendTxtMail(regr.emailParent, regr.firstNameChild, regr.lastNameChild, req.body.type, isKiso);
-		res.status(201).json(regr);
-	});
+		mail.sendTxtMail(req.body.emailParent, req.body.firstNameChild, req.body.lastNameChild, req.body.type, isKiso);
+		res.status(201).json(docs);
+	})
 };
 
 exports.update = (req, res, next) => {
