@@ -34,6 +34,7 @@ app.controller('EventNewCtrl', function($scope, $location, EventsSvc, Notificati
 				deadline: $scope.deadline,
 				budgetBusiness: $scope.budgetBusiness,
 				budgetFood: $scope.budgetFood,
+				feePerWeek: $scope.feePerWeek,
 				info: $scope.info,
 				info_it: $scope.info_it,
 				isInternal: $scope.isInternal,
@@ -51,6 +52,7 @@ app.controller('EventNewCtrl', function($scope, $location, EventsSvc, Notificati
 				$scope.deadline = null;
 				$scope.budgetBusiness = 0;
 				$scope.budgetFood = 0;
+				$scope.feePerWeek = 0;
 				$scope.info = null;
 				$scope.info_it = null;
 				$scope.isInternal = false;

@@ -1,7 +1,7 @@
 var app = angular.module('js');
 
 app.controller('AgbEditCtrl', function($scope, $routeParams, $location, AgbsSvc, NotificationSvc, $rootScope, $translate) {
-	$scope.activityId = $routeParams.activityId;
+	$scope.eventId = $routeParams.eventId;
 	$scope.type = $routeParams.type;
 
 	var host = $location.$$host.toLowerCase();

@@ -6,7 +6,8 @@
   "scripts": {
     "test:server": "node_modules/.bin/mocha --opts mocha.server.opts",
     "pretest:server": "mongo ./server/test/configTestDb.mongo.js",
-    "start": "./node_modules/.bin/gulp dev"
+    "start": "./node_modules/.bin/gulp dev",
+    "build": "./node_modules/.bin/gulp build"
   },
   "repository": {
     "type": "git",

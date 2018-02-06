@@ -1,0 +1,30 @@
+<div class='container'>
+    <ul class='list-group'>
+        <li ng-repeat='activity in activities' class='list-group-item'>
+            <div class='row'>
+                <div class='col-sm-1' ng-disabled='isReserveable(activity)'>
+                    <input type="checkbox" value="" ng-click="toggleActivity(activity._id)">
+                </div>
+                <div class='col-sm-8 act-status-container'>
+                    <div class='row'>
+                                <div class='col-sm-4'>
+                                    <strong ng-show="lang == 'de'">{{activity.name}}</strong>
+                                    <strong ng-show="lang == 'it'">{{activity.name_it}}</strong>
+                                    <div class='text-info'>{{activity.startDate | date: 'dd/MM/yyyy'}} - {{activity.endDate | date: 'dd/MM/yyyy'}}</div>
+                                </div>
+                                <div ng-show="canReserve(activity)" class='act-status-txt'>{{'ACTIVITIES.STATUS_RESERVATION' | translate:getCountObj(activity) }}</div>
+                                <div ng-show="canQueue(activity)" class='act-status-txt'>{{'ACTIVITIES.STATUS_LIMIT' | translate}}</div>
+                                <div ng-show="canNotReserve(activity)" class='act-status-txt'>{{'ACTIVITIES.STATUS_COMPLETE' | translate}}</div>
+                    </div>
+                    <div class='row'><div class='col-sm-4'>
+                                <p ng-show="lang == 'de'">{{activity.description}}</p>
+                                <p ng-show="lang == 'it'">{{activity.description_it}}</p>
+                    </div>
+                </div>
+            </div>
+        <li>
+    </ul>
+    <button class='btn btn-lg btn-success' ng-click='setState(3)' ng-disabled='!isChildDataComplete()'>
+        Weiter
+    </button>
+</div>

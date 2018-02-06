@@ -1,0 +1,239 @@
+<div class='container'>
+	<h2 class='text-orange'>{{"RESERVATION.TITLE" | translate}}</h2>
+	<form name='registrationForm' class='form-horizontal' novalidate>
+	<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="false">
+		<div class="panel panel-default">
+			<div class="panel-heading" role="tab" id="headingOne">
+				<h4 ng-show='currentState === 1' class="panel-title" style='color:orange'>1. Kontaktdaten</h4>
+				<h4 ng-show='currentState > 1' class="panel-title">1. Kontaktdaten <span style='color:green' class="glyphicon glyphicon-ok"></span></h4>
+			</div>
+			<div id="collapseOne" ng-class="(currentState === 1) ? 'panel-collapse collapse in' : 'panel-collapse collapse'" role="tabpanel" aria-labelledby="headingOne">
+				<div class="panel-body">
+						<div class='container'>
+								<button ng-show='hasCachedRegistration()' ng-click='updateFromCache()' class='btn btn-success bnt-lg col-sm-offset-2'>{{"RESERVATION.LABEL_LOAD_PREVIOUS" | translate}}</button>
+								<!-- <form name='registrationForm' class='form-horizontal' novalidate> -->
+									<div cg-Busy='{promise:busyPromise,message:"Loading",backdrop:true,minDuration:500}'></div>
+								
+									<div ng-show='type === "summer" || type === "music" || type === "club" || type == "jumprun"' class='text-orange'><strong>{{"RESERVATION.HEADER_SUMMER_PARENT" | translate}}</strong></div>
+									<div ng-show='type === "spiritnight"' class='text-orange'><strong>{{"RESERVATION.HEADER_SPIRIT_PARENT" | translate}}</strong></div>
+									<!-- FIRSTNAMEPARENT -->
+									<div class='form-group' ng-class='{ "has-error": registrationForm.firstNameParent.$invalid }'>
+										<label for='firstNameParent' class='control-label col-sm-2'>{{"RESERVATION.LABEL_FIRSTNAME_PARENT" | translate}}</label>
+										<div class='col-sm-8'>
+											<input name='firstNameParent' type='text' ng-model='firstNameParent' required maxlength='100' class='form-control'></input>
+										</div>
+									</div>
+									<!-- LASTNAMEPARENT -->
+									<div class='form-group' ng-class='{ "has-error": registrationForm.lastNameParent.$invalid }'>
+										<label for='lastNameParent' class='control-label col-sm-2'>{{"RESERVATION.LABEL_LASTNAME_PARENT" | translate}}</label>
+										<div class='col-sm-8'>
+											<input name='lastNameParent' type='text' ng-model='lastNameParent' class='form-control' required maxlenght='100'></input>
+										</div>
+									</div>
+									<!-- PHONENUMBERPARENT -->
+									<div class='form-group' ng-class='{ "has-error": registrationForm.phoneNumberParent.$invalid }'>
+										<label for='phoneNumberParent' class='control-label col-sm-2'>{{"RESERVATION.LABEL_TEL_PARENT" | translate}}</label>
+										<div class='col-sm-8'>
+											<input name='phoneNumberParent' type='tel' ng-model='phoneNumberParent' required maxlength='150' class='form-control'></input>
+										</div>
+									</div>
+									<!-- EMAILPARENT -->
+									<div class='form-group' ng-class='{ "has-error": registrationForm.emailParent.$invalid }'>
+										<label for='emailParent' class='control-label col-sm-2'>{{"RESERVATION.LABEL_MAIL_PARENT" | translate}}</label>
+										<div class='col-sm-8'>
+											<input name='emailParent' type='email' ng-model='emailParent' required maxlength='200' class='form-control'></input>
+										</div>
+									</div>
+									<div ng-show='type === "summer" || type === "music" || type === "club" || type === "jumprun"' class='text-orange'><strong>{{"RESERVATION.HEADER_SUMMER_CHILD" | translate}}</strong></div>
+									<div ng-show='type === "spiritnight"' class='text-orange'><strong>{{"RESERVATION.HEADER_SPIRIT_CHILD" | translate}}</strong></div>
+									<!-- FIRSTNAMECHILD -->
+									<div class='form-group' ng-class='{ "has-error": registrationForm.firstNameChild.$invalid }'>
+										<label for='firstNameChild' class='control-label col-sm-2'>{{"RESERVATION.LABEL_FIRSTNAME_CHILD" | translate}}</label>
+										<div class='col-sm-8'>
+											<input name='firstNameChild' type='text' ng-model='firstNameChild' required maxlength='100' class='form-control'></input>
+										</div>
+									</div>
+									<!-- LASTNAMECHILD -->
+									<div class='form-group' ng-class='{ "has-error": registrationForm.lastNameChild.$invalid }'>
+										<label for='lastNameChild' class='control-label col-sm-2'>{{"RESERVATION.LABEL_LASTNAME_CHILD" | translate}}</label>
+										<div class='col-sm-8'>
+											<input name='lastNameChild' type='text' ng-model='lastNameChild' class='form-control' required maxlenght='100'></input>
+										</div>
+									</div>
+									<!-- BIRTHDAYCHILD -->
+									<div class='form-group' ng-class='{ "has-error": registrationForm.birthdayChild.$invalid }'>
+										<label for='birthdayChild' class='control-label col-sm-2'>{{"RESERVATION.LABEL_BIRTHDAY_CHILD" | translate}}</label>
+										<div class='col-sm-8'>
+										<p class='input-group'>
+											<ng-datepicker ng-model='birthdayChild' view-format="DD.MM.YYYY"  locale='de' required></ng-datepicker>
+										</p>
+										</div>
+									</div>
+									<!-- SCHOOLCHILD -->
+									<div class='form-group' ng-class='{ "has-error": registrationForm.schoolChild.$invalid }'>
+										<label for='schoolChild' class='control-label col-sm-2'>{{"RESERVATION.LABEL_SCHOOL_CHILD" | translate}}</label>
+										<div class='col-sm-8'>
+											<input name='schoolChild' type='text' ng-model='schoolChild' required maxlength='100' class='form-control'></input>
+										</div>
+									</div>
+									<!-- HEALTHCHILD -->
+									<div class='form-group' ng-class='{ "has-error": registrationForm.healthChild.$invalid }'>
+										<label for='healthChild' class='control-label col-sm-2'>{{"RESERVATION.LABEL_HEALTH_CHILD" | translate}}</label>
+										<div class='col-sm-8'>
+											<textarea name='healthChild' ng-model='healthChild' rows='3' maxlength='350' class='form-control'></textarea>
+										</div>
+									</div>
+									<!-- ADDRESSCHILD -->
+									<div ng-show='type !== "spiritnight"' class='form-group' ng-class='{ "has-error": registrationForm.addressChild.$invalid }'>
+										<label for='addressChild' class='control-label col-sm-2'>{{"RESERVATION.LABEL_ADDRESS_CHILD" | translate}}</label>
+										<div class='col-sm-8'>
+											<input name='addressChild' type='text' ng-model='addressChild' maxlength='100' class='form-control'></input>
+										</div>
+									</div>
+									<!-- CITYCHILD -->
+									<div ng-show='type !== "spiritnight"' class='form-group' ng-class='{ "has-error": registrationForm.cityChild.$invalid }'>
+										<label for='cityChild' class='control-label col-sm-2'>{{"RESERVATION.LABEL_CITY_CHILD" | translate}}</label>
+										<div class='col-sm-8'>
+											<select name='cityChild' class='sel-base form-control' ng-model='cityChild'>
+												<option ng-repeat="city in cities" value='{{city}}'>{{city}}</option>
+											</select>
+										</div>
+									</div>
+									<!--TSHIRTSIZE -->
+									<div ng-show='type === "summer" && isKiso' class='form-group' ng-class='{ "has-error": registrationForm.tShirtSize.$invalid}'>
+										<label for='tShirtSize' class='control-label col-sm-2'>{{"RESERVATION.LABEL_T_SHIRT_SIZE" | translate}}</label>
+										<div class='col-sm-8'>
+											<select name='tShirtSize' class='sel-base form-control' ng-model='tShirtSize'>
+												<option ng-show="lang === 'de'" ng-repeat="size in tShirtSizes" value='{{size.name}}'>{{size.name}}</option>
+												<option ng-show="lang === 'it'" ng-repeat="size in tShirtSizes" value='{{size.name}}'>{{size.name_it}}</option>
+											</select>
+										</div>
+									</div>
+									<!-- NEEDSPRECARE -->
+									<!-- <div ng-show='!isKiso && (type === "summer" || type === "music")' class='col-sm-offset-2 col-sm4'>
+										<input type='checkbox' name='needsPreCare' ng-model='needsPreCare'><strong>{{"RESERVATION.LABEL_PRECARE_CHILD" | translate}}</input>
+									</div> -->
+									<br />
+									<div ng-show='type === "music"' class="panel panel-default">
+									<!-- JUNGBLÄSERWOCHE -->
+								  <div ng-show='type == "music"' class="panel-heading text-orange"><strong>{{"RESERVATION.HEADER_MUSIC" | translate}}</strong></div>
+								  <div ng-show='type == "music"' class="panel-body">
+										<div class='form-group' ng-class='{ "has-error": registrationForm.bandName.$invalid }'>
+											<label for='bandName' class='control-label col-sm-2'>{{"RESERVATION.LABEL_BANDNAME_CHILD" | translate}}</label>
+											<div class='col-sm-8'>
+												<input name='bandName' type='text' ng-model='bandName' maxlength="100" class='form-control'></textarea>
+											</div>
+										</div>
+										<div class='form-group' ng-class='{ "has-error": registrationForm.instrument.$invalid }'>
+											<label for='instrument' class='control-label col-sm-2'>{{"RESERVATION.LABEL_INSTRUMENT_CHILD" | translate}}</label>
+											<div class='col-sm-8'>
+												<input name='instrument' type='text' ng-model='instrument' maxlength="100" class='form-control'></textarea>
+											</div>
+										</div>
+										<div class='form-group' ng-class='{ "has-error": registrationForm.bandName.$invalid }'>
+											<label for='instrumentYears' class='control-label col-sm-2'>{{"RESERVATION.LABEL_YEARSINSTRUMENT_CHILD" | translate}}</label>
+											<div class='col-sm-8'>
+												<input name='instrumentYears' type='text' ng-model='instrumentYears' maxlength="100" class='form-control'></textarea>
+											</div>
+										</div>
+								  </div>
+								</div>
+									<div ng-show='type === "summer" || type === "music"' class='text-orange'><strong>{{"RESERVATION.HEADER_CONTACT" | translate}}</strong></div>
+									<!-- NAMECONTACT1 TELCONTACT1 -->
+									<div ng-show='type === "summer" || type === "music"' class='form-group'>
+										<label for='nameContact1' class='control-label col-sm-2'>{{"RESERVATION.LABEL_NAME_CONTACT1" | translate}}</label>
+										<div class='col-sm-3'>
+											<input name='nameContact1' type='text' maxlength='250' ng-model='nameContact1' class='form-control'></input>
+										</div>
+										<label for='telContact1' class='control-label col-sm-2'>{{"RESERVATION.LABEL_TEL_CONTACT1" | translate}}</label>
+										<div class='col-sm-3'>
+											<input name='telContact1' type='tel' maxlength='100' ng-model='telContact1' class='form-control'></input>
+										</div>
+									</div>
+									<!-- NAMECONTACT2 TELCONTACT2 -->
+									<div ng-show='type === "summer" || type === "music"' class='form-group'>
+										<label for='nameContact2' class='control-label col-sm-2'>{{"RESERVATION.LABEL_NAME_CONTACT2" | translate}}</label>
+										<div class='col-sm-3'>
+											<input name='nameContact2' type='text' maxlength='250' ng-model='nameContact2' class='form-control'></input>
+										</div>
+										<label for='telContact2' class='control-label col-sm-2'>{{"RESERVATION.LABEL_TEL_CONTACT2" | translate}}</label>
+										<div class='col-sm-3'>
+											<input name='telContact2' type='tel' maxlength='100' ng-model='telContact2' class='form-control'></input>
+										</div>
+									</div>
+						
+									<br />
+						
+									<button class='btn btn-lg btn-success' ng-click='setState(2)' ng-disabled='!isChildDataComplete()'>
+										Weiter
+									</button>
+								<!-- </form> -->
+								</div>
+								
+				</div>
+			</div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading" role="tab" id="headingTwo">
+				<h4 ng-show='currentState < 2' class="panel-title">2. Wochen auswählen</h4>
+				<h4 ng-show='currentState === 2' class="panel-title" style='color:orange'>2. Wochen auswählen</h4>
+				<h4 ng-show='currentState > 2' class="panel-title">2. Wochen auswählen <span style='color:green' class='glyphicon glyphicon-ok'></span></h4>
+			</div>
+			<div id="collapseTwo" ng-class="(currentState === 2) ? 'panel-collapse collapse in' : 'panel-collapse collapse'" role="tabpanel" aria-labelledby="headingTwo">
+				<div class="panel-body">
+					<div class='container'>
+						<ul class='list-group'>
+							<li ng-repeat='activity in activities' class='list-group-item'>
+								<div class='row'>
+									<div class='col-sm-1' ng-disabled='isReserveable(activity)'>
+										<input type="checkbox" value="" ng-disabled='canNotReserve(activity)' ng-click="toggleActivity(activity._id)">
+									</div>
+									<div class='col-sm-3'>
+										<strong ng-show="lang == 'de'">{{activity.name}}</strong>
+										<strong ng-show="lang == 'it'">{{activity.name_it}}</strong>
+										<div class='text-info'>{{activity.startDate | date: 'dd/MM/yyyy'}} - {{activity.endDate | date: 'dd/MM/yyyy'}}</div>
+									</div>
+									<div class='col-sm-1'>
+										<button ng-class='{"btn-success": canReserve(activity), "btn-warning": canQueue(activity), "btn-danger": canNotReserve(activity), "act-status": 1 == 1, "active": 1 == 1}'><span class='badge'>{{activity.curParticipants}}<span></button>
+									</div>
+									<div class='col-sm-3'>
+											<div ng-show="canReserve(activity)" class='act-status-txt'>{{'ACTIVITIES.STATUS_RESERVATION' | translate:getCountObj(activity) }}</div>
+											<div ng-show="canQueue(activity)" class='act-status-txt'>{{'ACTIVITIES.STATUS_LIMIT' | translate}}</div>
+											<div ng-show="canNotReserve(activity)" class='act-status-txt'>{{'ACTIVITIES.STATUS_COMPLETE' | translate}}</div>
+									</div>
+								</div>
+								<div class='row'>
+									<div class='col-sm-1'></div>
+									<div class='col-sm-5'>
+										<p ng-show="lang == 'de'">{{activity.description}}</p>
+										<p ng-show="lang == 'it'">{{activity.description_it}}</p>
+									</div>	
+								</div>
+							<li>
+						</ul>
+						<button class='btn btn-lg btn-success' ng-click='setState(3)' ng-disabled='!isActivityDataComplete()'>
+							Weiter
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading" role="tab" id="headingThree">
+				<h4 ng-show='currentState < 3' class="panel-title">3. Bestätigen</h4>
+				<h4 ng-show='currentState === 3' class="panel-title" style='color:orange'>3. Bestätigen</h4>
+			</div>
+			<div id="collapseThree" ng-class="(currentState === 3) ? 'panel-collapse collapse in' : 'panel-collapse collapse'" role="tabpanel" aria-labelledby="headingThree">
+				<div class="panel-body">
+					<div class='col-sm-offset-2 col-sm4'>
+						<input type='checkbox' name='agb' ng-model='acceptAGB'><strong>{{"RESERVATION.LABEL_TERMS1" | translate}}<a href='/#/agb/{{activityId}}?type={{type}}'>{{"RESERVATION.LABEL_TERMS2" | translate}}</a></strong></input>
+					</div>
+							
+					<div class='col-sm-offset-2 col-sm-8' style='margin-top:15px;'>
+						<input class='btn btn-success bnt-lg btn-block' ng-click='save()' translate-attr="{value: 'RESERVATION.BUTTON_SUBMIT'}" ng-disabled='!isRegistrationAllowed()'>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

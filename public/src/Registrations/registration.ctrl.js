@@ -1,8 +1,24 @@
 var app = angular.module('js');
 
 app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $location, NotificationSvc, RegistrationSvc, RegistrationCacheSvc, IdentitySvc, conf, $rootScope, $translate) {
-	RegistrationSvc.activityId = $routeParams.activityId;
-	$scope.activityId = $routeParams.activityId;
+	RegistrationSvc.eventId = $routeParams.eventId;
+	$scope.eventId = $routeParams.eventId;
+
+	$scope.acceptAGB = false;
+	$scope.currentState = 1;
+	$scope.selectedActivities = [];
+
+	$scope.toggleActivity = function(id) {
+		var index = $scope.selectedActivities.indexOf(id);
+		if(index === -1) $scope.selectedActivities.push(id);
+		else $scope.selectedActivities.splice(index, 1);
+		//console.log($scope.selectedActivities);
+	}
+
+	$scope.setState = function(state) {
+		$scope.currentState = state;
+		//console.log($scope.registrationForm.$valid, $scope.selectedActivities, $scope.acceptAGB, $scope.registrationForm);
+	}
 
 	var host = $location.$$host.toLowerCase();
 	$scope.isKiso = host.indexOf('kiso') !== -1;
@@ -33,6 +49,31 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 	$scope.tShirtSizes = conf.tSizes;
 	$scope.cityChild = $scope.isKiso ? 'Bozen': 'Deutschnofen';
 	$scope.needsPreCare = false;
+
+	$scope.canReserve = function(activity) {
+        return activity.curParticipants < activity.maxParticipants;
+    };
+
+    $scope.canQueue = function(activity) {
+        return activity.curParticipants >= activity.maxParticipants &&
+               activity.curParticipants < (activity.maxParticipants + activity.queueSize);
+    };
+
+    $scope.canNotReserve = function(activity) {
+        return activity.curParticipants >= (activity.maxParticipants + activity.queueSize);
+	};
+	
+	$scope.getCountObj = function(activity) {
+		return { count: activity.maxParticipants };
+	}
+
+	$scope.isChildDataComplete = function() {
+		return $scope.registrationForm.$valid;
+	}
+
+	$scope.isActivityDataComplete = function() {
+		return $scope.selectedActivities.length > 0;
+	}
 
 	$scope.isRegistrationAllowed = function() {
 		return $scope.registrationForm.$valid && $scope.acceptAGB;
@@ -89,7 +130,7 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 				telContact1: $scope.telContact1,
 				nameContact2: $scope.nameContact2,
 				telContact2: $scope.telContact2,
-				activityId: RegistrationSvc.activityId,
+				activityId: $scope.selectedActivities,
 				userId: IdentitySvc.currentUser._id,
 				needsPreCare: $scope.needsPreCare,
 				type: $scope.type
@@ -117,8 +158,10 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 				$scope.telContact1 = null;
 				$scope.nameContact2 = null;
 				$scope.telContact2 = null;
-				$scope.needsPreCare = false
-				RegistrationCacheSvc.lastRegistration = reg;
+				$scope.needsPreCare = false;
+				$scope.selectedActivities = [];
+				RegistrationCacheSvc.lastRegistration = reg[0];
+				console.log("last", RegistrationCacheSvc.lastRegistration, reg)
 			}).then(function() {
 				NotificationSvc.notify($scope.msgSuccess);
 				$location.path('/');
@@ -272,4 +315,10 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 		$scope.needsPreCare = RegistrationCacheSvc.currentRegistration.needsPreCare;
 		RegistrationCacheSvc.currentRegistration = undefined;
 	}
+
+	RegistrationSvc.findActivitiesByEventId($routeParams.eventId).then(function(response) {
+		$scope.activities = response.data;
+		console.log($scope.activities);
+	});
+
 });

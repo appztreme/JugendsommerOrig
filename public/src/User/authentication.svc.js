@@ -7,7 +7,7 @@ app.factory('AuthenticationSvc', function($http, $q, NotificationSvc, IdentitySv
 	var deferred = $q.defer();
 	$http.post('/api/login', { username: username, password: password }).then(function(response) {
 		if(response.data.success) {
-            		IdentitySvc.currentUser = response.data.user;
+            IdentitySvc.currentUser = response.data.user;
 			deferred.resolve(true);
 		} else {
 			deferred.resolve(false);

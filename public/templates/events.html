@@ -32,8 +32,11 @@
 					<p ng-show="lang == 'it'">{{event.description_it}}</p>
 				</div>
 				<div class='col-sm-2'>
-					<a href='/#/activities/{{event._id}}?type={{event.type}}' class='btn btn-xlarge btn-success' role='button'><span class='glyphicon glyphicon-triangle-right'></span></a>
+					<a href='/#/registration/{{event._id}}?type={{event.type}}' class='btn btn-xlarge btn-success' role='button' ng-show='iSvc.isAuthenticated()'><span class='glyphicon glyphicon-user'></span></a>
+					<button type="button" class="btn btn-xlarge btn-success" ng-hide='iSvc.isAuthenticated()' data-toggle="modal" data-target="#warningModal"><span class='glyphicon glyphicon-user'></button>
+					<!--<a href='/#/activities/{{event._id}}?type={{event.type}}' class='btn btn-xlarge btn-success' role='button'><span class='glyphicon glyphicon-triangle-right'></span></a>-->
 					<a href='/#/eventInfo/{{event._id}}' class="btn btn-xlarge btn-warning" role'button'><span class='glyphicon glyphicon-search'></span></a>
+					<a href='/#/activities/{{event._id}}?type={{event.type}}' class='btn btn-xlarge btn-success' role='button' ng-show='iSvc.isAuthorized("admin") || iSvc.isAuthorizedForEvent("fadmin", event._id) || iSvc.isAuthorizedForLocation("ladmin", event.location)'><span class='glyphicon glyphicon-triangle-right'></span></a>
 					<a href='/#/editEvent/{{event._id}}' class='btn btn-xlarge btn-info' role='button' ng-show='iSvc.isAuthorized("admin")'><span class='glyphicon glyphicon-pencil'></span></a>
 					<a href='/#/newCommitment/{{event._id}}' class='btn btn-xlarge btn-primary' role='button' ng-show='iSvc.isAuthorized("admin") || iSvc.isAuthorizedForEvent("fadmin", event._id) || iSvc.isAuthorizedForLocation("ladmin", event.location)'><span class='glyphicon glyphicon-usd'></span></a>
 					<a href='/#/newTravelExpenses/{{event._id}}' class='btn btn-xlarge btn-primary' role='button' ng-show='(iSvc.isAuthorized("admin") || iSvc.isAuthorizedForEvent("fadmin", event._id) || iSvc.isAuthorizedForLocation("ladmin", event.location)) && !isKiso'><span class='glyphicon glyphicon-road'></span></a>
@@ -44,4 +47,18 @@
 			</div>
 		</li>
 	</ul>
+	<div class="modal fade" id="warningModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+				  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				  <h4 class="modal-title" id="myModalLabel">{{"ACTIVITIES.WARNINGTITLE" | translate}}</h4>
+				</div>
+				<div class="modal-body">{{"ACTIVITIES.WARNING" | translate}}</div>
+				<div class="modal-footer">
+				  <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

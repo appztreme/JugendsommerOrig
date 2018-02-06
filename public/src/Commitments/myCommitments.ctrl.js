@@ -35,9 +35,9 @@ app.controller('MyCommitmentsCtrl', function($scope, $location, $route, Notifica
 	$scope.calcBudgetSum = function(grp) {
 		var sum = 0;
 		if(grp['business'])
-			sum += grp['business'][0].eventId.budgetBusiness;
+			sum += (grp['business'][0] ? grp['business'][0].eventId.budgetBusiness : 0);
 		if(grp['food'])
-			sum += grp['food'][0].eventId.budgetFood;
+			sum += (grp['food'][0] ? grp['food'][0].eventId.budgetFood : 0);
 		return sum;
 	};
 
@@ -67,12 +67,12 @@ app.controller('MyCommitmentsCtrl', function($scope, $location, $route, Notifica
 	};
 
 	$scope.withTwoDecPlaces = function(amount) {
-		return amount.toFixed(2);
+		return amount ? amount.toFixed(2) : 0;
 	}
 
 	$scope.formatDec = function(amount) {
 		// return parseFloat(Math.round(amount * 100) / 100).toFixed(2);
-		return parseFloat(Math.round(amount * 100) / 100);
+		return amount ? parseFloat(Math.round(amount * 100) / 100) : 0;
 	};
 
 	$scope.sumSummaryBy = function(prop1, prop2) {
@@ -111,13 +111,33 @@ app.controller('MyCommitmentsCtrl', function($scope, $location, $route, Notifica
 		return "";
 	};
 
+	$scope.loadCommitmentsByAmount = function() {
+		console.log("filter", $scope.amountFilter);
+		if(!$scope.amountFilter) return;
+		CommitmentSvc.findByAmount($scope.amountFilter).success(function(commitments) {
+			$scope.sum = Math.round(_.reduce(commitments, function(sum, object) {
+				return sum + object.amount;
+			}, 0) * 100) / 100;
+			// console.log("com", commitments);
+			$scope.commitments = _.reduce(commitments, function(acc, com) {
+				var key1 = com.eventId._id;
+				var key2 = com.type;
+				acc[key1] = acc[key1] || {};
+			 	acc[key1][key2] = acc[key1][key2] || [];
+				com['isHidden'] = false;
+				acc[key1][key2].push(com);
+			 	return acc;
+			}, {});
+		})
+	}
+
 	$scope.loadCommitmentsByEvent = function() {
 		if(!$scope.eventIdFilter) return;
 		CommitmentSvc.findByEvent($scope.eventIdFilter).success(function(commitments) {
 			$scope.sum = Math.round(_.reduce(commitments, function(sum, object) {
 				return sum + object.amount;
 			}, 0) * 100) / 100;
-			console.log(commitments);
+			// console.log("com", commitments);
 			$scope.commitments = _.reduce(commitments, function(acc, com) {
 				var key1 = com.eventId._id;
 				var key2 = com.type;
@@ -136,7 +156,7 @@ app.controller('MyCommitmentsCtrl', function($scope, $location, $route, Notifica
 					NotificationSvc.warn(err);
 				})
 				.success(function(evs) {
-					console.log(evs);
+					// console.log(evs);
 					$scope.events = _.map(evs, function(ev) {
 						return {
 							_id: ev._id,

@@ -2,7 +2,6 @@ var app = angular.module('js', ['ngRoute','ngResource','cgBusy','jkuri.datepicke
 
 var env = {};
 // Import variables if present (from env.js)
-//if(window) { Object.assign(env, window.__env); }
 if(window) env = window.__env;
 app.constant('conf', env);
 
