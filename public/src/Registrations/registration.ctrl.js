@@ -49,6 +49,7 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 	$scope.tShirtSizes = conf.tSizes;
 	$scope.cityChild = $scope.isKiso ? 'Bozen': 'Deutschnofen';
 	$scope.needsPreCare = false;
+	$scope.hasDisability = false;
 
 	$scope.canReserve = function(activity) {
         return activity.curParticipants < activity.maxParticipants;
@@ -105,6 +106,8 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 			$scope.nameContact2 = RegistrationCacheSvc.lastRegistration.nameContact2;
 			$scope.telContact2 =  RegistrationCacheSvc.lastRegistration.telContact2;
 			$scope.needsPreCare = RegistrationCacheSvc.lastRegistration.needsPreCare;
+			$scope.hasDisability = RegistrationCacheSvc.lastRegistration.hasDisability;
+			$scope.disabilityDescription = RegistrationSvc.lastRegistration.disabilityDescription;
 		}
 	};
 
@@ -133,6 +136,8 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 				activityId: $scope.selectedActivities,
 				userId: IdentitySvc.currentUser._id,
 				needsPreCare: $scope.needsPreCare,
+				hasDisability: $scope.hasDisability,
+				disabilityDescription: $scope.disabilityDescription,
 				type: $scope.type
 			})
 			.error(function(err) {
@@ -159,6 +164,8 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 				$scope.nameContact2 = null;
 				$scope.telContact2 = null;
 				$scope.needsPreCare = false;
+				$scope.hasDisability = false;
+				$scope.disabilityDescription = false;
 				$scope.selectedActivities = [];
 				RegistrationCacheSvc.lastRegistration = reg[0];
 				console.log("last", RegistrationCacheSvc.lastRegistration, reg)
@@ -289,6 +296,18 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 		}
 		RegistrationCacheSvc.currentRegistration.needsPreCare = newValue;
 	});
+	$scope.$watch('hasDisability', function(newValue, oldValue) {
+		if(!RegistrationCacheSvc.hasCurrentRegistration()) {
+			RegistrationCacheSvc.currentRegistration = {};
+		}
+		RegistrationCacheSvc.currentRegistration.hasDisability = newValue;
+	});
+	$scope.$watch('disabilityDescription', function(newValue, oldValue) {
+		if(!RegistrationCacheSvc.hasCurrentRegistration()) {
+			RegistrationCacheSvc.currentRegistration = {};
+		}
+		RegistrationCacheSvc.currentRegistration.disabilityDescription = newValue;
+	});
 
 	if(RegistrationCacheSvc.hasCurrentRegistration()) {
 		$scope.firstNameParent = RegistrationCacheSvc.currentRegistration.firstNameParent;
@@ -313,6 +332,8 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 		$scope.nameContact2 = RegistrationCacheSvc.currentRegistration.nameContact2;
 		$scope.telContact2 =  RegistrationCacheSvc.currentRegistration.telContact2;
 		$scope.needsPreCare = RegistrationCacheSvc.currentRegistration.needsPreCare;
+		$scope.hasDisability = RegistrationCacheSvc.currentRegistration.hasDisability;
+		$scope.disabilityDescription = RegistrationCacheSvc.currentRegistration.disabilityDescription;
 		RegistrationCacheSvc.currentRegistration = undefined;
 	}
 

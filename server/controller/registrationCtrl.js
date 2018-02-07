@@ -75,6 +75,8 @@ exports.create = (req, res, next) => {
 			addressChild: req.body.addressChild,
 			cityChild: req.body.cityChild,
 			needsPreCare: req.body.needsPreCare,
+			hasDisability: req.body.hasDisability,
+			disabilityDescription: req.body.disabilityDescription,
 			userId: req.body.userId
 		});
 		regs.push(reg);
@@ -122,6 +124,8 @@ exports.update = (req, res, next) => {
 		reg.addressChild = req.body.addressChild;
 		reg.cityChild = req.body.cityChild;
 		reg.needsPreCare = req.body.needsPreCare;
+		reg.hasDisability = req.body.hasDisability;
+		reg.disabilityDescription = req.body.disabilityDescription;
 		reg.save(function(err, regDb) {
 			if(err) { return next(err); }
 			res.status(201).json(regDb);
