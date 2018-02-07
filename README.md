@@ -29,7 +29,7 @@
     -> Zahlungsbestätigung
     -> freie Texte
     -> pro Eltern email pro Kind
--> deep links auf Programme (für einzelne Programme)
+-> [x] deep links auf Programme (für einzelne Programme)
 -> [x] mit Anmeldung Information das Einzahlung verpflichtend
 -> [x] bei neuem User email: username und Passwort
 
