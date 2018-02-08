@@ -2,7 +2,8 @@ var email   = require("./../../node_modules/emailjs/email");
 var server  = email.server.connect({});
 
 var htmlStart = "<html><body><p>Die Anmeldung f&uuml;r ";
-var htmlEnd = " f&uuml;r die Sommerprogramme des Jugenddienstes Bozen Land war erfolgreich.</p><p>Einzahlungsschein wird demn&auml;chst mittels email zugesandt.</p><p>Vielen Dank f&uuml;r die Anmeldung.</p></body></html>";
+var htmlEnd = " f&uuml;r die Sommerprogramme des Jugenddienstes Bozen Land war erfolgreich.</p><p>Einzahlungsschein wird demn&auml;chst mittels email zugesandt.</p><p>Vielen Dank f&uuml;r die Anmeldung.</p>";
+var htmlClose = "</body></html>";
 
 var htmlSpiritnight = "<html><body><p><strong>Vielen Dank</strong> f&uuml;r die Teilnahme an der SpiritNight 2017!</p><p>Bitte best&auml;tigen Sie die Anmeldung bis zum <strong>31.03.2017</strong> mit einer gesammelten &Uuml;berweisung f&uuml;r die gesamte Pfarrei. Die Gesamtsumme kann an folgende Konten &uuml;berwiesen werden:</p><p>S&uuml;dtiroler Volksbank<br />IBAN: IT42C0585658220070571084313<br />SWIFT/BIC: BPAAIT2BBRE</p><p>S&uuml;dtiroler Sparkasse<br />IBAN: IT62J0604558220000000078000<br />SWIFT/BIC: CRBZIT2B050</p><p>Raiffeisenkasse Eisacktal:<br />IBAN: IT95Y0830759090000301223658<br />SWIFT/BIC: RZSBIT21107</p><p>Bitte geben Sie bei der &Uuml;berweisung <strong>Spiritnight 2017 / Name der Pfarrei</strong> an.</p></body></html>";
 var txtSpiritnight = "Vielen Dank für die Teilnahme an der SpiritNight 2017! Bitte bestätigen Sie die Anmeldung bis zum 31.03.2017 mit einer gesammelten Überweisung für die gesamte Pfarrei. Die Gesamtsumme kann an folgende Konten überwiesen werden: Südtiroler Volksbank IBAN: IT42C0585658220070571084313 SWIFT/BIC: BPAAIT2BBRE; Südtiroler Sparkasse IBAN: IT62J0604558220000000078000 SWIFT/BIC: CRBZIT2B050; Raiffeisenkasse Eisacktal IBAN: IT95Y0830759090000301223658 SWIFT/BIC: RZSBIT21107 Bitte geben Sie bei der Überweisung 'Spiritnight 2017 / Name der Pfarrei' an.";
@@ -50,7 +51,7 @@ function getTypeText(type, firstNameChild, lastNameChild, isKiso) {
 	}
 }
 
-function getTypeBody(type, firstNameChild, lastNameChild, isKiso) {
+function getTypeBody(type, firstNameChild, lastNameChild, isKiso, activities) {
 	if(isKiso) {
 		if(type === 'jumprun')
 			return htmlJumpRun;
@@ -61,16 +62,25 @@ function getTypeBody(type, firstNameChild, lastNameChild, isKiso) {
 			case 'summer':
 			case 'music':
 			case 'club':
-				return htmlStart + firstNameChild + " " + lastNameChild + htmlEnd;
+				return htmlStart + firstNameChild + " " + lastNameChild + htmlEnd + getActivityTable(activities) + htmlClose;
 				break;
 			case 'spiritnight':
 				return htmlSpiritnight;
 				break;
 			default:
-				return htmlStart + firstNameChild + " " + lastNameChild + htmlEnd;
+				return htmlStart + firstNameChild + " " + lastNameChild + htmlEnd + htmlClose;
 				break;
 		}
 	}
+}
+
+function getActivityTable(activities) {
+	var tblStart = '<table><tr><th>Programm</th><th>Woche</th><th>Preis</th></tr>';
+	var tblEnd = '</table>';
+	for(var i=0; i<activities.length; i++) {
+		tblStart += '<tr><td>' + activities[i].eventId.location + ' - ' + activities[i].eventId.name + '</td><td>' + activities[i].name + '</td><td>' + activities[i].eventId.feePerWeek + '</td></tr>';
+	}
+	return tblStart + tblEnd;
 }
 
 function getKisoSubject(type) {
@@ -80,19 +90,19 @@ function getKisoSubject(type) {
 	return 'Anmeldung / Iscrizione KiSo Kindersommer 2017'
 }
 
-exports.sendTxtMail = function(recipient, firstNameChild, lastNameChild, type, isKiso) {
-		var body = getTypeBody(type, firstNameChild, lastNameChild, isKiso);
+exports.sendTxtMail = function(recipient, firstNameChild, lastNameChild, type, isKiso, activities) {
+		var body = getTypeBody(type, firstNameChild, lastNameChild, isKiso, activities);
 		var text = getTypeText(type, firstNameChild, lastNameChild, isKiso);
         var fromEmail = isKiso ? 'kiso@jd.bz.it' : 'info@jugenddienst.com';
 		var subjectEmail = isKiso ? getKisoSubject(type) : 'Anmeldung ' + getTypeString(type);
-		// console.log("mail subject", subjectEmail);
+		console.log("mail body", body);
 		server.send({
 		text: text,
 		from: fromEmail,
 		to: recipient,
 		subject: subjectEmail,
-		attachments: { data: body,
-			       alternative: true }
+		attachment: [{ data: body,
+			       alternative: true }]
 	}, function(err, message) {console.log(err||message); });
 };
 

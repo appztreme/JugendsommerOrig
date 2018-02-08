@@ -1,5 +1,6 @@
 'use strict';
 const Activity = require('./../models/activity');
+const mongoose = require('mongoose');
 
 const curYear = new Date().getFullYear();
 const startCurYear = new Date(curYear,1,1);
@@ -22,6 +23,17 @@ exports.getActivityIdsForEvent = (eventId) => {
 
 exports.findById = (id) => {
     return Activity.findById(id);
+}
+
+exports.findByIds = (ids) => {
+	var objids = [];
+	for(var i=0; i < ids.length; i++) {
+		objids.push(new mongoose.Types.ObjectId(ids[i]));
+	}
+	console.log("repor", objids);
+	return Activity.find({
+		'_id': { $in: objids } })
+		.populate('eventId', '_id name location feePerWeek');
 }
 
 exports.getContacts = (id) => {

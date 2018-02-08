@@ -79,22 +79,20 @@ exports.create = (req, res, next) => {
 			disabilityDescription: req.body.disabilityDescription,
 			userId: req.body.userId
 		});
-		regs.push(reg);
-		// reg.save(function(err, regr) {
-		// 	if(err) { return next(err); }
-		// 	var host = req.get('host');
-		// 	var isKiso = host.indexOf('kiso') !== -1;
-		// 	mail.sendTxtMail(regr.emailParent, regr.firstNameChild, regr.lastNameChild, req.body.type, isKiso);
-		// 	regs.push(regr);
-		// 	if(i === activityId.length) res.status(201).json(regs);
-		// });	
+		regs.push(reg);	
 	}
 	Registration.create(regs, function(error, docs) {
 		if(error) { return next(error); }
 		var host = req.get('host');
 		var isKiso = host.indexOf('kiso') !== -1;
-		mail.sendTxtMail(req.body.emailParent, req.body.firstNameChild, req.body.lastNameChild, req.body.type, isKiso);
+		// ActivityRepo.findByIds(req.body.activityId), function(err, activities) {
+		// 	console.log("in activities", err, activities);
+		// 	
+		// 	console.log("activities found", activities);
+		var activities = [];
+		mail.sendTxtMail(req.body.emailParent, req.body.firstNameChild, req.body.lastNameChild, req.body.type, isKiso, activities);
 		res.status(201).json(docs);
+		//}
 	})
 };
 
