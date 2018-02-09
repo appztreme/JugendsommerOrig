@@ -44,12 +44,12 @@
 											<input name='emailParent' type='email' ng-model='emailParent' required maxlength='200' class='form-control'></input>
 										</div>
 									</div>
-									<!-- <div class='form-group' ng-class='{ "has-error": registrationForm.emailParent.$invalid }'>
+									<div class='form-group' ng-class='{ "has-error": registrationForm.emailParentCheck.$invalid || !isEmailEqual() }'>
 											<label for='emailParentCheck' class='control-label col-sm-2'>{{"RESERVATION.LABEL_MAIL_PARENT_CHECK" | translate}}</label>
 											<div class='col-sm-8'>
-												<input name='emailParentChek' type='email' ng-model='emailParentCheck' required maxlength='200' class='form-control'></input>
+												<input name='emailParentChek' type='email' ng-model='emailParentCheck' maxlength='200' class='form-control'></input>
 											</div>
-										</div> -->
+									</div>
 									<div ng-show='type === "summer" || type === "music" || type === "club" || type === "jumprun"' class='text-orange'><strong>{{"RESERVATION.HEADER_SUMMER_CHILD" | translate}}</strong></div>
 									<div ng-show='type === "spiritnight"' class='text-orange'><strong>{{"RESERVATION.HEADER_SPIRIT_CHILD" | translate}}</strong></div>
 									<!-- FIRSTNAMECHILD -->

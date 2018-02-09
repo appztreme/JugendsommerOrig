@@ -109,7 +109,6 @@ exports.sendTxtMail = function(recipient, firstNameChild, lastNameChild, type, i
 		var text = getTypeText(type, firstNameChild, lastNameChild, isKiso);
         var fromEmail = isKiso ? 'kiso@jd.bz.it' : 'info@jugenddienst.com';
 		var subjectEmail = isKiso ? getKisoSubject(type) : 'Anmeldung ' + getTypeString(type);
-		console.log("mail body", body);
 		server.send({
 		text: text,
 		from: fromEmail,

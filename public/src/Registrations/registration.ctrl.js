@@ -7,17 +7,16 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 	$scope.acceptAGB = false;
 	$scope.currentState = 1;
 	$scope.selectedActivities = [];
+	$scope.emailParentCheck = '';
 
 	$scope.toggleActivity = function(id) {
 		var index = $scope.selectedActivities.indexOf(id);
 		if(index === -1) $scope.selectedActivities.push(id);
 		else $scope.selectedActivities.splice(index, 1);
-		//console.log($scope.selectedActivities);
 	}
 
 	$scope.setState = function(state) {
 		$scope.currentState = state;
-		//console.log($scope.registrationForm.$valid, $scope.selectedActivities, $scope.acceptAGB, $scope.registrationForm);
 	}
 
 	var host = $location.$$host.toLowerCase();
@@ -51,6 +50,12 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 	$scope.needsPreCare = false;
 	$scope.hasDisability = false;
 
+	$scope.isEmailEqual = function() {
+		if($scope.emailParent === '' || !$scope.emailParent || !$scope.emailParentCheck || $scope.emailParentCheck === '') return false;
+		if($scope.emailParent === $scope.emailParentCheck) return true;
+		return false;
+	}
+
 	$scope.canReserve = function(activity) {
         return activity.curParticipants < activity.maxParticipants;
     };
@@ -69,7 +74,7 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 	}
 
 	$scope.isChildDataComplete = function() {
-		return $scope.registrationForm.$valid;
+		return $scope.registrationForm.$valid && $scope.isEmailEqual();
 	}
 
 	$scope.isActivityDataComplete = function() {
@@ -90,6 +95,7 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 			$scope.lastNameParent =  RegistrationCacheSvc.lastRegistration.lastNameParent;
 			$scope.phoneNumberParent = RegistrationCacheSvc.lastRegistration.phoneNumberParent;
 			$scope.emailParent = RegistrationCacheSvc.lastRegistration.emailParent;
+			$scope.emailParentCheck = RegistrationCacheSvc.lastRegistration.emailParent;
 			$scope.firstNameChild = RegistrationCacheSvc.lastRegistration.firstNameChild;
 			$scope.lastNameChild = RegistrationCacheSvc.lastRegistration.lastNameChild;
 			$scope.birthdayChild = $filter('date')(new Date(RegistrationCacheSvc.lastRegistration.birthdayChild), 'yyyy-MM-dd');
@@ -150,6 +156,7 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 				$scope.lastNameParent = null;
 				$scope.phoneNumberParent = null;
 				$scope.emailParent = null;
+				$scope.emailParentCheck = '';
 				$scope.firstNameChild = null;
 				$scope.lastNameChild = null;
 				$scope.birthdayChild = null;
@@ -168,7 +175,7 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 				$scope.disabilityDescription = false;
 				$scope.selectedActivities = [];
 				RegistrationCacheSvc.lastRegistration = reg[0];
-				console.log("last", RegistrationCacheSvc.lastRegistration, reg)
+				// console.log("last", RegistrationCacheSvc.lastRegistration, reg)
 			}).then(function() {
 				NotificationSvc.notify($scope.msgSuccess);
 				$location.path('/');
@@ -339,7 +346,7 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 
 	RegistrationSvc.findActivitiesByEventId($routeParams.eventId).then(function(response) {
 		$scope.activities = response.data;
-		console.log($scope.activities);
+		// console.log($scope.activities);
 	});
 
 });
