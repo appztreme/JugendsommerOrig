@@ -32,6 +32,7 @@
 
 .card-orange {
     width:250px;
+    max-height: 220px;
     float:left;
     margin-right:10px;
     margin-top:10px;
