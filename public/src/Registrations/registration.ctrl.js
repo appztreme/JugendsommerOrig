@@ -48,6 +48,7 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 	$scope.tShirtSizes = conf.tSizes;
 	$scope.cityChild = $scope.isKiso ? 'Bozen': 'Deutschnofen';
 	$scope.needsPreCare = false;
+	$scope.needsAbK = false;
 	$scope.hasDisability = false;
 
 	$scope.isEmailEqual = function() {
@@ -114,6 +115,7 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 			$scope.needsPreCare = RegistrationCacheSvc.lastRegistration.needsPreCare;
 			$scope.hasDisability = RegistrationCacheSvc.lastRegistration.hasDisability;
 			$scope.disabilityDescription = RegistrationSvc.lastRegistration.disabilityDescription;
+			$scope.needsAbK = RegistrationSvc.lastRegistration.needsAbK;
 		}
 	};
 
@@ -144,6 +146,7 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 				needsPreCare: $scope.needsPreCare,
 				hasDisability: $scope.hasDisability,
 				disabilityDescription: $scope.disabilityDescription,
+				needsAbK: $scope.needsAbK,
 				type: $scope.type
 			})
 			.error(function(err) {
@@ -172,7 +175,8 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 				$scope.telContact2 = null;
 				$scope.needsPreCare = false;
 				$scope.hasDisability = false;
-				$scope.disabilityDescription = false;
+				$scope.disabilityDescription = null;
+				$scope.needsAbK = false;
 				$scope.selectedActivities = [];
 				RegistrationCacheSvc.lastRegistration = reg[0];
 				// console.log("last", RegistrationCacheSvc.lastRegistration, reg)
@@ -315,6 +319,12 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 		}
 		RegistrationCacheSvc.currentRegistration.disabilityDescription = newValue;
 	});
+	$scope.$watch('needsAbK', function(newValue, oldValue) {
+		if(!RegistrationCacheSvc.hasCurrentRegistration()) {
+			RegistrationCacheSvc.currentRegistration = {};
+		}
+		RegistrationCacheSvc.currentRegistration.needsAbK = newValue;
+	});
 
 	if(RegistrationCacheSvc.hasCurrentRegistration()) {
 		$scope.firstNameParent = RegistrationCacheSvc.currentRegistration.firstNameParent;
@@ -341,6 +351,7 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 		$scope.needsPreCare = RegistrationCacheSvc.currentRegistration.needsPreCare;
 		$scope.hasDisability = RegistrationCacheSvc.currentRegistration.hasDisability;
 		$scope.disabilityDescription = RegistrationCacheSvc.currentRegistration.disabilityDescription;
+		$scope.needsAbK = RegistrationCacheSvc.currentRegistration.needsAbK;
 		RegistrationCacheSvc.currentRegistration = undefined;
 	}
 

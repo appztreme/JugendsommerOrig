@@ -77,6 +77,7 @@ exports.create = async(req, res, next) => {
 			needsPreCare: req.body.needsPreCare,
 			hasDisability: req.body.hasDisability,
 			disabilityDescription: req.body.disabilityDescription,
+			needsEbK: req.body.needsEbK,
 			userId: req.body.userId
 		});
 		regs.push(reg);	
@@ -129,6 +130,7 @@ exports.update = (req, res, next) => {
 		reg.needsPreCare = req.body.needsPreCare;
 		reg.hasDisability = req.body.hasDisability;
 		reg.disabilityDescription = req.body.disabilityDescription;
+		reg.needsEbK = req.body.needsEbK;
 		reg.save(function(err, regDb) {
 			if(err) { return next(err); }
 			res.status(201).json(regDb);

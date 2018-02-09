@@ -181,6 +181,10 @@
 											<input name='telContact2' type='tel' maxlength='100' ng-model='telContact2' class='form-control'></input>
 										</div>
 									</div>
+									<!-- NEEDSAbK -->
+									<div ng-show='!isKiso && (type === "summer" || type === "music")' class='col-sm-offset-2 col-sm4'>
+										<input type='checkbox' name='needsAbK' ng-model='needsAbK'><strong>{{"RESERVATION.LABEL_ABK_CHILD" | translate}}</input>
+									</div>
 						
 									<br />
 						
