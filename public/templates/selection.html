@@ -15,7 +15,7 @@
 
 <div ng-repeat='loc in locations'>
     <div class='card-orange'>
-        <a class='invisible-link' href='#/events/{{loc._id}}'>
+        <a class='invisible-link' href='#/events/{{encodeFullURI(loc._id)}}'>
         <div class='panel-header'>
                 <h3 ng-show="lang == 'de'"><strong>{{loc.name}}</strong></h3>
                 <h3 ng-show="lang == 'it'"><strong>{{loc.name_it}}</strong></h3>

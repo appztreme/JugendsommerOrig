@@ -10,6 +10,12 @@ app.controller('GeoSelectionCtrl', function($scope, $location, GeoSvc, $rootScop
         $scope.lang = $translate.proposedLanguage() || $translate.user();
     });
 
+    $scope.encodeFullURI = function(str) {
+		var encoded = str.replace('/', '%2F');
+		console.log(encoded);
+		return encodeURI(encoded);
+	}
+
     $scope.isKiso = host.indexOf('kiso.bz.it') !== -1;
 
     const addNameProp = function (ar) {
