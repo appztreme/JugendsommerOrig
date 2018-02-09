@@ -89,6 +89,20 @@
 											<textarea name='healthChild' ng-model='healthChild' rows='3' maxlength='350' class='form-control'></textarea>
 										</div>
 									</div>
+									<!-- HASDISABILITY -->
+									<div ng-show='(type === "summer" || type === "music")' class='col-sm-offset-2 col-sm4 form-group'>
+										<label for='hasDisability' class='control-label col-sm-2'>{{"RESERVATION.LABEL_DISABILITY_CHILD" | translate}}</label>
+										<div class='col-sm-8'>
+											<input type='checkbox' name='hasDisability' ng-model='hasDisability'></input>
+										</div>
+									</div>
+									<!-- DISABILITYDESCRIPTION -->
+									<div ng-show='hasDisability && (type === "summer" || type === "music")' class='col-sm-offset-2 col-sm4 form-group'>
+										<label for='disabilityDescription' class='control-label col-sm-2'>{{"RESERVATION.LABEL_DISABILITY_CHILD_DESCRIPTION" | translate}}</label>
+										<div class='col-sm-8'>
+											<input type='text' name='disabilityDescription' ng-model='disabilityDescription' maxlength='100' class='form-control'></input>
+										</div>
+									</div>
 									<!-- ADDRESSCHILD -->
 									<div ng-show='type !== "spiritnight"' class='form-group' ng-class='{ "has-error": registrationForm.addressChild.$invalid }'>
 										<label for='addressChild' class='control-label col-sm-2'>{{"RESERVATION.LABEL_ADDRESS_CHILD" | translate}}</label>
@@ -119,20 +133,6 @@
 									<!-- <div ng-show='!isKiso && (type === "summer" || type === "music")' class='col-sm-offset-2 col-sm4'>
 										<input type='checkbox' name='needsPreCare' ng-model='needsPreCare'><strong>{{"RESERVATION.LABEL_PRECARE_CHILD" | translate}}</input>
 									</div> -->
-									<!-- HASDISABILITY -->
-									<div ng-show='(type === "summer" || type === "music")' class='col-sm-offset-2 col-sm4 form-group'>
-										<label for='hasDisability' class='control-label col-sm-2'>{{"RESERVATION.LABEL_DISABILITY_CHILD" | translate}}</label>
-										<div class='col-sm-8'>
-											<input type='checkbox' name='hasDisability' ng-model='hasDisability'></input>
-										</div>
-									</div>
-									<!-- DISABILITYDESCRIPTION -->
-									<div ng-show='hasDisability && (type === "summer" || type === "music")' class='col-sm-offset-2 col-sm4 form-group'>
-										<label for='disabilityDescription' class='control-label col-sm-2'>{{"RESERVATION.LABEL_DISABILITY_CHILD_DESCRIPTION" | translate}}</label>
-										<div class='col-sm-8'>
-											<input type='text' name='disabilityDescription' ng-model='disabilityDescription' maxlength='100' class='form-control'></input>
-										</div>
-									</div>
 									<br />
 									<div ng-show='type === "music"' class="panel panel-default">
 									<!-- JUNGBLÄSERWOCHE -->
@@ -249,7 +249,7 @@
 						<input type='checkbox' name='agb' ng-model='acceptAGB'><strong>{{"RESERVATION.LABEL_TERMS1" | translate}}<a href='/#/agb/{{eventId}}?type={{type}}'>{{"RESERVATION.LABEL_TERMS2" | translate}}</a></strong></input>
 					</div>
 					<br />
-					<p class="bg-info" style='padding: 5px'>{{"RESERVATION.LABEL_REGISTRATION_PAY_INFO" | translate}}</p>
+					<p class="bg-info" style='padding: 10px'>{{"RESERVATION.LABEL_REGISTRATION_PAY_INFO" | translate}}</p>
 							
 					<div class='col-sm-offset-2 col-sm-8' style='margin-top:15px;'>
 						<input class='btn btn-success bnt-lg btn-block' ng-click='save()' translate-attr="{value: 'RESERVATION.BUTTON_SUBMIT'}" ng-disabled='!isRegistrationAllowed()'>

@@ -22,6 +22,17 @@ app.controller('EventsCtrl', function($scope, $routeParams, $location, EventsSvc
 		return result;
 	}
 
+	$scope.cannotReserve = function(ev) {
+		if(IdentitySvc.isAdmin()) return false;
+		else {
+			var visible = new Date(ev.visibleFrom);
+			visible.setHours(19,0,0,0);
+			if(Date.now() > visible) return false;
+			if(Date.now() < ev.deadline) return false;
+			return true;
+		}
+	}
+
 	if(IdentitySvc.isAdmin()) {
 		if(['club', 'spiritnight'].indexOf($routeParams.location) !== -1) {
 			EventsSvc.findByTypeAsAdmin($routeParams.location).success(function(evs) {

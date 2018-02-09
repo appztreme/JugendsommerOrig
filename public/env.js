@@ -1,6 +1,6 @@
 (function (window) {
     window.__env = window.__env || {};
-    window.__env.cities_jdbl = ['Deutschnofen', 'Jenesien', 'Karneid', 'Mölten', 'Ritten', 'Sarntal', 'Tiers', 'Vöran', 'Welschnofen', 'Andere'];
+    window.__env.cities_jdbl = ['Deutschnofen', 'Jenesien', 'Kastelruth', 'Karneid', 'Mölten', 'Ritten', 'Sarntal', 'Tiers', 'Völs', 'Vöran', 'Welschnofen', 'Andere'];
     window.__env.cities_kiso = ['Bozen', 'Andere'];
     window.__env.tSizes = [
         {"name": '3-4 Jahre/89-104cm',             "name_it": '3-4 anni/89-104cm'},
@@ -102,7 +102,7 @@
             "LABEL_BANDNAME_CHILD": "Musikkapelle",
             "LABEL_INSTRUMENT_CHILD": "Instrument",
             "LABEL_YEARSINSTRUMENT_CHILD": "Ausbildungsjahr",
-            "LABEL_DISABILITY_CHILD": "Beeinträchtigung",
+            "LABEL_DISABILITY_CHILD": "Kind mit Beeinträchtigung",
             "LABEL_DISABILITY_CHILD_DESCRIPTION": "Diagnose bei Beenträchtigung",
             "LABEL_NAME_CONTACT1": "Name1",
             "LABEL_TEL_CONTACT1": "Telefon 1",
@@ -223,7 +223,7 @@
             "LABEL_BANDNAME_CHILD": "Musikkapelle",
             "LABEL_INSTRUMENT_CHILD": "Instrument",
             "LABEL_YEARSINSTRUMENT_CHILD": "Ausbildungsjahr",
-            "LABEL_DISABILITY_CHILD": "Beeinträchtigung",
+            "LABEL_DISABILITY_CHILD": "Kind mit Beeinträchtigung",
             "LABEL_DISABILITY_CHILD_DESCRIPTION": "Diagnose bei Beenträchtigung",
             "LABEL_NAME_CONTACT1": "nome1",
             "LABEL_TEL_CONTACT1": "telefono 1",

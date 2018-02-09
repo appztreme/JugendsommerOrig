@@ -2,8 +2,8 @@ var email   = require("./../../node_modules/emailjs/email");
 var server  = email.server.connect({});
 
 var htmlStart = "<html><body><p>Die Anmeldung f&uuml;r ";
-var htmlEnd = " f&uuml;r die Sommerprogramme des Jugenddienstes Bozen Land war erfolgreich.</p><p>Einzahlungsschein wird demn&auml;chst mittels email zugesandt.</p><p>Vielen Dank f&uuml;r die Anmeldung.</p>";
-var htmlClose = "</body></html>";
+var htmlEnd = " f&uuml;r die Sommerprogramme des Jugenddienstes Bozen Land war erfolgreich.</p><p>Einzahlungsschein wird demn&auml;chst mittels email zugesandt.</p><p>Vielen Dank f&uuml;r die Anmeldung.</p><h3>Zusammenfassung:</h3>";
+var htmlClose = "<br /><img src='cid:my-image' width='50' height ='50' /></body></html>";
 
 var htmlSpiritnight = "<html><body><p><strong>Vielen Dank</strong> f&uuml;r die Teilnahme an der SpiritNight 2017!</p><p>Bitte best&auml;tigen Sie die Anmeldung bis zum <strong>31.03.2017</strong> mit einer gesammelten &Uuml;berweisung f&uuml;r die gesamte Pfarrei. Die Gesamtsumme kann an folgende Konten &uuml;berwiesen werden:</p><p>S&uuml;dtiroler Volksbank<br />IBAN: IT42C0585658220070571084313<br />SWIFT/BIC: BPAAIT2BBRE</p><p>S&uuml;dtiroler Sparkasse<br />IBAN: IT62J0604558220000000078000<br />SWIFT/BIC: CRBZIT2B050</p><p>Raiffeisenkasse Eisacktal:<br />IBAN: IT95Y0830759090000301223658<br />SWIFT/BIC: RZSBIT21107</p><p>Bitte geben Sie bei der &Uuml;berweisung <strong>Spiritnight 2017 / Name der Pfarrei</strong> an.</p></body></html>";
 var txtSpiritnight = "Vielen Dank für die Teilnahme an der SpiritNight 2017! Bitte bestätigen Sie die Anmeldung bis zum 31.03.2017 mit einer gesammelten Überweisung für die gesamte Pfarrei. Die Gesamtsumme kann an folgende Konten überwiesen werden: Südtiroler Volksbank IBAN: IT42C0585658220070571084313 SWIFT/BIC: BPAAIT2BBRE; Südtiroler Sparkasse IBAN: IT62J0604558220000000078000 SWIFT/BIC: CRBZIT2B050; Raiffeisenkasse Eisacktal IBAN: IT95Y0830759090000301223658 SWIFT/BIC: RZSBIT21107 Bitte geben Sie bei der Überweisung 'Spiritnight 2017 / Name der Pfarrei' an.";
@@ -51,7 +51,7 @@ function getTypeText(type, firstNameChild, lastNameChild, isKiso) {
 	}
 }
 
-function getTypeBody(type, firstNameChild, lastNameChild, isKiso, activities) {
+function getTypeBody(type, firstNameChild, lastNameChild, isKiso, activities, reservation) {
 	if(isKiso) {
 		if(type === 'jumprun')
 			return htmlJumpRun;
@@ -62,7 +62,7 @@ function getTypeBody(type, firstNameChild, lastNameChild, isKiso, activities) {
 			case 'summer':
 			case 'music':
 			case 'club':
-				return htmlStart + firstNameChild + " " + lastNameChild + htmlEnd + getActivityTable(activities) + htmlClose;
+				return htmlStart + firstNameChild + " " + lastNameChild + htmlEnd + getActivityTable(activities) + "<br />" + getReservationTable(reservation) + htmlClose;
 				break;
 			case 'spiritnight':
 				return htmlSpiritnight;
@@ -75,12 +75,26 @@ function getTypeBody(type, firstNameChild, lastNameChild, isKiso, activities) {
 }
 
 function getActivityTable(activities) {
-	var tblStart = '<table><tr><th>Programm</th><th>Woche</th><th>Preis</th></tr>';
+	var tblStart = '<table style="border: 1px solid gray"><tr><th>Programm</th><th>Woche</th><th>Preis</th></tr>';
 	var tblEnd = '</table>';
 	for(var i=0; i<activities.length; i++) {
 		tblStart += '<tr><td>' + activities[i].eventId.location + ' - ' + activities[i].eventId.name + '</td><td>' + activities[i].name + '</td><td>' + activities[i].eventId.feePerWeek + '</td></tr>';
 	}
 	return tblStart + tblEnd;
+}
+
+function getReservationTable(res) {
+	var tbleStart = '<table style="border: 1px solid gray">';
+	var tbleEnd = '</table>';
+	tbleStart += '<tr><td>Vorname</td><td>' + res.firstNameChild + '</td></tr>';
+	tbleStart += '<tr><td>Nachname</td><td>' + res.lastNameChild + '</td></tr>';
+	tbleStart += '<tr><td>Klasse</td><td>' + res.schoolChild + '</td></tr>';
+	tbleStart += '<tr><td>Vorname Eltern</td><td>' + res.firstNameParent + '</td></tr>';
+	tbleStart += '<tr><td>Nachname Eltern</td><td>' + res.lastNameParent+ '</td></tr>';
+	tbleStart += '<tr><td>Email Eltern</td><td>' + res.emailParent + '</td></tr>';
+	tbleStart += '<tr><td>TelNr Eltern</td><td>' + res.phoneNumberParent + '</td></tr>'; 
+
+	return tbleStart + tbleEnd;
 }
 
 function getKisoSubject(type) {
@@ -90,8 +104,8 @@ function getKisoSubject(type) {
 	return 'Anmeldung / Iscrizione KiSo Kindersommer 2017'
 }
 
-exports.sendTxtMail = function(recipient, firstNameChild, lastNameChild, type, isKiso, activities) {
-		var body = getTypeBody(type, firstNameChild, lastNameChild, isKiso, activities);
+exports.sendTxtMail = function(recipient, firstNameChild, lastNameChild, type, isKiso, activities, reservation) {
+		var body = getTypeBody(type, firstNameChild, lastNameChild, isKiso, activities, reservation);
 		var text = getTypeText(type, firstNameChild, lastNameChild, isKiso);
         var fromEmail = isKiso ? 'kiso@jd.bz.it' : 'info@jugenddienst.com';
 		var subjectEmail = isKiso ? getKisoSubject(type) : 'Anmeldung ' + getTypeString(type);
@@ -101,8 +115,8 @@ exports.sendTxtMail = function(recipient, firstNameChild, lastNameChild, type, i
 		from: fromEmail,
 		to: recipient,
 		subject: subjectEmail,
-		attachment: [{ data: body,
-			       alternative: true }]
+		attachment: [{ data: body, alternative: true },
+		             { path:"public/assets/jd-logo.png", type:"image/png", headers:{"Content-ID":"<my-image>"} }]
 	}, function(err, message) {console.log(err||message); });
 };
 

@@ -50,7 +50,7 @@ exports.delete = (req, res, next) => {
 	});
 };
 
-exports.create = (req, res, next) => {
+exports.create = async(req, res, next) => {
 	var regs = [];
 	for (var i = 0; i < req.body.activityId.length; i++) {
 		var reg = new Registration({
@@ -81,18 +81,23 @@ exports.create = (req, res, next) => {
 		});
 		regs.push(reg);	
 	}
+	var objids = [];
+	for(var i=0; i < req.body.activityId.length; i++) {
+		objids.push(new mongoose.Types.ObjectId(req.body.activityId[i].trim()));
+	}
+	var activities = [];
+	try {
+		activities = await Activity.find({'_id': { $in: objids } })
+							   .populate('eventId', '_id name location feePerWeek')
+							   .select('_id name eventId');
+	} catch(e) { console.log(e); }
 	Registration.create(regs, function(error, docs) {
 		if(error) { return next(error); }
 		var host = req.get('host');
 		var isKiso = host.indexOf('kiso') !== -1;
-		// ActivityRepo.findByIds(req.body.activityId), function(err, activities) {
-		// 	console.log("in activities", err, activities);
-		// 	
-		// 	console.log("activities found", activities);
-		var activities = [];
-		mail.sendTxtMail(req.body.emailParent, req.body.firstNameChild, req.body.lastNameChild, req.body.type, isKiso, activities);
+
+		mail.sendTxtMail(req.body.emailParent, req.body.firstNameChild, req.body.lastNameChild, req.body.type, isKiso, activities, req.body);
 		res.status(201).json(docs);
-		//}
 	})
 };
 

@@ -22,18 +22,22 @@ exports.getActivityIdsForEvent = (eventId) => {
 }
 
 exports.findById = (id) => {
-    return Activity.findById(id);
+	console.log("findbyid")
+    return Activity.findById(id).exec();
 }
 
 exports.findByIds = (ids) => {
+	console.log(ids, "ids");
 	var objids = [];
 	for(var i=0; i < ids.length; i++) {
-		objids.push(new mongoose.Types.ObjectId(ids[i]));
+		objids.push(new mongoose.Types.ObjectId(ids[i].trim()));
 	}
+	//return objids;
 	console.log("repor", objids);
 	return Activity.find({
 		'_id': { $in: objids } })
-		.populate('eventId', '_id name location feePerWeek');
+		.populate('eventId', '_id name location feePerWeek')
+		.select(_id, name, eventId);
 }
 
 exports.getContacts = (id) => {
