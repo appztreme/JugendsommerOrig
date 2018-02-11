@@ -7,13 +7,13 @@ router.get('/', auth.requiresOneRoleOutOf(["admin", "fadmin", "ladmin"]), Regist
 
 router.get('/selectableEventActivities', RegistrationController.getSelectableEventActivities);
 
-router.get('/:registrationId', auth.requiresRole("admin"), RegistrationController.findById);
+router.get('/:registrationId', auth.requiresApiLogin, RegistrationController.findById);
 
 router.delete('/:registrationId', auth.requiresRole("admin"), RegistrationController.delete);
 
 router.post('/', auth.requiresApiLogin, RegistrationController.create);
 
-router.put('/', auth.requiresRole("admin"), RegistrationController.update);
+router.put('/', auth.requiresApiLogin, RegistrationController.update);
 
 router.patch('/updateIsPaymentDone', auth.requiresRole("admin"), RegistrationController.updateIsPaymentDone);
 

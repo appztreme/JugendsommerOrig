@@ -90,6 +90,10 @@ app.config(function($routeProvider) {
 			controller: 'RegistrationEditCtrl',
 			templateUrl: '../templates/registration/registrationEdit.html'
 		})
+		.when('/editOwnRegistration/:registrationId', {
+			controller: 'RegistrationOwnEditCtrl',
+			templateUrl: '../templates/registration/registrationOwnEdit.html'
+		})
 		.when('/login', {
 			controller: 'LoginCtrl',
 			templateUrl: '../templates/login.html'
