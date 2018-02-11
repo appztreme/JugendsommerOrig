@@ -10,7 +10,7 @@ app.controller('EventsCtrl', function($scope, $routeParams, $location, EventsSvc
 	$scope.isRegistrationWarningVisible = function() {
 		var d = new Date(2018,2,12,00,15,00);
 		var now = Date.now();
-		return now >= d;
+		return now <= d;
 	}
 
     $rootScope.$on('$translateChangeSuccess', function() {
