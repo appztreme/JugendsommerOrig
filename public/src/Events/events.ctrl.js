@@ -8,9 +8,9 @@ app.controller('EventsCtrl', function($scope, $routeParams, $location, EventsSvc
 	$scope.lang = $translate.proposedLanguage() || $translate.user();
 
 	$scope.isRegistrationWarningVisible = function() {
-		var d = new Date(2018,2,11,22,59,00);
+		var d = new Date(2018,2,11,23,15,00);
 		var now = new Date();
-		return now <= d;
+		return now >= d;
 	}
 
     $rootScope.$on('$translateChangeSuccess', function() {
