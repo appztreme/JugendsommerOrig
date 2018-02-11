@@ -12,7 +12,6 @@ app.controller('GeoSelectionCtrl', function($scope, $location, GeoSvc, $rootScop
 
     $scope.encodeFullURI = function(str) {
 		var encoded = str.replace('/', '%2F');
-		console.log(encoded);
 		return encodeURI(encoded);
 	}
 
