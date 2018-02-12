@@ -8,10 +8,10 @@ app.controller('EventsCtrl', function($scope, $routeParams, $location, EventsSvc
 	$scope.lang = $translate.proposedLanguage() || $translate.user();
 
 	$scope.isRegistrationWarningVisible = function() {
-		var d = new Date(2018,1,12,4,20,0, 0);
+		var d = new Date('2018-02-12');
+		d.setHours(4,57);
 		var now = Date.now();
-		console.log(Date(now) + ' < ' + d, Date(now) <= d)
-		return Date(now) <= d;
+		return now < d.getTime();
 	}
 
     $rootScope.$on('$translateChangeSuccess', function() {
@@ -33,9 +33,9 @@ app.controller('EventsCtrl', function($scope, $routeParams, $location, EventsSvc
 		if(IdentitySvc.isAdmin()) return false;
 		else {
 			var visible = new Date(ev.visibleFrom);
-			visible.setHours(4,20,0,0);
-			if(Date(Date.now()) > visible) return false;
-			if(Date(Date.now()) < ev.deadline) return false;
+			visible.setHours(4,57);
+			if(Date.now() > visible.getTime()) return false;
+			if(Date.now() > new Date(ev.deadline).getTime()) return false;
 			return true;
 		}
 	}
