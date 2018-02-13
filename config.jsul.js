@@ -1,0 +1,35 @@
+module.exports = {
+    "validLocations": [
+        {"name": 'Deutschnofen',            "name_it": 'Nova Ponente'},
+        {"name": 'Jenesien',                "name_it": 'San Genesio'},
+        {"name": 'Jugenddienst Bozen-Land', "name_it": 'Jugenddienst Bozen-Land'},
+        {"name": 'Jugenddienst Wipptal',    "name_it": 'Jugenddienst Wipptal'},
+        {"name": 'Karneid',                 "name_it": 'Cornedo'},
+        {"name": 'Kastelruth',              "name_it": 'Kastelruth'},
+        {"name": 'Mölten',                  "name_it": 'Meltina'},
+        {"name": 'Neustift',                "name_it": 'Neustift'},
+        {"name": 'Ritten',                  "name_it": 'Renon'},
+        {"name": 'Sarntal',                 "name_it": 'Val Sarentino'},
+        {"name": 'SpaceCamp',               "name_it": 'SpaceCamp'},
+        {"name": 'Tiers',                   "name_it": 'Tires'},
+        {"name": 'Völs',                    "name_it": 'Völs'},
+        {"name": 'Welschnofen',             "name_it": 'Nova Levante'},
+        {"name": 'Besondere Projekte 2018', "name_it": 'Besondere Projekte 2018'},
+        {"name": 'Hüttenlagerwoche',        "name_it": 'Hüttenlagerwoche'},
+        {"name": 'Tschögglberger Jungbläserwoche', "name_it": 'Tschögglberger Jungbläserwoche'}
+    ],
+    "tSizes": [
+        {"name": '3-4 Jahre/89-104cm',             "name_it": '3-4 anni/89-104cm'},
+        {"name": '5-6 Jahre/110-116cm',            "name_it": '5-6 anni/110-116cm'},
+        {"name": '7-8 Jahre/122-128cm',            "name_it": '7-8 anni/122-128cm'},
+        {"name": '9-10 Jahre/134-140cm',           "name_it": '9-10 anni/134-140cm'},
+        {"name": '11-12 Jahre/146-152cm',          "name_it": '11-12 anni/146-152cm'},
+        {"name": 'Erwachsenengröße S',             "name_it": 'Misura adulti S'},
+        {"name": 'Erwachsenengröße M',             "name_it": 'Misura adulti M'},
+    ],
+    "cities": ['Deutschnofen', 'Jenesien', 'Karneid', 'Kastelruth', 'Mölten', 'Ritten', 'Sarntal', 'Tiers', 'Völs', 'Vöran', 'Welschnofen', 'Andere'],
+    "db_test": "mongodb://localhost/jdul_test",
+    "db_prod": "mongodb://localhost/jdul",
+    "port": 3000,
+    "caching": true
+}
