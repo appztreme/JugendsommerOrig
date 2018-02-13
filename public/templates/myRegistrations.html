@@ -8,7 +8,6 @@
 			<th>{{"MYRESERVATION.LABEL_ACTIVITY" | translate}}</th>
 			<th>{{"MYRESERVATION.LABEL_ACCEPT" | translate}}</th>
 			<th>{{"MYRESERVATION.LABEL_PAYED" | translate}}</th>
-			<th ng-show="!isKiso">{{"MYRESERVATION.LABEL_PRECARE_CHILD" | translate}}</th>
 			<th>{{"MYRESERVATION.LABEL_FIRSTNAME_CHILD" | translate}}</th>
 			<th>{{"MYRESERVATION.LABEL_LASTNAME_CHILD" | translate}}</th>
 			<th>{{"MYRESERVATION.LABEL_BIRTHDAY_CHILD" | translate}}</th>
@@ -16,13 +15,13 @@
 			<th>{{"MYRESERVATION.LABEL_LASTNAME_PARENT" | translate}}</th>
 			<th>{{"MYRESERVATION.LABEL_MAIL_PARENT" | translate}}</th>
 			<th>{{"MYRESERVATION.LABEL_TEL_PARENT" | translate}}</th>
+			<th></th>
 		</tr>
 		<tr ng-repeat='reg in registrations | filter:filterReport(reg) | orderBy:colNameSort'>
 			<td>{{reg.activityId.eventId.location}} - {{reg.activityId.eventId.name}}</td>
 			<td>{{reg.activityId.name}}</td>
 			<td class='bg-success'>{{formatBool(true)}}</td>
 			<td ng-class='{"bg-success": reg.isPaymentDone, "bg-danger": !reg.isPaymentDone}'>{{formatBool(reg.isPaymentDone)}}</td>
-			<td ng-show="!isKiso">{{formatBool(reg.needsPreCare)}}</td>
 			<td>{{reg.firstNameChild}}</td>
 			<td>{{reg.lastNameChild}}</td>
 			<td>{{reg.birthdayChild | date: 'dd/MM/yyyy'}}</td>
@@ -30,6 +29,7 @@
 			<td>{{reg.lastNameParent}}</td>
 			<td><a href='mailto:{{reg.emailParent}}'>{{reg.emailParent}}</a></td>
 			<td>{{reg.phoneNumberParent}}</td>
+			<td><a href='/#/editOwnRegistration/{{reg._id}}' class="btn glyphicon glyphicon-pencil" type="button"></a></td>
 		</tr>
 	</table>
 </div>

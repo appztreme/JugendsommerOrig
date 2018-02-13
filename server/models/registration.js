@@ -31,7 +31,10 @@ var registrationSchema = db.Schema({
   registrationDate: { type: Date, required: false, default: Date.now },
   isPaymentDone: { type: Boolean, required: true, default: false },
   isEmailNotified: { type: Boolean, required: true, default: false },
-	needsPreCare: { type: Boolean, required: true, default: false },
+  needsPreCare: { type: Boolean, required: true, default: false },
+  hasDisability: { type: Boolean, required: true, default: false },
+  disabilityDescription: { type: String, required: false },
+  needsEbK: { type: String, required: true, default: false },
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: false }
 });
 

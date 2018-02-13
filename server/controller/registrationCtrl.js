@@ -50,7 +50,7 @@ exports.delete = (req, res, next) => {
 	});
 };
 
-exports.create = (req, res, next) => {
+exports.create = async(req, res, next) => {
 	var regs = [];
 	for (var i = 0; i < req.body.activityId.length; i++) {
 		var reg = new Registration({
@@ -75,23 +75,29 @@ exports.create = (req, res, next) => {
 			addressChild: req.body.addressChild,
 			cityChild: req.body.cityChild,
 			needsPreCare: req.body.needsPreCare,
+			hasDisability: req.body.hasDisability,
+			disabilityDescription: req.body.disabilityDescription,
+			needsEbK: req.body.needsEbK,
 			userId: req.body.userId
 		});
-		regs.push(reg);
-		// reg.save(function(err, regr) {
-		// 	if(err) { return next(err); }
-		// 	var host = req.get('host');
-		// 	var isKiso = host.indexOf('kiso') !== -1;
-		// 	mail.sendTxtMail(regr.emailParent, regr.firstNameChild, regr.lastNameChild, req.body.type, isKiso);
-		// 	regs.push(regr);
-		// 	if(i === activityId.length) res.status(201).json(regs);
-		// });	
+		regs.push(reg);	
 	}
+	var objids = [];
+	for(var i=0; i < req.body.activityId.length; i++) {
+		objids.push(new mongoose.Types.ObjectId(req.body.activityId[i].trim()));
+	}
+	var activities = [];
+	try {
+		activities = await Activity.find({'_id': { $in: objids } })
+							   .populate('eventId', '_id name location feePerWeek')
+							   .select('_id name eventId');
+	} catch(e) { console.log(e); }
 	Registration.create(regs, function(error, docs) {
 		if(error) { return next(error); }
 		var host = req.get('host');
 		var isKiso = host.indexOf('kiso') !== -1;
-		mail.sendTxtMail(req.body.emailParent, req.body.firstNameChild, req.body.lastNameChild, req.body.type, isKiso);
+
+		mail.sendTxtMail(req.body.emailParent, req.body.firstNameChild, req.body.lastNameChild, req.body.type, isKiso, activities, req.body);
 		res.status(201).json(docs);
 	})
 };
@@ -122,6 +128,9 @@ exports.update = (req, res, next) => {
 		reg.addressChild = req.body.addressChild;
 		reg.cityChild = req.body.cityChild;
 		reg.needsPreCare = req.body.needsPreCare;
+		reg.hasDisability = req.body.hasDisability;
+		reg.disabilityDescription = req.body.disabilityDescription;
+		reg.needsEbK = req.body.needsEbK;
 		reg.save(function(err, regDb) {
 			if(err) { return next(err); }
 			res.status(201).json(regDb);

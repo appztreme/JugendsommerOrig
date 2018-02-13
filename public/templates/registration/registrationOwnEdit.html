@@ -1,0 +1,91 @@
+<div class='container'>
+<h2 class='text-orange'>Anmeldung ändern</h2>
+<form name='registrationForm' class='form-horizontal' novalidate ng-submit='save()'>
+	<div cg-Busy='{promise:busyPromise,message:"Loading",backdrop:true,minDuration:500}'></div>
+
+	<div class='text-orange'><strong>Angaben Eltern:</strong></div>
+	<!-- FIRSTNAMEPARENT -->
+	<div class='form-group' ng-class='{ "has-error": registrationForm.firstNameParent.$invalid }'>
+	    <label for='firstNameParent' class='control-label col-sm-2'>Vorname</label>
+		<div class='col-sm-10'>
+			<input name='firstNameParent' type='text' ng-model='firstNameParent' required maxlength='100' class='form-control'></input>
+		</div>
+	</div>
+	<!-- LASTNAMEPARENT -->
+	<div class='form-group' ng-class='{ "has-error": registrationForm.lastNameParent.$invalid }'>
+		<label for='lastNameParent' class='control-label col-sm-2'>Familienname</label>
+		<div class='col-sm-10'>
+			<input name='lastNameParent' type='text' ng-model='lastNameParent' class='form-control' required maxlenght='100'></input>
+		</div>
+	</div>
+	<!-- PHONENUMBERPARENT -->
+	<div class='form-group' ng-class='{ "has-error": registrationForm.phoneNumberParent.$invalid }'>
+		<label for='phoneNumberParent' class='control-label col-sm-2'>Tel</label>
+		<div class='col-sm-10'>
+			<input name='phoneNumberParent' type='tel' ng-model='phoneNumberParent' required maxlength='150' class='form-control'></input>
+		</div>
+	</div>
+	<!-- EMAILPARENT -->
+	<div class='form-group' ng-class='{ "has-error": registrationForm.emailParent.$invalid }'>
+		<label for='emailParent' class='control-label col-sm-2'>Email</label>
+		<div class='col-sm-10'>
+			<input name='emailParent' type='email' ng-model='emailParent' required maxlength='200' class='form-control'></input>
+		</div>
+	</div>
+	<div class='text-orange'><strong>Angaben zum Kind:</strong></div>
+	<!-- FIRSTNAMECHILD -->
+	<div class='form-group' ng-class='{ "has-error": registrationForm.firstNameChild.$invalid }'>
+	    <label for='firstNameChild' class='control-label col-sm-2'>Vorname</label>
+		<div class='col-sm-10'>
+			<input name='firstNameChild' type='text' ng-model='firstNameChild' required maxlength='100' class='form-control'></input>
+		</div>
+	</div>
+	<!-- LASTNAMECHILD -->
+	<div class='form-group' ng-class='{ "has-error": registrationForm.lastNameChild.$invalid }'>
+		<label for='lastNameChild' class='control-label col-sm-2'>Familienname</label>
+		<div class='col-sm-10'>
+			<input name='lastNameChild' type='text' ng-model='lastNameChild' class='form-control' required maxlenght='100'></input>
+		</div>
+	</div>
+	<!-- BIRTHDAYCHILD -->
+	<div class='form-group' ng-class='{ "has-error": registrationForm.birthdayChild.$invalid }'>
+		<label for='birthdayChild' class='control-label col-sm-2'>Geburtstag</label>
+		<div class='col-sm-10'>
+			<ng-datepicker ng-model='birthdayChild' view-format="DD.MM.YYYY"  locale='de' required></ng-datepicker>
+		</div>
+	</div>
+	<!-- SCHOOLCHILD -->
+	<div class='form-group' ng-class='{ "has-error": registrationForm.schoolChild.$invalid }'>
+		<label for='schoolChild' class='control-label col-sm-2'>Besuchte Klasse</label>
+		<div class='col-sm-10'>
+			<input name='schoolChild' type='text' ng-model='schoolChild' required maxlength='100' class='form-control'></input>
+		</div>
+	</div>
+	<!-- HEALTHCHILD -->
+	<div class='form-group' ng-class='{ "has-error": registrationForm.healthChild.$invalid }'>
+		<label for='healthChild' class='control-label col-sm-2'>Gesundheitliche Probleme</label>
+		<div class='col-sm-10'>
+			<textarea name='healthChild' ng-model='healthChild' rows='3' maxlength='350' class='form-control'></textarea>
+		</div>
+	</div>
+	<!-- ADDRESSCHILD -->
+	<div class='form-group' ng-class='{ "has-error": registrationForm.addressChild.$invalid }'>
+		<label for='addressChild' class='control-label col-sm-2'>Adresse</label>
+		<div class='col-sm-10'>
+			<input name='addressChild' type='text' ng-model='addressChild' required maxlength='100' class='form-control'></input>
+		</div>
+	</div>
+	<!-- CITYCHILD -->
+	<div class='form-group' ng-class='{ "has-error": registrationForm.cityChild.$invalid }'>
+		<label for='cityChild' class='control-label col-sm-2'>Gemeinde</label>
+		<div class='col-sm-10'>
+			<select name='cityChild' class='sel-base form-control' ng-model='cityChild'>
+				<option ng-repeat="city in cities" value='{{city}}'>{{city}}</option>
+			</select>
+		</div>
+	</div>
+	<div class='col-sm-offset-2 col-sm-10' style='margin-top:15px;'>
+			<input class='btn btn-success bnt-lg btn-block' type='submit' value='Speichern'>
+	</div>
+</form>
+</div>

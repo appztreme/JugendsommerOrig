@@ -7,17 +7,24 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 	$scope.acceptAGB = false;
 	$scope.currentState = 1;
 	$scope.selectedActivities = [];
+	$scope.emailParentCheck = '';
 
 	$scope.toggleActivity = function(id) {
 		var index = $scope.selectedActivities.indexOf(id);
 		if(index === -1) $scope.selectedActivities.push(id);
 		else $scope.selectedActivities.splice(index, 1);
-		//console.log($scope.selectedActivities);
+		// if(!RegistrationCacheSvc.hasCurrentRegistration()) {
+		// 	RegistrationCacheSvc.currentRegistration = {};
+		// }
+		// RegistrationCacheSvc.currentRegistration.selectedActivities = $scope.selectedActivities;
 	}
 
 	$scope.setState = function(state) {
 		$scope.currentState = state;
-		//console.log($scope.registrationForm.$valid, $scope.selectedActivities, $scope.acceptAGB, $scope.registrationForm);
+		// if(!RegistrationCacheSvc.hasCurrentRegistration()) {
+		// 	RegistrationCacheSvc.currentRegistration = {};
+		// }
+		// RegistrationCacheSvc.currentRegistration.currentState = state;
 	}
 
 	var host = $location.$$host.toLowerCase();
@@ -49,6 +56,14 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 	$scope.tShirtSizes = conf.tSizes;
 	$scope.cityChild = $scope.isKiso ? 'Bozen': 'Deutschnofen';
 	$scope.needsPreCare = false;
+	$scope.needsAbK = false;
+	$scope.hasDisability = false;
+
+	$scope.isEmailEqual = function() {
+		if($scope.emailParent === '' || !$scope.emailParent || !$scope.emailParentCheck || $scope.emailParentCheck === '') return false;
+		if($scope.emailParent === $scope.emailParentCheck) return true;
+		return false;
+	}
 
 	$scope.canReserve = function(activity) {
         return activity.curParticipants < activity.maxParticipants;
@@ -68,11 +83,11 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 	}
 
 	$scope.isChildDataComplete = function() {
-		return $scope.registrationForm.$valid;
+		return $scope.registrationForm.$valid && $scope.isEmailEqual();
 	}
 
 	$scope.isActivityDataComplete = function() {
-		return $scope.selectedActivities.length > 0;
+		return $scope.selectedActivities && $scope.selectedActivities.length > 0;
 	}
 
 	$scope.isRegistrationAllowed = function() {
@@ -89,6 +104,7 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 			$scope.lastNameParent =  RegistrationCacheSvc.lastRegistration.lastNameParent;
 			$scope.phoneNumberParent = RegistrationCacheSvc.lastRegistration.phoneNumberParent;
 			$scope.emailParent = RegistrationCacheSvc.lastRegistration.emailParent;
+			$scope.emailParentCheck = RegistrationCacheSvc.lastRegistration.emailParent;
 			$scope.firstNameChild = RegistrationCacheSvc.lastRegistration.firstNameChild;
 			$scope.lastNameChild = RegistrationCacheSvc.lastRegistration.lastNameChild;
 			$scope.birthdayChild = $filter('date')(new Date(RegistrationCacheSvc.lastRegistration.birthdayChild), 'yyyy-MM-dd');
@@ -105,6 +121,9 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 			$scope.nameContact2 = RegistrationCacheSvc.lastRegistration.nameContact2;
 			$scope.telContact2 =  RegistrationCacheSvc.lastRegistration.telContact2;
 			$scope.needsPreCare = RegistrationCacheSvc.lastRegistration.needsPreCare;
+			$scope.hasDisability = RegistrationCacheSvc.lastRegistration.hasDisability;
+			$scope.disabilityDescription = RegistrationSvc.lastRegistration.disabilityDescription;
+			$scope.needsAbK = RegistrationSvc.lastRegistration.needsAbK;
 		}
 	};
 
@@ -133,6 +152,9 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 				activityId: $scope.selectedActivities,
 				userId: IdentitySvc.currentUser._id,
 				needsPreCare: $scope.needsPreCare,
+				hasDisability: $scope.hasDisability,
+				disabilityDescription: $scope.disabilityDescription,
+				needsAbK: $scope.needsAbK,
 				type: $scope.type
 			})
 			.error(function(err) {
@@ -145,6 +167,7 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 				$scope.lastNameParent = null;
 				$scope.phoneNumberParent = null;
 				$scope.emailParent = null;
+				$scope.emailParentCheck = '';
 				$scope.firstNameChild = null;
 				$scope.lastNameChild = null;
 				$scope.birthdayChild = null;
@@ -159,9 +182,14 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 				$scope.nameContact2 = null;
 				$scope.telContact2 = null;
 				$scope.needsPreCare = false;
+				$scope.hasDisability = false;
+				$scope.disabilityDescription = null;
+				$scope.needsAbK = false;
 				$scope.selectedActivities = [];
+				$scope.currentState = 1;
 				RegistrationCacheSvc.lastRegistration = reg[0];
-				console.log("last", RegistrationCacheSvc.lastRegistration, reg)
+				RegistrationCacheSvc.currentRegistration = undefined;
+				// console.log("last", RegistrationCacheSvc.lastRegistration, reg)
 			}).then(function() {
 				NotificationSvc.notify($scope.msgSuccess);
 				$location.path('/');
@@ -289,36 +317,62 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 		}
 		RegistrationCacheSvc.currentRegistration.needsPreCare = newValue;
 	});
-
-	if(RegistrationCacheSvc.hasCurrentRegistration()) {
-		$scope.firstNameParent = RegistrationCacheSvc.currentRegistration.firstNameParent;
-		$scope.lastNameParent =  RegistrationCacheSvc.currentRegistration.lastNameParent;
-		$scope.phoneNumberParent = RegistrationCacheSvc.currentRegistration.phoneNumberParent;
-		$scope.emailParent = RegistrationCacheSvc.currentRegistration.emailParent;
-		$scope.firstNameChild = RegistrationCacheSvc.currentRegistration.firstNameChild;
-		$scope.lastNameChild = RegistrationCacheSvc.currentRegistration.lastNameChild;
-		if(RegistrationCacheSvc.currentRegistration.birthdayChild){
-		$scope.birthdayChild = $filter('date')(new Date(RegistrationCacheSvc.currentRegistration.birthdayChild), 'yyyy-MM-dd');
+	$scope.$watch('hasDisability', function(newValue, oldValue) {
+		if(!RegistrationCacheSvc.hasCurrentRegistration()) {
+			RegistrationCacheSvc.currentRegistration = {};
 		}
-		$scope.schoolChild = RegistrationCacheSvc.currentRegistration.schoolChild;
-		$scope.healthChild = RegistrationCacheSvc.currentRegistration.healthChild;
-		$scope.addressChild = RegistrationCacheSvc.currentRegistration.addressChild;
-		$scope.cityChild = RegistrationCacheSvc.currentRegistration.cityChild;
-		$scope.tShirtSize = RegistrationCacheSvc.currentRegistration.tShirtSize;
-		$scope.bandName = RegistrationCacheSvc.currentRegistration.bandName;
-		$scope.instrument = RegistrationCacheSvc.currentRegistration.instrument;
-		$scope.instrumentYears = RegistrationCacheSvc.currentRegistration.instrumentYears;
-		$scope.nameContact1 = RegistrationCacheSvc.currentRegistration.nameContact1;
-		$scope.telContact1 = RegistrationCacheSvc.currentRegistration.telContact1;
-		$scope.nameContact2 = RegistrationCacheSvc.currentRegistration.nameContact2;
-		$scope.telContact2 =  RegistrationCacheSvc.currentRegistration.telContact2;
-		$scope.needsPreCare = RegistrationCacheSvc.currentRegistration.needsPreCare;
-		RegistrationCacheSvc.currentRegistration = undefined;
-	}
+		RegistrationCacheSvc.currentRegistration.hasDisability = newValue;
+	});
+	$scope.$watch('disabilityDescription', function(newValue, oldValue) {
+		if(!RegistrationCacheSvc.hasCurrentRegistration()) {
+			RegistrationCacheSvc.currentRegistration = {};
+		}
+		RegistrationCacheSvc.currentRegistration.disabilityDescription = newValue;
+	});
+	$scope.$watch('needsAbK', function(newValue, oldValue) {
+		if(!RegistrationCacheSvc.hasCurrentRegistration()) {
+			RegistrationCacheSvc.currentRegistration = {};
+		}
+		RegistrationCacheSvc.currentRegistration.needsAbK = newValue;
+	});
+
+	console.log("cur state before", RegistrationCacheSvc.hasCurrentRegistration(), RegistrationCacheSvc.currentRegistration, $scope.currentState, $scope.selectedActivities);
+
+	// if(RegistrationCacheSvc.hasCurrentRegistration()) {
+	// 	$scope.firstNameParent = RegistrationCacheSvc.currentRegistration.firstNameParent;
+	// 	$scope.lastNameParent =  RegistrationCacheSvc.currentRegistration.lastNameParent;
+	// 	$scope.phoneNumberParent = RegistrationCacheSvc.currentRegistration.phoneNumberParent;
+	// 	$scope.emailParent = RegistrationCacheSvc.currentRegistration.emailParent;
+	// 	$scope.firstNameChild = RegistrationCacheSvc.currentRegistration.firstNameChild;
+	// 	$scope.lastNameChild = RegistrationCacheSvc.currentRegistration.lastNameChild;
+	// 	if(RegistrationCacheSvc.currentRegistration.birthdayChild){
+	// 	$scope.birthdayChild = $filter('date')(new Date(RegistrationCacheSvc.currentRegistration.birthdayChild), 'yyyy-MM-dd');
+	// 	}
+	// 	$scope.schoolChild = RegistrationCacheSvc.currentRegistration.schoolChild;
+	// 	$scope.healthChild = RegistrationCacheSvc.currentRegistration.healthChild;
+	// 	$scope.addressChild = RegistrationCacheSvc.currentRegistration.addressChild;
+	// 	$scope.cityChild = RegistrationCacheSvc.currentRegistration.cityChild;
+	// 	$scope.tShirtSize = RegistrationCacheSvc.currentRegistration.tShirtSize;
+	// 	$scope.bandName = RegistrationCacheSvc.currentRegistration.bandName;
+	// 	$scope.instrument = RegistrationCacheSvc.currentRegistration.instrument;
+	// 	$scope.instrumentYears = RegistrationCacheSvc.currentRegistration.instrumentYears;
+	// 	$scope.nameContact1 = RegistrationCacheSvc.currentRegistration.nameContact1;
+	// 	$scope.telContact1 = RegistrationCacheSvc.currentRegistration.telContact1;
+	// 	$scope.nameContact2 = RegistrationCacheSvc.currentRegistration.nameContact2;
+	// 	$scope.telContact2 =  RegistrationCacheSvc.currentRegistration.telContact2;
+	// 	$scope.needsPreCare = RegistrationCacheSvc.currentRegistration.needsPreCare;
+	// 	$scope.hasDisability = RegistrationCacheSvc.currentRegistration.hasDisability;
+	// 	$scope.disabilityDescription = RegistrationCacheSvc.currentRegistration.disabilityDescription;
+	// 	$scope.needsAbK = RegistrationCacheSvc.currentRegistration.needsAbK;
+	// 	// $scope.currentState = RegistrationCacheSvc.currentRegistration.currentState;
+	// 	// $scope.selectedActivities = RegistrationCacheSvc.currentRegistration.selectedActivities;
+	// 	RegistrationCacheSvc.currentRegistration = undefined;
+	// }
+
 
 	RegistrationSvc.findActivitiesByEventId($routeParams.eventId).then(function(response) {
 		$scope.activities = response.data;
-		console.log($scope.activities);
+		// console.log($scope.activities);
 	});
 
 });

@@ -6,6 +6,7 @@ module.exports = {
         {"name": 'Jugenddienst Wipptal',    "name_it": 'Jugenddienst Wipptal'},
         {"name": 'Karneid',                 "name_it": 'Cornedo'},
         {"name": 'Kastelruth',              "name_it": 'Kastelruth'},
+        {"name": 'Kastelruth/Völs',         "name-it": 'Kastelruth/Völs'},  
         {"name": 'Mölten',                  "name_it": 'Meltina'},
         {"name": 'Neustift',                "name_it": 'Neustift'},
         {"name": 'Ritten',                  "name_it": 'Renon'},
