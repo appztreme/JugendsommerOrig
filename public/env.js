@@ -2,6 +2,7 @@
     window.__env = window.__env || {};
     window.__env.cities_jdbl = ['Deutschnofen', 'Jenesien', 'Kastelruth', 'Karneid', 'Mölten', 'Ritten', 'Sarntal', 'Tiers', 'Völs', 'Vöran', 'Welschnofen', 'Andere'];
     window.__env.cities_kiso = ['Bozen', 'Andere'];
+    window.__env.cities_jdul = ['Altrei', 'Aldein', 'Auer', 'Kurtatsch', 'Laag', 'Margreid', 'Montan', 'Neumarkt', 'Tramin', 'Truden', 'Andere'];
     window.__env.tSizes = [
         {"name": '3-4 Jahre/89-104cm',             "name_it": '3-4 anni/89-104cm'},
         {"name": '5-6 Jahre/110-116cm',            "name_it": '5-6 anni/110-116cm'},
