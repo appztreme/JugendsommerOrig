@@ -1,0 +1,10 @@
+<div ng-show="platform.isJDBL()"><div ng-include src="/info-jdbl.html"></div></div>
+
+<div ng-show="platform.isKiso() && lang == 'de'"><div ng-include src="/info-kiso-de.html"></div></div>
+<div ng-show="platform.isKiso() && lang == 'it'"><div ng-include src="/info-kiso-it.html"></div></div>
+
+<div ng-show="platform.isJDUL() && lang == 'de'"><div ng-include src="/info-jdul-de.html"></div></div>
+<div ng-show="platform.isJDUL() && lang == 'it'"><div ng-include src="/info-jdul-it.html"></div></div>
+
+<div ng-show="platform.isTest() && lang == 'de'" ng-include src="/info-jdul-de.html"></div>
+<div ng-show="platform.isTest() && lang == 'it'" ng-include src="/info-jdul-it.html"></div>

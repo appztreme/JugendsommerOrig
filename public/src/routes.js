@@ -12,7 +12,7 @@ app.config(function($routeProvider) {
 		})
 		.when('/info', {
 			controller: 'InfoCtrl',
-			templateUrl: '../templates/info.html'
+			templateUrl: '../templates/info/info.html'
 		})
 		.when('/report', {
 			controller: 'ReportCtrl',

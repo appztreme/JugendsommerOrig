@@ -11,7 +11,7 @@ app.factory('PlatformSvc', function() {
 
                 isJDBL: function() { return !!this.host && this.host.indexOf('jd-bozenland') !== -1; },
 
-                isJDUL: function() { return !!this.host && this.host.indexOf('jdsommer') !== -1; },
+                isJDUL: function() { return !!this.host && this.host.indexOf('jdsummer') !== -1; },
 
                 isJDWT: function() { return !! this.host && this.host.indexOf('wipptal') !== -1; },
 
