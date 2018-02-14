@@ -113,7 +113,7 @@
             "LABEL_TERMS1": "  Ich akzeptiere die ",
             "LABEL_TERMS2": "allgemeinen Geschäftsbedingungen",
             "LABEL_REGISTER": "Anmelden",
-            "LABEL_REGISTRATION_PAY_INFO": "Mit erfolgreicher Anmeldung für ein Programm ist eine Einzahlung verpflichtend",
+            "LABEL_REGISTRATION_PAY_INFO": "Nach erfolgreicher Anmeldung für ein Programm ist eine Einzahlung verpflichtend",
             "BUTTON_SUBMIT": "Anmelden",
             "MSG_SUCCESS": "Anmeldung erfolgreich gespeichert",
             "MSG_NO_DUPLICATES": "Doppelte Anmeldungen pro Veranstaltung sind nicht möglich"
