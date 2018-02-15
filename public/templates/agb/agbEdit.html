@@ -1,4 +1,4 @@
-
+<div ng-controller="AgbEditCtrl">
 <div ng-show="platform.isJDBL() || platform.isJugendsommer()"><div ng-include src='"templates/agb/agb-jdbl.html"'></div><div>
 
 <div ng-show="platform.isKiso() && lang == 'de'"><div ng-include src='"templates/agb/agb-kiso-de.html"'></div></div>
@@ -7,6 +7,6 @@
 <div ng-show="platform.isJDUL() && lang == 'de'"><div ng-include src='"templates/agb/agb-jdul-de.html"'></div></div>
 <div ng-show="platform.isJDUL() && lang == 'it'"><div ng-include src='"templates/agb/agb-jdul-it.html"'></div></div>
 
-<div ng-show="platform.isTest() && lang == 'de'"><div ng-include src='"templates/agb/agb-jdul-de.html"'></div></div>
-<div ng-show="platform.isTest() && lang == 'it'"><div ng-include src='"templates/agb/agb-jdul-it.html"'></div></div>
-
+<div ng-show="platform.isTest() && lang == 'de'"><div ng-include src='"templates/agb/agb-jdul-de.html"'xx></div></div>
+<div ng-show="platform.isTest() && lang == 'it'"><div ng-include src='"templates/agb/agb-jdul-it.html"'>yy</div></div>
+</div>

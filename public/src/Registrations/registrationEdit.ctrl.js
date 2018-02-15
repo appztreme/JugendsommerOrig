@@ -1,9 +1,9 @@
 var app = angular.module('js');
 
-app.controller('RegistrationEditCtrl', function($scope, $filter, $routeParams, $location, NotificationSvc, ActivitiesSvc, RegistrationSvc, conf) {
+app.controller('RegistrationEditCtrl', function($scope, $filter, $routeParams, $location, NotificationSvc, ActivitiesSvc, RegistrationSvc, PlatformSvc, conf) {
 
 	//$scope.busyPromise = RegistrationSvc.findById;
-	$scope.cities = $scope.isKiso ? conf.cities_kiso : conf.cities_jdbl;
+	$scope.cities = PlatformSvc.getCities();
 	$scope.tShirtSizes = conf.tSizes;
 
 	$scope.save = function() {
@@ -31,6 +31,8 @@ app.controller('RegistrationEditCtrl', function($scope, $filter, $routeParams, $
 			$scope.registration.isPaymentDone = $scope.isPaymentDone;
 			$scope.registration.isEmailNotified = $scope.isEmailNotified;
 			$scope.registration.needsPreCare = $scope.needsPreCare;
+			$scope.registration.hasDisability = $scope.hasDisability;
+			$scope.registration.disabilityDescription = $scope.disabilityDescription;
 
 			RegistrationSvc.update( $scope.registration
 			).success(function(reg) {
@@ -56,6 +58,8 @@ app.controller('RegistrationEditCtrl', function($scope, $filter, $routeParams, $
 				$scope.isPaymentDone = false;
 				$scope.isEmailNotified = false;
 				$scope.needsPreCare = false;
+				$scope.hasDisability = false;
+				$scope.disabilityDescription = null;
 			})
 			.then(function() {
 				NotificationSvc.notify('Aenderungen erfolgreich gespeichert');
@@ -89,6 +93,8 @@ app.controller('RegistrationEditCtrl', function($scope, $filter, $routeParams, $
 		$scope.isPaymentDone = registration.isPaymentDone;
 		$scope.isEmailNotified = registration.isEmailNotified;
 		$scope.needsPreCare = registration.needsPreCare;
+		$scope.hasDisability = registration.hasDisability;
+		$scope.disabilityDescription = registration.disabilityDescription;
 
 		ActivitiesSvc.findAllSiblingsByActivityId(registration.activityId).success(function(activities) {
 			$scope.activities = activities;

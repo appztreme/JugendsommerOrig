@@ -1,6 +1,6 @@
 var app = angular.module('js');
 
-app.factory('PlatformSvc', function() {
+app.factory('PlatformSvc', function(conf) {
 
 	return {
                 host: undefined,
@@ -25,6 +25,22 @@ app.factory('PlatformSvc', function() {
                         else if(this.isJDWT()) return 'Jugenddienst Wipptal';
                         else if(this.isTest()) return 'Test';
                         else return 'Title';
+                },
+
+                getCities: function() {
+                        if(this.isKiso()) return conf.cities_kiso;
+                        else if(this.isJugendsommer()) return conf.cities_jdbl;
+                        else if(this.isJDBL()) return conf.cities_jdbl;
+                        else if(this.isJDUL()) return conf.cities_jdul;
+                        else return ['test', 'Andere'];
+                },
+
+                getDefaultCity: function() {
+                        if(this.isKiso()) return 'Bozen';
+                        else if(this.isJugendsommer()) return 'Deutschnofen';
+                        else if(this.isJDBL()) return 'Deutschnofen';
+                        else if(this.isJDUL()) return 'Altrei';
+                        else return 'Andere';
                 }
 	};
 });

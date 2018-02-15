@@ -132,6 +132,6 @@ app.config(function($routeProvider) {
 		})
 		.when('/agb/:eventId', {
 			controller: 'AgbEditCtrl',
-			templateUrl: '../templates/agb/agb.html'
+			templateUrl: '../templates/agb/agbEdit.html'
 		});
 });

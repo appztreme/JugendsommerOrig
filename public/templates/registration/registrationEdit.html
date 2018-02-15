@@ -102,9 +102,20 @@
 			</select>
 		</div>
 	</div>
-	<!-- NEEDSPRECARE -->
+	<!-- NEEDSEBK -->
 	<div class='col-sm-offset-2 col-sm4'>
-		<input type='checkbox' name='needsPreCare' ng-model='needsPreCare'><strong>  Betreuung von 08:00-09:00 (15 EUR)</input>
+		<input type='checkbox' name='needsEbk' ng-model='needsEbK'><strong>  Ebk</input>
+	</div>
+	<!-- NEEDSEBK -->
+	<div class='col-sm-offset-2 col-sm4'>
+			<input type='checkbox' name='hasDisability' ng-model='hasDisability'><strong>  Beeinträchtigung</input>
+	</div>
+	<!-- DISABILITY DESCRIPTION -->
+	<div class='form-group' ng-class='{ "has-error": registrationForm.disabilityDescription.$invalid }'>
+		<label for='disabilityDescription' class='control-label col-sm-2'>Diagnose Beeinträchtigung</label>
+		<div class='col-sm-10'>
+			<input name='disabilityDescription' type='text' ng-model='disabilityDescription' class='form-control'></input>
+		</div>
 	</div>
 	<br />
 	<div class="panel panel-default">
