@@ -49,6 +49,22 @@
 								<input name='emailParentChek' type='email' ng-model='emailParentCheck' maxlength='200' class='form-control'></input>
 							</div>
 						</div>
+						<!-- ADDRESSCHILD -->
+						<div ng-show='type !== "spiritnight"' class='form-group' ng-class='{ "has-error": registrationForm.addressChild.$invalid }'>
+							<label for='addressChild' class='control-label col-sm-2'>{{"RESERVATION.LABEL_ADDRESS_CHILD" | translate}}</label>
+							<div class='col-sm-8'>
+								<input name='addressChild' type='text' ng-model='addressChild' maxlength='100' class='form-control'></input>
+							</div>
+						</div>
+						<!-- CITYCHILD -->
+						<div ng-show='type !== "spiritnight"' class='form-group' ng-class='{ "has-error": registrationForm.cityChild.$invalid }'>
+							<label for='cityChild' class='control-label col-sm-2'>{{"RESERVATION.LABEL_CITY_CHILD" | translate}}</label>
+							<div class='col-sm-8'>
+								<select name='cityChild' class='sel-base form-control' ng-model='cityChild'>
+									<option ng-repeat="city in cities" value='{{city}}'>{{city}}</option>
+								</select>
+							</div>
+						</div>
 						<div ng-show='type === "summer" || type === "music" || type === "club" || type === "jumprun"' class='text-orange'><strong>{{"RESERVATION.HEADER_SUMMER_CHILD" | translate}}</strong></div>
 						<div ng-show='type === "spiritnight"' class='text-orange'><strong>{{"RESERVATION.HEADER_SPIRIT_CHILD" | translate}}</strong></div>
 						<!-- FIRSTNAMECHILD -->
@@ -102,22 +118,7 @@
 								<input type='text' name='disabilityDescription' ng-model='disabilityDescription' maxlength='100' class='form-control'></input>
 							</div>
 						</div>
-						<!-- ADDRESSCHILD -->
-						<div ng-show='type !== "spiritnight"' class='form-group' ng-class='{ "has-error": registrationForm.addressChild.$invalid }'>
-							<label for='addressChild' class='control-label col-sm-2'>{{"RESERVATION.LABEL_ADDRESS_CHILD" | translate}}</label>
-							<div class='col-sm-8'>
-								<input name='addressChild' type='text' ng-model='addressChild' maxlength='100' class='form-control'></input>
-							</div>
-						</div>
-						<!-- CITYCHILD -->
-						<div ng-show='type !== "spiritnight"' class='form-group' ng-class='{ "has-error": registrationForm.cityChild.$invalid }'>
-							<label for='cityChild' class='control-label col-sm-2'>{{"RESERVATION.LABEL_CITY_CHILD" | translate}}</label>
-							<div class='col-sm-8'>
-								<select name='cityChild' class='sel-base form-control' ng-model='cityChild'>
-									<option ng-repeat="city in cities" value='{{city}}'>{{city}}</option>
-								</select>
-							</div>
-						</div>
+						
 						<!--TSHIRTSIZE -->
 						<div ng-show='type === "summer" && isKiso' class='form-group' ng-class='{ "has-error": registrationForm.tShirtSize.$invalid}'>
 							<label for='tShirtSize' class='control-label col-sm-2'>{{"RESERVATION.LABEL_T_SHIRT_SIZE" | translate}}</label>
