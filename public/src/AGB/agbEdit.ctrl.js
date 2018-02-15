@@ -1,12 +1,9 @@
 var app = angular.module('js');
 
-app.controller('AgbEditCtrl', function($scope, $routeParams, $location, AgbsSvc, NotificationSvc, $rootScope, $translate) {
+app.controller('AgbEditCtrl', function($scope, $routeParams, $location, AgbsSvc, NotificationSvc, $rootScope, $translate, PlatformSvc) {
 	$scope.eventId = $routeParams.eventId;
-	$scope.type = $routeParams.type;
-
-	var host = $location.$$host.toLowerCase();
-    $scope.isKiso = host.indexOf('kiso') !== -1;
-
+    $scope.type = $routeParams.type;
+    $scope.platform = PlatformSvc;
 	$scope.lang = $translate.proposedLanguage() || $translate.user();
 
     $rootScope.$on('$translateChangeSuccess', function() {

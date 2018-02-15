@@ -1,9 +1,8 @@
 var app = angular.module('js');
 
-app.controller('GeoSelectionCtrl', function($scope, $location, GeoSvc, $rootScope, $translate, IdentitySvc) {
+app.controller('GeoSelectionCtrl', function($scope, $location, GeoSvc, $rootScope, $translate, IdentitySvc, PlatformSvc) {
     $scope.busyPromise = GeoSvc.getSelection();
-    var host = $location.$$host.toLowerCase();
-
+    $scope.platform = PlatformSvc;
     $scope.lang = $translate.proposedLanguage() || $translate.user();
 
     $rootScope.$on('$translateChangeSuccess', function() {
@@ -15,8 +14,6 @@ app.controller('GeoSelectionCtrl', function($scope, $location, GeoSvc, $rootScop
 		return encodeURI(encoded);
 	}
 
-    $scope.isKiso = host.indexOf('kiso.bz.it') !== -1;
-
     const addNameProp = function (ar) {
         for(var i = 0; i < ar.length; i++) {
             if(ar[i].name === 'club') {
@@ -26,7 +23,7 @@ app.controller('GeoSelectionCtrl', function($scope, $location, GeoSvc, $rootScop
         }
     }
 
-    if(host.indexOf("jugendsommer") !== -1) {
+    if($scope.platform.isJugendsommer()) {
         if(IdentitySvc.isAdmin()) {
             GeoSvc.getSummerSelectionAdmin().success(function(sel) {
                 addNameProp(sel);
@@ -39,7 +36,7 @@ app.controller('GeoSelectionCtrl', function($scope, $location, GeoSvc, $rootScop
             });
         }
     }
-    else if(host.indexOf("jd-bozenland") !== -1) {
+    else if($scope.platform.isJDBL()) {
         if(IdentitySvc.isAdmin()) {
             GeoSvc.getTypeSelectionAdmin().success(function(sel) {
                 addNameProp(sel);

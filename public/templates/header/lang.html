@@ -3,11 +3,13 @@
     <div class='btn btn-lg'
          ng-show="curLang === 'de'"
          ng-click="setLang('it')" >
-        <img src='assets/Italy.png' style='height:35px' />
+        <img ng-show="!platform.isJDUL()" src='assets/Italy.png' style='height:35px' />
+        <div class='btn btn-default' ng-show="platform.isJDUL()">italiano</div>
     </div>
     <div class='btn btn-lg'
          ng-show="curLang === 'it'"
          ng-click="setLang('de')" >
-        <img  src='assets/Germany.png' style='height:35px' />
+        <img ng-show="!platform.isJDUL()" src='assets/Germany.png' style='height:35px' />
+        <div class='btn btn-default' ng-show="platform.isJDUL()">deutsch</div>
     </div>
 </div>
