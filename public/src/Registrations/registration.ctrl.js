@@ -8,6 +8,7 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 	$scope.currentState = 1;
 	$scope.selectedActivities = [];
 	$scope.emailParentCheck = '';
+	$scope.platform = PlatformSvc;
 
 	$scope.toggleActivity = function(id) {
 		var index = $scope.selectedActivities.indexOf(id);

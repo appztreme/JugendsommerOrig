@@ -1,7 +1,8 @@
 var app = angular.module('js');
 
-app.controller('ActivityEditCtrl', function($scope, $routeParams, $location, NotificationSvc, ActivitiesSvc) {
+app.controller('ActivityEditCtrl', function($scope, $routeParams, $location, NotificationSvc, ActivitiesSvc, PlatformSvc) {
 	$scope.title = 'Woche ändern';
+	$scope.platform = PlatformSvc;
 
 	$scope.save = function() {
 		if($scope.activityForm.$valid) {
