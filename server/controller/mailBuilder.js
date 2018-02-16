@@ -8,12 +8,23 @@ var txtSpiritnight = "Vielen Dank für die Teilnahme an der SpiritNight 2017! Bi
 var txtStart = "Die Anmeldung für ";
 var txtEnd = " für die Sommerprogramme des Jugenddienstes Bozen Land war erfolgreich. Einzahlungsschein wird demnächst mittels email zugesandt.";
 
+var txtStartJDUL_de = "Anmeldebestätigung./r/nEs freut uns, dass du heuer im Sommer beim Sommerferienprogramm in ";
+var txtEndJDUL_de = " dabei sein wirst./r/nDu wirst in der nächsten Zeit noch eine weitere E-Mail mit detaillierteren Informationen erhalten./r/nDeine Eltern sind gebeten folgende Daten zu kontrollieren und die Teilnahmegebühr bis zum 31.03.2018 auf folgendes Konto zu überweisen:/r/nJugenddienst Unterland – Raiffeisenkasse Salurn/r/nIBAN: IT 27 T 08220 58371000304204042/r/nmit dem Betreff: Nachname Vorname Wohnort./r/nWir freuen uns jetzt schon auf einen tollen Sommer, hoffen auf viel schönes Wetter und wünschen euch noch eine tolle Zeit bis zum Sommer."
+var txtStartJDUL_it = "Conferma d‘iscrizione./r/nSiamo contenti che parteciperai al nostro programma vacanze estive a ";
+var txtEndJDUL_it = " Nei prossimi tempi riceverai un’altra e-Mail con ulteriori informazioni./r/nI tuoi genitori sono pregati di controllare i seguenti dati e di versare l’importo sul nostro conto corrente entro il 31.03.2018:/r/nJugenddienst Unterland – Raiffeisenkasse Salurn/r/nIBAN: IT 27 T 08220 58371000304204042/r/ncon l‘oggetto: Nachname Vorname Wohnort./r/nNon vediamo l’ora che l’estate inizi a gonfie vele e speriamo in un bel tempo. Nel frattempo vi auguriamo tanto divertimento";
+var htmlStartJDUL_de = "<html><body><h2>Anmeldebestätigung</h2>Liebe/r ";
+var htmlMiddleJDUL_de = ",<br />es freut uns, dass du heuer im Sommer beim Sommerferienprogramm in ";
+var htmlEndJDUL_de = " dabei sein wirst.<br />Du wirst in der nächsten Zeit noch eine weitere E-Mail mit detaillierteren Informationen erhalten.<br />Deine Eltern sind gebeten folgende Daten zu kontrollieren und die Teilnahmegebühr bis zum <strong>31.03.2018</strong> auf folgendes Konto zu überweisen:<br />Jugenddienst Unterland – Raiffeisenkasse Salurn<br />IBAN: IT 27 T 08220 58371000304204042<br />mit dem Betreff: Nachname Vorname Wohnort<br /><br />Wir freuen uns jetzt schon auf einen tollen Sommer, hoffen auf viel schönes Wetter und wünschen euch noch eine tolle Zeit bis zum Sommer<br>Euer Jugenddienst Unterland Team";
+var htmlStartJDUL_it = "<html><body><h2>Conferma d‘iscrizione</h2>Cara/o ";
+var hmlMiddleJDUL_it = ",<br />Siamo contenti che parteciperai al nostro programma vacanze estive a ";
+var htmlEndJDUL_it = ".<br />Nei prossimi tempi riceverai un’altra e-Mail con ulteriori informazioni.<br />I tuoi genitori sono pregati di controllare i seguenti dati e di versare l’importo sul nostro conto corrente entro il <strong>31.03.2018:</stong><br />Jugenddienst Unterland – Raiffeisenkasse Salurn<br />IBAN: IT 27 T 08220 58371000304204042<br />con l‘oggetto: Nachname Vorname Wohnort<br /><br />Non vediamo l’ora che l’estate inizi a gonfie vele e speriamo in un bel tempo. Nel frattempo viauguriamo tanto divertimento<br />Il Vostro Team del Jugenddienst Unterland";
+
 var htmlKiso = "<html><body>Vielen Dank für die Anmeldung Ihres Kindes zum KISO 2017!<br />Sie erhalten innerhalb der n√§chsten Tage eine Rückmeldung vom Jugenddienst Bozen zu Ihrem Anmeldestand.<br />Falls das Gruppenlimit für die betreffende Woche bereits erreicht sein sollte, kommt Ihr Kind auf die Warteliste.<br />Freundliche Grüße,<br />das Jugenddienst Bozen Team<br /><br />Ringraziamo per l'iscrizione di suo/a figlio/a al KISO 2017!<br />Nei prossimi giorni lo Jugenddienst Bozen<br />Le invierà una risposta sullo stato di iscrizione. Se i posti disponibli per la settimana interessata dovessero già essere esauriti, suo/a figlio/a sarà messo/a sulla lista d'attesa.<br />Cordiali saluti,<br />l'equipe dello Jugenddienst Bozen";
 var textKiso = "Vielen Dank für die Anmeldung Ihres Kindes zum KISO 2017!\r\nSie erhalten innerhalb der nächsten Tage eine Rückmeldung vom Jugenddienst Bozen zu Ihrem Anmeldestand.\r\nFalls das Gruppenlimit für die betreffende Woche bereits erreicht sein sollte, kommt Ihr Kind auf die Warteliste.\r\nFreundliche Grüße, das Jugenddienst Bozen Team \r\n\r\nRingraziamo per l’iscrizione di suo/a figlio/a al KISO 2017!\r\nNei prossimi giorni lo Jugenddienst Bozen Le invierà una risposta sullo stato di iscrizione. Se i posti disponibli per la settimana interessata dovessero già essere esauriti, suo/a figlio/a sarà messo/a sulla lista d‘attesa.\r\nCordiali saluti,\r\nl’equipe dello Jugenddienst Bozen";
 var htmlJumpRun = "<html><body>Vielen Dank für die Anmeldung Ihres Kindes zum Jump&Run 2017!<br />Sie erhalten innerhalb der n√§chsten Tage eine Rückmeldung vom Jugenddienst Bozen zu Ihrem Anmeldestand.<br />Falls das Gruppenlimit für die betreffende Woche bereits erreicht sein sollte, kommt Ihr Kind auf die Warteliste.<br />Freundliche Grüße,<br />das Jugenddienst Bozen Team<br /><br />Ringraziamo per l'iscrizione di suo/a figlio/a al Jump&Run 2017!<br />Nei prossimi giorni lo Jugenddienst Bozen<br />Le invierà una risposta sullo stato di iscrizione. Se i posti disponibli per la settimana interessata dovessero già essere esauriti, suo/a figlio/a sarà messo/a sulla lista d'attesa.<br />Cordiali saluti,<br />l'equipe dello Jugenddienst Bozen";
 var textJumpRun = "Vielen Dank für die Anmeldung Ihres Kindes zum Jump&Run 2017!\r\nSie erhalten innerhalb der nächsten Tage eine Rückmeldung vom Jugenddienst Bozen zu Ihrem Anmeldestand.\r\nFalls das Gruppenlimit für die betreffende Woche bereits erreicht sein sollte, kommt Ihr Kind auf die Warteliste.\r\nFreundliche Grüße, das Jugenddienst Bozen Team \r\n\r\nRingraziamo per l’iscrizione di suo/a figlio/a al Jump&Run 2017!\r\nNei prossimi giorni lo Jugenddienst Bozen Le invierà una risposta sullo stato di iscrizione. Se i posti disponibli per la settimana interessata dovessero già essere esauriti, suo/a figlio/a sarà messo/a sulla lista d‘attesa.\r\nCordiali saluti,\r\nl’equipe dello Jugenddienst Bozen";
 
-exports.getTypeString = function(type) {
+function getTypeString(type) {
 	switch (type) {
 		case 'summer': return 'Jugendsommer'; break;
 		case 'music': return 'Musikwoche'; break;
@@ -24,12 +35,34 @@ exports.getTypeString = function(type) {
 	}
 }
 
-exports.getTypeText = function(type, firstNameChild, lastNameChild, isKiso) {
-	if(isKiso) {
+exports.getSender = function(instance) {
+	if(instance.isKiso) return 'kiso@jd.bz.it';
+	else if(instance.isJugendsommer) return 'sommer@jugenddienst.com';
+	else if(instance.isJDBL) return 'info@jugenddienst.com';
+	else if(instance.isJDUL) return 'unterland@jugenddienst.it';
+	else return 'info@jugenddienst.com';
+}
+
+function getKisoSubject(type) {
+	if(type === 'jumprun') {
+		return 'Anmeldung / Iscrizione ' + getTypeString(type);
+	}
+	return 'Anmeldung / Iscrizione KiSo Kindersommer 2017'
+}
+
+exports.getSubject = function(instance, type) {
+	if(instance.isKiso) return getKisoSubject(type);
+	else return 'Anmeldung ' + getTypeString(type);
+}
+
+exports.getTypeText = function(type, firstNameChild, lastNameChild, location, instance) {
+	if(instance.isKiso) {
 		if(type === 'jumprun')
 			return textJumpRun;
 		else
 			return textKiso;
+	} else if(instance.isJDUL) {
+		return txtStartJDUL_de + location + txtEndJDUL_de + "/r/n/r/n" + txtStartJDUL_it + location + txtEndJDUL_it;
 	} else {
 		switch (type) {
 			case 'summer':
@@ -47,12 +80,17 @@ exports.getTypeText = function(type, firstNameChild, lastNameChild, isKiso) {
 	}
 }
 
-exports.getTypeBody = function(type, firstNameChild, lastNameChild, isKiso, activities, reservation) {
-	if(isKiso) {
+exports.getTypeBody = function(type, firstNameChild, lastNameChild, activities, reservation, instance) {
+	if(instance.isKiso) {
 		if(type === 'jumprun')
 			return htmlJumpRun;
 		else
 			return htmlKiso;
+	if(instance.isJDUL) {
+		return htmlStartJDUL_de + firstNameChild + htmlMiddleJDUL_de + activities[0].eventId.location + htmlEndJDUL_de + "<br />" +
+			   htmlStartJDUL_it + firstNameChild + htmlMiddleJDUL_it + activities[0].eventId.location + htmlEndJDUL_it + "<br />" +
+			   getActivityTable(activities) + "<br />" + getReservationTable(reservation);
+	}
 	} else {
 		switch (type) {
 			case 'summer':
@@ -113,11 +151,4 @@ function getJDBLFooter() {
 	footer += '<tr><td><img src="cid:my-image" width="150" /></td></tr>';
 	footer += '</table>';
 	return footer;
-}
-
-exports.getKisoSubject = function (type) {
-	if(type === 'jumprun') {
-		return 'Anmeldung / Iscrizione ' + getTypeString(type);
-	}
-	return 'Anmeldung / Iscrizione KiSo Kindersommer 2017'
 }

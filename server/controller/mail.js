@@ -2,11 +2,11 @@ var email   = require("./../../node_modules/emailjs/email");
 var server  = email.server.connect({});
 var mailbuilder = require('./mailBuilder');
 
-exports.sendTxtMail = function(recipient, firstNameChild, lastNameChild, type, isKiso, activities, reservation) {
-		var body = mailbuilder.getTypeBody(type, firstNameChild, lastNameChild, isKiso, activities, reservation);
-		var text = mailbuilder.getTypeText(type, firstNameChild, lastNameChild, isKiso);
-        var fromEmail = isKiso ? 'kiso@jd.bz.it' : 'info@jugenddienst.com';
-		var subjectEmail = isKiso ? mailbuilder.getKisoSubject(type) : 'Anmeldung ' + mailbuilder.getTypeString(type);
+exports.sendTxtMail = function(recipient, firstNameChild, lastNameChild, type, activities, reservation, instance) {
+		var body = mailbuilder.getTypeBody(type, firstNameChild, lastNameChild, activities, reservation, instance);
+		var text = mailbuilder.getTypeText(type, firstNameChild, lastNameChild, activities[0].eventId.location, instance);
+        var fromEmail = mailbuilder.getSender(instance);
+		var subjectEmail = mailbuilder.getSubject(instance, type);
 		console.log("body", body);
 		server.send({
 		text: text,

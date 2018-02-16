@@ -6,6 +6,7 @@ const Activity = require('./../models/activity');
 const ActivityRepo = require('./../repositories/activity');
 const RegistrationRepo = require('./../repositories/registration');
 const mail = require('./mail');
+const platform = require('./platform');
 const mongoose = require('mongoose');
 
 const curYear = new Date().getFullYear();
@@ -94,10 +95,8 @@ exports.create = async(req, res, next) => {
 	} catch(e) { console.log(e); }
 	Registration.create(regs, function(error, docs) {
 		if(error) { return next(error); }
-		var host = req.get('host');
-		var isKiso = host.indexOf('kiso') !== -1;
-
-		mail.sendTxtMail(req.body.emailParent, req.body.firstNameChild, req.body.lastNameChild, req.body.type, isKiso, activities, req.body);
+		var instance = platform.getPlatform(req.get('host'));
+		mail.sendTxtMail(req.body.emailParent, req.body.firstNameChild, req.body.lastNameChild, req.body.type, activities, req.body, instance);
 		res.status(201).json(docs);
 	})
 };
