@@ -1,10 +1,10 @@
 var app = angular.module('js');
 
-app.controller('EventsCtrl', function($scope, $routeParams, $location, EventsSvc, IdentitySvc, $rootScope, $translate) {
+app.controller('EventsCtrl', function($scope, $routeParams, $location, EventsSvc, IdentitySvc, $rootScope, $translate, PlatformSvc) {
 	//$scope.busyPromise = EventsSvc.find();
 	var host = $location.$$host.toLowerCase();
 	$scope.isKiso = host.indexOf('kiso') !== -1
-
+	$scope.platform = PlatformSvc;
 	$scope.lang = $translate.proposedLanguage() || $translate.user();
 
 	$scope.isRegistrationWarningVisible = function() {

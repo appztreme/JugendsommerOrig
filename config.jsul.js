@@ -5,7 +5,7 @@ module.exports = {
         {"name": 'Auer',                    "name_it": 'Ora'},
         {"name": 'Kurtatsch',               "name_it": 'Cortaccia'},
         {"name": 'Laag',                    "name_it": 'Laghetti'},
-        {"name": 'Margreid',                "name_it": 'Magre'},
+        {"name": 'Margreid',                "name_it": 'Magrè'},
         {"name": 'Montan',                  "name_it": 'Montagna'},
         {"name": 'Neumarkt',                "name_it": 'Egna'},
         {"name": 'Tramin',                  "name_it": 'Termeno'},
