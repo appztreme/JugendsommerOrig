@@ -8,7 +8,7 @@ module.exports = {
         {"name": 'Margreid',                "name_it": 'Magre'},
         {"name": 'Montan',                  "name_it": 'Montagna'},
         {"name": 'Neumarkt',                "name_it": 'Egna'},
-        {"name": 'Tramin',                  "name_it": 'Temeno'},
+        {"name": 'Tramin',                  "name_it": 'Termeno'},
         {"name": 'Truden',                  "name_it": 'Trodena'},
     ],
     "tSizes": [

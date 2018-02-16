@@ -7,6 +7,7 @@ exports.getPlatform = function(host) {
     var isJDUL = host.indexOf('jdsummer') !== -1;
     var isTest = host.indexOf('localhost') !== -1;
     return {
+        host: host,
         isKiso: isKiso,
         isJugendsommer: isJugendsommer,
         isJDBL: isJDBL,

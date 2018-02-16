@@ -81,17 +81,19 @@ exports.getTypeText = function(type, firstNameChild, lastNameChild, location, in
 }
 
 exports.getTypeBody = function(type, firstNameChild, lastNameChild, activities, reservation, instance) {
+	console.log(instance, "platform")
 	if(instance.isKiso) {
 		if(type === 'jumprun')
 			return htmlJumpRun;
 		else
 			return htmlKiso;
-	if(instance.isJDUL) {
+	}
+	else if (instance.isJDUL) {
 		return htmlStartJDUL_de + firstNameChild + htmlMiddleJDUL_de + activities[0].eventId.location + htmlEndJDUL_de + "<br />" +
 			   htmlStartJDUL_it + firstNameChild + htmlMiddleJDUL_it + activities[0].eventId.location + htmlEndJDUL_it + "<br />" +
-			   getActivityTable(activities) + "<br />" + getReservationTable(reservation);
+		   getActivityTable(activities) + "<br />" + getReservationTable(reservation);
 	}
-	} else {
+	else {
 		switch (type) {
 			case 'summer':
 			case 'music':

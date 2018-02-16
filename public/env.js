@@ -16,7 +16,7 @@
     window.__env.translations.de = {
         "NAV": {
             "INFO": "Info",
-            "PROGRAM": "Programm",
+            "PROGRAM": "Anmeldung",
             "MYRES": "Meine Reservierungen",
             "MYCOMMITS": "Meine Rechnungen",
             "REPORT": "Report",
@@ -138,7 +138,7 @@
     window.__env.translations.it = {
         "NAV": {
             "INFO": "Info",
-            "PROGRAM": "Le nostre settimane",
+            "PROGRAM": "Iscrizione",
             "MYRES": "Le mie prenotazioni",
             "MYCOMMITS": "Le mie fatture",
             "REPORT": "Report",
