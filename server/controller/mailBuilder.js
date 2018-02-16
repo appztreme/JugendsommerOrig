@@ -14,10 +14,10 @@ var txtStartJDUL_it = "Conferma d‘iscrizione./r/nSiamo contenti che parteciper
 var txtEndJDUL_it = " Nei prossimi tempi riceverai un’altra e-Mail con ulteriori informazioni./r/nI tuoi genitori sono pregati di controllare i seguenti dati e di versare l’importo sul nostro conto corrente entro il 31.03.2018:/r/nJugenddienst Unterland – Raiffeisenkasse Salurn/r/nIBAN: IT 27 T 08220 58371000304204042/r/ncon l‘oggetto: Nachname Vorname Wohnort./r/nNon vediamo l’ora che l’estate inizi a gonfie vele e speriamo in un bel tempo. Nel frattempo vi auguriamo tanto divertimento";
 var htmlStartJDUL_de = "<html><body><h2>Anmeldebestätigung</h2>Liebe/r ";
 var htmlMiddleJDUL_de = ",<br />es freut uns, dass du heuer im Sommer beim Sommerferienprogramm in ";
-var htmlEndJDUL_de = " dabei sein wirst.<br />Du wirst in der nächsten Zeit noch eine weitere E-Mail mit detaillierteren Informationen erhalten.<br />Deine Eltern sind gebeten folgende Daten zu kontrollieren und die Teilnahmegebühr bis zum <strong>31.03.2018</strong> auf folgendes Konto zu überweisen:<br />Jugenddienst Unterland – Raiffeisenkasse Salurn<br />IBAN: IT 27 T 08220 58371000304204042<br />mit dem Betreff: Nachname Vorname Wohnort<br /><br />Wir freuen uns jetzt schon auf einen tollen Sommer, hoffen auf viel schönes Wetter und wünschen euch noch eine tolle Zeit bis zum Sommer<br>Euer Jugenddienst Unterland Team";
+var htmlEndJDUL_de = " dabei sein wirst.<br />Du wirst in der nächsten Zeit noch eine weitere E-Mail mit detaillierteren Informationen erhalten.<br /><br />Deine Eltern sind gebeten folgende Daten zu kontrollieren und die Teilnahmegebühr bis zum <strong>31.03.2018</strong> auf folgendes Konto zu überweisen:<br /><br />Jugenddienst Unterland – Raiffeisenkasse Salurn<br />IBAN: IT 27 T 08220 58371000304204042<br />mit dem Betreff: Nachname Vorname Wohnort<br /><br />Wir freuen uns jetzt schon auf einen tollen Sommer, hoffen auf viel schönes Wetter und wünschen euch noch eine tolle Zeit bis zum Sommer<br /><br />Euer Jugenddienst Unterland Team";
 var htmlStartJDUL_it = "<html><body><h2>Conferma d‘iscrizione</h2>Cara/o ";
 var htmlMiddleJDUL_it = ",<br />Siamo contenti che parteciperai al nostro programma vacanze estive a ";
-var htmlEndJDUL_it = ".<br />Nei prossimi tempi riceverai un’altra e-Mail con ulteriori informazioni.<br />I tuoi genitori sono pregati di controllare i seguenti dati e di versare l’importo sul nostro conto corrente entro il <strong>31.03.2018:</stong><br />Jugenddienst Unterland – Raiffeisenkasse Salurn<br />IBAN: IT 27 T 08220 58371000304204042<br />con l‘oggetto: Nachname Vorname Wohnort<br /><br />Non vediamo l’ora che l’estate inizi a gonfie vele e speriamo in un bel tempo. Nel frattempo viauguriamo tanto divertimento<br />Il Vostro Team del Jugenddienst Unterland";
+var htmlEndJDUL_it = ".<br />Nei prossimi tempi riceverai un’altra e-Mail con ulteriori informazioni.<br /><br />I tuoi genitori sono pregati di controllare i seguenti dati e di versare l’importo sul nostro conto corrente entro il <strong>31.03.2018:</strong><br /><br />Jugenddienst Unterland – Raiffeisenkasse Salurn<br />IBAN: IT 27 T 08220 58371000304204042<br />con l‘oggetto: Nachname Vorname Wohnort<br /><br />Non vediamo l’ora che l’estate inizi a gonfie vele e speriamo in un bel tempo. Nel frattempo viauguriamo tanto divertimento<br /><br />Il Vostro Team del Jugenddienst Unterland";
 
 var htmlKiso = "<html><body>Vielen Dank für die Anmeldung Ihres Kindes zum KISO 2017!<br />Sie erhalten innerhalb der n√§chsten Tage eine Rückmeldung vom Jugenddienst Bozen zu Ihrem Anmeldestand.<br />Falls das Gruppenlimit für die betreffende Woche bereits erreicht sein sollte, kommt Ihr Kind auf die Warteliste.<br />Freundliche Grüße,<br />das Jugenddienst Bozen Team<br /><br />Ringraziamo per l'iscrizione di suo/a figlio/a al KISO 2017!<br />Nei prossimi giorni lo Jugenddienst Bozen<br />Le invierà una risposta sullo stato di iscrizione. Se i posti disponibli per la settimana interessata dovessero già essere esauriti, suo/a figlio/a sarà messo/a sulla lista d'attesa.<br />Cordiali saluti,<br />l'equipe dello Jugenddienst Bozen";
 var textKiso = "Vielen Dank für die Anmeldung Ihres Kindes zum KISO 2017!\r\nSie erhalten innerhalb der nächsten Tage eine Rückmeldung vom Jugenddienst Bozen zu Ihrem Anmeldestand.\r\nFalls das Gruppenlimit für die betreffende Woche bereits erreicht sein sollte, kommt Ihr Kind auf die Warteliste.\r\nFreundliche Grüße, das Jugenddienst Bozen Team \r\n\r\nRingraziamo per l’iscrizione di suo/a figlio/a al KISO 2017!\r\nNei prossimi giorni lo Jugenddienst Bozen Le invierà una risposta sullo stato di iscrizione. Se i posti disponibli per la settimana interessata dovessero già essere esauriti, suo/a figlio/a sarà messo/a sulla lista d‘attesa.\r\nCordiali saluti,\r\nl’equipe dello Jugenddienst Bozen";
@@ -80,6 +80,19 @@ exports.getTypeText = function(type, firstNameChild, lastNameChild, location, in
 	}
 }
 
+exports.getAttachment = function(body, instance) {
+	if(instance.isJDBL || instance.isJugendsommer) {
+		return [{ data: body, alternative: true },
+			    { path:"public/assets/jdbl-logo.jpg", type:"image/jpg", headers:{"Content-ID":"<my-image>"} }]
+	}
+	else if (instance.isJDUL) {
+		return [{ data: body, alternative: true },
+			{ path:"public/assets/jdul-ente.jpg", type:"image/jpg", headers:{"Content-ID":"<my-image>"} }]
+	} else {
+		return [{ data: body, alternative: true }];
+	}
+}
+
 exports.getTypeBody = function(type, firstNameChild, lastNameChild, activities, reservation, instance) {
 	console.log(instance, "platform")
 	if(instance.isKiso) {
@@ -90,8 +103,8 @@ exports.getTypeBody = function(type, firstNameChild, lastNameChild, activities, 
 	}
 	else if (instance.isJDUL) {
 		return htmlStartJDUL_de + firstNameChild + htmlMiddleJDUL_de + activities[0].eventId.location + htmlEndJDUL_de + "<br />" +
-			   htmlStartJDUL_it + firstNameChild + htmlMiddleJDUL_it + activities[0].eventId.location + htmlEndJDUL_it + "<br />" +
-		   getActivityTable(activities) + "<br />" + getReservationTable(reservation);
+			   htmlStartJDUL_it + firstNameChild + htmlMiddleJDUL_it + activities[0].eventId.location + htmlEndJDUL_it + "<br /><br />" +
+		   getActivityTable(activities) + "<br /><br />" + getReservationTable(reservation);
 	}
 	else {
 		switch (type) {

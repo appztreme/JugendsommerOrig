@@ -13,8 +13,7 @@ exports.sendTxtMail = function(recipient, firstNameChild, lastNameChild, type, a
 		from: fromEmail,
 		to: recipient,
 		subject: subjectEmail,
-		attachment: [{ data: body, alternative: true },
-		             { path:"public/assets/jdbl-logo.jpg", type:"image/jpg", headers:{"Content-ID":"<my-image>"} }]
+		attachment: mailbuilder.getAttachment(body, instance)
 	}, function(err, message) {console.log(err||message); });
 };
 
