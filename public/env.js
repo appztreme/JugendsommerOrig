@@ -59,7 +59,7 @@
             "BUTTON_SUBMIT2": "Ändern"
         },
         "SELECTION": {
-            "TITLE": "Wo wir tätig sind",
+            "TITLE": "Wir sind in folgenden Gemeinden vertreten",
             "PROGRAM": "Programme",
             "INFO": "Bitte lesen Sie sich vor der Anmeldung aufmerksam unsere Allgemeinen Geschäftsbedingungen durch!",
         },
@@ -181,7 +181,7 @@
             "BUTTON_SUBMIT2": "Cambio password"
         },
         "SELECTION": {
-            "TITLE": "Le nostre settimane",
+            "TITLE": "Siamo presenti nei seguenti communi",
             "PROGRAM": "programmi",
             "INFO": "Preghiamo di leggere attentamente le nostre condizioni generali prima di effettuare l’iscrizione"
         },
