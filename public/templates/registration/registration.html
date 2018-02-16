@@ -221,12 +221,12 @@
 										<strong ng-show="lang == 'it'">{{activity.name_it}}</strong>
 										<div class='text-info'>{{activity.startDate | date: 'dd/MM/yyyy'}} - {{activity.endDate | date: 'dd/MM/yyyy'}}</div>
 									</div>
-									<div class='col-sm-1'>
+									<div class='col-sm-1' ng-show='!platform.isJDUL()'>
 										<button ng-class='{"btn-success": canReserve(activity), "btn-warning": canQueue(activity), "btn-danger": canNotReserve(activity), "act-status": 1 == 1, "active": 1 == 1}'><span class='badge'>{{activity.curParticipants}}<span></button>
 									</div>
 									<div class='col-sm-3'>
-											<div ng-show="canReserve(activity)" class='act-status-txt'>{{'ACTIVITIES.STATUS_RESERVATION' | translate:getCountObj(activity) }}</div>
-											<div ng-show="canQueue(activity)" class='act-status-txt'>{{'ACTIVITIES.STATUS_LIMIT' | translate}}</div>
+											<div ng-show="canReserve(activity) && !platform.isJDUL()" class='act-status-txt'>{{'ACTIVITIES.STATUS_RESERVATION' | translate:getCountObj(activity) }}</div>
+											<div ng-show="canQueue(activity) && !platform.isJDUL()" class='act-status-txt'>{{'ACTIVITIES.STATUS_LIMIT' | translate}}</div>
 											<div ng-show="canNotReserve(activity)" class='act-status-txt'>{{'ACTIVITIES.STATUS_COMPLETE' | translate}}</div>
 									</div>
 								</div>
