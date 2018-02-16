@@ -87,7 +87,7 @@ exports.getAttachment = function(body, instance) {
 	}
 	else if (instance.isJDUL) {
 		return [{ data: body, alternative: true },
-			{ path:"public/assets/jdul-ente.jpg", type:"image/jpg", headers:{"Content-ID":"<my-image>"} }]
+			{ path:"public/assets/jdul_ente.jpg", type:"image/jpg", headers:{"Content-ID":"<my-image>"} }]
 	} else {
 		return [{ data: body, alternative: true }];
 	}
