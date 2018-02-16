@@ -1,9 +1,10 @@
 var app = angular.module('js');
 
-app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc, NotificationSvc, ReportCacheSvc) {
+app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc, NotificationSvc, ReportCacheSvc, PlatformSvc) {
 	$scope.busyPromise = RegistrationSvc.find() || RegistrationSvc.updateIsPaymentDone();
 
 	var host = $location.$$host.toLowerCase();
+	$scope.platform = PlatformSvc;
 
 	// default values
 	$scope.yearFilter = (new Date()).getFullYear();

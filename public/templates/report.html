@@ -106,6 +106,8 @@
 			<th>T-Shirt</th>
 			<th>Beeinträchtigung</th>
 			<th>Diagnose</th>
+			<th ng-show='platform.isJDUL()'>Kann Schwimmen</th>
+			<th ng-show='platform.isJDUL()'>Darf allein nach Hause</th>
 			<th>Anmeldedatum</th>
 		</tr>
 		<tr ng-repeat='reg in registrations | orderBy:[colNameSort,colNameSort2]'>
@@ -135,6 +137,8 @@
 			<td>{{reg.tShirtSize}}</td>
 			<td>{{formatBool(reg.hasDisability)}}</td>
 			<td>{{reg.disabilityDescription}}</td>
+			<td ng-show='platform.isJDUL()'>{{reg.canSwim}}</td>
+			<td ng-show='platform.isJDUL()'>{{reg.canGoHomeAllone}}</td>
 			<td>{{reg.registrationDate | date: 'dd/MM/yyyy : hh.mm.ss'}}</td>
 		</tr>
 	</table>

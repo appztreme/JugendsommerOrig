@@ -79,6 +79,8 @@ exports.create = async(req, res, next) => {
 			hasDisability: req.body.hasDisability,
 			disabilityDescription: req.body.disabilityDescription,
 			needsEbK: req.body.needsEbK,
+			canSwim: req.body.canSwim,
+			canGoHomeAllone: req.body.canGoHomeAllone,
 			userId: req.body.userId
 		});
 		regs.push(reg);	
@@ -130,6 +132,8 @@ exports.update = (req, res, next) => {
 		reg.hasDisability = req.body.hasDisability;
 		reg.disabilityDescription = req.body.disabilityDescription;
 		reg.needsEbK = req.body.needsEbK;
+		reg.canSwim = req.body.canSwim;
+		reg.canGoHomeAllone = req.body.canGoHomeAllone;
 		reg.save(function(err, regDb) {
 			if(err) { return next(err); }
 			res.status(201).json(regDb);

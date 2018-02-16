@@ -50,6 +50,8 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 	$scope.cityChild = PlatformSvc.getDefaultCity();
 	$scope.needsPreCare = false;
 	$scope.needsAbK = false;
+	$scope.canSwim = false;
+	$scope.canGoHomeAllone = false;
 	$scope.hasDisability = false;
 
 	$scope.isEmailEqual = function() {
@@ -115,7 +117,9 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 			$scope.telContact2 =  RegistrationCacheSvc.lastRegistration.telContact2;
 			$scope.needsPreCare = RegistrationCacheSvc.lastRegistration.needsPreCare;
 			$scope.hasDisability = RegistrationCacheSvc.lastRegistration.hasDisability;
-			$scope.disabilityDescription = RegistrationSvc.lastRegistration.disabilityDescription;
+			$scope.disabilityDescription = RegistrationCacheSvc.lastRegistration.disabilityDescription;
+			$scope.canSwim = RegistrationCacheSvc.lastRegistration.canSwim;
+			$scope.canGoHomeAllone = RegistrationCacheSvc.lastRegistration.canGoHomeAllone;
 			$scope.needsAbK = RegistrationSvc.lastRegistration.needsAbK;
 		}
 	};
@@ -148,6 +152,8 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 				hasDisability: $scope.hasDisability,
 				disabilityDescription: $scope.disabilityDescription,
 				needsAbK: $scope.needsAbK,
+				canSwim: $scope.canSwim,
+				canGoHomeAllone: $scope.canGoHomeAllone,
 				type: $scope.type
 			})
 			.error(function(err) {
@@ -178,6 +184,8 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 				$scope.hasDisability = false;
 				$scope.disabilityDescription = null;
 				$scope.needsAbK = false;
+				$scope.canSwim = false;
+				$scope.canGoHomeAllone = false;
 				$scope.selectedActivities = [];
 				$scope.currentState = 1;
 				RegistrationCacheSvc.lastRegistration = reg[0];

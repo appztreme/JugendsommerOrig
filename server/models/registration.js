@@ -35,6 +35,8 @@ var registrationSchema = db.Schema({
   hasDisability: { type: Boolean, required: true, default: false },
   disabilityDescription: { type: String, required: false },
   needsEbK: { type: String, required: true, default: false },
+  canSwim: { type: Boolean, required: true, default: false },
+  canGoHomeAllone: { type: Boolean, required: true, default: false },
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: false }
 });
 

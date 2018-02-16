@@ -129,6 +129,14 @@
 								</select>
 							</div>
 						</div>
+						<!-- CANSWIM -->
+						<div ng-show='platform.isJDUL()' class='col-sm-offset-2 col-sm4'>
+							<input type='checkbox' name='canSwin' ng-model='canSwim'><strong>{{"RESERVATION.LABEL_CANSWIM_CHILD" | translate}}</input>
+						</div>
+						<!-- CANGOHOMEALLONE -->
+						<div ng-show='platform.isJDUL()' class='col-sm-offset-2 col-sm4'>
+							<input type='checkbox' name='canGoHomeAllone' ng-model='canGoHomeAllone'><strong>{{"RESERVATION.LABEL_CANGOHOME_CHILD" | translate}}</input>
+						</div>
 						<!-- NEEDSPRECARE -->
 						<!-- <div ng-show='!isKiso && (type === "summer" || type === "music")' class='col-sm-offset-2 col-sm4'>
 										<input type='checkbox' name='needsPreCare' ng-model='needsPreCare'><strong>{{"RESERVATION.LABEL_PRECARE_CHILD" | translate}}</input>
@@ -195,9 +203,9 @@
 		</div>
 		<div class="panel panel-default">
 			<div class="panel-heading" role="tab" id="headingTwo">
-				<h4 ng-show='currentState < 2' class="panel-title">2. Wochen auswählen</h4>
-				<h4 ng-show='currentState === 2' class="panel-title" style='color:orange'>2. Wochen auswählen</h4>
-				<h4 ng-show='currentState > 2' class="panel-title">2. Wochen auswählen <span style='color:green' class='glyphicon glyphicon-ok'></span></h4>
+				<h4 ng-show='currentState < 2' class="panel-title">{{"RESERVATION.HEADER_STEP2" | translate}}</h4>
+				<h4 ng-show='currentState === 2' class="panel-title" style='color:orange'>{{"RESERVATION.HEADER_STEP2" | translate}}</h4>
+				<h4 ng-show='currentState > 2' class="panel-title">{{"RESERVATION.HEADER_STEP2" | translate}} <span style='color:green' class='glyphicon glyphicon-ok'></span></h4>
 			</div>
 			<div id="collapseTwo" ng-class="(currentState === 2) ? 'panel-collapse collapse in' : 'panel-collapse collapse'" role="tabpanel" aria-labelledby="headingTwo">
 				<div class="panel-body">
@@ -240,8 +248,8 @@
 		</div>
 		<div class="panel panel-default">
 			<div class="panel-heading" role="tab" id="headingThree">
-				<h4 ng-show='currentState < 3' class="panel-title">3. Bestätigen</h4>
-				<h4 ng-show='currentState === 3' class="panel-title" style='color:orange'>3. Bestätigen</h4>
+				<h4 ng-show='currentState < 3' class="panel-title">{{"RESERVATION.HEADER_STEP3" | translate}}</h4>
+				<h4 ng-show='currentState === 3' class="panel-title" style='color:orange'>{{"RESERVATION.HEADER_STEP3" | translate}}</h4>
 			</div>
 			<div id="collapseThree" ng-class="(currentState === 3) ? 'panel-collapse collapse in' : 'panel-collapse collapse'" role="tabpanel" aria-labelledby="headingThree">
 				<div class="panel-body">
