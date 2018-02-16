@@ -21,7 +21,8 @@
 				<div class='col-sm-1'>
 					<div class='btn-main'>
 					<a href='/#/activities/{{event._id}}?type={{event.type}}' role='button'>
-						<span ng-show='event.type === "summer"' class='glyphicon glyphicon-certificate'></span>
+						<span ng-show='event.type === "summer" && !platform.isJDUL()' class='glyphicon glyphicon-certificate'></span>
+						<span ng-show='event.type === "summer" && platform.isJDUL()'><img src='../../assets/button_ente.png' class='pull-left' style='width:45px;margin-right:10px' /></span>
 						<span ng-show='event.type === "music"' class='glyphicon glyphicon-music'></span>
 						<span ng-show='event.type === "spiritnight"' class='glyphicon glyphicon-education'></span>
 						<span ng-show='event.type === "club"' class='glyphicon glyphicon-home'></span>
@@ -38,7 +39,6 @@
 				</div>
 				<div class='col-sm-2'>
 					<a href='/#/registration/{{event._id}}?type={{event.type}}' class='btn btn-xlarge btn-success' role='button' ng-show='iSvc.isAuthenticated() && !cannotReserve(event) && !platform.isJDUL()'><span class='glyphicon glyphicon-user'></span></a>
-					<a href='/#/registration/{{event._id}}?type={{event.type}}' class='btn btn-xlarge btn-success' role='button' ng-show='iSvc.isAuthenticated() && !cannotReserve(event) && platform.isJDUL()'><img <img src='../../assets/button_ente.png' style='width:45px;margin-right:10px' /></a>
 					<button type="button" class="btn btn-xlarge btn-success" ng-hide='iSvc.isAuthenticated()' data-toggle="modal" data-target="#warningModal"><span class='glyphicon glyphicon-user'></button>
 					<!--<a href='/#/activities/{{event._id}}?type={{event.type}}' class='btn btn-xlarge btn-success' role='button'><span class='glyphicon glyphicon-triangle-right'></span></a>-->
 					<a href='/#/eventInfo/{{event._id}}' class="btn btn-xlarge btn-warning" role'button'><span class='glyphicon glyphicon-search'></span></a>
