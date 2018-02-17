@@ -95,7 +95,7 @@ exports.getAttachment = function(body, instance) {
 }
 
 exports.getTypeBody = function(type, firstNameChild, lastNameChild, activities, reservation, instance) {
-	console.log(instance, "platform")
+	// console.log(instance, "platform")
 	if(instance.isKiso) {
 		if(type === 'jumprun')
 			return htmlJumpRun;
@@ -104,7 +104,7 @@ exports.getTypeBody = function(type, firstNameChild, lastNameChild, activities, 
 	}
 	else if (instance.isJDUL) {
 		return htmlStartJDUL_de + firstNameChild + htmlMiddleJDUL_de + activities[0].eventId.location + htmlEndJDUL_de + "<br />" +
-			   htmlStartJDUL_it + firstNameChild + htmlMiddleJDUL_it + activities[0].eventId.location + htmlEndJDUL_it + "<br /><br />" +
+			   htmlStartJDUL_it + firstNameChild + htmlMiddleJDUL_it + activities[0].eventId.location_it + htmlEndJDUL_it + "<br /><br />" +
 		   getActivityTable(activities) + "<br /><br />" + getReservationTable(reservation) + "<br /><br />" + getJDULFooter() + "<br />" + htmlFinalJDUL;
 	}
 	else {
@@ -141,7 +141,7 @@ function getReservationTable(res) {
 	var tbleEnd = '</table>';
 	tbleStart += '<tr><td>Vorname</td><td>' + res.firstNameChild + '</td></tr>';
 	tbleStart += '<tr><td>Nachname</td><td>' + res.lastNameChild + '</td></tr>';
-	tbleStart += '<tr><td>Geburtsdatum</td><td>' + res.birthdayChild.toISOString().substring(0, 10) + '</td></tr>';
+	tbleStart += '<tr><td>Geburtsdatum</td><td>' + (new Date(res.birthdayChild)).toISOString().substring(0, 10) + '</td></tr>';
 	tbleStart += '<tr><td>Klasse</td><td>' + res.schoolChild + '</td></tr>';
 	tbleStart += '<tr><td>Vorname Eltern</td><td>' + res.firstNameParent + '</td></tr>';
 	tbleStart += '<tr><td>Nachname Eltern</td><td>' + res.lastNameParent+ '</td></tr>';
