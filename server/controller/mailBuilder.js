@@ -53,6 +53,7 @@ function getKisoSubject(type) {
 
 exports.getSubject = function(instance, type) {
 	if(instance.isKiso) return getKisoSubject(type);
+	else if(instance.isJDUL) return "Anmeldung | iscrizione JD-SUMMER";
 	else return 'Anmeldung ' + getTypeString(type);
 }
 
@@ -126,27 +127,27 @@ exports.getTypeBody = function(type, firstNameChild, lastNameChild, activities, 
 
 function getActivityTable(activities) {
 	var sum = 0;
-	var tblStart = '<table style="border: 1px solid gray; border-collapse: collapse"><tr><th style="border: 1px solid gray">Programm</th><th style="border: 1px solid gray">Woche</th><th style="border: 1px solid gray">Preis</th></tr>';
+	var tblStart = '<table style="border: 1px solid gray; border-collapse: collapse"><tr><th style="border: 1px solid gray">Programm | programma</th><th style="border: 1px solid gray">Woche | settimana</th><th style="border: 1px solid gray">Preis | prezzo in €</th></tr>';
 	var tblEnd = '</table>';
 	for(var i=0; i<activities.length; i++) {
 		sum += activities[i].eventId.feePerWeek;
 		tblStart += '<tr><td style="border: 1px solid gray;">' + activities[i].eventId.location + ' - ' + activities[i].eventId.name + '</td><td style="border: 1px solid gray;">' + activities[i].name + '</td><td style="border: 1px solid gray;">' + activities[i].eventId.feePerWeek + '</td></tr>';
 	}
-	tblStart += '<tr><td style="border:1px solid gray;"><strong>SUMME €</strong></td><td style="border: 1px solid gray;"></td><td style="border: 1px solid gray;">' + sum + '</td></tr>'
+	tblStart += '<tr><td style="border:1px solid gray;"><strong>Summe | somma in €</strong></td><td style="border: 1px solid gray;"></td><td style="border: 1px solid gray;">' + sum + '</td></tr>'
 	return tblStart + tblEnd;
 }
 
 function getReservationTable(res) {
 	var tbleStart = '<table style="border: 1px solid gray; border-collapse: collapse;">';
 	var tbleEnd = '</table>';
-	tbleStart += '<tr><td>Vorname</td><td>' + res.firstNameChild + '</td></tr>';
-	tbleStart += '<tr><td>Nachname</td><td>' + res.lastNameChild + '</td></tr>';
-	tbleStart += '<tr><td>Geburtsdatum</td><td>' + (new Date(res.birthdayChild)).toISOString().substring(0, 10) + '</td></tr>';
-	tbleStart += '<tr><td>Klasse</td><td>' + res.schoolChild + '</td></tr>';
-	tbleStart += '<tr><td>Vorname Eltern</td><td>' + res.firstNameParent + '</td></tr>';
-	tbleStart += '<tr><td>Nachname Eltern</td><td>' + res.lastNameParent+ '</td></tr>';
-	tbleStart += '<tr><td>Email Eltern</td><td>' + res.emailParent + '</td></tr>';
-	tbleStart += '<tr><td>TelNr Eltern</td><td>' + res.phoneNumberParent + '</td></tr>'; 
+	tbleStart += '<tr><td style="padding: 2px">Vorname | nome</td><td style="padding: 2px">' + res.firstNameChild + '</td></tr>';
+	tbleStart += '<tr><td style="padding: 2px">Nachname | cognome</td><td style="padding: 2px">' + res.lastNameChild + '</td></tr>';
+	tbleStart += '<tr><td style="padding: 2px">Geburtsdatum | data di nascita</td><td style="padding: 2px">' + (new Date(res.birthdayChild)).toISOString().substring(0, 10) + '</td></tr>';
+	tbleStart += '<tr><td style="padding: 2px">Besuchte Klasse | classe frequentata</td><td style="padding: 2px">' + res.schoolChild + '</td></tr>';
+	tbleStart += '<tr><td style="padding: 2px">Vorname Eltern | nome genitori</td><td style="padding: 2px">' + res.firstNameParent + '</td></tr>';
+	tbleStart += '<tr><td style="padding: 2px">Nachname Eltern | cognome genitori</td><td style="padding: 2px">' + res.lastNameParent+ '</td></tr>';
+	tbleStart += '<tr><td style="padding: 2px">Email</td><td style="padding: 2px">' + res.emailParent + '</td></tr>';
+	tbleStart += '<tr><td style="padding: 2px">Telefon</td><td style="padding: 2px">' + res.phoneNumberParent + '</td></tr>'; 
 
 	return tbleStart + tbleEnd;
 }
@@ -172,14 +173,15 @@ function getJDBLFooter() {
 
 function getJDULFooter() {
 	var footer = '<table>';
-	footer += '<tr><td><h4>Jugenddienst Unterland</h4></td></tr>';
+	footer += '<tr><td><h4>JUGENDDIENST UNTERLAND</h4></td></tr>';
 	footer += '<tr><td>Widumdurchgang Nr. 1</td></tr>';
-	footer += '<tr><td>39044 Südtirol/Italy</td></tr>';
+	footer += '<tr><td>39044 Neumarkt</td></tr>';
+	footer += '<tr><td>Tel.: 0471 812717</td></tr>';
+	footer += '<tr><td>unterland@jugenddienst.it</td></tr>';
+	footer += '<tr><td><a href="https://www.jugenddienst.it/unterland">www.jugenddienst.it/unterland</a></td></tr>';
 	footer += '<tr></tr>';
-	footer += '<tr><td>----------------------------------------------------</td></tr>';
 	footer += '<tr><td>IBAN: IT27T0822058371000304204042</td></tr>';
-	footer += '<tr><td>----------------------------------------------------</td></tr>';
-	footer += '<tr><td><a href="https://www.jugenddienst.it/unterland">www.jugenddienst.it/unterland</a></td></tr>'
+	footer += '<tr></tr>';
 	footer += '<tr><td><img src="cid:my-image" width="150" /></td></tr>';
 	footer += '</table>';
 	return footer;
