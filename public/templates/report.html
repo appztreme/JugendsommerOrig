@@ -137,8 +137,8 @@
 			<td>{{reg.tShirtSize}}</td>
 			<td>{{formatBool(reg.hasDisability)}}</td>
 			<td>{{reg.disabilityDescription}}</td>
-			<td ng-show='platform.isJDUL()'>{{reg.canSwim}}</td>
-			<td ng-show='platform.isJDUL()'>{{reg.canGoHomeAllone}}</td>
+			<td ng-show='platform.isJDUL()'>{{formatBool(reg.canSwim)}}</td>
+			<td ng-show='platform.isJDUL()'>{{formatBool(reg.canGoHomeAllone)}}</td>
 			<td>{{reg.registrationDate | date: 'dd/MM/yyyy : hh.mm.ss'}}</td>
 		</tr>
 	</table>

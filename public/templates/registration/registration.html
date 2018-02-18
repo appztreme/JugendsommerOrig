@@ -4,7 +4,7 @@
 	<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="false">
 		<div class="panel panel-default">
 			<div class="panel-heading" role="tab" id="headingOne">
-				<h4 ng-show='currentState === 1' class="panel-title" style='color:orange'>1. Kontaktdaten</h4>
+				<h4 ng-show='currentState === 1' class="panel-title" style='color:orange'>{{"RESERVATION.HEADER_STEP1" | translate }}</h4>
 				<h4 ng-show='currentState > 1' class="panel-title">1. Kontaktdaten <span style='color:green' class="glyphicon glyphicon-ok"></span></h4>
 			</div>
 			<div id="collapseOne" ng-class="(currentState === 1) ? 'panel-collapse collapse in' : 'panel-collapse collapse'" role="tabpanel" aria-labelledby="headingOne">
@@ -195,7 +195,7 @@
 						</div>
 						<br />
 						<button class='btn btn-lg btn-success' ng-click='setState(2)' ng-disabled='!isChildDataComplete()'>
-							Weiter
+							{{"RESERVATION.BUTTON_NEXT" | translate }}
 						</button>
 					</div>				
 				</div>
@@ -240,7 +240,7 @@
 							</li>
 						</ul>
 						<button class='btn btn-lg btn-success' ng-click='setState(3)' ng-disabled='!isActivityDataComplete()'>
-							Weiter
+							{{"RESERVATION.BUTTON_NEXT" | translate }}	
 						</button>
 					</div>
 				</div>
