@@ -92,8 +92,8 @@ exports.create = async(req, res, next) => {
 	var activities = [];
 	try {
 		activities = await Activity.find({'_id': { $in: objids } })
-							   .populate('eventId', '_id name location location_it feePerWeek')
-							   .select('_id name eventId');
+							   .populate('eventId', '_id name name_it location location_it feePerWeek')
+							   .select('_id name name_it eventId');
 	} catch(e) { console.log(e); }
 	Registration.create(regs, function(error, docs) {
 		if(error) { return next(error); }
