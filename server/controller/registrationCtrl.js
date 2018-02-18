@@ -162,3 +162,7 @@ exports.updateIsEmailNotified = (req, res, next) => {
 		});
 	});
 };
+
+exports.sendPaymentMail = (req, res, next) => {
+	
+}

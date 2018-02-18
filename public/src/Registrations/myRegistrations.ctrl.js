@@ -1,10 +1,11 @@
 var app = angular.module('js');
 
-app.controller('MyRegistrationsCtrl', function($scope, $location, $route, RegistrationSvc, IdentitySvc, $rootScope, $translate) {
+app.controller('MyRegistrationsCtrl', function($scope, $location, $route, RegistrationSvc, IdentitySvc, $rootScope, $translate, PlatformSvc) {
 	$scope.busyPromise = RegistrationSvc.findByUser(IdentitySvc.currentUser._id);
 
-	var host = $location.$$host.toLowerCase();
-	$scope.isKiso = host.indexOf('kiso') !== -1;
+	// var host = $location.$$host.toLowerCase();
+	// $scope.isKiso = host.indexOf('kiso') !== -1;
+	$scope.platform = PlatformSvc;
 
 	$scope.lang = $translate.proposedLanguage() || $translate.user();
 

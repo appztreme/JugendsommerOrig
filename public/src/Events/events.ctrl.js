@@ -8,8 +8,8 @@ app.controller('EventsCtrl', function($scope, $routeParams, $location, EventsSvc
 	$scope.lang = $translate.proposedLanguage() || $translate.user();
 
 	$scope.isRegistrationWarningVisible = function() {
-		var d = new Date('2018-02-12');
-		d.setHours(18,58,0);
+		var d = new Date('2018-02-19');
+		d.setHours(0,0,1);
 		var now = Date.now();
 		return now < d.getTime();
 	}
@@ -33,7 +33,7 @@ app.controller('EventsCtrl', function($scope, $routeParams, $location, EventsSvc
 		if(IdentitySvc.isAdmin()) return false;
 		else {
 			var visible = new Date(ev.visibleFrom);
-			visible.setHours(18,58,0);
+			visible.setHours(0,0,1);
 			if(Date.now() > visible.getTime()) return false;
 			if(Date.now() > new Date(ev.deadline).getTime()) return false;
 			return true;

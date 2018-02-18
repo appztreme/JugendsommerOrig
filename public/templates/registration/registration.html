@@ -5,7 +5,7 @@
 		<div class="panel panel-default">
 			<div class="panel-heading" role="tab" id="headingOne">
 				<h4 ng-show='currentState === 1' class="panel-title" style='color:orange'>{{"RESERVATION.HEADER_STEP1" | translate }}</h4>
-				<h4 ng-show='currentState > 1' class="panel-title">1. Kontaktdaten <span style='color:green' class="glyphicon glyphicon-ok"></span></h4>
+				<h4 ng-show='currentState > 1' class="panel-title">{{"RESERVATION.HEADER_STEP1" | translate }} <span style='color:green' class="glyphicon glyphicon-ok"></span></h4>
 			</div>
 			<div id="collapseOne" ng-class="(currentState === 1) ? 'panel-collapse collapse in' : 'panel-collapse collapse'" role="tabpanel" aria-labelledby="headingOne">
 				<div class="panel-body">
@@ -53,7 +53,7 @@
 						<div ng-show='type !== "spiritnight"' class='form-group' ng-class='{ "has-error": registrationForm.addressChild.$invalid }'>
 							<label for='addressChild' class='control-label col-sm-2'>{{"RESERVATION.LABEL_ADDRESS_CHILD" | translate}}</label>
 							<div class='col-sm-8'>
-								<input name='addressChild' type='text' ng-model='addressChild' maxlength='100' class='form-control'></input>
+								<input name='addressChild' type='text' ng-model='addressChild' maxlength='100' class='form-control' required></input>
 							</div>
 						</div>
 						<!-- CITYCHILD -->
@@ -284,7 +284,8 @@
 					</div>
 
 					<br />
-					<p class="bg-info" style='padding: 10px'>{{"RESERVATION.LABEL_REGISTRATION_PAY_INFO" | translate}}</p>
+					<p class="bg-info" style='padding: 10px; margin-bottom: 0px;'>{{"RESERVATION.LABEL_REGISTRATION_PAY_INFO" | translate}}</p>
+					<p ng-show='platform.isTest()' class="bg-info" style="padding: 10px; margin-top: 0px;">{{"RESERVATION.LABEL_REGISTRATION_RECEIPT_INFO" | translate}}</p>
 							
 					<div class='col-sm-offset-2 col-sm-8' style='margin-top:15px;'>
 						<input class='btn btn-success bnt-lg btn-block' ng-click='save()' translate-attr="{value: 'RESERVATION.BUTTON_SUBMIT'}" ng-disabled='!isRegistrationAllowed()'>
