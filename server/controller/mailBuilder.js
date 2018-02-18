@@ -127,13 +127,13 @@ exports.getTypeBody = function(type, firstNameChild, lastNameChild, activities, 
 
 function getActivityTable(activities) {
 	var sum = 0;
-	var tblStart = '<table style="border: 1px solid gray; border-collapse: collapse"><tr><th style="border: 1px solid gray">Programm | programma</th><th style="border: 1px solid gray">Woche | settimana</th><th style="border: 1px solid gray">Preis | prezzo in €</th></tr>';
+	var tblStart = '<table style="border: 1px solid gray; border-collapse: collapse"><tr><th style="border: 1px solid gray; padding: 2px;">Programm | programma</th><th style="border: 1px solid gray; padding: 2px;">Woche | settimana</th><th style="border: 1px solid gray; padding: 2px;">Preis | prezzo in €</th></tr>';
 	var tblEnd = '</table>';
 	for(var i=0; i<activities.length; i++) {
 		sum += activities[i].eventId.feePerWeek;
-		tblStart += '<tr><td style="border: 1px solid gray;">' + activities[i].eventId.location + ' - ' + activities[i].eventId.name + '</td><td style="border: 1px solid gray;">' + activities[i].name + '</td><td style="border: 1px solid gray;">' + activities[i].eventId.feePerWeek + '</td></tr>';
+		tblStart += '<tr><td style="border: 1px solid gray; padding: 2px;">' + activities[i].eventId.location + ' - ' + activities[i].eventId.name + '<br />' + activities[i].eventId.location_it + ' - ' + activities[i].eventId.name_it + '</td><td style="border: 1px solid gray; padding: 2px">' + activities[i].name + '<br />' + activities[i].name_it + '</td><td style="border: 1px solid gray; padding: 2px;">' + activities[i].eventId.feePerWeek + '</td></tr>';
 	}
-	tblStart += '<tr><td style="border:1px solid gray;"><strong>Summe | somma in €</strong></td><td style="border: 1px solid gray;"></td><td style="border: 1px solid gray;">' + sum + '</td></tr>'
+	tblStart += '<tr><td style="border:1px solid gray; padding: 2px;"><strong>Summe | somma in €</strong></td><td style="border: 1px solid gray;"></td><td style="border: 1px solid gray; padding: 2px;">' + sum + '</td></tr>'
 	return tblStart + tblEnd;
 }
 
