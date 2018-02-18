@@ -9,5 +9,5 @@ app.controller('AgbEditCtrl', function($scope, $routeParams, $location, AgbsSvc,
     $rootScope.$on('$translateChangeSuccess', function() {
         $scope.lang = $translate.proposedLanguage() || $translate.user();
     });
-    console.log($scope.platform.host, $scope.lang, $scope.platform.isTest())
+    // console.log($scope.platform.host, $scope.lang, $scope.platform.isTest())
 });
