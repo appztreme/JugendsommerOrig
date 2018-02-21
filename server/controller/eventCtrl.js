@@ -140,6 +140,7 @@ exports.create = (req, res, next) => {
 		visibleFrom: req.body.visibleFrom,
 		visibleTo: req.body.visibleTo,
 		deadline: req.body.deadline,
+		penalty: req.body.penalty,
 		budgetFood: req.body.budgetFood,
 		budgetBusiness: req.body.budgetBusiness,
 		feePerWeek: req.body.feePerWeek,
@@ -176,6 +177,7 @@ exports.update = (req, res, next) => {
 		ev.visibleFrom = req.body.visibleFrom;
 		ev.visibleTo = req.body.visibleTo;
 		ev.deadline = req.body.deadline;
+		ev.penalty = req.body.penalty;
 		ev.budgetFood = req.body.budgetFood;
 		ev.budgetBusiness = req.body.budgetBusiness;
 		ev.info = req.body.info;

@@ -32,6 +32,7 @@ app.controller('EventNewCtrl', function($scope, $location, EventsSvc, Notificati
 				visibleFrom: $scope.visibleFrom,
 				visibleTo: $scope.visibleTo,
 				deadline: $scope.deadline,
+				penalty: $scope.penalty,
 				budgetBusiness: $scope.budgetBusiness,
 				budgetFood: $scope.budgetFood,
 				feePerWeek: $scope.feePerWeek,
@@ -50,6 +51,7 @@ app.controller('EventNewCtrl', function($scope, $location, EventsSvc, Notificati
 				$scope.visibleFrom = null;
 				$scope.visibleTo = null;
 				$scope.deadline = null;
+				$scope.penalty = null;
 				$scope.budgetBusiness = 0;
 				$scope.budgetFood = 0;
 				$scope.feePerWeek = 0;

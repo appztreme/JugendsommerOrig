@@ -17,6 +17,7 @@ var eventSchema = db.Schema({
 	visibleFrom: { type: Date, required: false, default: Date.now },
 	visibleTo: { type: Date, required: false, default: Date.now },
 	deadline: { type: Date, required: false },
+	penalty: { type: Number, required: true, default: 0 },
 	budgetBusiness: { type: Number, required: true, default: 0 },
 	budgetFood: { type: Number, required: true, default: 0 },
 	feePerWeek: { type: Number, required: true, default: 0 },

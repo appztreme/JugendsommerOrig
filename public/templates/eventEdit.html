@@ -98,6 +98,15 @@
 		</p>
 		</div>
 	</div>
+	<!-- PENALTY -->
+	<div class='form-group' ng-class='{ "has-error": eventForm.penalty.$invalid }'>
+		<label for='penalty' class='control-label col-sm-2'>Strafgebühr</label>
+		<div class='col-sm-10'>
+			<p class='input-group'>
+				<input type='number' ng-model='penalty' min='0' step='0.01' required></input>
+			</p>
+		</div>
+	</div>
 	<!-- BUDGETBUSINESS -->
 	<div class='form-group' ng-class='{ "has-error": eventForm.budget.$invalid }'>
 		<label for='budgetBusiness' class='control-label col-sm-2'>Sachbudget</label>

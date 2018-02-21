@@ -5,8 +5,8 @@ const Registration = require('./../models/registration');
 const curYear = new Date().getFullYear();
 const startCurYear = new Date(curYear,1,1);
 
-exports.getSelectableEventActivities = () => {
-
+exports.findByEventId = (id) => {
+    return Registration.find()
 }
 
 exports.filter = (year, name, activityId, activityIds) => {
@@ -28,20 +28,3 @@ exports.filter = (year, name, activityId, activityIds) => {
 		.sort({ activityId: 1, registrationDate: 1, lastNameChild: 1, firstNameChild: 1})
 		.exec();
 }
-
-// exports.groupByEvent = () => {
-//     return Registration.aggregate([
-// 			{ $match:
-// 				{ $and: [ {registrationDate: { $gte: startCurYear }}, {isInternal: false} ] }
-// 			},
-// 			{ $group:
-// 				{ _id: "$location",
-// 					name: { $first: "$location" },
-// 					name_it: { $first: "$location_it" },
-// 					countEvents: { $sum: 1 },
-// 					distinctTypes: { $addToSet: "$type"}
-// 				}
-// 			},
-// 			{ $sort: {_id: 1}}
-// 		]).exec();
-// }

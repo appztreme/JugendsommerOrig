@@ -18,6 +18,7 @@ app.controller('EventEditCtrl', function($scope, $routeParams, $location, Notifi
 			$scope.event.visibleFrom = $scope.visibleFrom;
 			$scope.event.visibleTo = $scope.visibleTo;
 			$scope.event.deadline = $scope.deadline;
+			$scope.event.penalty = $scope.penalty;
 			$scope.event.budgetBusiness = $scope.budgetBusiness;
 			$scope.event.budgetFood = $scope.budgetFood;
 			$scope.event.feePerWeek = $scope.feePerWeek;
@@ -59,6 +60,7 @@ app.controller('EventEditCtrl', function($scope, $routeParams, $location, Notifi
 		$scope.visibleFrom = new Date(ev.visibleFrom);
 		$scope.visibleTo = new Date(ev.visibleTo);
 		$scope.deadline = ev.deadline ? new Date(ev.deadline) : undefined;
+		$scope.penalty = ev.penalty;
 		$scope.budgetBusiness = ev.budgetBusiness;
 		$scope.budgetFood = ev.budgetFood;
 		$scope.feePerWeek = ev.feePerWeek;
