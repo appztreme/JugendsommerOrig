@@ -20,7 +20,24 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 	//.error(function(err) {
 	//	console.log("error", err);
 	//})
-  	};
+	  };
+	  
+	$scope.calculateFee = function(activity) {
+		if(activity.eventId.deadline) {
+			if((moment(activity.eventId.deadline).hour(23).minute(59).second(59)).isBefore(moment())) return activity.eventId.feePerWeek + activity.eventId.penalty;
+			return activity.eventId.feePerWeek;
+		}
+		return activity.eventId.feePerWeek;
+	}
+
+	$scope.calculateOverallFee = function(registrations) {
+		if(!registrations) return 0;
+		var sum = 0;
+		for(var i = 0; i < registrations.length; i++) {
+			sum += $scope.calculateFee(registrations[i].activityId);
+		}
+		return sum;
+	}
 
 	$scope.clearEventSelection = function() {
 		$scope.eventIdFilter = undefined;
