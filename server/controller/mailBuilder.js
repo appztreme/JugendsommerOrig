@@ -1,3 +1,5 @@
+const moment = require('moment');
+
 var htmlStart = "<html><body><p>Die Anmeldung f&uuml;r ";
 var htmlEnd = " f&uuml;r die Sommerprogramme des Jugenddienstes Bozen Land war erfolgreich.</p><p><strong>Einzahlungsschein wird demn&auml;chst mittels email zugesandt.</strong></p><p>Vielen Dank f&uuml;r die Anmeldung.</p><h3>Zusammenfassung:</h3>";
 var htmlClose = "</body></html>";
@@ -125,13 +127,21 @@ exports.getTypeBody = function(type, firstNameChild, lastNameChild, activities, 
 	}
 }
 
+function calculateFee(activity) {
+	if(activity.eventId.deadline) {
+		if((moment(activity.eventId.deadline).hour(23).minute(59).second(59)).isBefore(moment())) return activity.eventId.feePerWeek + activity.eventId.penalty;
+		return activity.eventId.feePerWeek;
+	}
+	return activity.eventId.feePerWeek;
+}
+
 function getActivityTable(activities) {
 	var sum = 0;
 	var tblStart = '<table style="border: 1px solid gray; border-collapse: collapse"><tr><th style="border: 1px solid gray; padding: 2px;">Programm | programma</th><th style="border: 1px solid gray; padding: 2px;">Woche | settimana</th><th style="border: 1px solid gray; padding: 2px;">Preis | prezzo in €</th></tr>';
 	var tblEnd = '</table>';
 	for(var i=0; i<activities.length; i++) {
-		sum += activities[i].eventId.feePerWeek;
-		tblStart += '<tr><td style="border: 1px solid gray; padding: 2px;">' + activities[i].eventId.location + ' - ' + activities[i].eventId.name + '<br />' + activities[i].eventId.location_it + ' - ' + activities[i].eventId.name_it + '</td><td style="border: 1px solid gray; padding: 2px">' + activities[i].name + '<br />' + activities[i].name_it + '</td><td style="border: 1px solid gray; padding: 2px;">' + activities[i].eventId.feePerWeek + '</td></tr>';
+		sum += calculateFee(activities[i]);
+		tblStart += '<tr><td style="border: 1px solid gray; padding: 2px;">' + activities[i].eventId.location + ' - ' + activities[i].eventId.name + '<br />' + activities[i].eventId.location_it + ' - ' + activities[i].eventId.name_it + '</td><td style="border: 1px solid gray; padding: 2px">' + activities[i].name + '<br />' + activities[i].name_it + '</td><td style="border: 1px solid gray; padding: 2px;">' + calculateFee(activities[i]) + '</td></tr>';
 	}
 	tblStart += '<tr><td style="border:1px solid gray; padding: 2px;"><strong>Summe | somma in €</strong></td><td style="border: 1px solid gray;"></td><td style="border: 1px solid gray; padding: 2px;">' + sum + '</td></tr>'
 	return tblStart + tblEnd;
