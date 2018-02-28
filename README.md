@@ -1,7 +1,7 @@
 # Jugendsommer original
 
 #TODO:
-- AnmeldungBis + 1: +5EUR pro Woche
+- [x] AnmeldungBis + 1: +5EUR pro Woche
 - [x] Gemeinde: Kastelrut, Völs, Besondere Projekte 2018, Kastelruth/Völs
 - [x] T-Shirt Größe entfernen
 - [x] Kinderbetreuung in der Früh entfernen
