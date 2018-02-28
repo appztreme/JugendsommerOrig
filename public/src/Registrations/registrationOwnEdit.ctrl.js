@@ -1,9 +1,9 @@
 var app = angular.module('js');
 
-app.controller('RegistrationOwnEditCtrl', function($scope, $filter, $routeParams, $location, NotificationSvc, ActivitiesSvc, RegistrationSvc, conf) {
+app.controller('RegistrationOwnEditCtrl', function($scope, $filter, $routeParams, $location, NotificationSvc, ActivitiesSvc, RegistrationSvc, conf, PlatformSvc) {
 
 	//$scope.busyPromise = RegistrationSvc.findById;
-	$scope.cities = $scope.isKiso ? conf.cities_kiso : conf.cities_jdbl;
+	$scope.cities = PlatformSvc.getCities();
 
 	$scope.save = function() {
 		if($scope.registrationForm.$valid) {
