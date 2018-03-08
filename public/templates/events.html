@@ -11,11 +11,11 @@
 	<div class='row bg-danger' style='padding: 10px' ng-show='!platform.isJDUL() && isRegistrationWarningVisible()'>
 		<h4>Anmeldung ist ab Montag 19.02 00:00 für alle Programme möglich</h4>
 	</div>
-	<div ng-show="platform.isJDUL() && isRegistrationWarningVisible()">
+	<div ng-show="platform.isKiso() && isRegistrationWarningVisible()">
 		<div class="row">
 			<div class="col-sm-3">
-				<h2><span ng-show="lang == 'de'" class="label label-info">Anmeldestart: Montag 19. Februar!</span></h2>
-				<h2><span ng-show="lang == 'it'" class="label label-info">Partenza iscrizioni: 19 febbraio!</span></h2>
+				<h2><span ng-show="lang == 'de'" class="label label-info">Anmeldestart: 15 März um 19:00!</span></h2>
+				<h2><span ng-show="lang == 'it'" class="label label-info">Partenza iscrizioni: 15 marzo 2018 alle ore 19:00!</span></h2>
 			</div>
 		</div>
 	</div>

@@ -188,7 +188,7 @@
             "BUTTON_SUBMIT2": "Cambio password"
         },
         "SELECTION": {
-            "TITLE": "Siamo presenti nei seguenti communi",
+            "TITLE": "Siamo presenti nei seguenti comuni",
             "PROGRAM": "programmi",
             "INFO": "Preghiamo di leggere attentamente le nostre condizioni generali prima di effettuare l’iscrizione"
         },

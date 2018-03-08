@@ -8,8 +8,8 @@ app.controller('EventsCtrl', function($scope, $routeParams, $location, EventsSvc
 	$scope.lang = $translate.proposedLanguage() || $translate.user();
 
 	$scope.isRegistrationWarningVisible = function() {
-		var d = new Date('2018-02-19');
-		d.setHours(0,0,1);
+		var d = new Date('2018-03-15');
+		d.setHours(18,57,0);
 		var now = Date.now();
 		return now < d.getTime();
 	}
