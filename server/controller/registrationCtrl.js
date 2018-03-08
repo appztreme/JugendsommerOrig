@@ -167,6 +167,7 @@ exports.updateIsEmailNotified = (req, res, next) => {
 exports.sendPaymentMail = async(req, res, next) => {
 	try {
 		let activityIds = undefined;
+		var sentWithError = false;
 		if(req.params.eventId) {
 			let ids = await ActivityRepo.getActivityIdsForEvent(req.params.eventId);
 			activityIds = ids.map(function(v,i) { return v._id; });
@@ -177,7 +178,7 @@ exports.sendPaymentMail = async(req, res, next) => {
 			var instance = platform.getPlatform(req.get('host'));
 			//console.log("emails", emailsUnique);
 			for(let email of emailsUnique) {
-				var sentWithError = false;
+				sentWithError = false;
 				let registrationsPerMail = registrations.filter(reg => reg.emailParent === email && reg.isEmailNotified === false);
 				//console.log("email", email, registrationsPerMail.length);
 				if(registrationsPerMail.length === 0) continue;

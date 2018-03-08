@@ -20,8 +20,8 @@ var txtSpiritnight = "Vielen Dank für die Teilnahme an der SpiritNight 2017! Bi
 var txtStart = "Die Anmeldung für ";
 var txtEnd = " für die Sommerprogramme des Jugenddienstes Bozen Land war erfolgreich. Einzahlungsschein wird demnächst mittels email zugesandt.";
 
-var txtReceipt = "Hallo liebe Eltern,\r\n\r\nanbei findet ihr den Überweisungsschein für das Sommerprogramm 2018.\r\nSolltet ihr mehrer Kinder an verschiednen Programmen angemeldet haben bzw. ein Kind bei mehreren Programmen, bekommt ihr für jedes Programm einen eigenen Einzahlungsschein.\r\nFür unser Buchhaltung bitten wir euch jeden Einzahlungsschein extra zu überweisen.\r\nAchtung wir haben auch eine neue Kontonummer für unsere Sommerprogramme eingerichtet. Bitte bei der Überweisung Name des Kindes und eigene Überweisungsnummer angeben!\r\n\r\nKontodaten:Raiffeisenkassa Bozen\r\nIBAN: IT 09X 08081 11610 000306005853";
-var htmlReceiptStart = "<html><body><p>Hallo liebe Eltern,<br />anbei findet ihr den Überweisungsschein für das Sommerprogramm 2018.<br />Solltet ihr mehrer Kinder an verschiednen Programmen angemeldet haben bzw. ein Kind bei mehreren Programmen, bekommt ihr für jedes Programm einen eigenen Einzahlungsschein.<br />Für unser Buchhaltung bitten wir euch jeden Einzahlungsschein extra zu überweisen.<br /><br />Achtung wir haben auch eine neue Kontonummer für unsere Sommerprogramme eingerichtet. Bitte bei der Überweisung Name des Kindes und eigene Überweisungsnummer angeben!<br /><strong>Kontodaten:<br />Raiffeisenkassa Bozen<br />IBAN: IT 09X 08081 11610 000306005853</strong><br />";
+var txtReceipt = "Hallo liebe Eltern,\r\n\r\nanbei findet ihr den Überweisungsschein für das Sommerprogramm 2018.\r\nIhr bekommt für jedes Programm einen eigenen Überweisungsschein mit einer dazugehörigen Überweisungsnummer\r\nFür unser Buchhaltung bitten wir euch jeden Überweisungsscheinschein extra zu überweisen.\r\nBei der Überweisung bitten wir euch Überweisungsnummer und die Namen der Kinder anzugeben!\r\n\r\nAchtung ein neues Konto:\r\nWir haben für unsere Sommerprogramme ein neues Konto eingerichtet:\r\nKontodaten:Raiffeisenkassa Bozen\r\nIBAN: IT 09X 08081 11610 000306005853";
+var htmlReceiptStart = "<html><body><p>Hallo liebe Eltern,<br />anbei findet ihr den Überweisungsschein für das Sommerprogramm 2018.<br />Ihr bekommt für jedes Programm einen eigenen Überweisungsschein mit einer dazugehörigen Überweisungsnummer.<br />Für unser Buchhaltung bitten wir euch jeden Überweisungsschein extra zu überweisen.<br />Bei der Überweisung bitten wir euch <strong>Überweisungsnummer</strong> und die <strong>Namen der Kinder</strong> anzugeben!<br /><br />Achtung ein neues Kont:<br />Wir haben für unsere Sommerprogramme ein neues Konto eingerichtet.<br />Kontodaten:<br /><strong>Kontodaten:<br />Raiffeisenkassa Bozen<br />IBAN: IT 09X 08081 11610 000306005853</strong><br />";
 var htmlReceiptEnd = "</body></html>";
 
 var txtStartJDUL_de = "Anmeldebestätigung./r/nes freut uns, dass du heuer im Sommer bei unserem JD-SUMMER Programm in ";
@@ -143,7 +143,6 @@ exports.getTypeBody = function(type, firstNameChild, lastNameChild, activities, 
 }
 
 exports.getReceiptBody = function(reservations, rnumber) {
-	//return htmlReceiptStart + "<br /><br />" + "<br />" + getJDBLFooter() + "<br />" + htmlReceiptEnd;
 	return htmlReceiptStart + "<br /><br />" + getReceiptTable(reservations, rnumber) + "<br />" + getJDBLFooter() + "<br />" + htmlReceiptEnd;
 }
 
@@ -173,7 +172,7 @@ function getActivityTable(activities) {
 
 function getReceiptTable(res, rnumber) {
 	var sum = 0;
-	var tblStart = '<p>Ihre Rechnungsnummer: <strong>' + rnumber + '</strong></p>';
+	var tblStart = '<p>Ihre Überweisungsnummer: <strong>' + rnumber + '</strong></p>';
 	tblStart += '<table style="border: 1px solid gray; border-collapse: collapse"><tr><th style="border: 1px solid gray; padding: 2px;">Programm | programma</th><th style="border: 1px solid gray; padding: 2px;">Name | nome</th><th style="border: 1px solid gray; padding: 2px;">Woche | settimana</th><th style="border: 1px solid gray; padding: 2px;">Preis | prezzo in €</th></tr>';
 	var tblEnd = '</table>';
 	for(var i=0; i<res.length; i++) {
