@@ -27,8 +27,8 @@
 		<li ng-repeat='event in events' class='list-group-item'>
 		<div class='row'>
 				<div class='col-sm-1'>
-					<div class='btn-main'>
-					<a ng-attr-disabled='{{platform.isJUDL() ? true : false}}' href='/#/activities/{{event._id}}?type={{event.type}' role='button'>
+					<div class='btn-main' ng-show="!platform.isJDUL()">
+					<a href='/#/activities/{{event._id}}?type={{event.type}' role='button'>
 						<span ng-show='event.type === "summer" && !platform.isJDUL()' class='glyphicon glyphicon-certificate'></span>
 						<span ng-show='event.type === "summer" && platform.isJDUL()'><img src='../../assets/button_ente.png' class='pull-left' style='width:45px;margin-right:10px' /></span>
 						<span ng-show='event.type === "music"' class='glyphicon glyphicon-music'></span>
@@ -36,7 +36,15 @@
 						<span ng-show='event.type === "club"' class='glyphicon glyphicon-home'></span>
 						<span ng-show='event.type === "jumprun"' class='glyphicon glyphicon-refresh'></span>
 					</a>
-				</div>
+					</div>
+					<div class='btn-main' ng-show="platform.isJDUL()">
+							<span ng-show='event.type === "summer" && !platform.isJDUL()' class='glyphicon glyphicon-certificate'></span>
+							<span ng-show='event.type === "summer" && platform.isJDUL()'><img src='../../assets/button_ente.png' class='pull-left' style='width:45px;margin-right:10px' /></span>
+							<span ng-show='event.type === "music"' class='glyphicon glyphicon-music'></span>
+							<span ng-show='event.type === "spiritnight"' class='glyphicon glyphicon-education'></span>
+							<span ng-show='event.type === "club"' class='glyphicon glyphicon-home'></span>
+							<span ng-show='event.type === "jumprun"' class='glyphicon glyphicon-refresh'></span>
+					</div>
 				</div>
 				<div class='col-sm-9'>
 					<strong ng-show="lang == 'de'">{{event.location}} - {{event.name}}</strong>
