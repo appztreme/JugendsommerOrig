@@ -30,7 +30,7 @@ exports.sendReceiptMail = function(recipient, registrations, rnumber, instance) 
 		subject: subject,
 		attachment: mailbuilder.getAttachment(body, instance)
 	}, function(err, message) {
-		if(err) console.log(err||message);
+		if(err) console.log("ERROR:", err);
 		else {
 				//console.log("persist to db", registrationsPerMail.length);
 				for(let i = 0; i < registrations.length; i++) {
