@@ -17,16 +17,17 @@ exports.sendTxtMail = function(recipient, firstNameChild, lastNameChild, type, a
 	}, function(err, message) {console.log(err||message); });
 };
 
-exports.sendReceiptMail = function(recipient, registrations, instance) {
-	var body = "";
-	var text = "";
+exports.sendReceiptMail = function(recipient, registrations, rnumber, instance) {
+	var body = mailbuilder.getReceiptBody(registrations, rnumber);
+	var text = mailbuilder.getReceiptTxt();
 	var fromEmail = mailbuilder.getSender(instance);
 	var subject = mailbuilder.getSubject(instance, "receipt");
+	//console.log("body", fromEmail, subject, recipient);
 	server.send({
 		text: text,
 		from: fromEmail,
 		to: recipient,
-		subject: subjectEmail,
+		subject: subject,
 		attachment: mailbuilder.getAttachment(body, instance)
 	}, function(err, message) { console.log(err||message); });
 }

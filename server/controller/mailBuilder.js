@@ -1,5 +1,18 @@
 const moment = require('moment');
 
+<<<<<<< HEAD
+=======
+/*
+
+Achtung wir haben auch eine neue Kontonummer für unsere Sommerprogramme eingerichtet. Bitte bei der Überweisung Name des Kindes und eigene Überweisungsnummer angeben! 
+
+Überweisungsbeleg:
+
+
+Name Kind, Programm,Auflistung Wochen und  Gesamtbetrag mit Überweisungsnummer (fett)  
+*/
+
+>>>>>>> 0fe5747b6eecef1892fa2df23b4182d5ba8cfaa0
 var htmlStart = "<html><body><p>Die Anmeldung f&uuml;r ";
 var htmlEnd = " f&uuml;r die Sommerprogramme des Jugenddienstes Bozen Land war erfolgreich.</p><p><strong>Einzahlungsschein wird demn&auml;chst mittels email zugesandt.</strong></p><p>Vielen Dank f&uuml;r die Anmeldung.</p><h3>Zusammenfassung:</h3>";
 var htmlClose = "</body></html>";
@@ -9,6 +22,10 @@ var txtSpiritnight = "Vielen Dank für die Teilnahme an der SpiritNight 2017! Bi
 
 var txtStart = "Die Anmeldung für ";
 var txtEnd = " für die Sommerprogramme des Jugenddienstes Bozen Land war erfolgreich. Einzahlungsschein wird demnächst mittels email zugesandt.";
+
+var txtReceipt = "Hallo liebe Eltern,\r\n\r\nanbei findet ihr den Überweisungsschein für das Sommerprogramm 2018.\r\nIhr bekommt für jedes Programm einen eigenen Überweisungsschein mit einer dazugehörigen Überweisungsnummer\r\nFür unser Buchhaltung bitten wir euch jeden Überweisungsscheinschein extra zu überweisen.\r\nBei der Überweisung bitten wir euch Überweisungsnummer und die Namen der Kinder anzugeben!\r\n\r\nAchtung ein neues Konto:\r\nWir haben für unsere Sommerprogramme ein neues Konto eingerichtet:\r\nKontodaten:Raiffeisenkassa Bozen\r\nIBAN: IT 09X 08081 11610 000306005853";
+var htmlReceiptStart = "<html><body><p>Hallo liebe Eltern,<br />anbei findet ihr den Überweisungsschein für das Sommerprogramm 2018.<br />Ihr bekommt für jedes Programm einen eigenen Überweisungsschein mit einer dazugehörigen Überweisungsnummer.<br />Für unser Buchhaltung bitten wir euch jeden Überweisungsschein extra zu überweisen.<br />Bei der Überweisung bitten wir euch <strong>Überweisungsnummer</strong> und die <strong>Namen der Kinder</strong> anzugeben!<br /><br />Achtung ein neues Kont:<br />Wir haben für unsere Sommerprogramme ein neues Konto eingerichtet.<br />Kontodaten:<br /><strong>Kontodaten:<br />Raiffeisenkassa Bozen<br />IBAN: IT 09X 08081 11610 000306005853</strong><br />";
+var htmlReceiptEnd = "</body></html>";
 
 var txtStartJDUL_de = "Anmeldebestätigung./r/nes freut uns, dass du heuer im Sommer bei unserem JD-SUMMER Programm in ";
 var txtEndJDUL_de = " dabei sein wirst!/r/nDu erhältst in der nächsten Zeit noch eine weitere E-Mail mit detaillierteren Informationen./r/nDeine Eltern sind gebeten die untenstehenden Daten zu kontrollieren und die Teilnahmegebühr bis zum 31.03.2018 auf folgendes Konto zu überweisen:/r/nJugenddienst Unterland – Raiffeisenkasse Salurn/r/nIBAN: IT 27 T 08220 58371000304204042/r/nmit dem Betreff: Nachname Vorname Wohnort./r/nWir freuen uns jetzt schon auf den JD-SUMMER mit dir, hoffen auf schönes Wetter und wünschen euch noch eine tolle Zeit bis zum Sommer."
@@ -128,6 +145,14 @@ exports.getTypeBody = function(type, firstNameChild, lastNameChild, activities, 
 	}
 }
 
+exports.getReceiptBody = function(reservations, rnumber) {
+	return htmlReceiptStart + "<br /><br />" + getReceiptTable(reservations, rnumber) + "<br />" + getJDBLFooter() + "<br />" + htmlReceiptEnd;
+}
+
+exports.getReceiptTxt = function () {
+	return txtReceipt;
+}
+
 function calculateFee(activity) {
 	if(activity.eventId.deadline) {
 		if((moment(activity.eventId.deadline).hour(23).minute(59).second(59)).isBefore(moment())) return activity.eventId.feePerWeek + activity.eventId.penalty;
@@ -145,6 +170,21 @@ function getActivityTable(activities) {
 		tblStart += '<tr><td style="border: 1px solid gray; padding: 2px;">' + activities[i].eventId.location + ' - ' + activities[i].eventId.name + '<br />' + activities[i].eventId.location_it + ' - ' + activities[i].eventId.name_it + '</td><td style="border: 1px solid gray; padding: 2px">' + activities[i].name + '<br />' + activities[i].name_it + '</td><td style="border: 1px solid gray; padding: 2px;">' + calculateFee(activities[i]) + '</td></tr>';
 	}
 	tblStart += '<tr><td style="border:1px solid gray; padding: 2px;"><strong>Summe | somma in €</strong></td><td style="border: 1px solid gray;"></td><td style="border: 1px solid gray; padding: 2px;">' + sum + '</td></tr>'
+	return tblStart + tblEnd;
+}
+
+function getReceiptTable(res, rnumber) {
+	var sum = 0;
+	var tblStart = '<p>Ihre Überweisungsnummer: <strong>' + rnumber + '</strong></p>';
+	tblStart += '<table style="border: 1px solid gray; border-collapse: collapse"><tr><th style="border: 1px solid gray; padding: 2px;">Programm | programma</th><th style="border: 1px solid gray; padding: 2px;">Name | nome</th><th style="border: 1px solid gray; padding: 2px;">Woche | settimana</th><th style="border: 1px solid gray; padding: 2px;">Preis | prezzo in €</th></tr>';
+	var tblEnd = '</table>';
+	for(var i=0; i<res.length; i++) {
+		sum += calculateFee(res[i].activityId);
+		//console.log("sum", sum);
+		tblStart += '<tr><td style="border: 1px solid gray; padding: 2px;">' + res[i].activityId.eventId.location + ' - ' + res[i].activityId.eventId.name + '<br />' + res[i].activityId.eventId.location_it + ' - ' + res[i].activityId.eventId.name_it + '</td><td style="border: 1px solid gray; padding: 2px">' + res[i].activityId.name + '<br />' + res[i].activityId.name_it + '</td><td style="border: 1px solid gray; padding: 2px;">' + res[i].firstNameChild + ' ' + res[i].lastNameChild +'</td><td style="border: 1px solid gray; padding: 2px;">' + calculateFee(res[i].activityId) + '</td></tr>';
+		//console.log("html", tblStart);
+	}
+	tblStart += '<tr><td style="border:1px solid gray; padding: 2px;"><strong>Summe | somma in €</strong></td><td style="border: 1px solid gray;"></td><td style="border: 1px solid gray;"></td><td style="border: 1px solid gray; padding: 2px;">' + sum + '</td></tr>'
 	return tblStart + tblEnd;
 }
 
