@@ -27,7 +27,7 @@ exports.sendReceiptMail = function(recipient, registrations, rnumber, instance) 
 		text: text,
 		from: fromEmail,
 		to: recipient,
-		subject: subjectEmail,
+		subject: subject,
 		attachment: mailbuilder.getAttachment(body, instance)
 	}, function(err, message) { console.log(err||message); });
 }
