@@ -184,7 +184,7 @@ exports.sendPaymentMail = async(req, res, next) => {
 				let receiptNr = await SequenceRepo.nextReceipt();
 				// console.log("receipt number", receiptNr);
 				try {
-					mail.sendPaymentMail(email, registrationsPerMail, receiptNr.seq, instance);
+					mail.sendReceiptMail(email, registrationsPerMail, receiptNr.seq, instance);
 				} catch(err) {
 					sentWithError = true;
 					// console.log("has error", sentWithError)
