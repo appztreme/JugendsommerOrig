@@ -86,4 +86,8 @@ app.service('EventsSvc', function($http) {
 	this.createContact = function(c) {
 		return $http.post('/api/contact/', c);
 	}
+
+	this.sendReceiptEmail = function(eventId) {
+		return $http.get('/api/registrations/send/receipts/' + eventId);
+	}
 });

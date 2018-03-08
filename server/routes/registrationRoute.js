@@ -13,6 +13,8 @@ router.delete('/:registrationId', auth.requiresRole("admin"), RegistrationContro
 
 router.post('/', auth.requiresApiLogin, RegistrationController.create);
 
+router.get('/send/receipts/:eventId', RegistrationController.sendPaymentMail);
+
 router.put('/', auth.requiresApiLogin, RegistrationController.update);
 
 router.patch('/updateIsPaymentDone', auth.requiresRole("admin"), RegistrationController.updateIsPaymentDone);

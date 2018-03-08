@@ -1,6 +1,6 @@
 var app = angular.module('js');
 
-app.controller('EventsCtrl', function($scope, $routeParams, $location, EventsSvc, IdentitySvc, $rootScope, $translate, PlatformSvc) {
+app.controller('EventsCtrl', function($scope, $routeParams, $location, EventsSvc, IdentitySvc, $rootScope, $translate, PlatformSvc, NotificationSvc) {
 	//$scope.busyPromise = EventsSvc.find();
 	var host = $location.$$host.toLowerCase();
 	$scope.isKiso = host.indexOf('kiso') !== -1
@@ -38,6 +38,13 @@ app.controller('EventsCtrl', function($scope, $routeParams, $location, EventsSvc
 			if(Date.now() > new Date(ev.deadline).getTime()) return false;
 			return true;
 		}
+	}
+
+	$scope.sendReceiptEmail = function(evid) {
+		EventsSvc.sendReceiptEmail(evid).success(function(r) {
+			if(r.success) NotificationSvc.notify("Erfolgreich verschickt");
+			else NotificationSvc.warn("Fehler beim Verschicken");
+		});
 	}
 
 	if(IdentitySvc.isAdmin()) {

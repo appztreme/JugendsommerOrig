@@ -1,5 +1,23 @@
 const moment = require('moment');
 
+/*
+Hallo liebe Eltern,
+
+anbei findet ihr den Überweisungsschein für das Sommerprogramm 2018.  Solltet ihr mehrer Kinder an verschiednen Programmen angemeldet haben bzw. ein Kind bei mehreren Programmen, bekommt ihr für jedes Programm einen eigenen Einzahlungsschein.
+Für unser Buchhaltung bitten wir euch jeden Einzahlungsschein extra zu überweisen.
+
+Achtung wir haben auch eine neue Kontonummer für unsere Sommerprogramme eingerichtet. Bitte bei der Überweisung Name des Kindes und eigene Überweisungsnummer angeben! 
+
+Überweisungsbeleg:
+
+
+Name Kind, Programm,Auflistung Wochen und  Gesamtbetrag mit Überweisungsnummer (fett)  
+Kontodaten:
+
+Raiffeisenkassa Bozen
+IBAN: IT 09X 08081 11610 000306005853
+*/
+
 var htmlStart = "<html><body><p>Die Anmeldung f&uuml;r ";
 var htmlEnd = " f&uuml;r die Sommerprogramme des Jugenddienstes Bozen Land war erfolgreich.</p><p><strong>Einzahlungsschein wird demn&auml;chst mittels email zugesandt.</strong></p><p>Vielen Dank f&uuml;r die Anmeldung.</p><h3>Zusammenfassung:</h3>";
 var htmlClose = "</body></html>";
@@ -34,6 +52,7 @@ function getTypeString(type) {
 		case 'spiritnight': return 'SpiritNight'; break;
 		case 'club': return 'Jugendraum'; break;
 		case 'jumprun': return 'Jump&Run'; break;
+		case 'receipt': return 'Rechnung'; break;
 		default: return 'Jugendsommer';
 	}
 }

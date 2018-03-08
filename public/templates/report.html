@@ -90,6 +90,7 @@
 			<th>EbK</th>
 			<th>Einzahlung</th>
 			<th>Benachrichtigt</th>
+			<th>RechnungsNr</th>
 			<th>Betrag</th>
 			<th>Geburtstag</th>
 			<th>Schulstufe</th>
@@ -122,6 +123,7 @@
 			<td>{{formatBool(reg.needsEbK)}}</td>
 			<td ng-class='{"bg-success": reg.isPaymentDone, "bg-danger": !reg.isPaymentDone}'><input type='checkbox' ng-model='reg.isPaymentDone' ng-change='updateIsPaymentDone(reg._id, reg.isPaymentDone)' style='margin-right:8px' />{{formatBool(reg.isPaymentDone)}}</td>
 			<td ng-class='{"bg-success": reg.isEmailNotified, "bg-danger": !reg.isEmailNotified}'><input type='checkbox' ng-model='reg.isEmailNotified' ng-change='updateIsEmailNotified(reg._id, reg.isEmailNotified)' style='margin-right:8px' />{{formatBool(reg.isEmailNotified)}}</td>
+			<td>{{reg.receiptNumber}}</td>
 			<td align="right">{{calculateFee(reg.activityId)}}</td>
 			<td>{{reg.birthdayChild | date: 'dd/MM/yyyy'}}</td>
 			<td>{{reg.schoolChild}}</td>
@@ -143,7 +145,7 @@
 			<td ng-show='platform.isJDUL()'>{{formatBool(reg.canGoHomeAllone)}}</td>
 			<td>{{reg.registrationDate | date: 'dd/MM/yyyy : hh.mm.ss'}}</td>
 		</tr>
-		<tr><td colspan='10'>Summe:</td><td align='right'>{{calculateOverallFee(registrations)}}</td><td colspan='17'></td></tr>
+		<tr><td colspan='11'>Summe:</td><td align='right'>{{calculateOverallFee(registrations)}}</td><td colspan='17'></td></tr>
 	</table>
     <br />
     <div class='col-sm-6'>

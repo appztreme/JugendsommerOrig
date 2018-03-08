@@ -17,6 +17,20 @@ exports.sendTxtMail = function(recipient, firstNameChild, lastNameChild, type, a
 	}, function(err, message) {console.log(err||message); });
 };
 
+exports.sendReceiptMail = function(recipient, registrations, instance) {
+	var body = "";
+	var text = "";
+	var fromEmail = mailbuilder.getSender(instance);
+	var subject = mailbuilder.getSubject(instance, "receipt");
+	server.send({
+		text: text,
+		from: fromEmail,
+		to: recipient,
+		subject: subjectEmail,
+		attachment: mailbuilder.getAttachment(body, instance)
+	}, function(err, message) { console.log(err||message); });
+}
+
 exports.sendUserTokenMail = function(recipient, userToken, isKiso) {
 	var fromEmail = isKiso ? 'kiso@jd.bz.it' : 'info@jugenddienst.com';
 	var subjectEmail = isKiso ? 'Passwortänderung/Modifica password kiso@jd.bz.it' : 'Passwortänderung Jugendsommer.com';

@@ -5,6 +5,7 @@ const Activity = require('./../models/activity');
 
 const ActivityRepo = require('./../repositories/activity');
 const RegistrationRepo = require('./../repositories/registration');
+const SequenceRepo = require('./../repositories/sequence');
 const mail = require('./mail');
 const platform = require('./platform');
 const mongoose = require('mongoose');
@@ -163,6 +164,43 @@ exports.updateIsEmailNotified = (req, res, next) => {
 	});
 };
 
-exports.sendPaymentMail = (req, res, next) => {
+exports.sendPaymentMail = async(req, res, next) => {
+	try {
+		let activityIds = undefined;
+		if(req.params.eventId) {
+			let ids = await ActivityRepo.getActivityIdsForEvent(req.params.eventId);
+			activityIds = ids.map(function(v,i) { return v._id; });
+			let registrations = await RegistrationRepo.filter(curYear, null, null, activityIds);
+			// console.log("registrations", registrations.length);
+			let emails = registrations.map(function(v,i) { return v.emailParent; });
+			let emailsUnique = new Set(emails);
+			var instance = platform.getPlatform(req.get('host'));
+			// console.log("emails", emailsUnique);
+			for(let email of emailsUnique) {
+				var sentWithError = false;
+				let registrationsPerMail = registrations.filter(reg => reg.emailParent === email && reg.isEmailNotified === false);
+				// console.log("email", email, registrationsPerMail.length);
+				if(registrationsPerMail.length === 0) continue;
+				let receiptNr = await SequenceRepo.nextReceipt();
+				// console.log("receipt number", receiptNr);
+				try {
+					mail.sendPaymentMail(email, registrationsPerMail, receiptNr.seq, instance);
+				} catch(err) {
+					sentWithError = true;
+					// console.log("has error", sentWithError)
+				}
+				if(!sentWithError) {
+					for(let i = 1; i < registrationsPerMail.length; i++) {
+						let reg = registrationsPerMail[i];
+						reg.receiptNr = receiptNr.seq;
+						reg.isEmailNotified = true;
+						await reg.save();
+					}
+				}	
+			}
+		}
 	
+		res.status(201).json({ success: "true"});
+	}
+	catch(err) { next(err); }	
 }
