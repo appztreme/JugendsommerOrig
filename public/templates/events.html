@@ -28,7 +28,7 @@
 		<div class='row'>
 				<div class='col-sm-1'>
 					<div class='btn-main'>
-					<a ng-hide='platform.isKiso()' href='/#/activities/{{event._id}}?type={{event.type}}' role='button'>
+					<a ng-hide='platform.isJDUL()' href='/#/activities/{{event._id}}?type={{event.type}}' role='button'>
 						<span ng-show='event.type === "summer" && !platform.isJDUL()' class='glyphicon glyphicon-certificate'></span>
 						<span ng-show='event.type === "summer" && platform.isJDUL()'><img src='../../assets/button_ente.png' class='pull-left' style='width:45px;margin-right:10px' /></span>
 						<span ng-show='event.type === "music"' class='glyphicon glyphicon-music'></span>
