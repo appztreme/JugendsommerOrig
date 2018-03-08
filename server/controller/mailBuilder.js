@@ -1,18 +1,5 @@
 const moment = require('moment');
 
-<<<<<<< HEAD
-=======
-/*
-
-Achtung wir haben auch eine neue Kontonummer für unsere Sommerprogramme eingerichtet. Bitte bei der Überweisung Name des Kindes und eigene Überweisungsnummer angeben! 
-
-Überweisungsbeleg:
-
-
-Name Kind, Programm,Auflistung Wochen und  Gesamtbetrag mit Überweisungsnummer (fett)  
-*/
-
->>>>>>> 0fe5747b6eecef1892fa2df23b4182d5ba8cfaa0
 var htmlStart = "<html><body><p>Die Anmeldung f&uuml;r ";
 var htmlEnd = " f&uuml;r die Sommerprogramme des Jugenddienstes Bozen Land war erfolgreich.</p><p><strong>Einzahlungsschein wird demn&auml;chst mittels email zugesandt.</strong></p><p>Vielen Dank f&uuml;r die Anmeldung.</p><h3>Zusammenfassung:</h3>";
 var htmlClose = "</body></html>";
