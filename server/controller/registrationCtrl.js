@@ -186,6 +186,7 @@ exports.sendPaymentMail = async(req, res, next) => {
 				console.log("receipt number", receiptNr);
 				try {
 					mail.sendReceiptMail(email, registrationsPerMail, receiptNr.seq, instance);
+					console.log("mail sent");
 				} catch(err) {
 					sentWithError = true;
 					console.log("has error", sentWithError, err);
