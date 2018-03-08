@@ -22,7 +22,7 @@ exports.sendReceiptMail = function(recipient, registrations, rnumber, instance) 
 	var text = mailbuilder.getReceiptTxt();
 	var fromEmail = mailbuilder.getSender(instance);
 	var subject = mailbuilder.getSubject(instance, "receipt");
-	//console.log("body", body);
+	console.log("body", body);
 	server.send({
 		text: text,
 		from: fromEmail,
