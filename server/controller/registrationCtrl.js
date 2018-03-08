@@ -190,9 +190,10 @@ exports.sendPaymentMail = async(req, res, next) => {
 				// 	//console.log("has error", sentWithError, err);
 				// }
 				if(!sentWithError) {
-					console.log("persist to db");
+					console.log("persist to db", registrationsPerMail.length);
 					for(let i = 1; i < registrationsPerMail.length; i++) {
 						let reg = registrationsPerMail[i];
+						console.log("Log", reg, receiptNr);
 						reg.receiptNumber = receiptNr.seq;
 						reg.isEmailNotified = true;
 						console.log("reg", reg);
