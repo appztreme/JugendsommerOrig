@@ -187,12 +187,12 @@ exports.sendPaymentMail = async(req, res, next) => {
 					mail.sendReceiptMail(email, registrationsPerMail, receiptNr.seq, instance);
 				} catch(err) {
 					sentWithError = true;
-					console.log("has error", sentWithError)
+					//console.log("has error", sentWithError)
 				}
 				if(!sentWithError) {
 					for(let i = 1; i < registrationsPerMail.length; i++) {
 						let reg = registrationsPerMail[i];
-						reg.receiptNr = receiptNr.seq;
+						reg.receiptNumber = receiptNr.seq;
 						reg.isEmailNotified = true;
 						await reg.save();
 					}
