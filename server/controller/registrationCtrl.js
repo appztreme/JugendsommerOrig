@@ -167,7 +167,6 @@ exports.updateIsEmailNotified = (req, res, next) => {
 exports.sendPaymentMail = async(req, res, next) => {
 	try {
 		let activityIds = undefined;
-		var sentWithError = false;
 		if(req.params.eventId) {
 			let ids = await ActivityRepo.getActivityIdsForEvent(req.params.eventId);
 			activityIds = ids.map(function(v,i) { return v._id; });
@@ -178,7 +177,7 @@ exports.sendPaymentMail = async(req, res, next) => {
 			var instance = platform.getPlatform(req.get('host'));
 			console.log("emails", emailsUnique);
 			for(let email of emailsUnique) {
-				sentWithError = false;
+				var sentWithError = false;
 				let registrationsPerMail = registrations.filter(reg => reg.emailParent === email && reg.isEmailNotified === false);
 				console.log("email", email, registrationsPerMail.length);
 				if(registrationsPerMail.length === 0) continue;
@@ -186,12 +185,12 @@ exports.sendPaymentMail = async(req, res, next) => {
 				console.log("receipt number", receiptNr);
 				try {
 					mail.sendReceiptMail(email, registrationsPerMail, receiptNr.seq, instance);
-					console.log("mail sent");
 				} catch(err) {
 					sentWithError = true;
 					console.log("has error", sentWithError, err);
 				}
 				if(!sentWithError) {
+					console.log("persist to db");
 					for(let i = 1; i < registrationsPerMail.length; i++) {
 						let reg = registrationsPerMail[i];
 						reg.receiptNumber = receiptNr.seq;

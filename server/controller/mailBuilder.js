@@ -133,8 +133,8 @@ exports.getTypeBody = function(type, firstNameChild, lastNameChild, activities, 
 }
 
 exports.getReceiptBody = function(reservations, rnumber) {
-	return htmlReceiptStart + "<br /><br />" + "<br />" + getJDBLFooter() + "<br />" + htmlReceiptEnd;
-	//return htmlReceiptStart + "<br /><br />" + getReceiptTable(reservations, rnumber) + "<br />" + getJDBLFooter() + "<br />" + htmlReceiptEnd;
+	// return htmlReceiptStart + "<br /><br />" + "<br />" + getJDBLFooter() + "<br />" + htmlReceiptEnd;
+	return htmlReceiptStart + "<br /><br />" + getReceiptTable(reservations, rnumber) + "<br />" + getJDBLFooter() + "<br />" + htmlReceiptEnd;
 }
 
 exports.getReceiptTxt = function () {
