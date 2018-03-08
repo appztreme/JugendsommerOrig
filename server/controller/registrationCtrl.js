@@ -176,11 +176,11 @@ exports.sendPaymentMail = async(req, res, next) => {
 			let emails = registrations.map(function(v,i) { return v.emailParent; });
 			let emailsUnique = new Set(emails);
 			var instance = platform.getPlatform(req.get('host'));
-			//console.log("emails", emailsUnique);
+			console.log("emails", emailsUnique);
 			for(let email of emailsUnique) {
 				sentWithError = false;
 				let registrationsPerMail = registrations.filter(reg => reg.emailParent === email && reg.isEmailNotified === false);
-				//console.log("email", email, registrationsPerMail.length);
+				console.log("email", email, registrationsPerMail.length);
 				if(registrationsPerMail.length === 0) continue;
 				let receiptNr = await SequenceRepo.nextReceipt();
 				console.log("receipt number", receiptNr);
