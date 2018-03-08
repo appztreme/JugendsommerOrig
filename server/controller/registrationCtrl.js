@@ -187,7 +187,7 @@ exports.sendPaymentMail = async(req, res, next) => {
 					mail.sendPaymentMail(email, registrationsPerMail, receiptNr.seq, instance);
 				} catch(err) {
 					sentWithError = true;
-					// console.log("has error", sentWithError)
+					console.log("has error", sentWithError, err);
 				}
 				if(!sentWithError) {
 					for(let i = 1; i < registrationsPerMail.length; i++) {
