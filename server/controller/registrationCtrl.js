@@ -172,7 +172,7 @@ exports.sendPaymentMail = async(req, res, next) => {
 			let ids = await ActivityRepo.getActivityIdsForEvent(req.params.eventId);
 			activityIds = ids.map(function(v,i) { return v._id; });
 			let registrations = await RegistrationRepo.filter(curYear, null, null, activityIds);
-			//console.log("registrations", registrations.length);
+			console.log("registrations", registrations.length);
 			let emails = registrations.map(function(v,i) { return v.emailParent; });
 			let emailsUnique = new Set(emails);
 			var instance = platform.getPlatform(req.get('host'));
