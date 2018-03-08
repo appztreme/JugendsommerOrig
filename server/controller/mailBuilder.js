@@ -61,7 +61,10 @@ function getKisoSubject(type) {
 exports.getSubject = function(instance, type) {
 	if(instance.isKiso) return getKisoSubject(type);
 	else if(instance.isJDUL) return "Anmeldung | iscrizione JD-SUMMER";
-	else return 'Anmeldung ' + getTypeString(type);
+	else {
+		if(type === 'receipt') return 'Überweisung Sommer';
+		else return 'Anmeldung ' + getTypeString(type);
+	}
 }
 
 exports.getTypeText = function(type, firstNameChild, lastNameChild, location, instance) {
@@ -164,7 +167,7 @@ function getActivityTable(activities) {
 function getReceiptTable(res, rnumber) {
 	var sum = 0;
 	var tblStart = '<p>Ihre Überweisungsnummer: <strong>' + rnumber + '</strong></p>';
-	tblStart += '<table style="border: 1px solid gray; border-collapse: collapse"><tr><th style="border: 1px solid gray; padding: 2px;">Programm | programma</th><th style="border: 1px solid gray; padding: 2px;">Name | nome</th><th style="border: 1px solid gray; padding: 2px;">Woche | settimana</th><th style="border: 1px solid gray; padding: 2px;">Preis | prezzo in €</th></tr>';
+	tblStart += '<table style="border: 1px solid gray; border-collapse: collapse"><tr><th style="border: 1px solid gray; padding: 2px;">Programm | programma</th><th style="border: 1px solid gray; padding: 2px;">Woche | settimana</th><th style="border: 1px solid gray; padding: 2px;">Name | nome</th><th style="border: 1px solid gray; padding: 2px;">Preis | prezzo in €</th></tr>';
 	var tblEnd = '</table>';
 	for(var i=0; i<res.length; i++) {
 		sum += calculateFee(res[i].activityId);

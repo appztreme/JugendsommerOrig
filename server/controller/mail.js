@@ -29,7 +29,22 @@ exports.sendReceiptMail = function(recipient, registrations, rnumber, instance) 
 		to: recipient,
 		subject: subject,
 		attachment: mailbuilder.getAttachment(body, instance)
-	}, function(err, message) { console.log(err||message); });
+	}, function(err, message) {
+		if(err) console.log(err||message);
+		else {
+				//console.log("persist to db", registrationsPerMail.length);
+				for(let i = 0; i < registrations.length; i++) {
+					// console.log("counter", i);
+					let reg = registrations[i];
+					// console.log("Log", reg, receiptNr);
+					reg.receiptNumber = rnumber;
+					reg.isEmailNotified = true;
+					// console.log("reg", reg);
+					reg.save();
+					console.log("end")
+				}
+			}	
+	});
 }
 
 exports.sendUserTokenMail = function(recipient, userToken, isKiso) {

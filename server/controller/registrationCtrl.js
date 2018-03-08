@@ -183,25 +183,25 @@ exports.sendPaymentMail = async(req, res, next) => {
 				if(registrationsPerMail.length === 0) continue;
 				let receiptNr = await SequenceRepo.nextReceipt();
 				//console.log("receipt number", receiptNr);
-				try {
-					mail.sendReceiptMail(email, registrationsPerMail, receiptNr.seq, instance);
-				} catch(err) {
-					sentWithError = true;
-					//console.log("has error", sentWithError, err);
-				}
-				if(!sentWithError) {
-					console.log("persist to db", registrationsPerMail.length);
-					for(let i = 0; i < registrationsPerMail.length; i++) {
-						console.log("counter", i);
-						let reg = registrationsPerMail[i];
-						console.log("Log", reg, receiptNr);
-						reg.receiptNumber = receiptNr.seq;
-						reg.isEmailNotified = true;
-						console.log("reg", reg);
-						await reg.save();
-						console.log("end")
-					}
-				}	
+				//try {
+				mail.sendReceiptMail(email, registrationsPerMail, receiptNr.seq, instance);
+				// } catch(err) {
+				// 	sentWithError = true;
+				// 	//console.log("has error", sentWithError, err);
+				// }
+				// if(!sentWithError) {
+				// 	//console.log("persist to db", registrationsPerMail.length);
+				// 	for(let i = 0; i < registrationsPerMail.length; i++) {
+				// 		// console.log("counter", i);
+				// 		let reg = registrationsPerMail[i];
+				// 		// console.log("Log", reg, receiptNr);
+				// 		reg.receiptNumber = receiptNr.seq;
+				// 		reg.isEmailNotified = true;
+				// 		// console.log("reg", reg);
+				// 		await reg.save();
+				// 		// console.log("end")
+				// 	}
+				// }	
 			}
 		}
 	
