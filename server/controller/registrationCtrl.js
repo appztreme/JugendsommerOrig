@@ -183,12 +183,12 @@ exports.sendPaymentMail = async(req, res, next) => {
 				if(registrationsPerMail.length === 0) continue;
 				let receiptNr = await SequenceRepo.nextReceipt();
 				//console.log("receipt number", receiptNr);
-				try {
-					mail.sendReceiptMail(email, registrationsPerMail, receiptNr.seq, instance);
-				} catch(err) {
-					sentWithError = true;
-					//console.log("has error", sentWithError, err);
-				}
+				// try {
+				// 	mail.sendReceiptMail(email, registrationsPerMail, receiptNr.seq, instance);
+				// } catch(err) {
+				// 	sentWithError = true;
+				// 	//console.log("has error", sentWithError, err);
+				// }
 				if(!sentWithError) {
 					console.log("persist to db");
 					for(let i = 1; i < registrationsPerMail.length; i++) {
