@@ -11,7 +11,7 @@ var txtStart = "Die Anmeldung für ";
 var txtEnd = " für die Sommerprogramme des Jugenddienstes Bozen Land war erfolgreich. Einzahlungsschein wird demnächst mittels email zugesandt.";
 
 var txtReceipt = "Hallo liebe Eltern,\r\n\r\nanbei findet ihr den Überweisungsschein für das Sommerprogramm 2018.\r\nIhr bekommt für jedes Programm einen eigenen Überweisungsschein mit einer dazugehörigen Überweisungsnummer\r\nFür unser Buchhaltung bitten wir euch jeden Überweisungsscheinschein extra zu überweisen.\r\nBei der Überweisung bitten wir euch Überweisungsnummer und die Namen der Kinder anzugeben!\r\n\r\nAchtung ein neues Konto:\r\nWir haben für unsere Sommerprogramme ein neues Konto eingerichtet:\r\nKontodaten:Raiffeisenkassa Bozen\r\nIBAN: IT 09X 08081 11610 000306005853";
-var htmlReceiptStart = "<html><body><p>Hallo liebe Eltern,<br />anbei findet ihr den Überweisungsschein für das Sommerprogramm 2018.<br />Ihr bekommt für jedes Programm einen eigenen Überweisungsschein mit einer dazugehörigen Überweisungsnummer.<br />Für unser Buchhaltung bitten wir euch jeden Überweisungsschein extra zu überweisen.<br />Bei der Überweisung bitten wir euch <strong>Überweisungsnummer</strong> und die <strong>Namen der Kinder</strong> anzugeben!<br /><br />Achtung ein neues Kont:<br />Wir haben für unsere Sommerprogramme ein neues Konto eingerichtet.<br />Kontodaten:<br /><strong>Kontodaten:<br />Raiffeisenkassa Bozen<br />IBAN: IT 09X 08081 11610 000306005853</strong><br />";
+var htmlReceiptStart = "<html><body><p>Hallo liebe Eltern,<br />anbei findet ihr den Überweisungsschein für das Sommerprogramm 2018.<br />Ihr bekommt für jedes Programm einen eigenen Überweisungsschein mit einer dazugehörigen Überweisungsnummer.<br />Für unser Buchhaltung bitten wir euch jeden Überweisungsschein extra zu überweisen.<br />Bei der Überweisung bitten wir euch den <strong>Gesamtbetrag</strong> mit der <strong>Überweisungsnummer</strong> und den <strong>Namen der Kinder</strong> anzugeben!<br /><br />Achtung ein neues Kont:<br />Wir haben für unsere Sommerprogramme ein neues Konto eingerichtet.<br />Kontodaten:<br /><strong>Kontodaten:<br />Raiffeisenkassa Bozen<br />IBAN: IT 09X 08081 11610 000306005853</strong><br />";
 var htmlReceiptEnd = "</body></html>";
 
 var txtStartJDUL_de = "Anmeldebestätigung./r/nes freut uns, dass du heuer im Sommer bei unserem JD-SUMMER Programm in ";
@@ -160,7 +160,7 @@ function getActivityTable(activities) {
 		sum += calculateFee(activities[i]);
 		tblStart += '<tr><td style="border: 1px solid gray; padding: 2px;">' + activities[i].eventId.location + ' - ' + activities[i].eventId.name + '<br />' + activities[i].eventId.location_it + ' - ' + activities[i].eventId.name_it + '</td><td style="border: 1px solid gray; padding: 2px">' + activities[i].name + '<br />' + activities[i].name_it + '</td><td style="border: 1px solid gray; padding: 2px;">' + calculateFee(activities[i]) + '</td></tr>';
 	}
-	tblStart += '<tr><td style="border:1px solid gray; padding: 2px;"><strong>Summe | somma in €</strong></td><td style="border: 1px solid gray;"></td><td style="border: 1px solid gray; padding: 2px;">' + sum + '</td></tr>'
+	tblStart += '<tr><td style="border:1px solid gray; padding: 2px;"><strong>Summe | somma in €</strong></td><td style="border: 1px solid gray;"></td><td style="border: 1px solid gray; padding: 2px;"><strong>' + sum + '</strong></td></tr>'
 	return tblStart + tblEnd;
 }
 
