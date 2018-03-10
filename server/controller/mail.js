@@ -1,5 +1,6 @@
 var email   = require("./../../node_modules/emailjs/email");
 var server  = email.server.connect({});
+const platform = require('./platform')
 var mailbuilder = require('./mailBuilder');
 
 exports.sendTxtMail = function(recipient, firstNameChild, lastNameChild, type, activities, reservation, instance) {
@@ -13,7 +14,7 @@ exports.sendTxtMail = function(recipient, firstNameChild, lastNameChild, type, a
 		from: fromEmail,
 		to: recipient,
 		subject: subjectEmail,
-		attachment: mailbuilder.getAttachment(body, instance)
+		attachment: mailbuilder.getAttachment(body, platform.getPlatform('www.jugendsommer.com'))
 	}, function(err, message) {console.log(err||message); });
 };
 
@@ -45,6 +46,21 @@ exports.sendReceiptMail = function(recipient, registrations, rnumber, instance) 
 				}
 			}	
 	});
+}
+
+exports.sendSorryMail = function(recipient) {
+	var body = mailbuilder.getSorryBody();
+	var text = mailbuilder.getSorryText();
+    var fromEmail = 'sommer@jugenddienst.com';
+	var subjectEmail = "Fehler Einzahlung Jugendsommer 2018";
+	console.log("body", body);
+	server.send({
+		text: text,
+		from: fromEmail,
+		to: recipient,
+		subject: subjectEmail,
+		attachment: mailbuilder.getAttachment(body, instance)
+	}, function(err, message) {console.log(err||message); });	
 }
 
 exports.sendUserTokenMail = function(recipient, userToken, isKiso) {

@@ -140,6 +140,16 @@ exports.getReceiptBody = function(reservations, rnumber) {
 	return htmlReceiptStart + "<br /><br />" + getReceiptTable(reservations, rnumber) + "<br />" + getJDBLFooter() + "<br />" + htmlReceiptEnd;
 }
 
+exports.getSorryText = function() {
+	return "Liebe Eltern,/r/nim automatisch generierten Überweisungsemail hat sich ein Fehler in der Berechnung der Kosten eingeschlichen. Bitte das letzte Email ignorieren./r/nAm Sonntag den 10. März wird eine korrigierte Version versendet./r/nEntschuldigung für die entstandene Verwirrung./r/n";
+}
+
+exports.getSorryHtml = function() {
+	return "<html><body><p>Liebe Eltern,<br />im automatisch generierten Überweisungsemail hat sich ein Fehler in der Berechnung der Kosten eingeschlichen. Bitte das letzte Email ignorieren.<br />Am Sonntag den 10. März wird eine korrigierte Version versendet.<br />Entschuldigung für die entstandene Verwirrung.</p><br />"
+		   + getJDBLFooter();
+
+}
+
 exports.getReceiptTxt = function () {
 	return txtReceipt;
 }
