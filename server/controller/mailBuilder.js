@@ -154,7 +154,7 @@ function calculateFee(activity) {
 
 function calculateReceiptFee(reservation, activity) {
 	if(activity.eventId.deadline) {
-		if((moment(activity.eventId.deadline).hour(23).minute(59).second(59)).isBefore(moment(reservation.reservationDate))) return activity.eventId.feePerWeek + activity.eventId.penalty;
+		if((moment(activity.eventId.deadline).hour(23).minute(59).second(59)).isBefore(moment(reservation.registrationDate))) return activity.eventId.feePerWeek + activity.eventId.penalty;
 		return activity.eventId.feePerWeek;
 	}
 	return activity.eventId.feePerWeek;
