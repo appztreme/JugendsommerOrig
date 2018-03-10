@@ -14,7 +14,7 @@ exports.sendTxtMail = function(recipient, firstNameChild, lastNameChild, type, a
 		from: fromEmail,
 		to: recipient,
 		subject: subjectEmail,
-		attachment: mailbuilder.getAttachment(body, platform.getPlatform('www.jugendsommer.com'))
+		attachment: mailbuilder.getAttachment(body, instance)
 	}, function(err, message) {console.log(err||message); });
 };
 
@@ -59,7 +59,7 @@ exports.sendSorryMail = function(recipient) {
 		from: fromEmail,
 		to: recipient,
 		subject: subjectEmail,
-		attachment: mailbuilder.getAttachment(body, instance)
+		attachment: mailbuilder.getAttachment(body, platform.getPlatform('www.jugendsommer.com'))
 	}, function(err, message) {console.log(err||message); });	
 }
 
