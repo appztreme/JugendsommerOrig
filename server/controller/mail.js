@@ -49,7 +49,7 @@ exports.sendReceiptMail = function(recipient, registrations, rnumber, instance) 
 }
 
 exports.sendSorryMail = function(recipient) {
-	var body = mailbuilder.getSorryBody();
+	var body = mailbuilder.getSorryHtml();
 	var text = mailbuilder.getSorryText();
     var fromEmail = 'sommer@jugenddienst.com';
 	var subjectEmail = "Fehler Einzahlung Jugendsommer 2018";
