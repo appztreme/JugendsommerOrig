@@ -34,7 +34,7 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 		if(!registrations) return 0;
 		var sum = 0;
 		for(var i = 0; i < registrations.length; i++) {
-			sum += $scope.calculateFee(registrations[i].activityId);
+			sum += $scope.calculateFee(registrations[i]);
 		}
 		return sum;
 	}
