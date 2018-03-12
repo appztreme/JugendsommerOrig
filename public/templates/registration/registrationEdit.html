@@ -106,7 +106,7 @@
 	<div class='col-sm-offset-2 col-sm4'>
 		<input type='checkbox' name='needsEbk' ng-model='needsEbK'><strong>  Ebk</input>
 	</div>
-	<!-- NEEDSEBK -->
+	<!-- HASDISABILITY -->
 	<div class='col-sm-offset-2 col-sm4'>
 			<input type='checkbox' name='hasDisability' ng-model='hasDisability'><strong>  Beeinträchtigung</input>
 	</div>
@@ -120,27 +120,27 @@
 	<br />
 	<div class="panel panel-default">
 	<div class="panel-heading text-orange"><strong>Auszufüllen nur bei Anmeldung für die Tschögglberger Jungbläserwochen</strong></div>
-  <div class="panel-body">
-		<div class='form-group' ng-class='{ "has-error": registrationForm.bandName.$invalid }'>
-			<label for='bandName' class='control-label col-sm-2'>Musikkapelle</label>
-			<div class='col-sm-10'>
-				<input name='bandName' type='text' ng-model='bandName' maxlength="100" class='form-control'></textarea>
+ 		<div class="panel-body">
+			<div class='form-group' ng-class='{ "has-error": registrationForm.bandName.$invalid }'>
+				<label for='bandName' class='control-label col-sm-2'>Musikkapelle</label>
+				<div class='col-sm-10'>
+					<input name='bandName' type='text' ng-model='bandName' maxlength="100" class='form-control'></textarea>
+				</div>
 			</div>
-		</div>
-		<div class='form-group' ng-class='{ "has-error": registrationForm.instrument.$invalid }'>
-			<label for='instrument' class='control-label col-sm-2'>Instrument</label>
-			<div class='col-sm-10'>
-				<input name='instrument' type='text' ng-model='instrument' maxlength="100" class='form-control'></textarea>
+			<div class='form-group' ng-class='{ "has-error": registrationForm.instrument.$invalid }'>
+				<label for='instrument' class='control-label col-sm-2'>Instrument</label>
+				<div class='col-sm-10'>
+					<input name='instrument' type='text' ng-model='instrument' maxlength="100" class='form-control'></textarea>
+				</div>
 			</div>
-		</div>
-		<div class='form-group' ng-class='{ "has-error": registrationForm.bandName.$invalid }'>
-			<label for='instrumentYears' class='control-label col-sm-2'>Ausbildungsjahr</label>
-			<div class='col-sm-10'>
-				<input name='instrumentYears' type='text' ng-model='instrumentYears' maxlength="100" class='form-control'></textarea>
+			<div class='form-group' ng-class='{ "has-error": registrationForm.bandName.$invalid }'>
+				<label for='instrumentYears' class='control-label col-sm-2'>Ausbildungsjahr</label>
+				<div class='col-sm-10'>
+					<input name='instrumentYears' type='text' ng-model='instrumentYears' maxlength="100" class='form-control'></textarea>
+				</div>
 			</div>
-		</div>
-  </div>
-</div>
+  		</div>
+	</div>
 	<div class='text-orange'><strong>Notfallkontakte:</strong></div>
 	<!-- NAMECONTACT1 TELCONTACT1 -->
 	<div class='form-group'>
@@ -180,6 +180,15 @@
 			<input type='checkbox' name='emailNotified' ng-model='isEmailNotified' class='form-control'></input>
 		</div>
 	</div>
+
+	<!-- COMMENTINTERNAL -->
+	<div class='form-group' ng-class='{ "has-error": registrationForm.commentInternal.$invalid }'>
+		<label for='commentInternal' class='control-label col-sm-2'>Kommentar Intern</label>
+		<div class='col-sm-10'>
+			<textarea name='commentInternal' ng-model='commentInternal' rows='3' maxlength='350' class='form-control'></textarea>
+		</div>
+	</div>
+
 
 	<div class='col-sm-offset-2 col-sm-10' style='margin-top:15px;'>
 			<input class='btn btn-success bnt-lg btn-block' type='submit' value='Speichern' ng-disabled='!iSvc.isAuthorized("admin")'>

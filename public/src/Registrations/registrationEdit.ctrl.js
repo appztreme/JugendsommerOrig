@@ -35,6 +35,7 @@ app.controller('RegistrationEditCtrl', function($scope, $filter, $routeParams, $
 			$scope.registration.disabilityDescription = $scope.disabilityDescription;
 			$scope.registration.canSwim = $scope.canSwim;
 			$scope.registration.canGoHomeAllone = $scope.canGoHomeAllone;
+			$scope.registration.commentInternal = $scope.commentInternal;
 
 			RegistrationSvc.update( $scope.registration
 			).success(function(reg) {
@@ -64,6 +65,7 @@ app.controller('RegistrationEditCtrl', function($scope, $filter, $routeParams, $
 				$scope.canSwim = false;
 				$scope.canGoHomeAllone = false;
 				$scope.disabilityDescription = null;
+				$scope.commentInternal = null;
 			})
 			.then(function() {
 				NotificationSvc.notify('Aenderungen erfolgreich gespeichert');
@@ -101,6 +103,7 @@ app.controller('RegistrationEditCtrl', function($scope, $filter, $routeParams, $
 		$scope.disabilityDescription = registration.disabilityDescription;
 		$scope.canSwim = registration.canSwim;
 		$scope.canGoHomeAllone = registration.canGoHomeAllone;
+		$scope.commentInternal = registration.commentInternal;
 
 		ActivitiesSvc.findAllSiblingsByActivityId(registration.activityId).success(function(activities) {
 			$scope.activities = activities;

@@ -18,6 +18,12 @@ app.controller('RegistrationOwnEditCtrl', function($scope, $filter, $routeParams
 			$scope.registration.healthChild = $scope.healthChild;
 			$scope.registration.addressChild = $scope.addressChild;
 			$scope.registration.cityChild = $scope.cityChild;
+			$scope.registration.hasDisability = $scope.hasDisability;
+			$scope.registration.disabilityDescription = $scope.disabilityDescription;
+			$scope.registration.nameContact1 = $scope.nameContact1;
+			$scope.registration.nameContact2 = $scope.nameContact2;
+			$scope.registration.telContact1 = $scope.telContact1;
+			$scope.registration.telContact2 = $scope.telContact2;
 			RegistrationSvc.update( $scope.registration
 			).success(function(reg) {
 				$scope.firstNameParent = null;
@@ -31,6 +37,12 @@ app.controller('RegistrationOwnEditCtrl', function($scope, $filter, $routeParams
 				$scope.healthChild = null;
 				$scope.addressChild = null;
 				$scope.cityChild = null;
+				$scope.hasDisability = false;
+				$scope.disabilityDescription = null;
+				$scope.nameContact1 = null;
+				$scope.nameContact2 = null;
+				$scope.telContact1 = null;
+				$scope.telContact2 = null;
 			})
 			.then(function() {
 				NotificationSvc.notify('Aenderungen erfolgreich gespeichert');
@@ -52,6 +64,12 @@ app.controller('RegistrationOwnEditCtrl', function($scope, $filter, $routeParams
 		$scope.healthChild = registration.healthChild;
 		$scope.addressChild = registration.addressChild;
 		$scope.cityChild = registration.cityChild;
+		$scope.hasDisability = registration.hasDisability;
+		$scope.disabilityDescription = registration.disabilityDescription;
+		$scope.nameContact1 = registration.nameContact1;
+		$scope.nameContact2 = registration.nameContact2;
+		$scope.telContact1 = registration.telContact1;
+		$scope.telContact2 = registration.telContact2;
 	});
 
 });

@@ -84,6 +84,44 @@
 			</select>
 		</div>
 	</div>
+
+	<!-- HASDISABILITY -->
+	<div class='col-sm-offset-2 col-sm4'>
+		<input type='checkbox' name='hasDisability' ng-model='hasDisability'><strong>  Beeinträchtigung</input>
+	</div>
+	<!-- DISABILITY DESCRIPTION -->
+	<div class='form-group' ng-class='{ "has-error": registrationForm.disabilityDescription.$invalid }'>
+		<label for='disabilityDescription' class='control-label col-sm-2'>Diagnose Beeinträchtigung</label>
+		<div class='col-sm-10'>
+			<input name='disabilityDescription' type='text' ng-model='disabilityDescription' class='form-control'></input>
+		</div>
+	</div>
+	<br />
+
+	<div class='text-orange'><strong>Notfallkontakte:</strong></div>
+	<!-- NAMECONTACT1 TELCONTACT1 -->
+	<div class='form-group'>
+		<label for='nameContact1' class='control-label col-sm-2'>Name1</label>
+		<div class='col-sm-4'>
+			<input name='nameContact1' type='text' maxlength='250' ng-model='nameContact1' class='form-control'></input>
+		</div>
+		<label for='telContact1' class='control-label col-sm-2'>Telefon1</label>
+		<div class='col-sm-4'>
+			<input name='telContact1' type='tel' maxlength='100' ng-model='telContact1' class='form-control'></input>
+		</div>
+	</div>
+	<!-- NAMECONTACT2 TELCONTACT2 -->
+	<div class='form-group'>
+		<label for='nameContact2' class='control-label col-sm-2'>Name2</label>
+		<div class='col-sm-4'>
+			<input name='nameContact2' type='text' maxlength='250' ng-model='nameContact2' class='form-control'></input>
+		</div>
+		<label for='telContact2' class='control-label col-sm-2'>Telefon2</label>
+		<div class='col-sm-4'>
+			<input name='telContact2' type='tel' maxlength='100' ng-model='telContact2' class='form-control'></input>
+		</div>
+	</div>
+
 	<div class='col-sm-offset-2 col-sm-10' style='margin-top:15px;'>
 			<input class='btn btn-success bnt-lg btn-block' type='submit' value='Speichern'>
 	</div>
