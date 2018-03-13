@@ -10,7 +10,7 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 	$scope.yearFilter = (new Date()).getFullYear();
 
   	$scope.getReportData = function() {
-    	RegistrationSvc.find($scope.eventIdFilter, $scope.activityIdFilter, $scope.yearFilter, $scope.nameFilter)
+    	RegistrationSvc.find($scope.eventIdFilter, $scope.activityIdFilter, $scope.yearFilter, $scope.nameFilter, $scope.receiptFilter)
 				.success(function (regs) {
             		$scope.registrations = regs;
             		$scope.emails = _.uniq(_.map($scope.registrations, function(r) {
@@ -54,6 +54,12 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 
 	$scope.clearNameSelection = function() {
 		$scope.nameFilter = undefined;
+		$scope.registrations = undefined;
+		$scope.emails = undefined;
+	}
+
+	$scope.clearReceiptSelection = function() {
+		$scope.receiptFilter = undefined;
 		$scope.registrations = undefined;
 		$scope.emails = undefined;
 	}
@@ -156,7 +162,8 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 		{dbName: "lastNameParents", colName: "Nachname Eltern"},
 		{dbName: "registrationDate", colName: "Anmeldedatum"},
 		{dbName: "isPaymentDone", colName: "Bezahlt"},
-		{dbName: "isEmailNotified", colName: "Benachrichtigt"}
+		{dbName: "isEmailNotified", colName: "Benachrichtigt"},
+		{dbName: "receiptNumber", colName: "Überweisungsnummer"}
 	);
 
 	if(ReportCacheSvc.hasEventFilterParameter()) {

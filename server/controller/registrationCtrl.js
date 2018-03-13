@@ -20,7 +20,7 @@ exports.find = async(req, res, next) => {
 			let ids = await ActivityRepo.getActivityIdsForEvent(req.query.eventId);
 			activityIds = ids.map(function(v,i) { return v._id; });
 		}
-		let result = await RegistrationRepo.filter(req.query.year, req.query.name, req.query.activityId, activityIds);
+		let result = await RegistrationRepo.filter(req.query.year, req.query.name, req.query.receiptNumber, req.query.activityId, activityIds);
 		res.json(result);
 	}
 	catch(err) { next(err); }
@@ -172,7 +172,7 @@ exports.sendPaymentMail = async(req, res, next) => {
 		if(req.params.eventId) {
 			let ids = await ActivityRepo.getActivityIdsForEvent(req.params.eventId);
 			activityIds = ids.map(function(v,i) { return v._id; });
-			let registrations = await RegistrationRepo.filter(curYear, null, null, activityIds);
+			let registrations = await RegistrationRepo.filter(curYear, null, null, null, activityIds);
 			//console.log("registrations", registrations.length);
 			let emails = registrations.map(function(v,i) { return v.emailParent; });
 			let emailsUnique = new Set(emails);

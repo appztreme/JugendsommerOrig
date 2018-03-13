@@ -9,16 +9,19 @@ exports.findByEventId = (id) => {
     return Registration.find()
 }
 
-exports.filter = (year, name, activityId, activityIds) => {
+exports.filter = (year, name, receiptNr, activityId, activityIds) => {
     const minDate = new Date(year + "-1-1");
     const maxDate = new Date(year + "-12-31");
     let query = undefined;
     if(name) query = Registration.find({ $or: [
             {lastNameChild:  {'$regex': name }},
-            {lastNameParent: {'$regex': name }}
+            {lastNameParent: {'$regex': name }},
+            {firstNameChild: {'$regex': name }},
+            {firstNameParent: {'$regex': name}}
         ]});
     else query = Registration.find();
 
+    if(receiptNr) query = query.where('receiptNumber').equals(receiptNr);
     if(activityId) query = query.where('activityId').equals(activityId);
     if(activityIds) query = query.where('activityId').in(activityIds);
 
