@@ -34,7 +34,7 @@ var registrationSchema = db.Schema({
   needsPreCare: { type: Boolean, required: true, default: false },
   hasDisability: { type: Boolean, required: true, default: false },
   disabilityDescription: { type: String, required: false },
-  needsEbK: { type: String, required: true, default: false },
+  needsEbK: { type: Boolean, required: true, default: false },
   canSwim: { type: Boolean, required: true, default: false },
   canGoHomeAllone: { type: Boolean, required: true, default: false },
   receiptNumber: { type: Number, required: false },

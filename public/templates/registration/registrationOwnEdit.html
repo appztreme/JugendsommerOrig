@@ -96,6 +96,16 @@
 			<input name='disabilityDescription' type='text' ng-model='disabilityDescription' class='form-control'></input>
 		</div>
 	</div>
+
+	<!-- CANSWIM -->
+	<div ng-show='platform.isJDUL()' class='col-sm-offset-2 col-sm4'>
+		<input type='checkbox' name='canSwin' ng-model='canSwim'><strong>  {{"RESERVATION.LABEL_CANSWIM_CHILD" | translate}}</input>
+	</div>
+	<!-- CANGOHOMEALLONE -->
+	<div ng-show='platform.isJDUL()' class='col-sm-offset-2 col-sm4'>
+		<input type='checkbox' name='canGoHomeAllone' ng-model='canGoHomeAllone'><strong>  {{"RESERVATION.LABEL_CANGOHOME_CHILD" | translate}}</input>
+	</div>
+
 	<br />
 
 	<div class='text-orange'><strong>Notfallkontakte:</strong></div>
@@ -120,6 +130,10 @@
 		<div class='col-sm-4'>
 			<input name='telContact2' type='tel' maxlength='100' ng-model='telContact2' class='form-control'></input>
 		</div>
+	</div>
+	<!-- NEEDSEBK -->
+	<div class='col-sm-offset-2 col-sm4'>
+		<input type='checkbox' name='needsEbk' ng-model='needsEbK'><strong>  Ebk</input>
 	</div>
 
 	<div class='col-sm-offset-2 col-sm-10' style='margin-top:15px;'>

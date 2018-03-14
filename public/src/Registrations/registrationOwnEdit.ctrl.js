@@ -4,6 +4,7 @@ app.controller('RegistrationOwnEditCtrl', function($scope, $filter, $routeParams
 
 	//$scope.busyPromise = RegistrationSvc.findById;
 	$scope.cities = PlatformSvc.getCities();
+	$scope.platform = PlatformSvc;
 
 	$scope.save = function() {
 		if($scope.registrationForm.$valid) {
@@ -24,6 +25,9 @@ app.controller('RegistrationOwnEditCtrl', function($scope, $filter, $routeParams
 			$scope.registration.nameContact2 = $scope.nameContact2;
 			$scope.registration.telContact1 = $scope.telContact1;
 			$scope.registration.telContact2 = $scope.telContact2;
+			$scope.registration.needsEbK = $scope.needsEbK;
+			$scope.registration.canSwim = $scope.canSwim;
+			$scope.registration.canGoHomeAllone = $scope.canGoHomeAllone;
 			RegistrationSvc.update( $scope.registration
 			).success(function(reg) {
 				$scope.firstNameParent = null;
@@ -43,6 +47,9 @@ app.controller('RegistrationOwnEditCtrl', function($scope, $filter, $routeParams
 				$scope.nameContact2 = null;
 				$scope.telContact1 = null;
 				$scope.telContact2 = null;
+				$scope.needsEbK = false;
+				$scope.canSwim = false;
+				$scope.canGoHomeAllone = false;
 			})
 			.then(function() {
 				NotificationSvc.notify('Aenderungen erfolgreich gespeichert');
@@ -70,6 +77,9 @@ app.controller('RegistrationOwnEditCtrl', function($scope, $filter, $routeParams
 		$scope.nameContact2 = registration.nameContact2;
 		$scope.telContact1 = registration.telContact1;
 		$scope.telContact2 = registration.telContact2;
+		$scope.needsEbK = registration.needsEbK;
+		$scope.canSwim = registration.canSwim;
+		$scope.canGoHomeAllone = registration.canGoHomeAllone;
 	});
 
 });

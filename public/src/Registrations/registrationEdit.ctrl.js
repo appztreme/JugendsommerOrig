@@ -35,6 +35,7 @@ app.controller('RegistrationEditCtrl', function($scope, $filter, $routeParams, $
 			$scope.registration.disabilityDescription = $scope.disabilityDescription;
 			$scope.registration.canSwim = $scope.canSwim;
 			$scope.registration.canGoHomeAllone = $scope.canGoHomeAllone;
+			$scope.registration.needsEbK = $scope.needsEbK;
 			$scope.registration.commentInternal = $scope.commentInternal;
 
 			RegistrationSvc.update( $scope.registration
@@ -64,6 +65,7 @@ app.controller('RegistrationEditCtrl', function($scope, $filter, $routeParams, $
 				$scope.hasDisability = false;
 				$scope.canSwim = false;
 				$scope.canGoHomeAllone = false;
+				$scope.needsEbK = false;
 				$scope.disabilityDescription = null;
 				$scope.commentInternal = null;
 			})
@@ -103,6 +105,7 @@ app.controller('RegistrationEditCtrl', function($scope, $filter, $routeParams, $
 		$scope.disabilityDescription = registration.disabilityDescription;
 		$scope.canSwim = registration.canSwim;
 		$scope.canGoHomeAllone = registration.canGoHomeAllone;
+		$scope.needsEbK = registration.needsEbK;
 		$scope.commentInternal = registration.commentInternal;
 
 		ActivitiesSvc.findAllSiblingsByActivityId(registration.activityId).success(function(activities) {
