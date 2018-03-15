@@ -9,7 +9,7 @@ app.controller('EventsCtrl', function($scope, $routeParams, $location, EventsSvc
 
 	$scope.isRegistrationWarningVisible = function() {
 		var d = new Date('2018-03-15');
-		d.setHours(18,57,0);
+		d.setHours(18,58,0);
 		var now = Date.now();
 		return now < d.getTime();
 	}
@@ -33,7 +33,7 @@ app.controller('EventsCtrl', function($scope, $routeParams, $location, EventsSvc
 		if(IdentitySvc.isAdmin()) return false;
 		else {
 			var visible = new Date(ev.visibleFrom);
-			visible.setHours(0,0,1);
+			visible.setHours(18,58,0);
 			if(Date.now() > visible.getTime()) return false;
 			if(Date.now() > new Date(ev.deadline).getTime()) return false;
 			return true;
