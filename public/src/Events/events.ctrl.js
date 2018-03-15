@@ -35,7 +35,7 @@ app.controller('EventsCtrl', function($scope, $routeParams, $location, EventsSvc
 			var visible = new Date(ev.visibleFrom);
 			visible.setHours(18,58,0);
 			if(Date.now() > visible.getTime()) return false;
-			if(Date.now() > new Date(ev.deadline).getTime()) return false;
+			if(Date.now() > new Date(ev.deadline).getTime()) return true;
 			return true;
 		}
 	}
