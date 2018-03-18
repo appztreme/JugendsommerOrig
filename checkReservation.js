@@ -9,13 +9,15 @@ args.option('log', 'show reservations against current status')
     .option('update', 'update counter if not equal');
 var flags = args.parse(process.argv);
 
+const curYear = 2018;
+
 
 const main = async () => {
     if(flags.log) {
         const activities = await activityRepo.findForCurrentYear();
         for(var i=0; i < activities.length; i++) {
             let a = activities[i];
-            let rs = await registrationRepo.filter(2018, null, null, a._id, null);
+            let rs = await registrationRepo.filter(curYear, null, null, a._id, null);
             let mismatch = a.curParticipants !== rs.length;
             console.log(chalk.yellow("NAME         , MAX, CUR, COUNT"));
             console.log(chalk.yellow(a.name, a.maxParticipants, a.curParticipants, rs.length));
