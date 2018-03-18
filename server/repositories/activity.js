@@ -14,6 +14,13 @@ exports.getSelectableEventActivities = () => {
 			.exec();
 }
 
+exports.findForCurrentYear = () => {
+	return Activity.find()
+		.where('startDate').gte(startCurYear)
+		.select('_id name curParticipants maxParticipants')
+		.exec();
+}
+
 exports.getActivityIdsForEvent = (eventId) => {
 	return Activity.find()
 			.where('eventId').equals(eventId)

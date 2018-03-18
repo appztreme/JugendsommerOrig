@@ -14,10 +14,10 @@ exports.filter = (year, name, receiptNr, activityId, activityIds) => {
     const maxDate = new Date(year + "-12-31");
     let query = undefined;
     if(name) query = Registration.find({ $or: [
-            {lastNameChild:  {'$regex': name }},
-            {lastNameParent: {'$regex': name }},
-            {firstNameChild: {'$regex': name }},
-            {firstNameParent: {'$regex': name}}
+            {lastNameChild:  {'$regex': name, $options: 'i' }},
+            {lastNameParent: {'$regex': name, $options: 'i' }},
+            {firstNameChild: {'$regex': name, $options: 'i' }},
+            {firstNameParent: {'$regex': name, $options: 'i' }}
         ]});
     else query = Registration.find();
 
