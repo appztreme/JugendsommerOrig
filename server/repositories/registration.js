@@ -9,16 +9,22 @@ exports.findByEventId = (id) => {
     return Registration.find()
 }
 
-exports.filter = (year, name, receiptNr, activityId, activityIds) => {
+exports.filter = (year, name, firstname, receiptNr, activityId, activityIds) => {
     const minDate = new Date(year + "-1-1");
     const maxDate = new Date(year + "-12-31");
     let query = undefined;
-    if(name) query = Registration.find({ $or: [
-            {lastNameChild:  {'$regex': name, $options: 'i' }},
-            {lastNameParent: {'$regex': name, $options: 'i' }},
-            {firstNameChild: {'$regex': name, $options: 'i' }},
-            {firstNameParent: {'$regex': name, $options: 'i' }}
+    if(name || firstname) {
+        query = Registration.find({ $and: [
+            { $or: [
+                {lastNameChild:  {'$regex': name, $options: 'i' }},
+                {lastNameParent: {'$regex': name, $options: 'i' }},
+            ]},
+            { $or: [
+                {firstNameChild: {'$regex': firstname, $options: 'i' }},
+                {firstNameParent: {'$regex': firstname, $options: 'i' }}
+            ]}
         ]});
+    }
     else query = Registration.find();
 
     if(receiptNr) query = query.where('receiptNumber').equals(receiptNr);

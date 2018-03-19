@@ -41,6 +41,17 @@
 			</div>
 		</div>
 		<div class='row' style='margin-top:10px'>
+			<label for='firstnameFilter' class='control-label col-sm-2'>Vorname:</label>
+			<div class='col-sm-5 input-group'>
+				<input id='firstnameFilter' class='form-control' type='text' ng-model='firstnameFilter' />
+				<span class='input-group-btn'>
+					<button class='btn btn-info' ng-click='clearFirstNameSelection()'>
+						<span class='glyphicon glyphicon-remove'></span>
+					</button>
+				</span>
+			</div>
+		</div>
+		<div class='row' style='margin-top:10px'>
 			<label for='receiptFilter' class='control-label col-sm-2'>ÜberweisungsNr:</label>
 			<div class='col-sm-5 input-group'>
 				<input id='receiptFilter' class='form-control' type='text' ng-model='receiptFilter' />

@@ -10,7 +10,7 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 	$scope.yearFilter = (new Date()).getFullYear();
 
   	$scope.getReportData = function() {
-    	RegistrationSvc.find($scope.eventIdFilter, $scope.activityIdFilter, $scope.yearFilter, $scope.nameFilter, $scope.receiptFilter)
+    	RegistrationSvc.find($scope.eventIdFilter, $scope.activityIdFilter, $scope.yearFilter, $scope.nameFilter, $scope.firstnameFilter, $scope.receiptFilter)
 				.success(function (regs) {
             		$scope.registrations = regs;
             		$scope.emails = _.uniq(_.map($scope.registrations, function(r) {
@@ -54,6 +54,12 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 
 	$scope.clearNameSelection = function() {
 		$scope.nameFilter = undefined;
+		$scope.registrations = undefined;
+		$scope.emails = undefined;
+	}
+
+	$scope.clearFirstNameSelection = function() {
+		$scope.firstnameFilter = undefined;
 		$scope.registrations = undefined;
 		$scope.emails = undefined;
 	}
