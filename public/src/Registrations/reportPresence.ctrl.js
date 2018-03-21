@@ -10,91 +10,40 @@ app.controller('ReportPresenceCtrl', function($scope, $location, $route, Registr
 	$scope.yearFilter = (new Date()).getFullYear();
 
   	$scope.getReportData = function() {
-    	RegistrationSvc.find($scope.eventIdFilter, $scope.activityIdFilter, $scope.yearFilter, $scope.nameFilter, $scope.firstnameFilter, $scope.receiptFilter)
+    	RegistrationSvc.find($scope.eventIdFilter, $scope.activityIdFilter, $scope.yearFilter, null, null, null)
 				.success(function (regs) {
-            		$scope.registrations = regs;
-            		$scope.emails = _.uniq(_.map($scope.registrations, function(r) {
-                		return r.emailParent;
-            		})).join(';');
+					$scope.registrations = regs;
+					if(regs.length > 0) {
+						var act = regs[0].activityId;
+						$scope.eventDuration = $scope.getDateRange(act.startDate, act.endDate);
+						console.log($scope.eventDuration);
+					}
     			});
-	//.error(function(err) {
-	//	console.log("error", err);
-	//})
-	  };
+	};
+
+	$scope.getDateRange = function(from, to) {
+		var range = [];
+		var d = moment(from);
+		while(d <= moment(to)) {
+			range.push(d);
+			d = moment(d.add(1, 'days'));
+			console.log("d", d);
+		}
+		return range;
+	}
 	  
-	$scope.calculateFee = function(reg) {
-		if(reg.activityId.eventId.deadline) {
-			if((moment(reg.activityId.eventId.deadline).hour(23).minute(59).second(59)).isBefore(moment(reg.registrationDate))) return reg.activityId.eventId.feePerWeek + reg.activityId.eventId.penalty;
-			return reg.activityId.eventId.feePerWeek;
-		}
-		return reg.activityId.eventId.feePerWeek;
-	}
-
-	$scope.calculateOverallFee = function(registrations) {
-		if(!registrations) return 0;
-		var sum = 0;
-		for(var i = 0; i < registrations.length; i++) {
-			sum += $scope.calculateFee(registrations[i]);
-		}
-		return sum;
-	}
-
 	$scope.clearEventSelection = function() {
 		$scope.eventIdFilter = undefined;
 		$scope.activityIdFilter = undefined;
 		$scope.registrations = undefined;
-		$scope.emails = undefined;
 	}
 
 	$scope.clearActivitySelection = function() {
 		$scope.activityIdFilter = undefined;
 		$scope.registrations = undefined;
-		$scope.emails = undefined;
 	}
 
-	$scope.clearNameSelection = function() {
-		$scope.nameFilter = undefined;
-		$scope.registrations = undefined;
-		$scope.emails = undefined;
-	}
-
-	$scope.clearFirstNameSelection = function() {
-		$scope.firstnameFilter = undefined;
-		$scope.registrations = undefined;
-		$scope.emails = undefined;
-	}
-
-	$scope.clearReceiptSelection = function() {
-		$scope.receiptFilter = undefined;
-		$scope.registrations = undefined;
-		$scope.emails = undefined;
-	}
-
-	$scope.editRegistration = function(registrationId) {
-		ReportCacheSvc.lastVerticalScrollPosition = window.pageYOffset || document.documentElement.scrollTop;
-		$location.path('editRegistration/' + registrationId);
-	}
-
-	$scope.deleteRegistration = function(registrationId) {
-		ReportCacheSvc.lastVerticalScrollPosition = window.pageYOffset || document.documentElement.scrollTop;
-		RegistrationSvc.delete(registrationId).then(function(err, reg) {
-			$route.reload();
-		});
-	};
-
-	$scope.isOnWait = function(reg) {
-		return reg.activityId.maxParticipants <= $scope.registrations.indexOf(reg);
-	}
-
-	$scope.isAfterDeadline = function(reg) {
-		return reg.activityId.eventId.deadline < reg.registrationDate;
-	}
-
-	$scope.formatBool = function(b) {
-		if(b) return "ja";
-		return "nein";
-	};
-
+	
 	$scope.filterActivities = function() {
 		$scope.activities = [];
 		$scope.activities = _.sortBy(_.filter($scope.allActivities, { parentId: $scope.eventIdFilter}),
@@ -111,27 +60,6 @@ app.controller('ReportPresenceCtrl', function($scope, $location, $route, Registr
 	$scope.updateActivityFilter = function(isCalledInternallyFromReload) {
 		if(!isCalledInternallyFromReload) { ReportCacheSvc.currentActivityIdFilter = $scope.activityIdFilter; }
 		$scope.registrations = undefined;
-		$scope.emails = undefined;
-	}
-
-	$scope.updateIsPaymentDone = function(id, isPaymentDone) {
-		RegistrationSvc.updateIsPaymentDone(id, isPaymentDone)
-		.error(function(err) {
-			NotificationSvc.warn(err);
-		})
-		.success(function(success) {
-			NotificationSvc.notify('Anmeldung geändert');
-		});
-	}
-
-	$scope.updateIsEmailNotified = function(id, isEmailNotified) {
-		RegistrationSvc.updateIsEmailNotified(id, isEmailNotified)
-		.error(function(err) {
-				NotificationSvc.warn(err);
-		})
-		.success(function(success) {
-			NotificationSvc.notify('Anmeldung geändert');
-		});
 	}
 
 	if(ReportCacheSvc.hasSelectionData()) {
@@ -161,29 +89,4 @@ app.controller('ReportPresenceCtrl', function($scope, $location, $route, Registr
 		});
 	}
 
-	$scope.columns = new Array(
-		{dbName: "firstNameChild" , colName: "Vorname"},
-		{dbName: "lastNameChild", colName: "Nachname"},
-		{dbName: "firstNameParents", colName: "Vorname Eltern"},
-		{dbName: "lastNameParents", colName: "Nachname Eltern"},
-		{dbName: "registrationDate", colName: "Anmeldedatum"},
-		{dbName: "isPaymentDone", colName: "Bezahlt"},
-		{dbName: "isEmailNotified", colName: "Benachrichtigt"},
-		{dbName: "receiptNumber", colName: "Überweisungsnummer"}
-	);
-
-	if(ReportCacheSvc.hasEventFilterParameter()) {
-		$scope.eventIdFilter = ReportCacheSvc.currentEventIdFilter;
-		$scope.updateEventFilter(true);
-	}
-	if(ReportCacheSvc.hasActivityFilterParameter()) {
-		$scope.activityIdFilter = ReportCacheSvc.currentActivityIdFilter;
-		$scope.updateActivityFilter(false);
-	}
-	if(ReportCacheSvc.hasEventFilterParameter() || ReportCacheSvc.hasActivityFilterParameter()) {
-		$scope.getReportData();
-		if(ReportCacheSvc.hasLastVerticalScrollPosition()) {
-			window.scroll(0,ReportCacheSvc.lastVerticalScrollPosition);
-		}
-	}
 });

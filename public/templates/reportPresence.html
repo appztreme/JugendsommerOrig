@@ -29,45 +29,6 @@
 				</span>
 			</div>
 		</div>
-		<div class='row' style='margin-top:10px'>
-			<label for='nameFilter' class='control-label col-sm-2'>Nachname:</label>
-			<div class='col-sm-5 input-group'>
-				<input id='nameFilter' class='form-control' type='text' ng-model='nameFilter' />
-				<span class='input-group-btn'>
-					<button class='btn btn-info' ng-click='clearNameSelection()'>
-						<span class='glyphicon glyphicon-remove'></span>
-					</button>
-				</span>
-			</div>
-		</div>
-		<div class='row' style='margin-top:10px'>
-			<label for='firstnameFilter' class='control-label col-sm-2'>Vorname:</label>
-			<div class='col-sm-5 input-group'>
-				<input id='firstnameFilter' class='form-control' type='text' ng-model='firstnameFilter' />
-				<span class='input-group-btn'>
-					<button class='btn btn-info' ng-click='clearFirstNameSelection()'>
-						<span class='glyphicon glyphicon-remove'></span>
-					</button>
-				</span>
-			</div>
-		</div>
-		<div class='row' style='margin-top:10px'>
-			<label for='receiptFilter' class='control-label col-sm-2'>ÜberweisungsNr:</label>
-			<div class='col-sm-5 input-group'>
-				<input id='receiptFilter' class='form-control' type='text' ng-model='receiptFilter' />
-				<span class='input-group-btn'>
-					<button class='btn btn-info' ng-click='clearReceiptSelection()'>
-						<span class='glyphicon glyphicon-remove'></span>
-					</button>
-				</span>
-			</div>
-		</div>
-		<div class='row' style='margin-top:10px'>
-			<label for='yearFilter' class='control-label col-sm-2'>Jahr:</label>
-			<div class='col-sm-5 input-group'>
-				<input name='yearFilter' class='form-control' type='number' ng-model='yearFilter' min='2015' step='1' />
-			</div>
-		</div>
 		<div class="row" style='margin-top:10px'>
     	<div class='col-sm-offset-2 col-sm-4'>
       	<button type='button' class='btn btn-primary btn-block' ng-click='getReportData()'>Laden</button>
@@ -76,26 +37,7 @@
 	</div>
 	</div>
 	</div>
-	<div class='container col-sm-3'>
-	<div class='panel panel-default'>
-	<div class='panel-heading'>Sortierung</div>
-	<div class='row panel-body'>
-		<div class='col-sm-3'>
-			<label>Sortierung1</label>
-			<select id='colSorter' class='sel-base' ng-model='colNameSort'>
-				<option ng-repeat='col in columns' value='{{col.dbName}}'>{{col.colName}}</option>
-			</select>
-		</div>
-	</div>
-	<div class='row panel-body'>
-		<div class='col-sm-3'>
-			<label>Sortierung2</label>
-			<select id='colSorter2' class='sel-base' ng-model='colNameSort2'>
-				<option ng-repeat='col in columns' value='{{col.dbName}}'>{{col.colName}}</option>
-			</select>
-		</div>
-	</div>
-	</div>
+
 	</div>
 	</div>
 
@@ -103,142 +45,19 @@
 	<div cg-Busy='{promise:busyPromise,message:"Loading",backdrop:true,minDuration:500}'></div>
 	<table class='table table-striped table-bordered tbl-serial3'>
 		<tr>
-			<th></th>
-			<th></th>
-			<th></th>
 			<th>Programm</th>
 			<th>Woche</th>
 			<th>Vorname</th>
 			<th>Nachname</th>
-			<th>EbK</th>
-			<th>Einzahlung</th>
-			<th>Benachrichtigt</th>
-			<th>RechnungsNr</th>
-			<th>Betrag</th>
 			<th>Geburtstag</th>
-			<th>Schulstufe</th>
-			<th>Gesundheit</th>
-			<th>Adresse</th>
-			<th>Wohnort</th>
-			<th>Vorname Eltern</th>
-			<th>Nachname Eltern</th>
-			<th>Email Eltern</th>
-			<th>Tel. Eltern</th>
-			<th>Kontakt1</th>
-			<th>Tel. Kontakt1</th>
-			<th>Kontak2</th>
-			<th>Tel. Kontakt2</th>
-			<th>T-Shirt</th>
-			<th>Beeinträchtigung</th>
-			<th>Diagnose</th>
-			<th ng-show='platform.isJDUL()'>Kann Schwimmen</th>
-			<th ng-show='platform.isJDUL()'>Darf allein nach Hause</th>
-			<th ng-show='platform.isJDUL()'>Kommentar Intern</th>
-			<th>Anmeldedatum</th>
-		</tr>
-		<tr ng-repeat='reg in registrations | orderBy:[colNameSort,colNameSort2]'>
-			<td ng-class='{"bg-warning": isOnWait(reg), "bg-danger": isAfterDeadline(reg)}'><button class="btn glyphicon glyphicon-pencil" ng-disabled='!iSvc.isAuthorized("admin")' type="button" ng-click='editRegistration(reg._id)'></button></td>
-			<td ng-class='{"bg-warning": isOnWait(reg), "bg-danger": isAfterDeadline(reg)}'><button type="button" class="btn glyphicon glyphicon-trash" ng-disabled='!iSvc.isAuthorized("admin")' ng-click='deleteRegistration(reg._id)'></button></td>
-			<td ng-class='{"bg-warning": isOnWait(reg), "bg-danger": isAfterDeadline(reg)}'></td>
-			<td>{{reg.activityId.eventId.location}} - {{reg.activityId.eventId.name}}</td>
-			<td>{{reg.activityId.name}}</td>
-			<td>{{reg.firstNameChild}}</td>
-			<td>{{reg.lastNameChild}}</td>
-			<td>{{formatBool(reg.needsEbK)}}</td>
-			<td ng-class='{"bg-success": reg.isPaymentDone, "bg-danger": !reg.isPaymentDone}'><input type='checkbox' ng-model='reg.isPaymentDone' ng-change='updateIsPaymentDone(reg._id, reg.isPaymentDone)' style='margin-right:8px' />{{formatBool(reg.isPaymentDone)}}</td>
-			<td ng-class='{"bg-success": reg.isEmailNotified, "bg-danger": !reg.isEmailNotified}'><input type='checkbox' ng-model='reg.isEmailNotified' ng-change='updateIsEmailNotified(reg._id, reg.isEmailNotified)' style='margin-right:8px' />{{formatBool(reg.isEmailNotified)}}</td>
-			<td>{{reg.receiptNumber}}</td>
-			<td align="right">{{calculateFee(reg)}}</td>
-			<td>{{reg.birthdayChild | date: 'dd/MM/yyyy'}}</td>
-			<td>{{reg.schoolChild}}</td>
-			<td>{{reg.healthChild}}</td>
-			<td>{{reg.addressChild}}</td>
-			<td>{{reg.cityChild}}</td>
-			<td>{{reg.firstNameParent}}</td>
-			<td>{{reg.lastNameParent}}</td>
-			<td><a href='mailto:{{reg.emailParent}}'>{{reg.emailParent}}</a></td>
-			<td>{{reg.phoneNumberParent}}</td>
-			<td>{{reg.nameContact1}}</td>
-			<td>{{reg.telContact1}}</td>
-			<td>{{reg.nameContact2}}</td>
-			<td>{{reg.telContact2}}</td>
-			<td>{{reg.tShirtSize}}</td>
-			<td>{{formatBool(reg.hasDisability)}}</td>
-			<td>{{reg.disabilityDescription}}</td>
-			<td ng-show='platform.isJDUL()'>{{formatBool(reg.canSwim)}}</td>
-			<td ng-show='platform.isJDUL()'>{{formatBool(reg.canGoHomeAllone)}}</td>
-			<td ng-show='platform.isJDUL()'>{{reg.commentInternal}}</td>
-			<td>{{reg.registrationDate | date: 'dd/MM/yyyy : hh.mm.ss'}}</td>	
-		</tr>
-		<tr><td></td><td></td><td></td><td colspan='8'>Summe:</td><td align='right'>{{calculateOverallFee(registrations)}}</td><td colspan='17'></td></tr>
-	</table>
-	<table id='datatable' class='hidden'>
-		<tr>
-			<th>Programm</th>
-			<th>Woche</th>
-			<th>Vorname</th>
-			<th>Nachname</th>
-			<th>EbK</th>
-			<th>Einzahlung</th>
-			<th>Benachrichtigt</th>
-			<th>RechnungsNr</th>
-			<th>Betrag</th>
-			<th>Geburtstag</th>
-			<th>Schulstufe</th>
-			<th>Gesundheit</th>
-			<th>Adresse</th>
-			<th>Wohnort</th>
-			<th>Vorname Eltern</th>
-			<th>Nachname Eltern</th>
-			<th>Email Eltern</th>
-			<th>Tel. Eltern</th>
-			<th>Kontakt1</th>
-			<th>Tel. Kontakt1</th>
-			<th>Kontak2</th>
-			<th>Tel. Kontakt2</th>
-			<th>T-Shirt</th>
-			<th>Beeinträchtigung</th>
-			<th>Diagnose</th>
-			<th ng-show='platform.isJDUL()'>Kann Schwimmen</th>
-			<th ng-show='platform.isJDUL()'>Darf allein nach Hause</th>
-			<th ng-show='platform.isJDUL()'>Kommentar Intern</th>
-			<th>Anmeldedatum</th>
 		</tr>
 		<tr ng-repeat='reg in registrations | orderBy:[colNameSort,colNameSort2]'>
 			<td>{{reg.activityId.eventId.location}} - {{reg.activityId.eventId.name}}</td>
 			<td>{{reg.activityId.name}}</td>
 			<td>{{reg.firstNameChild}}</td>
 			<td>{{reg.lastNameChild}}</td>
-			<td>{{formatBool(reg.needsEbK)}}</td>
-			<td ng-class='{"bg-success": reg.isPaymentDone, "bg-danger": !reg.isPaymentDone}'><input type='checkbox' ng-model='reg.isPaymentDone' ng-change='updateIsPaymentDone(reg._id, reg.isPaymentDone)' style='margin-right:8px' />{{formatBool(reg.isPaymentDone)}}</td>
-			<td ng-class='{"bg-success": reg.isEmailNotified, "bg-danger": !reg.isEmailNotified}'><input type='checkbox' ng-model='reg.isEmailNotified' ng-change='updateIsEmailNotified(reg._id, reg.isEmailNotified)' style='margin-right:8px' />{{formatBool(reg.isEmailNotified)}}</td>
-			<td>{{reg.receiptNumber}}</td>
-			<td align="right">{{calculateFee(reg)}}</td>
 			<td>{{reg.birthdayChild | date: 'dd/MM/yyyy'}}</td>
-			<td>{{reg.schoolChild}}</td>
-			<td>{{reg.healthChild}}</td>
-			<td>{{reg.addressChild}}</td>
-			<td>{{reg.cityChild}}</td>
-			<td>{{reg.firstNameParent}}</td>
-			<td>{{reg.lastNameParent}}</td>
-			<td><a href='mailto:{{reg.emailParent}}'>{{reg.emailParent}}</a></td>
-			<td>{{reg.phoneNumberParent}}</td>
-			<td>{{reg.nameContact1}}</td>
-			<td>{{reg.telContact1}}</td>
-			<td>{{reg.nameContact2}}</td>
-			<td>{{reg.telContact2}}</td>
-			<td>{{reg.tShirtSize}}</td>
-			<td>{{formatBool(reg.hasDisability)}}</td>
-			<td>{{reg.disabilityDescription}}</td>
-			<td ng-show='platform.isJDUL()'>{{formatBool(reg.canSwim)}}</td>
-			<td ng-show='platform.isJDUL()'>{{formatBool(reg.canGoHomeAllone)}}</td>
-			<td ng-show='platform.isJDUL()'>{{reg.commentInternal}}</td>
-			<td>{{reg.registrationDate | date: 'dd/MM/yyyy : hh.mm.ss'}}</td>	
 		</tr>
 	</table>
-    <br />
-    <div class='col-sm-6'>
-        <label for='uniqueEmail'><strong>Email-Adressen Eltern:</strong></label>
-        <textarea name='uniqueEmail' type='text' rows='4' class='form-control' ng-model='emails'></textarea>
-    </div>
+
 </div>
