@@ -24,7 +24,7 @@ app.controller('ReportPresenceCtrl', function($scope, $location, $route, Registr
 		var range = [];
 		var d = moment(from);
 		while(d <= moment(to)) {
-			range.push(d.format('D M'));
+			range.push(d.locale('de').format('dddd DD.MM.YY'));
 			d.add(1, 'days');
 		}
 		return range;

@@ -1,6 +1,7 @@
 var app = angular.module('js');
 
-app.controller('EventRegistrationCtrl', function($scope, $routeParams, EventsSvc) {
+app.controller('EventRegistrationCtrl', function($scope, $routeParams, EventsSvc, PlatformSvc) {
+	$scope.platform = PlatformSvc;
 
 	$scope.formatBool = function(b) {
 		if(b) return "ja";

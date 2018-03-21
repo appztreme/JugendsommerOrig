@@ -25,7 +25,8 @@
 	</div>
 	</div>
 
-    <table class='table table-striped table-bordered tbl-serial1'>
+	<a download="export.xls" href="#" onclick="return ngTableExcelExport.excel(this, 'datatable', 'Sheet1');"><span class='glyphicon glyphicon-share' style='margin-left:10px'></span> Export to Excel</a>
+    <table id='datatable' class='table table-striped table-bordered tbl-serial1'>
 		<tr>
 			<th></th>
 			<th>Woche</th>
@@ -35,6 +36,9 @@
 			<th>Geburtstag</th>
 			<th>Schulstufe</th>
 			<th>Gesundheit</th>
+			<th ng-show='platform.isJDUL()'>Kann Schwimmen</th>
+			<th ng-show='platform.isJDUL()'>Darf allein nach Hause</th>
+			<th ng-show='platform.isJDUL()'>Kommentar Intern</th>
 			<th>Adresse</th>
 			<th>Wohnort</th>
 			<th>Vorname Eltern</th>
@@ -56,6 +60,9 @@
 			<td>{{reg.birthdayChild | date: 'dd/MM/yyyy'}}</td>
 			<td>{{reg.schoolChild}}</td>
 			<td>{{reg.healthChild}}</td>
+			<td ng-show='platform.isJDUL()'>{{formatBool(reg.canSwim)}}</td>
+			<td ng-show='platform.isJDUL()'>{{formatBool(reg.canGoHomeAllone)}}</td>
+			<td ng-show='platform.isJDUL()'>{{reg.commentInternal}}</td>
 			<td>{{reg.addressChild}}</td>
 			<td>{{reg.cityChild}}</td>
 			<td>{{reg.firstNameParent}}</td>
