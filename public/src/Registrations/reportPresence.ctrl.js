@@ -6,31 +6,39 @@ app.controller('ReportPresenceCtrl', function($scope, $location, $route, Registr
 	var host = $location.$$host.toLowerCase();
 	$scope.platform = PlatformSvc;
 
+	$scope.yearFilter = (new Date()).getFullYear();
 
   	$scope.getReportData = function() {
-    	RegistrationSvc.find($scope.eventIdFilter, $scope.activityIdFilter, $scope.yearFilter, $scope.nameFilter, $scope.firstnameFilter, $scope.receiptFilter)
+    	RegistrationSvc.find($scope.eventIdFilter, $scope.activityIdFilter, $scope.yearFilter, null, null, null)
 				.success(function (regs) {
-            		$scope.registrations = regs;
-            		$scope.emails = _.uniq(_.map($scope.registrations, function(r) {
-                		return r.emailParent;
-            		})).join(';');
+					console.log("regs", regs);
+					$scope.registrations = regs;
+					if(regs.length > 0) {
+						var act = regs[0].activityId;
+						$scope.eventDuration = $scope.getDateRange(act.startDate, act.endDate);
+					}
     			});
-	//.error(function(err) {
-	//	console.log("error", err);
-	//})
-	  };
+	};
+
+	$scope.getDateRange = function(from, to) {
+		var range = [];
+		var d = moment(from);
+		while(d <= moment(to)) {
+			range.push(d.format('D M'));
+			d.add(1, 'days');
+		}
+		return range;
+	}
 	  
 	$scope.clearEventSelection = function() {
 		$scope.eventIdFilter = undefined;
 		$scope.activityIdFilter = undefined;
 		$scope.registrations = undefined;
-		$scope.emails = undefined;
 	}
 
 	$scope.clearActivitySelection = function() {
 		$scope.activityIdFilter = undefined;
 		$scope.registrations = undefined;
-		$scope.emails = undefined;
 	}
 
 	$scope.filterActivities = function() {
@@ -49,9 +57,12 @@ app.controller('ReportPresenceCtrl', function($scope, $location, $route, Registr
 	$scope.updateActivityFilter = function(isCalledInternallyFromReload) {
 		if(!isCalledInternallyFromReload) { ReportCacheSvc.currentActivityIdFilter = $scope.activityIdFilter; }
 		$scope.registrations = undefined;
-		$scope.emails = undefined;
 	}
 
+	if(ReportCacheSvc.hasSelectionData()) {
+		$scope.events = ReportCacheSvc.events;
+		$scope.allActivities = ReportCacheSvc.allActivities;
+	} else {
 		RegistrationSvc.getSelectionParams().success(function(params) {
 			$scope.events = _.uniq(_.map(params, function(p) {
 				return {
@@ -71,5 +82,5 @@ app.controller('ReportPresenceCtrl', function($scope, $location, $route, Registr
 
 			$scope.activities = undefined;
 		});
-
+	}
 });

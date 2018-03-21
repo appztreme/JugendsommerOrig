@@ -29,8 +29,6 @@
 				</span>
 			</div>
 		</div>
-		
-		
 		<div class="row" style='margin-top:10px'>
     	<div class='col-sm-offset-2 col-sm-4'>
       	<button type='button' class='btn btn-primary btn-block' ng-click='getReportData()'>Laden</button>
@@ -51,6 +49,9 @@
 			<th>Vorname</th>
 			<th>Nachname</th>
 			<th>Geburtstag</th>
+			<th ng-repeat='d in eventDuration'>
+				{{d}}
+			</th>
 		</tr>
 		<tr ng-repeat='reg in registrations | orderBy:[colNameSort,colNameSort2]'>
 			<td>{{reg.activityId.eventId.location}} - {{reg.activityId.eventId.name}}</td>
@@ -58,6 +59,7 @@
 			<td>{{reg.firstNameChild}}</td>
 			<td>{{reg.lastNameChild}}</td>
 			<td>{{reg.birthdayChild | date: 'dd/MM/yyyy'}}</td>
+			<td ng-repeat='d in eventDuration'></td>
 		</tr>
 	</table>
 </div>
