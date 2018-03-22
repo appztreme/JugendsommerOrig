@@ -15,6 +15,14 @@ app.service('ReportCacheSvc', function() {
     return !angular.isUndefined(this.currentActivityIdFilter);
   };
 
+  this.hasNameFilterParameter = function() {
+    return !angular.isUndefined(this.currentNameFilter);
+  }
+
+  this.hasFirstNameFilterParameter = function() {
+    return !angular.isUndefined(this.currentFirstNameFilter);
+  }
+
   this.hasSelectionData = function() {
       return !angular.isUndefined(this.events) &&
              !angular.isUndefined(this.allActivities);
@@ -26,6 +34,8 @@ app.service('ReportCacheSvc', function() {
 
 	this.currentActivityIdFilter = undefined;
   this.currentEventIdFilter = undefined;
+  this.currentNameFilter = undefined;
+  this.currentFirstNameFilter = undefined;
 
   this.events = undefined;
   this.allActivities = undefined;

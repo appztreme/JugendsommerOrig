@@ -114,6 +114,18 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 		$scope.emails = undefined;
 	}
 
+	$scope.updateNameFilter = function() {
+		ReportCacheSvc.currentNameFilter = $scope.nameFilter;
+		$scope.registrations = undefined;
+		$scope.emails = undefined;
+	}
+
+	$scope.updateFirstNameFilter = function() {
+		ReportCacheSvc.currentFirstNameFilter = $scope.firstnameFilter;
+		$scope.registrations = undefined;
+		$scope.emails = undefined;
+	}
+
 	$scope.updateIsPaymentDone = function(id, isPaymentDone) {
 		RegistrationSvc.updateIsPaymentDone(id, isPaymentDone)
 		.error(function(err) {
@@ -180,7 +192,14 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 		$scope.activityIdFilter = ReportCacheSvc.currentActivityIdFilter;
 		$scope.updateActivityFilter(false);
 	}
-	if(ReportCacheSvc.hasEventFilterParameter() || ReportCacheSvc.hasActivityFilterParameter()) {
+	if(ReportCacheSvc.hasNameFilterParameter()) {
+		$scope.nameFilter = ReportCacheSvc.currentNameFilter;
+	}
+	if(ReportCacheSvc.hasFirstNameFilterParameter()) {
+		$scope.firstnameFilter = ReportCacheSvc.currentFirstNameFilter;
+	}
+	if(ReportCacheSvc.hasEventFilterParameter() || ReportCacheSvc.hasActivityFilterParameter() ||
+       ReportCacheSvc.hasNameFilterParameter() || ReportCacheSvc.hasFirstNameFilterParameter()) {
 		$scope.getReportData();
 		if(ReportCacheSvc.hasLastVerticalScrollPosition()) {
 			window.scroll(0,ReportCacheSvc.lastVerticalScrollPosition);

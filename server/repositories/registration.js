@@ -13,7 +13,19 @@ exports.filter = (year, name, firstname, receiptNr, activityId, activityIds) => 
     const minDate = new Date(year + "-1-1");
     const maxDate = new Date(year + "-12-31");
     let query = undefined;
-    if(name || firstname) {
+    if(name && !firstname) {
+        query = Registration.find({ $or: [
+            {lastNameChild:  {'$regex': name, $options: 'i' }},
+            {lastNameParent: {'$regex': name, $options: 'i' }},
+        ]});
+    }
+    else if(firstname && !name) {
+        query = Registration.find({ $or: [
+            {firstNameChild: {'$regex': firstname, $options: 'i' }},
+            {firstNameParent: {'$regex': firstname, $options: 'i' }}
+        ]});
+    }
+    else if(name && firstname) {
         query = Registration.find({ $and: [
             { $or: [
                 {lastNameChild:  {'$regex': name, $options: 'i' }},
