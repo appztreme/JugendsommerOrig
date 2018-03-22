@@ -63,9 +63,9 @@ exports.sendSorryMail = function(recipient) {
 	}, function(err, message) {console.log(err||message); });	
 }
 
-exports.sendUserTokenMail = function(recipient, userToken, isKiso) {
-	var fromEmail = isKiso ? 'kiso@jd.bz.it' : 'info@jugenddienst.com';
-	var subjectEmail = isKiso ? 'Passwortänderung/Modifica password kiso@jd.bz.it' : 'Passwortänderung Jugendsommer.com';
+exports.sendUserTokenMail = function(recipient, userToken, platform) {
+	var fromEmail = mailbuilder.getSender(platform);
+	var subjectEmail = 'Passwortänderung/Modifica password ' + platform.host;
 	server.send({
 		from: fromEmail,
 		to: recipient,

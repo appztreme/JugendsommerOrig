@@ -4,6 +4,7 @@ const router = require('express').Router();
 const crypto = require('crypto');
 const mail = require('./mail.js');
 const repo = require('./../repositories/user');
+const platform = require('./platform');
 
 exports.create = (req, res, next) => {
 	let salt = createSalt();
@@ -74,9 +75,8 @@ exports.requestUserToken = (req, res, next) => {
 	User.findOne({userName: req.body.userName})
 		.exec((err, user) => {
 			if(err) { next(err); }
-			var host = req.get('host');
-			var isKiso = host.indexOf('kiso') !== -1;
-			mail.sendUserTokenMail(user.userEmail, user.getUserToken(), isKiso);
+			var instance = platform.getPlatform(req.get('host'));
+			mail.sendUserTokenMail(user.userEmail, user.getUserToken(), instance);
 			res.status(202).end();
 		});
 };

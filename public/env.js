@@ -128,8 +128,9 @@
             "MSG_NO_DUPLICATES": "Doppelte Anmeldungen pro Veranstaltung sind nicht möglich"
         },
         "MYRESERVATION": {
-            "TITLE": "Erfolgreiche Reservierungen",
+            "TITLE": "Reservierungen",
             "NOTE": "Zahlungsaufforderung wird innerhalb von fünf Tagen zugesandt. Danke für Ihre Reservierung.",
+            "NOTE_KISO": "In den nächsten Tagen erfahren Sie via E-Mail von uns, ob Sie unter den ersten 45 Anmeldungen gelandet sind oder einen Platz auf der Warteliste haben",
             "LABEL_EVENT": "Programm",
             "LABEL_ACTIVITY": "Woche",
             "LABEL_ACCEPT": "Angenommen",
@@ -259,8 +260,9 @@
             "MSG_NO_DUPLICATES": "Non sono possibili iscrizione doppie per la stessa settimana"
         },
         "MYRESERVATION": {
-            "TITLE": "Prenotazioni confermate",
+            "TITLE": "Prenotazioni",
             "NOTE": "L‘avviso di pagamento verrà inviato entro cinque giorni. Grazie per la sua prenotazione!",
+            "NOTE_KISO": "Nei prossimi giorni vi informereno via e-mail se siete arrivati tra le prime 45 iscrizioni o se avete un posto in lista d'attesa",
             "LABEL_EVENT": "programma",
             "LABEL_ACTIVITY": "settimana",
             "LABEL_ACCEPT": "accettato",
