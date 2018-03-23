@@ -85,7 +85,8 @@ app.controller('RegistrationEditCtrl', function($scope, $filter, $routeParams, $
 		$scope.emailParent = registration.emailParent;
 		$scope.firstNameChild = registration.firstNameChild;
 		$scope.lastNameChild = registration.lastNameChild;
-		$scope.birthdayChild = $filter('date')(new Date(registration.birthdayChild), 'yyyy-MM-dd');
+		//$scope.birthdayChild = $filter('date')(new Date(registration.birthdayChild), 'yyyy-MM-dd');
+		$scope.birthdayChild = new Date(registration.birthdayChild);
 		$scope.schoolChild = registration.schoolChild;
 		$scope.healthChild = registration.healthChild;
 		$scope.addressChild = registration.addressChild;
