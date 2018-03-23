@@ -5,6 +5,7 @@ app.controller('RegistrationEditCtrl', function($scope, $filter, $routeParams, $
 	//$scope.busyPromise = RegistrationSvc.findById;
 	$scope.cities = PlatformSvc.getCities();
 	$scope.tShirtSizes = conf.tSizes;
+	$scope.platform = PlatformSvc;
 
 	$scope.save = function() {
 		if($scope.registrationForm.$valid) {
