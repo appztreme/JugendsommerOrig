@@ -42,24 +42,29 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 	$scope.clearEventSelection = function() {
 		$scope.eventIdFilter = undefined;
 		$scope.activityIdFilter = undefined;
+		ReportCacheSvc.currentActivityIdFilter = undefined;
+		ReportCacheSvc.currentEventIdFilter = undefined;
 		$scope.registrations = undefined;
 		$scope.emails = undefined;
 	}
 
 	$scope.clearActivitySelection = function() {
 		$scope.activityIdFilter = undefined;
+		ReportCacheSvc.currentActivityIdFilter = undefined;
 		$scope.registrations = undefined;
 		$scope.emails = undefined;
 	}
 
 	$scope.clearNameSelection = function() {
 		$scope.nameFilter = undefined;
+		ReportCacheSvc.currentNameFilter = undefined;
 		$scope.registrations = undefined;
 		$scope.emails = undefined;
 	}
 
 	$scope.clearFirstNameSelection = function() {
 		$scope.firstnameFilter = undefined;
+		ReportCacheSvc.currentFirstNameFilter = undefined;
 		$scope.registrations = undefined;
 		$scope.emails = undefined;
 	}
