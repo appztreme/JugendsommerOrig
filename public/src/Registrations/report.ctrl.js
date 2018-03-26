@@ -75,6 +75,10 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 		$scope.emails = undefined;
 	}
 
+	$scope.showBatchUpdate = function() {
+		return $scope.registrations.length < 10;
+	}
+
 	$scope.editRegistration = function(registrationId) {
 		ReportCacheSvc.lastVerticalScrollPosition = window.pageYOffset || document.documentElement.scrollTop;
 		$location.path('editRegistration/' + registrationId);
@@ -129,6 +133,13 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 		ReportCacheSvc.currentFirstNameFilter = $scope.firstnameFilter;
 		$scope.registrations = undefined;
 		$scope.emails = undefined;
+	}
+
+	$scope.batchUpdateIsPaymentDone = function() {
+		for(var i=0; i < $scope.registrations.length; i++) {
+			var reg = $scope.registrations[i];
+			$scope.updateIsPaymentDone(reg._id, $scope.masterIsPaymentDone);
+		}
 	}
 
 	$scope.updateIsPaymentDone = function(id, isPaymentDone) {
