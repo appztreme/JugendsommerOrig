@@ -11,12 +11,18 @@ app.controller('ReportPresenceCtrl', function($scope, $location, $route, Registr
   	$scope.getReportData = function() {
     	RegistrationSvc.find($scope.eventIdFilter, $scope.activityIdFilter, $scope.yearFilter, null, null, null)
 				.success(function (regs) {
-					console.log("regs", regs);
-					$scope.registrations = regs;
-					if(regs.length > 0) {
-						var act = regs[0].activityId;
-						$scope.eventDuration = $scope.getDateRange(act.startDate, act.endDate);
+					//console.log("regs", regs);
+					for(var i=0; i < regs.length; i++) {
+						var reg = regs[i];
+						reg.eventDuration = $scope.getDateRange(reg.activityId.startDate, reg.activityId.endDate);
 					}
+					$scope.registrations = _.groupBy(regs, function(r) { return r.activityId._id; });
+					
+					console.log($scope.registrations);
+					// if(regs.length > 0) {
+					// 	var act = regs[0].activityId;
+					// 	$scope.eventDuration = $scope.getDateRange(act.startDate, act.endDate);
+					// }
     			});
 	};
 
