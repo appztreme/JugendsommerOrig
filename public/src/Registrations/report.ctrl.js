@@ -15,12 +15,20 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
             		$scope.registrations = regs;
             		$scope.emails = _.uniq(_.map($scope.registrations, function(r) {
                 		return r.emailParent;
-            		})).join(';');
+					})).join(';');
+					console.log(_.partition($scope.registrations, function(r) {return r.isPaymentDone}),
+								_.partition($scope.registrations, function(r) {return r.isPaymentDone})[0],
+								_.partition($scope.registrations, function(r) {return r.isPaymentDone})[0].length)
+					$scope.updateMasterIsPaymentDone();
     			});
 	//.error(function(err) {
 	//	console.log("error", err);
 	//})
-	  };
+	};
+
+	$scope.updateMasterIsPaymentDone = function() {
+		$scope.masterIsPaymentDone = _.partition($scope.registrations, function(r) {return r.isPaymentDone})[0].length === $scope.registrations.length;
+	}
 	  
 	$scope.calculateFee = function(reg) {
 		if(reg.activityId.eventId.deadline) {
@@ -131,10 +139,23 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 		$scope.emails = undefined;
 	}
 
+	$scope.isBatchUpdateAllowed = function() {
+		return $scope.registrations ? $scope.registrations.length <= 10 : false;
+	}
+
+	$scope.batchUpdateIsPaymentDone = function() {
+		for(var i=0; i < $scope.registrations.length; i++) {
+			var reg = $scope.registrations[i];
+			$scope.updateIsPaymentDone(reg._id, $scope.masterIsPaymentDone);
+		}
+		$location.path('/report/');
+	}
+
 	$scope.updateIsPaymentDone = function(id, isPaymentDone) {
 		RegistrationSvc.updateIsPaymentDone(id, isPaymentDone)
 		.error(function(err) {
 			NotificationSvc.warn(err);
+			$scope.updateMasterIsPaymentDone();
 		})
 		.success(function(success) {
 			NotificationSvc.notify('Anmeldung geändert');

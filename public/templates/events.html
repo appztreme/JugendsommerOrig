@@ -8,9 +8,15 @@
 		</div>
 	</div>
 
-	<!-- <div class='row bg-danger' style='padding: 10px' ng-show='!platform.isJDUL() && isRegistrationWarningVisible()'>
-		<h4>Anmeldung ist ab Montag 19.02 00:00 für alle Programme möglich</h4>
-	</div> -->
+	<div ng-show="platform.isJDUL()">
+		<div class="row">
+			<div class="col-sm-3">
+				<h2><span ng-show="lang == 'de'" class="label label-info">Anmeldeschluss: 23.03.2018</span></h2>
+				<h2><span ng-show="lang == 'it'" class="label label-info">Termine d'iscrizioni: 23.03.2018</span></h2>
+			</div>
+		</div>
+	</div>	
+
 	<div ng-show="platform.isKiso() && isRegistrationWarningVisible()">
 		<div class="row">
 			<div class="col-sm-3">
