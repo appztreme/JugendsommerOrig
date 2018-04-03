@@ -2,7 +2,9 @@ var app = angular.module('js');
 
 app.controller('ReportOverviewCtrl', function($scope, $location, $route, RegistrationSvc, NotificationSvc, PlatformSvc) {
 	$scope.busyPromise = RegistrationSvc.find();
-
+	/*
+	Vorname	Nachname	Geburtsdatum	Klasse	Strasse	Wohnort	Telefon	Gesundheit 	Schwimmen	alleine Nachhause	sonstige Infos	Woche 1	Woche 2	Woche 3	Woche 4	Woche 5	Woche 6	Woche 7	Woche 8
+	*/
 	console.log("overview test")
 	var host = $location.$$host.toLowerCase();
 	$scope.platform = PlatformSvc;
