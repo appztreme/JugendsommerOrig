@@ -1,8 +1,9 @@
 var app = angular.module('js');
 
-app.controller('ReportPresenceCtrl', function($scope, $location, $route, RegistrationSvc, NotificationSvc, PlatformSvc) {
+app.controller('ReportOverviewCtrl', function($scope, $location, $route, RegistrationSvc, NotificationSvc, PlatformSvc) {
 	$scope.busyPromise = RegistrationSvc.find();
 
+	console.log("overview test")
 	var host = $location.$$host.toLowerCase();
 	$scope.platform = PlatformSvc;
 

@@ -12,6 +12,7 @@
                 <li ng-show='iSvc.isAuthorized("admin")'><a href='/#/report'>{{'NAV.RESERVATIONS' | translate}}</a></li>
                 <li ng-show='iSvc.isAuthorized("admin") && !isKiso'><a href='/#/payment'>{{'NAV.PAYMENT' | translate}}</a></li>
                 <li ng-show='iSvc.isAuthorized("admin")'><a href='/#/reportPresence'>{{'NAV.PRESENCE' | translate}}</a></li>
+                <li ng-show='iSvc.isAuthorized("admin")'><a href='/#/reportOverview'>{{'NAV.OVERVIEW' | translate}}</a></li>
             </ul>
         </li>
         <li ng-show='iSvc.isAuthorized("fadmin")'><a target='_blank' href='http://www2.jugendsommer.com/'>{{'NAV.LENDINGS' | translate}}</a></li>

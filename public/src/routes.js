@@ -22,6 +22,10 @@ app.config(function($routeProvider) {
 			controller: 'ReportPresenceCtrl',
 			templateUrl: '../templates/reportPresence.html'
 		})
+		.when('reportOverview', {
+			controller: 'ReportOverviewCtrl',
+			templateUrl: '../templates/reportOverview.html'
+		})
 		.when('/myRegistrations', {
 			controller: 'MyRegistrationsCtrl',
 			templateUrl: '../templates/myRegistrations.html'
