@@ -6,6 +6,22 @@
     <h3 class="panel-title">{{user.firstName}} {{user.lastName}}</h3>
   </div>
   <div class="panel-body">
+	  <div class="panel">
+		  <div class="panel-heading">
+
+		  </div>
+		  <div class="panel-body">
+			  <div class="list-group">
+				  <div ng-repeat="grp in user.roles" class="list-group-item list-group-item-warning">
+					<span class="glyphicon glyphicon-trash" style="margin-right:3px;"></span>
+      				<span class="list-group-item-heading"><strong>{{grp.name}}</strong></span>
+      				<p class="list-group-item-text">{{grp}}</p>
+				  </div>
+			  </div>
+		  </div>
+	  </div>
+  </div>
+  <div class="panel-body">
 		<div class="panel">
 			<div class="panel-heading">
 				<input id="fadmin" name="role" type="radio" ng-model="curRole" value="fadmin" />

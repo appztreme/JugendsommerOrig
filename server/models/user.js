@@ -10,7 +10,7 @@ var userSchema = db.Schema({
 		userName: { type: String, required: true },
     	hashedPassword: { type: String, required: true },
     	salt: { type: String },
-    	roles: [String],
+    	roles: { type: Array, default: [] },
 		eventId: { type: mongoose.Schema.Types.ObjectId, ref: 'Event', required: false },
 		location: { type: String, required: false }
 });
