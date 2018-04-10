@@ -7,20 +7,18 @@
   </div>
   <div class="panel-body">
 	  <div class="panel">
-		  <div class="panel-heading">
-
-		  </div>
 		  <div class="panel-body">
 			  <div class="list-group">
 				  <div ng-repeat="grp in user.roles" class="list-group-item list-group-item-warning">
-					<span class="glyphicon glyphicon-trash" style="margin-right:3px;"></span>
-      				<span class="list-group-item-heading"><strong>{{grp.name}}</strong></span>
-      				<p class="list-group-item-text">{{grp}}</p>
+					<button class="glyphicon glyphicon-trash" style="margin-right:3px;" ng-click="deleteRole(grp.role, grp.areaId, grp.areaName)"></button>
+      				<span class="list-group-item-heading"><strong>{{displayRole(grp.role)}}</strong></span>
+      				<span class="list-group-item-text">{{grp.areaName}}</span>
 				  </div>
 			  </div>
 		  </div>
 	  </div>
   </div>
+  <div class="panel-heading"><strong>Neue Rolle hinzufügen</strong></div>
   <div class="panel-body">
 		<div class="panel">
 			<div class="panel-heading">

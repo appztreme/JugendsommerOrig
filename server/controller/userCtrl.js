@@ -41,13 +41,28 @@ exports.search = async(req, res, next) => {
 	catch(err) { next(err); }
 }
 
+exports.deleteRole = (req, res, next) => {
+	User.findById(req.body.id)
+		.exec((err, user) => {
+			if(err) { next(err); }
+			const index = user.roles.findIndex(r => r.role === req.body.role && r.areaId === req.body.areaId && r.areaName === req.body.areaName);
+			if(index > -1) { 	
+				user.roles.splice(index, 1)
+			};
+			user.save(function(errSave, userSaved) {
+				if(errSave) { next(errSave); }
+				res.status(201).json(userSaved);
+			})
+		})
+	
+}
+
 exports.updateRoles = (req, res, next) => {
 	User.findById(req.body.id)
 		.exec((err, user) => {
 			if(err) { next(err); }
-			user.roles = req.body.roles;
-			user.eventId = req.body.eventId;
-			user.location = req.body.location;
+			const role = {"role": req.body.role, "areaId": req.body.areaId, "areaName": req.body.areaName};
+			user.roles.push(role);
 			user.save(function(err, userSaved) {
 				if(err) { next(err); }
 				res.status(200).json(userSaved);

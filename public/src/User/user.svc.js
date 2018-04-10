@@ -22,14 +22,23 @@ app.service('UserSvc', function($http) {
 	};
 	this.search = function(term) {
 		return $http.get('/api/user/search/' + term);
-	}
-	this.updateRoles = function(id, eventId, location, roles) {
-		console.log('svc', id, eventId, location, roles);
+	};
+
+	this.deleteRole = function(id, role, areaId, areaName){
+		return $http.post('/api/user/deleteRole', {
+			id: id,
+			role: role,
+			areaId: areaId,
+			areaName: areaName
+		});
+	};
+
+	this.updateRoles = function(id, role, areaId, areaName) {
 		return $http.post('/api/user/updateRoles', {
 			id: id,
-			roles: roles,
-			eventId: eventId,
-			location: location
+			role: role,
+			areaId: areaId,
+			areaName: areaName
 		});
 	};
 	this.updatePassword = function(userName, userToken, newPassword) {

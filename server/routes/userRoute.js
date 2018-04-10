@@ -9,6 +9,8 @@ router.get('/:id', UserController.findById);
 
 router.get('/search/:txt', auth.requiresRole("admin"), UserController.search);
 
+router.post('/deleteRole', auth.requiresRole("admin"), UserController.deleteRole);
+
 router.post('/updateRoles', auth.requiresRole("admin"), UserController.updateRoles);
 
 router.post('/updatePwd', UserController.updatePwd);
