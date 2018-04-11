@@ -1,7 +1,10 @@
 'use strict';
-const db = require('./../db_shop');
+//const db = require('./../db_shop');
+const mongoose = require('mongoose');
+const config = require('./../../config');
+let conn = mongoose.createConnection(config.shop_prod);
 
-const articleSchema = db.Schema({
+const articleSchema = new mongoose.Schema({
 	code: { type: String, required: false },
 	name: { type: String, required: true },
 	description: { type: String, required: true },
@@ -35,6 +38,6 @@ articleSchema.pre('save', function(next) {
   	}
 });
 
-const Article = db.model('Article', articleSchema);
+const Article = conn.model('Article', articleSchema);
 
 module.exports = Article;

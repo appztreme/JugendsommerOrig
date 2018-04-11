@@ -1,10 +1,12 @@
 'use strict';
-const db = require('./../db_shop');
+//const db = require('./../db_shop');
 const mongoose = require('mongoose');
 const Article = require('./article');
 const moment = require('moment');
+const config = require('./../../config');
+let conn = mongoose.createConnection(config.shop_prod);
 
-const loanSchema = db.Schema({
+const loanSchema = new mongoose.Schema({
 	location: { type: String, required: true },
 	lender: { type: String, required: true },
 	phoneNumberLender: { type: String, required: true },
@@ -27,6 +29,6 @@ loanSchema.post('save', function(l) {
 	}
 });
 
-const Loan = db.model('Loan', loanSchema);
+const Loan = conn.model('Loan', loanSchema);
 
 module.exports = Loan;
