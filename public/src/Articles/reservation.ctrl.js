@@ -55,7 +55,7 @@ app.controller('ShopReservationCtrl', function($scope, $routeParams, IdentitySvc
     }
 
     $scope.save = function() {
-        LoansSvc.create($scope.article, $scope.location, $scope.lender, $scope.phoneNumber, $scope.from, $scope.to)
+        LoansSvc.create($scope.article, $scope.location, $scope.lender, $scope.phoneNumber, $scope.from, $scope.to, $scope.start, $scope.destination, $scope.startTime, $scope.endTime, $scope.participants)
             .error(function(err) {
                 $scope.hasError = true;
                 $scope.bookingRequestSent = true;

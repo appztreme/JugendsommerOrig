@@ -50,10 +50,12 @@ const findReservableArticle = async (articles, from, to) => {
     return null;
 }
 
-exports.create = async (articleName, location, lender, phoneNumber, from, to) => {
+exports.create = async (articleName, location, lender, phoneNumber, from, to, start, destination, startTime, endTime, participants) => {
+    //console.log(articleName, from, to, start, destination, startTime, endTime, participants);
+    // console.log("from", moment(from).isSameOrAfter(moment("2018-03-04")));
     if(!isFromGteNow(from))
         throw new Error(`Es kann nicht in die Vergangenheit gebucht werden. Anfangsdatum: ${moment(from).format('YYYY-MM-DD')}`);
-    if(!isFromLteTo(from, to))
+    if(!isFromLteTo(from,to))
         throw new Error('Das Anfangsdatum muß kleiner/gleich den Enddatum sein.');
     const articlesToReserve = await Article
         .find({name: articleName})
@@ -72,7 +74,12 @@ exports.create = async (articleName, location, lender, phoneNumber, from, to) =>
             phoneNumberLender: phoneNumber,
             from,
             to,
-            article: reservableArticleId
+            article: reservableArticleId,
+            start,
+            destination,
+            startTime,
+            endTime,
+            participants
         });
         console.log("new loan", l);
         const newLoan = await l.save();

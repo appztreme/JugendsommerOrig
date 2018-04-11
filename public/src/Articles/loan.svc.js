@@ -6,13 +6,18 @@ app.service('LoansSvc', function($http) {
         return $http.get('/api/loans/byDateRange/' + moment(from).format("YYYY-MM-DD") + '/' + moment(to).format("YYYY-MM-DD"));
     }
 
-	this.create = function(articleName, location, lender, phoneNumber, from, to) {
+	this.create = function(articleName, location, lender, phoneNumber, from, to, start, destination, startTime, endTime, participants) {
         return $http.post('/api/loans', { articleName: articleName,
                                              location: location,
                                              lender: lender,
                                              phoneNumber: phoneNumber,
                                              from: from,
-                                             to: to
+                                             to: to,
+                                             start: start,
+                                             destination: destination,
+                                             startTime: startTime,
+                                             endTime: endTime,
+                                             participants: participants
                                             });	
 	};
 

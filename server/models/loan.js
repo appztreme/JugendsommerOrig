@@ -13,7 +13,12 @@ const loanSchema = new mongoose.Schema({
 	from: { type: Date, required: true },
 	to: { type: Date, required: true },
 	article: { type: mongoose.Schema.Types.ObjectId, ref: 'Article', required: true },
-	isInSet: { type: Boolean, required: true, default: false }
+	isInSet: { type: Boolean, required: true, default: false },
+	startTime: { type: String, required: false },
+	endTime: { type: String, required: false },
+	participants: { type: Number, required: false },
+	destination: { type: String, required: false },
+	start: { type: String, required: false }
 });
 
 // loanSchema.index({article: 1, from: 1}, {unique: true});

@@ -13,7 +13,7 @@ exports.findAllByDateRange = async (req, res, next) => {
 
 exports.create = async (req, res, next) => {
     try {
-        const loan = await LoanRepo.create(req.body.articleName, req.body.location, req.body.lender, req.body.phoneNumber, req.body.from, req.body.to);
+        const loan = await LoanRepo.create(req.body.articleName, req.body.location, req.body.lender, req.body.phoneNumber, req.body.from, req.body.to, req.body.start, req.body.destination, req.body.startTime, req.body.endTime, req.body.participants);
         res.status(201).json(loan);
     } catch(err) {
         next(err);
