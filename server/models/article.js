@@ -1,8 +1,8 @@
 'use strict';
-//const db = require('./../db_shop');
+const conn = require('./../db_shop');
 const mongoose = require('mongoose');
 const config = require('./../../config');
-let conn = mongoose.createConnection(config.shop_prod);
+//let conn = mongoose.createConnection(config.shop_prod);
 
 const articleSchema = new mongoose.Schema({
 	code: { type: String, required: false },

@@ -1,10 +1,10 @@
 'use strict';
-//const db = require('./../db_shop');
+const conn = require('./../db_shop');
 const mongoose = require('mongoose');
 const Article = require('./article');
 const moment = require('moment');
 const config = require('./../../config');
-let conn = mongoose.createConnection(config.shop_prod);
+// let conn = mongoose.createConnection(config.shop_prod);
 
 const loanSchema = new mongoose.Schema({
 	location: { type: String, required: true },

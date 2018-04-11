@@ -18,7 +18,7 @@ app.factory('IdentitySvc', function() {
 		},
 
 		isAuthorized: function(role) {
-			return !!this.currentUser && this.currentUser.roles.indexOf(role) > -1;
+			return !!this.currentUser && (this.currentUser.roles.indexOf(role) > -1);
 		},
 
 		isAuthorizedForEvent: function(role, eventId) {
