@@ -9,7 +9,6 @@ app.controller('UserRolesUpdateCtrl', function($scope, $route, $location, UserSv
 			.success(function(success) {
 				NotificationSvc.notify('Berechtigung geändert');
 				$route.reload();
-				//$location.path('/userRolesSearch');
 			})
 	}
 
@@ -21,7 +20,6 @@ app.controller('UserRolesUpdateCtrl', function($scope, $route, $location, UserSv
 			.success(function(success) {
 				NotificationSvc.notify('Berechtigung gelöscht');
 				$route.reload();
-				//$location.path('/userRolesSearch');
 			})
 	}
 
