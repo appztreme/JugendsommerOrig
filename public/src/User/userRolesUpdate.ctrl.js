@@ -1,6 +1,6 @@
 var app = angular.module('js');
 
-app.controller('UserRolesUpdateCtrl', function($scope, $location, UserSvc, $routeParams, NotificationSvc) {
+app.controller('UserRolesUpdateCtrl', function($scope, $route, $location, UserSvc, $routeParams, NotificationSvc) {
 	$scope.save = function() {
 		UserSvc.updateRoles($scope.user._id, $scope.curRole, $scope.areaId, $scope.areaName)
 			.error(function(err) {
@@ -8,6 +8,7 @@ app.controller('UserRolesUpdateCtrl', function($scope, $location, UserSvc, $rout
 			})
 			.success(function(success) {
 				NotificationSvc.notify('Berechtigung geändert');
+				$route.reload();
 				//$location.path('/userRolesSearch');
 			})
 	}
@@ -19,6 +20,7 @@ app.controller('UserRolesUpdateCtrl', function($scope, $location, UserSvc, $rout
 			})
 			.success(function(success) {
 				NotificationSvc.notify('Berechtigung gelöscht');
+				$route.reload();
 				//$location.path('/userRolesSearch');
 			})
 	}
@@ -63,18 +65,5 @@ app.controller('UserRolesUpdateCtrl', function($scope, $location, UserSvc, $rout
 	UserSvc.findById($routeParams.userId)
 		.success(function(user) {
 			$scope.user = user;
-			console.log("roles", $scope.user);
-			//console.log("user", user);
-			//if(user.roles.indexOf('fadmin') !== -1) $scope.curRole = 'fadmin';
-			//if(user.roles.indexOf('ladmin') !== -1) $scope.curRole = 'ladmin';
-			//if(user.roles.indexOf('admin') !== -1) $scope.curRole = 'admin';
-			//if(user.location) $scope.location = user.location;
-
-			// if(user.eventId) {
-			// 	for(var ev in $scope.events) {
-			// 		var evObj = $scope.events[ev];
-			// 		if(evObj._id === user.eventId._id) { $scope.event = evObj; console.log("sel ev", $scope.event); break; }
-			// 	}
-			// }
 		});
 });
