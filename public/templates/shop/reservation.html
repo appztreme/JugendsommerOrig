@@ -1,0 +1,151 @@
+<div class='container'>
+    <div class='row'>
+        <div class='col-sm-10'>
+            <h2 class='text-orange'>Reservierung</h2>
+        </div>
+    </div>
+    <form name='reservationForm' class='form-horizontal' novalidate>
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="false">
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingOne">
+                        <h4 ng-show='currentState === 1' class="panel-title" style='color:orange'>Zeitraum und User auswählen</h4>
+                        <h4 ng-show='currentState > 1' class="panel-title">Zeitraum und User auswählen <span style='color:green' class="glyphicon glyphicon-ok"></span></h4>
+                </div>
+                <div id="collapseOne" ng-class="(currentState === 1) ? 'panel-collapse collapse in' : 'panel-collapse collapse'" role="tabpanel" aria-labelledby="headingOne">
+                        <div class="panel-body">
+                            <div class='container'>
+                                <!-- LOCATION -->
+                                <div class='form-group' ng-class='{ "has-error": reservationForm.location.$invalid }'>
+                                    <label for='location' class='control-label col-sm-2'>Einsatzort</label>
+                                    <div class='col-sm-8'>
+                                        <input name='location' type='text' ng-model='location' required maxlength='100' class='form-control'></input>
+                                    </div>
+                                </div>
+                                <!-- LENDER -->
+                                <div class='form-group' ng-class='{ "has-error": reservationForm.lender.$invalid }'>
+                                    <label for='lender' class='control-label col-sm-2'>Ausleiher/in</label>
+                                    <div class='col-sm-8'>
+                                        <input name='lender' type='text' ng-model='lender' class='form-control' required maxlenght='100'></input>
+                                    </div>
+                                </div>
+                                <!-- PHONENUMBER -->
+                                <div class='form-group' ng-class='{ "has-error": reservationForm.phoneNumber.$invalid }'>
+                                    <label for='phoneNumber' class='control-label col-sm-2'>Tel.Nr. Kontakt</label>
+                                    <div class='col-sm-8'>
+                                        <input name='phoneNumber' type='tel' ng-model='phoneNumber' required maxlength='150' class='form-control'></input>
+                                    </div>
+                                </div>
+                                <!-- FROM -->
+	                            <div class='form-group' ng-class='{ "has-error": reservationForm.from.$invalid }'>
+                                <label for='from' class='control-label col-sm-2'>Von</label>
+                                <div class='col-sm-10'>
+                                    <p class='input-group'>
+                                        <ng-datepicker ng-model='from' view-format="DD.MM.YYYY"  locale='de' required></ng-datepicker>
+                                    </p>
+                                </div>
+                                </div>
+                                <!-- TO -->
+                                <div class='form-group' ng-class='{ "has-error": reservationForm.to.$invalid }'>
+                                <label for='to' class='control-label col-sm-2'>Endet am</label>
+                                <div class='col-sm-10'>
+                                    <p class='input-group'>
+                                    <ng-datepicker ng-model='to' view-format="DD.MM.YYYY"  locale='de' required></ng-datepicker>
+                                    </p>
+                                </div>
+                                </div>
+
+                                <br />
+                                <button class='btn btn-lg btn-success' ng-click='setState(2)' ng-disabled='!IsFirstTabComplete()'>
+                                    {{"RESERVATION.BUTTON_NEXT" | translate }}
+                                </button>
+                            </div>				
+                        </div>
+                    </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingTwo">
+                    <h4 ng-show='currentState < 2' class="panel-title">Artikel auswählen</h4>
+                    <h4 ng-show='currentState === 2' class="panel-title" style='color:orange'>Artikel auswählen</h4>
+                    <h4 ng-show='currentState > 2' class="panel-title">Artikel auswählen <span style='color:green' class='glyphicon glyphicon-ok'></span></h4>
+                </div>
+                <div id="collapseTwo" ng-class="(currentState === 2) ? 'panel-collapse collapse in' : 'panel-collapse collapse'" role="tabpanel" aria-labelledby="headingTwo">
+                    <div class="panel-body">
+                        <div class='panel-body'>
+                            <div class='container'>
+                                <label for='typeFilter' class='control-label col-sm-2'>Type:</label>
+                                <div class='col-sm-5 input-group'>
+                                    <select id='typeFilter' class='form-control' ng-model='type' ng-change='updateType()'>
+                                        <option ng-repeat='t in types' value='{{t}}'>{{t}}</option>
+                                    </select>
+                                </div>
+                                <br />
+                                <label for='articleFilter' class='control-label col-sm-2'>Artikel:</label>
+                                <div class='col-sm-5 input-group'>
+                                    <select id='articleFilter' class='form-control' ng-model='article' ng-change='updateArticle()'>
+                                        <option ng-repeat='a in articles' value='{{a}}'>{{a}}</option>
+                                    </select>
+                                </div>
+
+                                <br />
+                                <button class='btn btn-lg btn-success' ng-click='setState(3)' ng-disabled='!IsSecondTabComplete()'>
+                                    {{"RESERVATION.BUTTON_NEXT" | translate }}
+                                </button>
+                            </div> 
+                        </div>
+                    </div>
+                
+
+                    <div ng-show="article === 'VW Caravell'" style="margin: 10px" class="row alert alert-danger" role="alert">
+                        <h3>Verleihbestimmung VW-Bus</h3>
+                        <p>
+                            <ul>
+                            <li>Der Mieter muss vor Übernahme des Fahrzeuges eine Kopie seines Führerscheines hinterlegen. Bei längeren Fahrten über 500 km müssen sich zwei Fahrer bereitstellen, und jeweils ihre Führerscheine vorweisen. Außerdem muss der Bus direkt vom Fahrer beim Ausleihort (z.Z. Parkgarage St. Johanngasse 21 in Bozen) abgeholt und zurückgegeben werden. Außer es wird mit den Angestellten des Jugenddienstes anders vereinbart. Beim Abholen und bei der Rückgabe wird der Bus vom Personal des Jugenddienstes kontrolliert.</li>
+                            <li>Bei Übernahme des Busses muss eine Kaution von 100 Euro hinterlegt werden. Bei evtl. Schäden oder Nichtreinigung des Busses wird diese zurückbehalten.</li>
+                            <li>Der Fahrer muss eine gute Fahrpraxis aufweisen können und bereits im Fahren mit Kleinbussen ausreichend Erfahrung besitzen.</li>
+                            <li>Als Ausleihgebühr ist dem Jugenddienst Bozen-Land der aktuelle Landestarif zu bezahlen.</li>
+                            <li>Die evtl. Gebühren für Ermächtigung zu Auslandsfahrten gehen zu Lasten des Mieters.</li>
+                            <li>Der Bus ist geputzt zur ausgemachten Zeit am vereinbarten Standort abzustellen. Sollte der Bus nicht ausreichend gereinigt sein oder zu spät zurückgebracht werden, wird ein Teil der Kaution zurückbehalten.</li>
+                            <li>Im Bus darf nicht geraucht werden.</li>
+                            <li>Der Mieter übernimmt die volle Haftung für alle Schäden, die nicht von der Versicherung gedeckt werden. Strafzettel werden vom jeweiligen Fahrer selbst getragen. Falls ein Unfall passiert und der Schaden der Versicherung gemeldet werden muss, ist ein Protokoll der Carabinieri - oder der Straßenpolizei erforderlich, ansonsten muss der Schaden vom Entleiher selbst getragen werden.</li>
+                            </ul>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingThree">
+                    <h4 ng-show='currentState < 3' class="panel-title">Buchen</h4>
+                    <h4 ng-show='currentState === 3' class="panel-title" style='color:orange'>Buchen</h4>
+                </div>
+                <div id="collapseThree" ng-class="(currentState === 3) ? 'panel-collapse collapse in' : 'panel-collapse collapse'" role="tabpanel" aria-labelledby="headingThree">
+                    <div class="panel-body">
+                        <div class="row" ng-show="!bookingRequestSent">
+                        <div><strong>Zusammefassung</strong></div>
+                        <table style="border: 1px solid gray; border-collapse: collapse;">
+                            <tr><td style="padding: 2px">Artikel</td><td style="padding: 2px">{{article}}</td></tr>
+                            <tr><td style="padding: 2px">Einsatzort</td><td style="padding: 2px">{{location}}</td></tr>
+                            <tr><td style="padding: 2px">Ausleiher/in</td><td style="padding: 2px">{{lender}}</td></tr>
+                            <tr><td style="padding: 2px">Tel.Nr. Kontakt</td><td style="padding: 2px">{{phoneNumber}}</td></tr>
+                            <tr><td style="padding: 2px">Von</td><td style="padding: 2px">{{from}}</td></tr>
+                            <tr><td style="padding: 2px">Bis</td><td style="padding: 2px">{{to}}</td></tr>
+                        </table>
+                        </div>
+
+                        <div class="row" style="margin: 10px; padding: 10px" ng-class="{'bg-danger': hasError, 'bg-info': !hasError}" ng-show="bookingRequestSent">
+                            <div><strong>Buchungsantwort</strong></div>
+                            <div style="padding: 5px;">
+                                {{response}}
+                            </div>
+                        </div>
+                        <br />
+                                 
+                        <div class='col-sm-offset-2 col-sm-8' style='margin-top:15px;'>
+                            <button ng-show="!bookingRequestSent" class='btn btn-success btn-lg btn-block' ng-click='save()' ng-disabled='!isRegistrationAllowed()'>Buchen</button>
+                            <a href="/#/shop/reservation/" ng-show="bookingRequestSent" class="btn btn-warning btn-lg btn-block">Neue Reservierung</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

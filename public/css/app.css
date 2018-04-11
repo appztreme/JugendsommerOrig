@@ -19,6 +19,10 @@
 	color: orange;
 }
 
+.bg-gray {
+    background-color: lightgray;
+}
+
 .invisible-link:hover {
     text-decoration: none;
 }

@@ -15,7 +15,17 @@
                 <li ng-show='iSvc.isAuthorized("admin")'><a href='/#/reportOverview'>{{'NAV.OVERVIEW' | translate}}</a></li>
             </ul>
         </li>
-        <li ng-show='iSvc.isAuthorized("fadmin")'><a target='_blank' href='http://www2.jugendsommer.com/'>{{'NAV.LENDINGS' | translate}}</a></li>
+        <li ng-show='iSvc.isAuthorized("fadmin")' class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                {{'NAV.LENDINGS' | translate}} <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li ng-show='iSvc.isAuthorized("admin") || iSvc.isAuthorized("fadmin") || iSvc.isAuthorized("ladmin")'><a href='/#/shop/articles'>Artikel</a></li>
+                <li ng-show='iSvc.isAuthorized("admin") || iSvc.isAuthorized("fadmin") || iSvc.isAuthorized("ladmin")'><a href='/#/shop/reservation'>Ausleihe</a></li>
+                <li ng-show='iSvc.isAuthorized("admin") || iSvc.isAuthorized("fadmin") || iSvc.isAuthorized("ladmin")'><a href='/#/shop/calendar'>Kalender</a></li>
+            </ul> 
+        </li>
+        <!-- <li ng-show='iSvc.isAuthorized("fadmin")'><a target='_blank' href='http://www2.jugendsommer.com/'>{{'NAV.LENDINGS' | translate}}</a></li> -->
         <li ng-show='iSvc.isAuthorized("admin")'><a href='/#/userRolesSearch'>{{'NAV.USERSEARCH' | translate}}</a></li>
     </ul>
 </div>

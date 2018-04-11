@@ -1,0 +1,35 @@
+<div class='container'>
+    <div class='row'>
+        <div class='col-sm-10'>
+            <h2 class='text-orange'>Kalender</h2>
+        </div>
+    </div>
+    <div class='row'>
+        <label for='fromFilter' class='control-label col-sm-1'>Von:</label>
+        <div class='col-sm-4 input-group'>
+            <p class='input-group'>
+                <ng-datepicker ng-model='from' view-format="DD.MM.YYYY"  locale='de' required></ng-datepicker>
+            </p>
+        </div>
+        <label for='toFilter' class='control-label col-sm-1'>Bis:</label>
+        <div class='col-sm-4 input-group'>
+            <p class='input-group'>
+                <ng-datepicker ng-model='to' view-format="DD.MM.YYYY"  locale='de' required></ng-datepicker>
+            </p>
+        </div>
+    </div>
+    <div class="row" style='margin-top:10px'>
+        <div class='col-sm-offset-2 col-sm-4'>
+          <button type='button' class='btn btn-primary btn-block' ng-click='find(from, to)'>Laden</button>
+        </div>
+    </div>
+</div>
+<br /><br />
+    <div class="container list-group">
+        <div ng-repeat="l in loans" class="list-group-item list-group-item-warning">
+            {{l.from | date: 'dd/MM/yyyy'}} - {{l.to | date: 'dd/MM/yyyy'}}<br />
+            <strong>{{l.article.code}} - {{l.article.name}}</strong><br />
+            {{l.lender}} {{l.location}}
+        </div>
+    </div>
+</div>

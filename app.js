@@ -36,6 +36,8 @@ app.use('/api/resources', require('./server/routes/resourceRoute'));
 app.use('/api/lendings', require('./server/routes/lendingRoute'));
 app.use('/api/locations', require('./server/routes/locationRoute'));
 app.use('/api/contact', require('./server/routes/contactRoute'));
+app.use('/api/articles', require('./server/routes/articleRoute'));
+app.use('/api/loans', require('./server/routes/loanRoute'));
 
 require('./server/passport.config')();
 

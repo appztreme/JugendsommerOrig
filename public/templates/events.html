@@ -63,7 +63,7 @@
 					<a href='/#/registration/{{event._id}}?type={{event.type}}' class='btn btn-xlarge btn-success' role='button' ng-show='iSvc.isAuthenticated() && !cannotReserve(event)'><span class='glyphicon glyphicon-user'></span></a>
 					<button type="button" class="btn btn-xlarge btn-success" ng-hide='iSvc.isAuthenticated()' data-toggle="modal" data-target="#warningModal"><span class='glyphicon glyphicon-user'></button>
 					<!--<a href='/#/activities/{{event._id}}?type={{event.type}}' class='btn btn-xlarge btn-success' role='button'><span class='glyphicon glyphicon-triangle-right'></span></a>-->
-					<a href='/#/eventInfo/{{event._id}}' class="btn btn-xlarge btn-warning" role'button'><span class='glyphicon glyphicon-search'></span></a>
+					<a href='/#/eventInfo/{{event._id}}' class="btn btn-xlarge btn-warning" role='button'><span class='glyphicon glyphicon-search'></span></a>
 					<a href='/#/activities/{{event._id}}?type={{event.type}}' class='btn btn-xlarge btn-success' role='button' ng-show='iSvc.isAuthorized("admin") || iSvc.isAuthorizedForEvent("fadmin", event._id) || iSvc.isAuthorizedForLocation("ladmin", event.location)'><span class='glyphicon glyphicon-triangle-right'></span></a>
 					<a href='/#/editEvent/{{event._id}}' class='btn btn-xlarge btn-info' role='button' ng-show='iSvc.isAuthorized("admin")'><span class='glyphicon glyphicon-pencil'></span></a>
 					<a href='/#/newCommitment/{{event._id}}' class='btn btn-xlarge btn-primary' role='button' ng-show='iSvc.isAuthorized("admin") || iSvc.isAuthorizedForEvent("fadmin", event._id) || iSvc.isAuthorizedForLocation("ladmin", event.location)'><span class='glyphicon glyphicon-usd'></span></a>

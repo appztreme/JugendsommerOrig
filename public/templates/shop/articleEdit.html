@@ -1,0 +1,50 @@
+<div class='container'>
+        <form name='articleForm' class='form-horizontal' novalidate ng-submit='save()'>
+            <div class='form-group'>
+                <label for='name' class='control-label col-sm-2'>Code</label>
+                <div class='col-sm-10'>
+                    <input name='name' type='text' ng-model='code' required disabled class='form-control'></input>
+                </div> 
+            </div>
+            <!-- NAME -->
+            <div class='form-group' ng-class='{ "has-error": articleForm.name.$invalid }'>
+                <label for='name' class='control-label col-sm-2'>Titel</label>
+                <div class='col-sm-10'>
+                    <input name='name' type='text' ng-model='name' required class='form-control'></input>
+                </div>
+            </div>
+            <!-- DESCRIPTION -->
+            <div class='form-group' ng-class='{ "has-error": articleForm.description.$invalid }'>
+                <label for='description' class='control-label col-sm-2'>Beschreibung</label>
+                <div class='col-sm-10'>
+                    <textarea name='description' type='text' ng-model='description' class='form-control' rows='3' placehoder='Beschreibung eintragen' required ></textarea>
+                </div>
+            </div>
+            <!-- LOCATION -->
+            <div class='form-group' ng-class='{ "has-error": articleForm.location.$invalid }'>
+                <label for='location' class='control-label col-sm-2'>Standort</label>
+                <div class='col-sm-10'>
+                    <input name='location' type='text' ng-model='location' required class='form-control'></input>
+                </div>
+            </div>
+            <!-- TYPE -->
+            <div class='form-group' ng-class='{ "has-error": articleForm.type.$invalid }'>
+                <label for='type' class='control-label col-sm-2'>Typ</label>
+                <div class='col-sm-10'>
+                    <input name='type' type='text' ng-model='type' required disabled class='form-control'></input>
+                </div>
+            </div>
+            <!-- MAXLOANDURATION -->
+            <div class='form-group' ng-class='{ "has-error": articleForm.maxLoanDuration.$invalid }'>
+                <label for='maxLoanDuration' class='control-label col-sm-2'>max. Ausleidauer</label>
+                <div class='col-sm-10'>
+                    <input name='maxLoanDuration' type='number' ng-model='maxLoanDuration' step="1" required class='form-control'></input>
+                </div>
+            </div>
+
+            <br />
+	        <div class='col-sm-offset-2 col-sm-10'>
+		    <input class='btn btn-success bnt-lg btn-block' type='submit' value='Speichern' ng-disabled='articleForm.$invalid'>
+	        </div>
+        </form>
+</div>

@@ -31,6 +31,8 @@ module.exports = {
     "cities": ['Deutschnofen', 'Jenesien', 'Karneid', 'Kastelruth', 'Mölten', 'Ritten', 'Sarntal', 'Tiers', 'Völs', 'Vöran', 'Welschnofen', 'Andere'],
     "db_test": "mongodb://localhost/jugendsommer_test",
     "db_prod": "mongodb://localhost/jugendsommer",
+    "shop_test": "mongodb://localhost/jdbl_shop_test",
+    "shop_prod": "mongodb://localhost/jdbl_shop",
     "port": 3000,
     "caching": true
 }

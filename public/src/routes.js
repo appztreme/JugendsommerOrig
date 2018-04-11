@@ -141,5 +141,25 @@ app.config(function($routeProvider) {
 		.when('/agb/:eventId', {
 			controller: 'AgbEditCtrl',
 			templateUrl: '../templates/agb/agbEdit.html'
+		})
+		.when('/shop/articles', {
+			controller: 'ArticleCtrl',
+			templateUrl: '../templates/shop/articles.html'
+		})
+		.when('/shop/newArticle', {
+			controller: 'ArticleNewCtrl',
+			templateUrl: '../templates/shop/articleNew.html'
+		})
+		.when('/shop/editArticle/:articleId', {
+			controller: 'ArticleEditCtrl',
+			templateUrl: '../templates/shop/articleEdit.html'
+		})
+		.when('/shop/reservation', {
+			controller: 'ShopReservationCtrl',
+			templateUrl: '../templates/shop/reservation.html'
+		})
+		.when('/shop/calendar', {
+			controller: 'ShopCalendarCtrl',
+			templateUrl: '../templates/shop/calendar.html'
 		});
 });
