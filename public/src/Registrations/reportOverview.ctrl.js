@@ -24,7 +24,7 @@ app.controller('ReportOverviewCtrl', function($scope, $location, $route, Registr
 			var fullName = r.lastNameChild + ' ' + r.firstNameChild;
 			if(nameIndex.indexOf(fullName) > -1) {
 				// UPDATE
-				var outputIndex = indexOfArray(output, fullName);
+				var outputIndex = $scope.indexOfArray(output, fullName);
 				output[outputIndex][r.activityId._id] = true;
 			} else {
 				// INSERT
