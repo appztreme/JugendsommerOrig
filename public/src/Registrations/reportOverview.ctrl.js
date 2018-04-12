@@ -28,7 +28,6 @@ app.controller('ReportOverviewCtrl', function($scope, $location, $route, Registr
 				output[outputIndex][r.activityId._id] = true;
 			} else {
 				// INSERT
-				nameIndex.push(fullName);
 				var entry = {
 					"event": r.activityId.eventId.location + ' - ' + r.activityId.eventId.name,
 					"firstNameChild": r.firstNameChild,
@@ -48,6 +47,7 @@ app.controller('ReportOverviewCtrl', function($scope, $location, $route, Registr
 					entry[$scope.activities[j]._id] = false;
 				}
 				entry[r.activityId._id] = true;
+				nameIndex.push(fullName);
 				output.push(entry);
 			}
 		}
