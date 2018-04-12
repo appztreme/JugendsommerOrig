@@ -6,11 +6,11 @@ app.factory('IdentitySvc', function() {
 		currentUser: undefined,
 
 		isAdmin:  function() {
-			return !!this.currentUser && this.currentUser.roles.indexOf("admin") > -1;
+			return !!this.currentUser && this.isAuthorized("admin"); // this.currentUser.roles.indexOf("admin") > -1;
 		},
 
 		isFAdmin: function() {
-			return !!this.currentUser && this.currentUser.roles.indexOf("fadmin") > -1;
+			return !!this.currentUser && this.isAuthorized("fadmin"); // this.currentUser.roles.indexOf("fadmin") > -1;
 		},
 
 		isAuthenticated: function() {

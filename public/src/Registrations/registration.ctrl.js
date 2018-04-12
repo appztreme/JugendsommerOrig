@@ -61,6 +61,7 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 	}
 
 	$scope.canReserve = function(activity) {
+		if(IdentitySvc.isAdmin()) return true;
         return activity.curParticipants < activity.maxParticipants;
     };
 
@@ -70,6 +71,7 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
     };
 
     $scope.canNotReserve = function(activity) {
+		if(IdentitySvc.isAdmin()) return false;
         return activity.curParticipants >= (activity.maxParticipants + activity.queueSize);
 	};
 	
