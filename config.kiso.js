@@ -14,6 +14,8 @@ module.exports = {
     "cities": ['Bozen', 'Andere'],
     "db_test": "mongodb://localhost/kiso_test",
     "db_prod": "mongodb://localhost/kiso",
+    "shop_test": "mongodb://localhost/kiso_shop_test",
+    "shop_prod": "mongodb://localhost/kiso_shop",
     "port": 3000,
     "caching": true
 }

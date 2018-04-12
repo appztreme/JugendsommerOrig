@@ -23,6 +23,8 @@ module.exports = {
     "cities": ['Altrei', 'Aldein', 'Auer', 'Kurtatsch', 'Laag', 'Margreid', 'Montan', 'Neumarkt', 'Tramin', 'Truden', 'Andere'],
     "db_test": "mongodb://localhost/jdul_test",
     "db_prod": "mongodb://localhost/jdul",
+    "shop_test": "mongodb://localhost/jsul_shop_test",
+    "shop_prod": "mongodb://localhost/jsul_shop",
     "port": 3000,
     "caching": true
 }

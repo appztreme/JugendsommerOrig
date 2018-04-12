@@ -27,6 +27,8 @@ module.exports = {
     ],
     "db_test": "mongodb://localhost/jd_bozenland_test",
     "db_prod": "mongodb://localhost/jd_bozenland",
+    "shop_test": "mongodb://localhost/jdbl_shop_test",
+    "shop_prod": "mongodb://localhost/jdbl_shop",
     "port": 3000,
     "caching": true
 }
