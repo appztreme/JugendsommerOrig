@@ -2,30 +2,64 @@ var app = angular.module('js');
 
 app.controller('ReportOverviewCtrl', function($scope, $location, $route, RegistrationSvc, NotificationSvc, PlatformSvc) {
 	$scope.busyPromise = RegistrationSvc.find();
-	/*
-	Vorname	Nachname	Geburtsdatum	Klasse	Strasse	Wohnort	Telefon	Gesundheit 	Schwimmen	alleine Nachhause	sonstige Infos	Woche 1	Woche 2	Woche 3	Woche 4	Woche 5	Woche 6	Woche 7	Woche 8
-	*/
+
 	console.log("overview test")
 	var host = $location.$$host.toLowerCase();
 	$scope.platform = PlatformSvc;
 
 	$scope.yearFilter = (new Date()).getFullYear();
 
+	$scope.indexOfArray = function(array, fullName) {
+		for(var i=0; i < array.length; i++) {
+			if(array[i].fullName === fullName) return i;
+		}
+		return -1;
+	}
+
+	$scope.aggregateReportStructure = function(regs) {
+		var output = [];
+		var nameIndex = [];
+		for(var i=0; i < regs.length; i++) {
+			var r = regs[i];
+			var fullName = r.lastNameChild + ' ' + r.firstNameChild;
+			if(nameIndex.indexOf(fullName) > -1) {
+				// UPDATE
+				var outputIndex = indexOfArray(output, fullName);
+				output[outputIndex][r.activityId._id] = true;
+			} else {
+				// INSERT
+				nameIndex.push(fullName);
+				var entry = {
+					"event": r.activityId.eventId.location + ' - ' + r.activityId.eventId.name,
+					"firstNameChild": r.firstNameChild,
+					"lastNameChild": r.lastNameChild,
+					"fullName": fullName,
+					"birthdayChild": r.birthdayChild,
+					"schollChild": r.schollChild,
+					"addressChild": r.addressChild,
+					"cityChild": r.cityChild,
+					"phoneNumberParents": r.phoneNumberParents,
+					"healthChild": r.healthChild,
+					"canSwim": r.canSwim,
+					"canGoHomeAllone": r.canGoHomeAllone,
+					"commentInternal": r.commentInternal
+				}
+				for(var j=0; j < $scope.activities.length; j++) {
+					entry[$scope.activities[j]._id] = false;
+				}
+				entry[r.activityId._id] = true;
+				output.push(entry);
+			}
+		}
+		return output;
+	}
+
   	$scope.getReportData = function() {
     	RegistrationSvc.find($scope.eventIdFilter, $scope.activityIdFilter, $scope.yearFilter, null, null, null)
 				.success(function (regs) {
-					//console.log("regs", regs);
-					for(var i=0; i < regs.length; i++) {
-						var reg = regs[i];
-						reg.eventDuration = $scope.getDateRange(reg.activityId.startDate, reg.activityId.endDate);
-					}
-					$scope.registrations = _.groupBy(regs, function(r) { return r.activityId._id; });
+					$scope.registrations = $scope.aggregateReportStructure(regs);
 					
 					console.log($scope.registrations);
-					// if(regs.length > 0) {
-					// 	var act = regs[0].activityId;
-					// 	$scope.eventDuration = $scope.getDateRange(act.startDate, act.endDate);
-					// }
     			});
 	};
 
@@ -38,6 +72,16 @@ app.controller('ReportOverviewCtrl', function($scope, $location, $route, Registr
 		}
 		return range;
 	}
+
+	$scope.formatBool = function(b) {
+		if(b) return "ja";
+		return "nein";
+	};
+
+	$scope.formatBoolToSymbol = function(b) {
+		if(b) return "x";
+		return "-";
+	};
 	  
 	$scope.clearEventSelection = function() {
 		$scope.eventIdFilter = undefined;
