@@ -22,9 +22,22 @@ function requiresApiLogin(req, res, next) {
   }
 }
 
+let getPlainRoles = (roles) => {
+  var r = [];
+  for(var i=0; i<roles.length; i++) {
+    var role = roles[i];
+    if(typeof role === 'string' || role instanceof String) {
+      r.push(role);
+    } else {
+      r.push(role.role);
+    }
+  }
+  return r;
+}
+
 function requiresRole(role) {
     return (req, res, next) => {
-        if(!req.isAuthenticated() || req.user.roles.indexOf(role) === -1) {
+        if(!req.isAuthenticated() || getPlainRoles(req.user.roles).indexOf(role) === -1) {
           res.status(403);
           res.end();
         } else { next(); }
@@ -35,7 +48,7 @@ function requiresOneRoleOutOf(roles) {
     return (req, res, next) => {
       let hasRole = false;
       roles.forEach(r => {
-        if(req.user.roles.indexOf(r) !== -1) hasRole = true;
+        if(getPlainRoles(req.user.roles).indexOf(r) !== -1) hasRole = true;
       });
       if(!req.isAuthenticated() || !hasRole) {
         res.status(403);
