@@ -3,15 +3,22 @@ const Loan = require('./../models/loan');
 const Article = require('./../models/article');
 const moment = require('moment');
 
-exports.findByArticleAndDateRange = (articleId, from, to) => {
-    return Loan.find()
-        .where('article').equals(articleId)
+exports.find = (from, to, articleId, location, lender) => {
+    console.log("params", from, to, articleId, location, lender);
+
+    let query = Loan.find()
         .where('from').gte(from)
         .where('to').lte(to)
-        .where('isInSet').equals(false)
+        .where('isInSet').equals(false);
+    
+    if(articleId) query = query.where('articleId').equals(articleId);
+    if(location) query = query.where('location').regex(new RegExp(location, 'i'));
+    if(lender) query = query.where('lender').regex(new RegExp(lender, 'i'));
+        
+    return query
         .populate({path: 'article'})
-        .sort({from: 1, 'article.name': 1})
-        .exec();
+        .sort({from: 1, 'article.code': 1, 'article.name': 1})
+        .exec(); 
 }
 
 exports.findAllByDateRange = (from, to) => {

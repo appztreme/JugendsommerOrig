@@ -5,22 +5,36 @@
         </div>
     </div>
     <div class='row'>
-        <label for='fromFilter' class='control-label col-sm-1'>Von:</label>
+        <label for='fromFilter' class='control-label col-sm-2'>Von:</label>
         <div class='col-sm-4 input-group'>
             <p class='input-group'>
                 <ng-datepicker ng-model='from' view-format="DD.MM.YYYY"  locale='de' required></ng-datepicker>
             </p>
         </div>
-        <label for='toFilter' class='control-label col-sm-1'>Bis:</label>
+        <label for='toFilter' class='control-label col-sm-2'>Bis:</label>
         <div class='col-sm-4 input-group'>
             <p class='input-group'>
                 <ng-datepicker ng-model='to' view-format="DD.MM.YYYY"  locale='de' required></ng-datepicker>
             </p>
         </div>
     </div>
+    <div class='row'>
+        <label for='locationFilter' class='control-label col-sm-2'>Einsatzort:</label>
+        <div class='col-sm-4 input-group'>
+            <p class='input-group'>
+                <input type="text" ng-model='location'></input>
+            </p>
+        </div>
+        <label for='lenderFilter' class='control-label col-sm-2'>Ausleiher/in:</label>
+        <div class='col-sm-4 input-group'>
+            <p class='input-group'>
+                <input type="text" ng-model='lender'></input>
+            </p>
+        </div>
+    </div>
     <div class="row" style='margin-top:10px'>
         <div class='col-sm-offset-2 col-sm-4'>
-          <button type='button' class='btn btn-primary btn-block' ng-click='find(from, to)'>Laden</button>
+          <button type='button' class='btn btn-primary btn-block' ng-click='find(from, to, articleId, location, lender)'>Laden</button>
         </div>
     </div>
 </div>

@@ -1,6 +1,7 @@
-app.controller('ShopReservationCtrl', function($scope, $routeParams, IdentitySvc, ArticlesSvc, LoansSvc, $location, NotificationSvc) {
+app.controller('ShopReservationCtrl', function($scope, $routeParams, IdentitySvc, ArticlesSvc, LoansSvc, $location, NotificationSvc, ReservationCacheSvc) {
     $scope.iSvc = IdentitySvc;
     $scope.currentState = 1;
+    $scope.count = 1;
 
     $scope.setState = function(state) {
 		$scope.currentState = state;
@@ -64,6 +65,11 @@ app.controller('ShopReservationCtrl', function($scope, $routeParams, IdentitySvc
             .success(function(result) {
                 $scope.hasError = false;
                 $scope.bookingRequestSent = true;
+                ReservationCacheSvc.location = $scope.location;
+                ReservationCacheSvc.lender = $scope.lender;
+                ReservationCacheSvc.phoneNumber = $scope.phoneNumber;
+                ReservationCacheSvc.from = $scope.from;
+                ReservationCacheSvc.to = $scope.to;
                 $scope.response = "Artikel " + result.article.code +
                                   " - " + result.article.name + 
                                   " wurde von " + moment(result.from).format("ll") + " bis " +
@@ -76,5 +82,13 @@ app.controller('ShopReservationCtrl', function($scope, $routeParams, IdentitySvc
         $scope.bookingRequestSent = false;
         $scope.types = $scope.getTypes($scope.overviews);
         $scope.articles = $scope.getDistinctArticles($scope.overviews, $scope.type);
-	});
+    });
+    
+    if(ReservationCacheSvc.hasData()) {
+        $scope.location = ReservationCacheSvc.location;
+        $scope.lender = ReservationCacheSvc.lender;
+        $scope.phoneNumber = ReservationCacheSvc.phoneNumber;
+        $scope.from = ReservationCacheSvc.from;
+        $scope.to = ReservationCacheSvc.to;
+    }
 })

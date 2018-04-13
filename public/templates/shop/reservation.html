@@ -86,6 +86,11 @@
                                     </select>
                                 </div>
                                 <br />
+                                <label for='countFilter' class='control-label col-sm-2'>Anzahl:</label>
+                                <div class='col-sm-5 input-group'>
+                                    <input type="number" id='countFilter' class='form-control' ng-model='count' min="1" step="1" disabled></input>
+                                </div>
+                                <br />
                                 <div ng-show="type === 'Bus'" class="container">
                                     <!-- START -->
                                     <div class='form-group' ng-class='{ "has-error": reservationForm.start.$invalid }'>
@@ -96,21 +101,21 @@
                                     </div>
                                     <!-- DESTINATION -->
                                     <div class='form-group' ng-class='{ "has-error": reservationForm.destination.$invalid }'>
-                                        <label for='destination' class='control-label col-sm-2'>Ziel/in</label>
+                                        <label for='destination' class='control-label col-sm-2'>Ziel</label>
                                         <div class='col-sm-8'>
                                             <input name='destination' type='text' ng-model='destination' class='form-control' ></input>
                                         </div>
                                     </div>
                                     <!-- STARTTIME -->
                                     <div class='form-group' ng-class='{ "has-error": reservationForm.startTime.$invalid }'>
-                                        <label for='startTime' class='control-label col-sm-2'>Start-Zeit/in</label>
+                                        <label for='startTime' class='control-label col-sm-2'>Start-Zeit</label>
                                         <div class='col-sm-8'>
                                             <input name='startTime' type='string' ng-model='startTime' class='form-control'></input>
                                         </div>
                                     </div>
                                     <!-- STARTTIME -->
                                     <div class='form-group' ng-class='{ "has-error": reservationForm.endTime.$invalid }'>
-                                        <label for='endTime' class='control-label col-sm-2'>EndZeit/in</label>
+                                        <label for='endTime' class='control-label col-sm-2'>End-Zeit</label>
                                         <div class='col-sm-8'>
                                             <input name='endTime' type='string' ng-model='endTime' class='form-control'></input>
                                         </div>

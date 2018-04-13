@@ -1,9 +1,14 @@
 var app = angular.module('js');
 
 app.service('LoansSvc', function($http) {
-	this.findByDateRange = function(from, to) {
-        console.log("params", from, to);
-        return $http.get('/api/loans/byDateRange/' + moment(from).format("YYYY-MM-DD") + '/' + moment(to).format("YYYY-MM-DD"));
+	this.findByDateRange = function(from, to, articleId, location, lender) {
+        var path = '/api/loans/search/';
+        var params = {from: moment(from).format("YYYY-MM-DD"), to: moment(to).format("YYYY-MM-DD")};
+        if(!angular.isUndefined(articleId)) params.articleId = articleId;
+        if(!angular.isUndefined(location)) params.location = location;
+        if(!angular.isUndefined(lender)) params.lender = lender;
+        // console.log("p", params, location, lender);
+        return $http.get(path, { params: params });
     }
 
 	this.create = function(articleName, location, lender, phoneNumber, from, to, start, destination, startTime, endTime, participants) {
