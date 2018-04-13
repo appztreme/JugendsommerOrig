@@ -34,7 +34,7 @@ app.controller('ReportOverviewCtrl', function($scope, $location, $route, Registr
 					"lastNameChild": r.lastNameChild,
 					"fullName": fullName,
 					"birthdayChild": r.birthdayChild,
-					"schollChild": r.schoolChild,
+					"schoolChild": r.schoolChild,
 					"addressChild": r.addressChild,
 					"cityChild": r.cityChild,
 					"phoneNumberParent": r.phoneNumberParent,
