@@ -150,48 +150,60 @@ app.controller('MyCommitmentsCtrl', function($scope, $location, $route, Notifica
 		});
 	};
 
+	$scope.authorizeEvents = function(evs) {
+		var result = [];
+		for(var i=0; i < evs.length; i++) {
+			var e = evs[i];
+			if(IdentitySvc.isAdmin()) result.push(e);
+			else if (IdentitySvc.isFadmin() && IdentitySvc.getAllEvents().indexOf(e._id) > -1) result.push(e);
+		}
+		return result;
+	}
+
 	$scope.loadEvents = function() {
 			CommitmentSvc.getSelectionParams()
 				.error(function(err) {
 					NotificationSvc.warn(err);
 				})
 				.success(function(evs) {
-					// console.log(evs);
+					
 					$scope.events = _.map(evs, function(ev) {
-						return {
-							_id: ev._id,
-							name: ev.location + ' - ' + ev.name
-						}
+
+							return {
+								_id: ev._id,
+								name: ev.location + ' - ' + ev.name
+							}
 					});
 				});
 	};
 
-	if(IdentitySvc.isFAdmin() && !IdentitySvc.isAdmin()) {
-		CommitmentSvc.findByEvent(IdentitySvc.currentUser.eventId).success(function(commitments) {
-			$scope.sum = Math.round(_.reduce(commitments, function(sum, object) {
-				return sum + object.amount;
-			}, 0) * 100) / 100;
+	// if(IdentitySvc.isFAdmin() && !IdentitySvc.isAdmin()) {
+	// 	CommitmentSvc.findByEvent(IdentitySvc.currentUser.eventId).success(function(commitments) {
+	// 		$scope.sum = Math.round(_.reduce(commitments, function(sum, object) {
+	// 			return sum + object.amount;
+	// 		}, 0) * 100) / 100;
 
-			$scope.commitments = _.reduce(commitments, function(acc, com) {
-				var key1 = com.eventId._id;
-				var key2 = com.type;
-				acc[key1] = acc[key1] || {};
-			 	acc[key1][key2] = acc[key1][key2] || [];
-				com['isHidden'] = true;
-				acc[key1][key2].push(com);
-			 	return acc;
-			}, {});
-		});
+	// 		$scope.commitments = _.reduce(commitments, function(acc, com) {
+	// 			var key1 = com.eventId._id;
+	// 			var key2 = com.type;
+	// 			acc[key1] = acc[key1] || {};
+	// 		 	acc[key1][key2] = acc[key1][key2] || [];
+	// 			com['isHidden'] = true;
+	// 			acc[key1][key2].push(com);
+	// 		 	return acc;
+	// 		}, {});
+	// 	});
+	// }
+	$scope.loadEvents();
+	if(MyCommitmentsCacheSvc.hasEventFilterParameter()) {
+		$scope.eventIdFilter = MyCommitmentsCacheSvc.currentEventIdFilter;
+		$scope.loadCommitmentsByEvent();
 	}
 	if(IdentitySvc.isAdmin()) {
-		$scope.loadEvents();
 		CommitmentSvc.getAdminSummary()
 			.success(function(summaries) {
 				$scope.summaries = summaries;
 			});
-		if(MyCommitmentsCacheSvc.hasEventFilterParameter()) {
-			$scope.eventIdFilter = MyCommitmentsCacheSvc.currentEventIdFilter;
-			$scope.loadCommitmentsByEvent();
-		}
+		
 	}
 });

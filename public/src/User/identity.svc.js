@@ -6,11 +6,11 @@ app.factory('IdentitySvc', function() {
 		currentUser: undefined,
 
 		isAdmin:  function() {
-			return !!this.currentUser && this.isAuthorized("admin"); // this.currentUser.roles.indexOf("admin") > -1;
+			return !!this.currentUser && this.isAuthorized("admin");
 		},
 
 		isFAdmin: function() {
-			return !!this.currentUser && this.isAuthorized("fadmin"); // this.currentUser.roles.indexOf("fadmin") > -1;
+			return !!this.currentUser && this.isAuthorized("fadmin");
 		},
 
 		isAuthenticated: function() {
@@ -56,15 +56,27 @@ app.factory('IdentitySvc', function() {
 			}
 		},
 
+		getAllEvents: function() {
+			var result = [];
+			for(var i=0; i < this.currentUser.roles.length; i++) {
+				var r = this.currentUser.roles[i];
+				if((typeof r === 'string' || r instanceof String)) {
+					if(r === 'fadmin') result.push(this.currentUser.eventId);
+				} else {
+					if(r.role === 'fadmin') result.push(r.areaId);
+				}
+
+			}
+			return result;
+		},
+
 		isAuthorizedForEvent: function(role, eventId) {
 			var check = this.isAuthorized(role) && this.checkEvent(this.currentUser.roles, role, eventId, this.currentUser.eventId);
-				// this.currentUser.eventId && this.currentUser.eventId.toString() === eventId.toString();
 			return check;
 		},
 
 		isAuthorizedForLocation: function(role, location) {
 			var check = this.isAuthorized(role) && this.checkLocation(this.currentUser.roles, role, location, this.currentUser.location);
-				// this.currentUser.location && this.currentUser.location === location;
 			return check;
 		}
 	};
