@@ -38,6 +38,7 @@ app.controller('ReportOverviewCtrl', function($scope, $location, $route, Registr
 					"addressChild": r.addressChild,
 					"cityChild": r.cityChild,
 					"phoneNumberParent": r.phoneNumberParent,
+					"emailParent": r.emailParent,
 					"healthChild": r.healthChild,
 					"canSwim": r.canSwim,
 					"canGoHomeAllone": r.canGoHomeAllone,
@@ -59,7 +60,7 @@ app.controller('ReportOverviewCtrl', function($scope, $location, $route, Registr
 				.success(function (regs) {
 					$scope.registrations = $scope.aggregateReportStructure(regs);
 					
-					console.log($scope.registrations);
+					// console.log($scope.registrations);
     			});
 	};
 

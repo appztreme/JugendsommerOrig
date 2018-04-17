@@ -155,7 +155,7 @@ app.controller('MyCommitmentsCtrl', function($scope, $location, $route, Notifica
 		for(var i=0; i < evs.length; i++) {
 			var e = evs[i];
 			if(IdentitySvc.isAdmin()) result.push(e);
-			else if (IdentitySvc.isFadmin() && IdentitySvc.getAllEvents().indexOf(e._id) > -1) result.push(e);
+			else if (IdentitySvc.isFAdmin() && IdentitySvc.getAllEvents().indexOf(e._id) > -1) result.push(e);
 		}
 		return result;
 	}
@@ -166,9 +166,8 @@ app.controller('MyCommitmentsCtrl', function($scope, $location, $route, Notifica
 					NotificationSvc.warn(err);
 				})
 				.success(function(evs) {
-					
-					$scope.events = _.map(evs, function(ev) {
-
+					console.log("events loaded");	
+					$scope.events = _.map($scope.authorizeEvents(evs), function(ev) {
 							return {
 								_id: ev._id,
 								name: ev.location + ' - ' + ev.name

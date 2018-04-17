@@ -32,7 +32,7 @@
 	<table id="datatable" class='table table-striped table-bordered'>
 		<thead>
 		<tr>
-			<th>{{registrations[0].event}}</th>
+			<th>Programm</th>
 			<th>Vorname</th>
 			<th>Nachname</th>
 			<th>Geburtstag</th>
@@ -40,6 +40,7 @@
 			<th>Strasse</th>
 			<th>Wohnort</th>
 			<th>Telefon</th>
+			<th>Email</th>
 			<th>Gesundheit</th>
 			<th>Schwimmen</th>
 			<th>allein Nachhause</th>
@@ -51,14 +52,15 @@
 		</thead>
 		<tbody>
 			<tr ng-repeat='reg in registrations'>
-				<td></td>
+				<td>{{reg.event}}</td>
 				<td>{{reg.firstNameChild}}</td>
 				<td>{{reg.lastNameChild}}</td>
 				<td>{{reg.birthdayChild | date: 'dd/MM/yyyy'}}</td>
 				<td>{{reg.schoolChild}}</td>
 				<td>{{reg.addressChild}}</td>
 				<td>{{reg.cityChild}}</td>
-				<td>{{reg.phoneNumberParents}}</td>
+				<td>{{reg.phoneNumberParent}}</td>
+				<td>{{reg.emailParent}}</td>
 				<td>{{reg.healthChild}}</td>
 				<td>{{formatBool(reg.canSwim)}}</td>
 				<td>{{formatBool(reg.canGoHomeAllone)}}</td>
