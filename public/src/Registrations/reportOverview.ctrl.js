@@ -9,23 +9,32 @@ app.controller('ReportOverviewCtrl', function($scope, $location, $route, Registr
 
 	$scope.yearFilter = (new Date()).getFullYear();
 
-	$scope.indexOfArray = function(array, fullName) {
+	$scope.indexOfArray = function(array, fullName, eventId) {
 		for(var i=0; i < array.length; i++) {
-			if(array[i].fullName === fullName) return i;
+			if(array[i].fullName === fullName && array[i].activityId.eventId._id === eventId) return i;
 		}
 		return -1;
+	}
+
+	$scope.getActivitiesForEvent = function(eventId) {
+		var result = [];
+		for(var i=0; i<$scope.allActivities.length; i++) {
+			if($scope.allActivities[i].parentId === eventId) result.push($scope.allActivities[i]);
+		}
+		return result;
 	}
 
 	$scope.aggregateReportStructure = function(regs) {
 		var output = [];
 		var nameIndex = [];
+		var activityNames = [];
 		for(var i=0; i < regs.length; i++) {
 			var r = regs[i];
 			var fullName = r.lastNameChild + ' ' + r.firstNameChild;
 			if(nameIndex.indexOf(fullName) > -1) {
 				// UPDATE
-				var outputIndex = $scope.indexOfArray(output, fullName);
-				output[outputIndex][r.activityId._id] = true;
+				var outputIndex = $scope.indexOfArray(output, fullName, r.activityId.eventId._id);
+				output[outputIndex][r.activityId.name] = true;
 			} else {
 				// INSERT
 				var entry = {
@@ -44,14 +53,18 @@ app.controller('ReportOverviewCtrl', function($scope, $location, $route, Registr
 					"canGoHomeAllone": r.canGoHomeAllone,
 					"commentInternal": r.commentInternal
 				}
-				for(var j=0; j < $scope.activities.length; j++) {
-					entry[$scope.activities[j]._id] = false;
+				var activities = $scope.getActivitiesForEvent(r.activityId.eventId._id);
+				for(var j=0; j < activities.length; j++) {
+					entry[activities[j].name] = false;
+					if(activityNames.indexOf(activities[j].name) === -1) activityNames.push(activities[j].name);
 				}
-				entry[r.activityId._id] = true;
+				entry[r.activityId.name] = true;
 				nameIndex.push(fullName);
 				output.push(entry);
 			}
 		}
+		$scope.activityNames = activityNames;
+		console.log("output", $scope.activityNames, activityNames);
 		return output;
 	}
 
@@ -127,7 +140,6 @@ app.controller('ReportOverviewCtrl', function($scope, $location, $route, Registr
 					name: p.name
 				}
 			}), '_id');
-
 			$scope.activities = undefined;
 	});
 });

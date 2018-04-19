@@ -45,8 +45,8 @@
 			<th>Schwimmen</th>
 			<th>allein Nachhause</th>
 			<th>sonstige Infos</th>
-			<th ng-repeat='a in activities'>
-				{{a.name}}
+			<th ng-repeat='a in activityNames'>
+				{{a}}
 			</th>
 		</tr>
 		</thead>
@@ -65,8 +65,8 @@
 				<td>{{formatBool(reg.canSwim)}}</td>
 				<td>{{formatBool(reg.canGoHomeAllone)}}</td>
 				<td>{{reg.commentInternal}}</td>
-				<td ng-repeat='a in activities'>
-					{{formatBoolToSymbol(reg[a._id])}}
+				<td ng-repeat='a in activityNames'>
+					{{formatBoolToSymbol(reg[a])}}
 				</td>
 			</tr>
 		</tbody>
