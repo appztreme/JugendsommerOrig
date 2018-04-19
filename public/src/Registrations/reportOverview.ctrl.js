@@ -34,7 +34,7 @@ app.controller('ReportOverviewCtrl', function($scope, $location, $route, Registr
 			if(nameIndex.indexOf(fullName) > -1) {
 				// UPDATE
 				var outputIndex = $scope.indexOfArray(output, fullName, r.activityId.eventId._id);
-				output[outputIndex][r.activityId.name] = true;
+				if(outputIndex > -1) output[outputIndex][r.activityId.name] = true;
 			} else {
 				// INSERT
 				var entry = {
