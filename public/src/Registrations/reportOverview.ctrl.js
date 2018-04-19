@@ -11,7 +11,7 @@ app.controller('ReportOverviewCtrl', function($scope, $location, $route, Registr
 
 	$scope.indexOfArray = function(array, fullName, eventId) {
 		for(var i=0; i < array.length; i++) {
-			if(array[i].fullName === fullName && array[i].activityId.eventId._id === eventId) return i;
+			if(array[i].fullName === fullName && array[i].eventId === eventId) return i;
 		}
 		return -1;
 	}
@@ -39,6 +39,7 @@ app.controller('ReportOverviewCtrl', function($scope, $location, $route, Registr
 				// INSERT
 				var entry = {
 					"event": r.activityId.eventId.location + ' - ' + r.activityId.eventId.name,
+					"eventId": r.activityId.eventId._id,
 					"firstNameChild": r.firstNameChild,
 					"lastNameChild": r.lastNameChild,
 					"fullName": fullName,
