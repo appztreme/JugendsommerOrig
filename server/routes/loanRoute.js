@@ -7,4 +7,6 @@ router.get('/search', LoanController.findAll);
 
 router.post('/', LoanController.create);
 
+ router.delete('/:loanId', LoanController.delete);
+
 module.exports = router;

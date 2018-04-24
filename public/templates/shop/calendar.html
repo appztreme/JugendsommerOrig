@@ -30,7 +30,7 @@
                         </span>
                     </div>
                 </div>
-                <div class='row'>                            
+                <div class='row'>
                     <label for='lenderFilter' class='control-label col-sm-2'>Ausleiher/in:</label>
                     <div class='col-sm-5 input-group'>
                         <input type="text" ng-model='lender' class='form-control'></input>
@@ -41,7 +41,7 @@
                         </span>
                     </div>
                 </div>
-                <div class='row'>                            
+                <div class='row'>
                         <label for='articleFilter' class='control-label col-sm-2'>Artikel:</label>
                         <div class='col-sm-5 input-group'>
                             <input type="text" ng-model='article' class='form-control'></input>
@@ -67,6 +67,9 @@
             {{l.from | date: 'dd/MM/yyyy'}} - {{l.to | date: 'dd/MM/yyyy'}}<br />
             <strong>{{l.article.code}} - {{l.article.name}}</strong><br />
             {{l.lender}} {{l.location}}
+        </div>
+        <div ng-show="IdentitySvc.isAdmin() || IdentitySvc.isFadmin()">
+            <button type="button" class="btn glyphicon glyphicon-trash" ng-disabled='!iSvc.isAuthorized("admin") && !iSvc.isAuthorized("fadmin")' ng-click='delete(l._id)'></button>
         </div>
     </div>
 </div>

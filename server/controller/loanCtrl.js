@@ -19,3 +19,11 @@ exports.create = async (req, res, next) => {
         next(err);
     }
 }
+
+exports.delete = async (req, res, next) => {
+    try {
+        const loan = await LoanRepo.delete(req.params.loanId);
+    } catch(err) {
+        next(err);
+    }
+}

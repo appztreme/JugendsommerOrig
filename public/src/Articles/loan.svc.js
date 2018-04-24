@@ -23,7 +23,12 @@ app.service('LoansSvc', function($http) {
                                              startTime: startTime,
                                              endTime: endTime,
                                              participants: participants
-                                            });	
+                                            });
 	};
+
+	this.delete = function(loanId) {
+		return $http.delete('/api/loans/' + loanId);
+	};
+
 
 });

@@ -15,5 +15,15 @@ app.controller('ShopCalendarCtrl', function($scope, $routeParams, IdentitySvc, L
         });
     }
 
+    $scope.delete = function(loanId) {
+        if(IdentitySvc.isAdmin() || IdentitySvc.isFadmin()) {
+            LoansSvc.delete(loanId).then(function(response) {
+                NotificationSvc.notify('Ausleihe gelöscht');
+                $location.path('/');
+            })
+        }
+
+    }
+
     //$scope.find(new Date("2018-04-01"), new Date("2018-04-26"))
 })
