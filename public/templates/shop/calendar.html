@@ -67,9 +67,9 @@
             {{l.from | date: 'dd/MM/yyyy'}} - {{l.to | date: 'dd/MM/yyyy'}}<br />
             <strong>{{l.article.code}} - {{l.article.name}}</strong><br />
             {{l.lender}} {{l.location}}
-        </div>
-        <div class="pull-right">
-            <button type="button" class="btn glyphicon glyphicon-trash" ng-disabled='!iSvc.isAuthorized("admin") && !iSvc.isAuthorized("fadmin")' ng-click='delete(l._id)'></button>
+            <div class="pull-right">
+                <button type="button" class="btn glyphicon glyphicon-trash" ng-disabled='!iSvc.isAuthorized("admin") && !iSvc.isAuthorized("fadmin")' ng-click='delete(l._id)'></button>
+            </div>
         </div>
     </div>
 </div>
