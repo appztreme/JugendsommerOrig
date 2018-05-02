@@ -31,6 +31,9 @@ var textKiso = "Vielen Dank für die Anmeldung Ihres Kindes zum KISO 2018!\r\nSi
 var htmlJumpRun = "<html><body>Vielen Dank für die Anmeldung Ihres Kindes zum Jump&Run 2018!<br />Sie erhalten innerhalb der nächsten Tage eine Rückmeldung vom Jugenddienst Bozen zu Ihrem Anmeldestand.<br />Falls das Gruppenlimit für die betreffende Woche bereits erreicht sein sollte, kommt Ihr Kind auf die Warteliste.<br />Freundliche Grüße,<br />das Jugenddienst Bozen Team<br /><br />Ringraziamo per l'iscrizione di suo/a figlio/a al Jump&Run 2018!<br />Nei prossimi giorni lo Jugenddienst Bozen<br />Le invierà una risposta sullo stato di iscrizione. Se i posti disponibli per la settimana interessata dovessero già essere esauriti, suo/a figlio/a sarà messo/a sulla lista d'attesa.<br />Cordiali saluti,<br />l'equipe dello Jugenddienst Bozen";
 var textJumpRun = "Vielen Dank für die Anmeldung Ihres Kindes zum Jump&Run 2018!\r\nSie erhalten innerhalb der nächsten Tage eine Rückmeldung vom Jugenddienst Bozen zu Ihrem Anmeldestand.\r\nFalls das Gruppenlimit für die betreffende Woche bereits erreicht sein sollte, kommt Ihr Kind auf die Warteliste.\r\nFreundliche Grüße, das Jugenddienst Bozen Team \r\n\r\nRingraziamo per l’iscrizione di suo/a figlio/a al Jump&Run 2018!\r\nNei prossimi giorni lo Jugenddienst Bozen Le invierà una risposta sullo stato di iscrizione. Se i posti disponibli per la settimana interessata dovessero già essere esauriti, suo/a figlio/a sarà messo/a sulla lista d‘attesa.\r\nCordiali saluti,\r\nl’equipe dello Jugenddienst Bozen";
 
+var htmlJSGries = "";
+var textJSGries = "";
+
 function getTypeString(type) {
 	switch (type) {
 		case 'summer': return 'Jugendsommer'; break;
@@ -48,6 +51,7 @@ exports.getSender = function(instance) {
 	else if(instance.isJugendsommer) return 'sommer@jugenddienst.com';
 	else if(instance.isJDBL) return 'info@jugenddienst.com';
 	else if(instance.isJDUL) return 'unterland@jugenddienst.it';
+	else if(instance.isJSGries) return 'Kathi14be@gmail.com';
 	else return 'info@jugenddienst.com';
 }
 
@@ -61,6 +65,7 @@ function getKisoSubject(type) {
 exports.getSubject = function(instance, type) {
 	if(instance.isKiso) return getKisoSubject(type);
 	else if(instance.isJDUL) return "Anmeldung | iscrizione JD-SUMMER";
+	else if(instance.isJSGries) return "Anmeldung";
 	else {
 		if(type === 'receipt') return 'Überweisung Sommer';
 		else return 'Anmeldung ' + getTypeString(type);
@@ -75,6 +80,8 @@ exports.getTypeText = function(type, firstNameChild, lastNameChild, location, in
 			return textKiso;
 	} else if(instance.isJDUL) {
 		return txtStartJDUL_de + location + txtEndJDUL_de + "/r/n/r/n" + txtStartJDUL_it + location + txtEndJDUL_it;
+	} else if(instance.isJSGries) {
+		return textJSGries;
 	} else {
 		switch (type) {
 			case 'summer':
@@ -117,6 +124,9 @@ exports.getTypeBody = function(type, firstNameChild, lastNameChild, activities, 
 		return htmlStartJDUL_de + firstNameChild + htmlMiddleJDUL_de + activities[0].eventId.location + htmlEndJDUL_de + "<br />" +
 			   htmlStartJDUL_it + firstNameChild + htmlMiddleJDUL_it + activities[0].eventId.location_it + htmlEndJDUL_it + "<br /><br />" +
 		   getActivityTable(activities) + "<br /><br />" + getReservationTable(reservation) + "<br /><br />" + getJDULFooter() + "<br />" + htmlFinalJDUL;
+	}
+	else if(instance.isJSGries) {
+		return htmlJSGries;
 	}
 	else {
 		switch (type) {
