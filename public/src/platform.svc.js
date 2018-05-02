@@ -12,6 +12,8 @@ app.factory('PlatformSvc', function(conf) {
                 isJDBL: function() { return !!this.host && this.host.indexOf('jd-bozenland') !== -1; },
 
                 isJDUL: function() { return !!this.host && this.host.indexOf('jdsummer') !== -1; },
+                
+                isJSGries: function() { return !!this.host && this.host.indexOf('jungschargries') !== -1; },
 
                 isJDWT: function() { return !! this.host && this.host.indexOf('wipptal') !== -1; },
 
@@ -23,6 +25,7 @@ app.factory('PlatformSvc', function(conf) {
                         else if(this.isJDBL()) return 'Jugenddienst Bozen Land';
                         else if(this.isJDUL()) return 'Jugenddienst Unterland';
                         else if(this.isJDWT()) return 'Jugenddienst Wipptal';
+                        else if(this.isJSGries()) return 'Jungschar Gries';
                         else if(this.isTest()) return 'Test';
                         else return 'Title';
                 },
@@ -32,6 +35,7 @@ app.factory('PlatformSvc', function(conf) {
                         else if(this.isJugendsommer()) return conf.cities_jdbl;
                         else if(this.isJDBL()) return conf.cities_jdbl;
                         else if(this.isJDUL()) return conf.cities_jdul;
+                        else if(this.isJSGries()) return conf.cities_kiso;
                         else return ['test', 'Andere'];
                 },
 
@@ -40,6 +44,7 @@ app.factory('PlatformSvc', function(conf) {
                         else if(this.isJugendsommer()) return 'Deutschnofen';
                         else if(this.isJDBL()) return 'Deutschnofen';
                         else if(this.isJDUL()) return 'Altrei';
+                        else if(this.isJSGries()) return 'Bozen';
                         else return 'Andere';
                 }
 	};
