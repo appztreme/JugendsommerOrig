@@ -71,7 +71,7 @@
 					<!--<a href='http://www2.jugendsommer.com/' target='_blank' class='btn btn-xlarge btn-primary' role='button' ng-show='iSvc.isAuthorized("admin") || iSvc.isAuthorizedForEvent("fadmin", event._id) || iSvc.isAuthorizedForLocation("ladmin", event.location)'><span class='glyphicon glyphicon-paperclip'></span></a>-->
 					<a href='/#/eventRegistrations/{{event._id}}' class='btn btn-xlarge btn-primary' role='button' ng-show='iSvc.isAuthorized("admin") || iSvc.isAuthorizedForEvent("fadmin", event._id) || iSvc.isAuthorizedForLocation("ladmin", event.location)'><span class='glyphicon glyphicon-list-alt'></span></a>
 					<a href='/#/eventContacts/{{event._id}}' class='btn btn-xlarge btn-primary' role='button' ng-show='iSvc.isAuthorized("admin") || iSvc.isAuthorizedForEvent("fadmin", event._id) || iSvc.isAuthorizedForLocation("ladmin", event.location)'><span class='glyphicon glyphicon-sunglasses'></span></a>
-					<button type="button" class="btn btn-xlarge btn-info" ng-click='sendReceiptEmail(event._id) && platform.isJugendsommer()' ng-show='iSvc.isAuthorized("admin")'><span class='glyphicon glyphicon-euro'></span></button>
+					<button type="button" class="btn btn-xlarge btn-info" ng-click='sendReceiptEmail(event._id)' ng-show='iSvc.isAuthorized("admin") && platform.isJugendsommer('><span class='glyphicon glyphicon-euro'></span></button>
 				</div>
 			</div>
 		</li>
