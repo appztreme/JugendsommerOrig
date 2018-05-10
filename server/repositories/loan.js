@@ -11,7 +11,7 @@ exports.find = (from, to, articleId, location, lender) => {
         .where('to').lte(to)
         .where('isInSet').equals(false);
     
-    if(articleId) query = query.where('articleId').equals(articleId);
+    if(articleId) query = query.where('article').equals(articleId);
     if(location) query = query.where('location').regex(new RegExp(location, 'i'));
     if(lender) query = query.where('lender').regex(new RegExp(lender, 'i'));
         
@@ -68,6 +68,8 @@ exports.create = async (articleName, location, lender, phoneNumber, from, to, st
         throw new Error('Das Anfangsdatum muß kleiner/gleich den Enddatum sein.');
     const articlesToReserve = await Article
         .find({name: articleName})
+        .where('isInSet').equals(false)
+        .where('status').ne('blocked')
         .sort({code: 1})
         .exec();
     if(articlesToReserve.length < 1)

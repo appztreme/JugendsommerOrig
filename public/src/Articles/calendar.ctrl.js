@@ -21,6 +21,11 @@ app.controller('ShopCalendarCtrl', function($scope, $routeParams, IdentitySvc, L
     $scope.clearArticleSelection = function() {
         $scope.loans = [];
         $scope.articleId = undefined;
+        $scope.selectedArticle = undefined;
+    }
+
+    $scope.setArticleId = function(selectedArticle) {
+        $scope.articleId = selectedArticle._id;
     }
 
     $scope.find = function(from, to, articleId, location, lender) {
@@ -41,5 +46,14 @@ app.controller('ShopCalendarCtrl', function($scope, $routeParams, IdentitySvc, L
 
     }
 
-    //$scope.find(new Date("2018-04-01"), new Date("2018-04-26"))
+    ArticlesSvc.overview().then(function(response) {
+		var articles = [];
+		for(var i=0; i < response.data.length; i++) {
+			var c = response.data[i].children;
+			for(var j=0; j < c.length; j++) {
+				if(!c[j].isInSet) articles.push(c[j]);
+			}
+		}
+		$scope.allArticles = articles;
+	});
 })

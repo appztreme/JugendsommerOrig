@@ -44,7 +44,10 @@
                 <div class='row'>
                         <label for='articleFilter' class='control-label col-sm-2'>Artikel:</label>
                         <div class='col-sm-5 input-group'>
-                            <input type="text" ng-model='article' class='form-control'></input>
+                            <div class="dropdown">
+                                <select class="form-control" aria-labelledby="dropdownArticles" ng-model="selectedArticle" ng-change="setArticleId(selectedArticle)" ng-options="a.code + ' ' + a.name for a in allArticles"></select>
+                            </div>
+                            <!-- <input type="text" ng-model='article' class='form-control'></input> -->
                             <span class='input-group-btn'>
                                 <button class='btn btn-info' ng-click='clearArticleSelection()'>
                                     <span class='glyphicon glyphicon-remove'></span>
