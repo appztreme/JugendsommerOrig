@@ -41,6 +41,42 @@
                     <input name='maxLoanDuration' type='number' ng-model='maxLoanDuration' step="1" required class='form-control'></input>
                 </div>
             </div>
+            <!-- ISSET -->
+            <div class='form-group' ng-class='{ "has-error": articleForm.isSet.$invalid }'>
+                <label for='isInSet' class='control-label col-sm-2'>Teil eines Sets</label>
+                <div class='col-sm-10'>
+                    <p class='input-group'>
+                        <label class='checkbox-inline'><input type='checkbox' ng-model='isInSet' /></label>
+                    </p>
+                </div>
+            </div>
+            <!-- ISSET -->
+            <div class='form-group' ng-class='{ "has-error": articleForm.isSet.$invalid }'>
+                <label for='isSet' class='control-label col-sm-2'>Set</label>
+                <div class='col-sm-10'>
+                    <p class='input-group'>
+                       <label class='checkbox-inline'><input type='checkbox' ng-model='isSet' disabled /></label>
+                    </p>
+                </div>
+            </div>
+            <!-- ARTICLES -->
+            <div class="dropdown col-sm-10 col-sm-offset-2" ng-show="isSet">
+                <select ng-disabled="!isSet" aria-labelledby="dropdownArticles" ng-model="selectedArticle" ng-change="addToArticles(selectedArticle)" ng-options="a.name for a in allArticles" style="min-width: 200px">
+                </select>
+                <label class='control-label'>Artikel hinzufügen</label>
+            </div>
+            <br /><br />
+            <div class='form-group' ng-show="isSet">
+                <label for='articles' class='control-label col-sm-2'>Artikel</label>
+                <div class='col-sm-10 list-group'>
+                    <div ng-repeat='sub in articles' class='list-group-item list-group-item-warning'>
+                       {{sub.code}} - {{sub.name}}
+                       <div class="pull-right">
+                            <button type="button" class="btn btn-xs glyphicon glyphicon-trash" ng-click='removeFromArticles(sub)'></button>
+                       </div>
+                    </div>
+                </div>
+            </div>
 
             <br />
 	        <div class='col-sm-offset-2 col-sm-10'>

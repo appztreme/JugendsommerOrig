@@ -23,6 +23,10 @@ app.service('ArticlesSvc', function($http) {
 
     this.updateStatus = function(id, status) {
         return $http.patch('/api/articles/status', {id: id, newStatus: status});
-    }
+    };
+
+    this.updateIsInSet = function(id, isInSet) {
+        return $http.patch('/api/articles/isInSet', {id: id, isInSet: isInSet });
+    };
 
 });

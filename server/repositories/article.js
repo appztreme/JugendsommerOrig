@@ -25,7 +25,7 @@ exports.findOverview = () => {
         { $group:
             { _id: "$type",
               count: { $sum: 1 },
-              children: { $push: { _id: "$_id", code: "$code", name: "$name", description: "$description", location: "$location", status: "$status" }}
+              children: { $push: { _id: "$_id", code: "$code", name: "$name", description: "$description", location: "$location", status: "$status", isInSet: "$isInSet" }}
             }
         },
         { $sort: {_id: 1}}
@@ -40,13 +40,20 @@ exports.updateStatus = (id, newStatus) => {
     return Article.findByIdAndUpdate(id, {status: newStatus}, {new: true});
 }
 
-exports.create = (name, description, location, type, maxLoanDuration) => {
+exports.updateIsInSet = (id, isInSet) => {
+    let status = isInSet ? 'blocked' : 'free';
+    return Article.findByIdAndUpdate(id, {isInSet: isInSet, status: status}, {new: true});
+}
+
+exports.create = (name, description, location, type, maxLoanDuration, isSet, articles) => {
     const a = new Article({
         name,
         description,
         location,
         type,
-        maxLoanDuration
+        maxLoanDuration,
+        isSet,
+        articles
     });
     return a.save();
 }

@@ -1,5 +1,6 @@
 'use strict';
 const LoanRepo = require('./../repositories/loan');
+const ArticleRepo = require('./../repositories/article');
 
 exports.findAll = async (req, res, next) => {
     console.log(req.params);
@@ -22,7 +23,11 @@ exports.create = async (req, res, next) => {
 
 exports.delete = async (req, res, next) => {
     try {
-        const loan = await LoanRepo.delete(req.params.loanId);
+        const loan = await LoanRepo.findById(req.params.loanId);
+        console.log("xxx", loan);
+        await ArticleRepo.updateStatus(loan.articleId, 'free');
+        const loanDel = await LoanRepo.delete(req.params.loanId);
+        res.status(201).json(loanDel);
     } catch(err) {
         next(err);
     }

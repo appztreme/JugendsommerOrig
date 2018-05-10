@@ -11,6 +11,9 @@ app.controller('ArticleEditCtrl', function($scope, $routeParams, ArticlesSvc, $l
 				location: $scope.location,
 				type: $scope.type,
 				maxLoanDuration: $scope.maxLoanDuration,
+				isSet: $scope.isSet,
+				isInSet: $scope.isInSet,
+				articles: $scope.articles
 			}).success(function(activity) {
                 $scope._id = null;
                 $scope.code = null;
@@ -19,12 +22,27 @@ app.controller('ArticleEditCtrl', function($scope, $routeParams, ArticlesSvc, $l
 				$scope.location = null;
 				$scope.type = null;
 				$scope.maxLoanDuration = 0;
+				$scope.isSet = false;
+				$scope.isInSet = false;
+				$scope.articles = [];
 			}).then(function() {
 				NotificationSvc.notify('Artikel erfolgreich geändert');
 				$location.path('/shop/articles/');
 			});
 		}
 	};
+
+	$scope.addToArticles = function(selectedArticle) {
+		selectedArticle.isInSet = true;
+		selectedArticle.status = 'blocked';
+		$scope.articles.push($scope.selectedArticle);
+	}
+
+	$scope.removeFromArticles = function(article) {
+		var index = $scope.articles.indexOf(article);
+		console.log("remove", article, index);
+		if(index >= 0) $scope.articles.splice(index, 1);
+	}
 
     ArticlesSvc.findById($routeParams.articleId).success(function(article) {
         $scope._id = article._id;
@@ -34,5 +52,20 @@ app.controller('ArticleEditCtrl', function($scope, $routeParams, ArticlesSvc, $l
 		$scope.location = article.location;
 		$scope.type = article.type;
 		$scope.maxLoanDuration = article.maxLoanDuration;
+		$scope.isSet = article.isSet;
+		$scope.isInSet = article.isInSet;
+		$scope.articles = article.articles;
+		console.log("a", article);
+	});
+
+	ArticlesSvc.overview().then(function(response) {
+		var articles = [];
+		for(var i=0; i < response.data.length; i++) {
+			var c = response.data[i].children;
+			for(var j=0; j < c.length; j++) {
+				if(!c[j].isInSet) articles.push(c[j]);
+			}
+		}
+		$scope.allArticles = articles;
 	});
 })

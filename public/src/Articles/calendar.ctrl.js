@@ -6,6 +6,7 @@ app.controller('ShopCalendarCtrl', function($scope, $routeParams, IdentitySvc, L
     $scope.articleId = undefined;
     $scope.location = undefined;
     $scope.lender = undefined;
+    $scope.loans = [];
 
     $scope.find = function(from, to, articleId, location, lender) {
         LoansSvc.findByDateRange(from, to, articleId, location, lender).then(function(response) {
@@ -19,7 +20,7 @@ app.controller('ShopCalendarCtrl', function($scope, $routeParams, IdentitySvc, L
         if(IdentitySvc.isAdmin() || IdentitySvc.isFadmin()) {
             LoansSvc.delete(loanId).then(function(response) {
                 NotificationSvc.notify('Ausleihe gelöscht');
-                $location.path('/');
+                $location.path('/shop/calendar/');
             })
         }
 

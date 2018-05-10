@@ -19,4 +19,6 @@ router.delete('/:id', auth.requiresRole("admin"), ArticleController.remove)
 
 router.patch('/status', ArticleController.updateStatus);
 
+router.patch('isInSet', auth.requiresRole("admin"), ArticleController.updateIsInSet);
+
 module.exports = router;

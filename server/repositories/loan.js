@@ -31,6 +31,8 @@ exports.findAllByDateRange = (from, to) => {
         .exec();
 }
 
+exports.findById = (id) => findLoanById(id);
+
 const findLoanById = (id) => {
     return Loan.findById(id)
         .populate({path: 'article'})
