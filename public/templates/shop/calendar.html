@@ -68,7 +68,7 @@
             <strong>{{l.article.code}} - {{l.article.name}}</strong><br />
             {{l.lender}} {{l.location}}
             <div class="pull-right">
-                <button type="button" class="btn glyphicon glyphicon-trash" ng-disabled='!iSvc.isAuthorized("admin") && !iSvc.isAuthorized("fadmin")' ng-click='delete(l._id)'></button>
+                <button type="button" class="btn btn-xs glyphicon glyphicon-trash" ng-disabled='!iSvc.isAuthorized("admin") && !iSvc.isAuthorized("fadmin")' ng-click='delete(l._id)'></button>
             </div>
         </div>
     </div>

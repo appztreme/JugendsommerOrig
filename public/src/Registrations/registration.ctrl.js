@@ -153,7 +153,7 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 				needsPreCare: $scope.needsPreCare,
 				hasDisability: $scope.hasDisability,
 				disabilityDescription: $scope.disabilityDescription,
-				needsAbK: $scope.needsAbK,
+				needsEbK: $scope.needsEbK,
 				canSwim: $scope.canSwim,
 				canGoHomeAllone: $scope.canGoHomeAllone,
 				type: $scope.type
@@ -185,7 +185,7 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 				$scope.needsPreCare = false;
 				$scope.hasDisability = false;
 				$scope.disabilityDescription = null;
-				$scope.needsAbK = false;
+				$scope.needsEbK = false;
 				$scope.canSwim = false;
 				$scope.canGoHomeAllone = false;
 				$scope.selectedActivities = [];

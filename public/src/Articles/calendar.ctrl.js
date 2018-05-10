@@ -8,6 +8,21 @@ app.controller('ShopCalendarCtrl', function($scope, $routeParams, IdentitySvc, L
     $scope.lender = undefined;
     $scope.loans = [];
 
+    $scope.clearLocationSelection = function() {
+        $scope.loans = [];
+        $scope.location = undefined;
+    }
+
+    $scope.clearLenderSelection = function() {
+        $scope.loans = [];
+        $scope.lender = undefined;
+    }
+
+    $scope.clearArticleSelection = function() {
+        $scope.loans = [];
+        $scope.articleId = undefined;
+    }
+
     $scope.find = function(from, to, articleId, location, lender) {
         LoansSvc.findByDateRange(from, to, articleId, location, lender).then(function(response) {
             NotificationSvc.notify('Daten geladen');

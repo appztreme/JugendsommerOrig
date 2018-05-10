@@ -88,7 +88,7 @@
                                 <br />
                                 <label for='countFilter' class='control-label col-sm-2'>Anzahl:</label>
                                 <div class='col-sm-5 input-group'>
-                                    <input type="number" id='countFilter' class='form-control' ng-model='count' min="1" step="1" disabled></input>
+                                    <input type="number" id='countFilter' class='form-control' ng-model='count' min="1" step="1" ></input>
                                 </div>
                                 <br />
                                 <div ng-show="type === 'Bus'" class="container">
@@ -161,7 +161,7 @@
                     <h4 ng-show='currentState === 3' class="panel-title" style='color:orange'>Buchen</h4>
                 </div>
                 <div id="collapseThree" ng-class="(currentState === 3) ? 'panel-collapse collapse in' : 'panel-collapse collapse'" role="tabpanel" aria-labelledby="headingThree">
-                    <div class="panel-body">
+                    <div class="panel-body" style="margin-left: 10px">
                         <div class="row" ng-show="!bookingRequestSent">
                         <div><strong>Zusammefassung</strong></div>
                         <table style="border: 1px solid gray; border-collapse: collapse;">
@@ -174,11 +174,13 @@
                         </table>
                         </div>
 
-                        <div class="row" style="margin: 10px; padding: 10px" ng-class="{'bg-danger': hasError, 'bg-info': !hasError}" ng-show="bookingRequestSent">
-                            <div><strong>Buchungsantwort</strong></div>
+                        <div ng-show="bookingRequestSent"><strong>Buchungsantwort</strong></div>
+                        <div ng-repeat="res in responses">
+                        <div class="row" style="margin: 10px; padding: 10px" ng-class="{'bg-danger': res.hasError, 'bg-info': !res.hasError}" ng-show="bookingRequestSent">
                             <div style="padding: 5px;">
-                                {{response}}
+                                {{res.response}}
                             </div>
+                        </div>
                         </div>
                         <br />
                                  
