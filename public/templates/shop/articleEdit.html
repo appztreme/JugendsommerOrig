@@ -61,7 +61,7 @@
             </div>
             <!-- ARTICLES -->
             <div class="dropdown col-sm-10 col-sm-offset-2" ng-show="isSet">
-                <select ng-disabled="!isSet" aria-labelledby="dropdownArticles" ng-model="selectedArticle" ng-change="addToArticles(selectedArticle)" ng-options="a.name for a in allArticles" style="min-width: 200px">
+                <select ng-disabled="!isSet" aria-labelledby="dropdownArticles" ng-model="selectedArticle" ng-change="addToArticles(selectedArticle)" ng-options="a.code + ' ' + a.name for a in allArticles" style="min-width: 200px">
                 </select>
                 <label class='control-label'>Artikel hinzufügen</label>
             </div>

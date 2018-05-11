@@ -68,7 +68,7 @@ exports.create = async (articleName, location, lender, phoneNumber, from, to, st
         throw new Error('Das Anfangsdatum muß kleiner/gleich den Enddatum sein.');
     const articlesToReserve = await Article
         .find({name: articleName})
-        .where('isInSet').equals(false)
+        //.where('isInSet').equals(false)
         .where('status').ne('blocked')
         .sort({code: 1})
         .exec();
