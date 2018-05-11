@@ -30,7 +30,7 @@ app.controller('ReportOverviewCtrl', function($scope, $location, $route, Registr
 		var activityNames = [];
 		for(var i=0; i < regs.length; i++) {
 			var r = regs[i];
-			var fullName = r.lastNameChild + ' ' + r.firstNameChild;
+			var fullName = r.lastNameChild + ' ' + r.firstNameChild + ' ' + r.activityId.eventId._id;
 			if(nameIndex.indexOf(fullName) > -1) {
 				// UPDATE
 				var outputIndex = $scope.indexOfArray(output, fullName, r.activityId.eventId._id);
