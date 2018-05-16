@@ -1,4 +1,4 @@
-app.controller('ShopReservationCtrl', function($scope, $routeParams, IdentitySvc, ArticlesSvc, LoansSvc, $location, NotificationSvc, ReservationCacheSvc, $timeout) {
+app.controller('ShopReservationCtrl', function($scope, $routeParams, IdentitySvc, ArticlesSvc, LoansSvc, $location, NotificationSvc, ReservationCacheSvc, $interval) {
     $scope.iSvc = IdentitySvc;
     $scope.currentState = 1;
     $scope.count = 1;
@@ -58,8 +58,8 @@ app.controller('ShopReservationCtrl', function($scope, $routeParams, IdentitySvc
 
     $scope.save = function() {
         $scope.responses = [];
-        for(var i=0; i<$scope.count; i++) {
-            $timeout(LoansSvc.create($scope.article, $scope.location, $scope.lender, $scope.phoneNumber, $scope.from, $scope.to, $scope.start, $scope.destination, $scope.startTime, $scope.endTime, $scope.participants)
+        //for(var i=0; i<$scope.count; i++) {
+            $interval(LoansSvc.create($scope.article, $scope.location, $scope.lender, $scope.phoneNumber, $scope.from, $scope.to, $scope.start, $scope.destination, $scope.startTime, $scope.endTime, $scope.participants)
                 .error(function(err) {
                     //$scope.hasError = true;
                     $scope.bookingRequestSent = true;
@@ -79,8 +79,8 @@ app.controller('ShopReservationCtrl', function($scope, $routeParams, IdentitySvc
                                   " wurde von " + moment(result.from).format("ll") + " bis " +
                                   moment(result.to).format("ll") + " erfolgreich reserviert";
                     $scope.responses.push({hasError: false, response: resp });
-            }), i * 1000);
-        }
+            }), 1000, $scope.count);
+        //}
         
     }
 

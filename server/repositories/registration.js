@@ -9,6 +9,20 @@ exports.findByEventId = (id) => {
     return Registration.find()
 }
 
+exports.findNotifiedWithoutPayment = (year, activityIds) => {
+    const minDate = new Date(year + "-1-1");
+    const maxDate = new Date(year + "-12-31");
+    return Registration.find()
+        .where('registrationDate').gte(minDate).lte(maxDate)
+        .where('activityId').in(activityIds)
+        .where('isEmailNotified').equals(true)
+        .where('receiptNumber').gt(0)
+        .where('isPaymentDone').equals(false)
+        .populate({path:'activityId', populate:{path:'eventId'}})
+        .sort({ activityId: 1, registrationDate: 1, lastNameChild: 1, firstNameChild: 1})
+        .exec();
+}
+
 exports.filter = (year, name, firstname, receiptNr, activityId, activityIds) => {
     const minDate = new Date(year + "-1-1");
     const maxDate = new Date(year + "-12-31");

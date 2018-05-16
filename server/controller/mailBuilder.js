@@ -68,6 +68,7 @@ exports.getSubject = function(instance, type) {
 	else if(instance.isJSGries) return "Anmeldung";
 	else {
 		if(type === 'receipt') return 'Überweisung Sommer';
+		else if(type === 'reminder') return 'Erinnerung';
 		else return 'Anmeldung ' + getTypeString(type);
 	}
 }

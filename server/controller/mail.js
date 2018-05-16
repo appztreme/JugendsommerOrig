@@ -48,6 +48,20 @@ exports.sendReceiptMail = function(recipient, registrations, rnumber, instance) 
 	});
 }
 
+exports.sendReminderMail = function(recipient, registrations, instance) {
+	var body = mailbuilder.getReminderBody(registrations, rnumber);
+	var text = mailbuilder.getReminderTxt();
+	var fromEmail = mailbuilder.getSender(instance);
+	var subject = mailbuilder.getSubject(instance, "reminder");
+	server.send({
+		text: text,
+		from: fromEmail,
+		to: recipient,
+		subject: subject,
+		attachment: mailbuilder.getAttachment(body, instance)
+	}, function(err, message) { console.log(err||message); });	
+}
+
 exports.sendSorryMail = function(recipient) {
 	var body = mailbuilder.getSorryHtml();
 	var text = mailbuilder.getSorryText();

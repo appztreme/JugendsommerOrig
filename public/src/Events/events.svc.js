@@ -90,4 +90,8 @@ app.service('EventsSvc', function($http) {
 	this.sendReceiptEmail = function(eventId) {
 		return $http.get('/api/registrations/send/receipts/' + eventId);
 	}
+
+	this.sendReminderEmail = function(eventId) {
+		return $http.get('/api/registrations/send/reminder/' + eventId);
+	}
 });
