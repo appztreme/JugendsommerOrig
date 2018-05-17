@@ -14,6 +14,10 @@ var txtReceipt = "Hallo liebe Eltern,\r\n\r\nanbei findet ihr den Überweisungss
 var htmlReceiptStart = "<html><body><p>Hallo liebe Eltern,<br/ >anbei findet ihr den Überweisungsschein für das Sommerprogramm 2018.<br />Ihr bekommt für jedes Programm einen eigenen Überweisungsschein mit einer dazugehörigen Überweisungsnummer.<br />Für unser Buchhaltung bitten wir euch, jeden Überweisungsschein extra zu überweisen.<br />Bei der Überweisung bitten wir euch den <strong>Gesamtbetrag</strong> mit der <strong>Überweisungsnummer</strong> und den <strong>Namen der Kinder</strong> anzugeben!<br /><br />Achtung ein neues Konto:<br />Wir haben für unsere Sommerprogramme ein neues Konto eingerichtet.<br /><strong>Kontodaten:<br />Raiffeisenkassa Bozen<br />IBAN: IT 09X 08081 11610 000306005853</strong><br />";
 var htmlReceiptEnd = "</body></html>";
 
+var txtReminder = "Hallo liebe Eltern,\r\n\r\nbei der Kontrolle unserer Buchhaltung ist uns aufgefallen, dass Ihre Einzahlung für unsere Sommerprogramme nocht nicht auf unserem Konto eingegangen ist.\r\nWir bitten dies so schnell wie möglich nachzuholen ansonsten wird die Anmeldung gelöscht.";
+var htmlReminderStart = "<html><body><p>Hallo liebe Eltern,<br />bei der Kontrolle unserer Buchhaltung ist uns aufgefallen, dass Ihre Einzahlung für unsere Sommerprogramme nocht nicht auf unserem Konto eingegangen ist.<br />Wir bitten dies so schnell wie möglich nachzuholen ansonsten wird die Anmeldung gelöscht.</p>";
+var htmlReminderEnd = "</body></html>";
+
 var txtStartJDUL_de = "Anmeldebestätigung./r/nes freut uns, dass du heuer im Sommer bei unserem JD-SUMMER Programm in ";
 var txtEndJDUL_de = " dabei sein wirst!/r/nDu erhältst in der nächsten Zeit noch eine weitere E-Mail mit detaillierteren Informationen./r/nDeine Eltern sind gebeten die untenstehenden Daten zu kontrollieren und die Teilnahmegebühr bis zum 31.03.2018 auf folgendes Konto zu überweisen:/r/nJugenddienst Unterland – Raiffeisenkasse Salurn/r/nIBAN: IT 27 T 08220 58371000304204042/r/nmit dem Betreff: Nachname Vorname Wohnort./r/nWir freuen uns jetzt schon auf den JD-SUMMER mit dir, hoffen auf schönes Wetter und wünschen euch noch eine tolle Zeit bis zum Sommer."
 var txtStartJDUL_it = "Conferma d‘iscrizione./r/nSiamo contenti che parteciperai al nostro programma JD-SUMMER a ";
@@ -163,6 +167,14 @@ exports.getSorryHtml = function() {
 
 exports.getReceiptTxt = function () {
 	return txtReceipt;
+}
+
+exports.getReminderTxt = function() {
+	return txtReminder;
+}
+
+exports.getReminderBody = function(reservations, rnumber) {
+	return htmlReminderStart + "<br /><br />" + getReceiptTable(reservations, rnumber) + "<br />" + getJDBLFooter() + "<br />" + htmlReminderEnd;
 }
 
 function calculateFee(activity) {

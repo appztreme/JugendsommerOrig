@@ -13,7 +13,9 @@ router.delete('/:registrationId', auth.requiresRole("admin"), RegistrationContro
 
 router.post('/', auth.requiresApiLogin, RegistrationController.create);
 
-router.get('/send/receipts/:eventId', RegistrationController.sendPaymentMail);
+router.get('/send/receipts/:eventId', auth.requiresRole('admin'), RegistrationController.sendPaymentMail);
+
+router.get('/send/reminder/:eventId', auth.requiresRole('admin'), RegistrationController.sendReminderMail);
 
 router.put('/', auth.requiresApiLogin, RegistrationController.update);
 

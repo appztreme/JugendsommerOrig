@@ -206,13 +206,12 @@ exports.sendReminderMail = async(req, res, next) => {
 			for(let email of emailsUnique) {
 				//var sentWithError = false;
 				let registrationsPerMail = registrations.filter(reg => reg.emailParent === email);
-				//console.log("email", email, registrationsPerMail.length);
 				if(registrationsPerMail.length === 0) continue;
-				mail.sendReminderMail(email, registrationsPerMail, receiptNr.seq, instance);
+				mail.sendReminderMail(email, registrationsPerMail, instance);
 			}
 		}
 	
 		res.status(201).json({ success: "true"});
 	}
-	catch(err) { next(er); }
+	catch(err) { next(err); }
 }

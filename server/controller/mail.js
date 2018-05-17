@@ -49,6 +49,8 @@ exports.sendReceiptMail = function(recipient, registrations, rnumber, instance) 
 }
 
 exports.sendReminderMail = function(recipient, registrations, instance) {
+	var reg = registrations.length > 0 ? registrations[0] : {};
+	var rnumber = reg.receiptNumber ? reg.receiptNumber : 0;
 	var body = mailbuilder.getReminderBody(registrations, rnumber);
 	var text = mailbuilder.getReminderTxt();
 	var fromEmail = mailbuilder.getSender(instance);
