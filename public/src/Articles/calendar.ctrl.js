@@ -1,4 +1,4 @@
-app.controller('ShopCalendarCtrl', function($scope, $routeParams, IdentitySvc, LoansSvc, ArticlesSvc, $location, NotificationSvc) {
+app.controller('ShopCalendarCtrl', function($scope, $routeParams, IdentitySvc, LoansSvc, ArticlesSvc, $location, NotificationSvc, CalendarCacheSvc) {
     $scope.iSvc = IdentitySvc;
 
     $scope.from = new Date();
@@ -28,7 +28,16 @@ app.controller('ShopCalendarCtrl', function($scope, $routeParams, IdentitySvc, L
         $scope.articleId = selectedArticle._id;
     }
 
+    $scope.updateCache = function(from, to, articleId, location, lender) {
+        CalendarCacheSvc.from = from;
+        CalendarCacheSvc.to = to;
+        CalendarCacheSvc.articleId = articleId;
+        CalendarCacheSvc.location = location;
+        CalendarCacheSvc.lender = lender;
+    }
+
     $scope.find = function(from, to, articleId, location, lender) {
+        $scope.updateCache(from, to, articleId, location, lender);
         LoansSvc.findByDateRange(from, to, articleId, location, lender).then(function(response) {
             NotificationSvc.notify('Daten geladen');
             $scope.loans = response.data;
@@ -55,5 +64,14 @@ app.controller('ShopCalendarCtrl', function($scope, $routeParams, IdentitySvc, L
 			}
 		}
 		$scope.allArticles = articles;
-	});
+    });
+    
+    if(CalendarCacheSvc.hasData()) {
+        $scope.from = CalendarCacheSvc.from;
+        $scope.to = CalendarCacheSvc.to;
+        $scope.articleId = CalendarCacheSvc.articleId;
+        $scope.location = CalendarCacheSvc.location;
+        $scope.lender = CalendarCacheSvc.lender;
+        $scope.find($scope.from, $scope.to, $scope.articleId, $scope.location, $scope.lender);
+    }
 })

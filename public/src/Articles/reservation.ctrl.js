@@ -1,4 +1,4 @@
-app.controller('ShopReservationCtrl', function($scope, $routeParams, IdentitySvc, ArticlesSvc, LoansSvc, $location, NotificationSvc, ReservationCacheSvc, $interval) {
+app.controller('ShopReservationCtrl', function($scope, $routeParams, IdentitySvc, ArticlesSvc, LoansSvc, $location, NotificationSvc, ReservationCacheSvc) {
     $scope.iSvc = IdentitySvc;
     $scope.currentState = 1;
     $scope.count = 1;
@@ -58,30 +58,43 @@ app.controller('ShopReservationCtrl', function($scope, $routeParams, IdentitySvc
 
     $scope.save = function() {
         $scope.responses = [];
-        //for(var i=0; i<$scope.count; i++) {
-            $interval(LoansSvc.create($scope.article, $scope.location, $scope.lender, $scope.phoneNumber, $scope.from, $scope.to, $scope.start, $scope.destination, $scope.startTime, $scope.endTime, $scope.participants)
-                .error(function(err) {
-                    //$scope.hasError = true;
-                    $scope.bookingRequestSent = true;
-                    //$scope.response = err.split('<br>')[0];
-                    $scope.responses.push({hasError: true, response: err.split('<br>')[0]});
-                })
-                .success(function(result) {
-                    //$scope.hasError = false;
-                    $scope.bookingRequestSent = true
-                    ReservationCacheSvc.location = $scope.location;
-                    ReservationCacheSvc.lender = $scope.lender;
-                    ReservationCacheSvc.phoneNumber = $scope.phoneNumber;
-                    ReservationCacheSvc.from = $scope.from;
-                    ReservationCacheSvc.to = $scope.to;
-                    var resp = "Artikel " + result.article.code +
-                                  " - " + result.article.name + 
-                                  " wurde von " + moment(result.from).format("ll") + " bis " +
-                                  moment(result.to).format("ll") + " erfolgreich reserviert";
-                    $scope.responses.push({hasError: false, response: resp });
-            }), 1000, $scope.count);
-        //}
-        
+        var counter = 0;
+        var onSuccess = function(result) {
+            var resp = "Artikel " + result.data.article.code +
+                          " - " + result.data.article.name + 
+                          " wurde von " + moment(result.data.from).format("ll") + " bis " +
+                          moment(result.data.to).format("ll") + " erfolgreich reserviert";
+            $scope.responses.push({hasError: false, response: resp });
+        };
+        var onError = function(err) {
+            $scope.responses.push({hasError: true, response: err.data.split('<br>')[0]}); 
+        };
+        var updateCache = function() {
+                ReservationCacheSvc.location = $scope.location;
+                ReservationCacheSvc.lender = $scope.lender;
+                ReservationCacheSvc.phoneNumber = $scope.phoneNumber;
+                ReservationCacheSvc.from = $scope.from;
+                ReservationCacheSvc.to = $scope.to;
+        };
+        var setRequestSent = function() {
+            $scope.bookingRequestSent = true;
+        };
+        var reserveMore = function() {
+            counter = counter + 1;
+            //console.log("counter", counter);
+            if(counter < $scope.count) {
+                LoansSvc.create($scope.article, $scope.location, $scope.lender, $scope.phoneNumber, $scope.from, $scope.to, $scope.start, $scope.destination, $scope.startTime, $scope.endTime, $scope.participants)
+                    .then(onSuccess, onError)
+                    .then(updateCache)
+                    .then(setRequestSent)
+                    .then(reserveMore);
+            }
+        }
+        LoansSvc.create($scope.article, $scope.location, $scope.lender, $scope.phoneNumber, $scope.from, $scope.to, $scope.start, $scope.destination, $scope.startTime, $scope.endTime, $scope.participants)
+            .then(onSuccess, onError)
+            .then(updateCache)
+            .then(setRequestSent)
+            .then(reserveMore); 
     }
 
     ArticlesSvc.overview().then(function(response) {

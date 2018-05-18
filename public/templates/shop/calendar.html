@@ -73,6 +73,12 @@
             <div class="pull-right">
                 <button type="button" class="btn btn-xs glyphicon glyphicon-trash" ng-disabled='!iSvc.isAuthorized("admin") && !iSvc.isAuthorized("fadmin")' ng-click='delete(l._id)'></button>
             </div>
+            <br />
+            <div ng-show="l.article.type === 'Bus'">
+                {{l.startTime}} - {{l.endTime}}<br />
+                nach: {{l.destination}} [{{l.participants}} Teilnehmer]
+            </div>
+            
         </div>
     </div>
 </div>
