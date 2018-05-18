@@ -26,6 +26,7 @@ app.controller('ShopReservationCtrl', function($scope, $routeParams, IdentitySvc
 
     $scope.updateType = function() {
         $scope.articles = $scope.getDistinctArticles($scope.overviews, $scope.type);
+        $scope.count = 1;
     }
 
     $scope.getTypes = function(overviews) {
