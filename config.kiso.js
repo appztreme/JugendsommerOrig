@@ -1,6 +1,7 @@
 module.exports = {
     "validLocations": [
         {"name": 'Bozen',            "name_it": 'Bolzano'},
+        {"name": 'Fennberg',         "name_it": 'Fennberg'}
     ],
     "tSizes": [
         {"name": '3-4 Jahre/89-104cm',             "name_it": '3-4 anni/89-104cm'},
