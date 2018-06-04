@@ -46,7 +46,7 @@ app.controller('ShopCalendarCtrl', function($scope, $routeParams, IdentitySvc, L
     }
 
     $scope.delete = function(loanId) {
-        if(IdentitySvc.isAdmin() || IdentitySvc.isFadmin()) {
+        if(IdentitySvc.isAdmin() || IdentitySvc.isFAdmin()) {
             LoansSvc.delete(loanId).then(function(response) {
                 NotificationSvc.notify('Ausleihe gelöscht');
                 $location.path('/shop/calendar/');
