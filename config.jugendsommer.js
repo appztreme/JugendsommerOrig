@@ -37,7 +37,7 @@ module.exports = {
         {"name": 'Wiesen',                  "name_it": 'Wiesen'},
         {"name": 'Hüttenlagerwoche',        "name_it": 'Hüttenlagerwoche'},
         {"name": 'Tschögglberger Jungbläserwoche', "name_it": 'Tschögglberger Jungbläserwoche'},
-        {"name": 'Besondere Projekte 2018', "name_it": 'Besondere Projekte 2018'},
+        {"name": 'Besondere Projekte', "name_it": 'Besondere Projekte'},
         {"name": 'Hüttenlagerwoche',        "name_it": 'Hüttenlagerwoche'},
     ],
     "tSizes": [
