@@ -1,0 +1,33 @@
+{
+  "name": "ng-combo-date-picker",
+  "version": "1.5.1",
+  "description": "An Angular directive to select dates using combo boxes",
+  "main": "source/ngComboDatePicker.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "minify": "node scripts/minify.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jfmdev/ngComboDatePicker"
+  },
+  "keywords": [
+    "angular",
+    "directive",
+    "calendar",
+    "date",
+    "date",
+    "picker",
+    "combobox"
+  ],
+  "author": "JFMDev <jfmdev@outlook.com> (http://jfmdev.github.io/)",
+  "license": "MPL-2.0",
+  "bugs": {
+    "url": "https://github.com/jfmdev/ngComboDatePicker/issues"
+  },
+  "homepage": "http://jfmdev.github.io/ngComboDatePicker/",
+  "devDependencies": {
+    "uglify-save-license": "^0.4.1",
+    "uglify-js": "^2.4.10"
+  }
+}
