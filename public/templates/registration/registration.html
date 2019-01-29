@@ -86,7 +86,7 @@
 							<label for='birthdayChild' class='control-label col-sm-2'>{{"RESERVATION.LABEL_BIRTHDAY_CHILD" | translate}}</label>
 							<div class='col-sm-8'>
 								<p class='input-group'>
-									<ng-combo-date-picker ng-model="birthdayChild" required></ng-combo-date-picker>
+									<ng-combo-date-picker ng-model="birthdayChild" ngMinDate="2000-01-01" required></ng-combo-date-picker>
 									<!--<ng-datepicker ng-model='birthdayChild' view-format="DD.MM.YYYY"  locale='de' required></ng-datepicker>-->
 								</p>
 							</div>
@@ -255,10 +255,27 @@
 			<div id="collapseThree" ng-class="(currentState === 3) ? 'panel-collapse collapse in' : 'panel-collapse collapse'" role="tabpanel" aria-labelledby="headingThree">
 				<div class="panel-body">
 					<div class='col-sm-offset-2 col-sm4'>
-						<input type='checkbox' name='agb' ng-model='acceptAGB'><strong>{{"RESERVATION.LABEL_TERMS1" | translate}}<button type="button" class="btn btn-default" data-toggle="modal" data-target=".bs-example-modal-lg">{{"RESERVATION.LABEL_TERMS2" | translate}}</button></strong></input>
+						<!--<input type='checkbox' name='agb' ng-model='acceptAGB'><strong>{{"RESERVATION.LABEL_TERMS1" | translate}}<button type="button" class="btn btn-default" data-toggle="modal" data-target=".bs-example-modal-lg">{{"RESERVATION.LABEL_TERMS2" | translate}}</button></strong></input>-->
+						<input type='checkbox' name='agb' ng-model='acceptAGB'><strong>{{"RESERVATION.LABEL_TERMS1" | translate}}<button type="button" class="btn btn-default" ng-click="toggleAgb()" >{{"RESERVATION.LABEL_TERMS2" | translate}}</button></strong></input>
+							<div class="panel panel-default" ng-class="agbVisibility ? 'show' : 'hidden'">
+							<div class="panel-body">
+								<div ng-show="platform.isJDBL() || platform.isJugendsommer()" ng-include src='"templates/agb/agb-jdbl.html"'></div>
+
+								<div ng-show="platform.isKiso() && lang == 'de'" ng-include src='"templates/agb/agb-kiso-de.html"'></div>
+								<div ng-show="platform.isKiso() && lang == 'it'" ng-include src='"templates/agb/agb-kiso-it.html"'></div>
+									
+								<div ng-show="platform.isJDUL() && lang == 'de'" ng-include src='"templates/agb/agb-jdul-de.html"'></div>
+								<div ng-show="platform.isJDUL() && lang == 'it'" ng-include src='"templates/agb/agb-jdul-it.html"'></div>
+									
+								<div ng-show="platform.isTest() && lang == 'de'" ng-include src='"templates/agb/agb-jdul-de.html"'></div>
+								<div ng-show="platform.isTest() && lang == 'it'" ng-include src='"templates/agb/agb-jdul-it.html"'></div>
+								
+								<div ng-show="platform.isJSGries()" ng-include src='"templates/agb/agb-jsgries-de.html"'></div>
+							</div>
+						</div>
 					</div>
 					
-					<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+					<!--<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
   						<div class="modal-dialog modal-lg" role="document">
 							<div class="modal-content">
 								<div class="modal-header">
@@ -284,7 +301,7 @@
 								</div>
 							</div>
   						</div>
-					</div>
+					</div>-->
 
 					<br />
 					<p class="bg-info" style='padding: 10px; margin-bottom: 0px;'>{{"RESERVATION.LABEL_REGISTRATION_PAY_INFO" | translate}}</p>

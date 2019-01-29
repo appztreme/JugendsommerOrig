@@ -10,6 +10,10 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 	$scope.emailParentCheck = '';
 	$scope.platform = PlatformSvc;
 
+	$scope.agbVisibility = false;
+
+	$scope.toggleAgb = function() { $scope.agbVisibility = !$scope.agbVisibility; }
+
 	$scope.toggleActivity = function(id) {
 		var index = $scope.selectedActivities.indexOf(id);
 		if(index === -1) $scope.selectedActivities.push(id);

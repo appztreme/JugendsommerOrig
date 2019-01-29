@@ -55,8 +55,8 @@ exports.delete = (req, res, next) => {
 exports.create = async(req, res, next) => {
 	var regs = [];
 	for (var i = 0; i < req.body.activityId.length; i++) {
-		console.log('ebk', req.body.needsEbK)
-		console.log('birthdayChild', req.body.birthdayChild)
+		//console.log('ebk', req.body.needsEbK)
+		//console.log('birthdayChild', req.body.birthdayChild)
 		var reg = new Registration({
 			firstNameParent: req.body.firstNameParent,
 			lastNameParent: req.body.lastNameParent,
