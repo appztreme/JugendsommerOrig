@@ -59,10 +59,13 @@
 						<!-- CITYCHILD -->
 						<div class='form-group' ng-class='{ "has-error": registrationForm.cityChild.$invalid }'>
 							<label for='cityChild' class='control-label col-sm-2'>{{"RESERVATION.LABEL_CITY_CHILD" | translate}}</label>
-							<div class='col-sm-8'>
+							<div class='col-sm-8' ng-show="!platform.isJDUL()">
 								<select name='cityChild' class='sel-base form-control' ng-model='cityChild'>
 									<option ng-repeat="city in cities" value='{{city}}'>{{city}}</option>
 								</select>
+							</div>
+							<div class='col-sm-8' ng-show="platform.isJDUL()">
+								<input name='cityChild' type="text" ng-model='cityChild' class="form-control" required></input>
 							</div>
 						</div>
 						<div ng-show='type === "summer" || type === "music" || type === "club" || type === "jumprun"' class='text-orange'><strong>{{"RESERVATION.HEADER_SUMMER_CHILD" | translate}}</strong></div>
