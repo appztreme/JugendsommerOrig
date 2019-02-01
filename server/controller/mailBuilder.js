@@ -10,8 +10,8 @@ var txtSpiritnight = "Vielen Dank für die Teilnahme an der SpiritNight 2019! Bi
 var txtStart = "Die Anmeldung für ";
 var txtEnd = " für die Sommerprogramme des Jugenddienstes Bozen Land war erfolgreich. Einzahlungsschein wird demnächst mittels email zugesandt.";
 
-var txtReceipt = "Hallo liebe Eltern,\r\n\r\nanbei findet ihr den Überweisungsschein für das Sommerprogramm 2019.\r\nIhr bekommt für jedes Programm einen eigenen Überweisungsschein mit einer dazugehörigen Überweisungsnummer\r\nFür unser Buchhaltung bitten wir euch, jeden Überweisungsscheinschein extra zu überweisen.\r\nBei der Überweisung bitten wir euch den Gesamtbetrag mit Überweisungsnummer und den Namen der Kinder anzugeben!\r\n\r\nAchtung ein neues Konto:\r\nWir haben für unsere Sommerprogramme ein neues Konto eingerichtet:\r\nKontodaten:Raiffeisenkassa Bozen\r\nIBAN: IT 09X 08081 11610 000306005853";
-var htmlReceiptStart = "<html><body><p>Hallo liebe Eltern,<br/ >anbei findet ihr den Überweisungsschein für das Sommerprogramm 2019.<br />Ihr bekommt für jedes Programm einen eigenen Überweisungsschein mit einer dazugehörigen Überweisungsnummer.<br />Für unser Buchhaltung bitten wir euch, jeden Überweisungsschein extra zu überweisen.<br />Bei der Überweisung bitten wir euch den <strong>Gesamtbetrag</strong> mit der <strong>Überweisungsnummer</strong> und den <strong>Namen der Kinder</strong> anzugeben!<br /><br />Achtung ein neues Konto:<br />Wir haben für unsere Sommerprogramme ein neues Konto eingerichtet.<br /><strong>Kontodaten:<br />Raiffeisenkassa Bozen<br />IBAN: IT 09X 08081 11610 000306005853</strong><br />";
+var txtReceipt = "Hallo liebe Eltern,\r\n\r\nanbei findet ihr den Überweisungsschein für das Sommerprogramm 2019.\r\nIhr bekommt für jedes Programm einen eigenen Überweisungsschein mit einer dazugehörigen Überweisungsnummer\r\nFür unser Buchhaltung bitten wir euch, jeden Überweisungsscheinschein extra zu überweisen.\r\nBei der Überweisung bitte die Überweisungsnummer und den Namen des Kindes angeben.\r\n\r\nAchtung ein neues Konto:\r\nWir haben für unsere Sommerprogramme ein neues Konto eingerichtet:\r\nKontodaten:Raiffeisenkassa Bozen\r\nIBAN: IT 09X 08081 11610 000306005853";
+var htmlReceiptStart = "<html><body><p>Hallo liebe Eltern,<br/ >anbei findet ihr den Überweisungsschein für das Sommerprogramm 2019.<br />Ihr bekommt für jedes Programm <strong>einen eigenen Überweisungsschein</strong> mit einer dazugehörigen Überweisungsnummer.<br />Für unser Buchhaltung bitten wir euch, jeden Überweisungsschein extra zu überweisen.<br /></strong>Bei der Überweisung bitte die <span style='color:#ffa500'><strong>Überweisungsnummer und den Namen des Kindes angeben</strong></span>.<br /><br />Kontodaten:<br /><strong>Raiffeisenkassa Bozen<br />IBAN: IT 09X 08081 11610 000306005853</strong><br />";
 var htmlReceiptEnd = "</body></html>";
 
 var txtReminder = "Hallo liebe Eltern,\r\n\r\nbei der Kontrolle unserer Buchhaltung ist uns aufgefallen, dass Ihre Einzahlung für unsere Sommerprogramme nocht nicht auf unserem Konto eingegangen ist.\r\nWir bitten dies so schnell wie möglich nachzuholen ansonsten wird die Anmeldung gelöscht.";
@@ -152,7 +152,7 @@ exports.getTypeBody = function(type, firstNameChild, lastNameChild, activities, 
 
 exports.getReceiptBody = function(reservations, rnumber) {
 	// return htmlReceiptStart + "<br /><br />" + "<br />" + getJDBLFooter() + "<br />" + htmlReceiptEnd;
-	return htmlReceiptStart + "<br /><br />" + getReceiptTable(reservations, rnumber) + "<br />" + getJDBLFooter() + "<br />" + htmlReceiptEnd;
+	return htmlReceiptStart + "<br /><br />" + getReceiptTable(reservations, rnumber) + "<br />" + getJDBLReceiptFooter() + "<br />" + htmlReceiptEnd;
 }
 
 exports.getSorryText = function() {
@@ -244,6 +244,26 @@ function getJDBLFooter() {
 	footer += '<tr></tr>';
 	footer += '<tr><td>Telefon: 0471324753</td></tr>';
 	footer += '<tr><td>E-Mail: <a mailto="sommer@jugenddienst.com">sommer@jugenddienst.com</a></tr></td>';
+	footer += '<tr><td><a href="https://www.jdbl.it">Homepage: www.jdbl.it</a></td></tr>'
+	footer += '<tr><td>St.-Nr.: 94072680211</td></tr>';
+	footer += '<tr></tr>';
+	footer += '<tr><td><img src="cid:my-image" width="150" /></td></tr>';
+	footer += '</table>';
+	return footer;
+}
+
+function getJDBLReceiptFooter() {
+	var footer = '<table>';
+	footer += '<tr><td><h4>Günter Reichhalter</h4></td></tr>';
+	footer += '<tr><td><h4>Geschäftsführung</h4></td></tr>';
+	footer += '<tr></tr>';	
+	footer += '<tr><td><h4>Jugenddienst Bozen-Land</h4></td></tr>';
+	footer += '<tr><td>Andreas-Hoferstr. 36</td></tr>';
+	footer += '<tr><td>39100 Bozen, Südtirol/Italy</td></tr>';
+	footer += '<tr></tr>';
+	footer += '<tr><td>Telefon: 3408136941</td></tr>';
+	footer += '<tr><td>E-Mail: <a mailto="guenther@jugenddienst.com">guenther@jugenddienst.com</a></tr></td>';
+	footer += '<tr><td>E-Mail: <a mailto="info@jugenddienst.com">info@jugenddienst.com</a></tr></td>';
 	footer += '<tr><td><a href="https://www.jdbl.it">Homepage: www.jdbl.it</a></td></tr>'
 	footer += '<tr><td>St.-Nr.: 94072680211</td></tr>';
 	footer += '<tr></tr>';
