@@ -180,6 +180,7 @@ exports.update = (req, res, next) => {
 		ev.penalty = req.body.penalty;
 		ev.budgetFood = req.body.budgetFood;
 		ev.budgetBusiness = req.body.budgetBusiness;
+		ev.feePerWeek = req.body.feePerWeek;
 		ev.info = req.body.info;
 		ev.info_it = req.body.info_it;
 		ev.isInternal = req.body.isInternal;
