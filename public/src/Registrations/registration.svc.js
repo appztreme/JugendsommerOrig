@@ -62,4 +62,9 @@ app.service('RegistrationSvc', function($http) {
 		var update = { _id: registrationId, isEmailNotified: isEmailNotified };
 		return $http.patch('/api/registrations/updateIsEmailNotified', update);
 	}
+
+	this.updateProp = function(registrationId, propertyName, value) {
+		var update = { _id: registrationId, property: propertyName, value: value };
+		return $http.patch('/api/registrations/updateProp', update);
+	}
 });

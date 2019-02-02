@@ -112,8 +112,12 @@
 			<th></th>
 			<th>Programm</th>
 			<th>Woche</th>
-			<th>Vorname</th>
-			<th>Nachname</th>
+			<th>Vorname
+				<div ng-show="isBatchUpdateAllowed()" class="input-group"><input type="text" class="form-control" style="min-width: 45px" ng-model="masterFirstNameChild" /><div class="input-group-btn"><button type="button" class="btn btn-success" ng-click="updateBatchProperty('firstNameChild', masterFirstNameChild)">U</button></div></div>
+			</th>
+			<th>Nachname
+				<div ng-show="isBatchUpdateAllowed()" class="input-group"><input type="text" class="form-control" style="min-width: 45px" ng-model="masterLastNameChild" /><div class="input-group-btn"><button type="button" class="btn btn-success" ng-click="updateBatchProperty('lastNameChild', masterLastNameChild)">U</button></div></div>
+			</th>
 			<th>EbK</th>
 			<th>Einzahlung
 				<div ng-show="isBatchUpdateAllowed()"><input type="checkbox" ng-checked="masterIsPaymentDone" ng-model="masterIsPaymentDone" ng-change="batchUpdateIsPaymentDone()" /></div>
@@ -122,14 +126,28 @@
 			<th>RechnungsNr</th>
 			<th>Betrag</th>
 			<th>Geburtstag</th>
-			<th>Schulstufe</th>
-			<th>Gesundheit</th>
-			<th>Adresse</th>
+			<th>Schulstufe
+				<div ng-show="isBatchUpdateAllowed()" class="input-group"><input type="text" class="form-control" style="min-width: 45px" ng-model="masterSchoolChild" /><div class="input-group-btn"><button type="button" class="btn btn-success" ng-click="updateBatchProperty('schoolChild', masterSchoolChild)">U</button></div></div>
+			</th>
+			<th>Gesundheit
+				<div ng-show="isBatchUpdateAllowed()" class="input-group"><input type="text" class="form-control" style="min-width: 45px" ng-model="masterHealthChild" /><div class="input-group-btn"><button type="button" class="btn btn-success" ng-click="updateBatchProperty('healthChild', masterHealthChild)">U</button></div></div>
+			</th>
+			<th>Adresse
+				<div ng-show="isBatchUpdateAllowed()" class="input-group"><input type="text" class="form-control" style="min-width: 45px" ng-model="masterAddressChild" /><div class="input-group-btn"><button type="button" class="btn btn-success" ng-click="updateBatchProperty('addressChild', masterAddressChild)">U</button></div></div>
+			</th>
 			<th>Wohnort</th>
-			<th>Vorname Eltern</th>
-			<th>Nachname Eltern</th>
-			<th>Email Eltern</th>
-			<th>Tel. Eltern</th>
+			<th>Vorname Eltern
+				<div ng-show="isBatchUpdateAllowed()" class="input-group"><input type="text" class="form-control" style="min-width: 45px" ng-model="masterFirstNameParent" /><div class="input-group-btn"><button type="button" class="btn btn-success" ng-click="updateBatchProperty('firstNameParent', masterFirstNameParent)">U</button></div></div>
+			</th>
+			<th>Nachname Eltern
+				<div ng-show="isBatchUpdateAllowed()" class="input-group"><input type="text" class="form-control" style="min-width: 45px" ng-model="masterLastNameParent" /><div class="input-group-btn"><button type="button" class="btn btn-success" ng-click="updateBatchProperty('lastNameParent', masterLastNameParent)">U</button></div></div>
+			</th>
+			<th>Email Eltern
+				<div ng-show="isBatchUpdateAllowed()" class="input-group"><input type="text" class="form-control" style="min-width: 45px" ng-model="masterEmailParent" /><div class="input-group-btn"><button type="button" class="btn btn-success" ng-click="updateBatchProperty('emailParent', masterEmailParent)">U</button></div></div>
+			</th>
+			<th>Tel. Eltern
+				<div ng-show="isBatchUpdateAllowed()" class="input-group"><input type="text" class="form-control" style="min-width: 45px" ng-model="masterPhoneNumberParent" /><div class="input-group-btn"><button type="button" class="btn btn-success" ng-click="updateBatchProperty('phoneNumberParent', masterPhoneNumberParent)">U</button></div></div>
+			</th>
 			<th>Kontakt1</th>
 			<th>Tel. Kontakt1</th>
 			<th>Kontak2</th>

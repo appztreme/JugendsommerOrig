@@ -168,6 +168,17 @@ exports.updateIsEmailNotified = (req, res, next) => {
 	});
 };
 
+exports.updateProperty = (req, res, next) => {
+	Registration.findById(req.body._id, function(err, reg) {
+		if(!reg) return next(new Error('Keine Registrierung im System mit id ' + req.body._id));
+		reg[req.body.property] = req.body.value;
+		reg.save(function(err, regDb) {
+			if(err) { return next(err); }
+			res.status(201).json(regDb);
+		});
+	});
+}
+
 exports.sendPaymentMail = async(req, res, next) => {
 	try {
 		let activityIds = undefined;

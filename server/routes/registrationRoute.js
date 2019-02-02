@@ -23,4 +23,6 @@ router.patch('/updateIsPaymentDone', auth.requiresRole("admin"), RegistrationCon
 
 router.patch('/updateIsEmailNotified', auth.requiresRole("admin"), RegistrationController.updateIsEmailNotified);
 
+router.patch('/updateProp', auth.requiresRole("admin"), RegistrationController.updateProperty);
+
 module.exports = router;

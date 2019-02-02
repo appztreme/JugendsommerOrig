@@ -151,6 +151,25 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 		$location.path('/report/');
 	}
 
+	$scope.updateBatchProperty = function(prop, value) {
+		console.log(prop, value);
+		for(var i=0; i < $scope.registrations.length; i++) {
+			var reg = $scope.registrations[i];
+			$scope.updateProperty(reg._id, prop, value);
+		}
+		$location.path('/report/');
+	}
+
+	$scope.updateProperty = function(id, prop, value) {
+		RegistrationSvc.updateProp(id, prop, value)
+		.error(function(err) {
+			NotificationSvc.warn(err);
+		})
+		.success(function(success) {
+			NotificationSvc.notify('Anmeldung geändert')
+		})
+	}
+
 	$scope.updateIsPaymentDone = function(id, isPaymentDone) {
 		RegistrationSvc.updateIsPaymentDone(id, isPaymentDone)
 		.error(function(err) {
