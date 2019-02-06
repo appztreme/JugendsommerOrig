@@ -29,6 +29,10 @@ var htmlFinalJDUL = "</body></html>";
 var htmlStartJDUL_it = "<h2>Conferma d‘iscrizione</h2>Cara/o ";
 var htmlMiddleJDUL_it = ",<br />Siamo contenti che parteciperai al nostro programma JD-SUMMER a ";
 var htmlEndJDUL_it = ".<br />Nei prossimi tempi riceverai un'altra e-mail con ulteriori informazioni.<br /><br />I tuoi genitori sono pregati di controllare i dati sottostanti e di versare la quota d'iscrizione sul nostro conto corrente entro il <strong>31.03.2018:</strong><br /><br />Jugenddienst Unterland – Raiffeisenkasse Salurn<br />IBAN: IT 27 T 08220 58371000304204042<br />con l‘oggetto: cognome nome comune di residenza<br /><br />Non vediamo l'ora che il JD-SUMMER inizi a gonfie vele e speriamo in un bel tempo. Nel frattempo vi auguriamo tanto divertimento.<br /><br />Il Vostro Team del Jugenddienst Unterland";
+var txtWaitingListJDUL = "Guten Tag,/r/nleider ist das von Ihnen gewünschte Programm bereits ausgebucht./r/nSie sind jedoch auf der Warteliste. Sollte ein Platz frei werden, melden wir uns innerhalb 22.03.2019 bei Ihnen./r/nMit freundlichen Grüßen/r/nDas Team des Jugenddienst Unterland/r/n/r/n/r/n";
+var txtWaitingListJDUL_it = "Buon giorno,/r/npurtroppo è già pieno il programma da lei scelto./r/nLa sua iscrizione si trova sulla lista d‘ attesa. Se dovesse liberarsi un posto, La contatteremmo entro il  22.03.2019./r/nCordiali saluti/r/nIl Team del Jugenddienst Unterland";
+var htmlWaitingListJDUL = "<html><body>Guten Tag,<br />leider ist das von Ihnen gewünschte Programm bereits ausgebucht.<br />Sie sind jedoch auf der Warteliste. Sollte ein Platz frei werden, melden wir uns innerhalb 22.03.2019 bei Ihnen.<br />Mit freundlichen Grüßen<br />Das Team des Jugenddienst Unterland<br /><br /><br />";
+var htmlWaitingListJDUL_it = "Buon giorno,<br />purtroppo è già pieno il programma da lei scelto.<br />La sua iscrizione si trova sulla lista d‘ attesa. Se dovesse liberarsi un posto, La contatteremmo entro il  22.03.2019.<br />Cordiali saluti<br />Il Team del Jugenddienst Unterland</body></html>";
 
 var htmlKiso = "<html><body>Vielen Dank für die Anmeldung Ihres Kindes zum KISO 2019!<br />Sie erhalten innerhalb der nächsten Tage eine Rückmeldung vom Jugenddienst Bozen zu Ihrem Anmeldestand.<br />Falls das Gruppenlimit für die betreffende Woche bereits erreicht sein sollte, kommt Ihr Kind auf die Warteliste.<br />Freundliche Grüße,<br />das Jugenddienst Bozen Team<br /><br />Ringraziamo per l'iscrizione di suo/a figlio/a al KISO 2018!<br />Nei prossimi giorni lo Jugenddienst Bozen<br />Le invierà una risposta sullo stato di iscrizione. Se i posti disponibli per la settimana interessata dovessero già essere esauriti, suo/a figlio/a sarà messo/a sulla lista d'attesa.<br />Cordiali saluti,<br />l'equipe dello Jugenddienst Bozen";
 var textKiso = "Vielen Dank für die Anmeldung Ihres Kindes zum KISO 2019!\r\nSie erhalten innerhalb der nächsten Tage eine Rückmeldung vom Jugenddienst Bozen zu Ihrem Anmeldestand.\r\nFalls das Gruppenlimit für die betreffende Woche bereits erreicht sein sollte, kommt Ihr Kind auf die Warteliste.\r\nFreundliche Grüße, das Jugenddienst Bozen Team \r\n\r\nRingraziamo per l’iscrizione di suo/a figlio/a al KISO 2018!\r\nNei prossimi giorni lo Jugenddienst Bozen Le invierà una risposta sullo stato di iscrizione. Se i posti disponibli per la settimana interessata dovessero già essere esauriti, suo/a figlio/a sarà messo/a sulla lista d‘attesa.\r\nCordiali saluti,\r\nl’equipe dello Jugenddienst Bozen";
@@ -77,14 +81,18 @@ exports.getSubject = function(instance, type) {
 	}
 }
 
-exports.getTypeText = function(type, firstNameChild, lastNameChild, location, instance) {
+exports.getTypeText = function(type, firstNameChild, lastNameChild, location, instance, activities) {
 	if(instance.isKiso) {
 		if(type === 'jumprun')
 			return textJumpRun;
 		else
 			return textKiso;
 	} else if(instance.isJDUL) {
-		return txtStartJDUL_de + location + txtEndJDUL_de + "/r/n/r/n" + txtStartJDUL_it + location + txtEndJDUL_it;
+		if(activities[0].maxParticipants <= activities[0].currentParticipants) { //child on waiting list
+			return txtWaitingListJDUL + txtWaitingListJDUL_it;
+		} else { // regular reservation
+			return txtStartJDUL_de + location + txtEndJDUL_de + "/r/n/r/n" + txtStartJDUL_it + location + txtEndJDUL_it;
+		}
 	} else if(instance.isJSGries) {
 		return textJSGries;
 	} else {
@@ -126,9 +134,13 @@ exports.getTypeBody = function(type, firstNameChild, lastNameChild, activities, 
 			return htmlKiso;
 	}
 	else if (instance.isJDUL) {
-		return htmlStartJDUL_de + firstNameChild + htmlMiddleJDUL_de + activities[0].eventId.location + htmlEndJDUL_de + "<br />" +
-			   htmlStartJDUL_it + firstNameChild + htmlMiddleJDUL_it + activities[0].eventId.location_it + htmlEndJDUL_it + "<br /><br />" +
-		   getActivityTable(activities) + "<br /><br />" + getReservationTable(reservation) + "<br /><br />" + getJDULFooter() + "<br />" + htmlFinalJDUL;
+		if(activities[0].maxParticipants <= activities[0].currentParticipants) { //child on waiting list
+			return htmlWaitingListJDUL + htmlWaitingListJDUL_it;
+		} else { // regular reservation
+			return htmlStartJDUL_de + firstNameChild + htmlMiddleJDUL_de + activities[0].eventId.location + htmlEndJDUL_de + "<br />" +
+					htmlStartJDUL_it + firstNameChild + htmlMiddleJDUL_it + activities[0].eventId.location_it + htmlEndJDUL_it + "<br /><br />" +
+		   			getActivityTable(activities) + "<br /><br />" + getReservationTable(reservation) + "<br /><br />" + getJDULFooter() + "<br />" + htmlFinalJDUL;
+		}
 	}
 	else if(instance.isJSGries) {
 		return htmlJSGries;

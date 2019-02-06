@@ -4,7 +4,7 @@ const platform = require('./platform')
 var mailbuilder = require('./mailBuilder');
 
 exports.sendTxtMail = function(recipient, firstNameChild, lastNameChild, type, activities, reservation, instance) {
-		var body = mailbuilder.getTypeBody(type, firstNameChild, lastNameChild, activities, reservation, instance);
+		var body = mailbuilder.getTypeBody(type, firstNameChild, lastNameChild, activities, reservation, instance, activities);
 		var text = mailbuilder.getTypeText(type, firstNameChild, lastNameChild, activities[0].eventId.location, instance);
         var fromEmail = mailbuilder.getSender(instance);
 		var subjectEmail = mailbuilder.getSubject(instance, type);
