@@ -82,6 +82,8 @@ exports.getSubject = function(instance, type) {
 }
 
 exports.getTypeText = function(type, firstNameChild, lastNameChild, location, instance, activities) {
+	instance.isKiso = false;
+	instance.isJDUL = true;
 	if(instance.isKiso) {
 		if(type === 'jumprun')
 			return textJumpRun;
@@ -134,7 +136,8 @@ exports.getTypeBody = function(type, firstNameChild, lastNameChild, activities, 
 			return htmlKiso;
 	}
 	else if (instance.isJDUL) {
-		if(activities[0].maxParticipants <= activities[0].currentParticipants) { //child on waiting list
+		//console.log(activities[0].maxParticipants, activities[0].curParticipants)
+		if(activities[0].maxParticipants <= activities[0].curParticipants) { //child on waiting list
 			return htmlWaitingListJDUL + htmlWaitingListJDUL_it;
 		} else { // regular reservation
 			return htmlStartJDUL_de + firstNameChild + htmlMiddleJDUL_de + activities[0].eventId.location + htmlEndJDUL_de + "<br />" +
