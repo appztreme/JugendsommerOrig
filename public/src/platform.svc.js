@@ -43,7 +43,7 @@ app.factory('PlatformSvc', function(conf) {
                         if(this.isKiso()) return 'Bozen';
                         else if(this.isJugendsommer()) return 'Deutschnofen';
                         else if(this.isJDBL()) return 'Deutschnofen';
-                        else if(this.isJDUL()) return 'Altrei';
+                        else if(this.isJDUL()) return '';
                         else if(this.isJSGries()) return 'Bozen';
                         else return 'Andere';
                 }

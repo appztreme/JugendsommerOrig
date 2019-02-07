@@ -5,14 +5,17 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 	$scope.eventId = $routeParams.eventId;
 
 	$scope.acceptAGB = false;
+	$scope.acceptInsurance = false;
 	$scope.currentState = 1;
 	$scope.selectedActivities = [];
 	$scope.emailParentCheck = '';
 	$scope.platform = PlatformSvc;
 
 	$scope.agbVisibility = false;
+	$scope.insuranceVisibility = false;
 
 	$scope.toggleAgb = function() { $scope.agbVisibility = !$scope.agbVisibility; }
+	$scope.toggleInsurance = function() { $scope.insuranceVisibility = !$scope.insuranceVisibility; }
 
 	$scope.toggleActivity = function(id) {
 		var index = $scope.selectedActivities.indexOf(id);
@@ -92,7 +95,10 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 	}
 
 	$scope.isRegistrationAllowed = function() {
-		return $scope.registrationForm.$valid && $scope.acceptAGB;
+		if($scope.platform.isJDUL())
+			return $scope.registrationForm.$valid && $scope.acceptAGB && $scope.acceptInsurance;
+		else
+			return $scope.registrationForm.$valid && $scope.acceptAGB;
 	};
 
 	$scope.hasCachedRegistration = function() {
@@ -203,179 +209,6 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 			});
 		}
 	};
-
-	// $scope.$watch('firstNameParent', function(newValue, oldValue) {
-	// 	if(!RegistrationCacheSvc.hasCurrentRegistration()) {
-	// 		RegistrationCacheSvc.currentRegistration = {};
-	// 	}
-	// 	RegistrationCacheSvc.currentRegistration.firstNameParent = newValue;
-	// });
-	// $scope.$watch('lastNameParent', function(newValue, oldValue) {
-	// 	if(!RegistrationCacheSvc.hasCurrentRegistration()) {
-	// 		RegistrationCacheSvc.currentRegistration = {};
-	// 	}
-	// 	RegistrationCacheSvc.currentRegistration.lastNameParent = newValue;
-	// });
-	// $scope.$watch('phoneNumberParent', function(newValue, oldValue) {
-	// 	if(!RegistrationCacheSvc.hasCurrentRegistration()) {
-	// 		RegistrationCacheSvc.currentRegistration = {};
-	// 	}
-	// 	RegistrationCacheSvc.currentRegistration.phoneNumberParent = newValue;
-	// });
-	// $scope.$watch('emailParent', function(newValue, oldValue) {
-	// 	if(!RegistrationCacheSvc.hasCurrentRegistration()) {
-	// 		RegistrationCacheSvc.currentRegistration = {};
-	// 	}
-	// 	RegistrationCacheSvc.currentRegistration.emailParent = newValue;
-	// });
-	// $scope.$watch('firstNameChild', function(newValue, oldValue) {
-	// 	if(!RegistrationCacheSvc.hasCurrentRegistration()) {
-	// 		RegistrationCacheSvc.currentRegistration = {};
-	// 	}
-	// 	RegistrationCacheSvc.currentRegistration.firstNameChild = newValue;
-	// });
-	// $scope.$watch('lastNameChild', function(newValue, oldValue) {
-	// 	if(!RegistrationCacheSvc.hasCurrentRegistration()) {
-	// 		RegistrationCacheSvc.currentRegistration = {};
-	// 	}
-	// 	RegistrationCacheSvc.currentRegistration.lastNameChild = newValue;
-	// });
-	// $scope.$watch('birthdayChild', function(newValue, oldValue) {
-	// 	if(!RegistrationCacheSvc.hasCurrentRegistration()) {
-	// 		RegistrationCacheSvc.currentRegistration = {};
-	// 	}
-	// 	RegistrationCacheSvc.currentRegistration.birthdayChild = newValue;
-	// });
-	// $scope.$watch('schoolChild', function(newValue, oldValue) {
-	// 	if(!RegistrationCacheSvc.hasCurrentRegistration()) {
-	// 		RegistrationCacheSvc.currentRegistration = {};
-	// 	}
-	// 	RegistrationCacheSvc.currentRegistration.schoolChild = newValue;
-	// });
-	// $scope.$watch('healthChild', function(newValue, oldValue) {
-	// 	if(!RegistrationCacheSvc.hasCurrentRegistration()) {
-	// 		RegistrationCacheSvc.currentRegistration = {};
-	// 	}
-	// 	RegistrationCacheSvc.currentRegistration.healthChild = newValue;
-	// });
-	// $scope.$watch('addressChild', function(newValue, oldValue) {
-	// 	if(!RegistrationCacheSvc.hasCurrentRegistration()) {
-	// 		RegistrationCacheSvc.currentRegistration = {};
-	// 	}
-	// 	RegistrationCacheSvc.currentRegistration.addressChild = newValue;
-	// });
-	// $scope.$watch('cityChild', function(newValue, oldValue) {
-	// 	if(!RegistrationCacheSvc.hasCurrentRegistration()) {
-	// 		RegistrationCacheSvc.currentRegistration = {};
-	// 	}
-	// 	RegistrationCacheSvc.currentRegistration.cityChild = newValue;
-	// });
-	// $scope.$watch('tShirtSize', function(newValue, oldValue) {
-	// 	if(!RegistrationCacheSvc.hasCurrentRegistration()) {
-	// 		RegistrationCacheSvc.currentRegistration = {};
-	// 	}
-	// 	RegistrationCacheSvc.currentRegistration.tShirtSize = newValue;
-	// });
-	// $scope.$watch('bandName', function(newValue, oldValue) {
-	// 	if(!RegistrationCacheSvc.hasCurrentRegistration()) {
-	// 		RegistrationCacheSvc.currentRegistration = {};
-	// 	}
-	// 	RegistrationCacheSvc.currentRegistration.bandName = newValue;
-	// });
-	// $scope.$watch('instrument', function(newValue, oldValue) {
-	// 	if(!RegistrationCacheSvc.hasCurrentRegistration()) {
-	// 		RegistrationCacheSvc.currentRegistration = {};
-	// 	}
-	// 	RegistrationCacheSvc.currentRegistration.instrument = newValue;
-	// });
-	// $scope.$watch('instrumentYears', function(newValue, oldValue) {
-	// 	if(!RegistrationCacheSvc.hasCurrentRegistration()) {
-	// 		RegistrationCacheSvc.currentRegistration = {};
-	// 	}
-	// 	RegistrationCacheSvc.currentRegistration.instrumentYears = newValue;
-	// });
-	// $scope.$watch('nameContact1', function(newValue, oldValue) {
-	// 	if(!RegistrationCacheSvc.hasCurrentRegistration()) {
-	// 		RegistrationCacheSvc.currentRegistration = {};
-	// 	}
-	// 	RegistrationCacheSvc.currentRegistration.nameContact1 = newValue;
-	// });
-	// $scope.$watch('telContact1', function(newValue, oldValue) {
-	// 	if(!RegistrationCacheSvc.hasCurrentRegistration()) {
-	// 		RegistrationCacheSvc.currentRegistration = {};
-	// 	}
-	// 	RegistrationCacheSvc.currentRegistration.telContact1 = newValue;
-	// });
-	// $scope.$watch('nameContact2', function(newValue, oldValue) {
-	// 	if(!RegistrationCacheSvc.hasCurrentRegistration()) {
-	// 		RegistrationCacheSvc.currentRegistration = {};
-	// 	}
-	// 	RegistrationCacheSvc.currentRegistration.nameContact2 = newValue;
-	// });
-	// $scope.$watch('telContact2', function(newValue, oldValue) {
-	// 	if(!RegistrationCacheSvc.hasCurrentRegistration()) {
-	// 		RegistrationCacheSvc.currentRegistration = {};
-	// 	}
-	// 	RegistrationCacheSvc.currentRegistration.telContact2 = newValue;
-	// });
-	// $scope.$watch('needsPreCare', function(newValue, oldValue) {
-	// 	if(!RegistrationCacheSvc.hasCurrentRegistration()) {
-	// 		RegistrationCacheSvc.currentRegistration = {};
-	// 	}
-	// 	RegistrationCacheSvc.currentRegistration.needsPreCare = newValue;
-	// });
-	// $scope.$watch('hasDisability', function(newValue, oldValue) {
-	// 	if(!RegistrationCacheSvc.hasCurrentRegistration()) {
-	// 		RegistrationCacheSvc.currentRegistration = {};
-	// 	}
-	// 	RegistrationCacheSvc.currentRegistration.hasDisability = newValue;
-	// });
-	// $scope.$watch('disabilityDescription', function(newValue, oldValue) {
-	// 	if(!RegistrationCacheSvc.hasCurrentRegistration()) {
-	// 		RegistrationCacheSvc.currentRegistration = {};
-	// 	}
-	// 	RegistrationCacheSvc.currentRegistration.disabilityDescription = newValue;
-	// });
-	// $scope.$watch('needsAbK', function(newValue, oldValue) {
-	// 	if(!RegistrationCacheSvc.hasCurrentRegistration()) {
-	// 		RegistrationCacheSvc.currentRegistration = {};
-	// 	}
-	// 	RegistrationCacheSvc.currentRegistration.needsAbK = newValue;
-	// });
-
-	// console.log("cur state before", RegistrationCacheSvc.hasCurrentRegistration(), RegistrationCacheSvc.currentRegistration, $scope.currentState, $scope.selectedActivities);
-
-	// if(RegistrationCacheSvc.hasCurrentRegistration()) {
-	// 	$scope.firstNameParent = RegistrationCacheSvc.currentRegistration.firstNameParent;
-	// 	$scope.lastNameParent =  RegistrationCacheSvc.currentRegistration.lastNameParent;
-	// 	$scope.phoneNumberParent = RegistrationCacheSvc.currentRegistration.phoneNumberParent;
-	// 	$scope.emailParent = RegistrationCacheSvc.currentRegistration.emailParent;
-	// 	$scope.firstNameChild = RegistrationCacheSvc.currentRegistration.firstNameChild;
-	// 	$scope.lastNameChild = RegistrationCacheSvc.currentRegistration.lastNameChild;
-	// 	if(RegistrationCacheSvc.currentRegistration.birthdayChild){
-	// 	$scope.birthdayChild = $filter('date')(new Date(RegistrationCacheSvc.currentRegistration.birthdayChild), 'yyyy-MM-dd');
-	// 	}
-	// 	$scope.schoolChild = RegistrationCacheSvc.currentRegistration.schoolChild;
-	// 	$scope.healthChild = RegistrationCacheSvc.currentRegistration.healthChild;
-	// 	$scope.addressChild = RegistrationCacheSvc.currentRegistration.addressChild;
-	// 	$scope.cityChild = RegistrationCacheSvc.currentRegistration.cityChild;
-	// 	$scope.tShirtSize = RegistrationCacheSvc.currentRegistration.tShirtSize;
-	// 	$scope.bandName = RegistrationCacheSvc.currentRegistration.bandName;
-	// 	$scope.instrument = RegistrationCacheSvc.currentRegistration.instrument;
-	// 	$scope.instrumentYears = RegistrationCacheSvc.currentRegistration.instrumentYears;
-	// 	$scope.nameContact1 = RegistrationCacheSvc.currentRegistration.nameContact1;
-	// 	$scope.telContact1 = RegistrationCacheSvc.currentRegistration.telContact1;
-	// 	$scope.nameContact2 = RegistrationCacheSvc.currentRegistration.nameContact2;
-	// 	$scope.telContact2 =  RegistrationCacheSvc.currentRegistration.telContact2;
-	// 	$scope.needsPreCare = RegistrationCacheSvc.currentRegistration.needsPreCare;
-	// 	$scope.hasDisability = RegistrationCacheSvc.currentRegistration.hasDisability;
-	// 	$scope.disabilityDescription = RegistrationCacheSvc.currentRegistration.disabilityDescription;
-	// 	$scope.needsAbK = RegistrationCacheSvc.currentRegistration.needsAbK;
-	// 	// $scope.currentState = RegistrationCacheSvc.currentRegistration.currentState;
-	// 	// $scope.selectedActivities = RegistrationCacheSvc.currentRegistration.selectedActivities;
-	// 	RegistrationCacheSvc.currentRegistration = undefined;
-	// }
-
 
 	RegistrationSvc.findActivitiesByEventId($routeParams.eventId).then(function(response) {
 		$scope.activities = response.data;
