@@ -278,8 +278,8 @@
 						</div>
 						<br />
 						<div ng-show="platform.isJDUL()">
-							<input type='checkbox' name='insurance' ng-model='acceptInsurance'><strong>{{"RESERVATION.LABEL_INSUR1" | translate}}<button type="button" class="btn btn-default" ng-click="toggleInsurance()" >{{"RESERVATION.LABEL_INSUR2" | translate}}</button></strong></input>
-							<div class="panel panel-default" ng-class="insuranceVisibility ? 'show' : 'hidden'">
+							<input type='checkbox' name='insurance' ng-model='acceptInsurance'><strong>{{"RESERVATION.LABEL_INSUR1" | translate}}</strong></input>
+							<div class="panel panel-default">
 								<div class="panel-body">
 									<div ng-show="platform.isJDUL() && lang == 'de'" ng-include src='"templates/insurance/insurance-jdul-de.html"'></div>
 									<div ng-show="platform.isJDUL() && lang == 'it'" ng-include src='"templates/insurance/insurance-jdul-it.html"'></div>
