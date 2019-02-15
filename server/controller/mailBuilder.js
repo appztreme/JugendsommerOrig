@@ -241,7 +241,7 @@ function getReservationTable(res) {
 	var tbleEnd = '</table>';
 	tbleStart += '<tr><td style="padding: 2px">Vorname | nome</td><td style="padding: 2px">' + res.firstNameChild + '</td></tr>';
 	tbleStart += '<tr><td style="padding: 2px">Nachname | cognome</td><td style="padding: 2px">' + res.lastNameChild + '</td></tr>';
-	tbleStart += '<tr><td style="padding: 2px">Geburtsdatum | data di nascita</td><td style="padding: 2px">' + (new Date(res.birthdayChild)).toLocaleDateString() + '</td></tr>'; //.toISOString().substring(0, 10) + '</td></tr>';
+	tbleStart += '<tr><td style="padding: 2px">Geburtsdatum | data di nascita</td><td style="padding: 2px">' + (new Date(res.birthdayChild)).toLocaleDateString("de-DE", { weekday: 'short', year: 'numeric', month: '2-digit', day: '2-digit' }) + '</td></tr>'; //.toISOString().substring(0, 10) + '</td></tr>';
 	tbleStart += '<tr><td style="padding: 2px">Besuchte Klasse | classe frequentata</td><td style="padding: 2px">' + res.schoolChild + '</td></tr>';
 	tbleStart += '<tr><td style="padding: 2px">Vorname Eltern | nome genitori</td><td style="padding: 2px">' + res.firstNameParent + '</td></tr>';
 	tbleStart += '<tr><td style="padding: 2px">Nachname Eltern | cognome genitori</td><td style="padding: 2px">' + res.lastNameParent+ '</td></tr>';
