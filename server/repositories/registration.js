@@ -1,6 +1,7 @@
 'use strict';
 
 const Registration = require('./../models/registration');
+const mongoose = require('mongoose');
 
 const curYear = new Date().getFullYear();
 const startCurYear = new Date(curYear,1,1);
@@ -8,6 +9,7 @@ const startCurYear = new Date(curYear,1,1);
 exports.findById = (id) => {
     return Registration
         .findById(id)
+        //.findOne({'_id': mongoose.Types.ObjectId(id)})
         .populate({path:'activityId', populate:{path:'eventId'}})
         .exec();
 }

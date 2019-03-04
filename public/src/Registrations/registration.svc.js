@@ -54,7 +54,7 @@ app.service('RegistrationSvc', function($http) {
 	};
 
 	this.sendPaymentMail = function(registrationId) {
-		return $http.get('/api/send/receipt/' + registrationId)
+		return $http.get('/api/registrations/send/receipt/' + registrationId)
 	}
 
 	this.updateIsPaymentDone = function(registrationId, isPaymentDone) {

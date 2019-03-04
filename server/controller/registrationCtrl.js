@@ -213,14 +213,16 @@ exports.sendPaymentMail = async(req, res, next) => {
 
 exports.sendSinglePaymentMail = async(req, res, next) => {
 	try {
-		let reg = await RegistrationRepo.findById(req.param.registrationId);
-		let instance = platform.getPlatform(req.get('host'));
-		let receiptNr = await SequenceRepo.nextReceipt();
-		mail.sendReceiptMail(reg.emailParent, [reg], receiptNr.seq, instance);
+		let reg = await RegistrationRepo.findById(req.params.registrationId);
+		if(reg) {
+			let instance = platform.getPlatform(req.get('host'));
+			let receiptNr = await SequenceRepo.nextReceipt();
+			mail.sendReceiptMail(reg.emailParent, [reg], receiptNr.seq, instance);
 
-		res.status(201).json({ success: "true" });
-
-	} catch(err) { next(err); }
+			res.status(201).json({ success: "true" });
+		}
+		res.status(500).json({ success: "false", msg: "no registration found"})
+	} catch(err) { console.log(err); next(err); }
 }
 
 exports.sendReminderMail = async(req, res, next) => {
