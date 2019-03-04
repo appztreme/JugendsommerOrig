@@ -185,13 +185,19 @@ exports.sendPaymentMail = async(req, res, next) => {
 		if(req.params.eventId) {
 			let ids = await ActivityRepo.getActivityIdsForEvent(req.params.eventId);
 			activityIds = ids.map(function(v,i) { return v._id; });
+			let registrationsWithoutQueue = [];
 			let registrations = await RegistrationRepo.filter(curYear, null, null, null, null, activityIds);
-			let emails = registrations.map(function(v,i) { return v.emailParent; });
+			const activities = new Set(registrations.map((v,i) => v.activityId));
+			activities.forEach(vA => {
+				const fixRegistrations = registrations.filter(v => v.activityId._id === vA._id).filter((v,i) => i < vA.maxParticipants);
+				registrationsWithoutQueue = registrationsWithoutQueue.concat(fixRegistrations);
+			})
+			let emails = registrationsWithoutQueue.map(function(v,i) { return v.emailParent; });
 			let emailsUnique = new Set(emails);
 			var instance = platform.getPlatform(req.get('host'));
 			for(let email of emailsUnique) {
 				var sentWithError = false;
-				let registrationsPerMail = registrations.filter(reg => reg.emailParent === email && reg.isEmailNotified === false);
+				let registrationsPerMail = registrationsWithoutQueue.filter(reg => reg.emailParent === email && reg.isEmailNotified === false);
 				//console.log("email", email, registrationsPerMail.length);
 				if(registrationsPerMail.length === 0) continue;
 				let receiptNr = await SequenceRepo.nextReceipt();
@@ -203,6 +209,18 @@ exports.sendPaymentMail = async(req, res, next) => {
 		res.status(201).json({ success: "true"});
 	}
 	catch(err) { next(err); }	
+}
+
+exports.sendSinglePaymentMail = async(req, res, next) => {
+	try {
+		let reg = await RegistrationRepo.findById(req.param.registrationId);
+		let instance = platform.getPlatform(req.get('host'));
+		let receiptNr = await SequenceRepo.nextReceipt();
+		mail.sendReceiptMail(reg.emailParent, [reg], receiptNr.seq, instance);
+
+		res.status(201).json({ success: "true" });
+
+	} catch(err) { next(err); }
 }
 
 exports.sendReminderMail = async(req, res, next) => {

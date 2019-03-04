@@ -164,6 +164,15 @@
   content: counter(serial-number);  /* Display the counter */
 }
 
+.tbl-serial4 {
+  counter-reset: serial-number;
+}
+
+.tbl-serial4 td:nth-child(4):before {
+  counter-increment: serial-number;
+  content: counter(serial-number);
+}
+
 .tbl-serial1 {
   counter-reset: serial-number;  /* Set the serial number counter to 0 */
 }

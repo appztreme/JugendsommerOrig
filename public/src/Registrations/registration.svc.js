@@ -53,6 +53,10 @@ app.service('RegistrationSvc', function($http) {
 		return $http.put('/api/registrations', reg);
 	};
 
+	this.sendPaymentMail = function(registrationId) {
+		return $http.get('/api/send/receipt/' + registrationId)
+	}
+
 	this.updateIsPaymentDone = function(registrationId, isPaymentDone) {
 		var update = { _id: registrationId, isPaymentDone: isPaymentDone };
 		return $http.patch('/api/registrations/updateIsPaymentDone', update);

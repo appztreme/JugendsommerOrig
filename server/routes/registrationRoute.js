@@ -15,6 +15,8 @@ router.post('/', auth.requiresApiLogin, RegistrationController.create);
 
 router.get('/send/receipts/:eventId', auth.requiresRole('admin'), RegistrationController.sendPaymentMail);
 
+router.get('/send/receipt/:registrationId', auth.requiresRole('admin'), RegistrationController.sendSinglePaymentMail);
+
 router.get('/send/reminder/:eventId', auth.requiresRole('admin'), RegistrationController.sendReminderMail);
 
 router.put('/', auth.requiresApiLogin, RegistrationController.update);

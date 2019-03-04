@@ -95,6 +95,13 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 		});
 	};
 
+	$scope.sendPaymentMail = function(registrationId) {
+		ReportCacheSvc.lastVerticalScrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+		RegistrationSvc.sendPaymentMail(registrationId).then(function(err, res) {
+			$route.reload();
+		})
+	}
+
 	$scope.isOnWait = function(reg) {
 		return reg.activityId.maxParticipants <= $scope.registrations.indexOf(reg);
 	}

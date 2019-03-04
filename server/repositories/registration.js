@@ -5,8 +5,11 @@ const Registration = require('./../models/registration');
 const curYear = new Date().getFullYear();
 const startCurYear = new Date(curYear,1,1);
 
-exports.findByEventId = (id) => {
-    return Registration.find()
+exports.findById = (id) => {
+    return Registration
+        .findById(id)
+        .populate({path:'activityId', populate:{path:'eventId'}})
+        .exec();
 }
 
 exports.findNotifiedWithoutPayment = (year, activityIds) => {
