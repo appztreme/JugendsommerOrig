@@ -18,6 +18,12 @@ app.controller('MyRegistrationsCtrl', function($scope, $location, $route, Regist
 		return $scope.lang == 'de' ? "nein" : "no";
 	};
 
+	$scope.deleteRegistration = function(registrationId) {
+		RegistrationSvc.deleteByUser(registrationId).then(function(err, reg) {
+			$route.reload();
+		});
+	};
+
 	RegistrationSvc.findByUser(IdentitySvc.currentUser._id).success(function(registrations) {
 		$scope.registrations = registrations;
 		$scope.user = IdentitySvc.currentUser;

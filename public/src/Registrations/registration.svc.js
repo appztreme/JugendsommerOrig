@@ -45,6 +45,10 @@ app.service('RegistrationSvc', function($http) {
 		return $http.delete('/api/registrations/' + registrationId);
 	};
 
+	this.deleteByUser = function(registrationId) {
+		return $http.delete('/api/myRegistrations/' + registrationId);
+	}
+
 	this.create = function(reg) {
 		return $http.post('/api/registrations', reg);
 	};

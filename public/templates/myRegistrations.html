@@ -19,6 +19,7 @@
 			<th>{{"MYRESERVATION.LABEL_MAIL_PARENT" | translate}}</th>
 			<th>{{"MYRESERVATION.LABEL_TEL_PARENT" | translate}}</th>
 			<th></th>
+			<th ng-show='platform.isJDUL() || platform.isTest()'></th>
 		</tr>
 		<tr ng-repeat='reg in registrations | filter:filterReport(reg) | orderBy:colNameSort'>
 			<td>{{reg.activityId.eventId.location}} - {{reg.activityId.eventId.name}}</td>
@@ -33,6 +34,7 @@
 			<td><a href='mailto:{{reg.emailParent}}'>{{reg.emailParent}}</a></td>
 			<td>{{reg.phoneNumberParent}}</td>
 			<td><a href='/#/editOwnRegistration/{{reg._id}}' class="btn glyphicon glyphicon-pencil" type="button"></a></td>
+			<td ng-show='platform.isJDUL() || platform.isTest()'><button type="button" class="btn glyphicon glyphicon-trash" ng-click='deleteRegistration(reg._id)'></button></td>
 		</tr>
 	</table>
 </div>
