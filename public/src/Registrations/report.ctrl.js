@@ -96,13 +96,15 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 	};
 
 	$scope.isEmailNotified = function(registration) {
-		return registration && registration.isEmailNotified;
+		console.log(registration, registration.isEmailNotified);
+		return registration !== null && registration.isEmailNotified === true;
 	}
 
 	$scope.sendPaymentMail = function(registrationId) {
 		ReportCacheSvc.lastVerticalScrollPosition = window.pageYOffset || document.documentElement.scrollTop;
 		RegistrationSvc.sendPaymentMail(registrationId).then(function(err, res) {
-			$route.reload();
+			$location.path('/report/');
+			//$route.reload();
 		})
 	}
 
