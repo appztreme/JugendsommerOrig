@@ -269,7 +269,7 @@ function getJDBLFooter() {
 
 function getJDBLReceiptFooter() {
 	var footer = '<table>';
-	footer += '<tr><td><h4>Günter Reichhalter</h4></td></tr>';
+	footer += '<tr><td><h4>Günther Reichhalter</h4></td></tr>';
 	footer += '<tr><td><h4>Geschäftsführung</h4></td></tr>';
 	footer += '<tr></tr>';	
 	footer += '<tr><td><h4>Jugenddienst Bozen-Land</h4></td></tr>';

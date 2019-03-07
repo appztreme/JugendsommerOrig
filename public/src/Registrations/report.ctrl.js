@@ -95,7 +95,7 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 		});
 	};
 
-	$scope.isEmailNotified = function(registration) {
+	$scope.isEmailSent = function(registration) {
 		console.log(registration, registration.isEmailNotified);
 		return registration !== null && registration.isEmailNotified === true;
 	}
