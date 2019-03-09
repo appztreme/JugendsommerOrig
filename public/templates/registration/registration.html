@@ -218,7 +218,8 @@
 							<li ng-repeat='activity in activities' class='list-group-item'>
 								<div class='row'>
 									<div class='col-sm-1' ng-disabled='isReserveable(activity)'>
-										<input type="checkbox" value="" ng-disabled='canNotReserve(activity)' ng-click="toggleActivity(activity._id)">
+										<input ng-show="!platform.isKiso()" type="checkbox" value="" ng-disabled='canNotReserve(activity)' ng-click="toggleActivity(activity._id)">
+										<input ng-show="platform.isKiso()" type="radio" name="activities" value="" ng-disabled='canNotReserve(activity)' ng-click="toggleActivity(activity._id)">
 									</div>
 									<div class='col-sm-3'>
 										<strong ng-show="lang == 'de'">{{activity.name}}</strong>

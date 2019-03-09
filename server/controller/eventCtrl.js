@@ -144,6 +144,8 @@ exports.create = (req, res, next) => {
 		budgetFood: req.body.budgetFood,
 		budgetBusiness: req.body.budgetBusiness,
 		feePerWeek: req.body.feePerWeek,
+		optionalFeePerWeek: req.body.optionalFeePerWeek,
+		siblingDiscount: req.body.siblingDiscount,
 	  	info: req.body.info,
 		info_it: req.body.info_it,
 		isInternal: req.body.isInternal
@@ -181,6 +183,8 @@ exports.update = (req, res, next) => {
 		ev.budgetFood = req.body.budgetFood;
 		ev.budgetBusiness = req.body.budgetBusiness;
 		ev.feePerWeek = req.body.feePerWeek;
+		ev.optionalFeePerWeek = req.body.optionalFeePerWeek;
+		ev.siblingDiscount = req.body.siblingDiscount;
 		ev.info = req.body.info;
 		ev.info_it = req.body.info_it;
 		ev.isInternal = req.body.isInternal;

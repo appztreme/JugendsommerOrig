@@ -21,6 +21,8 @@ var eventSchema = db.Schema({
 	budgetBusiness: { type: Number, required: true, default: 0 },
 	budgetFood: { type: Number, required: true, default: 0 },
 	feePerWeek: { type: Number, required: true, default: 0 },
+	siblingDiscount: { type: Number, required: true, default: 0 },
+	optionalFeePerWeek: { type: Number, required: true, default: 0 },
 	info: { type: String, required: true },
 	info_it: { type: String, required: true },
 	isInternal: { type: Boolean, required: true, default: false },

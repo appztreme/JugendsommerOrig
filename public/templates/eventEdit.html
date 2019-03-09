@@ -134,6 +134,24 @@
 				</p>
 			</div>
 	</div>	
+	<!-- OPTIONALFEEPERWEEK -->
+	<div class='form-group' ng-class='{ "has-error": eventForm.optionalFeePerWeek.$invalid }'>
+		<label for='optionalFeePerWeek' class='control-label col-sm-2'>freiwilliger Preis</label>
+		<div class='col-sm-10'>
+			<p class='input-group'>
+				<input type='number' ng-model='optionalFeePerWeek' step='0.01' class="form-control" required></input>
+			</p>
+		</div>
+	</div>
+	<!-- SIBLINGDISCOUNT -->
+	<div class='form-group' ng-class='{ "has-error": eventForm.siblingDiscount.$invalid }'>
+		<label for='siblingDiscount' class='control-label col-sm-2'>Geschwisterrabatt</label>
+		<div class='col-sm-10'>
+			<p class='input-group'>
+				<input type='number' ng-model='siblingDiscount' step='0.01' class="form-control" required></input>
+			</p>
+		</div>
+	</div>
 	<!-- INFO -->
 	<div class='form-group' ng-class='{ "has-error": eventForm.info.$invalid }'>
 		<label for='info' class='control-label col-sm-2'>Info</label>

@@ -22,6 +22,8 @@ app.controller('EventEditCtrl', function($scope, $routeParams, $location, Notifi
 			$scope.event.budgetBusiness = $scope.budgetBusiness;
 			$scope.event.budgetFood = $scope.budgetFood;
 			$scope.event.feePerWeek = $scope.feePerWeek;
+			$scope.event.optionalFeePerWeek = $scope.optionalFeePerWeek;
+			$scope.event.siblingDiscount = $scope.siblingDiscount;
 			$scope.event.info = $scope.info;
 			$scope.event.info_it = $scope.info_it;
 			$scope.event.isInternal = $scope.isInternal;
@@ -64,6 +66,8 @@ app.controller('EventEditCtrl', function($scope, $routeParams, $location, Notifi
 		$scope.budgetBusiness = ev.budgetBusiness;
 		$scope.budgetFood = ev.budgetFood;
 		$scope.feePerWeek = ev.feePerWeek;
+		$scope.optionalFeePerWeek = ev.optionalFeePerWeek;
+		$scope.siblingDiscount = ev.siblingDiscount;
 		$scope.info = ev.info;
 		$scope.info_it = ev.info_it;
 		$scope.isInternal = ev.isInternal;

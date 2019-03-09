@@ -36,6 +36,8 @@ app.controller('EventNewCtrl', function($scope, $location, EventsSvc, Notificati
 				budgetBusiness: $scope.budgetBusiness,
 				budgetFood: $scope.budgetFood,
 				feePerWeek: $scope.feePerWeek,
+				optionalFeePerWeek: $scope.optionalFeePerWeek,
+				siblingDiscount: $scope.siblingDiscount,
 				info: $scope.info,
 				info_it: $scope.info_it,
 				isInternal: $scope.isInternal,
@@ -55,6 +57,8 @@ app.controller('EventNewCtrl', function($scope, $location, EventsSvc, Notificati
 				$scope.budgetBusiness = 0;
 				$scope.budgetFood = 0;
 				$scope.feePerWeek = 0;
+				$scope.optionalFeePerWeek = 0;
+				$scope.siblingDiscount = 0;
 				$scope.info = null;
 				$scope.info_it = null;
 				$scope.isInternal = false;
