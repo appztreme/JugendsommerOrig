@@ -1,0 +1,12 @@
+<div>
+<div ng-show="platform.isJDBL() || platform.isJugendsommer()" ng-include src='"templates/agb/agb-jdbl.html"'></div>
+
+<div ng-show="platform.isKiso() && lang == 'de'" ng-include src='"templates/agb/agb-kiso-de.html"'></div>
+<div ng-show="platform.isKiso() && lang == 'it'" ng-include src='"templates/agb/agb-kiso-it.html"'></div>
+
+<div ng-show="platform.isJDUL() && lang == 'de'"  ng-include src='"templates/agb/agb-jdul-de.html"'></div>
+<div ng-show="platform.isJDUL() && lang == 'it'" ng-include src='"templates/agb/agb-jdul-it.html"'></div>
+
+<div ng-show="platform.isTest() && lang == 'de'" ng-include src='"templates/agb/agb-kiso-de.html"'></div>
+<div ng-show="platform.isTest() && lang == 'it'" ng-include src='"templates/agb/agb-kiso-it.html"'></div>
+</div>

@@ -14,6 +14,10 @@ app.config(function($routeProvider) {
 			controller: 'InfoCtrl',
 			templateUrl: '../templates/info/info.html'
 		})
+		.when('/agb', {
+			controller: 'AgbCtrl',
+			templateUrl: '../templates/agb/agb.html'
+		})
 		.when('/report', {
 			controller: 'ReportCtrl',
 			templateUrl: '../templates/report.html'

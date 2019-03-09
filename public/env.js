@@ -25,7 +25,8 @@
             "RESERVATIONS": "Anmeldungen",
             "PAYMENT": "Auszahlung",
             "LENDINGS": "Material",
-            "USERSEARCH": "User"
+            "USERSEARCH": "User",
+            "AGB": "AGB"
         },
         "LOGIN": {
             "USER": "User",
@@ -160,7 +161,8 @@
             "RESERVATIONS": "Prenotazioni",
             "PAYMENT": "Computo",
             "LENDINGS": "Materiale",
-            "USERSEARCH": "Utente"
+            "USERSEARCH": "Utente",
+            "AGB": "Condizioni Generali"
         },
         "LOGIN": {
             "USER": "Utente",
