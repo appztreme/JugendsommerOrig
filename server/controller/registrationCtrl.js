@@ -86,6 +86,8 @@ exports.create = async(req, res, next) => {
 			canGoHomeAllone: req.body.canGoHomeAllone,
 			isSiblingReservation: req.body.isSiblingReservation,
 			acceptsOptionalFee: req.body.acceptsOptionalFee,
+			acceptsNewsletter: req.body.acceptsNewsletter,
+			acceptsMediaPublication: req.body.acceptsMediaPublication,
 			commentInternal: req.body.commentInternal,
 			userId: req.body.userId
 		});
@@ -140,6 +142,10 @@ exports.update = (req, res, next) => {
 		reg.needsEbK = req.body.needsEbK;
 		reg.canSwim = req.body.canSwim;
 		reg.canGoHomeAllone = req.body.canGoHomeAllone;
+		reg.acceptsMediaPublication = req.body.acceptsMediaPublication;
+		reg.acceptsNewsletter = req.body.acceptsNewsletter;
+		reg.acceptsOptionalFee = req.body.acceptsOptionalFee;
+		reg.isSiblingReservation = req.body.isSiblingReservation;
 		reg.commentInternal = req.body.commentInternal;
 		reg.save(function(err, regDb) {
 			if(err) { return next(err); }

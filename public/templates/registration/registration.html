@@ -258,6 +258,9 @@
 			</div>
 			<div id="collapseThree" ng-class="(currentState === 3) ? 'panel-collapse collapse in' : 'panel-collapse collapse'" role="tabpanel" aria-labelledby="headingThree">
 				<div class="panel-body">
+					<div ng-show="platform.isTest()" class="col-sm-offset-2 col-sm4">
+						
+					</div>
 					<div class='col-sm-offset-2 col-sm4'>
 						<!--<input type='checkbox' name='agb' ng-model='acceptAGB'><strong>{{"RESERVATION.LABEL_TERMS1" | translate}}<button type="button" class="btn btn-default" data-toggle="modal" data-target=".bs-example-modal-lg">{{"RESERVATION.LABEL_TERMS2" | translate}}</button></strong></input>-->
 						<input type='checkbox' name='agb' ng-model='acceptAGB'><strong>{{"RESERVATION.LABEL_TERMS1" | translate}}<button type="button" class="btn btn-default" ng-click="toggleAgb()" >{{"RESERVATION.LABEL_TERMS2" | translate}}</button></strong></input>

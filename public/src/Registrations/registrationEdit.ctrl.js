@@ -38,6 +38,10 @@ app.controller('RegistrationEditCtrl', function($scope, $filter, $routeParams, $
 			$scope.registration.canGoHomeAllone = $scope.canGoHomeAllone;
 			$scope.registration.needsEbK = $scope.needsEbK;
 			$scope.registration.commentInternal = $scope.commentInternal;
+			$scope.registration.acceptsNewsletter = $scope.acceptsNewsletter;
+			$scope.registration.acceptsMediaPublication = $scope.acceptsMediaPublication;
+			$scope.registration.acceptsOptionalFee = $scope.acceptsOptionalFee;
+			$scope.registration.isSiblingRegistration = $scope.isSiblingRegistration;
 
 			RegistrationSvc.update( $scope.registration
 			).success(function(reg) {
@@ -69,6 +73,10 @@ app.controller('RegistrationEditCtrl', function($scope, $filter, $routeParams, $
 				$scope.needsEbK = false;
 				$scope.disabilityDescription = null;
 				$scope.commentInternal = null;
+				$scope.acceptsMediaPublication = false;
+				$scope.acceptsNewsletter = false;
+				$scope.acceptsOptionalFee = false;
+				$scope.isSiblingRegistration = false;
 			})
 			.then(function() {
 				NotificationSvc.notify('Aenderungen erfolgreich gespeichert');
@@ -109,6 +117,10 @@ app.controller('RegistrationEditCtrl', function($scope, $filter, $routeParams, $
 		$scope.canGoHomeAllone = registration.canGoHomeAllone;
 		$scope.needsEbK = registration.needsEbK;
 		$scope.commentInternal = registration.commentInternal;
+		$scope.acceptsMediaPublication = registration.acceptsMediaPublication;
+		$scope.acceptsNewsletter = registration.acceptsNewsletter;
+		$scope.acceptsOptionalFee = registration.acceptsOptionalFee;
+		$scope.isSiblingRegistration = registration.isSiblingRegistration;
 
 		ActivitiesSvc.findAllSiblingsByActivityId(registration.activityId).success(function(activities) {
 			$scope.activities = activities;

@@ -62,6 +62,8 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 	$scope.hasDisability = false;
 	$scope.isSiblingReservation = false;
 	$scope.acceptsOptionalFee = false;
+	$scope.acceptsNewsletter = false;
+	$scope.acceptsMediaPublication = false;
 
 	$scope.isEmailEqual = function() {
 		if($scope.emailParent === '' || !$scope.emailParent || !$scope.emailParentCheck || $scope.emailParentCheck === '') return false;
@@ -170,6 +172,8 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 				canGoHomeAllone: $scope.canGoHomeAllone,
 				isSiblingReservation: $scope.isSiblingReservation,
 				acceptsOptionalFee: $scope.acceptsOptionalFee,
+				acceptsMediaPublication: $scope.acceptsMediaPublication,
+				acceptsNewsletter: $scope.acceptsNewsletter,
 				type: $scope.type
 			})
 			.error(function(err) {
@@ -202,6 +206,8 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 				$scope.needsEbK = false;
 				$scope.canSwim = false;
 				$scope.acceptsOptionalFee = false;
+				$scope.acceptsMediaPublication = false;
+				$scope.acceptsNewsletter = false;
 				$scope.isSiblingReservation = false;
 				$scope.canGoHomeAllone = false;
 				$scope.selectedActivities = [];

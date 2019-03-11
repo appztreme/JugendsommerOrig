@@ -31,11 +31,17 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 	}
 	  
 	$scope.calculateFee = function(reg) {
-		if(reg.activityId.eventId.deadline) {
-			if((moment(reg.activityId.eventId.deadline).hour(23).minute(59).second(59)).isBefore(moment(reg.registrationDate))) return reg.activityId.eventId.feePerWeek + reg.activityId.eventId.penalty;
-			return reg.activityId.eventId.feePerWeek;
+		var fee = reg.activityId.eventId.feePerWeek;
+		if(reg.acceptsOptionalFee) {
+			fee = fee + reg.activityId.eventId.optionalFeePerWeek;
 		}
-		return reg.activityId.eventId.feePerWeek;
+		if(reg.isSiblingReservation) {
+			fee = fee - reg.activityId.eventId.siblingDiscount;
+		}
+		if(reg.activityId.eventId.deadline) {
+			if((moment(reg.activityId.eventId.deadline).hour(23).minute(59).second(59)).isBefore(moment(reg.registrationDate))) fee = fee + reg.activityId.eventId.penalty;	
+		}
+		return fee;
 	}
 
 	$scope.calculateOverallFee = function(registrations) {

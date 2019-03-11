@@ -42,6 +42,8 @@ var registrationSchema = db.Schema({
   commentInternal: { type: String, required: false },
   isSiblingReservation: { type: Boolean, required: true, default: false },
   acceptsOptionalFee: { type: Boolean, required: true, default: false },
+  acceptsNewsletter: { type: Boolean, required: true, default: false },
+  acceptsMediaPublication: { type: Boolean, required: true, default: false },
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: false }
 });
 
