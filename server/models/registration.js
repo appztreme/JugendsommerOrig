@@ -40,6 +40,8 @@ var registrationSchema = db.Schema({
   canGoHomeAllone: { type: Boolean, required: true, default: false },
   receiptNumber: { type: Number, required: false },
   commentInternal: { type: String, required: false },
+  isSiblingReservation: { type: Boolean, required: true, default: false },
+  acceptsOptionalFee: { type: Boolean, required: true, default: false },
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: false }
 });
 

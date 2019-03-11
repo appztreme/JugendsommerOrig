@@ -28,6 +28,14 @@
             "USERSEARCH": "User",
             "AGB": "AGB"
         },
+        "BTN": {
+            "RESERVE": "Anmelden",
+            "INFO": "Info",
+            "EDIT": "Edit",
+            "WEEKS": "Wochen",
+            "EXPENSE": "Ausgabe",
+            "TEXPENSE": "KM-Geld"
+        },
         "LOGIN": {
             "USER": "User",
             "PWD": "Passwort",
@@ -163,6 +171,14 @@
             "LENDINGS": "Materiale",
             "USERSEARCH": "Utente",
             "AGB": "Condizioni Generali"
+        },
+        "BTN": {
+            "RESERVE": "Iscrizione",
+            "INFO": "Info",
+            "EDIT": "Edit",
+            "WEEKS": "Wochen",
+            "EXPENSE": "Ausgabe",
+            "TEXPENSE": "KM-Geld"
         },
         "LOGIN": {
             "USER": "Utente",

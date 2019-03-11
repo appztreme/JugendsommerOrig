@@ -60,6 +60,8 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 	$scope.canSwim = false;
 	$scope.canGoHomeAllone = false;
 	$scope.hasDisability = false;
+	$scope.isSiblingReservation = false;
+	$scope.acceptsOptionalFee = false;
 
 	$scope.isEmailEqual = function() {
 		if($scope.emailParent === '' || !$scope.emailParent || !$scope.emailParentCheck || $scope.emailParentCheck === '') return false;
@@ -166,6 +168,8 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 				needsEbK: $scope.needsEbK,
 				canSwim: $scope.canSwim,
 				canGoHomeAllone: $scope.canGoHomeAllone,
+				isSiblingReservation: $scope.isSiblingReservation,
+				acceptsOptionalFee: $scope.acceptsOptionalFee,
 				type: $scope.type
 			})
 			.error(function(err) {
@@ -197,6 +201,8 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 				$scope.disabilityDescription = null;
 				$scope.needsEbK = false;
 				$scope.canSwim = false;
+				$scope.acceptsOptionalFee = false;
+				$scope.isSiblingReservation = false;
 				$scope.canGoHomeAllone = false;
 				$scope.selectedActivities = [];
 				$scope.currentState = 1;

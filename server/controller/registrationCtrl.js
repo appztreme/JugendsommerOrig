@@ -84,6 +84,8 @@ exports.create = async(req, res, next) => {
 			needsEbK: req.body.needsEbK,
 			canSwim: req.body.canSwim,
 			canGoHomeAllone: req.body.canGoHomeAllone,
+			isSiblingReservation: req.body.isSiblingReservation,
+			acceptsOptionalFee: req.body.acceptsOptionalFee,
 			commentInternal: req.body.commentInternal,
 			userId: req.body.userId
 		});
