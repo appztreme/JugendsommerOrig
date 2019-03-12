@@ -6,6 +6,7 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 
 	$scope.acceptAGB = false;
 	$scope.acceptInsurance = false;
+	$scope.acceptPrivacy = false;
 	$scope.currentState = 1;
 	$scope.selectedActivities = [];
 	$scope.emailParentCheck = '';
@@ -13,9 +14,13 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 
 	$scope.agbVisibility = false;
 	$scope.insuranceVisibility = false;
+	$scope.privacyVisibility = false;
+	$scope.mediaVisibility = false;
 
 	$scope.toggleAgb = function() { $scope.agbVisibility = !$scope.agbVisibility; }
+	$scope.togglePrivacy = function() { $scope.privacyVisibility = !$scope.privacyVisibility; }
 	$scope.toggleInsurance = function() { $scope.insuranceVisibility = !$scope.insuranceVisibility; }
+	$scope.toggleMedia = function() { $scope.mediaVisibility = !$scope.mediaVisibility; }
 
 	$scope.toggleActivity = function(id) {
 		var index = $scope.selectedActivities.indexOf(id);
@@ -101,6 +106,8 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 	$scope.isRegistrationAllowed = function() {
 		if($scope.platform.isJDUL())
 			return $scope.registrationForm.$valid && $scope.acceptAGB && $scope.acceptInsurance;
+		else if($scope.platform.isKiso() || $scope.platform.isTest())
+			return $scope.registrationForm.$valid && $scope.acceptAGB && $scope.acceptPrivacy;
 		else
 			return $scope.registrationForm.$valid && $scope.acceptAGB;
 	};

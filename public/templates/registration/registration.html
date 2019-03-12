@@ -258,13 +258,14 @@
 			</div>
 			<div id="collapseThree" ng-class="(currentState === 3) ? 'panel-collapse collapse in' : 'panel-collapse collapse'" role="tabpanel" aria-labelledby="headingThree">
 				<div class="panel-body">
-					<div ng-show="platform.isTest()" class="col-sm-offset-2 col-sm4">
-						
-					</div>
 					<div class='col-sm-offset-2 col-sm4'>
+						<div ng-show="(platform.isTest() || platform.isKiso())">
+							<input type='checkbox' name='optpayment' ng-model='acceptsOptionalFee'><strong>{{"RESERVATION.LABEL_OPTIONALPAYMENT" | translate}}</strong></input>
+						</div>
+						<br />
 						<!--<input type='checkbox' name='agb' ng-model='acceptAGB'><strong>{{"RESERVATION.LABEL_TERMS1" | translate}}<button type="button" class="btn btn-default" data-toggle="modal" data-target=".bs-example-modal-lg">{{"RESERVATION.LABEL_TERMS2" | translate}}</button></strong></input>-->
 						<input type='checkbox' name='agb' ng-model='acceptAGB'><strong>{{"RESERVATION.LABEL_TERMS1" | translate}}<button type="button" class="btn btn-default" ng-click="toggleAgb()" >{{"RESERVATION.LABEL_TERMS2" | translate}}</button></strong></input>
-							<div class="panel panel-default" ng-class="agbVisibility ? 'show' : 'hidden'">
+						<div class="panel panel-default" ng-class="agbVisibility ? 'show' : 'hidden'">
 							<div class="panel-body">
 								<div ng-show="platform.isJDBL() || platform.isJugendsommer()" ng-include src='"templates/agb/agb-jdbl.html"'></div>
 
@@ -281,7 +282,7 @@
 							</div>
 						</div>
 						<br />
-						<div ng-show="platform.isJDUL()">
+						<div ng-show="(platform.isTest() || platform.isJDUL())">
 							<input type='checkbox' name='insurance' ng-model='acceptInsurance'><strong>{{"RESERVATION.LABEL_INSUR1" | translate}}</strong></input>
 							<div class="panel panel-default">
 								<div class="panel-body">
@@ -290,15 +291,38 @@
 								</div>
 							</div>
 						</div>
+						<br />
+						<div ng-show="(platform.isTest() || platform.isKiso())">
+							<input type='checkbox' name='privacy' ng-model='acceptPrivacy'><strong>{{"RESERVATION.LABEL_PRIVACY1" | translate}}<button type="button" class="btn btn-default" ng-click="togglePrivacy()" >{{"RESERVATION.LABEL_PRIVACY2" | translate}}</button>{{"RESERVATION.LABEL_PRIVACY3" | translate}}</strong></input>
+							<div class="panel panel-default" ng-class="privacyVisibility ? 'show' : 'hidden'">
+								<div class="panel-body">
+									<div ng-show="(platform.isKiso() || platform.isTest()) && lang == 'de'" ng-include src='"templates/agb/privacy-kiso-de.html"'></div>
+									<div ng-show="(platform.isKiso() || platform.isTest()) && lang == 'it'" ng-include src='"templates/agb/privacy-kiso-it.html"'></div>
+								</div>
+							</div>
+						</div>
+						<br />
+						<div ng-show="(platform.isTest() || platform.isKiso())">
+							<input type='checkbox' name='media' ng-model='acceptsMediaPublication'><strong>{{"RESERVATION.LABEL_MEDIA1" | translate}}<button type="button" class="btn btn-default" ng-click="toggleMedia()" >{{"RESERVATION.LABEL_MEDIA2" | translate}}</button>{{"RESERVATION.LABEL_MEDIA3" | translate}}</strong></input>
+							<div class="panel panel-default" ng-class="mediaVisibility ? 'show' : 'hidden'">
+								<div class="panel-body">
+									<div ng-show="(platform.isKiso() || platform.isTest()) && lang == 'de'" ng-include src='"templates/agb/media-kiso-de.html"'></div>
+									<div ng-show="(platform.isKiso() || platform.isTest()) && lang == 'it'" ng-include src='"templates/agb/media-kiso-it.html"'></div>
+								</div>
+							</div>
+						</div>
+						<div ng-show="(platform.isTest() || platform.isKiso())">
+							<input type='checkbox' name='newsletter' ng-model='acceptsNewsletter'><strong>{{"RESERVATION.LABEL_NEWSLETTER" | translate}}</strong></input>
+						</div>
 					</div>
+				</div>
 					
-					<br />
-					<p class="bg-info" style='padding: 10px; margin-bottom: 0px;'>{{"RESERVATION.LABEL_REGISTRATION_PAY_INFO" | translate}}</p>
-					<p ng-show='platform.isJDUL()' class="bg-info" style="padding: 10px; margin-top: 0px;">{{"RESERVATION.LABEL_REGISTRATION_RECEIPT_INFO" | translate}}</p>
+				<br />
+				<p class="bg-info" style='padding: 10px; margin-bottom: 0px;'>{{"RESERVATION.LABEL_REGISTRATION_PAY_INFO" | translate}}</p>
+				<p ng-show='platform.isJDUL()' class="bg-info" style="padding: 10px; margin-top: 0px;">{{"RESERVATION.LABEL_REGISTRATION_RECEIPT_INFO" | translate}}</p>
 							
-					<div class='col-sm-offset-2 col-sm-8' style='margin-top:15px;'>
-						<input class='btn btn-success bnt-lg btn-block' ng-click='save()' translate-attr="{value: 'RESERVATION.BUTTON_SUBMIT'}" ng-disabled='!isRegistrationAllowed()'>
-					</div>
+				<div class='col-sm-offset-2 col-sm-8' style='margin-top:15px;'>
+					<input class='btn btn-success bnt-lg btn-block' ng-click='save()' translate-attr="{value: 'RESERVATION.BUTTON_SUBMIT'}" ng-disabled='!isRegistrationAllowed()'>
 				</div>
 			</div>
 		</div>

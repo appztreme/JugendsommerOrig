@@ -201,11 +201,17 @@ function calculateFee(activity) {
 }
 
 function calculateReceiptFee(reservation, activity) {
-	if(activity.eventId.deadline) {
-		if((moment(activity.eventId.deadline).hour(23).minute(59).second(59)).isBefore(moment(reservation.registrationDate))) return activity.eventId.feePerWeek + activity.eventId.penalty;
-		return activity.eventId.feePerWeek;
+	let fee = activity.eventId.feePerWeek;
+	if(reservation.acceptsOptionalFee) {
+		fee = fee + activity.eventId.optionalFeePerWeek;
 	}
-	return activity.eventId.feePerWeek;
+	if(reservation.isSiblingReservation) {
+		fee = fee - activity.eventId.siblingDiscount;
+	}
+	if(reg.activityId.eventId.deadline) {
+		if((moment(activity.eventId.deadline).hour(23).minute(59).second(59)).isBefore(moment(reservation.registrationDate))) fee = fee + activity.eventId.penalty;	
+	}
+	return fee;
 }
 
 function getActivityTable(activities) {
