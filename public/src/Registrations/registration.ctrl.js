@@ -10,6 +10,7 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 	$scope.currentState = 1;
 	$scope.selectedActivities = [];
 	$scope.emailParentCheck = '';
+	$scope.disabledForSibling = false;
 	$scope.platform = PlatformSvc;
 
 	$scope.agbVisibility = false;
@@ -125,7 +126,7 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 			$scope.emailParentCheck = RegistrationCacheSvc.lastRegistration.emailParent;
 			$scope.firstNameChild = RegistrationCacheSvc.lastRegistration.firstNameChild;
 			$scope.lastNameChild = RegistrationCacheSvc.lastRegistration.lastNameChild;
-			$scope.birthdayChild = $filter('date')(new Date(RegistrationCacheSvc.lastRegistration.birthdayChild), 'yyyy-MM-dd');
+			$scope.birthdayChild = new Date(RegistrationCacheSvc.lastRegistration.birthdayChild);
 			$scope.schoolChild = RegistrationCacheSvc.lastRegistration.schoolChild;
 			$scope.healthChild = RegistrationCacheSvc.lastRegistration.healthChild;
 			$scope.addressChild = RegistrationCacheSvc.lastRegistration.addressChild;
@@ -143,9 +144,20 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 			$scope.disabilityDescription = RegistrationCacheSvc.lastRegistration.disabilityDescription;
 			$scope.canSwim = RegistrationCacheSvc.lastRegistration.canSwim;
 			$scope.canGoHomeAllone = RegistrationCacheSvc.lastRegistration.canGoHomeAllone;
-			$scope.needsAbK = RegistrationSvc.lastRegistration.needsAbK;
+			//$scope.needsEbK = RegistrationSvc.lastRegistration.needsEbK;
 		}
 	};
+
+	$scope.updateSiblingFromCache = function() {
+		$scope.updateFromCache();
+		$scope.firstNameChild = null;
+		$scope.isSiblingReservation = true;
+		$scope.disabledForSibling = true;
+		$scope.birthdayChild = null;
+		$scope.schoolChild = null;
+		$scope.healthChild = null;
+		$scope.hasDisability = false;
+	}
 
 	$scope.save = function() {
 		if($scope.registrationForm.$valid) {

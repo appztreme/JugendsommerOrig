@@ -104,7 +104,7 @@ exports.create = async(req, res, next) => {
 							   .select('_id name name_it maxParticipants curParticipants eventId');
 	} catch(e) { console.log(e); }
 	Registration.create(regs, function(error, docs) {
-		if(error) { return next(error); }
+		if(error) { console.log(error); return next(error); }
 		var instance = platform.getPlatform(req.get('host'));
 		mail.sendTxtMail(req.body.emailParent, req.body.firstNameChild, req.body.lastNameChild, req.body.type, activities, req.body, instance);
 		res.status(201).json(docs);
