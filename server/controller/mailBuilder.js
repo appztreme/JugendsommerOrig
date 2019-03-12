@@ -82,8 +82,6 @@ exports.getSubject = function(instance, type) {
 }
 
 exports.getTypeText = function(type, firstNameChild, lastNameChild, location, instance, activities) {
-	instance.isKiso = false;
-	instance.isJDUL = true;
 	if(instance.isKiso) {
 		if(type === 'jumprun')
 			return textJumpRun;

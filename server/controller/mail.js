@@ -8,7 +8,7 @@ exports.sendTxtMail = function(recipient, firstNameChild, lastNameChild, type, a
 		var text = mailbuilder.getTypeText(type, firstNameChild, lastNameChild, activities[0].eventId.location, instance, activities);
         var fromEmail = mailbuilder.getSender(instance);
 		var subjectEmail = mailbuilder.getSubject(instance, type);
-		console.log("body", body);
+		//console.log("body", body);
 		server.send({
 		text: text,
 		from: fromEmail,
