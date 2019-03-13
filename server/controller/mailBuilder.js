@@ -136,7 +136,7 @@ exports.getTypeBody = function(type, firstNameChild, lastNameChild, activities, 
 		if(type === 'jumprun')
 			return htmlJumpRun;
 		else {
-			console.log(activities[0].eventId.name, activities[0].eventId.name.startWith("Kiso"))
+			console.log(activities[0].eventId.name, activities[0].eventId.name.startsWith("Kiso"))
 			if(activities[0].eventId.name.startsWith("Kiso")) return htmlKiso;
 			return htmlKisoSP;
 		}
