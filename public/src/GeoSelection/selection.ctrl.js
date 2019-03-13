@@ -56,11 +56,19 @@ app.controller('GeoSelectionCtrl', function($scope, $location, GeoSvc, $rootScop
                 $scope.locations = sel;
             });
         } else {
-            GeoSvc.getSelection().success(function(sel) {
-                addNameProp(sel);
-                $scope.locations = sel;
-                console.log(sel);
-            }).error(function(err) { console.log("err", err)});
+            $scope.locations = [{
+                $$hashKey: "object:130",
+                countEvents: 2,
+                distinctTypes: ["summer"],
+                name: "Bozen",
+                name_it: "Bolzano",
+                _id: "Bozen"
+            }];
+            // GeoSvc.getSelection().success(function(sel) {
+            //     addNameProp(sel);
+            //     $scope.locations = sel;
+            //     console.log(sel);
+            // }).error(function(err) { console.log("err", err)});
         }
     }
 });

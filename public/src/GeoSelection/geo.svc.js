@@ -4,7 +4,7 @@ app.service('GeoSvc', function($http) {
 	var EVENT_SVC_PATH = '/api/events/';
 
     this.getSelection = function() {
-        return $http.get(EVENT_SVC_PATH + 'selection');
+		return $http.get(EVENT_SVC_PATH + 'selection');
     }
 
 	this.getSelectionAdmin = function() {
