@@ -88,7 +88,7 @@ exports.getTypeText = function(type, firstNameChild, lastNameChild, location, in
 		if(type === 'jumprun')
 			return textJumpRun;
 		else {
-			if(activities[0].eventId.name.startsWith("Kiso")) return textKiso;
+			if(activities[0].eventId.name.startsWith("KiSo")) return textKiso;
 			return textKisoSP;
 		}
 			return textKiso;
@@ -136,8 +136,8 @@ exports.getTypeBody = function(type, firstNameChild, lastNameChild, activities, 
 		if(type === 'jumprun')
 			return htmlJumpRun;
 		else {
-			console.log(activities[0].eventId.name, activities[0].eventId.name.startsWith("Kiso"))
-			if(activities[0].eventId.name.startsWith("Kiso")) return htmlKiso;
+			console.log(activities[0].eventId.name, activities[0].eventId.name.startsWith("KiSo"))
+			if(activities[0].eventId.name.startsWith("KiSo")) return htmlKiso;
 			return htmlKisoSP;
 		}
 	}
