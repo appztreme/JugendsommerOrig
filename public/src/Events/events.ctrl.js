@@ -87,6 +87,7 @@ app.controller('EventsCtrl', function($scope, $routeParams, $location, EventsSvc
 				});
 			} else {
 				EventsSvc.findByLocation($routeParams.location).success(function(evs) {
+					console.log(evs);
 					$scope.events = $scope.filterEvents(evs);
 				});
 			}
