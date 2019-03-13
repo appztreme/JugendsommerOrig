@@ -9,7 +9,7 @@
 		<tr>
 			<th>{{"MYRESERVATION.LABEL_EVENT" | translate}}</th>
 			<th>{{"MYRESERVATION.LABEL_ACTIVITY" | translate}}</th>
-			<th>{{"MYRESERVATION.LABEL_ACCEPT" | translate}}</th>
+			<th ng-show='!platform.isKiso()'>{{"MYRESERVATION.LABEL_ACCEPT" | translate}}</th>
 			<th>{{"MYRESERVATION.LABEL_PAYED" | translate}}</th>
 			<th>{{"MYRESERVATION.LABEL_FIRSTNAME_CHILD" | translate}}</th>
 			<th>{{"MYRESERVATION.LABEL_LASTNAME_CHILD" | translate}}</th>
@@ -24,7 +24,7 @@
 		<tr ng-repeat='reg in registrations | filter:filterReport(reg) | orderBy:colNameSort'>
 			<td>{{reg.activityId.eventId.location}} - {{reg.activityId.eventId.name}}</td>
 			<td>{{reg.activityId.name}}</td>
-			<td class='bg-success'>{{formatBool(true)}}</td>
+			<td ng-show='!platform.isKiso()' class='bg-success'>{{formatBool(true)}}</td>
 			<td ng-class='{"bg-success": reg.isPaymentDone, "bg-danger": !reg.isPaymentDone}'>{{formatBool(reg.isPaymentDone)}}</td>
 			<td>{{reg.firstNameChild}}</td>
 			<td>{{reg.lastNameChild}}</td>
