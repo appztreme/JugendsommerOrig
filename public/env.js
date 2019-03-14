@@ -101,7 +101,7 @@
             "HEADER_STEP2": "2. Woche auswählen",
             "HEADER_STEP3": "3. Bestätigen",
             "LABEL_LOAD_PREVIOUS": "Daten von letzter Anmeldung verwenden",
-            "LABEL_LOAD_SIBLING": "Geschwister registrieren",
+            "LABEL_LOAD_SIBLING": "Geschwisterkind anmelden (Rabatt)",
             "LABEL_FIRSTNAME_PARENT": "Vorname",
             "LABEL_LASTNAME_PARENT": "Familienname",
             "LABEL_TEL_PARENT": "Tel",
