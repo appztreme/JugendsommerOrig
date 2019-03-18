@@ -102,7 +102,7 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 	};
 
 	$scope.isEmailSent = function(registration) {
-		console.log(registration, registration.isEmailNotified);
+		console.log("reg", registration, registration.isEmailNotified);
 		return registration !== null && registration.isEmailNotified === true;
 	}
 
@@ -222,6 +222,13 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 					type: p.eventId.type
 				}
 			}), '_id');
+			$scope.events.sort(function(a,b) {
+				var nameA = a.name.toUpperCase();
+  				var nameB = b.name.toUpperCase();
+  				if (nameA < nameB) return -1;
+				if (nameA > nameB) return 1;
+				return 0;
+			});
 
 			$scope.allActivities = _.uniq(_.map(params, function(p) {
 				return {
