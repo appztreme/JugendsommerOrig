@@ -179,7 +179,7 @@
 			<td ng-class='{"bg-success": reg.isEmailNotified, "bg-danger": !reg.isEmailNotified}'><input type='checkbox' ng-model='reg.isEmailNotified' ng-change='updateIsEmailNotified(reg._id, reg.isEmailNotified)' style='margin-right:8px' />{{formatBool(reg.isEmailNotified)}}</td>
 			<td>{{reg.receiptNumber}}</td>
 			<td align="right">{{calculateFee(reg)}}</td>
-			<td ng-show='platform.isKiso()'>{{formatBool(reg.optionalFeePerWeek)}}</td>
+			<td ng-show='platform.isKiso()'>{{formatBool(reg.acceptsOptionalFee)}}</td>
 			<td ng-show='platform.isKiso()'>{{formatBool(reg.isSiblingReservation)}}</td>
 			<td>{{reg.birthdayChild | date: 'dd/MM/yyyy'}}</td>
 			<td>{{reg.schoolChild}}</td>
