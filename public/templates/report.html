@@ -126,6 +126,8 @@
 			<th>Benachrichtigt</th>
 			<th>RechnungsNr</th>
 			<th>Betrag</th>
+			<th ng-show='platform.isKiso()'>Aufpreis</th>
+			<th ng-show='platform.isKiso()'>Geschwister</th>
 			<th>Geburtstag</th>
 			<th>Schulstufe
 				<div ng-show="isBatchUpdateAllowed()" class="input-group"><input type="text" class="form-control" style="min-width: 45px" ng-model="masterSchoolChild" /><div class="input-group-btn"><button type="button" class="btn btn-success" ng-click="updateBatchProperty('schoolChild', masterSchoolChild)">U</button></div></div>
@@ -177,6 +179,8 @@
 			<td ng-class='{"bg-success": reg.isEmailNotified, "bg-danger": !reg.isEmailNotified}'><input type='checkbox' ng-model='reg.isEmailNotified' ng-change='updateIsEmailNotified(reg._id, reg.isEmailNotified)' style='margin-right:8px' />{{formatBool(reg.isEmailNotified)}}</td>
 			<td>{{reg.receiptNumber}}</td>
 			<td align="right">{{calculateFee(reg)}}</td>
+			<td ng-show='platform.isKiso()'>{{formatBool(reg.optionalFeePerWeek)}}</td>
+			<td ng-show='platform.isKiso()'>{{formatBool(reg.isSiblingReservation)}}</td>
 			<td>{{reg.birthdayChild | date: 'dd/MM/yyyy'}}</td>
 			<td>{{reg.schoolChild}}</td>
 			<td>{{reg.healthChild}}</td>
