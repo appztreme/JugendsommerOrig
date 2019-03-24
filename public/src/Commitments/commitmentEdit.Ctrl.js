@@ -10,6 +10,7 @@ app.controller('CommitmentEditCtrl', function($scope, $routeParams, $location, I
 				name: $scope.name,
 				type: $scope.type,
 				description: $scope.description,
+				rnumber: $scope.rnumber,
 				date: $scope.date,
 				amount: $scope.amount,
 				userId: $scope.userId,
@@ -22,6 +23,7 @@ app.controller('CommitmentEditCtrl', function($scope, $routeParams, $location, I
 			}).success(function(commitment) {
 				$scope.name = null;
 				$scope.description = null;
+				$scope.rnumber = null;
 				$scope.date = null;
 				$scope.type = null;
 				$scope.amount = 0;
@@ -40,6 +42,7 @@ app.controller('CommitmentEditCtrl', function($scope, $routeParams, $location, I
 		$scope._id = com._id;
 		$scope.name = com.name;
 		$scope.description = com.description;
+		$scope.rnumber = com.rnumber;
 		$scope.type = com.type;
 		$scope.amount = com.amount;
 		$scope.eventId = com.eventId;

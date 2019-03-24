@@ -22,6 +22,7 @@ app.controller('CommitmentNewCtrl', function($scope, $routeParams, $location, No
 				name: $scope.name,
 				type: $scope.type,
 				description: $scope.description,
+				rnumber: $scope.rnumber,
 				date: $scope.date,
 				amount: $scope.amount,
 				userId: IdentitySvc.currentUser._id,
@@ -34,6 +35,7 @@ app.controller('CommitmentNewCtrl', function($scope, $routeParams, $location, No
 			}).success(function(commitment) {
 				$scope.name = null;
 				$scope.description = null;
+				$scope.rnumber = null;
 				$scope.date = null;
 				$scope.type = null;
 				$scope.amount = 0;

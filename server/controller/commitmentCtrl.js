@@ -70,6 +70,7 @@ exports.create = (req, res, next) => {
 	var commitment = new Commitment({
 		name: req.body.name,
 		description: req.body.description,
+		rnumber: req.body.rnumber,
 		date: req.body.date,
 		type: req.body.type,
 		amount: req.body.amount,
@@ -92,6 +93,7 @@ exports.update = (req, res, next) => {
 		if(!com) return next(new Error('Keine Rechnung im System mit id ' + req.body._id));
 		com.name = req.body.name;
 		com.description = req.body.description;
+		com.rnumber = req.body.rnumber;
 		com.date = req.body.date;
 		com.type = req.body.type;
 		com.amount = req.body.amount;

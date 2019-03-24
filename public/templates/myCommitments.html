@@ -42,6 +42,7 @@
 				<th>Buchungs-Nummer</th>
 				<th>Name</th>
 				<th>Beschreibung</th>
+				<th>RNummer</th>
 				<th>Datum</th>
 				<th>Betrag</th>
 				<th>Bezahlt</th>
@@ -54,7 +55,7 @@
 		</thead>
 		<tbody ng-repeat='grp in commitments'>
 			<tr>
-				<th colspan="5" class="bg-warning"><i><strong>{{getEventName(grp)}}</strong></i></th>
+				<th colspan="6" class="bg-warning"><i><strong>{{getEventName(grp)}}</strong></i></th>
         <th class="bg-warning" ng-show='iSvc.isAuthorized("admin")'><strong>Gesamtbudget:</strong></th>
 				<th class="bg-warning" ng-show='!iSvc.isAuthorized("admin")'></th>
 				<th class="bg-warning" ng-show='!iSvc.isAuthorized("admin")'></th>
@@ -64,7 +65,7 @@
 			<!-- HEAD BUSINESS -->
 			<tr>
 				<td colspan="2"><button class="btn btn-default glyphicon glyphicon-resize-full" ng-click="toggleVisibility(grp['business'])"></button></td>
-				<td colspan="3" class="bg-warning"><i><strong>Sachkosten</strong></i></td>
+				<td colspan="4" class="bg-warning"><i><strong>Sachkosten</strong></i></td>
         		<td class="bg-warning"><strong>Budget:</strong></td>
 				<td align="right" class="bg-primary"><strong>{{formatDec(grp['business'][0].eventId.budgetBusiness)}}</strong></td>
 				<td class="bg-warning" colspan="2"><strong>Restbudget:</strong></td>
@@ -78,7 +79,8 @@
 	  			<td><button type="button" class="btn glyphicon glyphicon-trash" align="center" ng-disabled='!iSvc.isAuthorized("admin")' ng-click='deleteCommitment(com._id)'></button></td>
 				<td>{{com.index}}</td>
 				<td>{{com.name}}</td>
-			  	<td>{{com.description}}</td>
+					<td>{{com.description}}</td>
+					<td>{{com.rnumber}}</td>
 			  	<td>{{com.date | date: 'dd/MM/yyyy'}}</td>
         		<td align="right">{{formatDec(com.amount)}}</td>
         		<td align="center" ng-class='{"bg-info": com.isPaymentDone}'>{{formatBool(com.isPaymentDone)}}</td>
@@ -91,7 +93,7 @@
 			<!-- FOOTER BUSINESS -->
 			<tr>
 				<td colspan="2"></td>
-				<td colspan="4"><strong>Summe:</strong></td>
+				<td colspan="5"><strong>Summe:</strong></td>
 				<td align="right" ng-class='{"bg-success": !isOverBudget(grp["business"], "business"), "bg-danger": isOverBudget(grp["business"], "business")}'><strong>{{sumGrpAll(grp["business"])}}</strong></td>
 				<td align="right"><strong>{{sumGrpIsPaymentDone(grp["business"])}}</strong></td>
         		<td align="right"><strong>{{sumGrpIsPaymentJDDone(grp["business"])}}</strong></td>
@@ -101,7 +103,7 @@
 			<!-- HEADER FOOD -->
 			<tr ng-show='iSvc.isAuthorized("admin")'>
 				<td colspan="2"><button class="btn btn-default glyphicon glyphicon-resize-full" ng-click="toggleVisibility(grp['food'])"></button></td>
-				<td colspan="3" class="bg-warning"><i><strong>Essenskosten</strong></i></td>
+				<td colspan="4" class="bg-warning"><i><strong>Essenskosten</strong></i></td>
         		<td class="bg3warning"><strong>Budget:</strong></td>
 				<td align="right" class="bg-primary"><strong>{{formatDec(grp['food'][0].eventId.budgetFood)}}</strong></td>
 				<td class="bg-warning" colspan="2"><strong>Restbudget	:</strong></td>
@@ -115,7 +117,8 @@
   			<td><button type="button" class="btn glyphicon glyphicon-trash" ng-disabled='!iSvc.isAuthorized("admin")' ng-click='deleteCommitment(com._id)'></button></td>
 				<td>{{com.index}}</td>
 				<td>{{com.name}}</td>
-			  	<td>{{com.description}}</td>
+					<td>{{com.description}}</td>
+				<td>{{com.rnumber}}</td>
 			  	<td>{{com.date | date: 'dd/MM/yyyy'}}</td>
         		<td align="right">{{formatDec(com.amount)}}</td>
         		<td align="center" ng-class='{"bg-info": com.isPaymentDone}'>{{formatBool(com.isPaymentDone)}}</td>
@@ -128,7 +131,7 @@
       <!-- FOOTER FOOD -->
 			<tr ng-show='iSvc.isAuthorized("admin")'>
 				<td colspan="2"></td>
-				<td colspan="4"><strong>Summe:</strong></td>
+				<td colspan="5"><strong>Summe:</strong></td>
 				<td align="right" ng-class='{"bg-success": !isOverBudget(grp["food"], "food"), "bg-danger": isOverBudget(grp["food"], "food")}'><strong>{{sumGrpAll(grp["food"])}}</strong></td>
 				<td align="right"><strong>{{sumGrpIsPaymentDone(grp["food"])}}</strong></td>
         		<td align="right"><strong>{{sumGrpIsPaymentJDDone(grp["food"])}}</strong></td>
@@ -138,7 +141,7 @@
       <!-- HEAD TRAVEL -->
 			<tr>
 				<td colspan="2"><button class="btn btn-default glyphicon glyphicon-resize-full" ng-click="toggleVisibility(grp['travel'])"></button></td>
-				<td colspan="3" class="bg-warning"><i><strong>Fahrtkosten</strong></i></td>
+				<td colspan="4" class="bg-warning"><i><strong>Fahrtkosten</strong></i></td>
         		<td class="bg-warning"></td>
 				<td align="right" class="bg-primary"></td>
 				<td colspan="5" class="bg-warning"></td>
@@ -150,7 +153,7 @@
   				<td><button type="button" class="btn glyphicon glyphicon-trash" ng-disabled='!iSvc.isAuthorized("admin")' ng-click='deleteCommitment(com._id)'></button></td>
 				<td>{{com.index}}</td>
 				<td>{{com.name}}</td>
-			  	<td>{{com.description}}</td>
+			  	<td colspan="2">{{com.description}}</td>
 			  	<td>{{com.date | date: 'dd/MM/yyyy'}}</td>
         		<td align="right">{{formatDec(com.amount)}}</td>
         		<td align="center"></td>
@@ -163,7 +166,7 @@
 			<!-- FOOTER TRAVEL -->
 			<tr>
 				<td colspan="2"></td>
-				<td colspan="4"><strong>Summe:</strong></td>
+				<td colspan="5"><strong>Summe:</strong></td>
 				<td align="right"><strong>{{formatDec(sumGrpAll(grp["travel"]))}}</strong></td>
 				<td align="right"></td>
         		<td align="right"></td>
@@ -171,7 +174,7 @@
 				<td colspan="3"></td>
 			</tr>
       		<tr>
-				<td colspan="6"><strong>Summe:</strong></td>
+				<td colspan="7"><strong>Summe:</strong></td>
 				<td align="right"><strong>{{formatDec(sumGrpTypes(grp))}}</strong></td>
 				<td colspan="6"></td>
 			</tr>
