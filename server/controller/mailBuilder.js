@@ -214,7 +214,7 @@ function calculateReceiptFee(reservation, activity) {
 	if(reservation.isSiblingReservation) {
 		fee = fee - activity.eventId.siblingDiscount;
 	}
-	if(reg.activityId.eventId.deadline) {
+	if(reservation.activityId.eventId.deadline) {
 		if((moment(activity.eventId.deadline).hour(23).minute(59).second(59)).isBefore(moment(reservation.registrationDate))) fee = fee + activity.eventId.penalty;	
 	}
 	return fee;
