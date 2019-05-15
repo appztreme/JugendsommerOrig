@@ -4,6 +4,11 @@ app.controller('ShopReservationCtrl', function($scope, $routeParams, IdentitySvc
     $scope.count = 1;
     $scope.responses = [];
 
+    if($scope.iSvc.currentUser) {
+        $scope.lender = $scope.iSvc.currentUser.firstName + ' ' + $scope.iSvc.currentUser.lastName;
+        $scope.phoneNumber = $scope.iSvc.currentUser.userTel;
+    }
+
     $scope.setState = function(state) {
 		$scope.currentState = state;
     }

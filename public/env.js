@@ -17,7 +17,7 @@
         "NAV": {
             "INFO": "Info",
             "PROGRAM": "Anmeldung",
-            "MYRES": "Meine Reservierungen",
+            "MYRES": "Meine Anmeldungen",
             "MYCOMMITS": "Meine Rechnungen",
             "REPORT": "Report",
             "PRESENCE": "Anwesenheit",

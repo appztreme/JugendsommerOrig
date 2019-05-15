@@ -5,14 +5,14 @@
         <li><a id='nav_link_programme' href='/#/'>{{'NAV.PROGRAM' | translate}}</a></li>
         <li ng-show='iSvc.isAuthenticated()'><a id='nav_link_myres' href='/#/myRegistrations'>{{'NAV.MYRES' | translate}}</a></li>
         <li ng-show='iSvc.isAuthorized("fadmin")'><a href='/#/myCommitments'>{{'NAV.MYCOMMITS' | translate}}</a></li>
-        <li ng-show='iSvc.isAuthorized("admin")' class="dropdown">
+        <li ng-show='iSvc.isAuthorized("fadmin") || iSvc.isAuthorized("admin)"' class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                 {{'NAV.REPORT' | translate}} <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
                 <li ng-show='iSvc.isAuthorized("admin")'><a href='/#/report'>{{'NAV.RESERVATIONS' | translate}}</a></li>
                 <li ng-show='iSvc.isAuthorized("admin") && !isKiso'><a href='/#/payment'>{{'NAV.PAYMENT' | translate}}</a></li>
-                <li ng-show='iSvc.isAuthorized("admin")'><a href='/#/reportPresence'>{{'NAV.PRESENCE' | translate}}</a></li>
+                <li ng-show='iSvc.isAuthorized("admin") || iSvc.isAuthorized("fadmin")'><a href='/#/reportPresence'>{{'NAV.PRESENCE' | translate}}</a></li>
                 <li ng-show='iSvc.isAuthorized("admin")'><a href='/#/reportOverview'>{{'NAV.OVERVIEW' | translate}}</a></li>
             </ul>
         </li>
