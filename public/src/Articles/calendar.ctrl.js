@@ -13,6 +13,16 @@ app.controller('ShopCalendarCtrl', function($scope, $routeParams, IdentitySvc, L
         $scope.location = undefined;
     }
 
+    $scope.clearFromSelection = function() {
+        $scope.loans = [];
+        $scope.from = undefined;
+    }
+    
+    $scope.clearToSelection = function() {
+        $scope.loans = [];
+        $scope.to = undefined;
+    }
+
     $scope.clearLenderSelection = function() {
         $scope.loans = [];
         $scope.lender = undefined;

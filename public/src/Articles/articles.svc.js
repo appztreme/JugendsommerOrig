@@ -1,8 +1,9 @@
 var app = angular.module('js');
 
 app.service('ArticlesSvc', function($http) {
-    this.overview = function() {
-        return $http.get('/api/articles/overview');
+    this.overview = function(search) {
+        if(search === null || search === undefined || search === '') search = 'null';
+        return $http.get('/api/articles/overview/' + search);
     }
 
 	this.findById = function(articleId) {

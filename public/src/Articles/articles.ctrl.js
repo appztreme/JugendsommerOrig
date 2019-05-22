@@ -22,7 +22,18 @@ app.controller('ArticleCtrl', function($scope, $routeParams, IdentitySvc, Articl
         });
     }
 
-    ArticlesSvc.overview().then(function(response) {
+    $scope.clearFilter = function() {
+        $scope.search = null;
+    }
+
+    $scope.filter = function() {
+        ArticlesSvc.overview($scope.search).then(function(response) {
+            $scope.overviews = response.data;
+        })
+    }
+
+    ArticlesSvc.overview(null).then(function(response) {
         $scope.overviews = response.data;
+        //console.log(response.data);
 	});
 })

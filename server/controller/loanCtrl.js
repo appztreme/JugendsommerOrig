@@ -3,9 +3,8 @@ const LoanRepo = require('./../repositories/loan');
 const ArticleRepo = require('./../repositories/article');
 
 exports.findAll = async (req, res, next) => {
-    console.log(req.params);
     try {
-        const loans = await LoanRepo.find(new Date(req.query.from), new Date(req.query.to), req.query.articleId, req.query.location, req.query.lender);
+        const loans = await LoanRepo.find(req.query.from, req.query.to, req.query.articleId, req.query.location, req.query.lender);
         res.status(200).json(loans);
     } catch(err) {
         next(err);

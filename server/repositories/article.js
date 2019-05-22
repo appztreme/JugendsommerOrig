@@ -20,7 +20,27 @@ exports.findByType = (type) => {
     return Article.find().where('type').equals(type).exec();
 }
 
-exports.findOverview = () => {
+exports.findOverview = (search) => {
+    console.log("search", search);
+    if(search !== 'null') {
+        return Article.aggregate([
+            {
+                $match: {
+                    $or: [
+                        {code: {'$regex': search }},
+                        {name: {'$regex': search }}
+                    ]
+                }
+            },
+            { $group:
+                { _id: "$type",
+                  count: { $sum: 1 },
+                  children: { $push: { _id: "$_id", code: "$code", name: "$name", description: "$description", location: "$location", status: "$status", isInSet: "$isInSet" }}
+                }
+            },
+            { $sort: {_id: 1}}
+        ]).exec();
+    } else {
     return Article.aggregate([
         { $group:
             { _id: "$type",
@@ -30,6 +50,7 @@ exports.findOverview = () => {
         },
         { $sort: {_id: 1}}
     ]).exec();
+    }
 }
 
 exports.update = (article) => {

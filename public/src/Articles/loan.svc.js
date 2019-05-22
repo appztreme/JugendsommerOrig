@@ -3,7 +3,9 @@ var app = angular.module('js');
 app.service('LoansSvc', function($http) {
 	this.findByDateRange = function(from, to, articleId, location, lender) {
         var path = '/api/loans/search/';
-        var params = {from: moment(from).format("YYYY-MM-DD"), to: moment(to).format("YYYY-MM-DD")};
+        var params = {};
+        if(!angular.isUndefined(from)) params.from = moment(from).format("YYYY-MM-DD");
+        if(!angular.isUndefined(to)) params.to = moment(to).format("YYYY-MM-DD");
         if(!angular.isUndefined(articleId)) params.articleId = articleId;
         if(!angular.isUndefined(location)) params.location = location;
         if(!angular.isUndefined(lender)) params.lender = lender;

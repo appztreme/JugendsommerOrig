@@ -7,7 +7,7 @@ router.get('/', ArticleController.find);
 
 router.get('/type/:type', ArticleController.findByType);
 
-router.get('/overview', ArticleController.findOverview);
+router.get('/overview/:search', ArticleController.findOverview);
 
 router.get('/:id', ArticleController.findById);
 

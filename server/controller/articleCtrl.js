@@ -21,7 +21,7 @@ exports.findByType = async (req, res, next) => {
 
 exports.findOverview = async(req, res, next) => {
     try {
-        const overview = await ArticleRepo.findOverview();
+        const overview = await ArticleRepo.findOverview(req.params.search);
         res.status(200).json(overview);
     } catch(err) {
         next(err);

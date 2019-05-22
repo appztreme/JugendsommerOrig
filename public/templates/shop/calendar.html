@@ -6,17 +6,27 @@
                 <div class='row'>
                     <label for='fromFilter' class='control-label col-sm-2'>Von:</label>
                     <div class='col-sm-5 input-group'>
-                        <p class='input-group'>
-                            <ng-datepicker ng-model='from' view-format="DD.MM.YYYY"  locale='de' required></ng-datepicker>
-                         </p>
+                        <!--<p class='input-group'>-->
+                        <ng-datepicker ng-model='from' view-format="DD.MM.YYYY"  locale='de'></ng-datepicker>
+                        <!--</p>-->
+                        <span class="input-group-btn">
+                            <button class='btn btn-info' ng-click='clearFromSelection()'>
+                                <span class='glyphicon glyphicon-remove'></span>
+                            </button>
+                        </span>
                     </div>
                 </div>
                 <div class='row'>
                     <label for='toFilter' class='control-label col-sm-2'>Bis:</label>
                     <div class='col-sm-5 input-group'>
-                        <p class='input-group'>
-                            <ng-datepicker ng-model='to' view-format="DD.MM.YYYY"  locale='de' required ></ng-datepicker>
-                        </p>
+                        <!--<p class='input-group'>-->
+                        <ng-datepicker ng-model='to' view-format="DD.MM.YYYY"  locale='de' required ></ng-datepicker>
+                        <!--</p>-->
+                        <span class="input-group-btn">
+                            <button class='btn btn-info' ng-click='clearToSelection()'>
+                                <span class='glyphicon glyphicon-remove'></span>
+                            </button>
+                        </span>
                     </div>
                 </div>
                 <div class='row'>

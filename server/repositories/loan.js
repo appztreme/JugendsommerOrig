@@ -4,13 +4,34 @@ const Article = require('./../models/article');
 const moment = require('moment');
 
 exports.find = (from, to, articleId, location, lender) => {
-    console.log("params", from, to, articleId, location, lender);
+    //console.log("params", from, to, articleId, location, lender);
 
     let query = Loan.find()
-        .where('from').gte(from)
-        .where('to').lte(to)
         .where('isInSet').equals(false);
-    
+    if(from && to) {
+        let fromDate = new Date(from);
+        fromDate.setHours(0,0,0);
+        let toDate = new Date(to);
+        toDate.setHours(23,59,59);
+        query = query.where('from').gte(fromDate)
+                     .where('to').lte(toDate);
+    }
+    else if(from) {
+        let fromDate1 = new Date(from);
+        fromDate1.setHours(0,0,0);
+        let fromDate2 = new Date(from);
+        fromDate2.setHours(23,59,59);
+        query = query.where('from').gte(fromDate1)
+                     .where('from').lte(fromDate2);
+    }
+    else if(to) {
+        let toDate1 = new Date(to);
+        toDate1.setHours(0,0,0);
+        let toDate2 = new Date(to);
+        toDate2.setHours(23,59,59);
+        query = query.where('to').gte(toDate1)
+                     .where('to').lte(toDate2);
+    }
     if(articleId) query = query.where('article').equals(articleId);
     if(location) query = query.where('location').regex(new RegExp(location, 'i'));
     if(lender) query = query.where('lender').regex(new RegExp(lender, 'i'));

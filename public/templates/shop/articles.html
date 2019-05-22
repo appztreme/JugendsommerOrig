@@ -5,8 +5,23 @@
 		</div>
 		<div class='col-sm-2' ng-show='iSvc.isAuthorized("admin")'>
 			<a class='btn btn-success btn-block' href='/#/shop/newArticle' role='button'>Neu</a>
-		</div>
+        </div>
+        
     </div>
+    <form class="form-inline">
+            <div class="form-group" novalidate ng-submit='filter()'>
+                <label for='searchTerm' class='control-label'>Suchbegriff: </label>
+                <input type="text" ng-model='search' class="form-control" id="searchTerm" />
+             </div>
+             <button type="submit" ng-click="filter()" class="btn btn-success btn-default">Suchen</button>
+        </form>
+        <br />
+    <!-- <div class='panel panel-default'>
+            <div class='panel-body'>
+                <div class='row'>
+                </div>
+            </div>
+    </div> -->
     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
         <div ng-repeat="grp in overviews" class="panel panel-default">
             <div class="panel-heading" role="tab" id="{{'heading'+grp._id}}">
