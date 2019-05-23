@@ -50,7 +50,7 @@
                             </button>
                         </span>
                     </div>
-                    <div ng-show='iSvc.isAuthorized("fadmin") || iSvc.isAuthorized("ladmin")' class='col-sm-5 input-group'>
+                    <div ng-show='!iSvc.isAuthorized("admin")' class='col-sm-5 input-group'>
                         <input type="text" ng-model='lender' class='form-control' readonly></input>
                     </div>
                 </div>
