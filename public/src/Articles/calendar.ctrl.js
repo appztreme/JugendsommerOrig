@@ -1,11 +1,13 @@
 app.controller('ShopCalendarCtrl', function($scope, $routeParams, IdentitySvc, LoansSvc, ArticlesSvc, $location, NotificationSvc, CalendarCacheSvc) {
     $scope.iSvc = IdentitySvc;
 
+    $scope.notAdmin = !IdentitySvc.isAuthorized("admin");
+
     $scope.from = new Date();
     $scope.to = new Date();
     $scope.articleId = undefined;
     $scope.location = undefined;
-    $scope.lender = undefined;
+    $scope.lender = $scope.notAdmin ? $scope.iSvc.currentUser.firstName + ' ' + $scope.iSvc.currentUser.lastName : undefined;
     $scope.loans = [];
 
     $scope.clearLocationSelection = function() {

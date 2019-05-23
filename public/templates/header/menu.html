@@ -4,6 +4,7 @@
         <li><a id='nav_link_agb' href='/#/agb'>{{'NAV.AGB' | translate}}</a></li>
         <li><a id='nav_link_programme' href='/#/'>{{'NAV.PROGRAM' | translate}}</a></li>
         <li ng-show='iSvc.isAuthenticated()'><a id='nav_link_myres' href='/#/myRegistrations'>{{'NAV.MYRES' | translate}}</a></li>
+        <li ng-show='iSvc.isAuthorized("admin") || iSvc.isAuthorized("fadmin") || iSvc.isAuthorized("ladmin")'><a href='/#/shop/calendar'>Meine Reservierungen</a></li>
         <li ng-show='iSvc.isAuthorized("fadmin")'><a href='/#/myCommitments'>{{'NAV.MYCOMMITS' | translate}}</a></li>
         <li ng-show='iSvc.isAuthorized("fadmin") || iSvc.isAuthorized("admin)"' class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
@@ -23,7 +24,7 @@
             <ul class="dropdown-menu">
                 <li ng-show='iSvc.isAuthorized("admin") || iSvc.isAuthorized("fadmin") || iSvc.isAuthorized("ladmin")'><a href='/#/shop/articles'>Artikel</a></li>
                 <li ng-show='iSvc.isAuthorized("admin") || iSvc.isAuthorized("fadmin") || iSvc.isAuthorized("ladmin")'><a href='/#/shop/reservation'>Ausleihe</a></li>
-                <li ng-show='iSvc.isAuthorized("admin") || iSvc.isAuthorized("fadmin") || iSvc.isAuthorized("ladmin")'><a href='/#/shop/calendar'>Kalender</a></li>
+                <li ng-show='iSvc.isAuthorized("admin")'><a href='/#/shop/calendar'>Kalender</a></li>
             </ul> 
         </li>
         <!-- <li ng-show='iSvc.isAuthorized("fadmin")'><a target='_blank' href='http://www2.jugendsommer.com/'>{{'NAV.LENDINGS' | translate}}</a></li> -->

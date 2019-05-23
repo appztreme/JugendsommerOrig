@@ -38,7 +38,7 @@ exports.findOverview = (search) => {
                   children: { $push: { _id: "$_id", code: "$code", name: "$name", description: "$description", location: "$location", status: "$status", isInSet: "$isInSet" }}
                 }
             },
-            { $sort: {_id: 1}}
+            { $sort: {_id: 1, 'children.name': 1 }}
         ]).exec();
     } else {
     return Article.aggregate([
@@ -48,7 +48,7 @@ exports.findOverview = (search) => {
               children: { $push: { _id: "$_id", code: "$code", name: "$name", description: "$description", location: "$location", status: "$status", isInSet: "$isInSet" }}
             }
         },
-        { $sort: {_id: 1}}
+        { $sort: {_id: 1, 'children.name': 1 }}
     ]).exec();
     }
 }
