@@ -139,7 +139,7 @@
             "LABEL_MEDIA2": " Erlaubnis ",
             "LABEL_MEDIA3": " zur rechtmäßigen Verwendung von Bild- und Filmmaterial",
             "LABEL_REGISTER": "Anmelden",
-            "LABEL_REGISTRATION_PAY_INFO": "Mit erfolgreicher Anmeldung für ein Programm ist eine Einzahlung verpflichtend",
+            "LABEL_REGISTRATION_PAY_INFO": "Mit erfolgreicher Anmeldung erhalten sie ein Bestätigungsmail und eine Einzahlung ist verpflichtend",
             "LABEL_REGISTRATION_RECEIPT_INFO": "Anmeldebestätigung folgt per Email",
             "LABEL_NEWSLETTER": " Ich möchte eine Newsletter für künftige Angebote erhalten",
             "LABEL_OPTIONALPAYMENT": " Ich möchte freiwillig ein zusätzlichen Spendenbeitrag (10EUR) bezahlen",

@@ -1,6 +1,6 @@
 var app = angular.module('js');
 
-app.controller('ReportPresenceCtrl', function($scope, $location, $route, RegistrationSvc, NotificationSvc, PlatformSvc) {
+app.controller('ReportPresenceCtrl', function($scope, $location, $route, RegistrationSvc, NotificationSvc, PlatformSvc, IdentitySvc) {
 	$scope.busyPromise = RegistrationSvc.find();
 
 	var host = $location.$$host.toLowerCase();
@@ -64,6 +64,7 @@ app.controller('ReportPresenceCtrl', function($scope, $location, $route, Registr
 	}
 
 	RegistrationSvc.getSelectionParams().success(function(params) {
+
 			$scope.events = _.uniq(_.map(params, function(p) {
 				return {
 					_id: p.eventId._id,
@@ -71,6 +72,17 @@ app.controller('ReportPresenceCtrl', function($scope, $location, $route, Registr
 					type: p.eventId.type
 				}
 			}), '_id');
+
+			var tmpEvents = [];
+			if(IdentitySvc.isFAdmin()) {
+				for(var i=0; i < $scope.events.length; i++) {
+					console.log($scope.events[i], IdentitySvc.currentUser);
+					if($scope.events[i] === IdentitySvc.currentUser.eventId) {
+						tmpEvents.push($scope.events[i]);
+					}
+				}
+			}
+			$scope.events = tmpEvents;
 
 			$scope.allActivities = _.uniq(_.map(params, function(p) {
 				return {
