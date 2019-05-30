@@ -74,15 +74,17 @@ app.controller('ReportPresenceCtrl', function($scope, $location, $route, Registr
 			}), '_id');
 
 			var tmpEvents = [];
-			if(IdentitySvc.isFAdmin()) {
+			if(IdentitySvc.isFAdmin() && !IdentitySvc.isAdmin()) {
 				for(var i=0; i < $scope.events.length; i++) {
-					console.log($scope.events[i], IdentitySvc.currentUser);
-					if($scope.events[i] === IdentitySvc.currentUser.eventId) {
+					if(IdentitySvc.isAuthorizedForEvent("fadmin", $scope.events[i]._id)) {
+					//console.log($scope.events[i], IdentitySvc.currentUser);
+					//if($scope.events[i] === IdentitySvc.currentUser.eventId) {
 						tmpEvents.push($scope.events[i]);
 					}
 				}
+				$scope.events = tmpEvents;
 			}
-			$scope.events = tmpEvents;
+			
 
 			$scope.allActivities = _.uniq(_.map(params, function(p) {
 				return {
