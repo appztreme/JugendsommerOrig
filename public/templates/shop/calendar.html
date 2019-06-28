@@ -42,16 +42,13 @@
                 </div>
                 <div class='row'>
                     <label for='lenderFilter' class='control-label col-sm-2'>Ausleiher/in:</label>
-                    <div ng-show='iSvc.isAuthorized("admin")' class='col-sm-5 input-group'>
+                    <div class='col-sm-5 input-group'>
                         <input type="text" ng-model='lender' class='form-control'></input>
                         <span class='input-group-btn'>
                             <button class='btn btn-info' ng-click='clearLenderSelection()'>
                                 <span class='glyphicon glyphicon-remove'></span>
                             </button>
                         </span>
-                    </div>
-                    <div ng-show='!iSvc.isAuthorized("admin")' class='col-sm-5 input-group'>
-                        <input type="text" ng-model='lender' class='form-control' readonly></input>
                     </div>
                 </div>
                 <div class='row'>
