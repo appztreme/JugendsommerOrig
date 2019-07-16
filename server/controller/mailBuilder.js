@@ -177,15 +177,15 @@ exports.getAttachmentConfirmation = function(body, instance, reservations) {
 	if(instance.isJDBL || instance.isJugendsommer) {
 		return [{ data: body, alternative: true },
 				{ path:"public/assets/jdbl-logo.jpg", type:"image/jpg", headers:{"Content-ID":"<my-image>"} },
-			    { stream: doc, type:"application/pdf" }]
+			    { stream: doc, type:"application/pdf", name: 'bestaetigung.pdf' }]
 	}
 	else if (instance.isJDUL) {
 		return [{ data: body, alternative: true },
 			{ path:"public/assets/jdul_ente.jpg", type:"image/jpg", headers:{"Content-ID":"<my-image>"} },
-		    { stream: doc, type: "application/pdf" }]
+		    { stream: doc, type: "application/pdf", name: 'bestaetigung.pdf' }]
 	} else {
 		return [{ data: body, alternative: true },
-		        { stream: doc, type:"appliation/pdf" }];
+		        { stream: doc, type:"appliation/pdf", name: 'bestaetigung.pdf' }];
 	}
 }
 
