@@ -34,7 +34,13 @@
             "EDIT": "Edit",
             "WEEKS": "Wochen",
             "EXPENSE": "Ausgabe",
-            "TEXPENSE": "KM-Geld"
+            "TEXPENSE": "KM-Geld",
+            "RESERVATIONS": "Anmeldungen",
+            "CONTACTS": "Kontakte",
+            "PAYMENT": "Zahlung",
+            "REMINDER": "Erinnerung",
+            "CONFIRMATION": "Bestätigung",
+            "ADMIN": "Admin"
         },
         "LOGIN": {
             "USER": "User",
@@ -187,7 +193,13 @@
             "EDIT": "Edit",
             "WEEKS": "Wochen",
             "EXPENSE": "Ausgabe",
-            "TEXPENSE": "KM-Geld"
+            "TEXPENSE": "KM-Geld",
+            "RESERVATIONS": "Anmeldungen",
+            "CONTACTS": "Kontakte",
+            "PAYMENT": "Zahlung",
+            "REMINDER": "Erinnerung",
+            "CONFIRMATION": "Bestätigung",
+            "ADMIN": "Admin"
         },
         "LOGIN": {
             "USER": "Utente",

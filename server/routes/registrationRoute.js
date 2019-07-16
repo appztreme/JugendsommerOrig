@@ -19,6 +19,8 @@ router.get('/send/receipt/:registrationId', auth.requiresRole('admin'), Registra
 
 router.get('/send/reminder/:eventId', auth.requiresRole('admin'), RegistrationController.sendReminderMail);
 
+router.get('/send/confirmation/:eventId', auth.requiresRole('admin'), RegistrationController.sendConfirmationMail);
+
 router.put('/', auth.requiresApiLogin, RegistrationController.update);
 
 router.patch('/updateIsPaymentDone', auth.requiresRole("admin"), RegistrationController.updateIsPaymentDone);

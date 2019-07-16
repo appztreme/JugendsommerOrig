@@ -48,6 +48,25 @@ exports.sendReceiptMail = function(recipient, registrations, rnumber, instance) 
 	});
 }
 
+exports.sendConfirmationMail = function(recipient, registrations, instance) {
+	console.log("send confirmation mail start")
+	var body = mailbuilder.getConfirmationBody();
+	var text = mailbuilder.getConfirmationTxt();
+	var fromEmail = mailbuilder.getSender(instance);
+	var subject = mailbuilder.getSubject(instance, "confirmation");
+	//console.log("body", fromEmail, subject, recipient);
+	server.send({
+		text: text,
+		from: fromEmail,
+		to: recipient,
+		subject: subject,
+		attachment: mailbuilder.getAttachmentConfirmation(body, instance, registrations)
+	}, function(err, message) {
+		if(err) console.log("ERROR:", err);
+		else console.log("finished confirmation")
+	});
+}
+
 exports.sendReminderMail = function(recipient, registrations, instance) {
 	var reg = registrations.length > 0 ? registrations[0] : {};
 	var rnumber = reg.receiptNumber ? reg.receiptNumber : 0;

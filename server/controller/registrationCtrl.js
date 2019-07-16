@@ -233,6 +233,35 @@ exports.sendSinglePaymentMail = async(req, res, next) => {
 	} catch(err) { console.log(err); next(err); }
 }
 
+exports.sendConfirmationMail = async(req, res, next) => {
+	try {
+		let activityIds = undefined;
+		if(req.params.eventId) {
+			let ids = await ActivityRepo.getActivityIdsForEvent(req.params.eventId);
+			activityIds = ids.map(function(v,i) { return v._id; });
+			let registrationsWithoutQueue = [];
+			let registrations = await RegistrationRepo.filter(curYear, null, null, null, null, activityIds);
+			const activities = new Set(registrations.map((v,i) => v.activityId));
+			activities.forEach(vA => {
+				const fixRegistrations = registrations.filter(v => v.activityId._id === vA._id).filter((v,i) => i < vA.maxParticipants);
+				registrationsWithoutQueue = registrationsWithoutQueue.concat(fixRegistrations);
+			})
+			let emails = registrationsWithoutQueue.map(function(v,i) { return v.emailParent; });
+			let emailsUnique = new Set(emails);
+			var instance = platform.getPlatform(req.get('host'));
+			for(let email of emailsUnique) {
+				let registrationsPerMail = registrationsWithoutQueue.filter(reg => reg.emailParent === email);
+				//console.log("email", email, registrationsPerMail.length);
+				if(registrationsPerMail.length === 0) continue;
+				mail.sendConfirmationMail(email, registrationsPerMail, instance);
+			}
+		}
+	
+		res.status(201).json({ success: "true"});
+	}
+	catch(err) { next(err); }	
+}
+
 exports.sendReminderMail = async(req, res, next) => {
 	try {
 		let activityIds = undefined;

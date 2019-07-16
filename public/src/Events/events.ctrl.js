@@ -57,6 +57,13 @@ app.controller('EventsCtrl', function($scope, $routeParams, $location, EventsSvc
 		});
 	}
 
+	$scope.sendConfirmationEmail = function(evid) {
+		EventsSvc.sendConfirmationEmail(evid).success(function(r) {
+			if(r.success) NotificationSvc.notify("Erfolgreich verschickt");
+			else NotificationSvc.warn("Fehler beim Verschicken");
+		})
+	}
+
 	if(IdentitySvc.isAdmin()) {
 		if(['club', 'spiritnight'].indexOf($routeParams.location) !== -1) {
 			EventsSvc.findByTypeAsAdmin($routeParams.location).success(function(evs) {
