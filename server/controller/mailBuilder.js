@@ -20,8 +20,8 @@ var txtReminder = "Hallo liebe Eltern,\r\n\r\nbei der Kontrolle unserer Buchhalt
 var htmlReminderStart = "<html><body><p>Hallo liebe Eltern,<br />bei der Kontrolle unserer Buchhaltung ist uns aufgefallen, dass Ihre Einzahlung für unsere Sommerprogramme nocht nicht auf unserem Konto eingegangen ist.<br />Wir bitten dies so schnell wie möglich nachzuholen ansonsten wird die Anmeldung gelöscht.</p>";
 var htmlReminderEnd = "</body></html>";
 
-var textConfirmation = "Bestätigungs Text";
-var htmlConfirmation = "<html><body><p>Bestätigungs Text</p></body></html>"
+var textConfirmation = "Hallo liebe Eltern,\r\n\r\nim Anhang findet ihr die Teilnahmebestätigung eurer Anmeldungen.\r\nWir hoffen die Programme waren zu eurer Zufriedenheit und wir freuen uns auf eurer Anmeldungen im nächsten Jahr.\r\n\r\nMit freundlichen Grüßen\r\n\r\nGünther Reichhalter";
+var htmlConfirmation = "<html><body><p>Hallo liebe Eltern,<br />m Anhang findet ihr die Teilnahmebestätigung eurer Anmeldungen.<br />Wir hoffen die Programme waren zu eurer Zufriedenheit und wir freuen uns auf eurer Anmeldungen im nächsten Jahr.<br /><br />Mit freundlichen Grüßen<br />Günther Reichhalter</p></body></html>"
 
 var txtStartJDUL_de = "Anmeldebestätigung./r/nes freut uns, dass du heuer im Sommer bei unserem JD-SUMMER Programm in ";
 var txtEndJDUL_de = " dabei sein wirst!/r/nDu erhältst innerhalb Mai noch eine weitere E-Mail mit detaillierteren Informationen./r/nDeine Eltern sind gebeten die untenstehenden Daten zu kontrollieren und die Teilnahmegebühr bis zum 31.03.2019 auf folgendes Konto zu überweisen:/r/nJugenddienst Unterland – Raiffeisenkasse Salurn/r/nIBAN: IT 27 T 08220 58371000304204042/r/nmit dem Betreff: Nachname Vorname Wohnort./r/nWir freuen uns jetzt schon auf den JD-SUMMER mit dir, hoffen auf schönes Wetter und wünschen euch noch eine tolle Zeit bis zum Sommer."
@@ -145,26 +145,37 @@ exports.getAttachmentConfirmation = function(body, instance, reservations) {
 		let registrationsPerChild = reservations.filter(reg => reg.firstNameChild + ' ' + reg.lastNameChild === child);
 		
 		doc.image('public/assets/jdbl-logo.jpg', {
-			fit: [100, 150],
+			fit: [150, 250],
 			align: 'right',
 			valign: 'top'
 		});
-		doc.fontSize(28);
+		for(let i = 1; i <= 950; i += 40) {
+			doc
+   			.circle(0, 10 + i, 20)
+		   	.fillOpacity(0.8)
+		   	.fillAndStroke('#ffa500')
+		}
+		doc.fontSize(8).fillAndStroke("grey", "#000");
+		doc.moveDown(0.2);
+		doc.text("Andreas-Hofer-Strasse 36 | 39100 Bozen | Tel.: +39 0471 324753");
+		doc.moveDown(0.2);
+		doc.text("info@jugenddienst.com | www.jdbl.it | St.Nr.: 94072680211");
+		doc.fontSize(26).fillAndStroke("#ffa500", "#000");
+		doc.moveDown(1).moveDown(1).moveDown(1);
+		doc.text("Einzahlungsbestätigung", { align: 'center', width: 430 });
+		doc.fontSize(14).fillAndStroke("black", "#000");;
+		doc.moveDown(1).moveDown(1).moveDown(1);
+		doc.text("Hiermit wird bestätigt, dass ", { align: 'left', width: 430 });
+		doc.fontSize(20);
 		doc.moveDown(1);
-		doc.text("Einzahlungsbestätigung", { align: 'center', width: 410 });
-		doc.fontSize(17);
+		doc.text(child, { align: 'center', width: 430 });
+		doc.fontSize(14);
 		doc.moveDown(1);
-		doc.text("Hiermit wird bestätigt, dass ", { align: 'left', width: 410 });
-		doc.fontSize(22);
-		doc.moveDown(1);
-		doc.text(child, { align: 'center', width: 410 });
-		doc.fontSize(17);
-		doc.moveDown(1);
-		doc.text("an folgenden Sommerprogrammen des Jugenddienst Bozen Land " + new Date().getFullYear() + " teilgenommen hat:", { align: 'left', width: 410 });
+		doc.text("an folgenden Sommerprogrammen des Jugenddienst Bozen Land " + new Date().getFullYear() + " teilgenommen hat:", { align: 'left', width: 430 });
 		doc.moveDown(1);
 		let fee = 0;
 		for(let reg of registrationsPerChild) {
-			doc.text(reg.activityId.eventId.name + ' ' + reg.activityId.eventId.location + ' - ' + reg.activityId.name , { align: 'left', width: 410 });
+			doc.text(reg.activityId.eventId.name + ' ' + reg.activityId.eventId.location + ' - ' + reg.activityId.name , { align: 'left', width: 430 });
 			doc.moveDown(1);
 			fee += calculateReceiptFee(reg, reg.activityId);
 		}
@@ -173,7 +184,7 @@ exports.getAttachmentConfirmation = function(body, instance, reservations) {
 	}
 
 	doc.end();
-	// doc.pipe(fs.createWriteStream('output.pdf'));
+	doc.pipe(fs.createWriteStream('output.pdf'));
 	if(instance.isJDBL || instance.isJugendsommer) {
 		return [{ data: body, alternative: true },
 				{ path:"public/assets/jdbl-logo.jpg", type:"image/jpg", headers:{"Content-ID":"<my-image>"} },

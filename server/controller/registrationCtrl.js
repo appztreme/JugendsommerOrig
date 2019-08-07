@@ -250,7 +250,7 @@ exports.sendConfirmationMail = async(req, res, next) => {
 			let emailsUnique = new Set(emails);
 			var instance = platform.getPlatform(req.get('host'));
 			for(let email of emailsUnique) {
-				let registrationsPerMail = registrationsWithoutQueue.filter(reg => reg.emailParent === email);
+				let registrationsPerMail = registrationsWithoutQueue.filter(reg => reg.emailParent === email && reg.isPaymentDone);
 				//console.log("email", email, registrationsPerMail.length);
 				if(registrationsPerMail.length === 0) continue;
 				mail.sendConfirmationMail(email, registrationsPerMail, instance);
