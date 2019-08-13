@@ -37,7 +37,7 @@
 			</div>
 		<div class="row" style='margin-top:10px'>
     	<div class='col-sm-offset-2 col-sm-4'>
-      	<button type='button' class='btn btn-primary btn-block' ng-click='send()'>Senden</button>
+      	<button type='button' class='btn btn-primary btn-block' ng-click='send()' ng-disabled='!canSend(selectedChild)'>Senden</button>
   		</div>
 		</div>
 	</div>

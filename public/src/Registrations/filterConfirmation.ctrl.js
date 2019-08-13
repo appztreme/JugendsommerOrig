@@ -21,9 +21,14 @@ app.controller('FilterConfirmationCtrl', function($scope, RegistrationSvc, Ident
         });
     }
 
+    $scope.canSend = function(selectedChild) {
+        var c = angular.fromJson(selectedChild);
+        return c && $scope.emailOpt && $scope.eventId; 
+    }
+
     $scope.send = function() {
         var c = angular.fromJson($scope.selectedChild);
-        if(c && $scope.emailOpt && $scope.eventId) {
+        if($scope.canSend()) {
             RegistrationSvc.sendConfirmationMailSingle($scope.eventId, c.firstName, c.lastName, c.birthday, $scope.emailOpt)
                 .success(function(r) {
                     if(r.success) NotificationSvc.notify("Erfolgreich verschickt");
