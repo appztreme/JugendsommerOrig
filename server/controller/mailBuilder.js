@@ -163,10 +163,10 @@ exports.getAttachmentConfirmation = function(body, instance, reservations) {
 		doc.moveDown(0.2);
 		doc.text("info@jugenddienst.com | www.jdbl.it | St.Nr.: 94072680211");
 		doc.fontSize(26).fillAndStroke("#ffa500", "#000");
-		doc.moveDown(1).moveDown(1).moveDown(1);
+		doc.moveDown(1).moveDown(1);
 		doc.text("Einzahlungsbestätigung", { align: 'center', width: 430 });
 		doc.fontSize(14).fillAndStroke("black", "#000");;
-		doc.moveDown(1).moveDown(1).moveDown(1);
+		doc.moveDown(1).moveDown(1);
 		doc.text("Hiermit wird bestätigt, dass ", { align: 'left', width: 430 });
 		doc.fontSize(20);
 		doc.moveDown(1);
@@ -181,11 +181,17 @@ exports.getAttachmentConfirmation = function(body, instance, reservations) {
 			doc.moveDown(1);
 			fee += calculateReceiptFee(reg, reg.activityId);
 		}
-		doc.text("Spesen: Der Gesamtbetrag von " + fee + " Euro wurde ordnungsgemäß überwiesen und ist auf das Konto des Jugenddienst Bozen-Land eingegangen.")
+		doc.text("Spesen: Der Gesamtbetrag von " + fee + " Euro wurde ordnungsgemäß überwiesen und ist auf das Konto des Jugenddienst Bozen-Land eingegangen.");
+		doc.moveDown(1);
+		doc.image('public/assets/signature_jdbl.png', {
+			fit: [200, 200],
+			align: 'right'
+		});
 		doc.addPage();
 	}
 
 	doc.end();
+	// DEBUG only
 	// doc.pipe(fs.createWriteStream('output.pdf'));
 	if(instance.isJDBL || instance.isJugendsommer) {
 		return [{ data: body, alternative: true },
