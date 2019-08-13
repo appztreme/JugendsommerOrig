@@ -263,7 +263,7 @@ exports.sendConfirmationMailSingle = async(req, res, next) => {
 		if(reg.length > 0) {
 			let registrationsForEvent = reg.filter(v => v.activityId.eventId._id == req.body.eventId && v.isPaymentDone);
 			var instance = platform.getPlatform(req.get('host'));
-			///console.log(req.body.email, registrationsForEvent)
+			console.log("test");	
 			if(registrationsForEvent.length > 0) {
 				mail.sendConfirmationMail(req.body.email, registrationsForEvent, instance);
 			}
