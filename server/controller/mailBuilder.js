@@ -186,7 +186,7 @@ exports.getAttachmentConfirmation = function(body, instance, reservations) {
 	}
 
 	doc.end();
-	doc.pipe(fs.createWriteStream('output.pdf'));
+	// doc.pipe(fs.createWriteStream('output.pdf'));
 	if(instance.isJDBL || instance.isJugendsommer) {
 		return [{ data: body, alternative: true },
 				{ path:"public/assets/jdbl-logo.jpg", type:"image/jpg", headers:{"Content-ID":"<my-image>"} },
