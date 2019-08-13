@@ -136,25 +136,27 @@ exports.getAttachment = function(body, instance) {
 	}
 }
 
+const getChildStr = (child) => {
+	return child.firstNameChild + ' ' + child.lastNameChild + ' (' +  ("0" + child.birthdayChild.getDate()).slice(-2) + '.' + ("0" + (child.birthdayChild.getMonth() + 1)).slice(-2) + '.' + child.birthdayChild.getFullYear() + ')';
+}
+
 exports.getAttachmentConfirmation = function(body, instance, reservations) {
 	//console.log(reservations);
 	const doc = new pdf();
-	let children = reservations.map(function(v,i) { return v.firstNameChild + ' ' + v.lastNameChild; });
+	let children = reservations.map(function(v,i) { return getChildStr(v) });
 	let childrenUnique = new Set(children);
 	for(let child of childrenUnique) {
-		let registrationsPerChild = reservations.filter(reg => reg.firstNameChild + ' ' + reg.lastNameChild === child);
+		let registrationsPerChild = reservations.filter(reg => getChildStr(reg) === child);
 		
 		doc.image('public/assets/jdbl-logo.jpg', {
 			fit: [150, 250],
 			align: 'right',
 			valign: 'top'
 		});
-		for(let i = 1; i <= 950; i += 40) {
-			doc
-   			.circle(0, 10 + i, 20)
-		   	.fillOpacity(0.8)
-		   	.fillAndStroke('#ffa500')
-		}
+		let grad = doc.linearGradient(0, 0, 30, 0);
+		grad.stop(0, '#ffa500').stop(1, '#ffd27f');
+		doc.rect(0, 0, 30, 950);
+		doc.fill(grad);
 		doc.fontSize(8).fillAndStroke("grey", "#000");
 		doc.moveDown(0.2);
 		doc.text("Andreas-Hofer-Strasse 36 | 39100 Bozen | Tel.: +39 0471 324753");

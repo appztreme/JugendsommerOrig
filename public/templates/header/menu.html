@@ -15,6 +15,7 @@
                 <li ng-show='iSvc.isAuthorized("admin") && !isKiso'><a href='/#/payment'>{{'NAV.PAYMENT' | translate}}</a></li>
                 <li ng-show='iSvc.isAuthorized("admin") || iSvc.isAuthorized("fadmin")'><a href='/#/reportPresence'>{{'NAV.PRESENCE' | translate}}</a></li>
                 <li ng-show='iSvc.isAuthorized("admin")'><a href='/#/reportOverview'>{{'NAV.OVERVIEW' | translate}}</a></li>
+                <li ng-show='iSvc.isAuthorized("admin")'><a href='/#/filterConfirmation'>{{'NAV.FILTERCONFIRM' | translate}}</a></li>
             </ul>
         </li>
         <li ng-show='iSvc.isAuthorized("fadmin")' class="dropdown">

@@ -61,6 +61,12 @@ app.service('RegistrationSvc', function($http) {
 		return $http.get('/api/registrations/send/receipt/' + registrationId)
 	}
 
+	this.sendConfirmationMailSingle = function(eventId, firstName, lastName, birthday, email) {
+		var payload = { eventId: eventId, firstName: firstName, lastName: lastName, birthday: birthday, email: email };
+		console.log(payload, "payload");
+		return $http.post('/api/registrations/send/confirmationSingle', payload);
+	}
+
 	this.updateIsPaymentDone = function(registrationId, isPaymentDone) {
 		var update = { _id: registrationId, isPaymentDone: isPaymentDone };
 		return $http.patch('/api/registrations/updateIsPaymentDone', update);
@@ -74,5 +80,9 @@ app.service('RegistrationSvc', function($http) {
 	this.updateProp = function(registrationId, propertyName, value) {
 		var update = { _id: registrationId, property: propertyName, value: value };
 		return $http.patch('/api/registrations/updateProp', update);
+	}
+
+	this.getChildrenPerEvent = function(eventId) {
+		return $http.get('/api/registrations/children/'+eventId);
 	}
 });

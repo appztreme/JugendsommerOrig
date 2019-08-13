@@ -7,6 +7,8 @@ router.get('/', auth.requiresOneRoleOutOf(["admin", "fadmin", "ladmin"]), Regist
 
 router.get('/selectableEventActivities', RegistrationController.getSelectableEventActivities);
 
+router.get('/children/:eventId', auth.requiresRole("admin"), RegistrationController.getChildrenPerEvent);
+
 router.get('/:registrationId', auth.requiresApiLogin, RegistrationController.findById);
 
 router.delete('/:registrationId', auth.requiresRole("admin"), RegistrationController.delete);
@@ -20,6 +22,8 @@ router.get('/send/receipt/:registrationId', auth.requiresRole('admin'), Registra
 router.get('/send/reminder/:eventId', auth.requiresRole('admin'), RegistrationController.sendReminderMail);
 
 router.get('/send/confirmation/:eventId', auth.requiresRole('admin'), RegistrationController.sendConfirmationMail);
+
+router.post('/send/confirmationSingle', auth.requiresRole("admin"), RegistrationController.sendConfirmationMailSingle);
 
 router.put('/', auth.requiresApiLogin, RegistrationController.update);
 

@@ -26,6 +26,10 @@ app.config(function($routeProvider) {
 			controller: 'ReportPresenceCtrl',
 			templateUrl: '../templates/reportPresence.html'
 		})
+		.when('/filterConfirmation', {
+			controller: 'FilterConfirmationCtrl',
+			templateUrl: '../templates/filterConfirmation.html'
+		})
 		.when('/reportOverview', {
 			controller: 'ReportOverviewCtrl',
 			templateUrl: '../templates/reportOverview.html'

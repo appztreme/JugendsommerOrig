@@ -233,6 +233,44 @@ exports.sendSinglePaymentMail = async(req, res, next) => {
 	} catch(err) { console.log(err); next(err); }
 }
 
+exports.getChildrenPerEvent = async(req, res, next) => {
+	try {
+		let activityIds = undefined;
+		let childrenUnique = [];
+		if(req.params.eventId) {
+			let ids = await ActivityRepo.getActivityIdsForEvent(req.params.eventId);
+			activityIds = ids.map(function(v,i) { return v._id; });
+			let registrationsWithoutQueue = [];
+			let registrations = await RegistrationRepo.filter(curYear, null, null, null, null, activityIds);
+			const activities = new Set(registrations.map((v,i) => v.activityId));
+			activities.forEach(vA => {
+				const fixRegistrations = registrations.filter(v => v.activityId._id === vA._id).filter((v,i) => i < vA.maxParticipants);
+				registrationsWithoutQueue = registrationsWithoutQueue.concat(fixRegistrations);
+			})
+			let children = registrationsWithoutQueue.map(function(v,i) { return {firstName: v.firstNameChild, lastName: v.lastNameChild, birthday: v.birthdayChild }; });
+			childrenUnique = new Set(children);
+			//console.log(childrenUnique);
+		}
+	
+		res.status(200).json([...childrenUnique]);
+	}
+	catch(err) { next(err); }
+}
+
+exports.sendConfirmationMailSingle = async(req, res, next) => {
+	try {
+		let reg = await RegistrationRepo.findByFirstLastNameBirthday(req.body.firstName, req.body.lastName, req.body.birthday);
+		if(reg.length > 0) {
+			let registrationsForEvent = reg.filter(v => v.activityId.eventId._id == req.body.eventId && v.isPaymentDone);
+			var instance = platform.getPlatform(req.get('host'));
+			///console.log(req.body.email, registrationsForEvent)
+			if(registrationsForEvent.length > 0) {
+				mail.sendConfirmationMail(req.body.email, registrationsForEvent, instance);
+			}
+		}
+		res.status(201).json({'success': "true"});	
+	} catch(err) { next(err); }	}
+
 exports.sendConfirmationMail = async(req, res, next) => {
 	try {
 		let activityIds = undefined;

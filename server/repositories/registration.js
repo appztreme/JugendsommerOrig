@@ -68,3 +68,13 @@ exports.filter = (year, name, firstname, receiptNr, activityId, activityIds) => 
 		.sort({ activityId: 1, registrationDate: 1, lastNameChild: 1, firstNameChild: 1})
 		.exec();
 }
+
+exports.findByFirstLastNameBirthday = (firstName, lastName, birthday) => {
+    return Registration.find()
+        .where('firstNameChild').equals(firstName)
+        .where('lastNameChild').equals(lastName)
+        .where('birthdayChild').equals(birthday)
+        .populate({path:'activityId', populate:{path:'eventId'}})
+        .exec();
+        
+}
