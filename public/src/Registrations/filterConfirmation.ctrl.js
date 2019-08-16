@@ -17,7 +17,7 @@ app.controller('FilterConfirmationCtrl', function($scope, RegistrationSvc, Ident
                 children[i].birthday = new Date(children[i].birthday);
             }
             $scope.children = children;
-            //console.log(children);
+            console.log("Children: ", children);
         });
     }
 

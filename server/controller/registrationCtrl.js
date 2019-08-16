@@ -248,12 +248,12 @@ exports.getChildrenPerEvent = async(req, res, next) => {
 				registrationsWithoutQueue = registrationsWithoutQueue.concat(fixRegistrations);
 			})
 			let children = registrationsWithoutQueue.map(function(v,i) { return {firstName: v.firstNameChild, lastName: v.lastNameChild, birthday: v.birthdayChild }; });
-			childrenUnique = new Set(children);
-			childrenUniqueSorted = [...childrenUnique].sort((a,b) => a.lastName > b.lastName);
-			//console.log(childrenUnique);
+			childrenUnique = [...new Set(children)];
+			childrenUnique.sort((a,b) => a.lastName < b.lastName);
+			//console.log(childrenUniqueSorted);
 		}
 	
-		res.status(200).json(childrenUniqueSorted);
+		res.status(200).json(childrenUnique);
 	}
 	catch(err) { next(err); }
 }
