@@ -4,7 +4,7 @@ app.controller('TravelExpensesNewCtrl', function($scope, $routeParams, $location
 	$scope.title = 'Fahrtkostenabrechnung';
 	//Default values
   	$scope.kilometers = 0;
-  	$scope.subsidyRate = 0.15;
+  	$scope.subsidyRate = 0.25;
 	$scope.amount = 0;
   	$scope.type = 'travel';
 	$scope.isPaymentDone = false;

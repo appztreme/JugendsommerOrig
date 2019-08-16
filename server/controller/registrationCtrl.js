@@ -249,10 +249,11 @@ exports.getChildrenPerEvent = async(req, res, next) => {
 			})
 			let children = registrationsWithoutQueue.map(function(v,i) { return {firstName: v.firstNameChild, lastName: v.lastNameChild, birthday: v.birthdayChild }; });
 			childrenUnique = new Set(children);
+			childrenUniqueSorted = [...childrenUnique].sort((a,b) => a.lastName > b.lastName);
 			//console.log(childrenUnique);
 		}
 	
-		res.status(200).json([...childrenUnique]);
+		res.status(200).json(childrenUniqueSorted);
 	}
 	catch(err) { next(err); }
 }
@@ -263,7 +264,6 @@ exports.sendConfirmationMailSingle = async(req, res, next) => {
 		if(reg.length > 0) {
 			let registrationsForEvent = reg.filter(v => v.activityId.eventId._id == req.body.eventId && v.isPaymentDone);
 			var instance = platform.getPlatform(req.get('host'));
-			console.log("test");	
 			if(registrationsForEvent.length > 0) {
 				mail.sendConfirmationMail(req.body.email, registrationsForEvent, instance);
 			}
@@ -291,7 +291,12 @@ exports.sendConfirmationMail = async(req, res, next) => {
 				let registrationsPerMail = registrationsWithoutQueue.filter(reg => reg.emailParent === email && reg.isPaymentDone);
 				//console.log("email", email, registrationsPerMail.length);
 				if(registrationsPerMail.length === 0) continue;
-				mail.sendConfirmationMail(email, registrationsPerMail, instance);
+				try {
+					console.log("INFO: try starting sending confirmation mail");
+					mail.sendConfirmationMail(email, registrationsPerMail, instance);
+				} catch(e) {
+					console.log("ERROR:", e);
+				}
 			}
 		}
 	
