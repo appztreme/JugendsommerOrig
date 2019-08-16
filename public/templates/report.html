@@ -129,7 +129,9 @@
 			<th>Betrag</th>
 			<th ng-show='platform.isKiso()'>Aufpreis</th>
 			<th ng-show='platform.isKiso()'>Geschwister</th>
-			<th>Geburtstag</th>
+			<th>Geburtstag
+				<div ng-show="isBatchUpdateAllowed()" class="input-group"><ng-combo-date-picker ng-model="masterBirthdayChild" ng-min-date="2000-01-01" required></ng-combo-date-picker><div class="input-group-btn"><button type="button" class="btn btn-success" ng-click="updateBatchProperty('birthdayChild', masterBirthdayChild)">U</button></div> </div>
+			</th>
 			<th>Schulstufe
 				<div ng-show="isBatchUpdateAllowed()" class="input-group"><input type="text" class="form-control" style="min-width: 45px" ng-model="masterSchoolChild" /><div class="input-group-btn"><button type="button" class="btn btn-success" ng-click="updateBatchProperty('schoolChild', masterSchoolChild)">U</button></div></div>
 			</th>
