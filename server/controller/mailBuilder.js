@@ -180,7 +180,9 @@ exports.getAttachmentConfirmation = function(body, instance, reservations) {
 			doc.moveDown(1);
 			fee += calculateReceiptFee(reg, reg.activityId);
 		}
-		doc.font('Helvetica').text("Spesen: Der Gesamtbetrag von " + fee + " Euro wurde ordnungsgemäß überwiesen und ist auf das Konto des Jugenddienst Bozen-Land eingegangen.");
+		doc.font('Helvetica').text("Spesen: Der Gesamtbetrag von ", { continued: true });
+		doc.font('Helvetica-Bold').text(fee, { continued: true });
+		doc.font('Helvetica').text(" Euro wurde ordnungsgemäß überwiesen und ist auf das Konto des Jugenddienst Bozen-Land eingegangen.");
 		doc.moveDown(1);
 		doc.image('public/assets/signature_jdbl.jpg', {
 		 	fit: [200, 200],
