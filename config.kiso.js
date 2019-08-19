@@ -4,13 +4,24 @@ module.exports = {
         {"name": 'Fennberg',         "name_it": 'Fennberg'}
     ],
     "tSizes": [
-        {"name": '3-4 Jahre/89-104cm',             "name_it": '3-4 anni/89-104cm'},
+        /*
+5-6 y (110 – 116 cm)
+7-8 y (122 – 128 cm)
+9-11 y (134 – 146 cm)
+12-14 y (152-164 cm)
+S
+M
+L
+XL
+        */
         {"name": '5-6 Jahre/110-116cm',            "name_it": '5-6 anni/110-116cm'},
         {"name": '7-8 Jahre/122-128cm',            "name_it": '7-8 anni/122-128cm'},
-        {"name": '9-10 Jahre/134-140cm',           "name_it": '9-10 anni/134-140cm'},
-        {"name": '11-12 Jahre/146-152cm',          "name_it": '11-12 anni/146-152cm'},
+        {"name": '9-11 Jahre/134-146cm',           "name_it": '9-11 anni/134-146cm'},
+        {"name": '12-14 Jahre/152-164cm',          "name_it": '12-14 anni/152-164cm'},
         {"name": 'Erwachsenengröße S',             "name_it": 'Misura adulti S'},
         {"name": 'Erwachsenengröße M',             "name_it": 'Misura adulti M'},
+        {"name": 'Erwachsenengröße L',             "name_it": 'Misura adulti L'},
+        {"name": 'Erwachsenengröße XL',             "name_it": 'Misura adulti XL'},
     ],
     "cities": ['Bozen', 'Andere'],
     "db_test": "mongodb://localhost/kiso_test",
