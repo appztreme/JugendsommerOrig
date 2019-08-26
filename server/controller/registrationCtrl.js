@@ -244,7 +244,7 @@ exports.getChildrenPerEvent = async(req, res, next) => {
 			let registrations = await RegistrationRepo.filter(curYear, null, null, null, null, activityIds);
 			const activities = new Set(registrations.map((v,i) => v.activityId));
 			activities.forEach(vA => {
-				const fixRegistrations = registrations.filter(v => v.activityId._id === vA._id).filter((v,i) => i < vA.maxParticipants);
+				const fixRegistrations = registrations.filter(v => v.activityId._id === vA._id); // .filter((v,i) => i >= vA.maxParticipants);
 				registrationsWithoutQueue = registrationsWithoutQueue.concat(fixRegistrations);
 			})
 			let children = registrationsWithoutQueue.map(function(v,i) { return {firstName: v.firstNameChild, lastName: v.lastNameChild, birthday: v.birthdayChild }; });
@@ -281,7 +281,7 @@ exports.sendConfirmationMail = async(req, res, next) => {
 			let registrations = await RegistrationRepo.filter(curYear, null, null, null, null, activityIds);
 			const activities = new Set(registrations.map((v,i) => v.activityId));
 			activities.forEach(vA => {
-				const fixRegistrations = registrations.filter(v => v.activityId._id === vA._id).filter((v,i) => i < vA.maxParticipants);
+				const fixRegistrations = registrations.filter(v => v.activityId._id === vA._id).filter((v,i) => i >= vA.maxParticipants);
 				registrationsWithoutQueue = registrationsWithoutQueue.concat(fixRegistrations);
 			})
 			let emails = registrationsWithoutQueue.map(function(v,i) { return v.emailParent; });
