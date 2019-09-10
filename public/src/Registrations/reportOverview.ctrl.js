@@ -51,6 +51,7 @@ app.controller('ReportOverviewCtrl', function($scope, $location, $route, Registr
 					"emailParent": r.emailParent,
 					"healthChild": r.healthChild,
 					"canSwim": r.canSwim,
+					"needsEbK": r.needsEbK,
 					"canGoHomeAllone": r.canGoHomeAllone,
 					"commentInternal": r.commentInternal
 				}

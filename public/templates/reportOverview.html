@@ -44,6 +44,7 @@
 			<th>Gesundheit</th>
 			<th>Schwimmen</th>
 			<th>allein Nachhause</th>
+			<th>EbK</th>
 			<th>sonstige Infos</th>
 			<th ng-repeat='a in activityNames'>
 				{{a}}
@@ -64,6 +65,7 @@
 				<td>{{reg.healthChild}}</td>
 				<td>{{formatBool(reg.canSwim)}}</td>
 				<td>{{formatBool(reg.canGoHomeAllone)}}</td>
+				<td>{{formatBool(reg.needsEbK)}}</td>
 				<td>{{reg.commentInternal}}</td>
 				<td ng-repeat='a in activityNames'>
 					{{formatBoolToSymbol(reg[a])}}
