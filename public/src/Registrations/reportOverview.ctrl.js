@@ -53,6 +53,7 @@ app.controller('ReportOverviewCtrl', function($scope, $location, $route, Registr
 					"canSwim": r.canSwim,
 					"needsEbK": r.needsEbK,
 					"canGoHomeAllone": r.canGoHomeAllone,
+					"fee": $scope.calculateFee(r),
 					"commentInternal": r.commentInternal
 				}
 				var activities = $scope.getActivitiesForEvent(r.activityId.eventId._id);
@@ -68,6 +69,20 @@ app.controller('ReportOverviewCtrl', function($scope, $location, $route, Registr
 		$scope.activityNames = activityNames;
 		console.log("output", $scope.activityNames, activityNames);
 		return output;
+	}
+
+	$scope.calculateFee = function(reg) {
+		var fee = reg.activityId.eventId.feePerWeek;
+		if(reg.acceptsOptionalFee) {
+			fee = fee + reg.activityId.eventId.optionalFeePerWeek;
+		}
+		if(reg.isSiblingReservation) {
+			fee = fee - reg.activityId.eventId.siblingDiscount;
+		}
+		if(reg.activityId.eventId.deadline) {
+			if((moment(reg.activityId.eventId.deadline).hour(23).minute(59).second(59)).isBefore(moment(reg.registrationDate))) fee = fee + reg.activityId.eventId.penalty;	
+		}
+		return fee;
 	}
 
   	$scope.getReportData = function() {
