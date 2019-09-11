@@ -65,6 +65,7 @@ exports.filter = (year, name, firstname, receiptNr, activityId, activityIds) => 
     return query
         .where('registrationDate').gte(minDate).lte(maxDate)
         .populate({path:'activityId', populate:{path:'eventId'}})
+        .populate({path:'userId'})
 		.sort({ activityId: 1, registrationDate: 1, lastNameChild: 1, firstNameChild: 1})
 		.exec();
 }

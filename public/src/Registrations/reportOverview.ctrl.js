@@ -34,7 +34,11 @@ app.controller('ReportOverviewCtrl', function($scope, $location, $route, Registr
 			if(nameIndex.indexOf(fullName) > -1) {
 				// UPDATE
 				var outputIndex = $scope.indexOfArray(output, fullName, r.activityId.eventId._id);
-				if(outputIndex > -1) output[outputIndex][r.activityId.name] = true;
+				if(outputIndex > -1) {
+					output[outputIndex][r.activityId.name] = true;
+					output[outputIndex]["fee"] += $scope.calculateFee(r);
+				}
+
 			} else {
 				// INSERT
 				var entry = {
@@ -53,6 +57,8 @@ app.controller('ReportOverviewCtrl', function($scope, $location, $route, Registr
 					"canSwim": r.canSwim,
 					"needsEbK": r.needsEbK,
 					"canGoHomeAllone": r.canGoHomeAllone,
+					"firstNameUser": r.userId.firstName,
+					"lastNameUser": r.userId.lastName,
 					"fee": $scope.calculateFee(r),
 					"commentInternal": r.commentInternal
 				}
