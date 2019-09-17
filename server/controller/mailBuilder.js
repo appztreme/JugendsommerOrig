@@ -176,7 +176,7 @@ exports.getAttachmentConfirmation = function(body, instance, reservations) {
 		doc.moveDown(1);
 		let fee = 0;
 		for(let reg of registrationsPerChild) {
-			doc.font('Helvetica-Bold').text(reg.activityId.eventId.name + ' ' + reg.activityId.eventId.location + ' - ' + reg.activityId.name , { align: 'left', width: 430 });
+			doc.font('Helvetica-Bold').text(reg.activityId.eventId.name + ' ' + reg.activityId.eventId.location + ' - ' + reg.activityId.name + ' (' + moment(reg.activityId.startDate).format('DD.MM') + '-' + moment(reg.activityId.endDate).format('DD.MM.YYYY') + ')', { align: 'left', width: 430 });
 			doc.moveDown(1);
 			fee += calculateReceiptFee(reg, reg.activityId);
 		}
