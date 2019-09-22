@@ -6,11 +6,13 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 	var host = $location.$$host.toLowerCase();
 	$scope.platform = PlatformSvc;
 
+	$scope.cities = PlatformSvc.getCities();
+
 	// default values
 	$scope.yearFilter = (new Date()).getFullYear();
 
   	$scope.getReportData = function() {
-    	RegistrationSvc.find($scope.eventIdFilter, $scope.activityIdFilter, $scope.yearFilter, $scope.nameFilter, $scope.firstnameFilter, $scope.receiptFilter)
+    	RegistrationSvc.find($scope.eventIdFilter, $scope.activityIdFilter, $scope.yearFilter, $scope.nameFilter, $scope.firstnameFilter, $scope.receiptFilter, $scope.cityFilter)
 				.success(function (regs) {
             		$scope.registrations = regs;
             		$scope.emails = _.uniq(_.map($scope.registrations, function(r) {
@@ -75,6 +77,12 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 		$scope.registrations = undefined;
 		$scope.emails = undefined;
 	}
+	 $scope.clearCitySelection = function() {
+		 $scope.cityFilter = undefined;
+		 ReportCacheSvc.currentCityFilter = undefined;
+		 $scope.registrations = undefined;
+		 $scope.emails = undefined;
+	 }
 
 	$scope.clearFirstNameSelection = function() {
 		$scope.firstnameFilter = undefined;
@@ -154,6 +162,12 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 
 	$scope.updateFirstNameFilter = function() {
 		ReportCacheSvc.currentFirstNameFilter = $scope.firstnameFilter;
+		$scope.registrations = undefined;
+		$scope.emails = undefined;
+	}
+
+	$scope.updateCityFilter = function() {
+		ReportCacheSvc.currentCityFilter = $scope.cityFilter;
 		$scope.registrations = undefined;
 		$scope.emails = undefined;
 	}
@@ -269,8 +283,12 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 	if(ReportCacheSvc.hasFirstNameFilterParameter()) {
 		$scope.firstnameFilter = ReportCacheSvc.currentFirstNameFilter;
 	}
+	if(ReportCacheSvc.hasCityFilterParameter()) {
+		$scope.cityFilter = ReportCacheSvc.currentCityFilter;
+	}
 	if(ReportCacheSvc.hasEventFilterParameter() || ReportCacheSvc.hasActivityFilterParameter() ||
-       ReportCacheSvc.hasNameFilterParameter() || ReportCacheSvc.hasFirstNameFilterParameter()) {
+	   ReportCacheSvc.hasNameFilterParameter() || ReportCacheSvc.hasFirstNameFilterParameter() ||
+	   ReportCacheSvc.hasCityFilterParameter()) {
 		$scope.getReportData();
 		if(ReportCacheSvc.hasLastVerticalScrollPosition()) {
 			window.scroll(0,ReportCacheSvc.lastVerticalScrollPosition);

@@ -28,7 +28,7 @@ exports.findNotifiedWithoutPayment = (year, activityIds) => {
         .exec();
 }
 
-exports.filter = (year, name, firstname, receiptNr, activityId, activityIds) => {
+exports.filter = (year, name, firstname, receiptNr, activityId, activityIds, city) => {
     const minDate = new Date(year + "-1-1");
     const maxDate = new Date(year + "-12-31");
     let query = undefined;
@@ -61,6 +61,7 @@ exports.filter = (year, name, firstname, receiptNr, activityId, activityIds) => 
     if(receiptNr) query = query.where('receiptNumber').equals(receiptNr);
     if(activityId) query = query.where('activityId').equals(activityId);
     if(activityIds) query = query.where('activityId').in(activityIds);
+    if(city) query = query.where('cityChild').equals(city);
 
     return query
         .where('registrationDate').gte(minDate).lte(maxDate)

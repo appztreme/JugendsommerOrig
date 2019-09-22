@@ -5,7 +5,7 @@ var app = angular.module('js');
  * communication with server
  */
 app.service('RegistrationSvc', function($http) {
-	this.find = function(eventId, activityId, year, name, firstname, receiptNr) {
+	this.find = function(eventId, activityId, year, name, firstname, receiptNr, city) {
         var path = '/api/registrations';
 		var params = {};
 		if(!angular.isUndefined(eventId) && angular.isUndefined(activityId)) params.eventId = eventId;
@@ -14,6 +14,7 @@ app.service('RegistrationSvc', function($http) {
 		if(!angular.isUndefined(name)) params.name = name;
 		if(!angular.isUndefined(firstname)) params.firstname = firstname;
 		if(!angular.isUndefined(receiptNr)) params.receiptNumber = receiptNr;
+		if(!angular.isUndefined(city)) params.city = city;
 		return $http.get(path, { params: params });
 	};
 

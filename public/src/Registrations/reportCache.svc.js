@@ -23,6 +23,10 @@ app.service('ReportCacheSvc', function() {
     return !angular.isUndefined(this.currentFirstNameFilter);
   }
 
+  this.hasCityFilterParameter = function() {
+    return !angular.isUndefined(this.currentCityFilter);
+  }
+
   this.hasSelectionData = function() {
       return !angular.isUndefined(this.events) &&
              !angular.isUndefined(this.allActivities);
@@ -36,6 +40,7 @@ app.service('ReportCacheSvc', function() {
   this.currentEventIdFilter = undefined;
   this.currentNameFilter = undefined;
   this.currentFirstNameFilter = undefined;
+  this.currentCityFilter = undefined;
 
   this.events = undefined;
   this.allActivities = undefined;

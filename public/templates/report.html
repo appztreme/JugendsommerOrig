@@ -62,6 +62,19 @@
 				</span>
 			</div>
 		</div>
+		<div class='row' style='margin-top:10px'>
+			<label for='cityFilter' class='control-label col-sm-2'>Ort:</label>
+			<div class='col-sm-5 input-group'>
+				<select id='cityFilter' class='form-control' ng-model='cityFilter' ng-change='updateCityFilter()'>
+					<option ng-repeat='city in cities' value='{{city}}'>{{city}}</option>
+				</select>
+				<span class='input-group-btn'>
+					<button class='btn btn-info' ng-click='clearCitySelection()'>
+						<span class="glyphicon glyphicon-remove"></span>
+					</button>
+				</span>
+			</div>
+		</div>
 		<!--<div class='row' style='margin-top: 10px'>
 			<label for='paymentFilter' class='control-label col-sm-2'>Einzahlung:</label>
 			<input id='paymentFilter' class='form-control' type='checkbox' ng-model='paymentFilter' />

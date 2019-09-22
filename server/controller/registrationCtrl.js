@@ -20,7 +20,7 @@ exports.find = async(req, res, next) => {
 			let ids = await ActivityRepo.getActivityIdsForEvent(req.query.eventId);
 			activityIds = ids.map(function(v,i) { return v._id; });
 		}
-		let result = await RegistrationRepo.filter(req.query.year, req.query.name, req.query.firstname, req.query.receiptNumber, req.query.activityId, activityIds);
+		let result = await RegistrationRepo.filter(req.query.year, req.query.name, req.query.firstname, req.query.receiptNumber, req.query.activityId, activityIds, req.query.city);
 		res.json(result);
 	}
 	catch(err) { next(err); }
