@@ -33,6 +33,7 @@ module.exports = {
         {"name": 'Tiers',                   "name_it": 'Tires'},
         {"name": 'Trens',                   "name_it": 'Trens'},
         {"name": 'Völs',                    "name_it": 'Völs'},
+        {"name": 'Vöran',                   "name_it": 'Vöran'},
         {"name": 'Welschnofen',             "name_it": 'Nova Levante'},
         {"name": 'Wiesen',                  "name_it": 'Wiesen'},
         {"name": 'Hüttenlagerwoche',        "name_it": 'Hüttenlagerwoche'},

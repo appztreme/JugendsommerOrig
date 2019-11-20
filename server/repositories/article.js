@@ -48,7 +48,7 @@ exports.findOverview = (search) => {
               children: { $push: { _id: "$_id", code: "$code", name: "$name", description: "$description", location: "$location", status: "$status", isInSet: "$isInSet" }}
             }
         },
-        { $sort: {_id: 1, 'children.name': 1 }}
+        { $sort: { 'children.name': 1 }}
     ]).exec();
     }
 }

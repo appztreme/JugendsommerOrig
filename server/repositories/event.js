@@ -2,7 +2,7 @@
 const Contact = require('./../models/contact');
 const Event = require('./../models/event');
 
-const curYear = new Date().getFullYear();
+const curYear = (new Date().getMonth() >= 10) ? new Date().getFullYear()+1 : new Date().getFullYear();
 const startCurYear = new Date(curYear+"-1-1");
 
 exports.findByCurrentYear = () => {
