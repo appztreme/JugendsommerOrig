@@ -60,6 +60,7 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 	$scope.type = $routeParams.type;
 	$scope.cities = PlatformSvc.getCities();
 	$scope.tShirtSizes = conf.tSizes;
+	$scope.schoolLevels = conf.schoolLevels;
 	$scope.cityChild = PlatformSvc.getDefaultCity();
 	$scope.needsPreCare = false;
 	$scope.needsAbK = false;

@@ -12,6 +12,13 @@
         {"name": 'Erwachsenengröße S',             "name_it": 'Misura adulti S'},
         {"name": 'Erwachsenengröße M',             "name_it": 'Misura adulti M'},
     ];
+    window.__env.schoolLevels = [
+        {"name": '1 Klasse Grundschule',           "name_it": '1 Klasse Grundschule' },
+        {"name": '2 Klasse Grundschule',           "name_it": '2 Klasse Grundschule' },
+        {"name": '3 Klasse Grundschule',           "name_it": '3 Klasse Grundschule' },
+        {"name": '4 Klasse Grundschule',           "name_it": '4 Klasse Grundschle' },
+        {"name": '5 Klasse Grundschule',           "name_it": '5 Klasse Grundschle '}
+    ],
     window.__env.translations = window.__env.translations || {};
     window.__env.translations.de = {
         "NAV": {
@@ -78,7 +85,7 @@
         },
         "SELECTION": {
             "TITLE": "Wir sind in folgenden Gemeinden vertreten",
-            "TITLE_KISO": "KISO 2019",
+            "TITLE_KISO": "KISO 2020",
             "PROGRAM": "Programme",
             "INFO": "Bitte lesen Sie sich vor der Anmeldung aufmerksam unsere Allgemeinen Geschäftsbedingungen durch!",
         },
@@ -117,7 +124,7 @@
             "LABEL_FIRSTNAME_CHILD": "Vorname",
             "LABEL_LASTNAME_CHILD": "Familienname",
             "LABEL_BIRTHDAY_CHILD": "Geburtsdatum",
-            "LABEL_SCHOOL_CHILD": "Besuchte Klasse 2018/19",
+            "LABEL_SCHOOL_CHILD": "Besuchte Klasse 2019/20",
             "LABEL_HEALTH_CHILD": "Gesundheit / sonstige Infos",
             "LABEL_ADDRESS_CHILD": "Adresse",
             "LABEL_CITY_CHILD": "Gemeinde",
@@ -238,7 +245,7 @@
         },
         "SELECTION": {
             "TITLE": "Siamo presenti nei seguenti comuni",
-            "TITLE_KISO": "Kiso 2019",
+            "TITLE_KISO": "Kiso 2020",
             "PROGRAM": "programmi",
             "INFO": "Preghiamo di leggere attentamente le nostre condizioni generali prima di effettuare l’iscrizione"
         },
@@ -277,7 +284,7 @@
             "LABEL_FIRSTNAME_CHILD": "nome",
             "LABEL_LASTNAME_CHILD": "cognome",
             "LABEL_BIRTHDAY_CHILD": "data di nascita",
-            "LABEL_SCHOOL_CHILD": "classe frequentata 2018/19",
+            "LABEL_SCHOOL_CHILD": "classe frequentata 2019/20",
             "LABEL_HEALTH_CHILD": "salute / ulteriori informazioni",
             "LABEL_ADDRESS_CHILD": "indirizzo",
             "LABEL_CITY_CHILD": "comune",

@@ -46,6 +46,15 @@ app.factory('PlatformSvc', function(conf) {
                         else if(this.isJDUL()) return '';
                         else if(this.isJSGries()) return 'Bozen';
                         else return 'Andere';
+                },
+
+                getDefaultSchoolLevel: function() {
+                        if(this.isKiso()) return 'Bozen';
+                        else if(this.isJugendsommer()) return 'Deutschnofen';
+                        else if(this.isJDBL()) return 'Deutschnofen';
+                        else if(this.isJDUL()) return '';
+                        else if(this.isJSGries()) return 'Bozen';
+                        else return 'Andere';
                 }
 	};
 });
