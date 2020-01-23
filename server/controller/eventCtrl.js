@@ -17,6 +17,7 @@ exports.findByCurrentYear = async(req, res, next) => {
 exports.findByCurrentYearAndLocation = async(req, res, next) => {
 	try {
 		let evs = await EventRepo.findByCurrentYearAndLocation(req.params.location);
+		//console.log(evs);
 		return res.json(evs);
 	} catch(err) { return next(err); }
 }
@@ -24,6 +25,7 @@ exports.findByCurrentYearAndLocation = async(req, res, next) => {
 exports.findByCurrentYearAndLocationAdmin = async(req, res, next) => {
 	try {
 		let evs = await EventRepo.findByCurrentYearAndLocation(req.params.location, true);
+		//console.log(evs);
 		return res.json(evs);
 	} catch(err) { return next(err); }
 }
@@ -31,6 +33,7 @@ exports.findByCurrentYearAndLocationAdmin = async(req, res, next) => {
 exports.findByCurrentYearAndLocationSummer = async(req, res, next) => {
 	try {
 		let evs = await EventRepo.findByCurrentYearAndLocationSummer(req.params.location);
+		//console.log(evs);
 		return res.json(evs);
 	} catch(err) { return next(err); }
 }
@@ -38,6 +41,7 @@ exports.findByCurrentYearAndLocationSummer = async(req, res, next) => {
 exports.findByCurrentYearAndLocationSummerAdmin = async(req, res, next) => {
 	try {
 		let evs = await EventRepo.findByCurrentYearAndLocationSummer(req.params.location, true);
+		//console.log(evs);
 		return res.json(evs);
 	} catch(err) { return next(err); }
 }
@@ -45,6 +49,7 @@ exports.findByCurrentYearAndLocationSummerAdmin = async(req, res, next) => {
 exports.findByCurrentYearAndType = async(req, res, next) => {
 	try {
 		let evs = await EventRepo.findByCurrentYearAndType(req.params.type);
+		console.log(evs);
 		return res.json(evs);
 	} catch(err) { return next(err); }
 }
@@ -52,6 +57,7 @@ exports.findByCurrentYearAndType = async(req, res, next) => {
 exports.findByCurrentYearAndTypeAdmin = async(req, res, next) => {
 	try {
 		let evs = await EventRepo.findByCurrentYearAndType(req.params.type, true);
+		console.log(evs);
 		return res.json(evs);
 	} catch(err) { return next(err); }
 }
@@ -69,6 +75,7 @@ exports.getTypeByActivity = async(req, res, next) => {
 exports.getGeoSelection = async(req, res, next) => {
 	try {
 		let sel = await EventRepo.groupByLocation();
+		//console.log("sel", sel);
 		return res.json(sel);
 	} catch(err) { return next(err); }
 }
@@ -76,6 +83,7 @@ exports.getGeoSelection = async(req, res, next) => {
 exports.getGeoSelectionAdmin = async(req, res, next) => {
 	try {
 		let sel = await EventRepo.groupByLocationAdmin();
+		//console.log("sel", sel);
 		return res.json(sel);
 	} catch(err) { return next(err); }
 }
@@ -99,6 +107,7 @@ exports.getGeoSelectionSummerAdmin = async(req, res, next) => {
 exports.getTypeSelection = async(req, res, next) => {
 	try {
 		let sel = await EventRepo.groupByType();
+		console.log("sel", sel);
 		return res.json(sel);
 	}
 	catch(err) { return next(err); }
@@ -107,6 +116,7 @@ exports.getTypeSelection = async(req, res, next) => {
 exports.getTypeSelectionAdmin = async(req, res, next) => {
 	try {
 		let sel = await EventRepo.groupByTypeAdmin();
+		console.log("sel", sel);
 		return res.json(sel);
 	}
 	catch(err) { return next(err); }

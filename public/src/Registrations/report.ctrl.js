@@ -28,6 +28,15 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 	//})
 	};
 
+	$scope.$watch('colNameSort', function() {
+		if($scope.registrations) {
+			$scope.registrations.sort(function(a,b) {
+				return a[$scope.colNameSort] < b[$scope.colNameSort];
+			})
+		}
+		console.log($scope.colNameSort);
+	});
+
 	$scope.updateMasterIsPaymentDone = function() {
 		$scope.masterIsPaymentDone = _.partition($scope.registrations, function(r) {return r.isPaymentDone})[0].length === $scope.registrations.length;
 	}
