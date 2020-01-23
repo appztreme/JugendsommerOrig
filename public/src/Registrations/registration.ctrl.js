@@ -166,7 +166,7 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 		$scope.hasHealthIssues = false;
 		$scope.healthIncompatibility = null;
 		$scope.healthAllergy = null;
-		$scope.healthIllness = null;
+		$scope.healthIllnes = null;
 	}
 
 	$scope.save = function() {
@@ -197,7 +197,7 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 				hasHealthIssues: $scope.hasHealthIssues,
 				healthIncompatibility: $scope.healthIncompatibility,
 				healthAllergy: $scope.healthAllergy,
-				healthIllness: $scope.healthIllness,
+				healthIllnes: $scope.healthIllnes,
 				hasDisability: $scope.hasDisability,
 				disabilityDescription: $scope.disabilityDescription,
 				needsEbK: $scope.needsEbK,
@@ -237,7 +237,7 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 				$scope.hasHealthIssues = false;
 				$scope.healthAllergy = null;
 				$scope.healthIncompatibility = null;
-				$scope.healthIllness = null;
+				$scope.healthIllnes = null;
 				$scope.hasDisability = false;
 				$scope.disabilityDescription = null;
 				$scope.needsEbK = false;

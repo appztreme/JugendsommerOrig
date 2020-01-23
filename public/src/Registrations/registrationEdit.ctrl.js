@@ -31,6 +31,10 @@ app.controller('RegistrationEditCtrl', function($scope, $filter, $routeParams, $
 			$scope.registration.activityId = $scope.activityId;
 			$scope.registration.isPaymentDone = $scope.isPaymentDone;
 			$scope.registration.isEmailNotified = $scope.isEmailNotified;
+			$scope.registration.hasHealthIssues = $scope.hasHealthIssues;
+			$scope.registration.healthIncompatibility = $scope.healthIncompatibility;
+			$scope.registration.healthAllergy = $scope.healthAllergy;
+			$scope.registration.healthIllnes = $scope.healthIllnes;
 			$scope.registration.needsPreCare = $scope.needsPreCare;
 			$scope.registration.hasDisability = $scope.hasDisability;
 			$scope.registration.disabilityDescription = $scope.disabilityDescription;
@@ -68,6 +72,10 @@ app.controller('RegistrationEditCtrl', function($scope, $filter, $routeParams, $
 				$scope.isEmailNotified = false;
 				$scope.needsPreCare = false;
 				$scope.hasDisability = false;
+				$scope.hasHealthIssues = false;
+				$scope.healthIncompatibility = null;
+				$scope.healthAllergy = null;
+				$scope.healthIllnes = null;
 				$scope.canSwim = false;
 				$scope.canGoHomeAllone = false;
 				$scope.needsEbK = false;
@@ -97,6 +105,10 @@ app.controller('RegistrationEditCtrl', function($scope, $filter, $routeParams, $
 		$scope.birthdayChild = new Date(registration.birthdayChild);
 		$scope.schoolChild = registration.schoolChild;
 		$scope.healthChild = registration.healthChild;
+		$scope.hasHealthIssues = registration.hasHealthIssues;
+		$scope.healthIncompatibility = registration.healthIncompatibility;
+		$scope.healthAllergy = registration.healthAllergy;
+		$scope.healthIllnes = registration.healthIllnes;
 		$scope.addressChild = registration.addressChild;
 		$scope.cityChild = registration.cityChild;
 		$scope.tShirtSize = registration.tShirtSize;
