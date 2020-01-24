@@ -68,6 +68,8 @@ exports.create = async(req, res, next) => {
 			schoolChild: req.body.schoolChild,
 			healthChild: req.body.healthChild,
 			tShirtSize: req.body.tShirtSize,
+			hasOwnEBike: req.body.hasOwnEBike,
+			heightChild: req.body.heightChild,
 			bandName: req.body.bandName,
 			instrument: req.body.instrument,
 			instrumentYears: req.body.instrumentYears,
@@ -124,6 +126,8 @@ exports.update = (req, res, next) => {
 		reg.schoolChild = req.body.schoolChild;
 		reg.healthChild = req.body.healthChild;
 		reg.tShirtSize = req.body.tShirtSize;
+		reg.hasOwnEBike = req.body.hasOwnEBike;
+		reg.heightChild = req.body.heightChild;
 		reg.bandName = req.body.bandName;
 		reg.instrument = req.body.instrument;
 		reg.instrumentYears = req.body.instrumentYears;

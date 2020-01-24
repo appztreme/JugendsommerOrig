@@ -7,6 +7,7 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 	$scope.acceptAGB = false;
 	$scope.acceptInsurance = false;
 	$scope.acceptPrivacy = false;
+	$scope.acceptHealth = false;
 	$scope.currentState = 1;
 	$scope.selectedActivities = [];
 	$scope.emailParentCheck = '';
@@ -17,11 +18,13 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 	$scope.insuranceVisibility = false;
 	$scope.privacyVisibility = false;
 	$scope.mediaVisibility = false;
+	$scope.healthVisibility = false,
 
 	$scope.toggleAgb = function() { $scope.agbVisibility = !$scope.agbVisibility; }
 	$scope.togglePrivacy = function() { $scope.privacyVisibility = !$scope.privacyVisibility; }
 	$scope.toggleInsurance = function() { $scope.insuranceVisibility = !$scope.insuranceVisibility; }
 	$scope.toggleMedia = function() { $scope.mediaVisibility = !$scope.mediaVisibility; }
+	$scope.toggleHealth = function() { $scope.healthVisibility = !$scope.healthVisibility; }
 
 	$scope.toggleActivity = function(id) {
 		var index = $scope.selectedActivities.indexOf(id);
@@ -62,6 +65,7 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 	$scope.tShirtSizes = conf.tSizes;
 	$scope.schoolLevels = conf.schoolLevels;
 	$scope.cityChild = PlatformSvc.getDefaultCity();
+	$scope.addressChild = " ";
 	$scope.needsPreCare = false;
 	$scope.needsAbK = false;
 	$scope.canSwim = false;
@@ -71,6 +75,7 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 	$scope.acceptsOptionalFee = false;
 	$scope.acceptsNewsletter = false;
 	$scope.acceptsMediaPublication = false;
+	$scope.hasOwnEBike = false;
 
 	$scope.isEmailEqual = function() {
 		if($scope.emailParent === '' || !$scope.emailParent || !$scope.emailParentCheck || $scope.emailParentCheck === '') return false;
@@ -110,6 +115,8 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 			return $scope.registrationForm.$valid && $scope.acceptAGB && $scope.acceptInsurance;
 		else if($scope.platform.isKiso() || $scope.platform.isTest())
 			return $scope.registrationForm.$valid && $scope.acceptAGB && $scope.acceptPrivacy;
+		else if($scope.platform.isJugendsommer() || $scope.platform.isJDBL())
+			return $scope.registrationForm.$valid && $scope.acceptAGB && $scope.acceptHealth;
 		else
 			return $scope.registrationForm.$valid && $scope.acceptAGB;
 	};
@@ -158,6 +165,8 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 		$scope.schoolChild = null;
 		$scope.healthChild = null;
 		$scope.hasDisability = false;
+		$scope.hasOwnEBike = false;
+		$scope.heightChild = false;
 	}
 
 	$scope.save = function() {
@@ -175,6 +184,8 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 				addressChild: $scope.addressChild ? $scope.addressChild : 'Addresse',
 				cityChild: $scope.cityChild,
 				tShirtSize: $scope.tShirtSize,
+				hasOwnEBike: $scope.hasOwnEBike,
+				heightChild: $scope.heightChild,
 				bandName: $scope.bandName,
 				instrument: $scope.instrument,
 				instrumentYears: $scope.instrumentYears,
@@ -224,6 +235,8 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 				$scope.hasDisability = false;
 				$scope.disabilityDescription = null;
 				$scope.needsEbK = false;
+				$scope.hasOwnEBike = false;
+				$scope.heightChild = 0;
 				$scope.canSwim = false;
 				$scope.acceptsOptionalFee = false;
 				$scope.acceptsMediaPublication = false;

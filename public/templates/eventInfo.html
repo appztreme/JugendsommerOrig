@@ -1,7 +1,8 @@
 <div class='container'>
 	<div class='row'>
 		<div class='col-sm-12'>
-			<h2 class='text-orange'>Info: {{event.name}}</h2>
+			<h2><span ng-show="lang == 'de'" class="text-orange">Info: {{event.name}}</span></h2>
+			<h2><span ng-show="lang == 'it'" class="text-orange">Info: {{event.name_it}}</span></h2>
 		</div>
 
 		<div cg-Busy='{promise:busyPromise,message:"Loading",backdrop:true,minDuration:500}'></div>
