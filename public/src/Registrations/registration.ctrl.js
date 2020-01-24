@@ -18,23 +18,17 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 	$scope.insuranceVisibility = false;
 	$scope.privacyVisibility = false;
 	$scope.mediaVisibility = false;
-<<<<<<< HEAD
 	$scope.healthVisibility = false,
-=======
 	$scope.swimInfoVisible = false;
 	$scope.ebkInfoVisible = false;
->>>>>>> d330dd1c13d08d19926e14ecfd2ba0971526ab77
 
 	$scope.toggleAgb = function() { $scope.agbVisibility = !$scope.agbVisibility; }
 	$scope.togglePrivacy = function() { $scope.privacyVisibility = !$scope.privacyVisibility; }
 	$scope.toggleInsurance = function() { $scope.insuranceVisibility = !$scope.insuranceVisibility; }
 	$scope.toggleMedia = function() { $scope.mediaVisibility = !$scope.mediaVisibility; }
-<<<<<<< HEAD
 	$scope.toggleHealth = function() { $scope.healthVisibility = !$scope.healthVisibility; }
-=======
 	$scope.toggleSwimInfo = function() { $scope.swimInfoVisible = !$scope.swimInfoVisible; }
 	$scope.toggleebkInfo = function() { $scope.ebkInfoVisible = !$scope.ebkInfoVisible; }
->>>>>>> d330dd1c13d08d19926e14ecfd2ba0971526ab77
 
 	$scope.toggleActivity = function(id) {
 		var index = $scope.selectedActivities.indexOf(id);
@@ -176,15 +170,12 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 		$scope.schoolChild = null;
 		$scope.healthChild = null;
 		$scope.hasDisability = false;
-<<<<<<< HEAD
 		$scope.hasOwnEBike = false;
 		$scope.heightChild = false;
-=======
 		$scope.hasHealthIssues = false;
 		$scope.healthIncompatibility = null;
 		$scope.healthAllergy = null;
 		$scope.healthIllnes = null;
->>>>>>> d330dd1c13d08d19926e14ecfd2ba0971526ab77
 	}
 
 	$scope.save = function() {
