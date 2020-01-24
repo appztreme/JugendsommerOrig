@@ -107,7 +107,7 @@ exports.getGeoSelectionSummerAdmin = async(req, res, next) => {
 exports.getTypeSelection = async(req, res, next) => {
 	try {
 		let sel = await EventRepo.groupByType();
-		console.log("sel", sel);
+		//console.log("sel", sel);
 		return res.json(sel);
 	}
 	catch(err) { return next(err); }
@@ -116,7 +116,7 @@ exports.getTypeSelection = async(req, res, next) => {
 exports.getTypeSelectionAdmin = async(req, res, next) => {
 	try {
 		let sel = await EventRepo.groupByTypeAdmin();
-		console.log("sel", sel);
+		//console.log("sel", sel);
 		return res.json(sel);
 	}
 	catch(err) { return next(err); }

@@ -106,28 +106,30 @@
 							</div>
 						</div>
 						<!-- HASHEALTHISSUES -->
-						<div ng-show='(type === "summer" || type === "music")' class='col-sm-offset-2 col-sm4 form-group'>
+						<div class='col-sm-offset-2 col-sm4 form-group' ng-class='{ "has-error": registrationForm.schoolChild.$invalid }'>
 							<label for='hasHealthIssues' class='control-label col-sm-2'>{{"RESERVATION.LABEL_HEALTHISSUES_CHILD" | translate}}</label>
-							<div class='col-sm-8'>
-								<input type='checkbox' name='hasHealthIssues' ng-model='hasHealthIssues'></input>
+							<div class='col-sm-8 btn-group' role='group' required>
+								<button type="button" ng-class='{"btn-info": hasHealthIssues && isHasHealthIssuesSet()}' class="btn btn-default" ng-click="setHasHealthIssues(true)">{{"BTN.YES" | translate}}</button>
+								<button type="button" ng-class='{"btn-info": !hasHealthIssues && isHasHealthIssuesSet()}' class="btn btn-default" ng-click="setHasHealthIssues(false)">{{"BTN.NO" | translate}}</button>
+								<!--<input type='checkbox' name='hasHealthIssues' ng-model='hasHealthIssues'></input>-->
 							</div>
 						</div>
 						<!-- HEALTHINCOMPATIBILITY -->
-						<div ng-show='hasHealthIssues && (type === "summer" || type === "music")' class='col-sm-offset-2 col-sm4 form-group'>
+						<div ng-show='hasHealthIssues' class='col-sm-offset-2 col-sm4 form-group'>
 							<label for='healthIncompatibility' class='control-label col-sm-2'>{{"RESERVATION.LABEL_HEALTH_INCOMPATIBILITY" | translate}}</label>
 							<div class='col-sm-8'>
 								<input type='text' name='healthIncompatibility' ng-model='healthIncompatibility' maxlength='100' class='form-control'></input>
 							</div>
 						</div>
 						<!-- HEALTHALLERGY -->
-						<div ng-show='hasHealthIssues && (type === "summer" || type === "music")' class='col-sm-offset-2 col-sm4 form-group'>
+						<div ng-show='hasHealthIssues' class='col-sm-offset-2 col-sm4 form-group'>
 							<label for='healthAllergy' class='control-label col-sm-2'>{{"RESERVATION.LABEL_HEALTH_ALLERGY" | translate}}</label>
 							<div class='col-sm-8'>
 								<input type='text' name='healthAllergy' ng-model='healthAllergy' maxlength='100' class='form-control'></input>
 							</div>
 						</div>
 						<!-- HEALTHILLNESS -->
-						<div ng-show='hasHealthIssues && (type === "summer" || type === "music")' class='col-sm-offset-2 col-sm4 form-group'>
+						<div ng-show='hasHealthIssues' class='col-sm-offset-2 col-sm4 form-group'>
 							<label for='healthIllnes' class='control-label col-sm-2'>{{"RESERVATION.LABEL_HEALTH_ILLNESS" | translate}}</label>
 							<div class='col-sm-8'>
 								<input type='text' name='healthIllnes' ng-model='healthIllnes' maxlength='100' class='form-control'></input>
@@ -142,14 +144,16 @@
 						</div>-->
 
 						<!-- HASDISABILITY -->
-						<div ng-show='(type === "summer" || type === "music")' class='col-sm-offset-2 col-sm4 form-group'>
+						<div class='col-sm-offset-2 col-sm4 form-group'>
 							<label for='hasDisability' class='control-label col-sm-2'>{{"RESERVATION.LABEL_DISABILITY_CHILD" | translate}}</label>
-							<div class='col-sm-8'>
-								<input type='checkbox' name='hasDisability' ng-model='hasDisability'></input>
+							<div class='col-sm-8 btn-group'>
+									<button type="button" ng-class='{"btn-info": hasDisability && isHasDisabilitySet()}' class="btn btn-default" ng-click="setHasDisability(true)">{{"BTN.YES" | translate}}</button>
+									<button type="button" ng-class='{"btn-info": !hasDisability && isHasDisabilitySet()}' class="btn btn-default" ng-click="setHasDisability(false)">{{"BTN.NO" | translate}}</button>	
+								<!--<input type='checkbox' name='hasDisability' ng-model='hasDisability'></input>-->
 							</div>
 						</div>
 						<!-- DISABILITYDESCRIPTION -->
-						<div ng-show='hasDisability && (type === "summer" || type === "music")' class='col-sm-offset-2 col-sm4 form-group'>
+						<div ng-show='hasDisability' class='col-sm-offset-2 col-sm4 form-group'>
 							<label for='disabilityDescription' class='control-label col-sm-2'>{{"RESERVATION.LABEL_DISABILITY_CHILD_DESCRIPTION" | translate}}</label>
 							<div class='col-sm-8'>
 								<input type='text' name='disabilityDescription' ng-model='disabilityDescription' maxlength='100' class='form-control'></input>
@@ -166,26 +170,26 @@
 							</div>
 						</div>
 						<!-- HASOWNEBIKE -->
-						<div ng-show='type == "bike"' class='col-sm-offset-2 col-sm-2'>
+						<div ng-show='type == "bike"' class='col-sm-offset-2 col-sm-10'>
 							<input type='checkbox' name='hasOwnEBike' ng-model='hasOwnEBike'><strong>  {{"RESERVATION.LABEL_HASOWNEBIKE" | translate}}</input>
 						</div>
-						<div ng-show='type == "bike" && hasWonEBike' class='col-sm-offset-4'>
-							<label for='budgetBusiness' class='control-label col-sm-2'><strong> {{"RESERVATION.LABEL_HEIGHT_CHILD" | translate}}</strong>></label>
+						<div ng-show='type == "bike" && hasOwnEBike' class='col-sm-11'>
+							<label for='budgetBusiness' class='control-label col-sm-2'><strong> {{"RESERVATION.LABEL_HEIGHT_CHILD" | translate}}</strong></label>
 							<input type='number' class='col-sm-10' ng-model='heightChild' min='0' step='0.0'></input>
 						</div>
 						<!-- CANSWIM -->
-						<div ng-show='platform.isJDUL() || platform.isTest()' class='col-sm-offset-2 col-sm4'>
+						<div ng-show='platform.isJDUL() || platform.isTest()' class='col-sm-offset-2 col-sm10'>
 							<div class="input-group">
 								<input type='checkbox' name='canSwin' ng-model='canSwim'><strong>  {{"RESERVATION.LABEL_CANSWIM_CHILD" | translate}}</input>
 								<button type="button" class="btn btn-info btn-sm" style="margin-left: 10px" ng-click="toggleSwimInfo()">?</button>
 							</div>
-							<div class="alert alert-info col-sm4" style="margin-top: 10px; max-width: 250;" role="alert" ng-show="swimInfoVisible">
+							<div class="alert alert-info col-sm-10" style="margin-top: 10px; max-width: 250;" role="alert" ng-show="swimInfoVisible">
 								<span>{{"RESERVATION.INFO_CANSWIM_1" | translate}}</span><br />
 								<span>{{"RESERVATION.INFO_CANSWIM_2" | translate}}</span>
 							</div>
 						</div>
 						<!-- CANGOHOMEALLONE -->
-						<div ng-show='platform.isJDUL()' class='col-sm-offset-2 col-sm4'>
+						<div ng-show='platform.isJDUL() || platform.isTest()' class='col-sm-offset-2 col-sm-10'>
 							<input type='checkbox' name='canGoHomeAllone' ng-model='canGoHomeAllone'><strong>  {{"RESERVATION.LABEL_CANGOHOME_CHILD" | translate}}</input>
 						</div>
 						<!-- NEEDSPRECARE -->
@@ -322,7 +326,7 @@
 						</div>
 						<br />
 						<!--<input type='checkbox' name='agb' ng-model='acceptAGB'><strong>{{"RESERVATION.LABEL_TERMS1" | translate}}<button type="button" class="btn btn-default" data-toggle="modal" data-target=".bs-example-modal-lg">{{"RESERVATION.LABEL_TERMS2" | translate}}</button></strong></input>-->
-						<input type='checkbox' name='agb' ng-model='acceptAGB'><strong>{{"RESERVATION.LABEL_TERMS1" | translate}}<button type="button" class="btn btn-default" ng-click="toggleAgb()" >{{"RESERVATION.LABEL_TERMS2" | translate}}</button></strong></input>
+						<input type='checkbox' name='agb' ng-model='acceptAGB'><strong>{{"RESERVATION.LABEL_TERMS1" | translate}}<button type="button" class="btn btn-default" ng-click="toggleAgb()" >{{"RESERVATION.LABEL_TERMS2" | translate}}</button></strong><strong>{{"RESERVATION.LABEL_TERMS3" | translate}}</input>
 						<div class="panel panel-default" ng-class="agbVisibility ? 'show' : 'hidden'">
 							<div class="panel-body">
 								<div ng-show="(platform.isJDBL() || platform.isJugendsommer()) && lang == 'de'" ng-include src='"templates/agb/agb-jdbl-de.html"'></div>

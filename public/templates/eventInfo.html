@@ -6,8 +6,8 @@
 		</div>
 
 		<div cg-Busy='{promise:busyPromise,message:"Loading",backdrop:true,minDuration:500}'></div>
-		<p ng-show="lang == 'de'" class='col-sm-12'>{{event.info}}</p>
-		<p ng-show="lang == 'it'" class='col-sm-12'>{{event.info_it}}</p>
+		<p ng-show="lang == 'de'" class='col-sm-12' ng-bind-html="info"></p>
+		<p ng-show="lang == 'it'" class='col-sm-12' ng-bind-html="info_it"></p>
 		<div class='col-sm-8'>
 			<a href='/#/' class='btn btn-warning' role='button'>{{"INFO.BACK" | translate}}</a>
 		</div>

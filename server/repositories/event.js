@@ -68,7 +68,7 @@ exports.groupByLocation = () => {
 			{ $sort: {_id: 1}}
 		]).exec();
 
-		console.log(x);
+		//console.log("group by loc", x);
     return x;
 }
 

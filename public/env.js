@@ -48,7 +48,9 @@
             "PAYMENT": "Zahlung",
             "REMINDER": "Erinnerung",
             "CONFIRMATION": "Bestätigung",
-            "ADMIN": "Admin"
+            "ADMIN": "Admin",
+            "YES": "Ja",
+            "NO": "Nein"
         },
         "LOGIN": {
             "USER": "User",
@@ -162,7 +164,7 @@
             "LABEL_MEDIA1": " Hiermit erteile ich die ",
             "LABEL_MEDIA2": " Erlaubnis ",
             "LABEL_MEDIA3": " zur rechtmäßigen Verwendung von Bild- und Filmmaterial",
-            "LABEL_MEDIA1_JDBL": " ch willige mittels Anklicken des entsprechenden Buttons ein, dass mein Name und mein Nachname sowie mein Lichtbild für die in Punkt 10 der  ",
+            "LABEL_MEDIA1_JDBL": " Ich willige mittels Anklicken des entsprechenden Buttons ein, dass mein Name und mein Nachname sowie mein Lichtbild für die in Punkt 10 der  ",
             "LABEL_MEDIA2_JDBL": " Datenschutzerklärung ",
             "LABEL_MEDIA3_JDBL": " genannten Zwecke in den dort genannten Medien verwendet werden können.",
             "LABEL_HEALTH1_JDBL": " Ich willige mittels Unterschrift bzw. Anklicken des entsprechenden Buttons ein, dass die Gesundheitsdaten in Punkt 9 (siehe ",
@@ -225,7 +227,9 @@
             "PAYMENT": "Zahlung",
             "REMINDER": "Erinnerung",
             "CONFIRMATION": "Bestätigung",
-            "ADMIN": "Admin"
+            "ADMIN": "Admin",
+            "YES": "Si",
+            "NO": "No"
         },
         "LOGIN": {
             "USER": "Utente",

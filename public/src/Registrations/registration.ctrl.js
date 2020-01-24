@@ -30,6 +30,11 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 	$scope.toggleSwimInfo = function() { $scope.swimInfoVisible = !$scope.swimInfoVisible; }
 	$scope.toggleebkInfo = function() { $scope.ebkInfoVisible = !$scope.ebkInfoVisible; }
 
+	$scope.setHasHealthIssues = function(b) { $scope.hasHealthIssues = b; }
+	$scope.isHasHealthIssuesSet = function() { return $scope.hasHealthIssues !== undefined && $scope.hasHealthIssues !== null; }
+	$scope.setHasDisability = function(b) { $scope.hasDisability = b; }
+	$scope.isHasDisabilitySet = function() { return $scope.hasDisability !== undefined && $scope.hasDisability !== null; }
+
 	$scope.toggleActivity = function(id) {
 		var index = $scope.selectedActivities.indexOf(id);
 		if(index === -1) $scope.selectedActivities.push(id);
@@ -74,8 +79,8 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 	$scope.needsAbK = false;
 	$scope.canSwim = false;
 	$scope.canGoHomeAllone = false;
-	$scope.hasDisability = false;
-	$scope.hasHealthIssues = false;
+	$scope.hasDisability = undefined;
+	$scope.hasHealthIssues = undefined;
 	$scope.isSiblingReservation = false;
 	$scope.acceptsOptionalFee = false;
 	$scope.acceptsNewsletter = false;
@@ -108,7 +113,7 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 	}
 
 	$scope.isChildDataComplete = function() {
-		return $scope.registrationForm.$valid && $scope.isEmailEqual();
+		return $scope.registrationForm.$valid && $scope.isEmailEqual() && $scope.isHasHealthIssuesSet() && $scope.isHasDisabilitySet();
 	}
 
 	$scope.isActivityDataComplete = function() {
@@ -153,7 +158,7 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 			$scope.nameContact2 = RegistrationCacheSvc.lastRegistration.nameContact2;
 			$scope.telContact2 =  RegistrationCacheSvc.lastRegistration.telContact2;
 			$scope.needsPreCare = RegistrationCacheSvc.lastRegistration.needsPreCare;
-			$scope.hasDisability = RegistrationCacheSvc.lastRegistration.hasDisability;
+			//$scope.hasDisability = RegistrationCacheSvc.lastRegistration.hasDisability;
 			$scope.disabilityDescription = RegistrationCacheSvc.lastRegistration.disabilityDescription;
 			$scope.canSwim = RegistrationCacheSvc.lastRegistration.canSwim;
 			$scope.canGoHomeAllone = RegistrationCacheSvc.lastRegistration.canGoHomeAllone;
@@ -169,10 +174,10 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 		$scope.birthdayChild = null;
 		$scope.schoolChild = null;
 		$scope.healthChild = null;
-		$scope.hasDisability = false;
+		$scope.hasDisability = undefined;
 		$scope.hasOwnEBike = false;
 		$scope.heightChild = false;
-		$scope.hasHealthIssues = false;
+		$scope.hasHealthIssues = undefined;
 		$scope.healthIncompatibility = null;
 		$scope.healthAllergy = null;
 		$scope.healthIllnes = null;
@@ -245,11 +250,11 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 				$scope.nameContact2 = null;
 				$scope.telContact2 = null;
 				$scope.needsPreCare = false;
-				$scope.hasHealthIssues = false;
+				$scope.hasHealthIssues = undefined;
 				$scope.healthAllergy = null;
 				$scope.healthIncompatibility = null;
 				$scope.healthIllnes = null;
-				$scope.hasDisability = false;
+				$scope.hasDisability = undefined;
 				$scope.disabilityDescription = null;
 				$scope.needsEbK = false;
 				$scope.hasOwnEBike = false;

@@ -1,6 +1,6 @@
 var app = angular.module('js');
 
-app.controller('EventInfoCtrl', function($scope, $routeParams, EventsSvc, $rootScope, $translate) {
+app.controller('EventInfoCtrl', function($scope, $routeParams, $sce, EventsSvc, $rootScope, $translate) {
 	$scope.busyPromise = EventsSvc.findById($routeParams.eventId);
 
 	$scope.lang = $translate.proposedLanguage() || $translate.user();
@@ -11,6 +11,7 @@ app.controller('EventInfoCtrl', function($scope, $routeParams, EventsSvc, $rootS
 
 	EventsSvc.findById($routeParams.eventId).success(function(ev) {
 		$scope.event = ev;
-		$scope.info = ev.info;
+		$scope.info = $sce.trustAsHtml(ev.info);
+		$scope.info_it = $sce.trustAsHtml(ev.info_it);
 	});
 });
