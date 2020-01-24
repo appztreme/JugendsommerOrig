@@ -104,14 +104,14 @@
 			</select>
 		</div>
 	</div>
-	<div class='row panel-body'>
+	<!-- <div class='row panel-body'>
 		<div class='col-sm-3'>
 			<label>Sortierung2</label>
 			<select id='colSorter2' class='sel-base' ng-model='colNameSort2'>
 				<option ng-repeat='col in columns' value='{{col.dbName}}'>{{col.colName}}</option>
 			</select>
 		</div>
-	</div>
+	</div> -->
 	</div>
 	</div>
 	</div>
@@ -134,6 +134,7 @@
 				<div ng-show="isBatchUpdateAllowed()" class="input-group"><input type="text" class="form-control" style="min-width: 45px" ng-model="masterLastNameChild" /><div class="input-group-btn"><button type="button" class="btn btn-success" ng-click="updateBatchProperty('lastNameChild', masterLastNameChild)">U</button></div></div>
 			</th>
 			<th>EbK</th>
+			<th ng-show='activityIdFilter'>Warteliste</th>
 			<th>Einzahlung
 				<div ng-show="isBatchUpdateAllowed()"><input type="checkbox" ng-checked="masterIsPaymentDone" ng-model="masterIsPaymentDone" ng-change="batchUpdateIsPaymentDone()" /></div>
 			</th>
@@ -188,9 +189,10 @@
 			<td ng-class='{"bg-warning": isOnWait(reg), "bg-danger": isAfterDeadline(reg)}'></td>
 			<td>{{reg.activityId.eventId.location}} - {{reg.activityId.eventId.name}}</td>
 			<td>{{reg.activityId.name}}</td>
-			<td>{{reg.firstNameChild}}</td>
-			<td>{{reg.lastNameChild}}</td>
+			<td>{{reg.firstNameChild.toUpperCase()}}</td>
+			<td>{{reg.lastNameChild.toUpperCase()}}</td>
 			<td>{{formatBool(reg.needsEbK)}}</td>
+			<td ng-show='activityIdFilter' ng-class='{"bg-warning": isOnWait(reg), "bg-success": !isOnWait(reg)}'>{{formatBool(isOnWait(reg))}}</td>
 			<td ng-class='{"bg-success": reg.isPaymentDone, "bg-danger": !reg.isPaymentDone}'><input type='checkbox' ng-model='reg.isPaymentDone' ng-change='updateIsPaymentDone(reg._id, reg.isPaymentDone)' style='margin-right:8px' />{{formatBool(reg.isPaymentDone)}}</td>
 			<td ng-class='{"bg-success": reg.isEmailNotified, "bg-danger": !reg.isEmailNotified}'><input type='checkbox' ng-model='reg.isEmailNotified' ng-change='updateIsEmailNotified(reg._id, reg.isEmailNotified)' style='margin-right:8px' />{{formatBool(reg.isEmailNotified)}}</td>
 			<td>{{reg.receiptNumber}}</td>

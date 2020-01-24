@@ -72,12 +72,40 @@
 		</div>
 	</div>
 	<!-- HEALTHCHILD -->
-	<div class='form-group' ng-class='{ "has-error": registrationForm.healthChild.$invalid }'>
+	<!--<div class='form-group' ng-class='{ "has-error": registrationForm.healthChild.$invalid }'>
 		<label for='healthChild' class='control-label col-sm-2'>Gesundheitliche Probleme</label>
 		<div class='col-sm-10'>
 			<textarea name='healthChild' ng-model='healthChild' rows='3' maxlength='350' class='form-control'></textarea>
 		</div>
+	</div>-->
+	<!-- HASHEALTHISSUES -->
+	<div class='col-sm-offset-2 col-sm4 form-group'>
+		<label for='hasHealthIssues' class='control-label col-sm-2'>{{"RESERVATION.LABEL_HEALTHISSUES_CHILD" | translate}}</label>
+		<div class='col-sm-8'>
+			<input type='checkbox' name='hasHealthIssues' ng-model='hasHealthIssues'></input>
+		</div>
 	</div>
+	<!-- HEALTHINCOMPATIBILITY -->
+	<div ng-show='hasHealthIssues' class='col-sm-offset-2 col-sm4 form-group'>
+		<label for='healthIncompatibility' class='control-label col-sm-2'>{{"RESERVATION.LABEL_HEALTH_INCOMPATIBILITY" | translate}}</label>
+		<div class='col-sm-8'>
+			<input type='text' name='healthIncompatibility' ng-model='healthIncompatibility' maxlength='100' class='form-control'></input>
+		</div>
+	</div>
+	<!-- HEALTHALLERGY -->
+	<div ng-show='hasHealthIssues' class='col-sm-offset-2 col-sm4 form-group'>
+		<label for='healthAllergy' class='control-label col-sm-2'>{{"RESERVATION.LABEL_HEALTH_ALLERGY" | translate}}</label>
+		<div class='col-sm-8'>
+			<input type='text' name='healthAllergy' ng-model='healthAllergy' maxlength='100' class='form-control'></input>
+		</div>
+	</div>
+	<!-- HEALTHILLNESS -->
+	<div ng-show='hasHealthIssues' class='col-sm-offset-2 col-sm4 form-group'>
+		<label for='healthIllnes' class='control-label col-sm-2'>{{"RESERVATION.LABEL_HEALTH_ILLNESS" | translate}}</label>
+		<div class='col-sm-8'>
+			<input type='text' name='healthIllnes' ng-model='healthIllnes' maxlength='100' class='form-control'></input>
+		</div>
+    </div>
 	<!-- ADDRESSCHILD -->
 	<div class='form-group' ng-class='{ "has-error": registrationForm.addressChild.$invalid }'>
 		<label for='addressChild' class='control-label col-sm-2'>Adresse</label>
@@ -102,6 +130,16 @@
 				<option ng-repeat="size in tShirtSizes" value='{{size.name}}'>{{size.name}}</option>
 			</select>
 		</div>
+	</div>
+	<!-- CANSWIM -->
+	<div ng-show='platform.isJDUL() || platform.isTest()' class='col-sm-offset-2 col-sm4'>
+		<div class="input-group">
+			<input type='checkbox' name='canSwin' ng-model='canSwim'><strong>  {{"RESERVATION.LABEL_CANSWIM_CHILD" | translate}}</input>
+		</div>
+	</div>
+	<!-- CANGOHOMEALLONE -->
+	<div ng-show='platform.isJDUL()' class='col-sm-offset-2 col-sm4'>
+		<input type='checkbox' name='canGoHomeAllone' ng-model='canGoHomeAllone'><strong>  {{"RESERVATION.LABEL_CANGOHOME_CHILD" | translate}}</input>
 	</div>
 	<!-- NEEDSEBK -->
 	<div class='col-sm-offset-2 col-sm4'>

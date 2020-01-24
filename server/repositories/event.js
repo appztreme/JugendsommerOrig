@@ -52,7 +52,8 @@ exports.getContacts = (id) => {
 }
 
 exports.groupByLocation = () => {
-    return Event.aggregate([
+	console.log("group by loc")
+    var x = Event.aggregate([
 			{ $match:
 				{ $and: [ {startDate: { $gte: startCurYear }}, {isInternal: false} ] }
 			},
@@ -66,6 +67,9 @@ exports.groupByLocation = () => {
 			},
 			{ $sort: {_id: 1}}
 		]).exec();
+
+		console.log(x);
+    return x;
 }
 
 exports.groupByLocationAdmin = () => {

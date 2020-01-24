@@ -18,13 +18,23 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 	$scope.insuranceVisibility = false;
 	$scope.privacyVisibility = false;
 	$scope.mediaVisibility = false;
+<<<<<<< HEAD
 	$scope.healthVisibility = false,
+=======
+	$scope.swimInfoVisible = false;
+	$scope.ebkInfoVisible = false;
+>>>>>>> d330dd1c13d08d19926e14ecfd2ba0971526ab77
 
 	$scope.toggleAgb = function() { $scope.agbVisibility = !$scope.agbVisibility; }
 	$scope.togglePrivacy = function() { $scope.privacyVisibility = !$scope.privacyVisibility; }
 	$scope.toggleInsurance = function() { $scope.insuranceVisibility = !$scope.insuranceVisibility; }
 	$scope.toggleMedia = function() { $scope.mediaVisibility = !$scope.mediaVisibility; }
+<<<<<<< HEAD
 	$scope.toggleHealth = function() { $scope.healthVisibility = !$scope.healthVisibility; }
+=======
+	$scope.toggleSwimInfo = function() { $scope.swimInfoVisible = !$scope.swimInfoVisible; }
+	$scope.toggleebkInfo = function() { $scope.ebkInfoVisible = !$scope.ebkInfoVisible; }
+>>>>>>> d330dd1c13d08d19926e14ecfd2ba0971526ab77
 
 	$scope.toggleActivity = function(id) {
 		var index = $scope.selectedActivities.indexOf(id);
@@ -71,6 +81,7 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 	$scope.canSwim = false;
 	$scope.canGoHomeAllone = false;
 	$scope.hasDisability = false;
+	$scope.hasHealthIssues = false;
 	$scope.isSiblingReservation = false;
 	$scope.acceptsOptionalFee = false;
 	$scope.acceptsNewsletter = false;
@@ -165,8 +176,15 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 		$scope.schoolChild = null;
 		$scope.healthChild = null;
 		$scope.hasDisability = false;
+<<<<<<< HEAD
 		$scope.hasOwnEBike = false;
 		$scope.heightChild = false;
+=======
+		$scope.hasHealthIssues = false;
+		$scope.healthIncompatibility = null;
+		$scope.healthAllergy = null;
+		$scope.healthIllnes = null;
+>>>>>>> d330dd1c13d08d19926e14ecfd2ba0971526ab77
 	}
 
 	$scope.save = function() {
@@ -196,6 +214,10 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 				activityId: $scope.selectedActivities,
 				userId: IdentitySvc.currentUser._id,
 				needsPreCare: $scope.needsPreCare,
+				hasHealthIssues: $scope.hasHealthIssues,
+				healthIncompatibility: $scope.healthIncompatibility,
+				healthAllergy: $scope.healthAllergy,
+				healthIllnes: $scope.healthIllnes,
 				hasDisability: $scope.hasDisability,
 				disabilityDescription: $scope.disabilityDescription,
 				needsEbK: $scope.needsEbK,
@@ -232,6 +254,10 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 				$scope.nameContact2 = null;
 				$scope.telContact2 = null;
 				$scope.needsPreCare = false;
+				$scope.hasHealthIssues = false;
+				$scope.healthAllergy = null;
+				$scope.healthIncompatibility = null;
+				$scope.healthIllnes = null;
 				$scope.hasDisability = false;
 				$scope.disabilityDescription = null;
 				$scope.needsEbK = false;
