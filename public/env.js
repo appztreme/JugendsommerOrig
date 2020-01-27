@@ -13,11 +13,15 @@
         {"name": 'Erwachsenengröße M',             "name_it": 'Misura adulti M'},
     ];
     window.__env.schoolLevels = [
-        {"name": '1 Klasse Grundschule',           "name_it": '1 Klasse Grundschule' },
-        {"name": '2 Klasse Grundschule',           "name_it": '2 Klasse Grundschule' },
-        {"name": '3 Klasse Grundschule',           "name_it": '3 Klasse Grundschule' },
-        {"name": '4 Klasse Grundschule',           "name_it": '4 Klasse Grundschle' },
-        {"name": '5 Klasse Grundschule',           "name_it": '5 Klasse Grundschle '}
+        {"name": '1. Klasse Grundschule',           "name_it": '1° elementare' },
+        {"name": '2. Klasse Grundschule',           "name_it": '2° elementare' },
+        {"name": '3. Klasse Grundschule',           "name_it": '3° elementare' },
+        {"name": '4. Klasse Grundschule',           "name_it": '4° elementare' },
+        {"name": '5. Klasse Grundschule',           "name_it": '5° elementare '},
+        {"name": '1. Klasse Mittelschule',          "name_it": '1° media '},
+        {"name": '2. Klasse Mittelschule',          "name_it": '2° media'},
+        {"name": '3. Klasse Mittelschule',          "name_it": '3° media'},
+        {"name": '1. Klasse Oberschule',            "name_it": '1° superiore'}
     ],
     window.__env.translations = window.__env.translations || {};
     window.__env.translations.de = {
@@ -142,7 +146,7 @@
             "LABEL_HEALTHISSUES_CHILD": "Gesundheitliche Probleme",
             "LABEL_HEALTH_INCOMPATIBILITY": "Unverträglichkeiten",
             "LABEL_HEALTH_ALLERGY": "Allergien",
-            "LABEL_HEALTH_ILLNESS": "Krankheiten",
+            "LABEL_HEALTH_ILLNESS": "Medikamente",
             "LABEL_DISABILITY_CHILD": "Kind mit Beeinträchtigung",
             "LABEL_DISABILITY_CHILD_DESCRIPTION": "Diagnose bei Beenträchtigung",
             "LABEL_HEIGHT_CHILD": "Körpergröße in cm",
@@ -318,10 +322,10 @@
             "LABEL_BANDNAME_CHILD": "Musikkapelle",
             "LABEL_INSTRUMENT_CHILD": "Instrument",
             "LABEL_YEARSINSTRUMENT_CHILD": "Ausbildungsjahr",
-            "LABEL_HEALTHISSUES_CHILD": "Gesundheitliche Probleme",
-            "LABEL_HEALTH_INCOMPATIBILITY": "Unverträglichkeiten",
-            "LABEL_HEALTH_ALLERGY": "Allergien",
-            "LABEL_HEALTH_ILLNESS": "Krankheiten",
+            "LABEL_HEALTHISSUES_CHILD": "problemi di salute",
+            "LABEL_HEALTH_INCOMPATIBILITY": "l'intolleranza",
+            "LABEL_HEALTH_ALLERGY": "l'allergia",
+            "LABEL_HEALTH_ILLNESS": "medicinale",
             "LABEL_DISABILITY_CHILD": "bambino/a con bisogni speciali",
             "LABEL_DISABILITY_CHILD_DESCRIPTION": "diagnosi",
             "LABEL_NAME_CONTACT1": "nome1",
