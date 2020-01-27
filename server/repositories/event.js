@@ -92,7 +92,7 @@ exports.groupByLocationAdmin = () => {
 exports.groupByLocationSummer = () => {
     return Event.aggregate([
 		{ $match:
-			{ $and: [ {startDate: { $gte: startCurYear }}, {isInternal: false}, {type: { $in: ['summer', 'music']}} ] }
+			{ $and: [ {startDate: { $gte: startCurYear }}, {isInternal: false}, {type: { $in: ['summer', 'music', 'bike']}} ] }
 		},
 		{ $group:
 			{ _id: "$location",
@@ -109,7 +109,7 @@ exports.groupByLocationSummer = () => {
 exports.groupByLocationSummerAdmin = () => {
     return Event.aggregate([
 		{ $match:
-			{ $and: [ {startDate: { $gte: startCurYear }}, {type: { $in: ['summer', 'music']}} ] }
+			{ $and: [ {startDate: { $gte: startCurYear }}, {type: { $in: ['summer', 'music', 'bike']}} ] }
 		},
 		{ $group:
 			{ _id: "$location",
@@ -126,7 +126,7 @@ exports.groupByLocationSummerAdmin = () => {
 exports.groupByType = () => {
     return Event.aggregate([
 		{ $match:
-			{ $and: [ {startDate: { $gte: startCurYear }}, {isInternal: false}, {type: { $nin: ['summer', 'music']}} ] }
+			{ $and: [ {startDate: { $gte: startCurYear }}, {isInternal: false}, {type: { $nin: ['summer', 'music', 'bike']}} ] }
 		},
 		{ $group:
 			{ _id: "$type",
@@ -143,7 +143,7 @@ exports.groupByType = () => {
 exports.groupByTypeAdmin = () => {
     return Event.aggregate([
 		{ $match:
-			{ $and: [ {startDate: { $gte: startCurYear }}, {type: { $nin: ['summer', 'music']}} ] }
+			{ $and: [ {startDate: { $gte: startCurYear }}, {type: { $nin: ['summer', 'music', 'bike']}} ] }
 		},
 		{ $group:
 			{ _id: "$type",
