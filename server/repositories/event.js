@@ -24,7 +24,7 @@ exports.findByCurrentYearAndLocationSummer = (location, asAdmin = false) => {
     let query = Event.find()
 			.where('startDate').gte(startCurYear)
        		.where('location').equals(location)
-       		.where('type').in(['summer', 'music']);
+       		.where('type').in(['summer', 'music','bike']);
     if(!asAdmin) query = query.where('isInternal').equals(false);
     return query.sort({ startDate: 1 }).exec();
 }
