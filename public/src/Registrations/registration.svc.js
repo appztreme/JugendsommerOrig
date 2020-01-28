@@ -50,6 +50,11 @@ app.service('RegistrationSvc', function($http) {
 		return $http.delete('/api/myRegistrations/' + registrationId);
 	}
 
+	this.getMyConfirmation = function(firstName, lastName, birthday, eventId) {
+		var payload = { lastName: lastName, firstName: firstName, birthday: birthday, eventId: eventId };
+		return $http.post('/api/myregistrations/confirmation', payload);
+	}
+
 	this.create = function(reg) {
 		return $http.post('/api/registrations', reg);
 	};

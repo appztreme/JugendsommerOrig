@@ -19,6 +19,7 @@
 			<th>{{"MYRESERVATION.LABEL_MAIL_PARENT" | translate}}</th>
 			<th>{{"MYRESERVATION.LABEL_TEL_PARENT" | translate}}</th>
 			<th></th>
+			<th>{{"MYRESERVATION.LABEL_DOWNLOAD_CONFIRMATION" | translate }}</th>
 			<!--<th ng-show='platform.isJDUL() || platform.isTest()'></th>-->
 		</tr>
 		<tr ng-repeat='reg in registrations | filter:filterReport(reg) | orderBy:colNameSort'>
@@ -34,6 +35,8 @@
 			<td><a href='mailto:{{reg.emailParent}}'>{{reg.emailParent}}</a></td>
 			<td>{{reg.phoneNumberParent}}</td>
 			<td><a href='/#/editOwnRegistration/{{reg._id}}' class="btn btn-success btn-small glyphicon glyphicon-pencil" type="button"><div style="font-size: 60%"><br />Editieren</div></a></td>
+			<td><button class="btn btn-info btn-small glyphicon glyphicon-file" type="button" ng-click="downloadConfirmation(reg.firstNameChild, reg.lastNameChild, reg.birthdayChild, reg.activityId.eventId._id)"><div style="font-size:60%"><br />Download</div></button></td>
+
 			<!--<td ng-show='platform.isJDUL() || platform.isTest()'><button type="button" class="btn glyphicon glyphicon-trash" ng-click='deleteRegistration(reg._id)'></button></td>-->
 		</tr>
 	</table>

@@ -200,7 +200,8 @@
             "LABEL_FIRSTNAME_PARENT": "Vorname Eltern",
             "LABEL_LASTNAME_PARENT": "Nachname Eltern",
             "LABEL_MAIL_PARENT": "Email Eltern",
-            "LABEL_TEL_PARENT": "Tel. Eltern"
+            "LABEL_TEL_PARENT": "Tel. Eltern",
+            "LABEL_DOWNLOAD_CONFIRMATION": "EbK Bestätigung"
         }
     };
     window.__env.translations.it = {
@@ -379,7 +380,8 @@
             "LABEL_FIRSTNAME_PARENT": "nome genitore",
             "LABEL_LASTNAME_PARENT": "cognome genitore",
             "LABEL_MAIL_PARENT": "e-mail genitore",
-            "LABEL_TEL_PARENT": "telefono genitore"
+            "LABEL_TEL_PARENT": "telefono genitore",
+            "LABEL_DOWNLOAD_CONFIRMATION": "EbK Bestätigung"
         }
     };
 }(this));

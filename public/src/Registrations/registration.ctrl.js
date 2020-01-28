@@ -76,7 +76,7 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 	$scope.cityChild = PlatformSvc.getDefaultCity();
 	$scope.addressChild = " ";
 	$scope.needsPreCare = false;
-	$scope.needsAbK = false;
+	$scope.needsAbK = true;
 	$scope.canSwim = false;
 	$scope.canGoHomeAllone = false;
 	$scope.hasDisability = undefined;
@@ -256,7 +256,7 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 				$scope.healthIllnes = null;
 				$scope.hasDisability = undefined;
 				$scope.disabilityDescription = null;
-				$scope.needsEbK = false;
+				$scope.needsEbK = true;
 				$scope.hasOwnEBike = false;
 				$scope.heightChild = 0;
 				$scope.canSwim = false;

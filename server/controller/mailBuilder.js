@@ -140,11 +140,10 @@ const getChildStr = (child) => {
 	return child.firstNameChild + ' ' + child.lastNameChild + ' (' +  ("0" + child.birthdayChild.getDate()).slice(-2) + '.' + ("0" + (child.birthdayChild.getMonth() + 1)).slice(-2) + '.' + child.birthdayChild.getFullYear() + ')';
 }
 
-exports.getAttachmentConfirmation = function(body, instance, reservations) {
+exports.getConfirmationPDF = function(instance, reservations) {
 	const doc = new pdf();
 	let children = reservations.map(function(v,i) { return getChildStr(v) });
 	let childrenUnique = [...new Set(children)];
-	//for(let child of childrenUnique) {
 	for(let i = 0; i < childrenUnique.length; i++) {
 		const child = childrenUnique[i];
 		let registrationsPerChild = reservations.filter(reg => getChildStr(reg) === child);
@@ -197,6 +196,11 @@ exports.getAttachmentConfirmation = function(body, instance, reservations) {
 	doc.end();
 	// DEBUG only
 	// doc.pipe(fs.createWriteStream('xxl.pdf'));
+	return doc;
+}
+
+exports.getAttachmentConfirmation = function(body, instance, reservations) {
+	var doc = getConfirmationPDF(instance, reservations);
 	if(instance.isJDBL || instance.isJugendsommer) {
 		return [{ data: body, alternative: true },
 				{ path:"public/assets/jdbl-logo.jpg", type:"image/jpg", headers:{"Content-ID":"<my-image>"} },

@@ -1,9 +1,12 @@
 'use strict';
 const Registration = require('./../models/registration');
+const RegistrationRepo = require('./../repositories/registration');
+const MailBuilder = require('./mailBuilder');
+const platform = require('./platform');
 const Activity = require('./../models/activity');
 
 const curYear = new Date().getFullYear();
-const startCurYear = new Date(curYear,1,1);
+const startCurYear = new Date(curYear, 0, 1);
 
 exports.find = (req, res, next) => {
 	Registration.find({ userId: req.params.userId })
@@ -26,3 +29,21 @@ exports.delete = (req, res, next) => {
 		});
 	});
 };
+
+exports.getConfirmation = async(req, res, next) => {
+	try {
+		var doc;
+		let reg = await RegistrationRepo.findByFirstLastNameBirthday(req.body.firstName, req.body.lastName, req.body.birthday);
+		if(reg.length > 0) {
+			let registrationsForEvent = reg.filter(v => v.activityId.eventId._id == req.body.eventId && v.isPaymentDone);
+			var instance = platform.getPlatform(req.hostname);
+			if(registrationsForEvent.length > 0) {
+				doc = MailBuilder.getConfirmationPDF(instance, registrationsForEvent);
+			}
+		}
+		//res.setHeader('Content-Length', stat.size);
+		res.setHeader('Content-Type', 'application/pdf');
+		res.setHeader('Content-Disposition', 'attachment; filename=confirmation.pdf');
+		doc.pipe(res);
+	} catch(err) { next(err); }	
+}

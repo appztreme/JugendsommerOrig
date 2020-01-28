@@ -245,7 +245,7 @@
 							</div>
 						</div>
 						<!-- NEEDSAbK -->
-						<div ng-show='!isKiso && (type === "summer" || type === "music")' class='col-sm-offset-2 col-sm4'>
+						<!-- <div ng-show='!isKiso && (type === "summer" || type === "music")' class='col-sm-offset-2 col-sm4'>
 							<div class="input-group">
 								<input type='checkbox' name='needsEbK' ng-model='needsEbK'><strong>{{"RESERVATION.LABEL_ABK_CHILD" | translate}}</input>
 								<button type="button" class="btn btn-info btn-sm" style="margin-left: 10px" ng-click="toggleebkInfo()">?</button>
@@ -253,7 +253,7 @@
 							<div class="alert alert-info col-sm3" style="margin-top: 10px" role="alert" ng-show="ebkInfoVisible">
 								<span>{{"RESERVATION.INFO_EBK_1" | translate}}</span><br />
 							</div>
-						</div>
+						</div> -->
 						<br />
 						<div class="row">
 						<button class='btn btn-lg btn-success' ng-click='setState(2)' ng-disabled='!isChildDataComplete()'>
@@ -375,7 +375,7 @@
 							</div>
 						</div>
 						<div ng-show="(platform.isTest() || platform.isJDBL() || platform.isJugendsommer())">
-								<input type='checkbox' name='health-jdbl' ng-model='acceptHealth'><strong>{{"RESERVATION.LABEL_HEALTH1_JDBL" | translate}}<button type="button" class="btn btn-default" ng-click="toggleMedia()" >{{"RESERVATION.LABEL_HEALTH2_JDBL" | translate}}</button>{{"RESERVATION.LABEL_HEALTH3_JDBL" | translate}}</strong></input>
+								<input type='checkbox' name='health-jdbl' ng-model='acceptHealth'><strong>{{"RESERVATION.LABEL_HEALTH1_JDBL" | translate}}{{"RESERVATION.LABEL_HEALTH2_JDBL" | translate}}{{"RESERVATION.LABEL_HEALTH3_JDBL" | translate}}</strong></input>
 								<div class="panel panel-default" ng-class="healthVisibility ? 'show' : 'hidden'">
 									<div class="panel-body">
 										<div ng-show="(platform.isTest() || platform.isJDBL() || platform.isJugendsommer()) && lang == 'de'" ng-include src='"templates/agb/ds-jdbl-de.html"'></div>
@@ -385,7 +385,7 @@
 						</div>
 						<br />
 						<div ng-show="(platform.isTest() || platform.isJDBL() || platform.isJugendsommer())">
-								<input type='checkbox' name='media-jdbl' ng-model='acceptsMediaPublication'><strong>{{"RESERVATION.LABEL_MEDIA1_JDBL" | translate}}<button type="button" class="btn btn-default" ng-click="toggleMedia()" >{{"RESERVATION.LABEL_MEDIA2_JDBL" | translate}}</button>{{"RESERVATION.LABEL_MEDIA3_JDBL" | translate}}</strong></input>
+								<input type='checkbox' name='media-jdbl' ng-model='acceptsMediaPublication'><strong>{{"RESERVATION.LABEL_MEDIA1_JDBL" | translate}}{{"RESERVATION.LABEL_MEDIA2_JDBL" | translate}}{{"RESERVATION.LABEL_MEDIA3_JDBL" | translate}}</strong></input>
 								<div class="panel panel-default" ng-class="mediaVisibility ? 'show' : 'hidden'">
 									<div class="panel-body">
 										<div ng-show="(platform.isTest() || platform.isJDBL() || platform.isJugendsommer()) && lang == 'de'" ng-include src='"templates/agb/ds-jdbl-de.html"'></div>

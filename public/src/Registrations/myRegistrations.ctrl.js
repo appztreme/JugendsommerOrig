@@ -1,6 +1,6 @@
 var app = angular.module('js');
 
-app.controller('MyRegistrationsCtrl', function($scope, $location, $route, RegistrationSvc, IdentitySvc, $rootScope, $translate, PlatformSvc) {
+app.controller('MyRegistrationsCtrl', function($scope, FileSaver, Blob, $location, $route, RegistrationSvc, IdentitySvc, $rootScope, $translate, PlatformSvc) {
 	$scope.busyPromise = RegistrationSvc.findByUser(IdentitySvc.currentUser._id);
 
 	// var host = $location.$$host.toLowerCase();
@@ -23,6 +23,14 @@ app.controller('MyRegistrationsCtrl', function($scope, $location, $route, Regist
 			$route.reload();
 		});
 	};
+
+	$scope.downloadConfirmation = function(firstName, lastName, birthday, eventId) {
+		RegistrationSvc.getMyConfirmation(firstName, lastName, birthday, eventId)
+			.success(function(pdf) {
+				var blob = new Blob([pdf]);
+             	FileSaver.saveAs(blob, "confirmation.pdf");
+			})
+	}
 
 	RegistrationSvc.findByUser(IdentitySvc.currentUser._id).success(function(registrations) {
 		$scope.registrations = registrations;
