@@ -4,6 +4,8 @@ const RegistrationRepo = require('./../repositories/registration');
 const MailBuilder = require('./mailBuilder');
 const platform = require('./platform');
 const Activity = require('./../models/activity');
+const fs = require('fs');
+const pdf = require('pdfkit');
 
 const curYear = new Date().getFullYear();
 const startCurYear = new Date(curYear, 0, 1);
@@ -32,16 +34,17 @@ exports.delete = (req, res, next) => {
 
 exports.getConfirmation = async(req, res, next) => {
 	try {
-		var doc;
+		var doc = new pdf();
 		let reg = await RegistrationRepo.findByFirstLastNameBirthday(req.body.firstName, req.body.lastName, req.body.birthday);
 		if(reg.length > 0) {
 			let registrationsForEvent = reg.filter(v => v.activityId.eventId._id == req.body.eventId && v.isPaymentDone);
 			var instance = platform.getPlatform(req.hostname);
 			if(registrationsForEvent.length > 0) {
-				doc = MailBuilder.getConfirmationPDF(instance, registrationsForEvent);
+				doc = await MailBuilder.getConfirmationPDF(instance, registrationsForEvent);
 			}
 		}
-		//res.setHeader('Content-Length', stat.size);
+		//const stats = fs.statSync(doc.toBlob('application/pdf'));
+		//res.setHeader('Content-Length', stats[size]);
 		res.setHeader('Content-Type', 'application/pdf');
 		res.setHeader('Content-Disposition', 'attachment; filename=confirmation.pdf');
 		doc.pipe(res);

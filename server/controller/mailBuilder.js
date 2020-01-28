@@ -140,7 +140,7 @@ const getChildStr = (child) => {
 	return child.firstNameChild + ' ' + child.lastNameChild + ' (' +  ("0" + child.birthdayChild.getDate()).slice(-2) + '.' + ("0" + (child.birthdayChild.getMonth() + 1)).slice(-2) + '.' + child.birthdayChild.getFullYear() + ')';
 }
 
-exports.getConfirmationPDF = function(instance, reservations) {
+exports.getConfirmationPDF = async function(instance, reservations) {
 	const doc = new pdf();
 	let children = reservations.map(function(v,i) { return getChildStr(v) });
 	let childrenUnique = [...new Set(children)];

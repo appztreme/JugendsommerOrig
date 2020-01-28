@@ -27,7 +27,9 @@ app.controller('MyRegistrationsCtrl', function($scope, FileSaver, Blob, $locatio
 	$scope.downloadConfirmation = function(firstName, lastName, birthday, eventId) {
 		RegistrationSvc.getMyConfirmation(firstName, lastName, birthday, eventId)
 			.success(function(pdf) {
-				var blob = new Blob([pdf]);
+				var blob = new Blob([pdf], {type: 'application/pdf'});
+				//var txt = await blob.text();
+				console.log("blob",  blob.size)
              	FileSaver.saveAs(blob, "confirmation.pdf");
 			})
 	}
