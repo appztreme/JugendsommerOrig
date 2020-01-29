@@ -1,5 +1,7 @@
 <div>
-<div ng-show="platform.isJDBL() || platform.isJugendsommer()" ng-include src='"templates/agb/agb-jdbl.html"'></div>
+<div ng-show="(platform.isJDBL() || platform.isJugendsommer()) && lang == 'de'" ng-include src='"templates/agb/agb-jdbl-de.html"'></div>
+<div ng-show="(platform.isJDBL() || platform.isJugendsommer()) && lang == 'it'" ng-include src='"templates/agb/agb-jdbl-it.html"'></div>
+
 
 <div ng-show="platform.isKiso() && lang == 'de'" ng-include src='"templates/agb/agb-kiso-de.html"'></div>
 <div ng-show="platform.isKiso() && lang == 'it'" ng-include src='"templates/agb/agb-kiso-it.html"'></div>
