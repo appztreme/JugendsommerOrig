@@ -16,7 +16,7 @@ var registrationSchema = db.Schema({
 	birthdayChild: { type: Date, required: true },
   schoolChild: { type: String, required: true },
  	healthChild: { type: String, required: false },
-	addressChild: { type: String, required: true, default: 'Adresse'},
+	addressChild: { type: String, required: false, default: 'Adresse'},
   //cityChild: { type: String, enum: config.cities, required: true, default: 'Jenesien' },
   cityChild: { type: String, required: true, default: 'Jenesien' },
   tShirtSize: { type: String, enum: tSizes, required: false },

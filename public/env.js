@@ -174,7 +174,7 @@
             "LABEL_MEDIA2_JDBL": " Datenschutzerklärung ",
             "LABEL_MEDIA3_JDBL": " genannten Zwecke in den dort genannten Medien verwendet werden können.",
             "LABEL_HEALTH1_JDBL": " Ich willige mittels Unterschrift bzw. Anklicken des entsprechenden Buttons ein, dass die Gesundheitsdaten in Punkt 9 (siehe ",
-            "LABEL_HEALTH2_JDBL": " Datenschutzbestimmungen ",
+            "LABEL_HEALTH2_JDBL": " Datenschutzerklärung ",
             "LABEL_HEALTH3_JDBL": " ) für die dort genannten Zwecke verwendet werden können.",
             "LABEL_REGISTER": "Anmelden",
             "LABEL_REGISTRATION_PAY_INFO": "Mit erfolgreicher Anmeldung erhalten sie ein Bestätigungsmail und eine Einzahlung ist verpflichtend",
