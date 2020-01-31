@@ -2,7 +2,7 @@ const Event = require('./../server/models/event');
 const Activity = require('./../server/models/activity');
 const chalk = require('chalk');
 
-const year = 2018;
+const year = 2019;
 const verbose = true;
 const dryRun = true;
 
