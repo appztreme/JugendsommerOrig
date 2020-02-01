@@ -170,18 +170,23 @@
 							</div>
 						</div>
 						<!-- HASOWNEBIKE -->
-						<div ng-show='type == "bike"' class='col-sm-offset-2 col-sm-10'>
-							<input type='checkbox' name='hasOwnEBike' ng-model='hasOwnEBike'><strong>  {{"RESERVATION.LABEL_HASOWNEBIKE" | translate}}</input>
+						<div ng-show='type == "bike"' class='col-sm-11'>
+							<!--<input type='checkbox' name='hasOwnEBike' ng-model='hasOwnEBike'><strong>  {{"RESERVATION.LABEL_HASOWNEBIKE" | translate}}</input>-->
+							<label for='hasOwnEBike' class='control-label col-sm-2'>{{"RESERVATION.LABEL_HASOWNEBIKE" | translate}}</label>
+							<div class='col-sm-8 btn-group' role='group'>
+								<button type="button" ng-class='{"btn-info": hasOwnEBike && isHasOwnEBikeSet()}' class="btn btn-default" ng-click="setHasOwnEBike(true)">{{"BTN.YES" | translate}}</button>
+								<button type="button" ng-class='{"btn-info": !hasOwnEBike && isHasOwnEBikeSet()}' class="btn btn-default" ng-click="setHasOwnEBike(false)">{{"BTN.NO" | translate}}</button>
+							</div>
 						</div>
-						<div ng-show='type == "bike" && hasOwnEBike' class='col-sm-11'>
-							<label for='budgetBusiness' class='control-label col-sm-2'><strong> {{"RESERVATION.LABEL_HEIGHT_CHILD" | translate}}</strong></label>
-							<input type='number' class='col-sm-10' ng-model='heightChild' min='0' step='0.0'></input>
+						<div ng-show='type == "bike" && hasOwnEBike === false' class='col-sm-10'>
+							<label for='heightChild' class='control-label col-sm-2'><strong> {{"RESERVATION.LABEL_HEIGHT_CHILD" | translate}}</strong></label>
+							<input type='number' class='col-sm-8 form-control' style="width:150px; margin-left: 10px" ng-model='heightChild' min='50' step='1.0'></input>
 						</div>
 						<!-- CANSWIM -->
-						<div ng-show='platform.isJDUL() || platform.isTest()' class='col-sm-offset-2 col-sm10'>
+						<div ng-show='platform.isJDUL() || platform.isTest()' class='col-sm-offset-2 col-sm-10'>
 							<div class="input-group">
 								<input type='checkbox' name='canSwin' ng-model='canSwim'><strong>  {{"RESERVATION.LABEL_CANSWIM_CHILD" | translate}}</input>
-								<button type="button" class="btn btn-info btn-sm" style="margin-left: 10px" ng-click="toggleSwimInfo()">?</button>
+								<button type="button" class="btn btn-info btn-sm" style="margin-left: 45px" ng-click="toggleSwimInfo()">?</button>
 							</div>
 							<div class="alert alert-info col-sm-10" style="margin-top: 10px; max-width: 250;" role="alert" ng-show="swimInfoVisible">
 								<span>{{"RESERVATION.INFO_CANSWIM_1" | translate}}</span><br />
@@ -255,7 +260,7 @@
 							</div>
 						</div> -->
 						<br />
-						<div class="row">
+						<div class="row col-sm-12">
 						<button class='btn btn-lg btn-success' ng-click='setState(2)' ng-disabled='!isChildDataComplete()'>
 							{{"RESERVATION.BUTTON_NEXT" | translate }}
 						</button>

@@ -189,7 +189,7 @@
         },
         "MYRESERVATION": {
             "TITLE": "Reservierungen",
-            "NOTE": "Zahlungsaufforderung wird innerhalb von fünf Tagen zugesandt. Danke für Ihre Reservierung.",
+            "NOTE": "Zahlungsaufforderung wird im März zugesand. Danke für Ihre Reservierung.",
             "NOTE_KISO": "In den nächsten Tagen erfahren Sie via E-Mail von uns, ob Sie unter den ersten 45 Anmeldungen gelandet sind oder einen Platz auf der Warteliste haben",
             "LABEL_EVENT": "Programm",
             "LABEL_ACTIVITY": "Woche",
@@ -371,7 +371,7 @@
         },
         "MYRESERVATION": {
             "TITLE": "Prenotazioni",
-            "NOTE": "L‘avviso di pagamento verrà inviato entro cinque giorni. Grazie per la sua prenotazione!",
+            "NOTE": "L‘avviso di pagamento verrà inviato entro a marzo. Grazie per la sua prenotazione!",
             "NOTE_KISO": "Nei prossimi giorni vi informereno via e-mail se siete arrivati tra le prime 45 iscrizioni o se avete un posto in lista d'attesa",
             "LABEL_EVENT": "programma",
             "LABEL_ACTIVITY": "settimana",

@@ -34,6 +34,8 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 	$scope.isHasHealthIssuesSet = function() { return $scope.hasHealthIssues !== undefined && $scope.hasHealthIssues !== null; }
 	$scope.setHasDisability = function(b) { $scope.hasDisability = b; }
 	$scope.isHasDisabilitySet = function() { return $scope.hasDisability !== undefined && $scope.hasDisability !== null; }
+	$scope.setHasOwnEBike = function(b) { $scope.hasOwnEBike = b; }
+	$scope.isHasOwnEBikeSet = function() { return $scope.hasOwnEBike !== undefined && $scope.hasOwnEBike !== null; }
 
 	$scope.toggleActivity = function(id) {
 		var index = $scope.selectedActivities.indexOf(id);
@@ -85,7 +87,7 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 	$scope.acceptsOptionalFee = false;
 	$scope.acceptsNewsletter = false;
 	$scope.acceptsMediaPublication = false;
-	$scope.hasOwnEBike = false;
+	$scope.hasOwnEBike = undefined;
 
 	$scope.isEmailEqual = function() {
 		if($scope.emailParent === '' || !$scope.emailParent || !$scope.emailParentCheck || $scope.emailParentCheck === '') return false;
@@ -175,7 +177,7 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 		$scope.schoolChild = null;
 		$scope.healthChild = null;
 		$scope.hasDisability = undefined;
-		$scope.hasOwnEBike = false;
+		$scope.hasOwnEBike = undefined;
 		$scope.heightChild = false;
 		$scope.hasHealthIssues = undefined;
 		$scope.healthIncompatibility = null;
@@ -257,7 +259,7 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 				$scope.hasDisability = undefined;
 				$scope.disabilityDescription = null;
 				$scope.needsEbK = true;
-				$scope.hasOwnEBike = false;
+				$scope.hasOwnEBike = undefined;
 				$scope.heightChild = 0;
 				$scope.canSwim = false;
 				$scope.acceptsOptionalFee = false;
