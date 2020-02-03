@@ -6,6 +6,14 @@ app.controller('RegistrationOwnEditCtrl', function($scope, $filter, $routeParams
 	$scope.cities = PlatformSvc.getCities();
 	$scope.platform = PlatformSvc;
 
+	$scope.hasDisability = undefined;
+	$scope.hasHealthIssues = undefined;
+
+	$scope.setHasHealthIssues = function(b) { $scope.hasHealthIssues = b; }
+	$scope.isHasHealthIssuesSet = function() { return $scope.hasHealthIssues !== undefined && $scope.hasHealthIssues !== null; }
+	$scope.setHasDisability = function(b) { $scope.hasDisability = b; }
+	$scope.isHasDisabilitySet = function() { return $scope.hasDisability !== undefined && $scope.hasDisability !== null; }
+
 	$scope.save = function() {
 		if($scope.registrationForm.$valid) {
 			$scope.registration.firstNameParent = $scope.firstNameParent;
@@ -16,11 +24,14 @@ app.controller('RegistrationOwnEditCtrl', function($scope, $filter, $routeParams
 			$scope.registration.lastNameChild = $scope.lastNameChild;
 			$scope.registration.birthdayChild = $scope.birthdayChild;
 			$scope.registration.schoolChild = $scope.schoolChild;
-			$scope.registration.healthChild = $scope.healthChild;
-			$scope.registration.addressChild = $scope.addressChild;
+			$scope.registration.hasHealthIssues = $scope.hasHealthIssues;
+			$scope.registration.healthAllergy = $scope.healthAllergy;
+			$scope.registration.healthIncompatibility = $scope.healthIncompatibility;
+			$scope.registration.healthIllnes = $scope.healthIllnes;
 			$scope.registration.cityChild = $scope.cityChild;
 			$scope.registration.hasDisability = $scope.hasDisability;
 			$scope.registration.disabilityDescription = $scope.disabilityDescription;
+			$scope.registration.diagnosticDescription = $scope.diagnosticDescription;
 			$scope.registration.nameContact1 = $scope.nameContact1;
 			$scope.registration.nameContact2 = $scope.nameContact2;
 			$scope.registration.telContact1 = $scope.telContact1;
@@ -38,11 +49,15 @@ app.controller('RegistrationOwnEditCtrl', function($scope, $filter, $routeParams
 				$scope.lastNameChild = null;
 				$scope.birthdayChild = null;
 				$scope.schoolChild = null;
-				$scope.healthChild = null;
 				$scope.addressChild = null;
 				$scope.cityChild = null;
-				$scope.hasDisability = false;
+				$scope.hasHealthIssues = undefined;
+				$scope.healthAllergy = null;
+				$scope.healthIncompatibility = null;
+				$scope.healthIllnes = null;
+				$scope.hasDisability = undefined;
 				$scope.disabilityDescription = null;
+				$scope.diagnosticDescription = null;
 				$scope.nameContact1 = null;
 				$scope.nameContact2 = null;
 				$scope.telContact1 = null;
@@ -68,11 +83,14 @@ app.controller('RegistrationOwnEditCtrl', function($scope, $filter, $routeParams
 		$scope.lastNameChild = registration.lastNameChild;
 		$scope.birthdayChild = $filter('date')(new Date(registration.birthdayChild), 'yyyy-MM-dd');
 		$scope.schoolChild = registration.schoolChild;
-		$scope.healthChild = registration.healthChild;
-		$scope.addressChild = registration.addressChild;
 		$scope.cityChild = registration.cityChild;
+		$scope.hasHealthIssues = registration.hasHealthIssues;
+		$scope.healthIncompatibility = registration.healthIncompatibility;
+		$scope.healthAllergy = registration.healthAllergy;
+		$scope.healthIllnes = registration.healthIllnes;
 		$scope.hasDisability = registration.hasDisability;
 		$scope.disabilityDescription = registration.disabilityDescription;
+		$scope.diagnosticDescription = registration.diagnosticDescription;
 		$scope.nameContact1 = registration.nameContact1;
 		$scope.nameContact2 = registration.nameContact2;
 		$scope.telContact1 = registration.telContact1;

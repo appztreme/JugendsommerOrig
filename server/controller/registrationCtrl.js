@@ -129,7 +129,7 @@ exports.update = (req, res, next) => {
 		reg.lastNameChild = req.body.lastNameChild;
 		reg.birthdayChild = req.body.birthdayChild;
 		reg.schoolChild = req.body.schoolChild;
-		reg.healthChild = req.body.healthChild;
+		//reg.healthChild = req.body.healthChild;
 		reg.tShirtSize = req.body.tShirtSize;
 		reg.hasOwnEBike = req.body.hasOwnEBike;
 		reg.heightChild = req.body.heightChild;
@@ -162,7 +162,7 @@ exports.update = (req, res, next) => {
 		reg.isSiblingReservation = req.body.isSiblingReservation;
 		reg.commentInternal = req.body.commentInternal;
 		reg.save(function(err, regDb) {
-			if(err) { return next(err); }
+			if(err) { console.log(err); return next(err); }
 			res.status(201).json(regDb);
 		});
 	});
