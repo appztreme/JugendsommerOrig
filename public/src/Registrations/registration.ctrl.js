@@ -86,6 +86,7 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 	$scope.isSiblingReservation = false;
 	$scope.acceptsOptionalFee = false;
 	$scope.acceptsNewsletter = false;
+	$scope.diagnosticDescription = null;
 	$scope.acceptsMediaPublication = false;
 	$scope.hasOwnEBike = undefined;
 
@@ -183,6 +184,7 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 		$scope.healthIncompatibility = null;
 		$scope.healthAllergy = null;
 		$scope.healthIllnes = null;
+		$scope.diagnosticDescription = null;
 	}
 
 	$scope.save = function() {
@@ -218,6 +220,7 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 				healthIllnes: $scope.healthIllnes,
 				hasDisability: $scope.hasDisability,
 				disabilityDescription: $scope.disabilityDescription,
+				diagnosticDescription: $scope.diagnosticDescription,
 				needsEbK: $scope.needsEbK,
 				canSwim: $scope.canSwim,
 				canGoHomeAllone: $scope.canGoHomeAllone,
@@ -258,6 +261,7 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 				$scope.healthIllnes = null;
 				$scope.hasDisability = undefined;
 				$scope.disabilityDescription = null;
+				$scope.diagnosticDescription = null;
 				$scope.needsEbK = true;
 				$scope.hasOwnEBike = undefined;
 				$scope.heightChild = 0;

@@ -40,6 +40,7 @@ var registrationSchema = db.Schema({
   healthAllergy: { type: String, required: false },
   healthIllnes: { type: String, required: false },
   hasDisability: { type: Boolean, required: true, default: false },
+  diagnosticDescription: { type: Boolean, required: true, default: false },
   disabilityDescription: { type: String, required: false },
   needsEbK: { type: Boolean, required: true, default: false },
   canSwim: { type: Boolean, required: true, default: false },

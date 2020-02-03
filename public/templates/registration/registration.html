@@ -99,8 +99,12 @@
 						<div class='form-group' ng-class='{ "has-error": registrationForm.schoolChild.$invalid }'>
 							<label for='schoolChild' class='control-label col-sm-2'>{{"RESERVATION.LABEL_SCHOOL_CHILD" | translate}}</label>
 							<div class='col-sm-8'>
-									<select name='schoolChild' class='sel-base form-control' ng-disabled="disabledForSibling" ng-model='schoolChild'>
+									<select ng-show='lang === "de"' name='schoolChild' class='sel-base form-control' ng-disabled="disabledForSibling" ng-model='schoolChild'>
+
 										<option ng-repeat="level in schoolLevels" value='{{level.name}}'>{{level.name}}</option>
+									</select>
+									<select ng-show="lang === 'it'" name='schoolChild' class='sel-base form-control' ng-disabled="disabledForSibling" ng-model='schoolChild'>
+										<option ng-repeat="level in schoolLevels" value='{{level.name}}'>{{level.name_it}}</option>
 									</select>
 								<!--<input name='schoolChild' type='text' ng-model='schoolChild' required maxlength='100' class='form-control'></input>-->
 							</div>
@@ -157,6 +161,12 @@
 							<label for='disabilityDescription' class='control-label col-sm-2'>{{"RESERVATION.LABEL_DISABILITY_CHILD_DESCRIPTION" | translate}}</label>
 							<div class='col-sm-8'>
 								<input type='text' name='disabilityDescription' ng-model='disabilityDescription' maxlength='100' class='form-control'></input>
+							</div>
+						</div>	
+						<div ng-show='hasDisability' class='col-sm-offset-2 col-sm4 form-group'>
+							<label for='diagnosticDescription' class='control-label col-sm-2'>{{"RESERVATION.LABEL_DIAGNOSTIC_CHILD_DESCRIPTION" | translate}}</label>
+							<div class='col-sm-8'>
+								<input type='text' name='diagnosticDescription' ng-model='diagnosticDescription' maxlength='100' class='form-control'></input>
 							</div>
 						</div>	
 						<!--TSHIRTSIZE -->

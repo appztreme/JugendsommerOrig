@@ -25,13 +25,18 @@ app.controller('MyRegistrationsCtrl', function($scope, FileSaver, Blob, $locatio
 	};
 
 	$scope.downloadConfirmation = function(firstName, lastName, birthday, eventId) {
-		RegistrationSvc.getMyConfirmation(firstName, lastName, birthday, eventId)
-			.success(function(pdf) {
-				var blob = new Blob([pdf], {type: 'application/pdf'});
-				//var txt = await blob.text();
-				console.log("blob",  blob.size)
-             	FileSaver.saveAs(blob, "confirmation.pdf");
-			})
+		RegistrationSvc.sendConfirmationMailSingle(eventId, firstName, lastName, birthday, $scope.user.userEmail)
+			.success(function(r) {
+			if(r.success) NotificationSvc.notify("Erfolgreich verschickt");
+			else NotificationSvc.warn("Fehler beim Verschicken");
+		});
+		// RegistrationSvc.getMyConfirmation(firstName, lastName, birthday, eventId)
+		// 	.success(function(pdf) {
+		// 		var blob = new Blob([pdf], {type: 'application/pdf'});
+		// 		//var txt = await blob.text();
+		// 		console.log("blob",  blob.size)
+        //      	FileSaver.saveAs(blob, "confirmation.pdf");
+		// 	})
 	}
 
 	RegistrationSvc.findByUser(IdentitySvc.currentUser._id).success(function(registrations) {

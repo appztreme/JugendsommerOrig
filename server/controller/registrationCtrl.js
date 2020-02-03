@@ -87,6 +87,7 @@ exports.create = async(req, res, next) => {
 			healthIllnes: req.body.healthIllnes,
 			hasDisability: req.body.hasDisability,
 			disabilityDescription: req.body.disabilityDescription,
+			diagnosticDescription: req.body.diagnosticDescription,
 			needsEbK: req.body.needsEbK,
 			canSwim: req.body.canSwim,
 			canGoHomeAllone: req.body.canGoHomeAllone,
@@ -151,6 +152,7 @@ exports.update = (req, res, next) => {
 		reg.healtIllnes = req.body.healthIllnes;
 		reg.hasDisability = req.body.hasDisability;
 		reg.disabilityDescription = req.body.disabilityDescription;
+		reg.diagnosticDescription = req.body.diagnosticDescription;
 		reg.needsEbK = req.body.needsEbK;
 		reg.canSwim = req.body.canSwim;
 		reg.canGoHomeAllone = req.body.canGoHomeAllone;

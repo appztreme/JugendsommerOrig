@@ -35,7 +35,8 @@ exports.delete = (req, res, next) => {
 exports.getConfirmation = async(req, res, next) => {
 	try {
 		var doc = new pdf();
-		let reg = await RegistrationRepo.findByFirstLastNameBirthday(req.body.firstName, req.body.lastName, req.body.birthday);
+		//let reg = await RegistrationRepo.findByFirstLastNameBirthday(req.body.firstName, req.body.lastName, req.body.birthday);
+		let reg = await RegistrationRepo.findByFirstLastNameBirthday('Nora', "Edelmaier", new Date(2017, 4, 31))
 		if(reg.length > 0) {
 			let registrationsForEvent = reg.filter(v => v.activityId.eventId._id == req.body.eventId && v.isPaymentDone);
 			var instance = platform.getPlatform(req.hostname);
@@ -47,6 +48,6 @@ exports.getConfirmation = async(req, res, next) => {
 		//res.setHeader('Content-Length', stats[size]);
 		res.setHeader('Content-Type', 'application/pdf');
 		res.setHeader('Content-Disposition', 'attachment; filename=confirmation.pdf');
-		doc.pipe(res);
+		res.pipe(doc);
 	} catch(err) { next(err); }	
 }

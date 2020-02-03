@@ -52,6 +52,7 @@ app.service('RegistrationSvc', function($http) {
 
 	this.getMyConfirmation = function(firstName, lastName, birthday, eventId) {
 		var payload = { lastName: lastName, firstName: firstName, birthday: birthday, eventId: eventId };
+		console.log("payload", payload)
 		return $http.post('/api/myregistrations/confirmation', payload);
 	}
 
