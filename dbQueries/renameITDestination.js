@@ -3,10 +3,10 @@ const chalk = require('chalk');
 
 const year = 2020;
 const verbose = true;
-const dryRun = true;
+const dryRun = false;
 
-const name_old = "Völs";
-const name_new = "Fiè allo Sciliar";
+const name_old = "Vöran";
+const name_new = "Verano";
 
 
 const main = async() => {
