@@ -190,7 +190,7 @@
         },
         "MYRESERVATION": {
             "TITLE": "Reservierungen",
-            "NOTE": "Zahlungsaufforderung wird im März zugesand. Danke für Ihre Reservierung.",
+            "NOTE": "Zahlungsaufforderung wird im März zugesandt. Danke für Ihre Reservierung.",
             "NOTE_KISO": "In den nächsten Tagen erfahren Sie via E-Mail von uns, ob Sie unter den ersten 45 Anmeldungen gelandet sind oder einen Platz auf der Warteliste haben",
             "LABEL_EVENT": "Programm",
             "LABEL_ACTIVITY": "Woche",
