@@ -14,17 +14,17 @@ const main = async() => {
     
     for(let i = 0; i < events.length; i++) {
         const ev = events[i];
-        console.log(chalk.green(ev.name_it));
-        if(ev.name_it === name_old) {
-            ev.name_it = name_new;
+        console.log(chalk.green(ev.location_it));
+        if(ev.location_it === name_old) {
+            ev.location_it = name_new;
 
             if(verbose) {
-                console.log(chalk.blue(ev.name));
-                console.log(chalk.blue(ev.name_it));
+                console.log(chalk.blue(ev.location));
+                console.log(chalk.blue(ev.location_it));
             }
             if(!dryRun) {
                 try {
-                    await newEvent.save();
+                    await ev.save();
                 } catch(eEv) {
                     console.log(chalk.red("error Event:", eEv))
                 }
