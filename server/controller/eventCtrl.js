@@ -49,7 +49,7 @@ exports.findByCurrentYearAndLocationSummerAdmin = async(req, res, next) => {
 exports.findByCurrentYearAndType = async(req, res, next) => {
 	try {
 		let evs = await EventRepo.findByCurrentYearAndType(req.params.type);
-		console.log(evs);
+		//console.log(evs);
 		return res.json(evs);
 	} catch(err) { return next(err); }
 }
@@ -57,7 +57,7 @@ exports.findByCurrentYearAndType = async(req, res, next) => {
 exports.findByCurrentYearAndTypeAdmin = async(req, res, next) => {
 	try {
 		let evs = await EventRepo.findByCurrentYearAndType(req.params.type, true);
-		console.log(evs);
+		//console.log(evs);
 		return res.json(evs);
 	} catch(err) { return next(err); }
 }

@@ -52,7 +52,7 @@ exports.getContacts = (id) => {
 }
 
 exports.groupByLocation = () => {
-	console.log("group by loc")
+	//console.log("group by loc")
     var x = Event.aggregate([
 			{ $match:
 				{ $and: [ {startDate: { $gte: startCurYear }}, {isInternal: false} ] }
