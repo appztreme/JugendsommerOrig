@@ -60,13 +60,10 @@
 						<!-- CITYCHILD -->
 						<div class='form-group' ng-class='{ "has-error": registrationForm.cityChild.$invalid }'>
 							<label for='cityChild' class='control-label col-sm-2'>{{"RESERVATION.LABEL_CITY_CHILD" | translate}}</label>
-							<div class='col-sm-8' ng-show="!platform.isJDUL()">
+							<div class='col-sm-8'>
 								<select name='cityChild' class='sel-base form-control' ng-disabled="disabledForSibling" ng-model='cityChild'>
 									<option ng-repeat="city in cities" value='{{city}}'>{{city}}</option>
 								</select>
-							</div>
-							<div class='col-sm-8' ng-show="platform.isJDUL()">
-								<input name='cityChild' type="text" ng-model='cityChild' class="form-control" required></input>
 							</div>
 						</div>
 						<div ng-show='type === "summer" || type === "music" || type === "club" || type === "jumprun"' class='text-orange'><strong>{{"RESERVATION.HEADER_SUMMER_CHILD" | translate}}</strong></div>
@@ -110,7 +107,7 @@
 							</div>
 						</div>
 						<!-- HASHEALTHISSUES -->
-						<div ng-show='!platform.isJDUL()' class='col-sm-offset-2 col-sm4 form-group' ng-class='{ "has-error": registrationForm.schoolChild.$invalid }'>
+						<div ng-hide='platform.isJDUL()' class='col-sm-offset-2 col-sm4 form-group' ng-class='{ "has-error": registrationForm.schoolChild.$invalid }'>
 							<label for='hasHealthIssues' class='control-label col-sm-2'>{{"RESERVATION.LABEL_HEALTHISSUES_CHILD" | translate}}</label>
 							<div class='col-sm-8 btn-group' role='group' required>
 								<button type="button" ng-class='{"btn-info": hasHealthIssues && isHasHealthIssuesSet()}' class="btn btn-default" ng-click="setHasHealthIssues(true)">{{"BTN.YES" | translate}}</button>
@@ -148,7 +145,7 @@
 						</div>-->
 
 						<!-- HASDISABILITY -->
-						<div ng-show='!platform.isJDUL()' class='col-sm-offset-2 col-sm4 form-group'>
+						<div ng-hide='platform.isJDUL()' class='col-sm-offset-2 col-sm4 form-group'>
 							<label for='hasDisability' class='control-label col-sm-2'>{{"RESERVATION.LABEL_DISABILITY_CHILD" | translate}}</label>
 							<div class='col-sm-8 btn-group'>
 									<button type="button" ng-class='{"btn-info": hasDisability && isHasDisabilitySet()}' class="btn btn-default" ng-click="setHasDisability(true)">{{"BTN.YES" | translate}}</button>
