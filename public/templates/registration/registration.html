@@ -110,7 +110,7 @@
 							</div>
 						</div>
 						<!-- HASHEALTHISSUES -->
-						<div class='col-sm-offset-2 col-sm4 form-group' ng-class='{ "has-error": registrationForm.schoolChild.$invalid }'>
+						<div ng-show='!platform.isJDUL()' class='col-sm-offset-2 col-sm4 form-group' ng-class='{ "has-error": registrationForm.schoolChild.$invalid }'>
 							<label for='hasHealthIssues' class='control-label col-sm-2'>{{"RESERVATION.LABEL_HEALTHISSUES_CHILD" | translate}}</label>
 							<div class='col-sm-8 btn-group' role='group' required>
 								<button type="button" ng-class='{"btn-info": hasHealthIssues && isHasHealthIssuesSet()}' class="btn btn-default" ng-click="setHasHealthIssues(true)">{{"BTN.YES" | translate}}</button>
@@ -148,7 +148,7 @@
 						</div>-->
 
 						<!-- HASDISABILITY -->
-						<div class='col-sm-offset-2 col-sm4 form-group'>
+						<div ng-show='!platform.isJDUL()' class='col-sm-offset-2 col-sm4 form-group'>
 							<label for='hasDisability' class='control-label col-sm-2'>{{"RESERVATION.LABEL_DISABILITY_CHILD" | translate}}</label>
 							<div class='col-sm-8 btn-group'>
 									<button type="button" ng-class='{"btn-info": hasDisability && isHasDisabilitySet()}' class="btn btn-default" ng-click="setHasDisability(true)">{{"BTN.YES" | translate}}</button>
@@ -390,7 +390,7 @@
 								</div>
 							</div>
 						</div>
-						<div ng-show="(platform.isTest() || platform.isJDBL() || platform.isJugendsommer())">
+						<div ng-show="(platform.isTest() || platform.isJDBL() || platform.isJugendsommer() || platform.isJDUL())">
 								<input type='checkbox' name='media-jdbl' ng-model='acceptsMediaPublication'><strong>{{"RESERVATION.LABEL_MEDIA1_JDBL" | translate}}{{"RESERVATION.LABEL_MEDIA2_JDBL" | translate}}{{"RESERVATION.LABEL_MEDIA3_JDBL" | translate}}</strong></input>
 								<div class="panel panel-default" ng-class="mediaVisibility ? 'show' : 'hidden'">
 									<div class="panel-body">
@@ -400,7 +400,7 @@
 								</div>
 						</div>
 						<br />
-						<div ng-show="(platform.isTest() || platform.isJDBL() || platform.isJugendsommer())">
+						<div ng-show="(platform.isTest() || platform.isJDBL() || platform.isJugendsommer() || platform.isJUDL())">
 								<input type='checkbox' name='health-jdbl' ng-model='acceptHealth'><strong>{{"RESERVATION.LABEL_HEALTH1_JDBL" | translate}}{{"RESERVATION.LABEL_HEALTH2_JDBL" | translate}}{{"RESERVATION.LABEL_HEALTH3_JDBL" | translate}}</strong></input>
 								<div class="panel panel-default" ng-class="healthVisibility ? 'show' : 'hidden'">
 									<div class="panel-body">

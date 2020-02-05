@@ -15,4 +15,4 @@ mongoose.Promise = global.Promise;
 // 	});
 // }
 
-module.exports = mongoose.createConnection(config.shop_prod);;
+module.exports = mongoose.createConnection(config.shop_prod, { useNewUrlParser: true, useUnifiedTopology: true });;

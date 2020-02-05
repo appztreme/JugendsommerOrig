@@ -83,6 +83,10 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 	$scope.canGoHomeAllone = false;
 	$scope.hasDisability = undefined;
 	$scope.hasHealthIssues = undefined;
+	if($scope.platform.isJDUL()) {
+		$scope.hasHealthIssues = true;
+		$scope.hasDisability = true;
+	}
 	$scope.isSiblingReservation = false;
 	$scope.acceptsOptionalFee = false;
 	$scope.acceptsNewsletter = false;
@@ -125,7 +129,7 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 
 	$scope.isRegistrationAllowed = function() {
 		if($scope.platform.isJDUL())
-			return $scope.registrationForm.$valid && $scope.acceptAGB && $scope.acceptInsurance;
+			return $scope.registrationForm.$valid && $scope.acceptAGB && $scope.acceptHealth && $scope.acceptInsurance;
 		else if($scope.platform.isKiso() || $scope.platform.isTest())
 			return $scope.registrationForm.$valid && $scope.acceptAGB && $scope.acceptPrivacy;
 		else if($scope.platform.isJugendsommer() || $scope.platform.isJDBL())
@@ -177,10 +181,14 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 		$scope.birthdayChild = null;
 		$scope.schoolChild = null;
 		$scope.healthChild = null;
+		$scope.hasHealthIssues = undefined;
 		$scope.hasDisability = undefined;
+		if($scope.platform.isJDUL()) {
+			$scope.hasHealthIssues = true;
+			$scope.hasDisability = true;
+		}
 		$scope.hasOwnEBike = undefined;
 		$scope.heightChild = false;
-		$scope.hasHealthIssues = undefined;
 		$scope.healthIncompatibility = null;
 		$scope.healthAllergy = null;
 		$scope.healthIllnes = null;
@@ -256,10 +264,14 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 				$scope.telContact2 = null;
 				$scope.needsPreCare = false;
 				$scope.hasHealthIssues = undefined;
+				$scope.hasDisability = undefined;
+				if($scope.platform.isJDUL()) {
+					$scope.hasHealthIssues = true;
+					$scope.hasDisability = true;
+				}
 				$scope.healthAllergy = null;
 				$scope.healthIncompatibility = null;
 				$scope.healthIllnes = null;
-				$scope.hasDisability = undefined;
 				$scope.disabilityDescription = null;
 				$scope.diagnosticDescription = null;
 				$scope.needsEbK = true;
