@@ -48,6 +48,7 @@
 			<th>Vorname User</th>
 			<th>Nachname User</th>
 			<th>Betrag</th>
+			<th>Bezahlt</th>
 			<th>sonstige Infos</th>
 			<th ng-repeat='a in activityNames'>
 				{{a}}
@@ -72,6 +73,7 @@
 				<td>{{reg.firstNameUser}}</td>
 				<td>{{reg.lastNameUser}}</td>
 				<td>{{reg.fee}}</td>
+				<td>{{reg.paied}}</td>
 				<td>{{reg.commentInternal}}</td>
 				<td ng-repeat='a in activityNames'>
 					{{formatBoolToSymbol(reg[a])}}

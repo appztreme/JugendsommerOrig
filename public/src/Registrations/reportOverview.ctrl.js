@@ -37,6 +37,7 @@ app.controller('ReportOverviewCtrl', function($scope, $location, $route, Registr
 				if(outputIndex > -1) {
 					output[outputIndex][r.activityId.name] = true;
 					output[outputIndex]["fee"] += $scope.calculateFee(r);
+					output[outputIndex]["paied"] = r.isPaymentDone && output[outputIndex]["paied"]; 
 				}
 
 			} else {
@@ -60,6 +61,7 @@ app.controller('ReportOverviewCtrl', function($scope, $location, $route, Registr
 					"firstNameUser": r.userId.firstName,
 					"lastNameUser": r.userId.lastName,
 					"fee": $scope.calculateFee(r),
+					"paied": r.isPaymentDone,
 					"commentInternal": r.commentInternal
 				}
 				var activities = $scope.getActivitiesForEvent(r.activityId.eventId._id);

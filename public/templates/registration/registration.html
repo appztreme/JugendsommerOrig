@@ -364,7 +364,8 @@
 									<div class="panel-body">
 										<div ng-show="(platform.isTest() || platform.isJDBL() || platform.isJugendsommer()) && lang == 'de'" ng-include src='"templates/agb/ds-jdbl-de.html"'></div>
 										<div ng-show="(platform.isTest() || platform.isJDBL() || platform.isJugendsommer()) && lang == 'it'" ng-include src='"templates/agb/ds-jdbl-it.html"'></div>
-										
+										<div ng-show="(platform.isJDUL()) && lang == 'de'" ng-include src='"templates/agb/ds-jdul-de.html"'></div>
+										<div ng-show="(platform.isJDUL()) && lang == 'it'" ng-include src='"templates/agb/ds-jdul-it.html"'></div>	
 									</div>
 								</div>
 						</div>
