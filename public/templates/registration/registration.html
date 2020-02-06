@@ -11,7 +11,7 @@
 				<div class="panel-body">
 					<div class='container'>
 						<button ng-show='hasCachedRegistration()' ng-click='updateFromCache()' class='btn btn-success col-sm-offset-2'>{{"RESERVATION.LABEL_LOAD_PREVIOUS" | translate}}</button>
-						<button ng-show='hasCachedRegistration() && (platform.isKiso() || platform.isTest())' ng-click='updateSiblingFromCache()' class='btn btn-success col-sm-offset-2'>{{"RESERVATION.LABEL_LOAD_SIBLING" | translate}}</button>
+						<button ng-show='hasCachedRegistration() && (platform.isKiso() || platform.isTest())' ng-click='updateSiblingFromCache()' class='btn btn-lg btn-warning col-sm-offset-2'><img src="../../assets/sibling.png" style="height:30px;margin:5px" class="img-rounded"><strong>{{"RESERVATION.LABEL_LOAD_SIBLING" | translate}}</strong></button>
 						<div cg-Busy='{promise:busyPromise,message:"Loading",backdrop:true,minDuration:500}'></div>
 								
 						<div ng-show='type === "summer" || type === "music" || type === "club" || type == "jumprun"' class='text-orange'><strong>{{"RESERVATION.HEADER_SUMMER_PARENT" | translate}}</strong></div>
