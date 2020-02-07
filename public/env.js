@@ -167,7 +167,7 @@
             "LABEL_TERMS4": " Datenschutzerklärung ",
             "LABEL_TERMS5": " zur Kennntis.",
             "INFO_EBK_1": "EbK ist die Bilaterale Körperschaft für den Sektor Handel und Dienstleistungen in Südtirol. Die Dienstleistungen der EbK sind an Mitglieder der EbK gerichtet. EBK fördert u.a. die Vereinbarkeit von Familie und Beruf und soziale Initiativen. Die Sommerferienprogramme des Jugenddienstes stellen eine solche Initiative dar und den Eltern kann somit ein Teil des Teilnehmerbeitrages zurückerstattet werden. Bitte informieren Sie sich bei ihrem Arbeitgeber, ob der Betrieb Mitglied des EbK ist. Nähere Informationen unter ebk.bz.it",
-            "INFO_EBK_DOWNLOAD": "Für eine Teilnahmebestätigung kann von jedem unter 'Meine Anmeldungen' auf dieser Homepage (ab Ende Juli) heruntergeladen werden",
+            "INFO_EBK_DOWNLOAD": "Eine Teilnahmebestätigung kann von jedem unter 'Meine Anmeldungen' auf dieser Homepage (ab Ende Juli) heruntergeladen werden",
             "LABEL_INSUR1": "  gelesen und akzeptiert ",
             "LABEL_INSUR2": "Versicherungsansprüche",
             "LABEL_PRIVACY1": " Hiermit erkläre ich, die ",
