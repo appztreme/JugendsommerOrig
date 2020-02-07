@@ -1,8 +1,3 @@
 City: Dropdown - andere txt
 
-8 Woche löschen
-Margreit: 6 Woche löschen
-
 Wochen Reihenfolge
-
-Report Bezahlstatus

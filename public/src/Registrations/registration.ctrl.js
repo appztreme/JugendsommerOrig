@@ -36,6 +36,14 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 	$scope.isHasDisabilitySet = function() { return $scope.hasDisability !== undefined && $scope.hasDisability !== null; }
 	$scope.setHasOwnEBike = function(b) { $scope.hasOwnEBike = b; }
 	$scope.isHasOwnEBikeSet = function() { return $scope.hasOwnEBike !== undefined && $scope.hasOwnEBike !== null; }
+	$scope.isOtherCityVisible = function() {
+		if($scope.cityChild === "Andere" || $scope.cityChild === "Altri") {
+			return true;
+		} else {
+			$scope.cityChildOther = undefined;
+			return false;
+		}
+	}
 
 	$scope.toggleActivity = function(id) {
 		var index = $scope.selectedActivities.indexOf(id);
@@ -208,7 +216,7 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 				schoolChild: $scope.schoolChild,
 				healthChild: $scope.healthChild,
 				addressChild: $scope.addressChild ? $scope.addressChild : 'Addresse',
-				cityChild: $scope.cityChild,
+				cityChild: $scope.cityChildOther ? $scope.cityChildOther : $scope.cityChild,
 				tShirtSize: $scope.tShirtSize,
 				hasOwnEBike: $scope.hasOwnEBike,
 				heightChild: $scope.heightChild,

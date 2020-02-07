@@ -60,10 +60,13 @@
 						<!-- CITYCHILD -->
 						<div class='form-group' ng-class='{ "has-error": registrationForm.cityChild.$invalid }'>
 							<label for='cityChild' class='control-label col-sm-2'>{{"RESERVATION.LABEL_CITY_CHILD" | translate}}</label>
-							<div class='col-sm-8'>
+							<div class='col-sm-6'>
 								<select name='cityChild' class='sel-base form-control' ng-disabled="disabledForSibling" ng-model='cityChild'>
 									<option ng-repeat="city in cities" value='{{city}}'>{{city}}</option>
 								</select>
+								<div ng-show="(platform.isJDUL() || platform.isTest()) && isOtherCityVisible()">
+									<input type='text' ng-model="cityChildOther" class="form-control"></input>
+								</div>
 							</div>
 						</div>
 						<div ng-show='type === "summer" || type === "music" || type === "club" || type === "jumprun"' class='text-orange'><strong>{{"RESERVATION.HEADER_SUMMER_CHILD" | translate}}</strong></div>
@@ -247,6 +250,7 @@
 						</div>
 						<!-- NAMECONTACT2 TELCONTACT2 -->
 						<div ng-show='type === "summer" || type === "music"' class='form-group'>
+
 							<label for='nameContact2' class='control-label col-sm-2'>{{"RESERVATION.LABEL_NAME_CONTACT2" | translate}}</label>
 							<div class='col-sm-3'>
 								<input name='nameContact2' type='text' maxlength='250' ng-model='nameContact2' class='form-control'></input>
@@ -255,6 +259,10 @@
 							<div class='col-sm-3'>
 								<input name='telContact2' type='tel' maxlength='100' ng-model='telContact2' class='form-control'></input>
 							</div>
+						</div>
+						<br />
+						<div ng-show="platform.isKiso() alert alert-info">
+							{{"RESERVATION.INFO_EBK_DOWNLOAD" | translate}}
 						</div>
 						<!-- NEEDSAbK -->
 						<!-- <div ng-show='!isKiso && (type === "summer" || type === "music")' class='col-sm-offset-2 col-sm4'>
