@@ -256,7 +256,7 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 				if(err.indexOf('duplicate key error index') > -1) {
 					NotificationSvc.warn($scope.msgNoDuplicates);
 				} else {
-					NotificationSvc.warn($scope.error);
+					NotificationSvc.warn($scope.msgError);
 				}
 			})
 			.success(function(reg) {
