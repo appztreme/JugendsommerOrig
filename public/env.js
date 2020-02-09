@@ -191,7 +191,8 @@
             "BUTTON_NEXT": "Weiter",
             "BUTTON_PREVIOUS": "Zurück",
             "MSG_SUCCESS": "Anmeldung erfolgreich gespeichert",
-            "MSG_NO_DUPLICATES": "Doppelte Anmeldungen pro Veranstaltung sind nicht möglich"
+            "MSG_NO_DUPLICATES": "Doppelte Anmeldungen pro Veranstaltung sind nicht möglich",
+            "MSG_ERROR": "Bei Ihrer Anmeldung ist ein Problem aufgetreten. Bitte Loggen Sie sich im System neu ein."
         },
         "MYRESERVATION": {
             "TITLE": "Reservierungen",
@@ -375,7 +376,8 @@
             "BUTTON_NEXT": "Avanti",
             "BUTTON_PREVIOUS": "Indietro",
             "MSG_SUCCESS": "Iscrizione salvata con successo",
-            "MSG_NO_DUPLICATES": "Non sono possibili iscrizione doppie per la stessa settimana"
+            "MSG_NO_DUPLICATES": "Non sono possibili iscrizione doppie per la stessa settimana",
+            "MSG_ERROR": "Si è verificato un problema durante l'accesso. Si prega di effetturare nuovamente l'accesso."
         },
         "MYRESERVATION": {
             "TITLE": "Prenotazioni",

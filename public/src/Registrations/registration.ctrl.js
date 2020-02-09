@@ -61,6 +61,7 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 	//default values
 	$scope.msgSuccess = 'Anmeldung erfolgreich gespeichert';
 	$scope.msgNoDuplicates = 'Doppelte Anmeldungen pro Veranstaltung sind nicht möglich';
+	$scope.msgError = 'Bei Ihrer Anmeldung ist ein Problem aufgetreten'
 
 	$scope.lang = $translate.proposedLanguage() || $translate.user();
 
@@ -70,10 +71,12 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 		$translate(['RESERVATION.MSG_SUCCESS', 'RESERVATION.MSG_NO_DUPLICATES'])
 			.then(function (translations) {
     			$scope.msgSuccess = translations['RESERVATION.MSG_SUCCESS'];
-    			$scope.msgNoDuplicates = translations['RESERVATION.MSG_NO_DUPLICATES'];
+				$scope.msgNoDuplicates = translations['RESERVATION.MSG_NO_DUPLICATES'];
+				$scope.msgError = translations['RESERVATION.MSG_ERROR'];
   			}, function (translationIds) {
 				$scope.msgSuccess = translationIds.reservation_msg_success;
-    			$scope.msgNoDuplicates = translationIds.reservation_msg_no_duplicates;
+				$scope.msgNoDuplicates = translationIds.reservation_msg_no_duplicates;
+				$scope.msgError = translationIds.reservation_msg_error;
   			});
     });
 
@@ -249,6 +252,8 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 			.error(function(err) {
 				if(err.indexOf('duplicate key error index') > -1) {
 					NotificationSvc.warn($scope.msgNoDuplicates);
+				} else {
+					NotificationSvc.warn($scope.error);
 				}
 			})
 			.success(function(reg) {
