@@ -39,7 +39,7 @@ var htmlEndJDUL_de = " dabei sein wirst!<br />Du erhältst innerhalb Mai noch ei
 var htmlFinalJDUL = "</body></html>";
 var htmlStartJDUL_it = "<h2>Conferma d‘iscrizione</h2>Cara/o ";
 var htmlMiddleJDUL_it = ",<br />Siamo contenti che parteciperai al nostro programma JD-SUMMER a ";
-var htmlEndJDUL_it = ".<br />Entro maggio riceverai un'altra e-mail con ulteriori informazioni.<br /><br />I tuoi genitori sono pregati di controllare i dati sottostanti e di versare la quota d'iscrizione sul nostro conto corrente entro il <strong>31.03.2020:</strong><br /><br />Jugenddienst Unterland – Raiffeisenkasse Salurn<br />IBAN: IT 27 T 08220 58371000304204042<br />con l‘oggetto: cognome nome comune di residenza<br /><br />Non vediamo l'ora che il JD-SUMMER inizi a gonfie vele e speriamo in un bel tempo. Nel frattempo vi auguriamo tanto divertimento.<br /><br />Il Vostro Team del Jugenddienst Unterland";
+var htmlEndJDUL_it = ".<br />Entro maggio riceverai un'altra e-mail con ulteriori informazioni.<br /><br />I tuoi genitori sono pregati di controllare i dati sottostanti e di versare la quota d'iscrizione sul nostro conto corrente entro il <strong>20.03.2020:</strong><br /><br />Jugenddienst Unterland – Raiffeisenkasse Salurn<br />IBAN: IT 27 T 08220 58371000304204042<br />con l‘oggetto: cognome nome comune di residenza<br /><br />Non vediamo l'ora che il JD-SUMMER inizi a gonfie vele e speriamo in un bel tempo. Nel frattempo vi auguriamo tanto divertimento.<br /><br />Il Vostro Team del Jugenddienst Unterland";
 var txtWaitingListJDUL = "Guten Tag,/r/nleider ist das von Ihnen gewünschte Programm bereits ausgebucht./r/nSie sind jedoch auf der Warteliste. Sollte ein Platz frei werden, melden wir uns innerhalb 20.03.2020 bei Ihnen./r/nMit freundlichen Grüßen/r/nDas Team des Jugenddienst Unterland/r/n/r/n/r/n";
 var txtWaitingListJDUL_it = "Buon giorno,/r/npurtroppo è già pieno il programma da lei scelto./r/nLa sua iscrizione si trova sulla lista d‘ attesa. Se dovesse liberarsi un posto, La contatteremmo entro il  20.03.2020./r/nCordiali saluti/r/nIl Team del Jugenddienst Unterland";
 var htmlWaitingListJDUL = "<html><body>Guten Tag,<br />leider ist das von Ihnen gewünschte Programm bereits ausgebucht.<br />Sie sind jedoch auf der Warteliste. Sollte ein Platz frei werden, melden wir uns innerhalb 20.03.2020 bei Ihnen.<br />Mit freundlichen Grüßen<br />Das Team des Jugenddienst Unterland<br /><br /><br />";
@@ -412,7 +412,7 @@ function getJDULFooter() {
 	footer += '<tr><td>39044 Neumarkt</td></tr>';
 	footer += '<tr><td>Tel.: 0471 812717</td></tr>';
 	footer += '<tr><td>unterland@jugenddienst.it</td></tr>';
-	footer += '<tr><td><a href="https://www.jugenddienst.it/unterland">www.jugenddienst.it/unterland</a></td></tr>';
+	footer += '<tr><td><a href="https://www.jugenddienstunterland.it">www.jugenddienstunterland.it</a></td></tr>';
 	footer += '<tr></tr>';
 	footer += '<tr><td>IBAN: IT27T0822058371000304204042</td></tr>';
 	footer += '<tr></tr>';
