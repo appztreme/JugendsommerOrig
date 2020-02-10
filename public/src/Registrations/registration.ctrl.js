@@ -61,7 +61,8 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 	//default values
 	$scope.msgSuccess = 'Anmeldung erfolgreich gespeichert';
 	$scope.msgNoDuplicates = 'Doppelte Anmeldungen pro Veranstaltung sind nicht möglich';
-	$scope.msgError = 'Bei Ihrer Anmeldung ist ein Problem aufgetreten'
+	$scope.msgError = 'Bei Ihrer Anmeldung ist ein Problem aufgetreten';
+	$scope.msgNotValidForm = 'Das Formular enthält nicht valide Einträge';
 
 	$scope.lang = $translate.proposedLanguage() || $translate.user();
 
@@ -73,10 +74,12 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
     			$scope.msgSuccess = translations['RESERVATION.MSG_SUCCESS'];
 				$scope.msgNoDuplicates = translations['RESERVATION.MSG_NO_DUPLICATES'];
 				$scope.msgError = translations['RESERVATION.MSG_ERROR'];
+				$scope.msgNotValidForm = translations['RESERVATION.MSG_FORM_NOT_VALID'];
   			}, function (translationIds) {
 				$scope.msgSuccess = translationIds.reservation_msg_success;
 				$scope.msgNoDuplicates = translationIds.reservation_msg_no_duplicates;
 				$scope.msgError = translationIds.reservation_msg_error;
+				$scope.msgNotValidForm = translationIds.reservation_msg_not_valid_form;
   			});
     });
 
@@ -87,9 +90,7 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 	$scope.tShirtSizes = conf.tSizes;
 	$scope.schoolLevels = conf.schoolLevels;
 	$scope.cityChild = PlatformSvc.getDefaultCity();
-	// $scope.schoolChild = $scope.schoolLevels.length > 0 ? ( $scope.lang === 'de') : undefined;
-	// console.log($scope.schoolLevels);
-	// console.log($scope.schoolChild)
+	$scope.schoolChild = $scope.schoolLevels.length > 0 ? $scope.schoolLevels[0].name : undefined;
 	$scope.addressChild = " ";
 	$scope.needsPreCare = false;
 	$scope.needsAbK = true;
@@ -308,6 +309,8 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 				NotificationSvc.notify($scope.msgSuccess);
 				$location.path('/');
 			});
+		} else {
+			NotificationSvc.warn($scope.msgNotValidForm);
 		}
 	};
 
