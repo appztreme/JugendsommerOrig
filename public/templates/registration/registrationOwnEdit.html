@@ -70,6 +70,13 @@
 			</select>
 		</div>
 	</div>
+	<!-- ADDRESSCHILD -->
+	<div ng-show='!(platform.isJDBL() || platform.isJugendsommer())' class='form-group' ng-class='{ "has-error": registrationForm.addressChild.$invalid }' ng-show="!platform.isJugendsommer() || !platform.isJDBL()">
+		<label for='addressChild' class='control-label col-sm-2'>{{"RESERVATION.LABEL_ADDRESS_CHILD" | translate}}</label>
+		<div class='col-sm-8'>
+			<input name='addressChild' type='text' ng-model='addressChild' ng-disabled="disabledForSibling" maxlength='100' class='form-control' required></input>
+		</div>
+	</div>
 	<!-- HASHEALTHISSUES -->
 	<div ng-show="!platform.isJDUL()" class='col-sm-offset-2 col-sm4 form-group' ng-class='{ "has-error": registrationForm.schoolChild.$invalid }'>
 		<label for='hasHealthIssues' class='control-label col-sm-2'>{{"RESERVATION.LABEL_HEALTHISSUES_CHILD" | translate}}</label>
