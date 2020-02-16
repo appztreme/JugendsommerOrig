@@ -2,6 +2,7 @@
     <ul class='nav navbar-nav'>
         <li><a id='nav_link_info' href='/#/info'>{{'NAV.INFO' | translate}}</a></li>
         <li><a id='nav_link_agb' href='/#/agb'>{{'NAV.AGB' | translate}}</a></li>
+        <li ng-show='platform.isKiso() || platform.isTest()'><a id='nav_link_faq' href='/#/faq'>FAQ</a></li>
         <li><a id='nav_link_programme' href='/#/'>{{'NAV.PROGRAM' | translate}}</a></li>
         <li ng-show='iSvc.isAuthenticated()'><a id='nav_link_myres' href='/#/myRegistrations'>{{'NAV.MYRES' | translate}}</a></li>
         <li ng-show='iSvc.isAuthorized("admin") || iSvc.isAuthorized("fadmin") || iSvc.isAuthorized("ladmin")'><a href='/#/shop/calendar'>Meine Reservierungen</a></li>

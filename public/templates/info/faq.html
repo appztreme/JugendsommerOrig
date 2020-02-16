@@ -1,0 +1,13 @@
+<div ng-show="(platform.isJDBL() || platform.isJugendsommer()) && lang == 'de'"><div ng-include src="'templates/info/info-jdbl-de.html'"></div></div>
+<div ng-show="(platform.isJDBL() || platform.isJugendsommer()) && lang == 'it'"><div ng-include src="'templates/info/info-jdbl-it.html'"></div></div>
+
+<div ng-show="platform.isKiso() && lang == 'de'"><div ng-include src="'templates/info/info-kiso-de.html'"></div></div>
+<div ng-show="platform.isKiso() && lang == 'it'"><div ng-include src="'templates/info/info-kiso-it.html'"></div></div>
+
+<div ng-show="platform.isJDUL() && lang == 'de'"><div ng-include src="'templates/info/info-jdul-de.html'"></div></div>
+<div ng-show="platform.isJDUL() && lang == 'it'"><div ng-include src="'templates/info/info-jdul-it.html'"></div></div>
+
+<div ng-show="platform.isTest() && lang == 'de'"><div ng-include src="'templates/info/faq-kiso-de.html'"></div></div>
+<div ng-show="platform.isTest() && lang == 'it'"><div ng-include src="'templates/info/faq-kiso-it.html'"></div></div>
+
+<div ng-show="platform.isJSGries()"><div ng-include src="'templates/info/info-jsgries-de.html'"></div></div>

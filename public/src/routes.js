@@ -14,6 +14,10 @@ app.config(function($routeProvider) {
 			controller: 'InfoCtrl',
 			templateUrl: '../templates/info/info.html'
 		})
+		.when('/faq', {
+			controller: 'FaqCtrl',
+			templateUrl: '../templates/info/faq.html'
+		})
 		.when('/agb', {
 			controller: 'AgbCtrl',
 			templateUrl: '../templates/agb/agb.html'
