@@ -9,6 +9,6 @@ app.controller('InfoCtrl', function($scope, $rootScope, $translate, $location, P
         $scope.lang = $translate.proposedLanguage() || $translate.user();
     });
 
-    console.log(PlatformSvc, PlatformSvc.isTest(), $scope.lang);
+    //console.log(PlatformSvc, PlatformSvc.isTest(), $scope.lang);
 
 });
