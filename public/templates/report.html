@@ -173,13 +173,19 @@
 			<th>Kontak2</th>
 			<th>Tel. Kontakt2</th>
 			<th>T-Shirt</th>
+			<th>Gesundheit. Probleme</th>
+			<th>Unverträglichkeiten</th>
+			<th>Allergien</th>
+			<th>Medikamente</th>
 			<th>Beeinträchtigung</th>
 			<th>Diagnose</th>
 			<th ng-show='platform.isJDUL()'>Kann Schwimmen</th>
 			<th ng-show='platform.isJDUL()'>Darf allein nach Hause</th>
 			<th ng-show='platform.isJDUL()'>Kommentar Intern</th>
-			<th ng-show='platform.isKiso()'>Media</th>
+			<th>Media</th>
 			<th ng-show='platform.isKiso()'>News</th>
+			<th ng-show='platform.isJugendsommer()'>eigens EBike</th>
+			<th ng-show='platform.isJugendsommer()'>Körpergröße</th>
 			<th>Anmeldedatum</th>
 		</tr>
 		<tr ng-repeat='reg in registrations | orderBy:[colNameSort,colNameSort2]'>
@@ -213,13 +219,19 @@
 			<td>{{reg.nameContact2}}</td>
 			<td>{{reg.telContact2}}</td>
 			<td>{{reg.tShirtSize}}</td>
+			<td>{{formatBool(reg.hasHealthIssues)}}</td>
+			<td>{{reg.healthIncompatibility}}</td>
+			<td>{{reg.healthAllergy}}</td>
+			<td>{{reg.healthIllnes}}</td>
 			<td>{{formatBool(reg.hasDisability)}}</td>
 			<td>{{reg.disabilityDescription}}</td>
 			<td ng-show='platform.isJDUL()'>{{formatBool(reg.canSwim)}}</td>
 			<td ng-show='platform.isJDUL()'>{{formatBool(reg.canGoHomeAllone)}}</td>
 			<td ng-show='platform.isJDUL()'>{{reg.commentInternal}}</td>
-			<td ng-show='platform.isKiso()'>{{formatBool(reg.acceptsMediaPublication)}}</td>
+			<td>{{formatBool(reg.acceptsMediaPublication)}}</td>
 			<td ng-show='platform.isKiso()'>{{formatBool(reg.acceptsNewsletter)}}</td>
+			<td ng-show='platform.isJugendsommer()'>{{formatBool(reg.hasOwnEBike)}}</td>
+			<td ng-show='platform.isJugendsommer()'>{{reg.heightChild}}</td>
 			<td>{{reg.registrationDate | date: 'dd/MM/yyyy : hh.mm.ss'}}</td>	
 		</tr>
 		<tr><td></td><td></td><td></td><td></td><td colspan='8'>Summe:</td><td align='right'>{{calculateOverallFee(registrations)}}</td><td colspan='17'></td></tr>
