@@ -85,10 +85,11 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 
 	// $scope.busyPromise = RegistrationSvc.create();
 
+
 	$scope.type = $routeParams.type;
 	$scope.cities = PlatformSvc.getCities();
 	$scope.tShirtSizes = conf.tSizes;
-	$scope.schoolLevels = conf.schoolLevels;
+	$scope.schoolLevels = $scope.isKiso ? conf.schoolChild_Kiso : conf.schoolLevels;
 	$scope.cityChild = PlatformSvc.getDefaultCity();
 	$scope.schoolChild = $scope.schoolLevels.length > 0 ? $scope.schoolLevels[0].name : undefined;
 	$scope.addressChild = " ";
