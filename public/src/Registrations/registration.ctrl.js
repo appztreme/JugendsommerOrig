@@ -51,6 +51,11 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 		else $scope.selectedActivities.splice(index, 1);
 	}
 
+	$scope.toggleActivityKiso = function(id) {
+		$scope.selectedActivities = [];
+		$scope.selectedActivities.push(id);
+	}
+
 	$scope.setState = function(state) {
 		$scope.currentState = state;
 	}
