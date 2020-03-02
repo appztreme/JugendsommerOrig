@@ -26,7 +26,7 @@
         {"name": '2. Klasse Mittelschule',          "name_it": '2° media'},
         {"name": '3. Klasse Mittelschule',          "name_it": '3° media'},
         {"name": '1. Klasse Oberschule',            "name_it": '1° superiore'}
-    ],
+    ];
     window.__env.schoolLevels_Kiso = [
         {"name": "4. Kindergarten Jahr",            "name_it": "4 anno scuola materna"},
         {"name": '1. Klasse Grundschule',           "name_it": '1° elementare' },
@@ -38,7 +38,7 @@
         {"name": '2. Klasse Mittelschule',          "name_it": '2° media'},
         {"name": '3. Klasse Mittelschule',          "name_it": '3° media'},
         {"name": '1. Klasse Oberschule',            "name_it": '1° superiore'}
-    ],
+    ];
     window.__env.translations = window.__env.translations || {};
     window.__env.translations.de = {
         "NAV": {
