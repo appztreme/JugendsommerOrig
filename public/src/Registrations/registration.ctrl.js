@@ -54,6 +54,7 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 	$scope.toggleActivityKiso = function(id) {
 		$scope.selectedActivities = [];
 		$scope.selectedActivities.push(id);
+		console.log("radio activity", $scope.selectedActivities);
 	}
 
 	$scope.setState = function(state) {
