@@ -152,7 +152,8 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 		if($scope.platform.isJDUL())
 			return $scope.registrationForm.$valid && $scope.acceptAGB && $scope.acceptsMediaPublication && $scope.acceptHealth && $scope.acceptInsurance;
 		else if($scope.platform.isKiso() || $scope.platform.isTest())
-			return $scope.registrationForm.$valid && $scope.acceptAGB && $scope.acceptPrivacy;
+			// return $scope.registrationForm.$valid && $scope.acceptAGB && $scope.acceptPrivacy;
+			return $scope.registrationForm.$valid && $scope.acceptAGB && $scope.acceptsMediaPublication && $scope.acceptHealth;
 		else if($scope.platform.isJugendsommer() || $scope.platform.isJDBL())
 			return $scope.registrationForm.$valid && $scope.acceptAGB && $scope.acceptHealth;
 		else
