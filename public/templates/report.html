@@ -75,10 +75,10 @@
 				</span>
 			</div>
 		</div>
-		<!--<div class='row' style='margin-top: 10px'>
-			<label for='paymentFilter' class='control-label col-sm-2'>Einzahlung:</label>
-			<input id='paymentFilter' class='form-control' type='checkbox' ng-model='paymentFilter' />
-		</div>-->
+		<!-- <div ng-show='activityIdFilter' class='row' style='margin-top: 10px'>
+			<label for='waitlistFilter' class='control-label col-sm-2'>Warteliste:</label>
+			<input id='waitlistFilter' class='form-control' type='checkbox' ng-model='waitlistFilter' />
+		</div> -->
 		<div class='row' style='margin-top:10px'>
 			<label for='yearFilter' class='control-label col-sm-2'>Jahr:</label>
 			<div class='col-sm-5 input-group'>
@@ -98,7 +98,7 @@
 	<div class='panel-heading'>Sortierung</div>
 	<div class='row panel-body'>
 		<div class='col-sm-3'>
-			<label>Sortierung1</label>
+			<label>Sortierung1</label>-
 			<select id='colSorter' class='sel-base' ng-model='colNameSort'>
 				<option ng-repeat='col in columns' value='{{col.dbName}}'>{{col.colName}}</option>
 			</select>

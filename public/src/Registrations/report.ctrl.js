@@ -10,6 +10,7 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 
 	// default values
 	$scope.yearFilter = (new Date()).getFullYear();
+	$scope.waitlistFilter = undefined;
 
   	$scope.getReportData = function() {
     	RegistrationSvc.find($scope.eventIdFilter, $scope.activityIdFilter, $scope.yearFilter, $scope.nameFilter, $scope.firstnameFilter, $scope.receiptFilter, $scope.cityFilter)
