@@ -75,10 +75,19 @@
 				</span>
 			</div>
 		</div>
-		<!-- <div ng-show='activityIdFilter' class='row' style='margin-top: 10px'>
+		<div ng-show='activityIdFilter' class='row' style='margin-top: 10px'>
 			<label for='waitlistFilter' class='control-label col-sm-2'>Warteliste:</label>
-			<input id='waitlistFilter' class='form-control' type='checkbox' ng-model='waitlistFilter' />
-		</div> -->
+			<!--<input id='waitlistFilter' class='form-control' type='checkbox' ng-model='waitlistFilter' />-->
+			<div class='col-sm-8 btn-group' role='group' required>
+				<!--<button type="button" ng-class='{"btn-info": waitlistFilter && waitlistFilter !== undefined}' class="btn btn-default" ng-click="waitlistFilter = true;">{{"BTN.YES" | translate}}</button>-->
+				<button type="button" ng-class='{"btn-info": !waitlistFilter && waitlistFilter !== undefined}' class="btn btn-default" ng-click="setWaitlistFilter(false)">{{"BTN.NO" | translate}}</button>
+				<span class='input-group-btn'>
+					<button class='btn btn-info' ng-click='clearWaitSelection()'>
+						<span class="glyphicon glyphicon-remove"></span>
+					</button>
+				</span>	
+			</div>
+		</div>
 		<div class='row' style='margin-top:10px'>
 			<label for='yearFilter' class='control-label col-sm-2'>Jahr:</label>
 			<div class='col-sm-5 input-group'>
@@ -104,7 +113,7 @@
 			</select>
 		</div>
 	</div>
-	<!-- <div class='row panel-body'>
+	<!--<div class='row panel-body'>
 		<div class='col-sm-3'>
 			<label>Sortierung2</label>
 			<select id='colSorter2' class='sel-base' ng-model='colNameSort2'>
@@ -135,6 +144,8 @@
 			</th>
 			<th>EbK</th>
 			<th ng-show='activityIdFilter'>Warteliste</th>
+			<th ng-show='activityIdFilter'>Prio &uarr;</th>
+			<th ng-show='activityIdFilter'>Prio &darr;</th>
 			<th>Einzahlung
 				<div ng-show="isBatchUpdateAllowed()"><input type="checkbox" ng-checked="masterIsPaymentDone" ng-model="masterIsPaymentDone" ng-change="batchUpdateIsPaymentDone()" /></div>
 			</th>
@@ -199,6 +210,8 @@
 			<td>{{reg.lastNameChild.toUpperCase()}}</td>
 			<td>{{formatBool(reg.needsEbK)}}</td>
 			<td ng-show='activityIdFilter' ng-class='{"bg-warning": isOnWait(reg), "bg-success": !isOnWait(reg)}'>{{formatBool(isOnWait(reg))}}</td>
+			<td ng-show='activityIdFilter'><input type='checkbox' ng-model='reg.isPrioUp'   ng-change='updateProperty(reg._id, "isPrioUp",   reg.isPrioUp)' style='margin-right:8px'>{{formatBool(reg.isPrioUp)}}</td>
+			<td ng-show='activityIdFilter'><input type='checkbox' ng-model='reg.isPrioDown' ng-change='updateProperty(reg._id, "isPrioDown", reg.isPrioDown)' style='margin-right:8px'>{{formatBool(reg.isPrioDown)}}</td>
 			<td ng-class='{"bg-success": reg.isPaymentDone, "bg-danger": !reg.isPaymentDone}'><input type='checkbox' ng-model='reg.isPaymentDone' ng-change='updateIsPaymentDone(reg._id, reg.isPaymentDone)' style='margin-right:8px' />{{formatBool(reg.isPaymentDone)}}</td>
 			<td ng-class='{"bg-success": reg.isEmailNotified, "bg-danger": !reg.isEmailNotified}'><input type='checkbox' ng-model='reg.isEmailNotified' ng-change='updateIsEmailNotified(reg._id, reg.isEmailNotified)' style='margin-right:8px' />{{formatBool(reg.isEmailNotified)}}</td>
 			<td>{{reg.receiptNumber}}</td>

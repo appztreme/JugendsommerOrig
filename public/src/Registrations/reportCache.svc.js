@@ -27,6 +27,10 @@ app.service('ReportCacheSvc', function() {
     return !angular.isUndefined(this.currentCityFilter);
   }
 
+  this.hasWaitlistFilterParameter = function() {
+    return !angular.isUndefined(this.currentWaitlistFilter);
+  }
+
   this.hasSelectionData = function() {
       return !angular.isUndefined(this.events) &&
              !angular.isUndefined(this.allActivities);
@@ -41,6 +45,7 @@ app.service('ReportCacheSvc', function() {
   this.currentNameFilter = undefined;
   this.currentFirstNameFilter = undefined;
   this.currentCityFilter = undefined;
+  this.currentWaitlistFilter = undefined;
 
   this.events = undefined;
   this.allActivities = undefined;

@@ -51,6 +51,8 @@ var registrationSchema = db.Schema({
   acceptsOptionalFee: { type: Boolean, required: true, default: false },
   acceptsNewsletter: { type: Boolean, required: true, default: false },
   acceptsMediaPublication: { type: Boolean, required: true, default: false },
+  isPrioUp: { type: Boolean, required: true, default: false },
+  isPrioDown: { type: Boolean, required: true, default: false },
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: false }
 });
 

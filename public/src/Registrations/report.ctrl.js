@@ -15,7 +15,13 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
   	$scope.getReportData = function() {
     	RegistrationSvc.find($scope.eventIdFilter, $scope.activityIdFilter, $scope.yearFilter, $scope.nameFilter, $scope.firstnameFilter, $scope.receiptFilter, $scope.cityFilter)
 				.success(function (regs) {
-            		$scope.registrations = regs;
+					$scope.registrations = regs;
+					if($scope.waitlistFilter === true) {
+						$scope.registrations = _.filter(regs, function(x) { return $scope.isOnWait(x); });
+					} else if ($scope.waitlistFilter === false) {
+						$scope.registrations = _.filter(regs, function(x) { return !$scope.isOnWait(x); });
+					}
+
             		$scope.emails = _.uniq(_.map($scope.registrations, function(r) {
                 		return r.emailParent;
 					})).join(';');
@@ -101,6 +107,12 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 		$scope.emails = undefined;
 	}
 
+	$scope.clearWaitSelection = function() {
+		$scope.waitlistFilter = undefined;
+		$scope.registrations = undefined;
+		$scope.emails = undefinec;
+	}
+
 	$scope.clearReceiptSelection = function() {
 		$scope.receiptFilter = undefined;
 		$scope.registrations = undefined;
@@ -130,6 +142,11 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 			$location.path('/report/');
 			//$route.reload();
 		})
+	}
+
+	$scope.setWaitlistFilter = function(b) {
+		$scope.waitlistFilter = b;
+		$scope.updateWaitlistFilter();
 	}
 
 	$scope.isOnWait = function(reg) {
@@ -178,6 +195,12 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 
 	$scope.updateCityFilter = function() {
 		ReportCacheSvc.currentCityFilter = $scope.cityFilter;
+		$scope.registrations = undefined;
+		$scope.emails = undefined;
+	}
+
+	$scope.updateWaitlistFilter = function() {
+		ReportCacheSvc.currentWaitlistFiler = $scope.waitlistFilter;
 		$scope.registrations = undefined;
 		$scope.emails = undefined;
 	}
@@ -265,6 +288,7 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 			$scope.activities = undefined;
 			ReportCacheSvc.events = $scope.events;
 			ReportCacheSvc.allActivities = $scope.allActivities;
+
 		});
 	}
 
@@ -295,6 +319,9 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 	}
 	if(ReportCacheSvc.hasCityFilterParameter()) {
 		$scope.cityFilter = ReportCacheSvc.currentCityFilter;
+	}
+	if(ReportCacheSvc.hasWaitlistFilterParameter()) {
+		$scope.waitlistFilter = ReportCacheSvc.currentWaitlistFilter;
 	}
 	if(ReportCacheSvc.hasEventFilterParameter() || ReportCacheSvc.hasActivityFilterParameter() ||
 	   ReportCacheSvc.hasNameFilterParameter() || ReportCacheSvc.hasFirstNameFilterParameter() ||
