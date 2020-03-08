@@ -39,6 +39,18 @@
         {"name": '3. Klasse Mittelschule',          "name_it": '3° media'},
         {"name": '1. Klasse Oberschule',            "name_it": '1° superiore'}
     ];
+    window.__env.schoolLevels_JS = [
+        {"name": "4. Kindergarten Jahr",            "name_it": "4 anno scuola materna"},
+        {"name": '1. Klasse Grundschule',           "name_it": '1° elementare' },
+        {"name": '2. Klasse Grundschule',           "name_it": '2° elementare' },
+        {"name": '3. Klasse Grundschule',           "name_it": '3° elementare' },
+        {"name": '4. Klasse Grundschule',           "name_it": '4° elementare' },
+        {"name": '5. Klasse Grundschule',           "name_it": '5° elementare '},
+        {"name": '1. Klasse Mittelschule',          "name_it": '1° media '},
+        {"name": '2. Klasse Mittelschule',          "name_it": '2° media'},
+        {"name": '3. Klasse Mittelschule',          "name_it": '3° media'},
+        {"name": '1. Klasse Oberschule',            "name_it": '1° superiore'}
+    ];
     window.__env.translations = window.__env.translations || {};
     window.__env.translations.de = {
         "NAV": {
@@ -215,6 +227,7 @@
             "LABEL_ACTIVITY": "Woche",
             "LABEL_ACCEPT": "Angenommen",
             "LABEL_PAYED": "Bezahlt",
+            "LABEL_WAITLIST": "Warteliste",
             "LABEL_PRECARE_CHILD": "Frühbetreuung",
             "LABEL_FIRSTNAME_CHILD": "Vorname",
             "LABEL_LASTNAME_CHILD": "Nachname",
@@ -401,6 +414,7 @@
             "LABEL_ACTIVITY": "settimana",
             "LABEL_ACCEPT": "accettato",
             "LABEL_PAYED": "pagato",
+            "LABEL_WAITLIST": "Warteliste",
             "LABEL_PRECARE_CHILD": "Frühbetreuung",
             "LABEL_FIRSTNAME_CHILD": "nome",
             "LABEL_LASTNAME_CHILD": "cognome",

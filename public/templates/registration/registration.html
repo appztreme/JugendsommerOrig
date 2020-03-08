@@ -51,7 +51,7 @@
 							</div>
 						</div>
 						<!-- ADDRESSCHILD -->
-						<div class='form-group' ng-class='{ "has-error": registrationForm.addressChild.$invalid }' ng-show="!platform.isJugendsommer() || !platform.isJDBL()">
+						<div class='form-group' ng-class='{ "has-error": registrationForm.addressChild.$invalid }' ng-show="!platform.isJugendsommer()">
 							<label for='addressChild' class='control-label col-sm-2'>{{"RESERVATION.LABEL_ADDRESS_CHILD" | translate}}</label>
 							<div class='col-sm-8'>
 								<input name='addressChild' type='text' ng-model='addressChild' ng-disabled="disabledForSibling" maxlength='100' class='form-control' required></input>

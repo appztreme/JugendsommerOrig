@@ -90,11 +90,21 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 
 	// $scope.busyPromise = RegistrationSvc.create();
 
+	$scope.getSchoolLevels = function() {
+		if($scope.platform.isKiso()) {
+			return conf.schoolLevels_Kiso;
+		}
+		if($scope.platform.isJugendsommer()) {
+			return conf.schoolLevels_JS;
+		}
+		else return conf.schoolLevels;
+	}
+
 
 	$scope.type = $routeParams.type;
 	$scope.cities = PlatformSvc.getCities();
 	$scope.tShirtSizes = conf.tSizes;
-	$scope.schoolLevels = $scope.isKiso ? conf.schoolLevels_Kiso : conf.schoolLevels;
+	$scope.schoolLevels = $scope.getSchoolLevels();
 	$scope.cityChild = PlatformSvc.getDefaultCity();
 	$scope.schoolChild = $scope.schoolLevels.length > 0 ? $scope.schoolLevels[0].name : undefined;
 	$scope.addressChild = " ";
@@ -229,7 +239,7 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 				birthdayChild: $scope.birthdayChild,
 				schoolChild: $scope.schoolChild,
 				healthChild: $scope.healthChild,
-				addressChild: $scope.addressChild ? $scope.addressChild : 'Addresse',
+				addressChild: $scope.addressChild ? $scope.addressChild : 'Adresse',
 				cityChild: $scope.cityChildOther ? $scope.cityChildOther : $scope.cityChild,
 				tShirtSize: $scope.tShirtSize,
 				hasOwnEBike: $scope.hasOwnEBike,

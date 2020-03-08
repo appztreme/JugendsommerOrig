@@ -110,7 +110,7 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 	$scope.clearWaitSelection = function() {
 		$scope.waitlistFilter = undefined;
 		$scope.registrations = undefined;
-		$scope.emails = undefinec;
+		$scope.emails = undefined;
 	}
 
 	$scope.clearReceiptSelection = function() {

@@ -142,7 +142,7 @@
 			<th>Nachname
 				<div ng-show="isBatchUpdateAllowed()" class="input-group"><input type="text" class="form-control" style="min-width: 45px" ng-model="masterLastNameChild" /><div class="input-group-btn"><button type="button" class="btn btn-success" ng-click="updateBatchProperty('lastNameChild', masterLastNameChild)">U</button></div></div>
 			</th>
-			<th>EbK</th>
+			<!-- <th>EbK</th> -->
 			<th ng-show='activityIdFilter'>Warteliste</th>
 			<th ng-show='activityIdFilter'>Prio &uarr;</th>
 			<th ng-show='activityIdFilter'>Prio &darr;</th>
@@ -160,10 +160,10 @@
 			<th>Schulstufe
 				<div ng-show="isBatchUpdateAllowed()" class="input-group"><input type="text" class="form-control" style="min-width: 45px" ng-model="masterSchoolChild" /><div class="input-group-btn"><button type="button" class="btn btn-success" ng-click="updateBatchProperty('schoolChild', masterSchoolChild)">U</button></div></div>
 			</th>
-			<th>Gesundheit
+			<!-- <th>Gesundheit
 				<div ng-show="isBatchUpdateAllowed()" class="input-group"><input type="text" class="form-control" style="min-width: 45px" ng-model="masterHealthChild" /><div class="input-group-btn"><button type="button" class="btn btn-success" ng-click="updateBatchProperty('healthChild', masterHealthChild)">U</button></div></div>
-			</th>
-			<th>Adresse
+			</th> -->
+			<th ng-show='!platform.isJugendsommer()'>Adresse
 				<div ng-show="isBatchUpdateAllowed()" class="input-group"><input type="text" class="form-control" style="min-width: 45px" ng-model="masterAddressChild" /><div class="input-group-btn"><button type="button" class="btn btn-success" ng-click="updateBatchProperty('addressChild', masterAddressChild)">U</button></div></div>
 			</th>
 			<th>Wohnort</th>
@@ -208,7 +208,7 @@
 			<td>{{reg.activityId.name}}</td>
 			<td>{{reg.firstNameChild.toUpperCase()}}</td>
 			<td>{{reg.lastNameChild.toUpperCase()}}</td>
-			<td>{{formatBool(reg.needsEbK)}}</td>
+			<!-- <td>{{formatBool(reg.needsEbK)}}</td> -->
 			<td ng-show='activityIdFilter' ng-class='{"bg-warning": isOnWait(reg), "bg-success": !isOnWait(reg)}'>{{formatBool(isOnWait(reg))}}</td>
 			<td ng-show='activityIdFilter'><input type='checkbox' ng-model='reg.isPrioUp'   ng-change='updateProperty(reg._id, "isPrioUp",   reg.isPrioUp)' style='margin-right:8px'>{{formatBool(reg.isPrioUp)}}</td>
 			<td ng-show='activityIdFilter'><input type='checkbox' ng-model='reg.isPrioDown' ng-change='updateProperty(reg._id, "isPrioDown", reg.isPrioDown)' style='margin-right:8px'>{{formatBool(reg.isPrioDown)}}</td>
@@ -220,8 +220,8 @@
 			<td ng-show='platform.isKiso()'>{{formatBool(reg.isSiblingReservation)}}</td>
 			<td>{{reg.birthdayChild | date: 'dd/MM/yyyy'}}</td>
 			<td>{{reg.schoolChild}}</td>
-			<td>{{reg.healthChild}}</td>
-			<td>{{reg.addressChild}}</td>
+			<!-- <td>{{reg.healthChild}}</td> -->
+			<td ng-show="!platform.isJugendsommer()">{{reg.addressChild}}</td>
 			<td>{{reg.cityChild}}</td>
 			<td>{{reg.firstNameParent}}</td>
 			<td>{{reg.lastNameParent}}</td>
@@ -262,7 +262,7 @@
 			<th>Betrag</th>
 			<th>Geburtstag</th>
 			<th>Schulstufe</th>
-			<th>Gesundheit</th>
+			<!-- <th>Gesundheit</th> -->
 			<th>Adresse</th>
 			<th>Wohnort</th>
 			<th>Vorname Eltern</th>
@@ -295,7 +295,7 @@
 			<td align="right">{{calculateFee(reg)}}</td>
 			<td>{{reg.birthdayChild | date: 'dd/MM/yyyy'}}</td>
 			<td>{{reg.schoolChild}}</td>
-			<td>{{reg.healthChild}}</td>
+			<!-- <td>{{reg.healthChild}}</td> -->
 			<td>{{reg.addressChild}}</td>
 			<td>{{reg.cityChild}}</td>
 			<td>{{reg.firstNameParent}}</td>
@@ -323,15 +323,12 @@
 				<th>Woche</th>
 				<th>Vorname</th>
 				<th>Nachname</th>
-				<th>EbK</th>
 				<th>Einzahlung</th>
 				<th>Benachrichtigt</th>
 				<th>RechnungsNr</th>
 				<th>Betrag</th>
 				<th>Geburtstag</th>
 				<th>Schulstufe</th>
-				<th>Gesundheit</th>
-				<th>Adresse</th>
 				<th>Wohnort</th>
 				<th>Vorname Eltern</th>
 				<th>Nachname Eltern</th>
@@ -351,15 +348,12 @@
 				<td>{{reg.activityId.name}}</td>
 				<td>{{reg.firstNameChild}}</td>
 				<td>{{reg.lastNameChild}}</td>
-				<td>{{formatBool(reg.needsEbK)}}</td>
 				<td ng-class='{"bg-success": reg.isPaymentDone, "bg-danger": !reg.isPaymentDone}'><input type='checkbox' ng-model='reg.isPaymentDone' ng-change='updateIsPaymentDone(reg._id, reg.isPaymentDone)' style='margin-right:8px' />{{formatBool(reg.isPaymentDone)}}</td>
 				<td ng-class='{"bg-success": reg.isEmailNotified, "bg-danger": !reg.isEmailNotified}'><input type='checkbox' ng-model='reg.isEmailNotified' ng-change='updateIsEmailNotified(reg._id, reg.isEmailNotified)' style='margin-right:8px' />{{formatBool(reg.isEmailNotified)}}</td>
 				<td>{{reg.receiptNumber}}</td>
 				<td align="right">{{calculateFee(reg)}}</td>
 				<td>{{reg.birthdayChild | date: 'dd/MM/yyyy'}}</td>
 				<td>{{reg.schoolChild}}</td>
-				<td>{{reg.healthChild}}</td>
-				<td>{{reg.addressChild}}</td>
 				<td>{{reg.cityChild}}</td>
 				<td>{{reg.firstNameParent}}</td>
 				<td>{{reg.lastNameParent}}</td>
