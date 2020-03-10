@@ -3,8 +3,12 @@ const chalk = require('chalk');
 
 const main = async() => {
 
-    const reg = await Registration.findOne();
-    reg.save();
+    const registrations = await Registration.find();
+    for(let i = 0; i < registrations.length; i++) {
+        registrations[i].save();
+    }
+    //reg.save();
+    console.log(chalk.green(Done));
 
     process.exit(1);
 }
