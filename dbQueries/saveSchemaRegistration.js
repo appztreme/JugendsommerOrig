@@ -5,5 +5,8 @@ const main = async() => {
 
     const reg = await Registration.findOne();
     reg.save();
-    
+
+    process.exit(1);
 }
+
+main();
