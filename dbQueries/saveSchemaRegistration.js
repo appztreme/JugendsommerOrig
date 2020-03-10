@@ -4,11 +4,15 @@ const chalk = require('chalk');
 const main = async() => {
 
     const registrations = await Registration.find();
+    try {
     for(let i = 0; i < registrations.length; i++) {
         const reg = registrations[i];
         reg.isPrioUp = false;
         reg.isPrioDown = false;
         reg.save();
+    }
+    } catch(err) {
+        console.log(chalk.red(err));
     }
     //reg.save();
     console.log(chalk.green("Done"));
