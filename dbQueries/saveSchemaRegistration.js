@@ -8,7 +8,7 @@ const main = async() => {
         registrations[i].save();
     }
     //reg.save();
-    console.log(chalk.green(Done));
+    console.log(chalk.green("Done"));
 
     process.exit(1);
 }
