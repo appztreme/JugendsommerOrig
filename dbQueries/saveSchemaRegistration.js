@@ -3,12 +3,13 @@ const chalk = require('chalk');
 
 const main = async() => {
 
-    const registrations = await Registration.find();
+    const registrations = await Registration.find().exec();
     try {
     for(let i = 0; i < registrations.length; i++) {
         const reg = registrations[i];
         reg.isPrioUp = false;
         reg.isPrioDown = false;
+        console.log(chalk.red(reg.isPrioUp))
         reg.save();
     }
     } catch(err) {
