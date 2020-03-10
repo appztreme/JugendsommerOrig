@@ -3,7 +3,8 @@ const auth = require('./authentication');
 const router = require('express').Router();
 const RegistrationController = require('./../controller/registrationCtrl');
 
-router.get('/', auth.requiresOneRoleOutOf(["admin", "fadmin", "ladmin"]), RegistrationController.find);
+//router.get('/', auth.requiresOneRoleOutOf(["admin", "fadmin", "ladmin"]), RegistrationController.find);
+router.get('/', RegistrationController.find);
 
 router.get('/selectableEventActivities', RegistrationController.getSelectableEventActivities);
 
