@@ -53,7 +53,7 @@ var registrationSchema = db.Schema({
   acceptsMediaPublication: { type: Boolean, required: true, default: false },
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: false },
   isPrioUp: { type: Boolean, required: true, default: false },
-  isPrioDown: { type: Boolean, required: true, default: false }
+  isPrioDown: { type: Boolean, required: true, default: false },
 });
 
 registrationSchema.index({firstNameChild: 1, lastNameChild: 1, activityId: 1}, {unique: true});
