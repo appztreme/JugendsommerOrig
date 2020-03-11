@@ -9,7 +9,6 @@ module.exports = function()
     passport.use('local', new LocalStrategy(
 			function(username, password, done) {
 				User.findOne({userName: username}).exec(function(err, user) {
-					console.log("auth:", user)
 					if(user && user.authenticate(password)) {
 						return done(null, user);
 					} else {
