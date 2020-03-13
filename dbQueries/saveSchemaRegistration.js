@@ -4,6 +4,7 @@ const chalk = require('chalk');
 const main = async() => {
 
     const registrations = await Registration.find().exec();
+    console.log(chalk.green("number registrations:", registrations.length));
     try {
     for(let i = 0; i < registrations.length; i++) {
         const reg = registrations[i];

@@ -27,6 +27,7 @@ module.exports = function()
     passport.deserializeUser(function(id, done) {
 	    User.findOne({_id: id}).exec(function(err, user) {
 		    if(user) {
+				console.log("passport: ", user);
 			    return done(null, user);
 		    } else {
 			    return  done(null, false);
