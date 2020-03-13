@@ -10,8 +10,8 @@ const main = async() => {
         const reg = registrations[i];
         reg.isPrioUp = false;
         reg.isPrioDown = false;
-        console.log(chalk.red(reg.isPrioUp))
-        reg.save();
+        //console.log(chalk.red(reg.isPrioUp))
+        await reg.save();
     }
     } catch(err) {
         console.log(chalk.red(err));
