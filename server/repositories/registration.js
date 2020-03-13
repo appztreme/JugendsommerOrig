@@ -67,8 +67,8 @@ exports.filter = (year, name, firstname, receiptNr, activityId, activityIds, cit
         .where('registrationDate').gte(minDate).lte(maxDate)
         .populate({path:'activityId', populate:{path:'eventId'}})
         .populate({path:'userId'})
-        //.sort({ activityId: 1, isPrioUp: -1, isPrioDown: 1, registrationDate: 1, lastNameChild: 1, firstNameChild: 1})
-        .sort({activityId: 1, registrationDate: 1, lastNameChild: 1, firstNameChild: 1})
+        .sort({ activityId: 1, isPrioUp: -1, isPrioDown: 1, registrationDate: 1, lastNameChild: 1, firstNameChild: 1})
+        //.sort({activityId: 1, registrationDate: 1, lastNameChild: 1, firstNameChild: 1})
 		.exec();
 }
 
