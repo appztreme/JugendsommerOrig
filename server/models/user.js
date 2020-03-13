@@ -6,7 +6,7 @@ var userSchema = db.Schema({
 		firstName: { type: String, required: true },
 		lastName: { type: String, required: true },
     	userTel: { type: String, required: true },
-		userEmail: { type: String, required: true },
+		userEmail: { type: String, required: true, default: 'info@jugenddienst.com' },
 		userName: { type: String, required: true },
     	hashedPassword: { type: String, required: true },
     	salt: { type: String },
