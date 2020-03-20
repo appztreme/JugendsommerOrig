@@ -262,7 +262,6 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 		$scope.allActivities = ReportCacheSvc.allActivities;
 	} else {
 		RegistrationSvc.getSelectionParams().success(function(params) {
-			console.log("PARAMS:", params);
 			$scope.events = _.uniq(_.map(params, function(p) {
 				return {
 					_id: p.eventId._id,
