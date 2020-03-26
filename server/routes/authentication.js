@@ -14,13 +14,13 @@ function authenticate(req, res, next) {
 }
 
 function requiresApiLogin(req, res, next) {
-  // next();
-  if(!req.isAuthenticated()) {
-    res.status(403);
-    res.end();
-  } else {
-    next();
-  }
+  next();
+  // if(!req.isAuthenticated()) {
+  //   res.status(403);
+  //   res.end();
+  // } else {
+  //   next();
+  // }
 }
 
 let getPlainRoles = (roles) => {
@@ -38,25 +38,25 @@ let getPlainRoles = (roles) => {
 
 function requiresRole(role) {
     return (req, res, next) => {
-        if(!req.isAuthenticated() || getPlainRoles(req.user.roles).indexOf(role) === -1) {
-          res.status(403);
-          res.end();
-        } else { next(); }
-    //next();
+    //     if(!req.isAuthenticated() || getPlainRoles(req.user.roles).indexOf(role) === -1) {
+    //       res.status(403);
+    //       res.end();
+    //     } else { next(); }
+      next();
     }
 }
 
 function requiresOneRoleOutOf(roles) {
     return (req, res, next) => {
-      //next();
-      let hasRole = false;
-      roles.forEach(r => {
-        if(getPlainRoles(req.user.roles).indexOf(r) !== -1) hasRole = true;
-      });
-      if(!req.isAuthenticated() || !hasRole) {
-        res.status(403);
-        res.end();
-      } else { next(); }
+      next();
+      // let hasRole = false;
+      // roles.forEach(r => {
+      //   if(getPlainRoles(req.user.roles).indexOf(r) !== -1) hasRole = true;
+      // });
+      // if(!req.isAuthenticated() || !hasRole) {
+      //   res.status(403);
+      //   res.end();
+      // } else { next(); }
     }
 }
 
