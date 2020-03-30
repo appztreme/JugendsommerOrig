@@ -35,7 +35,7 @@ app.controller('ReportOverviewCtrl', function($scope, $location, $route, Registr
 				// UPDATE
 				var outputIndex = $scope.indexOfArray(output, fullName, r.activityId.eventId._id);
 				if(outputIndex > -1) {
-					output[outputIndex][r.activityId.name] = true;
+					output[outputIndex][r.activityId.name] = { participate: true, paied: r.isPaymentDone };
 					output[outputIndex]["fee"] += $scope.calculateFee(r);
 					output[outputIndex]["paied"] = r.isPaymentDone && output[outputIndex]["paied"]; 
 				}
@@ -66,16 +66,16 @@ app.controller('ReportOverviewCtrl', function($scope, $location, $route, Registr
 				}
 				var activities = $scope.getActivitiesForEvent(r.activityId.eventId._id);
 				for(var j=0; j < activities.length; j++) {
-					entry[activities[j].name] = false;
+					entry[activities[j].name] = { participate: false, paied: false};
 					if(activityNames.indexOf(activities[j].name) === -1) activityNames.push(activities[j].name);
 				}
-				entry[r.activityId.name] = true;
+				entry[r.activityId.name] = { participate: true, paied: r.isPaymentDone };
 				nameIndex.push(fullName);
 				output.push(entry);
 			}
 		}
 		$scope.activityNames = activityNames;
-		console.log("output", $scope.activityNames, activityNames);
+		//console.log("output", output);
 		return output;
 	}
 

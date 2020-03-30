@@ -73,10 +73,10 @@
 				<td>{{reg.firstNameUser}}</td>
 				<td>{{reg.lastNameUser}}</td>
 				<td>{{reg.fee}}</td>
-				<td>{{formatBool(reg.paied)}}</td>
+				<td ng-class='{"bg-success": reg.paied, "bg-danger": !reg.paied}'>{{formatBool(reg.paied)}}</td>
 				<td>{{reg.commentInternal}}</td>
-				<td ng-repeat='a in activityNames'>
-					{{formatBoolToSymbol(reg[a])}}
+				<td ng-repeat='a in activityNames' ng-class='{"bg-success": reg[a].paied}'>
+					{{formatBoolToSymbol(reg[a].participate)}}
 				</td>
 			</tr>
 		</tbody>
