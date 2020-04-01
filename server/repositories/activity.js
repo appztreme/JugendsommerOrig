@@ -28,6 +28,12 @@ exports.getActivityIdsForEvent = (eventId) => {
 			.exec();
 }
 
+exports.getActivitiesForEvent = (eventId) => {
+	return Activity.find()
+			.where('eventId').equals(eventId)
+			.exec();
+}
+
 exports.findById = (id) => {
 	console.log("findbyid")
     return Activity.findById(id).exec();

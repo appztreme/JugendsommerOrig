@@ -18,6 +18,15 @@ app.service('RegistrationSvc', function($http) {
 		return $http.get(path, { params: params });
 	};
 
+	this.overview = function(eventId, activityId, year) {
+		var path = '/api/registrations/overview';
+		var params = {};
+		if(!angular.isUndefined(eventId) && angular.isUndefined(activityId)) params.eventId = eventId;
+		if(!angular.isUndefined(activityId)) params.activityId = activityId;
+		if(!angular.isUndefined(year)) params.year = year;
+		return $http.get(path, { params: params });
+	}
+
 	this.findActivitiesByEventId = function(eventId) {
 		return $http.get('/api/activities', { params: { eventId: eventId }});
 	};

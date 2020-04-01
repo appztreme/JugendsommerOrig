@@ -9,6 +9,7 @@ const SequenceRepo = require('./../repositories/sequence');
 const mail = require('./mail');
 const platform = require('./platform');
 const mongoose = require('mongoose');
+const moment = require('moment');
 
 const curYear = new Date().getFullYear();
 const startCurYear = new Date(curYear,1,1);
@@ -25,6 +26,95 @@ exports.find = async(req, res, next) => {
 	}
 	catch(err) { next(err); }
 };
+
+const calculateFee = reg => {
+	var fee = reg.activityId.eventId.feePerWeek;
+	if(reg.acceptsOptionalFee) {
+		fee = fee + reg.activityId.eventId.optionalFeePerWeek;
+	}
+	if(reg.isSiblingReservation) {
+		fee = fee - reg.activityId.eventId.siblingDiscount;
+	}
+	if(reg.activityId.eventId.deadline) {
+		if((moment(reg.activityId.eventId.deadline).hour(23).minute(59).second(59)).isBefore(moment(reg.registrationDate))) fee = fee + reg.activityId.eventId.penalty;	
+	}
+	return fee;
+}
+
+const indexOfArray = (array, fullName, eventId) => {
+	for(var i=0; i < array.length; i++) {
+		if(array[i].fullName === fullName && array[i].eventId === eventId) return i;
+	}
+	return -1;
+}
+
+const aggregateOverviewStructure = async (regs) => {
+	var output = [];
+	var nameIndex = [];
+	var activityNames = [];
+
+	for(var i=0; i < regs.length; i++) {
+		var r = regs[i];
+		var fullName = r.lastNameChild + ' ' + r.firstNameChild + ' ' + r.activityId.eventId._id;
+		if(nameIndex.indexOf(fullName) > -1) {
+			// UPDATE
+			var outputIndex = indexOfArray(output, fullName, r.activityId.eventId._id);
+			if(outputIndex > -1) {
+				output[outputIndex][r.activityId.name] = { participate: true, paied: r.isPaymentDone };
+				output[outputIndex]["fee"] += calculateFee(r);
+				output[outputIndex]["paied"] = r.isPaymentDone && output[outputIndex]["paied"]; 
+			}
+
+		} else {
+			// INSERT
+			var entry = {
+				"event": r.activityId.eventId.location + ' - ' + r.activityId.eventId.name,
+				"eventId": r.activityId.eventId._id,
+				"firstNameChild": r.firstNameChild,
+				"lastNameChild": r.lastNameChild,
+				"fullName": fullName,
+				"birthdayChild": r.birthdayChild,
+				"schoolChild": r.schoolChild,
+				"addressChild": r.addressChild,
+				"cityChild": r.cityChild,
+				"phoneNumberParent": r.phoneNumberParent,
+				"emailParent": r.emailParent,
+				"healthChild": r.healthChild,
+				"canSwim": r.canSwim,
+				"needsEbK": r.needsEbK,
+				"canGoHomeAllone": r.canGoHomeAllone,
+				"firstNameUser": r.userId.firstName,
+				"lastNameUser": r.userId.lastName,
+				"fee": calculateFee(r),
+				"paied": r.isPaymentDone,
+				"commentInternal": r.commentInternal
+			}
+			var activities = await ActivityRepo.getActivitiesForEvent(r.activityId.eventId._id);
+			for(var j=0; j < activities.length; j++) {
+				entry[activities[j].name] = { participate: false, paied: false};
+				if(activityNames.indexOf(activities[j].name) === -1) activityNames.push(activities[j].name);
+			}
+			entry[r.activityId.name] = { participate: true, paied: r.isPaymentDone };
+			nameIndex.push(fullName);
+			output.push(entry);
+		}
+	}
+	return { activityNames: activityNames, registrations: output};
+}
+
+exports.overview = async(req, res, next) => {
+	try {
+		let activityIds = undefined;
+		if(req.query.eventId) {
+			let ids = await ActivityRepo.getActivityIdsForEvent(req.query.eventId);
+			activityIds = ids.map(function(v,i) { return v._id; });
+		}
+		let result = await RegistrationRepo.filter(req.query.year, null, null, null, req.query.activityId, activityIds, null);
+		result = await aggregateOverviewStructure(result);
+		res.json(result);
+	}
+	catch(err) { next(err); }
+}
 
 exports.getSelectableEventActivities = async(req, res, next) => {
 	try {
@@ -55,8 +145,6 @@ exports.delete = (req, res, next) => {
 exports.create = async(req, res, next) => {
 	var regs = [];
 	for (var i = 0; i < req.body.activityId.length; i++) {
-		//console.log('ebk', req.body.needsEbK)
-		//console.log('birthdayChild', req.body.birthdayChild)
 		var reg = new Registration({
 			firstNameParent: req.body.firstNameParent,
 			lastNameParent: req.body.lastNameParent,
@@ -220,10 +308,8 @@ exports.sendPaymentMail = async(req, res, next) => {
 			for(let email of emailsUnique) {
 				var sentWithError = false;
 				let registrationsPerMail = registrationsWithoutQueue.filter(reg => reg.emailParent === email && reg.isEmailNotified === false);
-				//console.log("email", email, registrationsPerMail.length);
 				if(registrationsPerMail.length === 0) continue;
 				let receiptNr = await SequenceRepo.nextReceipt();
-				//console.log("receipt number", receiptNr);
 				mail.sendReceiptMail(email, registrationsPerMail, receiptNr.seq, instance);
 			}
 		}
@@ -264,7 +350,6 @@ exports.getChildrenPerEvent = async(req, res, next) => {
 			let children = registrationsWithoutQueue.map(function(v,i) { return {firstName: v.firstNameChild, lastName: v.lastNameChild, birthday: v.birthdayChild }; });
 			childrenUnique = [...new Set(children)];
 			childrenUnique.sort((a,b) => a.lastName < b.lastName);
-			//console.log(childrenUniqueSorted);
 		}
 	
 		res.status(200).json(childrenUnique);
@@ -303,7 +388,6 @@ exports.sendConfirmationMail = async(req, res, next) => {
 			var instance = platform.getPlatform(req.get('host'));
 			for(let email of emailsUnique) {
 				let registrationsPerMail = registrationsWithoutQueue.filter(reg => reg.emailParent === email && reg.isPaymentDone);
-				//console.log("email", email, registrationsPerMail.length);
 				if(registrationsPerMail.length === 0) continue;
 				try {
 					console.log("INFO: try starting sending confirmation mail");
