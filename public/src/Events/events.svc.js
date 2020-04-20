@@ -87,6 +87,14 @@ app.service('EventsSvc', function($http) {
 		return $http.post('/api/contact/', c);
 	}
 
+	this.updateContact = function(cid, phone, email) {
+		return $http.put('/api/contact/', {
+			id: cid,
+			phoneNumber: phone,
+			email: email
+		});
+	}
+
 	this.sendReceiptEmail = function(eventId) {
 		return $http.get('/api/registrations/send/receipts/' + eventId);
 	}

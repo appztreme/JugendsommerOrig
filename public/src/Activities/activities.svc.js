@@ -40,4 +40,12 @@ app.service('ActivitiesSvc', function($http) {
 	this.createContact = function(c) {
 		return $http.post('/api/contact/', c);
 	}
+
+	this.updateContact = function(cid, phone, email) {
+		return $http.put('/api/contact/', {
+			id: cid,
+			phoneNumber: phone,
+			email: email
+		});
+	}
 });

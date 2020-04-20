@@ -11,16 +11,16 @@ exports.create = async(req, res, next) => {
 }
 
 exports.update = async(req, res, next) => {
+    console.log(req.body);
     try {
         let cOrig = await contactRepo.findById(req.body.id);
-        cOrig.firstName = req.body.firstName;
-        cOrig.lastName = req.body.lastName;
+        console.log(cOrig);
         cOrig.email = req.body.email;
         cOrig.phoneNumber = req.body.phoneNumber;
         let cNew = await cOrig.save();
         res.json(cNew);
     }
-    catch(err) { next(err); }
+    catch(err) { console.log(err); next(err); }
 }
 
 exports.findById = async(req, res, next) => {

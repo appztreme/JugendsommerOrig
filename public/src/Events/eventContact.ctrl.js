@@ -2,7 +2,24 @@ var app = angular.module('js');
 
 app.controller('EventContactCtrl', function($scope, $routeParams, $route, $location, NotificationSvc, EventsSvc) {
 
-	$scope.title = 'Kontakte verwalten';
+    $scope.title = 'Kontakte verwalten';
+    
+    $scope.inlineEdit = false;
+
+    $scope.toggleInlineEdit = function() {
+        $scope.inlineEdit = !$scope.inlineEdit;
+    }
+
+    $scope.updateContact = function(contact) {
+        EventsSvc.updateContact(contact._id, contact.phoneNumber, contact.email)
+            .success(function(ev) {
+                    NotificationSvc.notify("Kontakt wurde erfolgreich geändert");
+                    $route.reload();
+            })
+            .error(function(errC) {
+                NotificationSvc.warn("Kontakt konnte nicht geändert werden");
+            });
+    }
 
     $scope.options = {
         shadowInput: false,

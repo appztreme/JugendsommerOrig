@@ -7,8 +7,7 @@ const curYear = new Date().getFullYear();
 const startCurYear = new Date(curYear+"-1-1");
 
 exports.findById = (id) => {
-    return Contact.findById(id)
-			.exec();
+    return Contact.findById(id).exec();
 }
 
 exports.findAll = () => {
