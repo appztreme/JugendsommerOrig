@@ -151,6 +151,7 @@
 				<div ng-show="isBatchUpdateAllowed()"><input type="checkbox" ng-checked="masterIsPaymentDone" ng-model="masterIsPaymentDone" ng-change="batchUpdateIsPaymentDone()" /></div>
 			</th>
 			<th>Benachrichtigt</th>
+			<th>Refundiert</th>
 			<th>RechnungsNr</th>
 			<th>Betrag</th>
 			<th ng-show='platform.isKiso()'>Aufpreis</th>
@@ -218,6 +219,7 @@
 			<td ng-show='activityIdFilter'><input type='checkbox' ng-model='reg.isPrioDown' ng-change='updateProperty(reg._id, "isPrioDown", reg.isPrioDown)' style='margin-right:8px'>{{formatBool(reg.isPrioDown)}}</td>
 			<td ng-class='{"bg-success": reg.isPaymentDone, "bg-danger": !reg.isPaymentDone}'><input type='checkbox' ng-model='reg.isPaymentDone' ng-change='updateIsPaymentDone(reg._id, reg.isPaymentDone)' style='margin-right:8px' />{{formatBool(reg.isPaymentDone)}}</td>
 			<td ng-class='{"bg-success": reg.isEmailNotified, "bg-danger": !reg.isEmailNotified}'><input type='checkbox' ng-model='reg.isEmailNotified' ng-change='updateIsEmailNotified(reg._id, reg.isEmailNotified)' style='margin-right:8px' />{{formatBool(reg.isEmailNotified)}}</td>
+			<td><input type='checkbox' ng-model='reg.isRefunded' style='margin-right:8px' ng-change='updateProperty(reg._id, "isRefunded", reg.isRefunded)' />{{formatBool(reg.isRefunded)}}</td>
 			<td>{{reg.receiptNumber}}</td>
 			<td align="right">{{calculateFee(reg)}}</td>
 			<td ng-show='platform.isKiso()'>{{formatBool(reg.acceptsOptionalFee)}}</td>

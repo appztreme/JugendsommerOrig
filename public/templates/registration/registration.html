@@ -207,6 +207,13 @@
 						<div ng-show='platform.isJDUL() || platform.isTest()' class='col-sm-offset-2 col-sm-10'>
 							<input type='checkbox' name='canGoHomeAllone' ng-model='canGoHomeAllone'><strong>  {{"RESERVATION.LABEL_CANGOHOME_CHILD" | translate}}</input>
 						</div>
+						<!-- PREFERREDFELLOW -->
+						<div ng-show='platform.isJugendsommer()' class='form-group' ng-class='{ "has-error": registrationForm.preferredFellow.$invalid }'>
+							<label for='preferredFellow' class='control-label col-sm-2'>{{"RESERVATION.LABEL_PREFERRED_FELLOW" | translate}}</label>
+							<div class='col-sm-8'>
+								<input name='preferredFellow' type='text' ng-model='preferredFellow' class='form-control' maxlenght='100'></input>
+							</div>
+						</div>
 						<!-- NEEDSPRECARE -->
 						<!-- <div ng-show='!isKiso && (type === "summer" || type === "music")' class='col-sm-offset-2 col-sm4'>
 										<input type='checkbox' name='needsPreCare' ng-model='needsPreCare'><strong>{{"RESERVATION.LABEL_PRECARE_CHILD" | translate}}</input>

@@ -268,6 +268,7 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 				acceptsOptionalFee: $scope.acceptsOptionalFee,
 				acceptsMediaPublication: $scope.acceptsMediaPublication,
 				acceptsNewsletter: $scope.acceptsNewsletter,
+				preferredFellow: $scope.preferredFellow,
 				type: $scope.type
 			})
 			.error(function(err) {
@@ -319,6 +320,7 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 				$scope.canGoHomeAllone = false;
 				$scope.selectedActivities = [];
 				$scope.currentState = 1;
+				$scope.preferredFellow = '';
 				RegistrationCacheSvc.lastRegistration = reg[0];
 				RegistrationCacheSvc.currentRegistration = undefined;
 				// console.log("last", RegistrationCacheSvc.lastRegistration, reg)

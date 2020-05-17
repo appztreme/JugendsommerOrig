@@ -39,8 +39,8 @@
 	<div cg-Busy='{promise:busyPromise,message:"Loading",backdrop:true,minDuration:500}'></div>
 
 	<ul class='list-group'>
-		<li ng-repeat='event in events' class='list-group-item'>
-		<div class='row'>
+		<li ng-repeat='event in events' class='list-group-item' ng-class='{ "bg-gray": event.isInternal }'>
+		<div class='row' >
 				<div class='col-sm-1'>
 					<div class='btn-main' ng-show="!platform.isJDUL()">
 					<a href='/#/activities/{{event._id}}?type={{event.type}' role='button'>

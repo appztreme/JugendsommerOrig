@@ -217,7 +217,8 @@
             "MSG_SUCCESS": "Anmeldung erfolgreich gespeichert",
             "MSG_NO_DUPLICATES": "Doppelte Anmeldungen pro Veranstaltung sind nicht möglich",
             "MSG_ERROR": "Bei Ihrer Anmeldung ist ein Problem aufgetreten. Bitte Loggen Sie sich im System neu ein.",
-            "MSG_FORM_NOT_VALID": "Das Formular enthält nicht valide Einträge"
+            "MSG_FORM_NOT_VALID": "Das Formular enthält nicht valide Einträge",
+            "LABEL_PREFERRED_FELLOW": "Wunsch-Freund(in)"
         },
         "MYRESERVATION": {
             "TITLE": "Reservierungen",
@@ -404,7 +405,8 @@
             "MSG_SUCCESS": "Iscrizione salvata con successo",
             "MSG_NO_DUPLICATES": "Non sono possibili iscrizione doppie per la stessa settimana",
             "MSG_ERROR": "Si è verificato un problema durante l'accesso. Si prega di effetturare nuovamente l'accesso.",
-            "MSG_FORM_NOT_VALID": "Il modulo non contiene voci valide"
+            "MSG_FORM_NOT_VALID": "Il modulo non contiene voci valide",
+            "LABEL_PREFERRED_FELLOW": "Wunsch-Freund(in)"
         },
         "MYRESERVATION": {
             "TITLE": "Prenotazioni",

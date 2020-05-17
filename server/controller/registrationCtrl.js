@@ -184,6 +184,7 @@ exports.create = async(req, res, next) => {
 			acceptsNewsletter: req.body.acceptsNewsletter,
 			acceptsMediaPublication: req.body.acceptsMediaPublication,
 			commentInternal: req.body.commentInternal,
+			preferredFellow: req.body.preferredFellow,
 			userId: req.body.userId
 		});
 		regs.push(reg);	
@@ -249,6 +250,7 @@ exports.update = (req, res, next) => {
 		reg.acceptsOptionalFee = req.body.acceptsOptionalFee;
 		reg.isSiblingReservation = req.body.isSiblingReservation;
 		reg.commentInternal = req.body.commentInternal;
+		reg.preferredFellow = req.body.preferredFellow;
 		reg.save(function(err, regDb) {
 			if(err) { console.log(err); return next(err); }
 			res.status(201).json(regDb);
