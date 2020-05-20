@@ -3,7 +3,7 @@ const pdf = require('pdfkit');
 const fs = require('fs');
 
 var htmlStart = "<html><body><p>Die Anmeldung f&uuml;r ";
-var htmlEnd = " f&uuml;r die Sommerprogramme des Jugenddienstes Bozen-Land war <strong>erfolgreich</strong>.</p><p style='color:#ffa500'><strong>Einzahlungsschein wird im M&auml;rz mittels Email zugesandt.</strong></p><p>Vielen Dank f&uuml;r die Anmeldung.</p><h3>Zusammenfassung:</h3>";
+var htmlEnd = " f&uuml;r die Sommerprogramme des Jugenddienstes Bozen-Land war <strong>erfolgreich</strong>.</p><p style='color:#ffa500'><strong>Einzahlungsschein wird in den nächsten Tagen mittels Email zugesandt.</strong></p><p>Vielen Dank f&uuml;r die Anmeldung.</p><h3>Zusammenfassung:</h3>";
 var htmlClose = "</body></html>";
 
 var htmlStartWait = "<html><body><p>Die Anmeldung f&uuml;r ";
@@ -14,7 +14,7 @@ var htmlSpiritnight = "<html><body><p><strong>Vielen Dank</strong> f&uuml;r die 
 var txtSpiritnight = "Vielen Dank für die Teilnahme an der SpiritNight 2020! Bitte bestätigen Sie die Anmeldung bis zum 31.03.2020 mit einer gesammelten Überweisung für die gesamte Pfarrei. Die Gesamtsumme kann an folgende Konten überwiesen werden: Südtiroler Volksbank IBAN: IT42C0585658220070571084313 SWIFT/BIC: BPAAIT2BBRE; Südtiroler Sparkasse IBAN: IT62J0604558220000000078000 SWIFT/BIC: CRBZIT2B050; Raiffeisenkasse Eisacktal IBAN: IT95Y0830759090000301223658 SWIFT/BIC: RZSBIT21107 Bitte geben Sie bei der Überweisung 'Spiritnight 2017 / Name der Pfarrei' an.";
 
 var txtStart = "Die Anmeldung für ";
-var txtEnd = " für die Sommerprogramme des Jugenddienstes Bozen-Land war erfolgreich. Einzahlungsschein wird im März mittels Email zugesandt.\r\nVielen Dank für die Anmeldung.";
+var txtEnd = " für die Sommerprogramme des Jugenddienstes Bozen-Land war erfolgreich. Einzahlungsschein wird in den nächsten Tagen mittels Email zugesandt.\r\nVielen Dank für die Anmeldung.";
 var txtStartWait = "Die Anmeldung für ";
 var txtEndWait = " für die Sommerprogramme des Jugenddienstes Bozen-Land war erfolgreich. Momentan befindet sich die Anmeldung auf der Warteliste. Sollten Sie im März einen Einzahlungsschein mittels Mail erhalten, ist die Anmeldung definitiv.\r\nVielen Dank für die Anmeldung.";
 
@@ -350,7 +350,7 @@ function getReceiptTable(res, rnumber) {
 		tblStart += '<tr><td style="border: 1px solid gray; padding: 2px;">' + res[i].activityId.eventId.location + ' - ' + res[i].activityId.eventId.name + '<br />' + res[i].activityId.eventId.location_it + ' - ' + res[i].activityId.eventId.name_it + '</td><td style="border: 1px solid gray; padding: 2px">' + res[i].activityId.name + '<br />' + res[i].activityId.name_it + '</td><td style="border: 1px solid gray; padding: 2px;">' + res[i].firstNameChild + ' ' + res[i].lastNameChild +'</td><td style="border: 1px solid gray; padding: 2px;">' + fee + '</td></tr>';
 		//console.log("html", tblStart);
 	}
-	tblStart += '<tr><td style="border:1px solid gray; padding: 2px;"><strong>Summe | somma in €</strong></td><td style="border: 1px solid gray;"></td><td style="border: 1px solid gray;"></td><td style="border: 1px solid gray; padding: 2px;">' + sum + '</td></tr>'
+	tblStart += '<tr style="background-color:#ffa500"><td style="border:1px solid gray; padding: 2px;"><strong>Summe | somma in €</strong></td><td style="border: 1px solid gray;"></td><td style="border: 1px solid gray;"></td><td style="border: 1px solid gray; padding: 2px;">' + sum + '</td></tr>'
 	return tblStart + tblEnd;
 }
 
@@ -371,12 +371,14 @@ function getReservationTable(res) {
 
 function getJDBLFooter() {
 	var footer = '<table>';
+	footer += '<tr><td><strong></strong></td></tr>'
 	footer += '<tr><td><h4>Jugenddienst Bozen-Land</h4></td></tr>';
 	footer += '<tr><td>Andreas-Hoferstr. 36</td></tr>';
 	footer += '<tr><td>39100 Bozen, Südtirol/Italy</td></tr>';
 	footer += '<tr></tr>';
 	footer += '<tr><td>Telefon: 0471324753</td></tr>';
-	footer += '<tr><td>E-Mail: <a mailto="sommer@jugenddienst.com">sommer@jugenddienst.com</a></tr></td>';
+	footer += '<tr><td>E-Mail: <a mailto="jasmin@jugenddienst.com">jasmin@jugenddienst.com</a></td></tr>';
+	footer += '<tr><td>E-Mail: <a mailto="info@jugenddienst.com">info@jugenddienst.com</a></td></tr>';
 	footer += '<tr><td><a href="https://www.jdbl.it">Homepage: www.jdbl.it</a></td></tr>'
 	footer += '<tr><td>St.-Nr.: 94072680211</td></tr>';
 	footer += '<tr></tr>';
