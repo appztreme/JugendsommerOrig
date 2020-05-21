@@ -340,7 +340,7 @@ function getActivityTable(activities) {
 
 function getReceiptTable(res, rnumber) {
 	var sum = 0;
-	var tblStart = '<p>Ihre Überweisungsnummer: <strong>' + rnumber + '</strong></p>';
+	var tblStart = '<p>Ihre Einzahlungsnummer: <div style:"color:#ffa500"><strong>' + rnumber + '</strong></div></p>';
 	tblStart += '<table style="border: 1px solid gray; border-collapse: collapse"><tr><th style="border: 1px solid gray; padding: 2px;">Programm | programma</th><th style="border: 1px solid gray; padding: 2px;">Woche | settimana</th><th style="border: 1px solid gray; padding: 2px;">Name | nome</th><th style="border: 1px solid gray; padding: 2px;">Preis | prezzo in €</th></tr>';
 	var tblEnd = '</table>';
 	for(var i=0; i<res.length; i++) {
@@ -371,12 +371,13 @@ function getReservationTable(res) {
 
 function getJDBLFooter() {
 	var footer = '<table>';
-	footer += '<tr><td><strong></strong></td></tr>'
+	footer += '<tr><td><strong>Jasmin Saltuari</strong></td></tr>';
+	footer += '<tr><td><strong>Mitarbeiterin für Sommerprojekte und soziale Medien</strong></td></tr>';
 	footer += '<tr><td><h4>Jugenddienst Bozen-Land</h4></td></tr>';
 	footer += '<tr><td>Andreas-Hoferstr. 36</td></tr>';
 	footer += '<tr><td>39100 Bozen, Südtirol/Italy</td></tr>';
 	footer += '<tr></tr>';
-	footer += '<tr><td>Telefon: 0471324753</td></tr>';
+	footer += '<tr><td>Telefon: 3473340181</td></tr>';
 	footer += '<tr><td>E-Mail: <a mailto="jasmin@jugenddienst.com">jasmin@jugenddienst.com</a></td></tr>';
 	footer += '<tr><td>E-Mail: <a mailto="info@jugenddienst.com">info@jugenddienst.com</a></td></tr>';
 	footer += '<tr><td><a href="https://www.jdbl.it">Homepage: www.jdbl.it</a></td></tr>'
