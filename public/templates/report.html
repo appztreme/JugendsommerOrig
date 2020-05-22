@@ -200,6 +200,7 @@
 			<th ng-show='platform.isJugendsommer()'>eigens EBike</th>
 			<th ng-show='platform.isJugendsommer()'>Körpergröße</th>
 			<th ng-show='platform.isJugendsommer()'>Instrument</th>
+			<th ng-show='platform.isJugendsommer()'>Wunschfreund(in)</th>
 			<th>Anmeldedatum</th>
 		</tr>
 		<tr ng-repeat='reg in registrations | orderBy:[colNameSort,colNameSort2]'>
@@ -252,6 +253,7 @@
 			<td ng-show='platform.isJugendsommer()'>{{formatBool(reg.hasOwnEBike)}}</td>
 			<td ng-show='platform.isJugendsommer()'>{{reg.heightChild}}</td>
 			<td ng-show='platform.isJugendsommer()'>{{reg.instrument}}</td>
+			<td ng-show='platform.isJugendsommer()'>{{reg.preferredFellow}}</td>
 			<td>{{reg.registrationDate | date: 'dd/MM/yyyy : hh.mm.ss'}}</td>	
 		</tr>
 		<tr><td></td><td></td><td></td><td></td><td colspan='8'>Summe:</td><td align='right'>{{calculateOverallFee(registrations)}}</td><td colspan='17'></td></tr>
