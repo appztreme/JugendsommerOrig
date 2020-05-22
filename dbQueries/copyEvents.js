@@ -4,7 +4,7 @@ const chalk = require('chalk');
 
 const year = 2020;
 const verbose = true;
-const dryRun = true;
+const dryRun = false;
 
 
 const main = async() => {
