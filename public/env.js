@@ -218,7 +218,16 @@
             "MSG_NO_DUPLICATES": "Doppelte Anmeldungen pro Veranstaltung sind nicht möglich",
             "MSG_ERROR": "Bei Ihrer Anmeldung ist ein Problem aufgetreten. Bitte Loggen Sie sich im System neu ein.",
             "MSG_FORM_NOT_VALID": "Das Formular enthält nicht valide Einträge",
-            "LABEL_PREFERRED_FELLOW": "Wunsch-Freund(in)"
+            "LABEL_PREFERRED_FELLOW": "Wunsch-Freund(in)",
+            "LABEL_COVID_IS_AT_RISK": "Ich bestätige dem Jugenddienst Unterland, dass mein Kind in Bezug auf Sars-Covid-19 nicht zur Risikogruppe gehört. (Bitte klären Sie dies mit ihrem zuständigen Kinderarzt ab). Dem Jugenddienst muss keine Ärztliche Bestätigung abgegeben werden.",
+            "LABEL_COVID_SWIM": "Zum jetzigen Zeitpunkt können wir noch nicht sagen ob die Hygienebestimmungen während des Sommers Schwimmtage zulassen. Diese Info fragen wir in der Zwischenzeit denn noch ab, damit wir gegebenenfalls gleich startklar sind.",
+            "LABEL_COVID_PRIO_GENERAL1": "Wir sind bemüht allen Kindern einen Betreuungsplatz anzubieten.",
+            "LABEL_COVID_PRIO_GENERAL2": "Nur für den Fall, dass die Anmeldungen die verfügbaren Plätze aufgrund der aktuellen gesetzlichen Bestimmung überschreiten, werden Vorzugskriterien angewandt.",
+            "LABEL_COVID_PRIO_GENERAL3": "Die folgenden Kriterien wurden gemeinsam mit VertreterInnen der Unterlandler Gemeindeverwaltungen ausgearbeitet.",
+            "LABEL_COVID_PRIO_START": "Ich erkläre, dass:",
+            "LABEL_COVID_PRIO_WORK": "ich berufstätig (Homeoffice eingeschlossen!) bin und KEINE andere Möglichkeit zur Betreuung des Kindes/der Kinder durch einen zweiten Elternteil bzw. Erziehungsverantwortlichen, eine/n Partner/in oder nahe Angehörige habe.",
+            "LABEL_COVID_PRIO_SOCIAL": "eine prekäre familiäre Situation vorliegt, die vom Sozialsprengel bestätigt werden kann.",
+            "LABEL_COVID_PRIO_NONE": "Keiner der beiden oberen Punkte zutrifft."
         },
         "MYRESERVATION": {
             "TITLE": "Reservierungen",
@@ -406,7 +415,16 @@
             "MSG_NO_DUPLICATES": "Non sono possibili iscrizione doppie per la stessa settimana",
             "MSG_ERROR": "Si è verificato un problema durante l'accesso. Si prega di effetturare nuovamente l'accesso.",
             "MSG_FORM_NOT_VALID": "Il modulo non contiene voci valide",
-            "LABEL_PREFERRED_FELLOW": "Wunsch-Freund(in)"
+            "LABEL_PREFERRED_FELLOW": "Wunsch-Freund(in)",
+            "LABEL_COVID_IS_AT_RISK": "Io confermo al Jugenddienst Unterland, che mio/a figlio/a non fa parte del gruppo a rischio riguardante il Sars-Covid-19. (Consultare a riguardo il medico di famiglia). Al Jugenddienst non deve essere consegnato nessun certificato medico.",
+            "LABEL_COVID_SWIM": "Al momento non possiamo ancora dire se le norme igieniche ci permetteranno di trascorrere alcune giornate in piscina. Nel frattempo ci informeremo a riguardo per essere eventualmente preparati a questa eventualità.",
+            "LABEL_COVID_PRIO_GENERAL1": "Noi ci impegneremo a offrire a tutti i bambini un posto di assistenza.",
+            "LABEL_COVID_PRIO_GENERAL2": "Solo nel caso in cui il numero delle iscrizioni supererà i posti disponibili che possiamo offrire per legge, ci saranno dei criteri di preferenza.",
+            "LABEL_COVID_PRIO_GENERAL3": "I criteri saranno elaborati insieme ai rispettivi consigli comunali della Bassa Atesina.",
+            "LABEL_COVID_PRIO_START": "Io dichiaro che:",
+            "LABEL_COVID_PRIO_WORK": "Sono impiegato/a (questo vale anche per il lavoro da casa) e non ho NESSUNA possibilità di assistere il bambino attraverso il secondo genitore, attraverso un partner, un responsabile dell’educazione oppure un parente stretto.",
+            "LABEL_COVID_PRIO_SOCIAL": "La situazione famigliare è precaria e questa situazione viene confermata dal distretto sociale.",
+            "LABEL_COVID_PRIO_NONE": "Nessuno dei due punti soprastanti mi riguarda."
         },
         "MYRESERVATION": {
             "TITLE": "Prenotazioni",

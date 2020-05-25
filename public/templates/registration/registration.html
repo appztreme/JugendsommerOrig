@@ -109,6 +109,11 @@
 								<!--<input name='schoolChild' type='text' ng-model='schoolChild' required maxlength='100' class='form-control'></input>-->
 							</div>
 						</div>
+						<!-- COVIDRULES.ISATRISK -->
+						<div ng-show="platform.isTest() || platform.isJDUL()" form-group'>
+							
+							<input type="checkbox" id='covidRules.isAtRisk' class="col-sm-2" ng-model="covidRules.isAtRisk">{{"RESERVATION.LABEL_COVID_IS_AT_RISK" | translate}}</input>
+						</div>
 						<!-- HASHEALTHISSUES -->
 						<div ng-hide='platform.isJDUL()' class='col-sm-offset-2 col-sm4 form-group' ng-class='{ "has-error": registrationForm.schoolChild.$invalid }'>
 							<label for='hasHealthIssues' class='control-label col-sm-2'>{{"RESERVATION.LABEL_HEALTHISSUES_CHILD" | translate}}</label>
@@ -199,8 +204,9 @@
 								<button type="button" class="btn btn-info btn-sm" style="margin-left: 45px" ng-click="toggleSwimInfo()">?</button>
 							</div>
 							<div class="alert alert-info col-sm-10" style="margin-top: 10px; max-width: 250;" role="alert" ng-show="swimInfoVisible">
-								<span>{{"RESERVATION.INFO_CANSWIM_1" | translate}}</span><br />
-								<span>{{"RESERVATION.INFO_CANSWIM_2" | translate}}</span>
+								<!--<span>{{"RESERVATION.INFO_CANSWIM_1" | translate}}</span><br />
+								<span>{{"RESERVATION.INFO_CANSWIM_2" | translate}}</span>-->
+								<span>{{"RESERVATION.LABEL_COVID_SWIM" | translate}}</span>
 							</div>
 						</div>
 						<!-- CANGOHOMEALLONE -->
@@ -348,6 +354,15 @@
 			<div id="collapseThree" ng-class="(currentState === 3) ? 'panel-collapse collapse in' : 'panel-collapse collapse'" role="tabpanel" aria-labelledby="headingThree">
 				<div class="panel-body">
 					<div class='col-sm-offset-2 col-sm4'>
+						<div class="panel panel-default" ng-show="platform.isTest() || platform.isJDUL()">
+							<div class="panel-body">
+								<p>{{"RESERVATION.LABEL_COVID_PRIO_GENERAL1" | translate}}</br>{{"RESERVATION.LABEL_COVID_PRIO_GENERAL2" | translate}}</br>{{"RESERVATION.LABEL_COVID_PRIO_GENERAL3" | translate}}</p>
+								<p>{{"RESERVATION.LABEL_COVID_PRIO_START" | translate}}</p>
+								<input type='radio' name='covidprio' ng-model="covidRules.isPrioWork" ng-click='setCovidPrio("work")''>  {{"RESERVATION.LABEL_COVID_PRIO_WORK" | translate}}</input></br>
+								<input type='radio' name='covidprio' ng-model="covidRules.isPrioSocial" ng-click='setCovidPrio("social")'>  {{"RESERVATION.LABEL_COVID_PRIO_SOCIAL" | translate}}</input></br>
+								<input type='radio' name='covidprio' ng-model="covidRules.isPrioNone" ng-click='setCovidPrio("none")'>  {{"RESERVATION.LABEL_COVID_PRIO_NONE" | translate}}</input>
+							</div>
+						</div>
 						<div ng-show="(platform.isTest() || platform.isKiso())">
 							<input type='checkbox' name='optpayment' ng-model='acceptsOptionalFee'><strong>{{"RESERVATION.LABEL_OPTIONALPAYMENT" | translate}}</strong></input>
 						</div>

@@ -12,6 +12,12 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 	$scope.selectedActivities = [];
 	$scope.emailParentCheck = '';
 	$scope.disabledForSibling = false;
+	$scope.covidRules = {
+		isAtRisk: false,
+		isPrioWork: false,
+		isPrioSocial: false,
+		isPrioNone: true
+	}
 	$scope.platform = PlatformSvc;
 
 	$scope.agbVisibility = false;
@@ -43,6 +49,15 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 			$scope.cityChildOther = undefined;
 			return false;
 		}
+	}
+
+	$scope.setCovidPrio = function(discriminator) {
+		$scope.covidRules.isPrioWork = false;
+		$scope.covidRules.isPrioSocial = false;
+		$scope.covidRules.isPrioNone = false;
+		if(discriminator == "work") $scope.covidRules.isPrioWork = true;
+		else if (discriminator == "social") $scope.covidRules.isPrioSocial = true;
+		else if(discriminator == "none") $scope.covidRules.isPrioNone = true;
 	}
 
 	$scope.toggleActivity = function(id) {
@@ -269,6 +284,7 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 				acceptsMediaPublication: $scope.acceptsMediaPublication,
 				acceptsNewsletter: $scope.acceptsNewsletter,
 				preferredFellow: $scope.preferredFellow,
+				covidRules: $scope.covidRules,
 				type: $scope.type
 			})
 			.error(function(err) {
@@ -321,6 +337,12 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 				$scope.selectedActivities = [];
 				$scope.currentState = 1;
 				$scope.preferredFellow = '';
+				$scope.covidRules = {
+					isAtRisk: false,
+					isPrioWork: false,
+					isPrioSocial: false,
+					isPrioNone: false
+				}
 				RegistrationCacheSvc.lastRegistration = reg[0];
 				RegistrationCacheSvc.currentRegistration = undefined;
 				// console.log("last", RegistrationCacheSvc.lastRegistration, reg)

@@ -185,7 +185,8 @@ exports.create = async(req, res, next) => {
 			acceptsMediaPublication: req.body.acceptsMediaPublication,
 			commentInternal: req.body.commentInternal,
 			preferredFellow: req.body.preferredFellow,
-			userId: req.body.userId
+			userId: req.body.userId,
+			covidRules: req.body.covidRules
 		});
 		regs.push(reg);	
 	}

@@ -56,6 +56,12 @@ var registrationSchema = db.Schema({
   isPrioDown: { type: Boolean, required: true, default: false },
   isRefunded: { type: Boolean, required: true, default: false },
   preferredFellow: { type: String, required: false },
+  covidRules: {
+    isAtRisk : { type: Boolean, required: true, default: false },
+    isPrioWork: { type: Boolean, required: true, default: false },
+    isPrioSocial: { type: Boolean, required: true, default: false },
+    isPrioNone: { type: Boolean, required: true, default: false }
+  }
 });
 
 registrationSchema.index({firstNameChild: 1, lastNameChild: 1, activityId: 1}, {unique: true});

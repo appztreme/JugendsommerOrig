@@ -29,17 +29,25 @@ var htmlReminderEnd = "</body></html>";
 var textConfirmation = "Hallo liebe Eltern,\r\n\r\nim Anhang findet ihr nochmals die Einzahlungsbestätigung eurer Anmeldungen.\r\n\r\nWir hoffen die Programme waren zu eurer Zufriedenheit und wir freuen uns auf eure Anmeldungen im nächsten Jahr.\r\nDieses sind nun, wie von einigen Eltern erwünscht, mit dem genauen Datum der Teilnahme versehen.\r\nMit freundlichen Grüßen\r\n\r\nGünther Reichhalter";
 var htmlConfirmation = "<html><body><p>Hallo liebe Eltern,<br />im Anhang findet ihr <strong>nochmals</strong> die Einzahlungsbestätigung eurer Anmeldungen.<br />Dieses sind nun, wie von einigen Eltern erwünscht, mit dem genauen Datum der Teilnahme versehen.<br />Wir hoffen die Programme waren zu eurer Zufriedenheit und wir freuen uns auf eure Anmeldungen im nächsten Jahr.<br /><br />Mit freundlichen Grüßen<br />Günther Reichhalter</p></body></html>"
 
+
 var txtStartJDUL_de = "Anmeldebestätigung./r/nes freut uns, dass du heuer im Sommer bei unserem JD-SUMMER Programm in ";
 var txtEndJDUL_de = " dabei sein wirst!/r/nDu erhältst innerhalb Mai noch eine weitere E-Mail mit detaillierteren Informationen./r/nDeine Eltern sind gebeten die untenstehenden Daten zu kontrollieren und die Teilnahmegebühr bis zum 20.03.2020 auf folgendes Konto zu überweisen:/r/nJugenddienst Unterland – Raiffeisenkasse Salurn/r/nIBAN: IT 27 T 08220 58371000304204042/r/nmit dem Betreff: Nachname Vorname Wohnort./r/nWir freuen uns jetzt schon auf den JD-SUMMER mit dir, hoffen auf schönes Wetter und wünschen euch noch eine tolle Zeit bis zum Sommer."
 var txtStartJDUL_it = "Conferma d‘iscrizione./r/nSiamo contenti che parteciperai al nostro programma JD-SUMMER a ";
 var txtEndJDUL_it = " Entro maggio riceverai un'altra e-mail con ulteriori informazioni./r/nI tuoi genitori sono pregati di controllare i dati sottostanti e di versare la quota d'iscrizione sul nostro conto corrente entro il 20.03.2020:/r/nJugenddienst Unterland – Raiffeisenkasse Salurn/r/nIBAN: IT 27 T 08220 58371000304204042/r/ncon l‘oggetto: Nachname Vorname Wohnort./r/nNon vediamo l’ora che l’estate inizi a gonfie vele e speriamo in un bel tempo. Nel frattempo vi auguriamo tanto divertimento";
 var htmlStartJDUL_de = "<html><body><h2>Anmeldebestätigung</h2>Liebe/r ";
-var htmlMiddleJDUL_de = ",<br />es freut uns, dass du heuer im Sommer bei unserem JD-SUMMER Programm in  ";
-var htmlEndJDUL_de = " dabei sein wirst!<br />Du erhältst innerhalb Mai noch eine weitere E-Mail mit detaillierteren Informationen.<br /><br />Deine Eltern sind gebeten die untenstehenden Daten zu kontrollieren und die Teilnahmegebühr bis zum <strong>20.03.2020</strong> auf folgendes Konto zu überweisen:<br /><br />Jugenddienst Unterland – Raiffeisenkasse Salurn<br />IBAN: IT 27 T 08220 58371000304204042<br />mit dem Betreff: Nachname Vorname Wohnort<br /><br />Wir freuen uns jetzt schon auf den JD-SUMMER mit dir, hoffen auf schönes Wetter und wünschen euch noch eine tolle Zeit bis zum Sommer.<br /><br />Euer Jugenddienst Unterland Team";
+var htmlMiddleJDUL_de = ",<br />Vielen Dank für deine Anmeldung.<br />Deine Eltern erhalten innerhalb 11.06.2020 noch eine schriftliche Benachrichtigung von uns, ob du einen Platz erhalten hast.";
+var htmlEndJDUL_de = "<br />Bei dieser Gelegenheit werden wir Ihnen auch die Zahlungsmodalitäten mitteilen. Außerdem bitten wir deine Eltern, die untenstehenden Daten zu kontrollieren:<br /><br />Euer Jugenddienst Unterland Team";
 var htmlFinalJDUL = "</body></html>";
 var htmlStartJDUL_it = "<h2>Conferma d‘iscrizione</h2>Cara/o ";
-var htmlMiddleJDUL_it = ",<br />Siamo contenti che parteciperai al nostro programma JD-SUMMER a ";
-var htmlEndJDUL_it = ".<br />Entro maggio riceverai un'altra e-mail con ulteriori informazioni.<br /><br />I tuoi genitori sono pregati di controllare i dati sottostanti e di versare la quota d'iscrizione sul nostro conto corrente entro il <strong>20.03.2020:</strong><br /><br />Jugenddienst Unterland – Raiffeisenkasse Salurn<br />IBAN: IT 27 T 08220 58371000304204042<br />con l‘oggetto: cognome nome comune di residenza<br /><br />Non vediamo l'ora che il JD-SUMMER inizi a gonfie vele e speriamo in un bel tempo. Nel frattempo vi auguriamo tanto divertimento.<br /><br />Il Vostro Team del Jugenddienst Unterland";
+var htmlMiddleJDUL_it = ",<br />Grazie mille per l’iscrizione.<br />I tuoi genitori ricevono entro il 11.06.2020 una notifica per iscritto, se hai ottenuto un posto.";
+var htmlEndJDUL_it = ".<br />In quell’occasione le comunicheremo anche le modalità di pagamento. Inoltre preghiamo i genitori di controllare i dati sottostanti.<br /><br />Il Vostro Team del Jugenddienst Unterland";
+// var htmlStartJDUL_de = "<html><body><h2>Anmeldebestätigung</h2>Liebe/r ";
+// var htmlMiddleJDUL_de = ",<br />es freut uns, dass du heuer im Sommer bei unserem JD-SUMMER Programm in  ";
+// var htmlEndJDUL_de = " dabei sein wirst!<br />Du erhältst innerhalb Mai noch eine weitere E-Mail mit detaillierteren Informationen.<br /><br />Deine Eltern sind gebeten die untenstehenden Daten zu kontrollieren und die Teilnahmegebühr bis zum <strong>20.03.2020</strong> auf folgendes Konto zu überweisen:<br /><br />Jugenddienst Unterland – Raiffeisenkasse Salurn<br />IBAN: IT 27 T 08220 58371000304204042<br />mit dem Betreff: Nachname Vorname Wohnort<br /><br />Wir freuen uns jetzt schon auf den JD-SUMMER mit dir, hoffen auf schönes Wetter und wünschen euch noch eine tolle Zeit bis zum Sommer.<br /><br />Euer Jugenddienst Unterland Team";
+// var htmlFinalJDUL = "</body></html>";
+// var htmlStartJDUL_it = "<h2>Conferma d‘iscrizione</h2>Cara/o ";
+// var htmlMiddleJDUL_it = ",<br />Siamo contenti che parteciperai al nostro programma JD-SUMMER a ";
+// var htmlEndJDUL_it = ".<br />Entro maggio riceverai un'altra e-mail con ulteriori informazioni.<br /><br />I tuoi genitori sono pregati di controllare i dati sottostanti e di versare la quota d'iscrizione sul nostro conto corrente entro il <strong>20.03.2020:</strong><br /><br />Jugenddienst Unterland – Raiffeisenkasse Salurn<br />IBAN: IT 27 T 08220 58371000304204042<br />con l‘oggetto: cognome nome comune di residenza<br /><br />Non vediamo l'ora che il JD-SUMMER inizi a gonfie vele e speriamo in un bel tempo. Nel frattempo vi auguriamo tanto divertimento.<br /><br />Il Vostro Team del Jugenddienst Unterland";
 var txtWaitingListJDUL = "Guten Tag,/r/nleider ist das von Ihnen gewünschte Programm bereits ausgebucht./r/nSie sind jedoch auf der Warteliste. Sollte ein Platz frei werden, melden wir uns innerhalb 20.03.2020 bei Ihnen./r/nMit freundlichen Grüßen/r/nDas Team des Jugenddienst Unterland/r/n/r/n/r/n";
 var txtWaitingListJDUL_it = "Buon giorno,/r/npurtroppo è già pieno il programma da lei scelto./r/nLa sua iscrizione si trova sulla lista d‘ attesa. Se dovesse liberarsi un posto, La contatteremmo entro il  20.03.2020./r/nCordiali saluti/r/nIl Team del Jugenddienst Unterland";
 var htmlWaitingListJDUL = "<html><body>Guten Tag,<br />leider ist das von Ihnen gewünschte Programm bereits ausgebucht.<br />Sie sind jedoch auf der Warteliste. Sollte ein Platz frei werden, melden wir uns innerhalb 20.03.2020 bei Ihnen.<br />Mit freundlichen Grüßen<br />Das Team des Jugenddienst Unterland<br /><br /><br />";
@@ -243,9 +251,12 @@ exports.getTypeBody = function(type, firstNameChild, lastNameChild, activities, 
 		if(activities[0].maxParticipants <= activities[0].curParticipants) { //child on waiting list
 			return htmlWaitingListJDUL + htmlWaitingListJDUL_it;
 		} else { // regular reservation
-			return htmlStartJDUL_de + firstNameChild + htmlMiddleJDUL_de + activities[0].eventId.location + htmlEndJDUL_de + "<br />" +
-					htmlStartJDUL_it + firstNameChild + htmlMiddleJDUL_it + activities[0].eventId.location_it + htmlEndJDUL_it + "<br /><br />" +
-		   			getActivityTable(activities) + "<br /><br />" + getReservationTable(reservation) + "<br /><br />" + getJDULFooter() + "<br />" + htmlFinalJDUL;
+			// return htmlStartJDUL_de + firstNameChild + htmlMiddleJDUL_de + activities[0].eventId.location + htmlEndJDUL_de + "<br />" +
+			// 		htmlStartJDUL_it + firstNameChild + htmlMiddleJDUL_it + activities[0].eventId.location_it + htmlEndJDUL_it + "<br /><br />" +
+			// 		   getActivityTable(activities) + "<br /><br />" + getReservationTable(reservation) + "<br /><br />" + getJDULFooter() + "<br />" + htmlFinalJDUL;
+			return htmlStartJDUL_de + firstNameChild + htmlMiddleJDUL_de + htmlEndJDUL_de + "<br />" +
+				htmlStartJDUL_it + firstNameChild + htmlMiddleJDUL_it + htmlEndJDUL_it + "<br /><br />" +
+				getActivityTable(activities) + "<br /><br />" + getReservationTable(reservation) + "<br /><br />" + getJDULFooter() + "<br />" + htmlFinalJDUL;
 		}
 	}
 	else if(instance.isJSGries) {
