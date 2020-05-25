@@ -166,7 +166,10 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 	}
 
 	$scope.isChildDataComplete = function() {
-		return $scope.registrationForm.$valid && $scope.isEmailEqual() && $scope.isHasHealthIssuesSet() && $scope.isHasDisabilitySet();
+		if($scope.platform.isJDUL() || $scope.platform.isTest())
+		return $scope.registrationForm.$valid && $scope.isEmailEqual() && $scope.isHasHealthIssuesSet() && $scope.isHasDisabilitySet() && $scope.covidRules.isAtRisk;
+		else
+			return $scope.registrationForm.$valid && $scope.isEmailEqual() && $scope.isHasHealthIssuesSet() && $scope.isHasDisabilitySet();
 	}
 
 	$scope.isActivityDataComplete = function() {
@@ -175,7 +178,7 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 
 	$scope.isRegistrationAllowed = function() {
 		if($scope.platform.isJDUL())
-			return $scope.registrationForm.$valid && $scope.acceptAGB && $scope.acceptsMediaPublication && $scope.acceptHealth && $scope.acceptInsurance;
+			return $scope.registrationForm.$valid && $scope.acceptAGB && $scope.acceptsMediaPublication && $scope.acceptHealth && $scope.acceptInsurance && $scope.covidRules.isAtRisk;
 		else if($scope.platform.isKiso() || $scope.platform.isTest())
 			// return $scope.registrationForm.$valid && $scope.acceptAGB && $scope.acceptPrivacy;
 			return $scope.registrationForm.$valid && $scope.acceptAGB && $scope.acceptHealth;

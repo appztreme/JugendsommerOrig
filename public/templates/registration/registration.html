@@ -110,9 +110,8 @@
 							</div>
 						</div>
 						<!-- COVIDRULES.ISATRISK -->
-						<div ng-show="platform.isTest() || platform.isJDUL()" form-group'>
-							
-							<input type="checkbox" id='covidRules.isAtRisk' class="col-sm-2" ng-model="covidRules.isAtRisk">{{"RESERVATION.LABEL_COVID_IS_AT_RISK" | translate}}</input>
+						<div ng-show="platform.isTest() || platform.isJDUL()" class='col-sm-offset-2 col-sm-10' ng-class='{ "has-error": registrationForm.covidRules.isAtRisk.$invalid }'>
+							<input type="checkbox" id='covidRules.isAtRisk' ng-model="covidRules.isAtRisk"><strong> {{"RESERVATION.LABEL_COVID_IS_AT_RISK" | translate}}</strong></input>
 						</div>
 						<!-- HASHEALTHISSUES -->
 						<div ng-hide='platform.isJDUL()' class='col-sm-offset-2 col-sm4 form-group' ng-class='{ "has-error": registrationForm.schoolChild.$invalid }'>
