@@ -358,9 +358,9 @@
 							<div class="panel-body">
 								<p>{{"RESERVATION.LABEL_COVID_PRIO_GENERAL1" | translate}}</br>{{"RESERVATION.LABEL_COVID_PRIO_GENERAL2" | translate}}</br>{{"RESERVATION.LABEL_COVID_PRIO_GENERAL3" | translate}}</p>
 								<p>{{"RESERVATION.LABEL_COVID_PRIO_START" | translate}}</p>
-								<input type='radio' name='covidprio' ng-model="covidRules.isPrioWork" ng-click='setCovidPrio("work")''>  {{"RESERVATION.LABEL_COVID_PRIO_WORK" | translate}}</input></br>
-								<input type='radio' name='covidprio' ng-model="covidRules.isPrioSocial" ng-click='setCovidPrio("social")'>  {{"RESERVATION.LABEL_COVID_PRIO_SOCIAL" | translate}}</input></br>
-								<input type='radio' name='covidprio' ng-model="covidRules.isPrioNone" ng-click='setCovidPrio("none")'>  {{"RESERVATION.LABEL_COVID_PRIO_NONE" | translate}}</input>
+								<input type='radio' name='covidprio' ng-click='setCovidPrio("work")''>  {{"RESERVATION.LABEL_COVID_PRIO_WORK" | translate}}</input></br>
+								<input type='radio' name='covidprio' ng-click='setCovidPrio("social")'>  {{"RESERVATION.LABEL_COVID_PRIO_SOCIAL" | translate}}</input></br>
+								<input type='radio' name='covidprio' checked ng-click='setCovidPrio("none")'>  {{"RESERVATION.LABEL_COVID_PRIO_NONE" | translate}}</input>
 							</div>
 						</div>
 						<div ng-show="(platform.isTest() || platform.isKiso())">
