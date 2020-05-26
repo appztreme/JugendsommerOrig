@@ -40,7 +40,8 @@ app.controller('MyRegistrationsCtrl', function($scope, FileSaver, Blob, $locatio
 	}
 
 	RegistrationSvc.findByUser(IdentitySvc.currentUser._id).success(function(registrations) {
-		$scope.registrations = registrations;
+		$scope.registrations = _.filter(registrations, function(reg) { return !reg.activityId.eventId.isInternal });//registrations;
 		$scope.user = IdentitySvc.currentUser;
+		//console.log("my reservations:", registrations.length, $scope.registrations.length, registrations);
 	});
 });
