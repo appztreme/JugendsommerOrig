@@ -24,6 +24,7 @@
     "angular-busy": "~4.1.2",
     "modernizr": "~2.8.3",
     "lodash": "~3.6.0",
-    "angular-translate": "^2.13.1"
+    "angular-translate": "^2.13.1",
+    "components-font-awesome": "^5.12.1"
   }
 }
