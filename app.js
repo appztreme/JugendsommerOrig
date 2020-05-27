@@ -6,16 +6,19 @@ var compression = require('compression');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var passport = require('passport');
+var helmet = require('helmet');
 
 var env = process.env.NODE_ENV = process.env.NODE_ENV || 'dev';
 
 var app = exports.app = express();
+app.use(helmet());
 app.use(compression());
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(session({ secret: 'Sommer', resave: true, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
+
 
 app.use(express.static(__dirname + "/public"));
 app.use(express.static(__dirname + "/public/lib"));
