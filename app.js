@@ -12,6 +12,12 @@ var env = process.env.NODE_ENV = process.env.NODE_ENV || 'dev';
 
 var app = exports.app = express();
 app.use(helmet());
+app.use(helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'self'"],
+      styleSrc: ["'self'"]
+    }
+  }));
 app.use(compression());
 app.use(cookieParser());
 app.use(bodyParser.json());
