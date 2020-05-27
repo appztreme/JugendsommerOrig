@@ -19,6 +19,7 @@ app.use(helmet.contentSecurityPolicy({
       fontSrc: ["'self'", 'maxcdn.bootstrapcdn.com']
     }
   }));
+app.use(helmet.permittedCrossDomainPolicies())
 app.use(compression());
 app.use(cookieParser());
 app.use(bodyParser.json());
