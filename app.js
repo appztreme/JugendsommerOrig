@@ -15,7 +15,8 @@ app.use(helmet());
 app.use(helmet.contentSecurityPolicy({
     directives: {
       defaultSrc: ["'self'"],
-      styleSrc: ["'self'", 'maxcdn.bootstrapcdn.com']
+      styleSrc: ["'self'", 'maxcdn.bootstrapcdn.com'],
+      fontSrc: ["'self'", 'maxcdn.bootstrapcdn.com']
     }
   }));
 app.use(compression());
