@@ -7,6 +7,15 @@ app.controller('RegistrationEditCtrl', function($scope, $filter, $routeParams, $
 	$scope.tShirtSizes = conf.tSizes;
 	$scope.platform = PlatformSvc;
 
+	$scope.setCovidPrio = function(discriminator) {
+		$scope.covidRules.isPrioWork = false;
+		$scope.covidRules.isPrioSocial = false;
+		$scope.covidRules.isPrioNone = false;
+		if(discriminator == "work") $scope.covidRules.isPrioWork = true;
+		else if (discriminator == "social") $scope.covidRules.isPrioSocial = true;
+		else if(discriminator == "none") $scope.covidRules.isPrioNone = true;
+	}
+
 	$scope.save = function() {
 		if($scope.registrationForm.$valid) {
 			$scope.registration.firstNameParent = $scope.firstNameParent;
@@ -46,6 +55,8 @@ app.controller('RegistrationEditCtrl', function($scope, $filter, $routeParams, $
 			$scope.registration.acceptsMediaPublication = $scope.acceptsMediaPublication;
 			$scope.registration.acceptsOptionalFee = $scope.acceptsOptionalFee;
 			$scope.registration.isSiblingRegistration = $scope.isSiblingRegistration;
+			$scope.registration.covidRules = $scope.covidRules;
+
 
 			RegistrationSvc.update( $scope.registration
 			).success(function(reg) {
@@ -133,6 +144,7 @@ app.controller('RegistrationEditCtrl', function($scope, $filter, $routeParams, $
 		$scope.acceptsNewsletter = registration.acceptsNewsletter;
 		$scope.acceptsOptionalFee = registration.acceptsOptionalFee;
 		$scope.isSiblingRegistration = registration.isSiblingRegistration;
+		$scope.covidRules = registration.covidRules;
 
 		ActivitiesSvc.findAllSiblingsByActivityId(registration.activityId).success(function(activities) {
 			$scope.activities = activities;

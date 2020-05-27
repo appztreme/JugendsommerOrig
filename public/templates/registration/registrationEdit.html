@@ -204,6 +204,15 @@
 		</div>
 	</div>
 
+	<div class="panel panel-default" ng-show="platform.isTest() || platform.isJDUL()">
+		<div class="panel-body">
+				<p>{{"RESERVATION.LABEL_COVID_PRIO_START" | translate}}</p>
+				<input type='radio' name='covidprio' ng-checked="covidRules.isPrioWork" >  {{"RESERVATION.LABEL_COVID_PRIO_WORK" | translate}}</input></br>
+				<input type='radio' name='covidprio' ng-checked="covidRules.isPrioSocial" >  {{"RESERVATION.LABEL_COVID_PRIO_SOCIAL" | translate}}</input></br>
+				<input type='radio' name='covidprio' ng-checked="covidRules.isPrioNone" >  {{"RESERVATION.LABEL_COVID_PRIO_NONE" | translate}}</input>
+		</div>
+	</div>
+
 	<!-- ISPAYMENTDONE -->
 	<div class='form-group' ng-class='{ "has-error": registrationForm.paymentDone.$invalid }'>
 		<label for='paymentDone' class='control-label col-sm-2'>Einzahlung erhalten</label>

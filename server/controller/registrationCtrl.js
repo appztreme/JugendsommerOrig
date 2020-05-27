@@ -252,6 +252,7 @@ exports.update = (req, res, next) => {
 		reg.isSiblingReservation = req.body.isSiblingReservation;
 		reg.commentInternal = req.body.commentInternal;
 		reg.preferredFellow = req.body.preferredFellow;
+		reg.covidRules = req.body.covidRules;
 		reg.save(function(err, regDb) {
 			if(err) { console.log(err); return next(err); }
 			res.status(201).json(regDb);
