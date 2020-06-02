@@ -296,6 +296,9 @@
 			<th ng-show='platform.isJDUL()'>Kommentar Intern</th>
 			<th ng-show='platform.isKiso()'>Media</th>
 			<th ng-show='platform.isKiso()'>News</th>
+			<th ng-show='platform.isJDUL()'>Prio Arbeit</th>
+			<th ng-show='platform.isJDUL()'>Prio Sozial</th>
+			<th ng-show='platform.isJDUL()'>Prio -</th>
 			<th>Anmeldedatum</th>
 		</tr>
 		<tr ng-repeat='reg in registrations | orderBy:[colNameSort,colNameSort2]'>
@@ -329,6 +332,9 @@
 			<td ng-show='platform.isJDUL()'>{{reg.commentInternal}}</td>
 			<td ng-show='platform.isKiso()'>{{formatBool(reg.acceptsMediaPublication)}}</td>
 			<td ng-show='platform.isKiso()'>{{formatBool(reg.acceptsNewsletter)}}</td>
+			<td ng-show='platform.isJDUL()'>{{formatBool(reg.covidRules.isPrioWork)}}</td>
+			<td ng-show='platform.isJDUL()'>{{formatBool(reg.covidRules.isPrioSocial)}}</td>
+			<td ng-show='platform.isJDUL()'>{{formatBool(reg.covidRules.isPrioNone)}}</td>
 			<td>{{reg.registrationDate | date: 'dd/MM/yyyy : hh.mm.ss'}}</td>	
 		</tr>
 	</table>
