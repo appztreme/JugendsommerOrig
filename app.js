@@ -16,7 +16,8 @@ app.use(helmet.contentSecurityPolicy({
     directives: {
       defaultSrc: ["'self'"],
       styleSrc: ["'self'", 'maxcdn.bootstrapcdn.com',"'unsafe-inline'"],
-      fontSrc: ["'self'", 'maxcdn.bootstrapcdn.com']
+      fontSrc: ["'self'", 'maxcdn.bootstrapcdn.com'],
+      imgSrc: ["'self'", 'maxcdn.bootstrapcdn.com', 'data:', 'https:'],
     }
   }));
 //app.use(helmet.permittedCrossDomainPolicies())

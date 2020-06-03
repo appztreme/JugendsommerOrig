@@ -285,7 +285,13 @@ exports.updateIsEmailNotified = (req, res, next) => {
 exports.updateProperty = (req, res, next) => {
 	Registration.findById(req.body._id, function(err, reg) {
 		if(!reg) return next(new Error('Keine Registrierung im System mit id ' + req.body._id));
-		reg[req.body.property] = req.body.value;
+		if(req.body.property.includes('.')) {
+			let [nestedObj, prop] = req.body.property.split('.');
+			reg[nestedObj][prop] = req.body.value;
+		} else {
+			reg[req.body.property] = req.body.value;
+		}
+		
 		reg.save(function(err, regDb) {
 			if(err) { return next(err); }
 			res.status(201).json(regDb);

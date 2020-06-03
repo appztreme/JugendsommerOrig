@@ -61,6 +61,11 @@ var registrationSchema = db.Schema({
     isPrioWork: { type: Boolean, required: true, default: false },
     isPrioSocial: { type: Boolean, required: true, default: false },
     isPrioNone: { type: Boolean, required: true, default: false }
+  },
+  transferStatus: {
+    move: { type: Boolean, required: true, default: false },
+    unavailable: { type: Boolean, required: true, default: false },
+    waitlist: { type: Boolean, required: true, default: false }
   }
 });
 
