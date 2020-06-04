@@ -12,15 +12,15 @@ var env = process.env.NODE_ENV = process.env.NODE_ENV || 'dev';
 
 var app = exports.app = express();
 app.use(helmet());
-app.use(helmet.contentSecurityPolicy({
-    directives: {
-      defaultSrc: ["'self'"],
-      styleSrc: ["'self'", 'maxcdn.bootstrapcdn.com',"'unsafe-inline'"],
-      fontSrc: ["'self'", 'maxcdn.bootstrapcdn.com'],
-      imgSrc: ["'self'", 'maxcdn.bootstrapcdn.com', 'data:', 'https:'],
-      scriptSrc: ["'self", "'unsafe-inline'"],
-    }
-  }));
+// app.use(helmet.contentSecurityPolicy({
+//     directives: {
+//       defaultSrc: ["'self'"],
+//       styleSrc: ["'self'", 'maxcdn.bootstrapcdn.com',"'unsafe-inline'"],
+//       fontSrc: ["'self'", 'maxcdn.bootstrapcdn.com'],
+//       'script-src': ["'self'", "'unsafe-inline'", "'unsave-eval'"],
+//       'img-src': ["'self'", 'maxcdn.bootstrapcdn.com', 'data:', 'https:'],
+//     }
+//   }));
 //app.use(helmet.permittedCrossDomainPolicies())
 app.use(compression());
 app.use(cookieParser());
