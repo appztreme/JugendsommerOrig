@@ -87,7 +87,8 @@ const aggregateOverviewStructure = async (regs) => {
 				"lastNameUser": r.userId.lastName,
 				"fee": calculateFee(r),
 				"paied": r.isPaymentDone,
-				"commentInternal": r.commentInternal
+				"commentInternal": r.commentInternal,
+				"tShirtSize": r.tShirtSize
 			}
 			var activities = await ActivityRepo.getActivitiesForEvent(r.activityId.eventId._id);
 			for(var j=0; j < activities.length; j++) {

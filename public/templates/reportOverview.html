@@ -49,6 +49,7 @@
 			<th>Nachname User</th>
 			<th>Betrag</th>
 			<th>Bezahlt</th>
+			<th>T-shirt</th>
 			<th>sonstige Infos</th>
 			<th ng-repeat='a in activityNames'>
 				{{a}}
@@ -74,6 +75,7 @@
 				<td>{{reg.lastNameUser}}</td>
 				<td>{{reg.fee}}</td>
 				<td ng-class='{"bg-success": reg.paied, "bg-danger": !reg.paied}'>{{formatBool(reg.paied)}}</td>
+				<td>{{reg.tShirtSize}}</td>
 				<td>{{reg.commentInternal}}</td>
 				<td ng-repeat='a in activityNames' ng-class='{"bg-success": reg[a].paied}'>
 					{{formatBoolToSymbol(reg[a].participate)}}
