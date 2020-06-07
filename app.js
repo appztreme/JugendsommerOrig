@@ -11,7 +11,7 @@ var helmet = require('helmet');
 var env = process.env.NODE_ENV = process.env.NODE_ENV || 'dev';
 
 var app = exports.app = express();
-// app.use(helmet());
+app.use(helmet());
 // app.use(helmet.contentSecurityPolicy({
 //     directives: {
 //       defaultSrc: ["'self'"],
