@@ -50,6 +50,7 @@ app.controller('RegistrationEditCtrl', function($scope, $filter, $routeParams, $
 			$scope.registration.canSwim = $scope.canSwim;
 			$scope.registration.canGoHomeAllone = $scope.canGoHomeAllone;
 			$scope.registration.needsEbK = $scope.needsEbK;
+			$scope.registration.preferredFellow = $scope.preferredFellow;
 			$scope.registration.commentInternal = $scope.commentInternal;
 			$scope.registration.acceptsNewsletter = $scope.acceptsNewsletter;
 			$scope.registration.acceptsMediaPublication = $scope.acceptsMediaPublication;
@@ -92,6 +93,7 @@ app.controller('RegistrationEditCtrl', function($scope, $filter, $routeParams, $
 				$scope.needsEbK = false;
 				$scope.disabilityDescription = null;
 				$scope.commentInternal = null;
+				$scope.preferredFellow = null;
 				$scope.acceptsMediaPublication = false;
 				$scope.acceptsNewsletter = false;
 				$scope.acceptsOptionalFee = false;
@@ -145,6 +147,7 @@ app.controller('RegistrationEditCtrl', function($scope, $filter, $routeParams, $
 		$scope.acceptsOptionalFee = registration.acceptsOptionalFee;
 		$scope.isSiblingRegistration = registration.isSiblingRegistration;
 		$scope.covidRules = registration.covidRules;
+		$scope.preferredFellow = registration.preferredFellow;
 
 		ActivitiesSvc.findAllSiblingsByActivityId(registration.activityId).success(function(activities) {
 			$scope.activities = activities;

@@ -240,7 +240,7 @@ exports.update = (req, res, next) => {
 		reg.hasHealthIssues = req.body.hasHealthIssues;
 		reg.healthIncompatibility = req.body.healthIncompatibility;
 		reg.healthAllergy = req.body.healthAllergy;
-		reg.healtIllnes = req.body.healthIllnes;
+		reg.healthIllnes = req.body.healthIllnes;
 		reg.hasDisability = req.body.hasDisability;
 		reg.disabilityDescription = req.body.disabilityDescription;
 		reg.diagnosticDescription = req.body.diagnosticDescription;
