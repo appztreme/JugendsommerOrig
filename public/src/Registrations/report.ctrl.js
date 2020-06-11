@@ -8,6 +8,16 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 
 	$scope.cities = PlatformSvc.getCities();
 
+	$scope.showInternalProgrammes = false;
+
+	$scope.toggleInternalProgrammes = function() {
+		if($scope.showInternalProgrammes) {
+			$scope.events = $scope.allEvents;
+		} else {
+			$scope.events = _.filter($scope.allEvents, function(ev) { return !ev.isInternal; });
+		}
+	}
+
 	// default values
 	$scope.yearFilter = (new Date()).getFullYear();
 	$scope.waitlistFilter = undefined;
@@ -25,9 +35,6 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
             		$scope.emails = _.uniq(_.map($scope.registrations, function(r) {
                 		return r.emailParent;
 					})).join(';');
-					console.log(_.partition($scope.registrations, function(r) {return r.isPaymentDone}),
-								_.partition($scope.registrations, function(r) {return r.isPaymentDone})[0],
-								_.partition($scope.registrations, function(r) {return r.isPaymentDone})[0].length)
 					$scope.updateMasterIsPaymentDone();
     			});
 	//.error(function(err) {
@@ -41,7 +48,6 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 				return a[$scope.colNameSort] < b[$scope.colNameSort];
 			})
 		}
-		console.log($scope.colNameSort);
 	});
 
 	$scope.updateMasterIsPaymentDone = function() {
@@ -132,7 +138,7 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 	};
 
 	$scope.isEmailSent = function(registration) {
-		console.log("reg", registration, registration.isEmailNotified);
+		//console.log("reg", registration, registration.isEmailNotified);
 		return registration !== null && registration.isEmailNotified === true;
 	}
 
@@ -218,7 +224,7 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 	}
 
 	$scope.updateBatchProperty = function(prop, value) {
-		console.log(prop, value);
+		//console.log(prop, value);
 		for(var i=0; i < $scope.registrations.length; i++) {
 			var reg = $scope.registrations[i];
 			$scope.updateProperty(reg._id, prop, value);
@@ -262,20 +268,25 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 		$scope.allActivities = ReportCacheSvc.allActivities;
 	} else {
 		RegistrationSvc.getSelectionParams().success(function(params) {
-			$scope.events = _.uniq(_.map(params, function(p) {
+			$scope.allEvents = _.uniq(_.map(params, function(p) {
 				return {
 					_id: p.eventId._id,
 					name: p.eventId.location + ' - ' + p.eventId.name,
-					type: p.eventId.type
+					type: p.eventId.type,
+					isInternal: p.eventId.isInternal
 				}
 			}), '_id');
-			$scope.events.sort(function(a,b) {
+			$scope.allEvents.sort(function(a,b) {
 				var nameA = a.name.toUpperCase();
   				var nameB = b.name.toUpperCase();
   				if (nameA < nameB) return -1;
 				if (nameA > nameB) return 1;
 				return 0;
 			});
+			$scope.events = _.filter($scope.allEvents, function(e) {
+				return !e.isInternal
+			});
+			console.log($scope.events);
 
 			$scope.allActivities = _.uniq(_.map(params, function(p) {
 				return {

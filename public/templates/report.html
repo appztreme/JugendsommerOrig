@@ -6,6 +6,9 @@
 		<div class='row'>
 			<label for='eventFilter' class='control-label col-sm-2'>Progr.:</label>
 			<div class='col-sm-5 input-group'>
+				<span class="input-group-addon btn-info">
+					<span class='input-group-btn' style="font-size:smaller">Intern: <input type="checkbox" ng-change="toggleInternalProgrammes()" ng-model="showInternalProgrammes" /></span>
+				</span>
 				<select id='eventFilter' class='form-control' ng-model='eventIdFilter' ng-change='updateEventFilter(false)'>
 					<option ng-repeat='event in events' value='{{event._id}}'>{{event.name}}</option>
 				</select>

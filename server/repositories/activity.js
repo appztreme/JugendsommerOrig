@@ -8,7 +8,7 @@ const startCurYear = new Date(curYear,1,1);
 exports.getSelectableEventActivities = () => {
     return Activity.find()
 			.where('startDate').gte(startCurYear)
-			.populate('eventId', '_id name location')
+			.populate('eventId', '_id name location isInternal')
 			.select('_id name eventId')
             .sort({'eventId.location': 1})
 			.exec();
