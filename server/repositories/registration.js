@@ -14,6 +14,14 @@ exports.findById = (id) => {
         .exec();
 }
 
+exports.findByReceiptNumber = (rnumber) => {
+    return Registration
+        .find()
+        .where('receiptNumber').equals(rnumber)
+        .populate({path:'activityId', populate:{path:'eventId'}})
+        .exec();
+}
+
 exports.findNotifiedWithoutPayment = (year, activityIds) => {
     const minDate = new Date(year + "-1-1");
     const maxDate = new Date(year + "-12-31");

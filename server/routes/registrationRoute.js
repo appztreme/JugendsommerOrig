@@ -22,6 +22,8 @@ router.get('/send/receipts/:eventId', auth.requiresRole('admin'), RegistrationCo
 
 router.get('/send/receipt/:registrationId', auth.requiresRole('admin'), RegistrationController.sendSinglePaymentMail);
 
+router.get('/resend/receipt/:receiptNumber', auth.requiresRole('admin'), RegistrationController.resendSinglePaymentMail);
+
 router.get('/send/reminder/:eventId', auth.requiresRole('admin'), RegistrationController.sendReminderMail);
 
 router.get('/send/confirmation/:eventId', auth.requiresRole('admin'), RegistrationController.sendConfirmationMail);

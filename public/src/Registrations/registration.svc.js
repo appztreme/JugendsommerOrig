@@ -77,6 +77,10 @@ app.service('RegistrationSvc', function($http) {
 		return $http.get('/api/registrations/send/receipt/' + registrationId)
 	}
 
+	this.resendPaymentMail = function(receiptNumber) {
+		return $http.get('/api/registrations/resend/receipt/' + receiptNumber);
+	}
+
 	this.sendConfirmationMailSingle = function(eventId, firstName, lastName, birthday, email) {
 		var payload = { eventId: eventId, firstName: firstName, lastName: lastName, birthday: birthday, email: email };
 		console.log(payload, "payload");

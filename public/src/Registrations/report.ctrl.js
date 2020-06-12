@@ -146,8 +146,14 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 		ReportCacheSvc.lastVerticalScrollPosition = window.pageYOffset || document.documentElement.scrollTop;
 		RegistrationSvc.sendPaymentMail(registrationId).then(function(err, res) {
 			$location.path('/report/');
-			//$route.reload();
 		})
+	}
+
+	$scope.resendPaymentMail = function(receiptNumber) {
+		ReportCacheSvc.lastVerticalScrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+		RegistrationSvc.resendPaymentMail(receiptNumber).then(function(err, res) {
+			$location.path('/report/');
+		})	
 	}
 
 	$scope.setWaitlistFilter = function(b) {

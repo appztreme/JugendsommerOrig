@@ -344,6 +344,18 @@ exports.sendSinglePaymentMail = async(req, res, next) => {
 	} catch(err) { console.log(err); next(err); }
 }
 
+exports.resendSinglePaymentMail = async(req, res, next) => {
+	try {
+		let regs = await RegistrationRepo.findByReceiptNumber(req.params.receiptNumber);
+		if(regs) {
+			let instance = platform.getPlatform(req.get('host'));
+			mail.sendReceiptMail(regs[0].emailParent, regs, req.params.receiptNumber, instance);
+			res.status(201).json({ success: "true" });
+		}
+		res.status(500).json({ success: "false", msg: "no registration found"});
+	} catch(err) { next(err); }
+}
+
 exports.getChildrenPerEvent = async(req, res, next) => {
 	try {
 		let activityIds = undefined;

@@ -19,6 +19,7 @@ exports.sendTxtMail = function(recipient, firstNameChild, lastNameChild, type, a
 };
 
 exports.sendReceiptMail = function(recipient, registrations, rnumber, instance) {
+	//console.log(rnumber, recipient, instance, registrations);
 	var body = mailbuilder.getReceiptBody(registrations, rnumber);
 	var text = mailbuilder.getReceiptTxt();
 	var fromEmail = mailbuilder.getSender(instance);
