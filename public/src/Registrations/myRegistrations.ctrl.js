@@ -1,6 +1,6 @@
 var app = angular.module('js');
 
-app.controller('MyRegistrationsCtrl', function($scope, FileSaver, Blob, $location, $route, RegistrationSvc, IdentitySvc, $rootScope, $translate, PlatformSvc) {
+app.controller('MyRegistrationsCtrl', function($scope, FileSaver, Blob, $location, $route, RegistrationSvc, NotificationSvc, IdentitySvc, $rootScope, $translate, PlatformSvc) {
 	$scope.busyPromise = RegistrationSvc.findByUser(IdentitySvc.currentUser._id);
 
 	// var host = $location.$$host.toLowerCase();
@@ -30,9 +30,11 @@ app.controller('MyRegistrationsCtrl', function($scope, FileSaver, Blob, $locatio
 				var blob = new Blob([pdf], {type: 'application/pdf'});
 				//var txt = await blob.text();
 				//console.log("blob",  blob.size)
+				NotificationSvc.notify("Download");
              	FileSaver.saveAs(blob, "confirmation.pdf");
 			}).error(function(err) {
-				console.log("err", err);
+				NotificationSvc.warn(err);
+				//console.log("err", err);
 			})
 	}
 
