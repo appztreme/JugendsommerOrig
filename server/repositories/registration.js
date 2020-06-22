@@ -87,5 +87,4 @@ exports.findByFirstLastNameBirthday = (firstName, lastName, birthday) => {
         .where('birthdayChild').equals(birthday)
         .populate({path:'activityId', populate:{path:'eventId'}})
         .exec();
-        
 }

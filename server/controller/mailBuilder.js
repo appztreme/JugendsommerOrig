@@ -156,7 +156,7 @@ exports.getAttachment = function(body, instance) {
 }
 
 const getChildStr = (child) => {
-	return child.firstNameChild + ' ' + child.lastNameChild + ' (' +  ("0" + child.birthdayChild.getDate()).slice(-2) + '.' + ("0" + (child.birthdayChild.getMonth() + 1)).slice(-2) + '.' + child.birthdayChild.getFullYear() + ')';
+	return child.firstNameChild.toUpperCase() + ' ' + child.lastNameChild.toUpperCase() + ' (' +  ("0" + child.birthdayChild.getDate()).slice(-2) + '.' + ("0" + (child.birthdayChild.getMonth() + 1)).slice(-2) + '.' + child.birthdayChild.getFullYear() + ')';
 }
 
 exports.getConfirmationPDF = async function(instance, reservations) {
@@ -190,7 +190,7 @@ exports.getConfirmationPDF = async function(instance, reservations) {
 		doc.moveDown(1);
 		doc.font('Helvetica-Bold').text(child, { align: 'center', width: 430 });
 		doc.moveDown(1);
-		doc.font('Helvetica').text("an folgenden Sommerprogrammen des Jugenddienst Bozen Land " + new Date().getFullYear() + " teilgenommen hat:", { align: 'left', width: 430 });
+		doc.font('Helvetica').text("an folgenden Sommerprogrammen des Jugenddienst Bozen - Land " + new Date().getFullYear() + " teilgenommen hat:", { align: 'left', width: 430 });
 		doc.moveDown(1);
 		let fee = 0;
 		for(let reg of registrationsPerChild) {
@@ -212,10 +212,10 @@ exports.getConfirmationPDF = async function(instance, reservations) {
 		}
 	}
 
-	doc.end();
+	//doc.end();
 	// DEBUG only
-	// doc.pipe(fs.createWriteStream('xxl.pdf'));
-	return doc;
+	//doc.pipe(fs.createWriteStream('./xxl.pdf'));
+	return doc; //fs.createReadStream(doc);
 }
 
 exports.getAttachmentConfirmation = function(body, instance, reservations) {

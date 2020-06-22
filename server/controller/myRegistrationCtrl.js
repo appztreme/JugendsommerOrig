@@ -35,19 +35,16 @@ exports.delete = (req, res, next) => {
 exports.getConfirmation = async(req, res, next) => {
 	try {
 		var doc = new pdf();
-		//let reg = await RegistrationRepo.findByFirstLastNameBirthday(req.body.firstName, req.body.lastName, req.body.birthday);
-		let reg = await RegistrationRepo.findByFirstLastNameBirthday('Nora', "Edelmaier", new Date(2017, 4, 31))
-		if(reg.length > 0) {
-			let registrationsForEvent = reg.filter(v => v.activityId.eventId._id == req.body.eventId && v.isPaymentDone);
+		let reg = await RegistrationRepo.findById(req.params.registrationId);
+		let regs = await RegistrationRepo.findByFirstLastNameBirthday(reg.firstNameChild, reg.lastNameChild, reg.birthdayChild);
+		if(regs.length > 0) {
+			let regsInEvent = regs.filter(o => o.activityId.eventId._id.toString() === reg.activityId.eventId._id.toString() && o.isPaymentDone);
 			var instance = platform.getPlatform(req.hostname);
-			if(registrationsForEvent.length > 0) {
-				doc = await MailBuilder.getConfirmationPDF(instance, registrationsForEvent);
-			}
+			doc = await MailBuilder.getConfirmationPDF(instance, regsInEvent);
 		}
-		//const stats = fs.statSync(doc.toBlob('application/pdf'));
-		//res.setHeader('Content-Length', stats[size]);
 		res.setHeader('Content-Type', 'application/pdf');
-		res.setHeader('Content-Disposition', 'attachment; filename=confirmation.pdf');
-		res.pipe(doc);
+		res.setHeader('Content-Disposition', 'inline; filename="confirmation.pdf"');
+		doc.pipe(res);
+		doc.end();
 	} catch(err) { next(err); }	
 }
