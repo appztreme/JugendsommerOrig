@@ -14,6 +14,7 @@ exports.getPlatform = function(host) {
         isJDBL: isJDBL,
         isJDUL: isJDUL,
         isBL: isJugendsommer || isJDBL,
+        isTest: isTest,
         isJSGries: isJSGries
     }
 }

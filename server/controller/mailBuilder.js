@@ -160,6 +160,35 @@ const getChildStr = (child) => {
 }
 
 exports.getConfirmationPDF = async function(instance, reservations) {
+	const config_jdbl = {
+			logo: "public/assets/jdbl-logo.jpg",
+			address: "Andreas-Hofer-Strasse 36 | 39100 Bozen | Tel.: +39 0471 324753",
+			internet: "info@jugenddienst.com | www.jdbl.it | St.Nr.: 94072680211",
+			member: "Jugenddienst Bozen - Land",
+			signature: "",
+			signature_img: "public/assets/signature_jdbl.jpg"
+		};
+	const config_kiso = {
+			logo: "public/assets/jdb.png",
+			address: "Pfarrplatz 24 | 39100 Bozen | Tel.: +39 0471 972098",
+			internet: "info@jd.bz.it | www.jd.bz.it | St.Nr.: 94008410212",
+			member: "Jugenddienst Bozen",
+			signature: "Für den Jugenddienst Bozen – Michael Hofer (Geschäftsführer)",
+			signature_img: "public/assets/signature_kiso.png"
+		};
+	const config_jdul = {
+			logo: "",
+			address: "",
+			internet: "",
+			member: "",
+			signature: ""
+		};
+
+	const config = instance.isJugendsommer || instance.isJDBL ? config_jdbl :
+					instance.isKiso ? config_kiso :
+					instance.isJDUL ? config_jdul :
+					instance.isTest ? config_jdbl : {};
+
 	const doc = new pdf();
 	let children = reservations.map(function(v,i) { return getChildStr(v) });
 	let childrenUnique = [...new Set(children)];
@@ -167,7 +196,7 @@ exports.getConfirmationPDF = async function(instance, reservations) {
 		const child = childrenUnique[i];
 		let registrationsPerChild = reservations.filter(reg => getChildStr(reg) === child);
 		//console.log(registrationsPerChild);
-		doc.image('public/assets/jdbl-logo.jpg', {
+		doc.image(config.logo, {
 			fit: [150, 250],
 			align: 'right',
 			valign: 'top'
@@ -178,9 +207,9 @@ exports.getConfirmationPDF = async function(instance, reservations) {
 		doc.fill(grad);
 		doc.fontSize(8).fillAndStroke("grey", "#000");
 		doc.moveDown(0.2);
-		doc.font('Helvetica').text("Andreas-Hofer-Strasse 36 | 39100 Bozen | Tel.: +39 0471 324753");
+		doc.font('Helvetica').text(config.address);
 		doc.moveDown(0.2);
-		doc.text("info@jugenddienst.com | www.jdbl.it | St.Nr.: 94072680211");
+		doc.text(config.internet);
 		doc.fontSize(26).fillAndStroke("#ffa500", "#000");
 		doc.moveDown(1).moveDown(1);
 		doc.font('Helvetica-Bold').text("Einzahlungsbestätigung", { align: 'center', width: 430 });
@@ -190,7 +219,7 @@ exports.getConfirmationPDF = async function(instance, reservations) {
 		doc.moveDown(1);
 		doc.font('Helvetica-Bold').text(child, { align: 'center', width: 430 });
 		doc.moveDown(1);
-		doc.font('Helvetica').text("an folgenden Sommerprogrammen des Jugenddienst Bozen - Land " + new Date().getFullYear() + " teilgenommen hat:", { align: 'left', width: 430 });
+		doc.font('Helvetica').text("an folgenden Sommerprogrammen des " + config.member + " " + new Date().getFullYear() + " teilgenommen hat:", { align: 'left', width: 430 });
 		doc.moveDown(1);
 		let fee = 0;
 		for(let reg of registrationsPerChild) {
@@ -200,13 +229,18 @@ exports.getConfirmationPDF = async function(instance, reservations) {
 		}
 		doc.font('Helvetica').text("Spesen: Der Gesamtbetrag von ", { continued: true });
 		doc.font('Helvetica-Bold').text(fee, { continued: true }).text(" Euro ", { continued: true });
-		doc.font('Helvetica').text("wurde ordnungsgemäß überwiesen und ist auf das Konto des Jugenddienst Bozen-Land eingegangen.");
+		doc.font('Helvetica').text("wurde ordnungsgemäß überwiesen und ist auf das Konto des " + config.member + " eingegangen.");
 		doc.moveDown(1);
-		doc.image('public/assets/signature_jdbl.jpg', {
+		doc.image(config.signature_img, {
 		 	fit: [200, 200],
-			 align: 'right',
-			 valign: 'top'
+			align: 'right',
+			valign: 'top'
 		});
+		if(instance.isKiso) {
+			doc.fontSize(10);
+			doc.moveDown(1);
+			doc.font('Helvetica').text(config.signature);
+		}
 		if(i < (childrenUnique.length - 1)) {
 			doc.addPage();
 		}
