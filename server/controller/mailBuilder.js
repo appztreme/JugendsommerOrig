@@ -161,7 +161,7 @@ const getChildStr = (child) => {
 
 exports.getConfirmationPDF = async function(instance, reservations) {
 	const config_jdbl = {
-			logo: "public/assets/jdbl-logo.jpg",
+			logo: "public/assets/jdbl_new.png",
 			address: "Andreas-Hofer-Strasse 36 | 39100 Bozen | Tel.: +39 0471 324753",
 			internet: "info@jugenddienst.com | www.jdbl.it | St.Nr.: 94072680211",
 			member: "Jugenddienst Bozen - Land",
