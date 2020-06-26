@@ -177,17 +177,23 @@ exports.getConfirmationPDF = async function(instance, reservations) {
 			signature_img: "public/assets/signature_kiso.png"
 		};
 	const config_jdul = {
-			logo: "",
-			address: "",
-			internet: "",
-			member: "",
-			signature: ""
+			logo: "public/assets/jdul_logo.png",
+			address: "Widumdurchgang 1 | 39044 Neumarkt | Tel.: +39 0471 812717",
+			address_it: "Passaggio Canonica 1 | 39044 Egna | Tel.: +39 0471 812717",
+			internet: "unterland@jugenddienst.i | www.jugenddienst.it/unterland",
+			member: "Jugenddienst Unterland",
+			signature: "Barbara Postingel (Vorsitzende Jugenddienst Unterland)",
+			signature_it: "Barbara Postingel (Presidente Jugenddienst Unterland)",
+			signature_img: "public/assets/signature_jdul.png"
 		};
 
 	const config = instance.isJugendsommer || instance.isJDBL ? config_jdbl :
 					instance.isKiso ? config_kiso :
 					instance.isJDUL ? config_jdul :
-					instance.isTest ? config_jdbl : {};
+					instance.isTest ? config_jdul : {};
+
+	if(instance.isJDUL || instance.isTest)
+		return getConfirmationPDF_JDUL(instance, reservations, config);
 
 	const doc = new pdf();
 	let children = reservations.map(function(v,i) { return getChildStr(v) });
@@ -236,7 +242,7 @@ exports.getConfirmationPDF = async function(instance, reservations) {
 			align: 'right',
 			valign: 'top'
 		});
-		if(instance.isKiso) {
+		if(instance.isKiso || instance.isJDUL || instance.isTest) {
 			doc.fontSize(10);
 			doc.moveDown(1);
 			doc.font('Helvetica').text(config.signature);
@@ -249,6 +255,122 @@ exports.getConfirmationPDF = async function(instance, reservations) {
 	//doc.end();
 	// DEBUG only
 	//doc.pipe(fs.createWriteStream('./xxl.pdf'));
+	return doc; //fs.createReadStream(doc);
+}
+
+const getConfirmationPDF_JDUL = async function(instance, reservations, config) {
+	const doc = new pdf();
+	let children = reservations.map(function(v,i) { return getChildStr(v) });
+	let childrenUnique = [...new Set(children)];
+	for(let i = 0; i < childrenUnique.length; i++) {
+		const child = childrenUnique[i];
+		let registrationsPerChild = reservations.filter(reg => getChildStr(reg) === child);
+		//console.log(registrationsPerChild);
+		doc.image(config.logo, {
+			fit: [150, 250],
+			align: 'right',
+			valign: 'top'
+		});
+		let grad = doc.linearGradient(0, 0, 30, 0);
+		grad.stop(0, '#ffa500').stop(1, '#ffd27f');
+		doc.rect(0, 0, 30, 950);
+		doc.fill(grad);
+		doc.fontSize(8).fillAndStroke("grey", "#000");
+		doc.moveDown(0.2);
+		doc.font('Helvetica').text(config.address);
+		doc.moveDown(0.2);
+		doc.text(config.internet);
+		doc.moveDown(1);
+		doc.font('Helvetica').text("Neumarkt, " + moment(Date.now()).format('DD.MM.YYYY'), { align: 'right', width: 450 }  );
+		doc.fontSize(26).fillAndStroke("#ffa500", "#000");
+		doc.moveDown(1).moveDown(1);
+		doc.font('Helvetica-Bold').text("Zahlungsbestätigung", { align: 'center', width: 430 });
+		doc.fontSize(14).fillAndStroke("black", "#000");;
+		doc.moveDown(1).moveDown(1);
+		doc.font('Helvetica').text("Sehr geehrte Damen und Herren,");
+		doc.moveDown(1);
+		doc.font('Helvetica').text("Hiermit bestätigt der " + config.member + " die Teilnahme von " + child + ", für die Wochen:" , { align: 'left', width: 430 });
+		doc.moveDown(1);
+		let fee = 0;
+		for(let reg of registrationsPerChild) {
+			doc.font('Helvetica-Bold').text(reg.activityId.eventId.name + ' ' + reg.activityId.eventId.location + ' - ' + reg.activityId.name + ' (' + moment(reg.activityId.startDate).format('DD.MM') + '-' + moment(reg.activityId.endDate).format('DD.MM.YYYY') + ')', { align: 'left', width: 430 });
+			doc.moveDown(1);
+			fee += calculateReceiptFee(reg, reg.activityId);
+		}
+		doc.font('Helvetica').text("am Sommerprogramm " + new Date().getFullYear() + ".", { align: 'left', width: 430 });
+		doc.moveDown(1);
+		
+		doc.font('Helvetica').text("Der Teilnahmebetrag in Höhe von  ", { continued: true });
+		doc.font('Helvetica-Bold').text(fee, { continued: true }).text(" € ", { continued: true });
+		doc.font('Helvetica').text(" wurde auf unser Konto überwiesen.");
+		doc.moveDown(1);
+		doc.font("Helvetica").text("Der Jugenddienst Unterland als ehrenamtliche Körperschaft ist von der MwSt. befreit ist (Art. 8 Abs. 2 Gesetz 266/1991).");
+		doc.moveDown(1);
+		doc.image(config.signature_img, {
+		 	fit: [200, 200],
+			align: 'right',
+			valign: 'top'
+		});
+		doc.fontSize(10);
+		doc.moveDown(1);
+		doc.font('Helvetica').text(config.signature);
+		doc.addPage();
+
+		doc.image(config.logo, {
+			fit: [150, 250],
+			align: 'right',
+			valign: 'top'
+		});
+		let grad2 = doc.linearGradient(0, 0, 30, 0);
+		grad2.stop(0, '#ffa500').stop(1, '#ffd27f');
+		doc.rect(0, 0, 30, 950);
+		doc.fill(grad2);
+		doc.rect(0, 0, 30, 950);
+		doc.fill(grad);
+		doc.fontSize(8).fillAndStroke("grey", "#000");
+		doc.moveDown(0.2);
+		doc.font('Helvetica').text(config.address_it);
+		doc.moveDown(0.2);
+		doc.text(config.internet);
+		doc.moveDown(1);
+		doc.font('Helvetica').text("Egna, " + moment(Date.now()).format('DD.MM.YYYY'), { align: 'right', width: 450 } );
+		doc.fontSize(26).fillAndStroke("#ffa500", "#000");
+		doc.moveDown(1).moveDown(1);
+		doc.font('Helvetica-Bold').text("Conferma di pagamento", { align: 'center', width: 430 });
+		doc.fontSize(14).fillAndStroke("black", "#000");;
+		doc.moveDown(1).moveDown(1);
+		doc.font('Helvetica').text("Gentili signore e signori,");
+		doc.moveDown(1);
+		doc.font('Helvetica').text("con la presente il " + config.member + " il conferma l’iscrizione " + child + ", per le settimane:" , { align: 'left', width: 430 });
+		doc.moveDown(1);
+		fee = 0;
+		for(let reg of registrationsPerChild) {
+			doc.font('Helvetica-Bold').text(reg.activityId.eventId.name + ' ' + reg.activityId.eventId.location + ' - ' + reg.activityId.name + ' (' + moment(reg.activityId.startDate).format('DD.MM') + '-' + moment(reg.activityId.endDate).format('DD.MM.YYYY') + ')', { align: 'left', width: 430 });
+			doc.moveDown(1);
+			fee += calculateReceiptFee(reg, reg.activityId);
+		}
+		doc.font('Helvetica').text("nel nostro programma vacanze estive " + new Date().getFullYear() + ".", { align: 'left', width: 430 });
+		doc.moveDown(1);
+		
+		doc.font('Helvetica').text("L`importo comlessivo di ", { continued: true });
+		doc.font('Helvetica-Bold').text(fee, { continued: true }).text(" € ", { continued: true });
+		doc.font('Helvetica').text(" è stato versato sul nostro contocorrente.");
+		doc.moveDown(1);
+		doc.font('Helvetica').text("Il Jugenddienst Unterland come organizzazione di volontariato è esente dall’IVA (L. 11 agosto 1991, n. 266).");
+		doc.moveDown(1);
+		doc.image(config.signature_img, {
+		 	fit: [200, 200],
+			align: 'right',
+			valign: 'top'
+		});
+		doc.fontSize(10);
+		doc.moveDown(1);
+		doc.font('Helvetica').text(config.signature_it);
+
+		if(i < (childrenUnique.length - 1)) {
+			doc.addPage();
+		}
+	}
 	return doc; //fs.createReadStream(doc);
 }
 
