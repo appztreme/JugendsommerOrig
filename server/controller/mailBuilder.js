@@ -180,11 +180,13 @@ exports.getConfirmationPDF = async function(instance, reservations) {
 			logo: "public/assets/jdul_logo.png",
 			address: "Widumdurchgang 1 | 39044 Neumarkt | Tel.: +39 0471 812717",
 			address_it: "Passaggio Canonica 1 | 39044 Egna | Tel.: +39 0471 812717",
-			internet: "unterland@jugenddienst.i | www.jugenddienst.it/unterland",
+			internet: "unterland@jugenddienst.i | www.jugenddienst.it/unterland | St.Nr.: 94008770219",
 			member: "Jugenddienst Unterland",
 			signature: "Barbara Postingel (Vorsitzende Jugenddienst Unterland)",
 			signature_it: "Barbara Postingel (Presidente Jugenddienst Unterland)",
-			signature_img: "public/assets/signature_jdul.png"
+			signature_img: "public/assets/signature_jdul.png",
+			bonus: 'Für Bonus Centro estivo: Codice identificativo „Centri con funzione educativo – ricreativa (LA)“',
+			bonus_it: 'Per Bonus Centro estivo: Codice identificativo „Centri con funzione educativo – ricreativa (LA)“'
 		};
 
 	const config = instance.isJugendsommer || instance.isJDBL ? config_jdbl :
@@ -281,12 +283,22 @@ const getConfirmationPDF_JDUL = async function(instance, reservations, config) {
 		doc.moveDown(0.2);
 		doc.text(config.internet);
 		doc.moveDown(1);
+		doc.text(registrationsPerChild[0].firstNameChild + ' ' + registrationsPerChild[0].lastNameChild, { align: 'right', width: 450 });
+		doc.moveDown(0.2);
+		doc.text(registrationsPerChild[0].addressChild, { align: 'right', width: 450 });
+		doc.moveDown(0.2);
+		doc.text(registrationsPerChild[0].cityChild, { align: 'right', width: 450});
+		//doc.moveDown(1);
+		doc.moveDown(1);
 		doc.font('Helvetica').text("Neumarkt, " + moment(Date.now()).format('DD.MM.YYYY'), { align: 'right', width: 450 }  );
 		doc.fontSize(26).fillAndStroke("#ffa500", "#000");
-		doc.moveDown(1).moveDown(1);
+		doc.moveDown(1);
 		doc.font('Helvetica-Bold').text("Zahlungsbestätigung", { align: 'center', width: 430 });
+		doc.fontSize(8).fillAndStroke("black", "#000");
+		doc.moveDown(0.5);
+		doc.font('Helvetica').text(config.bonus);
 		doc.fontSize(14).fillAndStroke("black", "#000");;
-		doc.moveDown(1).moveDown(1);
+		doc.moveDown(1);
 		doc.font('Helvetica').text("Sehr geehrte Damen und Herren,");
 		doc.moveDown(1);
 		doc.font('Helvetica').text("Hiermit bestätigt der " + config.member + " die Teilnahme von " + child + ", für die Wochen:" , { align: 'left', width: 430 });
@@ -333,12 +345,22 @@ const getConfirmationPDF_JDUL = async function(instance, reservations, config) {
 		doc.moveDown(0.2);
 		doc.text(config.internet);
 		doc.moveDown(1);
+		doc.text(registrationsPerChild[0].firstNameChild + ' ' + registrationsPerChild[0].lastNameChild, { align: 'right', width: 450 });
+		doc.moveDown(0.2);
+		doc.text(registrationsPerChild[0].addressChild, { align: 'right', width: 450 });
+		doc.moveDown(0.2);
+		doc.text(registrationsPerChild[0].cityChild, { align: 'right', width: 450});
+		//doc.moveDown(1);
+		doc.moveDown(1);
 		doc.font('Helvetica').text("Egna, " + moment(Date.now()).format('DD.MM.YYYY'), { align: 'right', width: 450 } );
 		doc.fontSize(26).fillAndStroke("#ffa500", "#000");
-		doc.moveDown(1).moveDown(1);
+		doc.moveDown(1);
 		doc.font('Helvetica-Bold').text("Conferma di pagamento", { align: 'center', width: 430 });
-		doc.fontSize(14).fillAndStroke("black", "#000");;
-		doc.moveDown(1).moveDown(1);
+		doc.fontSize(8).fillAndStroke("black", "#000");;
+		doc.moveDown(0.5);
+		doc.font('Helvetica').text(config.bonus_it);
+		doc.fontSize(14).fillAndStroke("black", "#000");;	
+		doc.moveDown(1);
 		doc.font('Helvetica').text("Gentili signore e signori,");
 		doc.moveDown(1);
 		doc.font('Helvetica').text("con la presente il " + config.member + " il conferma l’iscrizione " + child + ", per le settimane:" , { align: 'left', width: 430 });
