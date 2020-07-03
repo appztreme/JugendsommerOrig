@@ -301,8 +301,7 @@ const getConfirmationPDF_JDUL = async function(instance, reservations, config) {
 		doc.moveDown(1);
 		doc.font('Helvetica').text("Sehr geehrte Damen und Herren,");
 		doc.moveDown(1);
-		doc.font('Helvetica').text("Hiermit bestätigt der " + config.member + " die Teilnahme von " + child + ", für die Wochen in "
-			+ registrationsPerChild[0].activityId.eventId.name + ' ' + registrationsPerChild[0].activityId.eventId.location  + " :", { align: 'left', width: 430 });
+		doc.font('Helvetica').text("Hiermit bestätigt der " + config.member + " die Teilnahme von " + child + ", für die Wochen:", { align: 'left', width: 430 });
 		doc.moveDown(1);
 		let fee = 0;
 		let index = 0;
@@ -319,7 +318,7 @@ const getConfirmationPDF_JDUL = async function(instance, reservations, config) {
 		doc.text("", { continued: false });
 		doc.moveDown(1);
 		doc.fontSize(12).fillAndStroke("black", "#000");
-		doc.font('Helvetica').text("am Sommerprogramm " + new Date().getFullYear() + ".", { align: 'left', width: 430 });
+		doc.font('Helvetica').text("am Sommerprogramm " + new Date().getFullYear()  + " " + registrationsPerChild[0].activityId.eventId.name + ' ' + registrationsPerChild[0].activityId.eventId.location + ".", { align: 'left', width: 430 });
 		doc.moveDown(1);
 		doc.font('Helvetica').text("Der Teilnahmebetrag in Höhe von  ", { continued: true });
 		doc.font('Helvetica-Bold').text(fee, { continued: true }).text(" € ", { continued: true });
@@ -372,8 +371,7 @@ const getConfirmationPDF_JDUL = async function(instance, reservations, config) {
 		doc.moveDown(1);
 		doc.font('Helvetica').text("Gentili signore e signori,");
 		doc.moveDown(1);
-		doc.font('Helvetica').text("con la presente il " + config.member + " il conferma l’iscrizione " + child + ", per le settimane a "
-		+ registrationsPerChild[0].activityId.eventId.name + ' ' + registrationsPerChild[0].activityId.eventId.location  + " :" , { align: 'left', width: 430 });
+		doc.font('Helvetica').text("con la presente il " + config.member + " il conferma l’iscrizione " + child + ", per le settimane:", { align: 'left', width: 430 });
 		doc.moveDown(1);
 		fee = 0;
 		index = 0;
@@ -390,7 +388,7 @@ const getConfirmationPDF_JDUL = async function(instance, reservations, config) {
 		doc.text("", { continued: false });
 		doc.moveDown(1);
 		doc.fontSize(12).fillAndStroke("black", "#000");
-		doc.font('Helvetica').text("nel nostro programma vacanze estive " + new Date().getFullYear() + ".", { align: 'left', width: 430 });
+		doc.font('Helvetica').text("nel nostro programma vacanze estive " + new Date().getFullYear() + " " + registrationsPerChild[0].activityId.eventId.name + ' ' + registrationsPerChild[0].activityId.eventId.location + ".", { align: 'left', width: 430 });
 		doc.moveDown(1);
 		doc.font('Helvetica').text("L`importo comlessivo di ", { continued: true });
 		doc.font('Helvetica-Bold').text(fee, { continued: true }).text(" € ", { continued: true });
