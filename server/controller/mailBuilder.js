@@ -291,27 +291,36 @@ const getConfirmationPDF_JDUL = async function(instance, reservations, config) {
 		//doc.moveDown(1);
 		doc.moveDown(1);
 		doc.font('Helvetica').text("Neumarkt, " + moment(Date.now()).format('DD.MM.YYYY'), { align: 'right', width: 450 }  );
-		doc.fontSize(26).fillAndStroke("#ffa500", "#000");
+		doc.fontSize(22).fillAndStroke("#ffa500", "#000");
 		doc.moveDown(1);
 		doc.font('Helvetica-Bold').text("Zahlungsbestätigung", { align: 'center', width: 430 });
 		doc.fontSize(8).fillAndStroke("black", "#000");
 		doc.moveDown(0.5);
 		doc.font('Helvetica').text(config.bonus);
-		doc.fontSize(14).fillAndStroke("black", "#000");;
+		doc.fontSize(12).fillAndStroke("black", "#000");;
 		doc.moveDown(1);
 		doc.font('Helvetica').text("Sehr geehrte Damen und Herren,");
 		doc.moveDown(1);
-		doc.font('Helvetica').text("Hiermit bestätigt der " + config.member + " die Teilnahme von " + child + ", für die Wochen:" , { align: 'left', width: 430 });
+		doc.font('Helvetica').text("Hiermit bestätigt der " + config.member + " die Teilnahme von " + child + ", für die Wochen in "
+			+ registrationsPerChild[0].activityId.eventId.name + ' ' + registrationsPerChild[0].activityId.eventId.location  + " :", { align: 'left', width: 430 });
 		doc.moveDown(1);
 		let fee = 0;
+		let index = 0;
+		//doc.font('Helvetica-Bold').text(registrationsPerChild[0].activityId.eventId.name + ' ' + registrationsPerChild[0].activityId.eventId.location, { align: 'left', width: 430 });
+		//doc.moveDown(1);
+		doc.fontSize(12).fillAndStroke("black", "#000");
 		for(let reg of registrationsPerChild) {
-			doc.font('Helvetica-Bold').text(reg.activityId.eventId.name + ' ' + reg.activityId.eventId.location + ' - ' + reg.activityId.name + ' (' + moment(reg.activityId.startDate).format('DD.MM') + '-' + moment(reg.activityId.endDate).format('DD.MM.YYYY') + ')', { align: 'left', width: 430 });
+			if(index > 0) doc.font('Helvetica').text(", ", {continued: true});
+			doc.font('Helvetica').text(reg.activityId.name + ' (' + moment(reg.activityId.startDate).format('DD.MM') + '-' + moment(reg.activityId.endDate).format('DD.MM.YYYY') + ')', { continued: true });
 			doc.moveDown(1);
 			fee += calculateReceiptFee(reg, reg.activityId);
+			index += 1;
 		}
+		doc.text("", { continued: false });
+		doc.moveDown(1);
+		doc.fontSize(12).fillAndStroke("black", "#000");
 		doc.font('Helvetica').text("am Sommerprogramm " + new Date().getFullYear() + ".", { align: 'left', width: 430 });
 		doc.moveDown(1);
-		
 		doc.font('Helvetica').text("Der Teilnahmebetrag in Höhe von  ", { continued: true });
 		doc.font('Helvetica-Bold').text(fee, { continued: true }).text(" € ", { continued: true });
 		doc.font('Helvetica').text(" wurde auf unser Konto überwiesen.");
@@ -363,17 +372,26 @@ const getConfirmationPDF_JDUL = async function(instance, reservations, config) {
 		doc.moveDown(1);
 		doc.font('Helvetica').text("Gentili signore e signori,");
 		doc.moveDown(1);
-		doc.font('Helvetica').text("con la presente il " + config.member + " il conferma l’iscrizione " + child + ", per le settimane:" , { align: 'left', width: 430 });
+		doc.font('Helvetica').text("con la presente il " + config.member + " il conferma l’iscrizione " + child + ", per le settimane a "
+		+ registrationsPerChild[0].activityId.eventId.name + ' ' + registrationsPerChild[0].activityId.eventId.location  + " :" , { align: 'left', width: 430 });
 		doc.moveDown(1);
 		fee = 0;
+		index = 0;
+		//doc.font('Helvetica-Bold').text(registrationsPerChild[0].activityId.eventId.name + ' ' + registrationsPerChild[0].activityId.eventId.location, { align: 'left', width: 430 });
+		//doc.moveDown(1);
+		doc.fontSize(12).fillAndStroke("black", "#000");
 		for(let reg of registrationsPerChild) {
-			doc.font('Helvetica-Bold').text(reg.activityId.eventId.name + ' ' + reg.activityId.eventId.location + ' - ' + reg.activityId.name + ' (' + moment(reg.activityId.startDate).format('DD.MM') + '-' + moment(reg.activityId.endDate).format('DD.MM.YYYY') + ')', { align: 'left', width: 430 });
+			if(index > 0) doc.font('Helvetica').text(", ", {continued: true});
+			doc.font('Helvetica').text(reg.activityId.name + ' (' + moment(reg.activityId.startDate).format('DD.MM') + '-' + moment(reg.activityId.endDate).format('DD.MM.YYYY') + ')', { continued: true });
 			doc.moveDown(1);
 			fee += calculateReceiptFee(reg, reg.activityId);
+			index += 1;
 		}
+		doc.text("", { continued: false });
+		doc.moveDown(1);
+		doc.fontSize(12).fillAndStroke("black", "#000");
 		doc.font('Helvetica').text("nel nostro programma vacanze estive " + new Date().getFullYear() + ".", { align: 'left', width: 430 });
 		doc.moveDown(1);
-		
 		doc.font('Helvetica').text("L`importo comlessivo di ", { continued: true });
 		doc.font('Helvetica-Bold').text(fee, { continued: true }).text(" € ", { continued: true });
 		doc.font('Helvetica').text(" è stato versato sul nostro contocorrente.");
