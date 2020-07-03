@@ -311,7 +311,7 @@ const getConfirmationPDF_JDUL = async function(instance, reservations, config) {
 		for(let reg of registrationsPerChild) {
 			if(index > 0) doc.font('Helvetica').text(", ", {continued: true});
 			doc.font('Helvetica').text(reg.activityId.name + ' (' + moment(reg.activityId.startDate).format('DD.MM') + '-' + moment(reg.activityId.endDate).format('DD.MM.YYYY') + ')', { continued: true });
-			doc.moveDown(1);
+			//doc.moveDown(1);
 			fee += calculateReceiptFee(reg, reg.activityId);
 			index += 1;
 		}
