@@ -315,7 +315,7 @@ const getConfirmationPDF_JDUL = async function(instance, reservations, config, l
 				index += 1;
 			}
 			doc.text("", { continued: false });
-			doc.moveDown(1).moveDown(1).moveDown(1);
+			doc.moveDown(1).moveDown(1);
 			doc.fontSize(12).fillAndStroke("black", "#000");
 			doc.font('Helvetica').text("am Sommerprogramm " + new Date().getFullYear()  + ".", { align: 'left', width: 430 });
 			doc.moveDown(1);
@@ -383,7 +383,7 @@ const getConfirmationPDF_JDUL = async function(instance, reservations, config, l
 				index += 1;
 			}
 			doc.text("", { continued: false });
-			doc.moveDown(1).moveDown(1).moveDown(1);
+			doc.moveDown(1).moveDown(1);
 			doc.fontSize(12).fillAndStroke("black", "#000");
 			doc.font('Helvetica').text("nel nostro programma vacanze estive " + new Date().getFullYear() + ".", { align: 'left', width: 430 });
 			doc.moveDown(1);
