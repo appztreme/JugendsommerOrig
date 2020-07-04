@@ -159,7 +159,7 @@ const getChildStr = (child) => {
 	return child.firstNameChild.toUpperCase() + ' ' + child.lastNameChild.toUpperCase() + ' (' +  ("0" + child.birthdayChild.getDate()).slice(-2) + '.' + ("0" + (child.birthdayChild.getMonth() + 1)).slice(-2) + '.' + child.birthdayChild.getFullYear() + ')';
 }
 
-exports.getConfirmationPDF = async function(instance, reservations) {
+exports.getConfirmationPDF = async function(instance, reservations, lang) {
 	const config_jdbl = {
 			logo: "public/assets/jdbl_new.png",
 			address: "Andreas-Hofer-Strasse 36 | 39100 Bozen | Tel.: +39 0471 324753",
@@ -195,7 +195,7 @@ exports.getConfirmationPDF = async function(instance, reservations) {
 					instance.isTest ? config_jdul : {};
 
 	if(instance.isJDUL || instance.isTest)
-		return getConfirmationPDF_JDUL(instance, reservations, config);
+		return getConfirmationPDF_JDUL(instance, reservations, config, lang);
 
 	const doc = new pdf();
 	let children = reservations.map(function(v,i) { return getChildStr(v) });
@@ -260,156 +260,153 @@ exports.getConfirmationPDF = async function(instance, reservations) {
 	return doc; //fs.createReadStream(doc);
 }
 
-const getConfirmationPDF_JDUL = async function(instance, reservations, config) {
+const getConfirmationPDF_JDUL = async function(instance, reservations, config, lang) {
 	const doc = new pdf();
 	let children = reservations.map(function(v,i) { return getChildStr(v) });
 	let childrenUnique = [...new Set(children)];
 	for(let i = 0; i < childrenUnique.length; i++) {
 		const child = childrenUnique[i];
 		let registrationsPerChild = reservations.filter(reg => getChildStr(reg) === child);
-		//console.log(registrationsPerChild);
-		doc.image(config.logo, {
-			fit: [150, 250],
-			align: 'right',
-			valign: 'top'
-		});
-		let grad = doc.linearGradient(0, 0, 30, 0);
-		grad.stop(0, '#ffa500').stop(1, '#ffd27f');
-		doc.rect(0, 0, 30, 950);
-		doc.fill(grad);
-		doc.fontSize(8).fillAndStroke("grey", "#000");
-		doc.moveDown(0.2);
-		doc.font('Helvetica').text(config.address);
-		doc.moveDown(0.2);
-		doc.text(config.internet);
-		doc.moveDown(1);
-		doc.text(registrationsPerChild[0].firstNameChild + ' ' + registrationsPerChild[0].lastNameChild, { align: 'right', width: 450 });
-		doc.moveDown(0.2);
-		doc.text(registrationsPerChild[0].addressChild, { align: 'right', width: 450 });
-		doc.moveDown(0.2);
-		doc.text(registrationsPerChild[0].cityChild, { align: 'right', width: 450});
-		//doc.moveDown(1);
-		doc.moveDown(1);
-		doc.font('Helvetica').text("Neumarkt, " + moment(Date.now()).format('DD.MM.YYYY'), { align: 'right', width: 450 }  );
-		doc.fontSize(22).fillAndStroke("#ffa500", "#000");
-		doc.moveDown(1);
-		doc.font('Helvetica-Bold').text("Zahlungsbestätigung", { align: 'center', width: 430 });
-		doc.fontSize(8).fillAndStroke("black", "#000");
-		doc.moveDown(0.5);
-		doc.font('Helvetica').text(config.bonus);
-		doc.fontSize(12).fillAndStroke("black", "#000");;
-		doc.moveDown(1);
-		doc.font('Helvetica').text("Sehr geehrte Damen und Herren,");
-		doc.moveDown(1);
-		doc.font('Helvetica').text("Hiermit bestätigt der " + config.member + " die Teilnahme von " + child + ", für die Wochen:", { align: 'left', width: 430 });
-		doc.moveDown(1);
-		let fee = 0;
-		let index = 0;
-		//doc.font('Helvetica-Bold').text(registrationsPerChild[0].activityId.eventId.name + ' ' + registrationsPerChild[0].activityId.eventId.location, { align: 'left', width: 430 });
-		//doc.moveDown(1);
-		doc.fontSize(12).fillAndStroke("black", "#000");
-		for(let reg of registrationsPerChild) {
-			if(index > 0) doc.font('Helvetica').text(", ", {continued: true});
-			doc.font('Helvetica').text(reg.activityId.name + ' (' + moment(reg.activityId.startDate).format('DD.MM') + '-' + moment(reg.activityId.endDate).format('DD.MM.YYYY') + ')', { continued: true });
+		if(lang === 'de') {
+			doc.image(config.logo, {
+				fit: [150, 250],
+				align: 'right',
+				valign: 'top'
+			});	
+			let grad = doc.linearGradient(0, 0, 30, 0);
+			grad.stop(0, '#ffa500').stop(1, '#ffd27f');
+			doc.rect(0, 0, 30, 950);
+			doc.fill(grad);
+			doc.fontSize(8).fillAndStroke("grey", "#000");
+			doc.moveDown(0.2);
+			doc.font('Helvetica').text(config.address);
+			doc.moveDown(0.2);
+			doc.text(config.internet);
+			doc.moveDown(1);
+			doc.text(registrationsPerChild[0].firstNameChild + ' ' + registrationsPerChild[0].lastNameChild, { align: 'right', width: 450 });
+			doc.moveDown(0.2);
+			doc.text(registrationsPerChild[0].addressChild, { align: 'right', width: 450 });
+			doc.moveDown(0.2);
+			doc.text(registrationsPerChild[0].cityChild, { align: 'right', width: 450});
+			doc.moveDown(1);
+			doc.font('Helvetica').text("Neumarkt, " + moment(Date.now()).format('DD.MM.YYYY'), { align: 'right', width: 450 }  );
+			doc.fontSize(22).fillAndStroke("#ffa500", "#000");
+			doc.moveDown(1);
+			doc.font('Helvetica-Bold').text("Zahlungsbestätigung", { align: 'center', width: 430 });
+			doc.fontSize(8).fillAndStroke("black", "#000");
+			doc.moveDown(0.5);
+			doc.font('Helvetica').text(config.bonus);
+			doc.fontSize(12).fillAndStroke("black", "#000");;
+			doc.moveDown(1);
+			doc.font('Helvetica').text("Sehr geehrte Damen und Herren,");
+			doc.moveDown(1);
+			doc.font('Helvetica').text("Hiermit bestätigt der " + config.member + " die Teilnahme von " + child + ", für die Wochen:", { align: 'left', width: 430 });
+			doc.moveDown(1);
+			let fee = 0;
+			let index = 0;
+			//doc.font('Helvetica-Bold').text(registrationsPerChild[0].activityId.eventId.name + ' ' + registrationsPerChild[0].activityId.eventId.location, { align: 'left', width: 430 });
 			//doc.moveDown(1);
-			fee += calculateReceiptFee(reg, reg.activityId);
-			index += 1;
+			doc.fontSize(12).fillAndStroke("black", "#000");
+			for(let reg of registrationsPerChild) {
+				if(index > 0) doc.font('Helvetica').text(", ", {continued: true});
+				doc.font('Helvetica').text(reg.activityId.name + ' (' + moment(reg.activityId.startDate).format('DD.MM') + '-' + moment(reg.activityId.endDate).format('DD.MM.YYYY') + ')', { continued: true });
+				//doc.moveDown(1);
+				fee += calculateReceiptFee(reg, reg.activityId);
+				index += 1;
+			}
+			doc.text("", { continued: false });
+			doc.moveDown(1);
+			doc.fontSize(12).fillAndStroke("black", "#000");
+			doc.font('Helvetica').text("am Sommerprogramm " + new Date().getFullYear()  + " " + registrationsPerChild[0].activityId.eventId.name + ' ' + registrationsPerChild[0].activityId.eventId.location + ".", { align: 'left', width: 430 });
+			doc.moveDown(1);
+			doc.font('Helvetica').text("Der Teilnahmebetrag in Höhe von  ", { continued: true });
+			doc.font('Helvetica-Bold').text(fee, { continued: true }).text(" € ", { continued: true });
+			doc.font('Helvetica').text(" wurde auf unser Konto überwiesen.");
+			doc.moveDown(1);
+			doc.font("Helvetica").text("Der Jugenddienst Unterland als ehrenamtliche Körperschaft ist von der MwSt. befreit ist (Art. 8 Abs. 2 Gesetz 266/1991).");
+			doc.moveDown(1);
+			doc.image(config.signature_img, {
+				 fit: [200, 200],
+				align: 'right',
+				valign: 'top'
+			});
+			doc.fontSize(10);
+			doc.moveDown(1);
+			doc.font('Helvetica').text(config.signature);
 		}
-		doc.text("", { continued: false });
-		doc.moveDown(1);
-		doc.fontSize(12).fillAndStroke("black", "#000");
-		doc.font('Helvetica').text("am Sommerprogramm " + new Date().getFullYear()  + " " + registrationsPerChild[0].activityId.eventId.name + ' ' + registrationsPerChild[0].activityId.eventId.location + ".", { align: 'left', width: 430 });
-		doc.moveDown(1);
-		doc.font('Helvetica').text("Der Teilnahmebetrag in Höhe von  ", { continued: true });
-		doc.font('Helvetica-Bold').text(fee, { continued: true }).text(" € ", { continued: true });
-		doc.font('Helvetica').text(" wurde auf unser Konto überwiesen.");
-		doc.moveDown(1);
-		doc.font("Helvetica").text("Der Jugenddienst Unterland als ehrenamtliche Körperschaft ist von der MwSt. befreit ist (Art. 8 Abs. 2 Gesetz 266/1991).");
-		doc.moveDown(1);
-		doc.image(config.signature_img, {
-		 	fit: [200, 200],
-			align: 'right',
-			valign: 'top'
-		});
-		doc.fontSize(10);
-		doc.moveDown(1);
-		doc.font('Helvetica').text(config.signature);
-		doc.addPage();
-
-		doc.image(config.logo, {
-			fit: [150, 250],
-			align: 'right',
-			valign: 'top'
-		});
-		let grad2 = doc.linearGradient(0, 0, 30, 0);
-		grad2.stop(0, '#ffa500').stop(1, '#ffd27f');
-		doc.rect(0, 0, 30, 950);
-		doc.fill(grad2);
-		doc.rect(0, 0, 30, 950);
-		doc.fill(grad);
-		doc.fontSize(8).fillAndStroke("grey", "#000");
-		doc.moveDown(0.2);
-		doc.font('Helvetica').text(config.address_it);
-		doc.moveDown(0.2);
-		doc.text(config.internet);
-		doc.moveDown(1);
-		doc.text(registrationsPerChild[0].firstNameChild + ' ' + registrationsPerChild[0].lastNameChild, { align: 'right', width: 450 });
-		doc.moveDown(0.2);
-		doc.text(registrationsPerChild[0].addressChild, { align: 'right', width: 450 });
-		doc.moveDown(0.2);
-		doc.text(registrationsPerChild[0].cityChild, { align: 'right', width: 450});
-		//doc.moveDown(1);
-		doc.moveDown(1);
-		doc.font('Helvetica').text("Egna, " + moment(Date.now()).format('DD.MM.YYYY'), { align: 'right', width: 450 } );
-		doc.fontSize(26).fillAndStroke("#ffa500", "#000");
-		doc.moveDown(1);
-		doc.font('Helvetica-Bold').text("Conferma di pagamento", { align: 'center', width: 430 });
-		doc.fontSize(8).fillAndStroke("black", "#000");;
-		doc.moveDown(0.5);
-		doc.font('Helvetica').text(config.bonus_it);
-		doc.fontSize(14).fillAndStroke("black", "#000");;	
-		doc.moveDown(1);
-		doc.font('Helvetica').text("Gentili signore e signori,");
-		doc.moveDown(1);
-		doc.font('Helvetica').text("con la presente il " + config.member + " il conferma l’iscrizione " + child + ", per le settimane:", { align: 'left', width: 430 });
-		doc.moveDown(1);
-		fee = 0;
-		index = 0;
-		//doc.font('Helvetica-Bold').text(registrationsPerChild[0].activityId.eventId.name + ' ' + registrationsPerChild[0].activityId.eventId.location, { align: 'left', width: 430 });
-		//doc.moveDown(1);
-		doc.fontSize(12).fillAndStroke("black", "#000");
-		for(let reg of registrationsPerChild) {
-			if(index > 0) doc.font('Helvetica').text(", ", {continued: true});
-			doc.font('Helvetica').text(reg.activityId.name + ' (' + moment(reg.activityId.startDate).format('DD.MM') + '-' + moment(reg.activityId.endDate).format('DD.MM.YYYY') + ')', { continued: true });
+		else if(lang === 'it') {
+			doc.image(config.logo, {
+				fit: [150, 250],
+				align: 'right',
+				valign: 'top'
+			});
+			let grad2 = doc.linearGradient(0, 0, 30, 0);
+			grad2.stop(0, '#ffa500').stop(1, '#ffd27f');
+			doc.rect(0, 0, 30, 950);
+			doc.fill(grad2);
+			doc.fontSize(8).fillAndStroke("grey", "#000");
+			doc.moveDown(0.2);
+			doc.font('Helvetica').text(config.address_it);
+			doc.moveDown(0.2);
+			doc.text(config.internet);
+			doc.moveDown(1);
+			doc.text(registrationsPerChild[0].firstNameChild + ' ' + registrationsPerChild[0].lastNameChild, { align: 'right', width: 450 });
+			doc.moveDown(0.2);
+			doc.text(registrationsPerChild[0].addressChild, { align: 'right', width: 450 });
+			doc.moveDown(0.2);
+			doc.text(registrationsPerChild[0].cityChild, { align: 'right', width: 450});
 			//doc.moveDown(1);
-			fee += calculateReceiptFee(reg, reg.activityId);
-			index += 1;
+			doc.moveDown(1);
+			doc.font('Helvetica').text("Egna, " + moment(Date.now()).format('DD.MM.YYYY'), { align: 'right', width: 450 } );
+			doc.fontSize(26).fillAndStroke("#ffa500", "#000");
+			doc.moveDown(1);
+			doc.font('Helvetica-Bold').text("Conferma di pagamento", { align: 'center', width: 430 });
+			doc.fontSize(8).fillAndStroke("black", "#000");;
+			doc.moveDown(0.5);
+			doc.font('Helvetica').text(config.bonus_it);
+			doc.fontSize(12).fillAndStroke("black", "#000");;	
+			doc.moveDown(1);
+			doc.font('Helvetica').text("Gentili signore e signori,");
+			doc.moveDown(1);
+			doc.font('Helvetica').text("con la presente il " + config.member + " il conferma l’iscrizione " + child + ", per le settimane:", { align: 'left', width: 430 });
+			doc.moveDown(1);
+			fee = 0;
+			index = 0;
+			//doc.font('Helvetica-Bold').text(registrationsPerChild[0].activityId.eventId.name + ' ' + registrationsPerChild[0].activityId.eventId.location, { align: 'left', width: 430 });
+			//doc.moveDown(1);
+			doc.fontSize(12).fillAndStroke("black", "#000");
+			for(let reg of registrationsPerChild) {
+				if(index > 0) doc.font('Helvetica').text(", ", {continued: true});
+				doc.font('Helvetica').text(reg.activityId.name + ' (' + moment(reg.activityId.startDate).format('DD.MM') + '-' + moment(reg.activityId.endDate).format('DD.MM.YYYY') + ')', { continued: true });
+				//doc.moveDown(1);
+				fee += calculateReceiptFee(reg, reg.activityId);
+				index += 1;
+			}
+			doc.text("", { continued: false });
+			doc.moveDown(1).moveDown(1);
+			doc.fontSize(12).fillAndStroke("black", "#000");
+			doc.font('Helvetica').text("nel nostro programma vacanze estive " + new Date().getFullYear() + " " + registrationsPerChild[0].activityId.eventId.name + ' ' + registrationsPerChild[0].activityId.eventId.location + ".", { align: 'left', width: 430 });
+			doc.moveDown(1);
+			doc.font('Helvetica').text("L`importo comlessivo di ", { continued: true });
+			doc.font('Helvetica-Bold').text(fee, { continued: true }).text(" € ", { continued: true });
+			doc.font('Helvetica').text(" è stato versato sul nostro contocorrente.");
+			doc.moveDown(1);
+			doc.font('Helvetica').text("Il Jugenddienst Unterland come organizzazione di volontariato è esente dall’IVA (L. 11 agosto 1991, n. 266).");
+			doc.moveDown(1);
+			doc.image(config.signature_img, {
+				 fit: [200, 200],
+				align: 'right',
+				valign: 'top'
+			});
+			doc.fontSize(10);
+			doc.moveDown(1);
+			doc.font('Helvetica').text(config.signature_it);
 		}
-		doc.text("", { continued: false });
-		doc.moveDown(1);
-		doc.fontSize(12).fillAndStroke("black", "#000");
-		doc.font('Helvetica').text("nel nostro programma vacanze estive " + new Date().getFullYear() + " " + registrationsPerChild[0].activityId.eventId.name + ' ' + registrationsPerChild[0].activityId.eventId.location + ".", { align: 'left', width: 430 });
-		doc.moveDown(1);
-		doc.font('Helvetica').text("L`importo comlessivo di ", { continued: true });
-		doc.font('Helvetica-Bold').text(fee, { continued: true }).text(" € ", { continued: true });
-		doc.font('Helvetica').text(" è stato versato sul nostro contocorrente.");
-		doc.moveDown(1);
-		doc.font('Helvetica').text("Il Jugenddienst Unterland come organizzazione di volontariato è esente dall’IVA (L. 11 agosto 1991, n. 266).");
-		doc.moveDown(1);
-		doc.image(config.signature_img, {
-		 	fit: [200, 200],
-			align: 'right',
-			valign: 'top'
-		});
-		doc.fontSize(10);
-		doc.moveDown(1);
-		doc.font('Helvetica').text(config.signature_it);
-
 		if(i < (childrenUnique.length - 1)) {
 			doc.addPage();
 		}
 	}
-	return doc; //fs.createReadStream(doc);
+	return doc;
 }
 
 exports.getAttachmentConfirmation = function(body, instance, reservations) {

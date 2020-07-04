@@ -7,7 +7,8 @@ router.get('/:userId', auth.requiresApiLogin, MyRegistrationController.find);
 
 router.delete('/:registrationId', auth.requiresApiLogin, MyRegistrationController.delete);
 
-router.get('/confirmation/:registrationId', auth.requiresApiLogin, MyRegistrationController.getConfirmation);
+router.get('/confirmation/de/:registrationId', auth.requiresApiLogin, MyRegistrationController.getConfirmationDe);
+router.get('/confirmation/it/:registrationId', auth.requiresApiLogin, MyRegistrationController.getConfirmationIt);
 
 
 module.exports = router;

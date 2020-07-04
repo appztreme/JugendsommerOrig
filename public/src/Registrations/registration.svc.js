@@ -59,8 +59,11 @@ app.service('RegistrationSvc', function($http) {
 		return $http.delete('/api/myRegistrations/' + registrationId);
 	}
 
-	this.getMyConfirmation = function(registrationId) {
-		return $http.get('/api/myregistrations/confirmation/' + registrationId, { responseType: 'arraybuffer' });
+	this.getMyConfirmation = function(registrationId, lang) {
+		if(lang === 'de')
+			return $http.get('/api/myregistrations/confirmation/de/' + registrationId, { responseType: 'arraybuffer' });
+		else
+			return $http.get('/api/myregistrations/confirmation/it/' + registrationId, { responseType: 'arraybuffer' });
 	}
 
 	this.create = function(reg) {

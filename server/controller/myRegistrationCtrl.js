@@ -32,19 +32,34 @@ exports.delete = (req, res, next) => {
 	});
 };
 
-exports.getConfirmation = async(req, res, next) => {
+exports.getConfirmationDe = async(req, res, next) => {
 	try {
-		var doc = new pdf();
-		let reg = await RegistrationRepo.findById(req.params.registrationId);
-		let regs = await RegistrationRepo.findByFirstLastNameBirthday(reg.firstNameChild, reg.lastNameChild, reg.birthdayChild);
-		if(regs.length > 0) {
-			let regsInEvent = regs.filter(o => o.activityId.eventId._id.toString() === reg.activityId.eventId._id.toString() && o.isPaymentDone);
-			var instance = platform.getPlatform(req.hostname);
-			doc = await MailBuilder.getConfirmationPDF(instance, regsInEvent);
-		}
+		var doc = await getConfirmation(req.params.registrationId, req.hostname, 'de');
 		res.setHeader('Content-Type', 'application/pdf');
 		res.setHeader('Content-Disposition', 'inline; filename="confirmation.pdf"');
 		doc.pipe(res);
 		doc.end();
-	} catch(err) { next(err); }	
+	} catch(err) { next(err); }
+}
+
+exports.getConfirmationIt = async(req, res, next) => {
+	try {
+		var doc = await getConfirmation(req.params.registrationId, req.hostname, 'it');
+		res.setHeader('Content-Type', 'application/pdf');
+		res.setHeader('Content-Disposition', 'inline; filename="confirmation.pdf"');
+		doc.pipe(res);
+		doc.end();
+	} catch(err) { next(err); }
+}
+
+const getConfirmation = async(registrationId, hostname, lang) => {
+	var doc = new pdf();
+	let reg = await RegistrationRepo.findById(registrationId);
+	let regs = await RegistrationRepo.findByFirstLastNameBirthday(reg.firstNameChild, reg.lastNameChild, reg.birthdayChild);
+	if(regs.length > 0) {
+		let regsInEvent = regs.filter(o => o.activityId.eventId._id.toString() === reg.activityId.eventId._id.toString() && o.isPaymentDone);
+		var instance = platform.getPlatform(hostname);
+		doc = await MailBuilder.getConfirmationPDF(instance, regsInEvent, lang);
+	}
+	return doc;	
 }

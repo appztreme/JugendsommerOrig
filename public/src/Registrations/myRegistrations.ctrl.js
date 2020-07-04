@@ -6,6 +6,11 @@ app.controller('MyRegistrationsCtrl', function($scope, FileSaver, Blob, $locatio
 	// var host = $location.$$host.toLowerCase();
 	// $scope.isKiso = host.indexOf('kiso') !== -1;
 	$scope.platform = PlatformSvc;
+	$scope.confirmationLang = 'de';
+
+	$scope.setConfirmationLang = function(l) {
+		$scope.confirmationLang = l;
+	}
 
 	$scope.lang = $translate.proposedLanguage() || $translate.user();
 
@@ -24,8 +29,8 @@ app.controller('MyRegistrationsCtrl', function($scope, FileSaver, Blob, $locatio
 		});
 	};
 
-	$scope.downloadConfirmation = function(registrationId) {
-		RegistrationSvc.getMyConfirmation(registrationId)
+	$scope.downloadConfirmation = function(registrationId, lang) {
+		RegistrationSvc.getMyConfirmation(registrationId, lang)
 			.success(function(pdf) {
 				var blob = new Blob([pdf], {type: 'application/pdf'});
 				//var txt = await blob.text();
