@@ -2,11 +2,12 @@ app.controller('ShopReservationCtrl', function($scope, $routeParams, IdentitySvc
     $scope.iSvc = IdentitySvc;
     $scope.currentState = 1;
     $scope.count = 1;
-    $scope.responses = [];
+    $scope.responses = []; 
 
     if($scope.iSvc.currentUser) {
         $scope.lender = $scope.iSvc.currentUser.firstName + ' ' + $scope.iSvc.currentUser.lastName;
         $scope.phoneNumber = $scope.iSvc.currentUser.userTel;
+        $scope.location = "-";
     }
 
     $scope.setState = function(state) {
@@ -34,80 +35,91 @@ app.controller('ShopReservationCtrl', function($scope, $routeParams, IdentitySvc
         $scope.count = 1;
     }
 
-    $scope.getTypes = function(overviews) {
-        var result = [];
+    // $scope.getTypes = function(overviews) {
+    //     var result = [];
+    //     if(overviews) {
+    //         for(var i=0; i<overviews.length; i++) {
+    //             result.push(overviews[i]._id);
+    //         }
+    //     }
+    //     return result;
+    // }
+
+    $scope.addMultiSelectProps = function(overviews) {
         if(overviews) {
             for(var i=0; i<overviews.length; i++) {
-                result.push(overviews[i]._id);
+                overviews[i].ticked = false;
+                overviews[i].icon = '<span class="glyphicon glyphicon-th-large"  />';
             }
         }
-        return result;
+        return overviews;
     }
 
-    $scope.getDistinctArticles = function(overviews, type) {
-        var result = [];
-        if(overviews) {
-            for(var i=0; i<overviews.length; i++) {
-                if(overviews[i]._id === type) {
-                    for(var j=0; j<overviews[i].children.length; j++) {
-                        if(result.indexOf(overviews[i].children[j].name) === -1 &&
-                           overviews[i].children[j].status !== 'blocked'
-                          ) {
-                            result.push(overviews[i].children[j].name);
-                        }
-                    }
-                }
-            }
-        }
-        return result;
-    }
+    // $scope.getDistinctArticles = function(overviews, type) {
+    //     var result = [];
+    //     if(overviews) {
+    //         for(var i=0; i<overviews.length; i++) {
+    //             if(overviews[i]._id === type) {
+    //                 for(var j=0; j<overviews[i].children.length; j++) {
+    //                     if(result.indexOf(overviews[i].children[j].name) === -1 &&
+    //                        overviews[i].children[j].status !== 'blocked'
+    //                       ) {
+    //                         result.push(overviews[i].children[j].name);
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //     }
+    //     return result;
+    // }
 
-    $scope.save = function() {
-        $scope.responses = [];
-        var counter = 0;
-        var onSuccess = function(result) {
-            var resp = "Artikel " + result.data.article.code +
-                          " - " + result.data.article.name + 
-                          " wurde von " + moment(result.data.from).format("ll") + " bis " +
-                          moment(result.data.to).format("ll") + " erfolgreich reserviert";
-            $scope.responses.push({hasError: false, response: resp });
-        };
-        var onError = function(err) {
-            $scope.responses.push({hasError: true, response: err.data.split('<br>')[0]}); 
-        };
-        var updateCache = function() {
-                ReservationCacheSvc.location = $scope.location;
-                ReservationCacheSvc.lender = $scope.lender;
-                ReservationCacheSvc.phoneNumber = $scope.phoneNumber;
-                ReservationCacheSvc.from = $scope.from;
-                ReservationCacheSvc.to = $scope.to;
-        };
-        var setRequestSent = function() {
-            $scope.bookingRequestSent = true;
-        };
-        var reserveMore = function() {
-            counter = counter + 1;
-            //console.log("counter", counter);
-            if(counter < $scope.count) {
-                LoansSvc.create($scope.article, $scope.location, $scope.lender, $scope.phoneNumber, $scope.from, $scope.to, $scope.start, $scope.destination, $scope.startTime, $scope.endTime, $scope.participants)
-                    .then(onSuccess, onError)
-                    .then(updateCache)
-                    .then(setRequestSent)
-                    .then(reserveMore);
-            }
-        }
-        LoansSvc.create($scope.article, $scope.location, $scope.lender, $scope.phoneNumber, $scope.from, $scope.to, $scope.start, $scope.destination, $scope.startTime, $scope.endTime, $scope.participants)
-            .then(onSuccess, onError)
-            .then(updateCache)
-            .then(setRequestSent)
-            .then(reserveMore); 
-    }
+    // $scope.save = function() {
+    //     $scope.responses = [];
+    //     var counter = 0;
+    //     var onSuccess = function(result) {
+    //         var resp = "Artikel " + result.data.article.code +
+    //                       " - " + result.data.article.name + 
+    //                       " wurde von " + moment(result.data.from).format("ll") + " bis " +
+    //                       moment(result.data.to).format("ll") + " erfolgreich reserviert";
+    //         $scope.responses.push({hasError: false, response: resp });
+    //     };
+        // var onError = function(err) {
+        //     $scope.responses.push({hasError: true, response: err.data.split('<br>')[0]}); 
+        // };
+        // var updateCache = function() {
+        //         ReservationCacheSvc.location = $scope.location;
+        //         ReservationCacheSvc.lender = $scope.lender;
+        //         ReservationCacheSvc.phoneNumber = $scope.phoneNumber;
+        //         ReservationCacheSvc.from = $scope.from;
+        //         ReservationCacheSvc.to = $scope.to;
+        // };
+        // var setRequestSent = function() {
+        //     $scope.bookingRequestSent = true;
+        // };
+    //     var reserveMore = function() {
+    //         counter = counter + 1;
+    //         //console.log("counter", counter);
+    //         if(counter < $scope.count) {
+    //             LoansSvc.create($scope.article, $scope.location, $scope.lender, $scope.phoneNumber, $scope.from, $scope.to, $scope.start, $scope.destination, $scope.startTime, $scope.endTime, $scope.participants)
+    //                 .then(onSuccess, onError)
+    //                 .then(updateCache)
+    //                 .then(setRequestSent)
+    //                 .then(reserveMore);
+    //         }
+    //     }
+    //     LoansSvc.create($scope.article, $scope.location, $scope.lender, $scope.phoneNumber, $scope.from, $scope.to, $scope.start, $scope.destination, $scope.startTime, $scope.endTime, $scope.participants)
+    //         .then(onSuccess, onError)
+    //         .then(updateCache)
+    //         .then(setRequestSent)
+    //         .then(reserveMore); 
+    // }
 
-    ArticlesSvc.overview().then(function(response) {
-        $scope.overviews = response.data;
+    ArticlesSvc.find().then(function(response) {
+        $scope.overviews = $scope.addMultiSelectProps(response.data);
         $scope.bookingRequestSent = false;
-        $scope.types = $scope.getTypes($scope.overviews);
-        $scope.articles = $scope.getDistinctArticles($scope.overviews, $scope.type);
+        console.log($scope.overviews);
+        // $scope.types = $scope.getTypes($scope.overviews);
+        // $scope.articles = $scope.getDistinctArticles($scope.overviews, $scope.type);
     });
     
     if(ReservationCacheSvc.hasData()) {

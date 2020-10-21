@@ -6,9 +6,13 @@ app.service('ArticlesSvc', function($http) {
         return $http.get('/api/articles/overview/' + search);
     }
 
+    this.find = function() {
+        return $http.get('/api/articles');
+    }
+
 	this.findById = function(articleId) {
 		return $http.get('/api/articles/' + articleId);
-	};
+    };
 
 	this.create = function(article) {
 	    return $http.post('/api/articles', article);	

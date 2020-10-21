@@ -15,26 +15,26 @@
                         <div class="panel-body">
                             <div class='container'>
                                 <!-- LOCATION -->
-                                <div class='form-group' ng-class='{ "has-error": reservationForm.location.$invalid }'>
+                                <!-- <div class='form-group' ng-class='{ "has-error": reservationForm.location.$invalid }'>
                                     <label for='location' class='control-label col-sm-2'>Einsatzort</label>
                                     <div class='col-sm-8'>
                                         <input name='location' type='text' ng-model='location' required maxlength='100' class='form-control'></input>
                                     </div>
-                                </div>
+                                </div> -->
                                 <!-- LENDER -->
-                                <div class='form-group' ng-class='{ "has-error": reservationForm.lender.$invalid }'>
+                                <!-- <div class='form-group' ng-class='{ "has-error": reservationForm.lender.$invalid }'>
                                     <label for='lender' class='control-label col-sm-2'>Ausleiher/in</label>
                                     <div class='col-sm-8'>
                                         <input name='lender' type='text' ng-model='lender' class='form-control' required maxlenght='100' readonly></input>
                                     </div>
-                                </div>
+                                </div> -->
                                 <!-- PHONENUMBER -->
-                                <div class='form-group' ng-class='{ "has-error": reservationForm.phoneNumber.$invalid }'>
+                                <!-- <div class='form-group' ng-class='{ "has-error": reservationForm.phoneNumber.$invalid }'>
                                     <label for='phoneNumber' class='control-label col-sm-2'>Tel.Nr. Kontakt</label>
                                     <div class='col-sm-8'>
                                         <input name='phoneNumber' type='tel' ng-model='phoneNumber' required maxlength='150' readonly class='form-control'></input>
                                     </div>
-                                </div>
+                                </div> -->
                                 <!-- FROM -->
 	                            <div class='form-group' ng-class='{ "has-error": reservationForm.from.$invalid }'>
                                 <label for='from' class='control-label col-sm-2'>Von</label>
@@ -72,7 +72,15 @@
                     <div class="panel-body">
                         <div class='panel-body'>
                             <div class='container'>
-                                <label for='typeFilter' class='control-label col-sm-2'>Type:</label>
+                                <div     
+                                    isteven-multi-select
+                                    input-model="overviews"
+                                    output-model="outputOverviews"
+                                    button-label="icon name"
+                                    item-label="icon name description type"
+                                    tick-property="ticked"
+                                ></div>
+                                <!--<label for='typeFilter' class='control-label col-sm-2'>Type:</label>
                                 <div class='col-sm-5 input-group'>
                                     <select id='typeFilter' class='form-control' ng-model='type' ng-change='updateType()'>
                                         <option ng-repeat='t in types' value='{{t}}'>{{t}}</option>
@@ -90,7 +98,7 @@
                                 <div class='col-sm-5 input-group'>
                                     <input type="number" id='countFilter' class='form-control' ng-model='count' min="1" step="1" ng-disabled="type === 'Bus'"></input>
                                 </div>
-                                <br />
+                                <br />-->
                                 <div ng-show="type === 'Bus'" class="container">
                                     <!-- START -->
                                     <div class='form-group' ng-class='{ "has-error": reservationForm.start.$invalid }'>
