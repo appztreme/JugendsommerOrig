@@ -20,11 +20,11 @@ const main = async() => {
         newEvent.type = ev.type;
         newEvent.location = ev.location;
         newEvent.location_it = ev.location_it;
-        // newEvent.startDate = ev.startDate;
-        // newEvent.endDate = ev.endDate;
-        // newEvent.visibleFrom = new Date("2020-05-25");
-        // newEvent.visibleTo = new Date("2020-06-01"); //ev.visibleTo;
-        // newEvent.deadline = new Date("2020-06-01"); //ev.deadline;
+        newEvent.startDate = ev.startDate;
+        newEvent.endDate = ev.endDate;
+        newEvent.visibleFrom = ev.visibleFrom;
+        newEvent.visibleTo = ev.visibleTo;
+        newEvent.deadline = ev.deadline;
         newEvent.startDate.setFullYear(newEvent.startDate.getFullYear() + 1);
         newEvent.endDate.setFullYear(newEvent.endDate.getFullYear() + 1)
         newEvent.visibleFrom.setFullYear(newEvent.visibleFrom.getFullYear() + 1);
@@ -64,8 +64,8 @@ const main = async() => {
             newActivity.name_it = act.name_it;
             newActivity.description = act.description;
             newActivity.description_it = act.description_it;
-            // newActivity.startDate = act.startDate;
-            // newActivity.endDate = act.endDate;
+            newActivity.startDate = act.startDate;
+            newActivity.endDate = act.endDate;
             newActivity.startDate.setFullYear(newActivity.startDate.getFullYear() + 1);
             newActivity.endDate.setFullYear(newActivity.endDate.getFullYear() + 1);
             newActivity.eventId = newEvent._id;
