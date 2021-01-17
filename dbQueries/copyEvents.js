@@ -13,18 +13,23 @@ const main = async() => {
     for(let i = 0; i < events.length; i++) {
         const ev = events[i];
         let newEvent = new Event();
-        newEvent.name = ev.name + " - Neu";
-        newEvent.name_it = ev.name_it + " - Nuovo";
+        newEvent.name = ev.name;
+        newEvent.name_it = ev.name_it;
         newEvent.description = ev.description;
         newEvent.description_it = ev.description_it;
         newEvent.type = ev.type;
         newEvent.location = ev.location;
         newEvent.location_it = ev.location_it;
-        newEvent.startDate = ev.startDate;
-        newEvent.endDate = ev.endDate;
-        newEvent.visibleFrom = new Date("2020-05-25");
-        newEvent.visibleTo = new Date("2020-06-01"); //ev.visibleTo;
-        newEvent.deadline = new Date("2020-06-01"); //ev.deadline;
+        // newEvent.startDate = ev.startDate;
+        // newEvent.endDate = ev.endDate;
+        // newEvent.visibleFrom = new Date("2020-05-25");
+        // newEvent.visibleTo = new Date("2020-06-01"); //ev.visibleTo;
+        // newEvent.deadline = new Date("2020-06-01"); //ev.deadline;
+        newEvent.startDate.setFullYear(newEvent.startDate.getFullYear() + 1);
+        newEvent.endDate.setFullYear(newEvent.endDate.getFullYear() + 1)
+        newEvent.visibleFrom.setFullYear(newEvent.visibleFrom.getFullYear() + 1);
+        newEvent.visibleTo.setFullYear(newEvent.visibleTo.getFullYear() + 1);
+        newEvent.deadline.setFullYear(newEvent.deadline.getFullYear() + 1);
         newEvent.penalty = ev.penalty;
         newEvent.budgetBusiness = ev.budgetBusiness;
         newEvent.budgetFood = ev.budgetFood;
@@ -35,11 +40,7 @@ const main = async() => {
         newEvent.contacts = ev.contacts;
         newEvent.contactRels = ev.contactRels;
 
-        // newEvent.startDate.setFullYear(newEvent.startDate.getFullYear() + 1);
-        // newEvent.endDate.setFullYear(newEvent.endDate.getFullYear() + 1)
-        // newEvent.visibleFrom.setFullYear(newEvent.visibleFrom.getFullYear() + 1);
-        // newEvent.visibleTo.setFullYear(newEvent.visibleTo.getFullYear() + 1);
-        // newEvent.deadline.setFullYear(newEvent.deadline.getFullYear() + 1);
+        
         if(verbose) {
             console.log(chalk.blue("Existing Event:"))
             console.log(chalk.blue(ev));
@@ -63,8 +64,10 @@ const main = async() => {
             newActivity.name_it = act.name_it;
             newActivity.description = act.description;
             newActivity.description_it = act.description_it;
-            newActivity.startDate = act.startDate;
-            newActivity.endDate = act.endDate;
+            // newActivity.startDate = act.startDate;
+            // newActivity.endDate = act.endDate;
+            newActivity.startDate.setFullYear(newActivity.startDate.getFullYear() + 1);
+            newActivity.endDate.setFullYear(newActivity.endDate.getFullYear() + 1);
             newActivity.eventId = newEvent._id;
             newActivity.maxParticipants = act.maxParticipants;
             newActivity.curParticipants = 0;
@@ -72,8 +75,7 @@ const main = async() => {
             newActivity.contacts = act.contacts;
             newActivity.contactRels = act.contactRels;
 
-            // newActivity.startDate.setFullYear(newActivity.startDate.getFullYear() + 1);
-            // newActivity.endDate.setFullYear(newActivity.endDate.getFullYear() + 1);
+            
             if(verbose) {
                 console.log(chalk.yellow("Existing Activity:"))
                 console.log(chalk.yellow(act));
