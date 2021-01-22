@@ -66,7 +66,9 @@ var registrationSchema = db.Schema({
     move: { type: Boolean, required: true, default: false },
     unavailable: { type: Boolean, required: true, default: false },
     waitlist: { type: Boolean, required: true, default: false }
-  }
+  },
+  taxNumber: { type: String, required: false },
+  gender: { type: String, enum: ['male', 'female'], required: true, default: 'female' },
 });
 
 registrationSchema.index({firstNameChild: 1, lastNameChild: 1, activityId: 1}, {unique: true});

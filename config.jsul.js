@@ -10,6 +10,7 @@ module.exports = {
         {"name": 'Neumarkt',                "name_it": 'Egna'},
         {"name": 'Tramin',                  "name_it": 'Termeno'},
         {"name": 'Truden',                  "name_it": 'Trodena'},
+        {"name": 'Salurn',                  "name_it": 'Salorno'},
     ],
     "tSizes": [
         {"name": '3-4 Jahre/89-104cm',             "name_it": '3-4 anni/89-104cm'},
@@ -20,7 +21,7 @@ module.exports = {
         {"name": 'Erwachsenengröße S',             "name_it": 'Misura adulti S'},
         {"name": 'Erwachsenengröße M',             "name_it": 'Misura adulti M'},
     ],
-    "cities": ['Altrei', 'Aldein', 'Auer', 'Kurtatsch', 'Laag', 'Margreid', 'Montan', 'Neumarkt', 'Tramin', 'Truden', 'Andere'],
+    "cities": ['Altrei', 'Aldein', 'Auer', 'Kurtatsch', 'Laag', 'Margreid', 'Montan', 'Neumarkt', 'Tramin', 'Truden', 'Salurn', 'Andere'],
     "db_test": "mongodb://localhost/jdul_test",
     "db_prod": "mongodb://localhost/jdul",
     "shop_test": "mongodb://localhost/jsul_shop_test",

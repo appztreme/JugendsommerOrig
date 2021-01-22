@@ -12,6 +12,8 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 	$scope.selectedActivities = [];
 	$scope.emailParentCheck = '';
 	$scope.disabledForSibling = false;
+	$scope.taxNumber = '';
+	$scope.gender = "female";
 	$scope.covidRules = {
 		isAtRisk: false,
 		isPrioWork: false,
@@ -288,6 +290,8 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 				acceptsNewsletter: $scope.acceptsNewsletter,
 				preferredFellow: $scope.preferredFellow,
 				covidRules: $scope.covidRules,
+				taxNumber: $scope.taxNumber,
+				gender: $scope.gender,
 				type: $scope.type
 			})
 			.error(function(err) {
@@ -340,6 +344,8 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 				$scope.selectedActivities = [];
 				$scope.currentState = 1;
 				$scope.preferredFellow = '';
+				$scope.taxNumber = '';
+				$scope.gender = 'female';
 				$scope.covidRules = {
 					isAtRisk: false,
 					isPrioWork: false,

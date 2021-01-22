@@ -178,6 +178,7 @@ db.registrations.insert({
     activityId: ObjectId('111111111111111111111102'),
     healthChild: 'alles gut',
     registrationDate: new Date(curYear, 5,5),
+    gender: 'female',
     userId: ObjectId('111111111111111111110001')
 });
 
@@ -194,6 +195,7 @@ db.registrations.insert({
     activityId: ObjectId('111111111111111111111102'),
     healthChild: '-',
     registrationDate: new Date(curYear, 7,12),
+    gender: 'male',
     userId: ObjectId('111111111111111111110001')
 });
 
@@ -213,6 +215,7 @@ db.registrations.insert({
     instrument: 'french horn',
     instrumentYears: '4 Jahre',
     registrationDate: new Date(curYear, 6,19),
+    gender: 'male',
     userId: ObjectId('111111111111111111110001')
 });
 
@@ -232,6 +235,7 @@ db.registrations.insert({
     instrument: 'french horn',
     instrumentYears: '4 Jahre',
     registrationDate: new Date(2016, 6,19),
+    gender: "female",
     userId: ObjectId('111111111111111111110001')
 });
 
