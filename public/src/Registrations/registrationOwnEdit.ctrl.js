@@ -88,7 +88,7 @@ app.controller('RegistrationOwnEditCtrl', function($scope, $filter, $routeParams
 		$scope.birthdayChild = $filter('date')(new Date(registration.birthdayChild), 'yyyy-MM-dd');
 		$scope.schoolChild = registration.schoolChild;
 		$scope.cityChild = registration.cityChild;
-		$scope.addressChild = registraton.addressChild;
+		$scope.addressChild = registration.addressChild;
 		$scope.hasHealthIssues = registration.hasHealthIssues;
 		$scope.healthIncompatibility = registration.healthIncompatibility;
 		$scope.healthAllergy = registration.healthAllergy;
