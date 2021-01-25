@@ -60,13 +60,9 @@
 	<div class='form-group' ng-class='{ "has-error": registrationForm.gender.$invalid }'>
 		<label for='genderChild' class='control-label col-sm-2'>{{"RESERVATION.LABEL_GENDER_CHILD" | translate}}</label>
 		<div class='col-sm-8'>
-				<select ng-show='lang === "de"' name='genderChild' class='sel-base form-control' ng-model='gender'>
+				<select name='genderChild' class='sel-base form-control' ng-model='gender'>
 					<option value='female'>weiblich</option>
 					<option value='male'>männlich</option>
-				</select>
-				<select ng-show="lang === 'it'" name='genderChild' class='sel-base form-control' ng-model='gender'>
-					<option value='female'>feminile</option>
-					<option value='male'>maschile</option>
 				</select>
 		</div>
 	</div>
