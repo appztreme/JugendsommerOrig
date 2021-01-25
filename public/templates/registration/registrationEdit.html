@@ -56,12 +56,33 @@
 			<input name='lastNameChild' type='text' ng-model='lastNameChild' class='form-control' required maxlenght='100'></input>
 		</div>
 	</div>
+	<!-- GENDER -->
+	<div class='form-group' ng-class='{ "has-error": registrationForm.gender.$invalid }'>
+		<label for='genderChild' class='control-label col-sm-2'>{{"RESERVATION.LABEL_GENDER_CHILD" | translate}}</label>
+		<div class='col-sm-8'>
+				<select ng-show='lang === "de"' name='genderChild' class='sel-base form-control' ng-model='gender'>
+					<option value='female'>weiblich</option>
+					<option value='male'>männlich</option>
+				</select>
+				<select ng-show="lang === 'it'" name='genderChild' class='sel-base form-control' ng-model='gender'>
+					<option value='female'>feminile</option>
+					<option value='male'>maschile</option>
+				</select>
+		</div>
+	</div>
 	<!-- BIRTHDAYCHILD -->
 	<div class='form-group' ng-class='{ "has-error": registrationForm.birthdayChild.$invalid }'>
 		<label for='birthdayChild' class='control-label col-sm-2'>Geburtstag</label>
 		<div class='col-sm-10'>
 			<ng-datepicker ng-show='!platform.isJDUL()' ng-model='birthdayChild' view-format="DD.MM.YYYY"  locale='de' required></ng-datepicker>
 			<input ng-show='platform.isJDUL()' type='date' ng-model='birthdayChild' required></input>
+		</div>
+	</div>
+	<!-- TAXNUMBER -->
+	<div ng-hide='platform.isJDUL()' class='form-group' ng-class='{ "has-error": registrationForm.taxNumber.$invalid }'>
+		<label for='lastNameChild' class='control-label col-sm-2'>{{"RESERVATION.LABEL_TAXNUMBER" | translate}}</label>
+		<div class='col-sm-8'>
+			<input name='taxNumberChild' type='text' ng-model='taxNumber' class='form-control' maxlenght='100'></input>
 		</div>
 	</div>
 	<!-- SCHOOLCHILD -->

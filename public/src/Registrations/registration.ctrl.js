@@ -12,7 +12,7 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 	$scope.selectedActivities = [];
 	$scope.emailParentCheck = '';
 	$scope.disabledForSibling = false;
-	$scope.taxNumber = '';
+	$scope.taxNumber = ' ';
 	$scope.gender = "female";
 	$scope.covidRules = {
 		isAtRisk: false,
