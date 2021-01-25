@@ -57,7 +57,7 @@ app.controller('RegistrationEditCtrl', function($scope, $filter, $routeParams, $
 			$scope.registration.acceptsOptionalFee = $scope.acceptsOptionalFee;
 			$scope.registration.isSiblingRegistration = $scope.isSiblingRegistration;
 			$scope.registration.taxNumber = $scope.taxNumber;
-			$scope.registraton.gender = $scope.gender;
+			$scope.registration.gender = $scope.gender;
 			$scope.registration.covidRules = $scope.covidRules;
 
 
