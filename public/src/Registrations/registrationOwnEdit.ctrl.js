@@ -29,6 +29,7 @@ app.controller('RegistrationOwnEditCtrl', function($scope, $filter, $routeParams
 			$scope.registration.healthIncompatibility = $scope.healthIncompatibility;
 			$scope.registration.healthIllnes = $scope.healthIllnes;
 			$scope.registration.cityChild = $scope.cityChild;
+			$scope.registration.addressChild = $scope.addressChild;
 			$scope.registration.hasDisability = $scope.hasDisability;
 			$scope.registration.disabilityDescription = $scope.disabilityDescription;
 			$scope.registration.diagnosticDescription = $scope.diagnosticDescription;
@@ -66,6 +67,9 @@ app.controller('RegistrationOwnEditCtrl', function($scope, $filter, $routeParams
 				$scope.canSwim = false;
 				$scope.canGoHomeAllone = false;
 			})
+			.error(function(err) {
+				console.log("ERR:", err);
+			})
 			.then(function() {
 				NotificationSvc.notify('Aenderungen erfolgreich gespeichert');
 				$location.path('/myRegistrations');
@@ -84,6 +88,7 @@ app.controller('RegistrationOwnEditCtrl', function($scope, $filter, $routeParams
 		$scope.birthdayChild = $filter('date')(new Date(registration.birthdayChild), 'yyyy-MM-dd');
 		$scope.schoolChild = registration.schoolChild;
 		$scope.cityChild = registration.cityChild;
+		$scope.addressChild = registraton.addressChild;
 		$scope.hasHealthIssues = registration.hasHealthIssues;
 		$scope.healthIncompatibility = registration.healthIncompatibility;
 		$scope.healthAllergy = registration.healthAllergy;
