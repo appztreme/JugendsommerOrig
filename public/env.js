@@ -119,7 +119,7 @@
         },
         "SELECTION": {
             "TITLE": "Wir sind in folgenden Gemeinden vertreten",
-            "TITLE_KISO": "KISO 2020",
+            "TITLE_KISO": "KISO 2021",
             "PROGRAM": "Programme",
             "INFO": "Bitte lesen Sie sich vor der Anmeldung aufmerksam unsere Allgemeinen Geschäftsbedingungen durch!",
         },
@@ -318,7 +318,7 @@
         },
         "SELECTION": {
             "TITLE": "Siamo presenti nei seguenti comuni",
-            "TITLE_KISO": "Kiso 2020",
+            "TITLE_KISO": "Kiso 2021",
             "PROGRAM": "programmi",
             "INFO": "Preghiamo di leggere attentamente le nostre condizioni generali prima di effettuare l’iscrizione"
         },

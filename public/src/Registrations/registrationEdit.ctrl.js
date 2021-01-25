@@ -103,6 +103,9 @@ app.controller('RegistrationEditCtrl', function($scope, $filter, $routeParams, $
 				$scope.taxNumber = null;
 				$scope.gender = null;
 			})
+			.error(function(err) {
+				console.log(err);
+			})
 			.then(function() {
 				NotificationSvc.notify('Aenderungen erfolgreich gespeichert');
 				$location.path('/report/');
