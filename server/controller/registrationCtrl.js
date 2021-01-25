@@ -256,8 +256,8 @@ exports.update = (req, res, next) => {
 		reg.commentInternal = req.body.commentInternal;
 		reg.preferredFellow = req.body.preferredFellow;
 		reg.covidRules = req.body.covidRules;
-		reg.taxNumber = req.taxNumber;
-		reg.gender = req.gender;
+		reg.taxNumber = req.body.taxNumber;
+		reg.gender = req.body.gender;
 		reg.save(function(err, regDb) {
 			if(err) { console.log(err); return next(err); }
 			res.status(201).json(regDb);

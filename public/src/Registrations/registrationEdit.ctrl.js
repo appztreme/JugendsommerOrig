@@ -56,6 +56,8 @@ app.controller('RegistrationEditCtrl', function($scope, $filter, $routeParams, $
 			$scope.registration.acceptsMediaPublication = $scope.acceptsMediaPublication;
 			$scope.registration.acceptsOptionalFee = $scope.acceptsOptionalFee;
 			$scope.registration.isSiblingRegistration = $scope.isSiblingRegistration;
+			$scope.registration.taxNumber = $scope.taxNumber;
+			$scope.registraton.gender = $scope.gender;
 			$scope.registration.covidRules = $scope.covidRules;
 
 
@@ -98,6 +100,8 @@ app.controller('RegistrationEditCtrl', function($scope, $filter, $routeParams, $
 				$scope.acceptsNewsletter = false;
 				$scope.acceptsOptionalFee = false;
 				$scope.isSiblingRegistration = false;
+				$scope.taxNumber = null;
+				$scope.gender = null;
 			})
 			.then(function() {
 				NotificationSvc.notify('Aenderungen erfolgreich gespeichert');
@@ -140,6 +144,8 @@ app.controller('RegistrationEditCtrl', function($scope, $filter, $routeParams, $
 		$scope.disabilityDescription = registration.disabilityDescription;
 		$scope.canSwim = registration.canSwim;
 		$scope.canGoHomeAllone = registration.canGoHomeAllone;
+		$scope.taxNumber = registration.taxNumber;
+		$scope.gender = registration.gender;
 		$scope.needsEbK = registration.needsEbK;
 		$scope.commentInternal = registration.commentInternal;
 		$scope.acceptsMediaPublication = registration.acceptsMediaPublication;
