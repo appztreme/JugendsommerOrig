@@ -61,7 +61,7 @@
 						<div class='form-group' ng-class='{ "has-error": registrationForm.cityChild.$invalid }'>
 							<label for='cityChild' class='control-label col-sm-2'>{{"RESERVATION.LABEL_CITY_CHILD" | translate}}</label>
 							<div class='col-sm-6'>
-								<select name='cityChild' class='sel-base form-control' ng-disabled="disabledForSibling" ng-model='cityChild'>
+								<select name='cityChild' class='sel-base form-control' ng-disabled="disabledForSibling" required="required" ng-model='cityChild'>
 									<option ng-repeat="city in cities" value='{{city}}'>{{city}}</option>
 								</select>
 								<div ng-show="(platform.isJDUL() || platform.isTest()) && isOtherCityVisible()">
@@ -86,7 +86,7 @@
 							</div>
 						</div>
 						<!-- GENDER -->
-						<div class='form-group' ng-class='{ "has-error": registrationForm.gender.$invalid }'>
+						<div class='form-group' ng-hide="platform.isJugendsommer()" ng-class='{ "has-error": registrationForm.gender.$invalid }'>
 							<label for='genderChild' class='control-label col-sm-2'>{{"RESERVATION.LABEL_GENDER_CHILD" | translate}}</label>
 							<div class='col-sm-8'>
 									<select ng-show='lang === "de"' name='genderChild' class='sel-base form-control' ng-model='gender'>
@@ -110,7 +110,7 @@
 							</div>
 						</div>
 						<!-- TAXNUMBER -->
-						<div ng-hide='platform.isJDUL()' class='form-group' ng-class='{ "has-error": registrationForm.taxNumber.$invalid }'>
+						<div ng-hide='platform.isJugendsommer()' class='form-group' ng-class='{ "has-error": registrationForm.taxNumber.$invalid }'>
 							<label for='lastNameChild' class='control-label col-sm-2'>{{"RESERVATION.LABEL_TAXNUMBER" | translate}}</label>
 							<div class='col-sm-8'>
 								<input name='taxNumberChild' type='text' ng-model='taxNumber' class='form-control' maxlenght='100'></input>

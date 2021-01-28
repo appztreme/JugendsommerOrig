@@ -66,7 +66,8 @@
             "PAYMENT": "Auszahlung",
             "LENDINGS": "Material",
             "USERSEARCH": "User",
-            "AGB": "AGB"
+            "AGB": "AGB",
+            "FAQ": "Anleitung"
         },
         "BTN": {
             "RESERVE": "Anmelden",
@@ -265,7 +266,8 @@
             "PAYMENT": "Computo",
             "LENDINGS": "Materiale",
             "USERSEARCH": "Utente",
-            "AGB": "Condizioni Generali"
+            "AGB": "Condizioni Generali",
+            "FAQ": "FAQ"
         },
         "BTN": {
             "RESERVE": "Iscrizione",
