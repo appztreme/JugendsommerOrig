@@ -155,6 +155,7 @@
 			</th>
 			<th>Benachrichtigt</th>
 			<th>Refundiert</th>
+			<th>zuerst Warteliste</th>
 			<th ng-show='platform.isJugendsommer() || platform.isTest()'>Verschieben</th>
 			<th ng-show='platform.isJugendsommer() || platform.isTest()'>nicht erreicht</th>
 			<th ng-show='platform.isJugendsommer() || platform.isTest()'>Warteliste</th>
@@ -233,6 +234,7 @@
 			<td ng-class='{"bg-success": reg.isPaymentDone, "bg-danger": !reg.isPaymentDone}'><input type='checkbox' ng-model='reg.isPaymentDone' ng-change='updateIsPaymentDone(reg._id, reg.isPaymentDone)' style='margin-right:8px' />{{formatBool(reg.isPaymentDone)}}</td>
 			<td ng-class='{"bg-success": reg.isEmailNotified, "bg-danger": !reg.isEmailNotified}'><input type='checkbox' ng-model='reg.isEmailNotified' ng-change='updateIsEmailNotified(reg._id, reg.isEmailNotified)' style='margin-right:8px' />{{formatBool(reg.isEmailNotified)}}</td>
 			<td><input type='checkbox' ng-model='reg.isRefunded' style='margin-right:8px' ng-change='updateProperty(reg._id, "isRefunded", reg.isRefunded)' />{{formatBool(reg.isRefunded)}}</td>
+			<td>{{formatBool(reg.wasWaiting)}}</td>
 			<td ng-show='platform.isJugendsommer() || platform.isTest()' style="background-color:bisque;"><input type='checkbox' ng-model='reg.transferStatus.move' style='margin-right:8px' ng-change='updateProperty(reg._id, "transferStatus.move", reg.transferStatus.move)' />{{formatBool(reg.transferStatus.move)}}</td>
 			<td ng-show='platform.isJugendsommer() || platform.isTest()' style="background-color:bisque;"><input type='checkbox' ng-model='reg.transferStatus.unavailable' style='margin-right:8px' ng-change='updateProperty(reg._id, "transferStatus.unavailable", reg.transferStatus.unavailable)' />{{formatBool(reg.transferStatus.unavailable)}}</td>
 			<td ng-show='platform.isJugendsommer() || platform.isTest()' style="background-color:bisque;"><input type='checkbox' ng-model='reg.transferStatus.waitlist' style='margin-right:8px' ng-change='updateProperty(reg._id, "transferStatus.waitlist", reg.transferStatus.waitlist)' />{{formatBool(reg.transferStatus.waitlist)}}</td>

@@ -123,7 +123,7 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 	$scope.tShirtSizes = conf.tSizes;
 	$scope.schoolLevels = $scope.getSchoolLevels();
 	$scope.cityChild = undefined; //PlatformSvc.getDefaultCity();
-	$scope.schoolChild = $scope.schoolLevels.length > 0 ? $scope.schoolLevels[0].name : undefined;
+	$scope.schoolChild = undefined; //$scope.schoolLevels.length > 0 ? $scope.schoolLevels[0].name : undefined;
 	$scope.addressChild = " ";
 	$scope.needsPreCare = false;
 	$scope.needsAbK = true;

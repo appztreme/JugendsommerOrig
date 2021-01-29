@@ -203,6 +203,15 @@ exports.create = async(req, res, next) => {
 							   .populate('eventId', '_id name name_it location location_it deadline feePerWeek penalty optionalFeePerWeek siblingDiscount')
 							   .select('_id name name_it maxParticipants curParticipants eventId startDate endDate');
 	} catch(e) { console.log(e); }
+	// if(activities) {
+	// 	for(var j=0; j < regs.length; i++) {
+	// 		var reg = regs[j];
+	// 		var act = activities[activities.findIndex((el) => el._id === reg.activityId)];
+	// 		if(act && act.maxParticipants <= act.curParticipants){
+	// 			reg.wasWaiting = true;
+	// 		}
+	// 	}
+	// }
 	Registration.create(regs, function(error, docs) {
 		if(error) { console.log(error); return next(error); }
 		var instance = platform.getPlatform(req.get('host'));
