@@ -142,15 +142,15 @@ exports.getTypeText = function(type, firstNameChild, lastNameChild, location, in
 	}
 }
 
-exports.getAttachment = function(body, instance) {
+exports.getAttachment = function(body, instance, pdf) {
 	if(instance.isJDBL || instance.isJugendsommer) {
 		return [{ data: body, alternative: true },
 			    { path:"public/assets/jdbl-logo.jpg", type:"image/jpg", headers:{"Content-ID":"<my-image>"} }]
 	}
 	else if (instance.isJDUL) {
 		return [{ data: body, alternative: true },
-			{ path:"public/assets/jdul_ente.jpg", type:"image/jpg", headers:{"Content-ID":"<my-image>"} }]
-		    //{ stream: pdf, type:"application/pdf", name: 'Einzahlungsbestaetigung.pdf' }]
+			{ path:"public/assets/jdul_ente.jpg", type:"image/jpg", headers:{"Content-ID":"<my-image>"} },
+		    { stream: pdf, type:"application/pdf", name: 'Bestaetigung.pdf' }]
 	} else {
 		return [{ data: body, alternative: true }];
 	}
