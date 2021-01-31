@@ -8,16 +8,12 @@ exports.sendTxtMail = function(recipient, firstNameChild, lastNameChild, type, a
 		var text = mailbuilder.getTypeText(type, firstNameChild, lastNameChild, activities[0].eventId.location, instance, activities);
         var fromEmail = mailbuilder.getSender(instance);
 		var subjectEmail = mailbuilder.getSubject(instance, type);
-		var pdf = null;
-		if(instance.isJDUL) {
-			pdf = mailbuilder.getReservationAttachment(type, firstNameChild, lastNameChild, activities, reservation, instance);
-		}
 		server.send({
 		text: text,
 		from: fromEmail,
 		to: recipient,
 		subject: subjectEmail,
-		attachment: mailbuilder.getAttachment(body, instance, pdf)
+		attachment: mailbuilder.getAttachment(body, instance)
 	}, function(err, message) {console.log(err||message); });
 };
 
