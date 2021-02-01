@@ -33,7 +33,8 @@ app.controller('EventsCtrl', function($scope, $routeParams, $location, EventsSvc
 		if(IdentitySvc.isAdmin()) return false;
 		else {
 			var visible = new Date(ev.visibleFrom);
-			visible.setHours(0,0,0);
+			visible.setHours(19,0,0);
+			//visible.setHours(0,0,0);
 			var deadline = new Date(ev.visibleTo);
 			console.log("visible", visible, deadline, new Date(Date.now()));
 			// if((new Date(ev.deadline).getTime()) > Date.now()) return true;
