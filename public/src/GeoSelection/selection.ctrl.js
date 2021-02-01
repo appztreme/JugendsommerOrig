@@ -27,11 +27,13 @@ app.controller('GeoSelectionCtrl', function($scope, $location, GeoSvc, $rootScop
         if(IdentitySvc.isAdmin()) {
             GeoSvc.getSummerSelectionAdmin().success(function(sel) {
                 addNameProp(sel);
+                console.log(sel);
                 $scope.locations = sel;
             });
         } else {
             GeoSvc.getSummerSelection().success(function(sel) {
                 addNameProp(sel);
+                console.log(sel);
                 $scope.locations = sel;
             });
         }

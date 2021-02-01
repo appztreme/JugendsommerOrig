@@ -7,7 +7,7 @@ function authenticate(req, res, next) {
     if(!user) { res.send({success:false})}
     req.logIn(user, function(err) {
       if(err) {return next(err);}
-      console.log(user);
+      //console.log(user);
       res.send({success:true, user: user});
     })
   })
