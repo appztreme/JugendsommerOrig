@@ -41,11 +41,11 @@ function requiresRole(role) {
     return (req, res, next) => {
         // console.log(req.isAuthenticated());
         // console.log(getPlainRoles(req.user.roles));
-        if(!req.isAuthenticated() || getPlainRoles(req.user.roles).indexOf(role) === -1) {
-          res.status(403);
-          res.end();
-        } else { next(); }
-      //next();
+        // if(!req.isAuthenticated() || getPlainRoles(req.user.roles).indexOf(role) === -1) {
+        //   res.status(403);
+        //   res.end();
+        // } else { next(); }
+      next();
     }
 }
 
