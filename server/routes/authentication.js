@@ -7,6 +7,7 @@ function authenticate(req, res, next) {
     if(!user) { res.send({success:false})}
     req.logIn(user, function(err) {
       if(err) {return next(err);}
+      console.log(user);
       res.send({success:true, user: user});
     })
   })
@@ -38,11 +39,13 @@ let getPlainRoles = (roles) => {
 
 function requiresRole(role) {
     return (req, res, next) => {
+        // console.log(req.isAuthenticated());
+        // console.log(getPlainRoles(req.user.roles));
         if(!req.isAuthenticated() || getPlainRoles(req.user.roles).indexOf(role) === -1) {
           res.status(403);
           res.end();
         } else { next(); }
-      next();
+      //next();
     }
 }
 
