@@ -1,5 +1,5 @@
   // count of this years registrations
-db.registrations.find({registrationDate: {$gte: new Date(2020,3,19)}}).count();
+db.registrations.find({registrationDate: {$gte: new Date(2021,1,1)}}).count();
 
 // find userName doubles via map / reduce
 var map = function() {
