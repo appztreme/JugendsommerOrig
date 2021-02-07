@@ -411,7 +411,7 @@ const getConfirmationPDF_JDUL = async function(instance, reservations, config, l
 	return doc;
 }
 
-const getReservationAttachment = () => {
+const getReservationAttachment = async function(){
 	const config = {
 		logo: "public/assets/jdul_logo.png",
 		address: "Widumdurchgang 1 | 39044 Neumarkt | Tel.: +39 0471 812717",
