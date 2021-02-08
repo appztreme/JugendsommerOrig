@@ -156,15 +156,15 @@ exports.getAttachment = function(body, instance, firstNameChild, activities) {
 		doc = getReservationAttachment(firstNameChild, activities);
 		//console.log("pdf", pdf);
 		return [{ data: body, alternative: true },
-				{ path:"public/assets/button_ente.jpg", type:"image/jpg", headers:{"Content-ID":"<my-image>"} },
+				{ path:"public/assets/button_ente.png", type:"image/jpg", headers:{"Content-ID":"<my-image>"} },
 				{ stream: doc, type:"application/pdf", name: 'Bestaetigung.pdf' }];
 	} else {
-		var doc = new pdf();
-		doc = getReservationAttachment(firstNameChild, activities);
+		//var doc = new pdf();
+		//doc = getReservationAttachment(firstNameChild, activities);
 		// console.log("pdf", pdf);
-		return [{ data: body, alternative: true },
-			{ path:"public/assets/jdul_ente.jpg", type:"image/jpg", headers:{"Content-ID":"<my-image>"} },
-			{ stream: doc, type:"application/pdf", name: 'Bestaetigung.pdf' }];
+		return [{ data: body, alternative: true }];
+			//{ path:"public/assets/jdul_ente.png", type:"image/jpg", headers:{"Content-ID":"<my-image>"} },
+			//{ stream: doc, type:"application/pdf", name: 'Bestaetigung.pdf' }];
 	}
 }
 
