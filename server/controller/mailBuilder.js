@@ -146,21 +146,21 @@ exports.getTypeText = function(type, firstNameChild, lastNameChild, location, in
 	}
 }
 
-exports.getAttachment = function(body, instance) {
+exports.getAttachment = function(body, instance, firstNameChild, activities) {
 	if(instance.isJDBL || instance.isJugendsommer) {
 		return [{ data: body, alternative: true },
 			    { path:"public/assets/jdbl-logo.jpg", type:"image/jpg", headers:{"Content-ID":"<my-image>"} }]
 	}
 	else if (instance.isJDUL) {
 		var doc = new pdf();
-		doc = getReservationAttachment();
+		doc = getReservationAttachment(firstNameChild, activities);
 		//console.log("pdf", pdf);
 		return [{ data: body, alternative: true },
-				{ path:"public/assets/jdul_ente.jpg", type:"image/jpg", headers:{"Content-ID":"<my-image>"} },
+				{ path:"public/assets/button_ente.jpg", type:"image/jpg", headers:{"Content-ID":"<my-image>"} },
 				{ stream: doc, type:"application/pdf", name: 'Bestaetigung.pdf' }];
 	} else {
 		var doc = new pdf();
-		doc = getReservationAttachment();
+		doc = getReservationAttachment(firstNameChild, activities);
 		// console.log("pdf", pdf);
 		return [{ data: body, alternative: true },
 			{ path:"public/assets/jdul_ente.jpg", type:"image/jpg", headers:{"Content-ID":"<my-image>"} },
@@ -422,7 +422,7 @@ const getConfirmationPDF_JDUL = async function(instance, reservations, config, l
 	return doc;
 }
 
-const getReservationAttachment = function(){
+const getReservationAttachment = function(firstNameChild, activities){
 	const config = {
 		logo: "public/assets/jdul_logo.png",
 		address: "Widumdurchgang 1 | 39044 Neumarkt | Tel.: +39 0471 812717",
@@ -450,9 +450,61 @@ const getReservationAttachment = function(){
 	doc.moveDown(1).moveDown(1);
 	doc.font('Helvetica-Bold').text("Anmeldebestätigung", { align: 'center', width: 430 });
 	doc.fontSize(14).fillAndStroke("black", "#000");
+	doc.moveDown(1).moveDown(1);
+	doc.text("Liebe/r ").text(firstNameChild).text(',');
+	doc.moveDown(1);
+	doc.text("es freut uns, dass du heuer im Sommer bei unserem JD-SUMMER Programm dabei sein wirst!");
+	doc.moveDown(1);
+	doc.text("Du erhältst innerhalb Mai noch eine weitere E-Mail mit detaillierteren Informationen.");
+	doc.moveDown(1);
+	doc.text("Deine Eltern sind gebeten die untenstehenden Daten zu kontrollieren und die Teilnahmegebühr bis zum 21.03.2021 auf folgendes Konto zu überweisen:");
+	doc.moveDown(1).moveDown(1);
+	doc.text("Jugenddienst Unterland – Raiffeisenkasse Salurn");
+	doc.moveDown(1);
+	doc.text("IBAN: IT 27 T 08220 58371000304204042");
+	doc.moveDown(1);
+	doc.text("mit dem Betreff: Nachname Vorname Wohnort");
+	doc.moveDown(1).moveDown(1);
+	doc.text("Wir freuen uns jetzt schon auf den JD-SUMMER mit dir, hoffen auf schönes Wetter und wünschen euch noch eine tolle Zeit bis zum Sommer.");
+	doc.moveDown(1);
+	doc.text("Euer Jugenddienst Unterland Team");
+
+
+	doc.fontSize(26).fillAndStroke("#ffa500", "#000");
+	doc.moveDown(1).moveDown(1);
+	doc.font('Helvetica-Bold').text("Conferma d'iscrizione", { align: 'center', width: 430 });
+	doc.fontSize(14).fillAndStroke("black", "#000");
+	doc.moveDown(1).moveDown(1);
+	doc.text("Cara/o ").text(firstNameChild).text(",");
+	doc.moveDown(1);
+	doc.text("Siamo contenti che parteciperai al nostro programma JD-SUMMER.");
+	doc.moveDown(1);
+	doc.text("Entro maggio riceverai un'altra e-mail con ulteriori informazioni.");
+	doc.moveDown(1);
+	doc.text("I tuoi genitori sono pregati di controllare i dati sottostanti e di versare la quota d'iscrizione sul nostro conto corrente entro il 21.03.2021:");
+	doc.moveDown(1).moveDown(1);
+	doc.text("Jugenddienst Unterland – Raiffeisenkasse Salurn");
+	doc.moveDown(1);
+	doc.text("IBAN: IT 27 T 08220 58371000304204042");
+	doc.moveDown(1);
+	doc.text("con l‘oggetto: cognome nome comune di residenza");
+	doc.moveDown(1).moveDown(1);
+	doc.text("Non vediamo l'ora che il JD-SUMMER inizi a gonfie vele e speriamo in un bel tempo. Nel frattempo vi auguriamo tanto divertimento.");
+	doc.moveDown(1);
+	doc.text("Il Vostro Team del Jugenddienst Unterland");
+
+	doc.moveDown(1).moveDown(1).moveDown(1);
+	doc.text("Programm / programma - Woche / settimana (Preis / prezzo in €)");
+	doc.moveDown(1);
+	doc.text("----------------------------------------------------------------------------");
+	doc.moveDown(1);
+	for(let act of activities) {
+		doc.text(act.eventId.location).text(" - ").text(act.eventId.name).text(" / ").text(act.eventId.name_it).text(" - ").text(act.name).text(" (").text(act.eventId.feePerWeek).text(" €)");
+		doc.moveDown(1);
+	}
+
 
 	doc.end();
-	console.log("doc finished");
 	return doc;
 }
 
