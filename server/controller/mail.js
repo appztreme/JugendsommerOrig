@@ -4,8 +4,8 @@ const platform = require('./platform')
 var mailbuilder = require('./mailBuilder');
 
 exports.sendTxtMail = function(recipient, firstNameChild, lastNameChild, type, activities, reservation, instance) {
-		var body = mailbuilder.getTypeBody(type, firstNameChild, lastNameChild, activities, reservation, instance);
-		var text = mailbuilder.getTypeText(type, firstNameChild, lastNameChild, activities[0].eventId.location, instance, activities);
+		var body = mailbuilder.getTypeBody(type, firstNameChild, lastNameChild, activities, reservation, instance, false);
+		var text = mailbuilder.getTypeText(type, firstNameChild, lastNameChild, activities[0].eventId.location, instance, activities, false);
         var fromEmail = mailbuilder.getSender(instance);
 		var subjectEmail = mailbuilder.getSubject(instance, type);
 		server.send({
@@ -15,6 +15,20 @@ exports.sendTxtMail = function(recipient, firstNameChild, lastNameChild, type, a
 		subject: subjectEmail,
 		attachment: mailbuilder.getAttachment(body, instance)
 	}, function(err, message) {console.log(err||message); });
+};
+
+exports.sendTxtMailWaiting = function(recipient, firstNameChild, lastNameChild, type, activities, reservation, instance) {
+	var body = mailbuilder.getTypeBody(type, firstNameChild, lastNameChild, activities, reservation, instance, true);
+	var text = mailbuilder.getTypeText(type, firstNameChild, lastNameChild, activities[0].eventId.location, instance, activities, true);
+	var fromEmail = mailbuilder.getSender(instance);
+	var subjectEmail = mailbuilder.getSubject(instance, type);
+	server.send({
+	text: text,
+	from: fromEmail,
+	to: recipient,
+	subject: subjectEmail,
+	attachment: mailbuilder.getAttachment(body, instance)
+}, function(err, message) {console.log(err||message); });
 };
 
 exports.sendReceiptMail = function(recipient, registrations, rnumber, instance) {

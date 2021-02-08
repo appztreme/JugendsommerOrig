@@ -204,18 +204,31 @@ exports.create = async(req, res, next) => {
 							   .select('_id name name_it maxParticipants curParticipants eventId startDate endDate');
 	} catch(e) { console.log(e); }
 
+	let activitiesConfirm = [];
+	let activitiesWaiting = [];
+
 	for(var j=0; j < regs.length; j++) {
 		var reg = regs[j];
 		var act = activities.find(a => a._id.toString() == reg.activityId.toString());
 		if(act) {
-			if(act.maxParticipants <= act.curParticipants)
-			reg.wasWaiting = true;
+			if(act.maxParticipants <= act.curParticipants) {
+				reg.wasWaiting = true;
+				activitiesWaiting.push(act);
+			} else {
+				activitiesConfirm.push(act);
+			}
+			
 		}
 	}
 	Registration.create(regs, function(error, docs) {
 		if(error) { console.log(error); return next(error); }
 		var instance = platform.getPlatform(req.get('host'));
-		mail.sendTxtMail(req.body.emailParent, req.body.firstNameChild, req.body.lastNameChild, req.body.type, activities, req.body, instance);
+		if(activitiesConfirm.length > 0) {
+			mail.sendTxtMail(req.body.emailParent, req.body.firstNameChild, req.body.lastNameChild, req.body.type, activitiesConfirm, req.body, instance);
+		}
+		if(activitiesWaiting.length > 0) {
+			mail.sendTxtMailWaiting(req.body.emailParent, req.body.firstNameChild, req.body.lastNameChild, req.body.type, activitiesWaiting, req.body, instance);
+		}
 		res.status(201).json(docs);
 	})
 };

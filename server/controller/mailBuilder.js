@@ -1,6 +1,7 @@
 const moment = require('moment');
 const pdf = require('pdfkit');
 const fs = require('fs');
+const { Base64Encode } = require('base64-stream');
 
 var htmlStart = "<html><body><p>Die Anmeldung f&uuml;r ";
 var htmlEnd = " f&uuml;r die Sommerprogramme des Jugenddienstes Bozen-Land war <strong>erfolgreich</strong>.</p><p style='color:#ffa500'><strong>Einzahlungsschein wird im März mittels Email zugesandt.</strong></p><p>Vielen Dank f&uuml;r die Anmeldung.</p><h3>Zusammenfassung:</h3>";
@@ -103,7 +104,7 @@ exports.getSubject = function(instance, type) {
 	}
 }
 
-exports.getTypeText = function(type, firstNameChild, lastNameChild, location, instance, activities) {
+exports.getTypeText = function(type, firstNameChild, lastNameChild, location, instance, activities, isWaitlist) {
 	if(instance.isKiso) {
 		if(type === 'jumprun')
 			return textJumpRun;
@@ -113,7 +114,8 @@ exports.getTypeText = function(type, firstNameChild, lastNameChild, location, in
 		}
 			return textKiso;
 	} else if(instance.isJDUL) {
-		if(activities[0].maxParticipants <= activities[0].currentParticipants) { //child on waiting list
+		//if(activities[0].maxParticipants <= activities[0].currentParticipants) { //child on waiting list
+		if(isWaitlist) {
 			return txtWaitingListJDUL + txtWaitingListJDUL_it;
 		} else { // regular reservation
 			return txtStartJDUL_de + location + txtEndJDUL_de + "/r/n/r/n" + txtStartJDUL_it + location + txtEndJDUL_it;
@@ -126,7 +128,8 @@ exports.getTypeText = function(type, firstNameChild, lastNameChild, location, in
 			case 'music':
 			case 'club':
 			case 'bike':
-				if(activities[0].maxParticipants <= activities[0].currentParticipants) { //child on waiting list
+				//if(activities[0].maxParticipants <= activities[0].currentParticipants) { //child on waiting list
+				if(isWaitlist) {
 					return txtStartWait + firstNameChild + " " + lastNameChild + txtEndWait;
 				} else { // regular reservation
 					return txtStart + firstNameChild + " " + lastNameChild + txtEnd;
@@ -148,12 +151,12 @@ exports.getAttachment = function(body, instance) {
 			    { path:"public/assets/jdbl-logo.jpg", type:"image/jpg", headers:{"Content-ID":"<my-image>"} }]
 	}
 	else if (instance.isJDUL) {
-		var pdf = getReservationAttachment();
+		//var pdf = getReservationAttachment();
 		return [{ data: body, alternative: true },
-			{ path:"public/assets/jdul_ente.jpg", type:"image/jpg", headers:{"Content-ID":"<my-image>"} },
-		    { stream: pdf, type:"application/pdf", name: 'Bestaetigung.pdf' }]
+			{ path:"public/assets/jdul_ente.jpg", type:"image/jpg", headers:{"Content-ID":"<my-image>"} }];
+		   // { stream: pdf, type:"application/pdf", name: 'Bestaetigung.pdf' }]
 	} else {
-		return [{ data: body, alternative: true }];
+		return [{ data: body, alternative: true }]
 	}
 }
 
@@ -438,9 +441,13 @@ const getReservationAttachment = async function(){
 	doc.fontSize(26).fillAndStroke("#ffa500", "#000");
 	doc.moveDown(1).moveDown(1);
 	doc.font('Helvetica-Bold').text("Anmeldebestätigung", { align: 'center', width: 430 });
-	doc.fontSize(14).fillAndStroke("black", "#000");;
+	doc.fontSize(14).fillAndStroke("black", "#000");
 
-	return doc;
+	doc.end();
+	return doc.pipe(new Base64Encode());
+	//return doc.pipe(fs.createWriteStream('./test.pdf'));
+	//return doc;
+	//return fs.createReadStream(doc);
 }
 
 exports.getAttachmentConfirmation = function(body, instance, reservations) {
@@ -460,7 +467,7 @@ exports.getAttachmentConfirmation = function(body, instance, reservations) {
 	}
 }
 
-exports.getTypeBody = function(type, firstNameChild, lastNameChild, activities, reservation, instance) {
+exports.getTypeBody = function(type, firstNameChild, lastNameChild, activities, reservation, instance, isWaitList) {
 	// console.log(instance, "platform")
 	if(instance.isKiso) {
 		if(type === 'jumprun')
@@ -472,8 +479,8 @@ exports.getTypeBody = function(type, firstNameChild, lastNameChild, activities, 
 		}
 	}
 	else if (instance.isJDUL) {
-		//console.log(activities[0].maxParticipants, activities[0].curParticipants)
-		if(activities[0].maxParticipants <= activities[0].curParticipants) { //child on waiting list
+		//if(activities[0].maxParticipants <= activities[0].curParticipants) { //child on waiting list
+        if(isWaitList) {
 			return htmlWaitingListJDUL + htmlWaitingListJDUL_it;
 		} else { // regular reservation
 			// return htmlStartJDUL_de + firstNameChild + htmlMiddleJDUL_de + activities[0].eventId.location + htmlEndJDUL_de + "<br />" +
@@ -493,7 +500,8 @@ exports.getTypeBody = function(type, firstNameChild, lastNameChild, activities, 
 			case 'music':
 			case 'club':
 			case 'bike':
-				if(activities[0].maxParticipants <= activities[0].curParticipants) { //child on waiting list
+				//if(activities[0].maxParticipants <= activities[0].curParticipants) { //child on waiting list
+				if(isWaitList) {
 					return htmlStartWait + firstNameChild + " " + lastNameChild + htmlEndWait + getActivityTable(activities) + "<br />" + getReservationTable(reservation) + "<br />" + getJDBLFooter() + htmlCloseWait;
 				} else { // regular reservation
 					return htmlStart + firstNameChild + " " + lastNameChild + htmlEnd + getActivityTable(activities) + "<br />" + getReservationTable(reservation) + "<br />" + getJDBLFooter() + htmlClose;
