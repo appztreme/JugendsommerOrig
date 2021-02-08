@@ -3,7 +3,7 @@ var server  = email.server.connect({});
 const platform = require('./platform')
 var mailbuilder = require('./mailBuilder');
 
-exports.sendTxtMail = async function(recipient, firstNameChild, lastNameChild, type, activities, reservation, instance) {
+exports.sendTxtMail = function(recipient, firstNameChild, lastNameChild, type, activities, reservation, instance) {
 		var body = mailbuilder.getTypeBody(type, firstNameChild, lastNameChild, activities, reservation, instance, false);
 		var text = mailbuilder.getTypeText(type, firstNameChild, lastNameChild, activities[0].eventId.location, instance, activities, false);
         var fromEmail = mailbuilder.getSender(instance);
@@ -13,11 +13,11 @@ exports.sendTxtMail = async function(recipient, firstNameChild, lastNameChild, t
 		from: fromEmail,
 		to: recipient,
 		subject: subjectEmail,
-		attachment: await mailbuilder.getAttachment(body, instance)
+		attachment: mailbuilder.getAttachment(body, instance)
 	}, function(err, message) {console.log(err||message); });
 };
 
-exports.sendTxtMailWaiting = async function(recipient, firstNameChild, lastNameChild, type, activities, reservation, instance) {
+exports.sendTxtMailWaiting = function(recipient, firstNameChild, lastNameChild, type, activities, reservation, instance) {
 	var body = mailbuilder.getTypeBody(type, firstNameChild, lastNameChild, activities, reservation, instance, true);
 	var text = mailbuilder.getTypeText(type, firstNameChild, lastNameChild, activities[0].eventId.location, instance, activities, true);
 	var fromEmail = mailbuilder.getSender(instance);
@@ -27,11 +27,11 @@ exports.sendTxtMailWaiting = async function(recipient, firstNameChild, lastNameC
 	from: fromEmail,
 	to: recipient,
 	subject: subjectEmail,
-	attachment: await mailbuilder.getAttachment(body, instance)
+	attachment: mailbuilder.getAttachment(body, instance)
 }, function(err, message) {console.log(err||message); });
 };
 
-exports.sendReceiptMail = async function(recipient, registrations, rnumber, instance) {
+exports.sendReceiptMail = function(recipient, registrations, rnumber, instance) {
 	//console.log(rnumber, recipient, instance, registrations);
 	var body = mailbuilder.getReceiptBody(registrations, rnumber);
 	var text = mailbuilder.getReceiptTxt();
@@ -43,7 +43,7 @@ exports.sendReceiptMail = async function(recipient, registrations, rnumber, inst
 		from: fromEmail,
 		to: recipient,
 		subject: subject,
-		attachment: await mailbuilder.getAttachment(body, instance)
+		attachment: mailbuilder.getAttachment(body, instance)
 	}, function(err, message) {
 		if(err) console.log("ERROR:", err);
 		else {
@@ -81,7 +81,7 @@ exports.sendConfirmationMail = function(recipient, registrations, instance) {
 	});
 }
 
-exports.sendReminderMail = async function(recipient, registrations, instance) {
+exports.sendReminderMail = function(recipient, registrations, instance) {
 	var reg = registrations.length > 0 ? registrations[0] : {};
 	var rnumber = reg.receiptNumber ? reg.receiptNumber : 0;
 	var body = mailbuilder.getReminderBody(registrations, rnumber);
@@ -93,11 +93,11 @@ exports.sendReminderMail = async function(recipient, registrations, instance) {
 		from: fromEmail,
 		to: recipient,
 		subject: subject,
-		attachment: await mailbuilder.getAttachment(body, instance)
+		attachment: mailbuilder.getAttachment(body, instance)
 	}, function(err, message) { console.log(err||message); });	
 }
 
-exports.sendSorryMail = async function(recipient) {
+exports.sendSorryMail = function(recipient) {
 	var body = mailbuilder.getSorryHtml();
 	var text = mailbuilder.getSorryText();
     var fromEmail = 'sommer@jugenddienst.com';
@@ -108,7 +108,7 @@ exports.sendSorryMail = async function(recipient) {
 		from: fromEmail,
 		to: recipient,
 		subject: subjectEmail,
-		attachment: await mailbuilder.getAttachment(body, platform.getPlatform('www.jugendsommer.com'))
+		attachment: mailbuilder.getAttachment(body, platform.getPlatform('www.jugendsommer.com'))
 	}, function(err, message) {console.log(err||message); });	
 }
 

@@ -146,23 +146,25 @@ exports.getTypeText = function(type, firstNameChild, lastNameChild, location, in
 	}
 }
 
-exports.getAttachment = async function(body, instance) {
+exports.getAttachment = function(body, instance) {
 	if(instance.isJDBL || instance.isJugendsommer) {
 		return [{ data: body, alternative: true },
 			    { path:"public/assets/jdbl-logo.jpg", type:"image/jpg", headers:{"Content-ID":"<my-image>"} }]
 	}
 	else if (instance.isJDUL) {
-		var pdf = await getReservationAttachment();
+		var doc = new pdf();
+		doc = getReservationAttachment();
 		//console.log("pdf", pdf);
 		return [{ data: body, alternative: true },
 				{ path:"public/assets/jdul_ente.jpg", type:"image/jpg", headers:{"Content-ID":"<my-image>"} },
-				{ stream: pdf, type:"application/pdf", name: 'Bestaetigung.pdf' }];
+				{ stream: doc, type:"application/pdf", name: 'Bestaetigung.pdf' }];
 	} else {
-		// var pdf = await getReservationAttachment();
+		var doc = new pdf();
+		doc = getReservationAttachment();
 		// console.log("pdf", pdf);
-		return [{ data: body, alternative: true }];
-			// { path:"public/assets/jdul_ente.jpg", type:"image/jpg", headers:{"Content-ID":"<my-image>"} },
-			//{ stream: pdf, type:"application/pdf", name: 'Bestaetigung.pdf' }];
+		return [{ data: body, alternative: true },
+			{ path:"public/assets/jdul_ente.jpg", type:"image/jpg", headers:{"Content-ID":"<my-image>"} },
+			{ stream: doc, type:"application/pdf", name: 'Bestaetigung.pdf' }];
 	}
 }
 
@@ -421,7 +423,6 @@ const getConfirmationPDF_JDUL = async function(instance, reservations, config, l
 }
 
 const getReservationAttachment = function(){
-	return new Promise((resolve, reject) => {
 	const config = {
 		logo: "public/assets/jdul_logo.png",
 		address: "Widumdurchgang 1 | 39044 Neumarkt | Tel.: +39 0471 812717",
@@ -430,7 +431,6 @@ const getReservationAttachment = function(){
 		member: "Jugenddienst Unterland"
 	};
 	const doc = new pdf();
-	//const stream = doc.pipe(blobStream());
 
 	doc.image(config.logo, {
 		fit: [150, 250],
@@ -453,11 +453,7 @@ const getReservationAttachment = function(){
 
 	doc.end();
 	console.log("doc finished");
-	//return doc;
-		stream.on("finish", () => { console.log("stream finished"); resolve(doc); });
-		stream.on("error", reject);
-
-	});
+	return doc;
 }
 
 exports.getAttachmentConfirmation = function(body, instance, reservations) {
