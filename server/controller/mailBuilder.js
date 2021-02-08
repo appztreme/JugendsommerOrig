@@ -449,9 +449,9 @@ const getReservationAttachment = function(firstNameChild, activities){
 	doc.fontSize(26).fillAndStroke("#ffa500", "#000");
 	doc.moveDown(1).moveDown(1);
 	doc.font('Helvetica-Bold').text("Anmeldebestätigung", { align: 'center', width: 430 });
-	doc.fontSize(14).fillAndStroke("black", "#000");
+	doc.font('Helvetica').fontSize(10).fillAndStroke("black", "#000");
 	doc.moveDown(1).moveDown(1);
-	doc.text("Liebe/r ").text(firstNameChild).text(',');
+	doc.text("Liebe/r ").text(firstNameChild, {continued: true}).text(',', {continued: true});
 	doc.moveDown(1);
 	doc.text("es freut uns, dass du heuer im Sommer bei unserem JD-SUMMER Programm dabei sein wirst!");
 	doc.moveDown(1);
@@ -475,7 +475,7 @@ const getReservationAttachment = function(firstNameChild, activities){
 	doc.font('Helvetica-Bold').text("Conferma d'iscrizione", { align: 'center', width: 430 });
 	doc.fontSize(14).fillAndStroke("black", "#000");
 	doc.moveDown(1).moveDown(1);
-	doc.text("Cara/o ").text(firstNameChild).text(",");
+	doc.text("Cara/o ").text(firstNameChild, {continued: true}).text(",", {continued: true});
 	doc.moveDown(1);
 	doc.text("Siamo contenti che parteciperai al nostro programma JD-SUMMER.");
 	doc.moveDown(1);
@@ -499,7 +499,7 @@ const getReservationAttachment = function(firstNameChild, activities){
 	doc.text("----------------------------------------------------------------------------");
 	doc.moveDown(1);
 	for(let act of activities) {
-		doc.text(act.eventId.location).text(" - ").text(act.eventId.name).text(" / ").text(act.eventId.name_it).text(" - ").text(act.name).text(" (").text(act.eventId.feePerWeek).text(" €)");
+		doc.text(act.eventId.location).text(" - ", {continued: true}).text(act.eventId.name, {continued: true}).text(" / ", {continued: true}).text(act.eventId.name_it, {continued: true}).text(" - ", {continued: true}).text(act.name, {continued: true}).text(" (", {continued: true}).text(act.eventId.feePerWeek, {continued: true}).text(" €)", {continued: true});
 		doc.moveDown(1);
 	}
 
