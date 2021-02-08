@@ -151,10 +151,10 @@ exports.getAttachment = function(body, instance) {
 			    { path:"public/assets/jdbl-logo.jpg", type:"image/jpg", headers:{"Content-ID":"<my-image>"} }]
 	}
 	else if (instance.isJDUL) {
-		//var pdf = getReservationAttachment();
+		var pdf = getReservationAttachment();
 		return [{ data: body, alternative: true },
-			{ path:"public/assets/jdul_ente.jpg", type:"image/jpg", headers:{"Content-ID":"<my-image>"} }];
-		   // { stream: pdf, type:"application/pdf", name: 'Bestaetigung.pdf' }]
+			{ path:"public/assets/jdul_ente.jpg", type:"image/jpg", headers:{"Content-ID":"<my-image>"} },
+		    { stream: pdf, type:"application/pdf", name: 'Bestaetigung.pdf' }]
 	} else {
 		return [{ data: body, alternative: true }]
 	}
@@ -444,9 +444,9 @@ const getReservationAttachment = async function(){
 	doc.fontSize(14).fillAndStroke("black", "#000");
 
 	doc.end();
-	return doc.pipe(new Base64Encode());
+	//return doc.pipe(new Base64Encode());
 	//return doc.pipe(fs.createWriteStream('./test.pdf'));
-	//return doc;
+	return doc;
 	//return fs.createReadStream(doc);
 }
 
