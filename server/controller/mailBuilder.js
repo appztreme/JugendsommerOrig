@@ -1,7 +1,8 @@
 const moment = require('moment');
 const pdf = require('pdfkit');
 const fs = require('fs');
-const { Base64Encode } = require('base64-stream');
+const blobStream = require('blob-stream');
+const { resolve } = require('path');
 
 var htmlStart = "<html><body><p>Die Anmeldung f&uuml;r ";
 var htmlEnd = " f&uuml;r die Sommerprogramme des Jugenddienstes Bozen-Land war <strong>erfolgreich</strong>.</p><p style='color:#ffa500'><strong>Einzahlungsschein wird im März mittels Email zugesandt.</strong></p><p>Vielen Dank f&uuml;r die Anmeldung.</p><h3>Zusammenfassung:</h3>";
@@ -145,18 +146,23 @@ exports.getTypeText = function(type, firstNameChild, lastNameChild, location, in
 	}
 }
 
-exports.getAttachment = function(body, instance) {
+exports.getAttachment = async function(body, instance) {
 	if(instance.isJDBL || instance.isJugendsommer) {
 		return [{ data: body, alternative: true },
 			    { path:"public/assets/jdbl-logo.jpg", type:"image/jpg", headers:{"Content-ID":"<my-image>"} }]
 	}
 	else if (instance.isJDUL) {
-		var pdf = getReservationAttachment();
+		var pdf = await getReservationAttachment();
+		//console.log("pdf", pdf);
 		return [{ data: body, alternative: true },
-			{ path:"public/assets/jdul_ente.jpg", type:"image/jpg", headers:{"Content-ID":"<my-image>"} },
-		    { stream: pdf, type:"application/pdf", name: 'Bestaetigung.pdf' }]
+				{ path:"public/assets/jdul_ente.jpg", type:"image/jpg", headers:{"Content-ID":"<my-image>"} },
+				{ stream: pdf, type:"application/pdf", name: 'Bestaetigung.pdf' }];
 	} else {
-		return [{ data: body, alternative: true }]
+		// var pdf = await getReservationAttachment();
+		// console.log("pdf", pdf);
+		return [{ data: body, alternative: true }];
+			// { path:"public/assets/jdul_ente.jpg", type:"image/jpg", headers:{"Content-ID":"<my-image>"} },
+			//{ stream: pdf, type:"application/pdf", name: 'Bestaetigung.pdf' }];
 	}
 }
 
@@ -414,7 +420,8 @@ const getConfirmationPDF_JDUL = async function(instance, reservations, config, l
 	return doc;
 }
 
-const getReservationAttachment = async function(){
+const getReservationAttachment = function(){
+	return new Promise((resolve, reject) => {
 	const config = {
 		logo: "public/assets/jdul_logo.png",
 		address: "Widumdurchgang 1 | 39044 Neumarkt | Tel.: +39 0471 812717",
@@ -423,6 +430,7 @@ const getReservationAttachment = async function(){
 		member: "Jugenddienst Unterland"
 	};
 	const doc = new pdf();
+	//const stream = doc.pipe(blobStream());
 
 	doc.image(config.logo, {
 		fit: [150, 250],
@@ -444,10 +452,12 @@ const getReservationAttachment = async function(){
 	doc.fontSize(14).fillAndStroke("black", "#000");
 
 	doc.end();
-	//return doc.pipe(new Base64Encode());
-	//return doc.pipe(fs.createWriteStream('./test.pdf'));
-	return doc;
-	//return fs.createReadStream(doc);
+	console.log("doc finished");
+	//return doc;
+		stream.on("finish", () => { console.log("stream finished"); resolve(doc); });
+		stream.on("error", reject);
+
+	});
 }
 
 exports.getAttachmentConfirmation = function(body, instance, reservations) {
