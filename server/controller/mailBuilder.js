@@ -50,10 +50,10 @@ var htmlFinalJDUL = "</body></html>";
 var htmlStartJDUL_it = "<h2>Conferma d‘iscrizione</h2>Cara/o ";
 var htmlMiddleJDUL_it = ",<br />Siamo contenti che parteciperai al nostro programma JD-SUMMER a ";
 var htmlEndJDUL_it = ".<br />Entro maggio riceverai un'altra e-mail con ulteriori informazioni.<br /><br />I tuoi genitori sono pregati di controllare i dati sottostanti e di versare la quota d'iscrizione sul nostro conto corrente entro il <strong>21.03.2021:</strong><br /><br />Jugenddienst Unterland – Raiffeisenkasse Salurn<br />IBAN: IT 27 T 08220 58371000304204042<br />con l‘oggetto: cognome nome comune di residenza<br /><br />Non vediamo l'ora che il JD-SUMMER inizi a gonfie vele e speriamo in un bel tempo. Nel frattempo vi auguriamo tanto divertimento.<br /><br />Il Vostro Team del Jugenddienst Unterland";
-var txtWaitingListJDUL = "Guten Tag,/r/nleider ist das von Ihnen gewünschte Programm bereits ausgebucht./r/nSie sind jedoch auf der Warteliste. Sollte ein Platz frei werden, melden wir uns innerhalb 20.03.2020 bei Ihnen./r/nMit freundlichen Grüßen/r/nDas Team des Jugenddienst Unterland/r/n/r/n/r/n";
-var txtWaitingListJDUL_it = "Buon giorno,/r/npurtroppo è già pieno il programma da lei scelto./r/nLa sua iscrizione si trova sulla lista d‘ attesa. Se dovesse liberarsi un posto, La contatteremmo entro il  20.03.2020./r/nCordiali saluti/r/nIl Team del Jugenddienst Unterland";
-var htmlWaitingListJDUL = "<html><body>Guten Tag,<br />leider ist das von Ihnen gewünschte Programm bereits ausgebucht.<br />Sie sind jedoch auf der Warteliste. Sollte ein Platz frei werden, melden wir uns innerhalb 20.03.2020 bei Ihnen.<br />Mit freundlichen Grüßen<br />Das Team des Jugenddienst Unterland<br /><br /><br />";
-var htmlWaitingListJDUL_it = "Buon giorno,<br />purtroppo è già pieno il programma da lei scelto.<br />La sua iscrizione si trova sulla lista d‘ attesa. Se dovesse liberarsi un posto, La contatteremmo entro il  20.03.2020.<br />Cordiali saluti<br />Il Team del Jugenddienst Unterland</body></html>";
+var txtWaitingListJDUL = "Guten Tag,/r/nleider ist das von Ihnen gewünschte Programm bereits ausgebucht./r/nSie sind jedoch auf der Warteliste. Sollte ein Platz frei werden, melden wir uns innerhalb 21.03.2021 bei Ihnen./r/nMit freundlichen Grüßen/r/nDas Team des Jugenddienst Unterland/r/n/r/n/r/n";
+var txtWaitingListJDUL_it = "Buon giorno,/r/npurtroppo è già pieno il programma da lei scelto./r/nLa sua iscrizione si trova sulla lista d‘ attesa. Se dovesse liberarsi un posto, La contatteremmo entro il  21.03.2021./r/nCordiali saluti/r/nIl Team del Jugenddienst Unterland";
+var htmlWaitingListJDUL = "<html><body>Guten Tag,<br />leider ist das von Ihnen gewünschte Programm bereits ausgebucht.<br />Sie sind jedoch auf der Warteliste. Sollte ein Platz frei werden, melden wir uns innerhalb 21.03.2021 bei Ihnen.<br />Mit freundlichen Grüßen<br />Das Team des Jugenddienst Unterland<br /><br /><br />";
+var htmlWaitingListJDUL_it = "Buon giorno,<br />purtroppo è già pieno il programma da lei scelto.<br />La sua iscrizione si trova sulla lista d‘ attesa. Se dovesse liberarsi un posto, La contatteremmo entro il  21.03.2021.<br />Cordiali saluti<br />Il Team del Jugenddienst Unterland</body></html>";
 
 var htmlKiso = "<html><body>Vielen Dank für die Anmeldung Ihres Kindes zum KISO 2020!<br />Sie erhalten innerhalb der nächsten Tage eine Rückmeldung vom Jugenddienst Bozen zu Ihrem Anmeldestand.<br />Falls das Gruppenlimit für die betreffende Woche bereits erreicht sein sollte, kommt Ihr Kind auf die Warteliste.<br />Freundliche Grüße,<br />das Jugenddienst Bozen Team<br /><br />Ringraziamo per l'iscrizione di suo/a figlio/a al KISO 2020!<br />Nei prossimi giorni lo Jugenddienst Bozen<br />Le invierà una risposta sullo stato di iscrizione. Se i posti disponibli per la settimana interessata dovessero già essere esauriti, suo/a figlio/a sarà messo/a sulla lista d'attesa.<br />Cordiali saluti,<br />l'equipe dello Jugenddienst Bozen";
 var textKiso = "Vielen Dank für die Anmeldung Ihres Kindes zum KISO 2020!\r\nSie erhalten innerhalb der nächsten Tage eine Rückmeldung vom Jugenddienst Bozen zu Ihrem Anmeldestand.\r\nFalls das Gruppenlimit für die betreffende Woche bereits erreicht sein sollte, kommt Ihr Kind auf die Warteliste.\r\nFreundliche Grüße, das Jugenddienst Bozen Team \r\n\r\nRingraziamo per l’iscrizione di suo/a figlio/a al KISO 2020!\r\nNei prossimi giorni lo Jugenddienst Bozen Le invierà una risposta sullo stato di iscrizione. Se i posti disponibli per la settimana interessata dovessero già essere esauriti, suo/a figlio/a sarà messo/a sulla lista d‘attesa.\r\nCordiali saluti,\r\nl’equipe dello Jugenddienst Bozen";
@@ -146,14 +146,18 @@ exports.getTypeText = function(type, firstNameChild, lastNameChild, location, in
 	}
 }
 
-exports.getAttachment = function(body, instance, firstNameChild, activities) {
+exports.getAttachment = function(body, instance, firstNameChild, activities, isWaitList) {
 	if(instance.isJDBL || instance.isJugendsommer) {
 		return [{ data: body, alternative: true },
 			    { path:"public/assets/jdbl-logo.jpg", type:"image/jpg", headers:{"Content-ID":"<my-image>"} }]
 	}
 	else if (instance.isJDUL) {
 		var doc = new pdf();
-		doc = getReservationAttachment(firstNameChild, activities);
+		if(isWaitList) {
+			doc = getReservationAttachmentWaitingList(firstNameChild, activities);
+		} else {
+			doc = getReservationAttachment(firstNameChild, activities);
+		}
 		//console.log("pdf", pdf);
 		return [{ data: body, alternative: true },
 				{ path:"public/assets/button_ente.png", type:"image/jpg", headers:{"Content-ID":"<my-image>"} },
@@ -460,16 +464,15 @@ const getReservationAttachment = function(firstNameChild, activities){
 	doc.text("Deine Eltern sind gebeten die untenstehenden Daten zu kontrollieren und die Teilnahmegebühr bis zum 21.03.2021 auf folgendes Konto zu überweisen:");
 	doc.moveDown(1).moveDown(1);
 	doc.text("Jugenddienst Unterland – Raiffeisenkasse Salurn");
-	doc.moveDown(1);
+	doc.moveDown(0.5);
 	doc.text("IBAN: IT 27 T 08220 58371000304204042");
-	doc.moveDown(1);
+	doc.moveDown(0.5);
 	doc.text("mit dem Betreff: Nachname Vorname Wohnort");
-	doc.moveDown(1).moveDown(1);
+	doc.moveDown(1);
 	doc.text("Wir freuen uns jetzt schon auf den JD-SUMMER mit dir, hoffen auf schönes Wetter und wünschen euch noch eine tolle Zeit bis zum Sommer.");
 	doc.moveDown(1);
 	doc.text("Euer Jugenddienst Unterland Team");
 
-	doc.addPage();
 
 	doc.fontSize(26).fillAndStroke("#ffa500", "#000");
 	doc.moveDown(1).moveDown(1);
@@ -485,11 +488,11 @@ const getReservationAttachment = function(firstNameChild, activities){
 	doc.text("I tuoi genitori sono pregati di controllare i dati sottostanti e di versare la quota d'iscrizione sul nostro conto corrente entro il 21.03.2021:");
 	doc.moveDown(1).moveDown(1);
 	doc.text("Jugenddienst Unterland – Raiffeisenkasse Salurn");
-	doc.moveDown(1);
+	doc.moveDown(0.5);
 	doc.text("IBAN: IT 27 T 08220 58371000304204042");
-	doc.moveDown(1);
+	doc.moveDown(0.5);
 	doc.text("con l‘oggetto: cognome nome comune di residenza");
-	doc.moveDown(1).moveDown(1);
+	doc.moveDown(1);
 	doc.text("Non vediamo l'ora che il JD-SUMMER inizi a gonfie vele e speriamo in un bel tempo. Nel frattempo vi auguriamo tanto divertimento.");
 	doc.moveDown(1);
 	doc.text("Il Vostro Team del Jugenddienst Unterland");
@@ -505,6 +508,74 @@ const getReservationAttachment = function(firstNameChild, activities){
 	}
 
 
+	doc.end();
+	return doc;
+}
+
+const getReservationAttachmentWaitingList = function(firstNameChild, activities){
+	const config = {
+		logo: "public/assets/jdul_logo.png",
+		address: "Widumdurchgang 1 | 39044 Neumarkt | Tel.: +39 0471 812717",
+		address_it: "Passaggio Canonica 1 | 39044 Egna | Tel.: +39 0471 812717",
+		internet: "unterland@jugenddienst.i | www.jugenddienst.it/unterland | St.Nr.: 94008770219",
+		member: "Jugenddienst Unterland"
+	};
+	const doc = new pdf();
+
+	doc.image(config.logo, {
+		fit: [150, 250],
+		align: 'right',
+		valign: 'top'
+	});
+	let grad = doc.linearGradient(0, 0, 30, 0);
+	grad.stop(0, '#ffa500').stop(1, '#ffd27f');
+	doc.rect(0, 0, 30, 950);
+	doc.fill(grad);
+	doc.fontSize(8).fillAndStroke("grey", "#000");
+	doc.moveDown(0.2);
+	doc.font('Helvetica').text(config.address);
+	doc.moveDown(0.2);
+	doc.text(config.internet);
+	doc.fontSize(26).fillAndStroke("#ffa500", "#000");
+	doc.moveDown(1).moveDown(1);
+	doc.font('Helvetica-Bold').text("Anmeldebestätigung", { align: 'center', width: 430 });
+	doc.font('Helvetica').fontSize(10).fillAndStroke("black", "#000");
+	doc.moveDown(1).moveDown(1);
+	doc.text("Liebe/r ", {continued: true}).text(firstNameChild, {continued: true}).text(',');
+	doc.moveDown(1);
+	doc.text("leider ist das von Ihnen gewünschte Programm bereits ausgebucht.");
+	doc.moveDown(1);
+	doc.text("Sie sind jedoch auf der Warteliste. Sollte ein Platz frei werden, melden wir uns innerhalb 21.03.2021 bei Ihnen.");
+	doc.moveDown(1);
+	doc.text("Mit freundlichen Grüßen");
+	doc.moveDown(1);
+	doc.text("Euer Jugenddienst Unterland Team");
+
+
+	doc.fontSize(26).fillAndStroke("#ffa500", "#000");
+	doc.moveDown(1).moveDown(1);
+	doc.font('Helvetica-Bold').text("Conferma d'iscrizione", { align: 'center', width: 430 });
+	doc.font('Helvetica').fontSize(10).fillAndStroke("black", "#000");
+	doc.moveDown(1).moveDown(1);
+	doc.text("Cara/o ", {continued: true}).text(firstNameChild, {continued: true}).text(",");
+	doc.moveDown(1);
+	doc.text("purtroppo è già pieno il programma da lei scelto.");
+	doc.moveDown(1);
+	doc.text("La sua iscrizione si trova sulla lista d‘ attesa. Se dovesse liberarsi un posto, La contatteremmo entro il  21.03.2021.");
+	doc.moveDown(1);
+	doc.text("Cordiali saluti");
+	doc.moveDown(1);
+	doc.text("Il Vostro Team del Jugenddienst Unterland");
+
+	doc.moveDown(1).moveDown(1).moveDown(1);
+	doc.text("Programm / programma - Woche / settimana (Preis / prezzo in €)");
+	doc.moveDown(1);
+	doc.text("----------------------------------------------------------------------------");
+	doc.moveDown(1);
+	for(let act of activities) {
+		doc.text(act.eventId.location, {continued: true}).text(" - ", {continued: true}).text(act.eventId.name, {continued: true}).text(" / ", {continued: true}).text(act.eventId.name_it, {continued: true}).text(" - ", {continued: true}).text(act.name, {continued: true}).text(" (", {continued: true}).text(act.eventId.feePerWeek, {continued: true}).text(" €)");
+		doc.moveDown(1);
+	}
 	doc.end();
 	return doc;
 }
