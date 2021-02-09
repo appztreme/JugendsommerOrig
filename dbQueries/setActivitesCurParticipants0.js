@@ -21,7 +21,7 @@ const main = async() => {
             
             if(verbose) {
                 console.log(chalk.cyan(act.name));
-                console.log(chalk.cyan(act.curParticipants, actu.queueSize));
+                console.log(chalk.cyan(act.curParticipants, act.queueSize));
             }
            try {
                 await act.save();
