@@ -1,7 +1,6 @@
 const moment = require('moment');
 const pdf = require('pdfkit');
 const fs = require('fs');
-const blobStream = require('blob-stream');
 const { resolve } = require('path');
 
 var htmlStart = "<html><body><p>Die Anmeldung f&uuml;r ";
@@ -146,7 +145,7 @@ exports.getTypeText = function(type, firstNameChild, lastNameChild, location, in
 	}
 }
 
-exports.getAttachment = function(body, instance, firstNameChild, activities, isWaitList) {
+exports.getAttachment = function(body, instance, firstNameChild, activities, isWaitList, reservation) {
 	if(instance.isJDBL || instance.isJugendsommer) {
 		return [{ data: body, alternative: true },
 			    { path:"public/assets/jdbl-logo.jpg", type:"image/jpg", headers:{"Content-ID":"<my-image>"} }]
@@ -154,14 +153,25 @@ exports.getAttachment = function(body, instance, firstNameChild, activities, isW
 	else if (instance.isJDUL) {
 		var doc = new pdf();
 		if(isWaitList) {
-			doc = getReservationAttachmentWaitingList(firstNameChild, activities);
+			doc = getReservationAttachmentWaitingList(firstNameChild, activities, reservation);
 		} else {
-			doc = getReservationAttachment(firstNameChild, activities);
+			doc = getReservationAttachment(firstNameChild, activities, reservation);
 		}
 		return [{ data: body, alternative: true },
 				{ path:"public/assets/button_ente.png", type:"image/jpg", headers:{"Content-ID":"<my-image>"} },
 				{ stream: doc, type:"application/pdf", name: 'Bestaetigung.pdf' }];
-	} else {
+	}	
+	else if (instance.isTest) {
+		var doc = new pdf();
+		if(isWaitList) {
+			doc = getReservationAttachmentWaitingList(firstNameChild, activities, reservation);
+		} else {
+			doc = getReservationAttachment(firstNameChild, activities, reservation);
+		}
+		return [{ data: body, alternative: true },
+				{ path:"public/assets/button_ente.png", type:"image/jpg", headers:{"Content-ID":"<my-image>"} },
+				{ stream: doc, type:"application/pdf", name: 'Bestaetigung.pdf' }];
+	}else {
 		return [{ data: body, alternative: true }];
 	}
 }
@@ -420,12 +430,12 @@ const getConfirmationPDF_JDUL = async function(instance, reservations, config, l
 	return doc;
 }
 
-const getReservationAttachment = function(firstNameChild, activities){
+const getReservationAttachment = function(firstNameChild, activities, reservation){
 	const config = {
 		logo: "public/assets/jdul_logo.png",
 		address: "Widumdurchgang 1 | 39044 Neumarkt | Tel.: +39 0471 812717",
 		address_it: "Passaggio Canonica 1 | 39044 Egna | Tel.: +39 0471 812717",
-		internet: "unterland@jugenddienst.i | www.jugenddienst.it/unterland | St.Nr.: 94008770219",
+		internet: "unterland@jugenddienst.it | www.jugenddienst.it/unterland | St.Nr.: 94008770219",
 		member: "Jugenddienst Unterland"
 	};
 	const doc = new pdf();
@@ -450,23 +460,28 @@ const getReservationAttachment = function(firstNameChild, activities){
 	doc.font('Helvetica').fontSize(10).fillAndStroke("black", "#000");
 	doc.moveDown(1).moveDown(1);
 	doc.text("Liebe/r ", {continued: true}).text(firstNameChild, {continued: true}).text(',');
-	doc.moveDown(1);
+	doc.moveDown(0.5);
 	doc.text("es freut uns, dass du heuer im Sommer bei unserem JD-SUMMER Programm dabei sein wirst!");
-	doc.moveDown(1);
+	doc.moveDown(0.5);
 	doc.text("Du erhältst innerhalb Mai noch eine weitere E-Mail mit detaillierteren Informationen.");
-	doc.moveDown(1);
+	doc.moveDown(0.5);
 	doc.text("Deine Eltern sind gebeten die untenstehenden Daten zu kontrollieren und die Teilnahmegebühr bis zum 21.03.2021 auf folgendes Konto zu überweisen:");
-	doc.moveDown(1).moveDown(1);
+	doc.moveDown(1);
 	doc.text("Jugenddienst Unterland – Raiffeisenkasse Salurn");
-	doc.moveDown(0.5);
+	doc.moveDown(0.2);
 	doc.text("IBAN: IT 27 T 08220 58371000304204042");
-	doc.moveDown(0.5);
+	doc.moveDown(0.2);
 	doc.text("mit dem Betreff: Nachname Vorname Wohnort");
 	doc.moveDown(1);
 	doc.text("Wir freuen uns jetzt schon auf den JD-SUMMER mit dir, hoffen auf schönes Wetter und wünschen euch noch eine tolle Zeit bis zum Sommer.");
-	doc.moveDown(1);
+	doc.moveDown(0.5);
 	doc.text("Euer Jugenddienst Unterland Team");
 
+	doc.addPage();
+	let grad2 = doc.linearGradient(0, 0, 30, 0);
+	grad2.stop(0, '#ffa500').stop(1, '#ffd27f');
+	doc.rect(0, 0, 30, 950);
+	doc.fill(grad2);
 
 	doc.fontSize(26).fillAndStroke("#ffa500", "#000");
 	doc.moveDown(1).moveDown(1);
@@ -474,35 +489,62 @@ const getReservationAttachment = function(firstNameChild, activities){
 	doc.font('Helvetica').fontSize(10).fillAndStroke("black", "#000");
 	doc.moveDown(1).moveDown(1);
 	doc.text("Cara/o ", {continued: true}).text(firstNameChild, {continued: true}).text(",");
-	doc.moveDown(1);
+	doc.moveDown(0.5);
 	doc.text("Siamo contenti che parteciperai al nostro programma JD-SUMMER.");
-	doc.moveDown(1);
+	doc.moveDown(0.5);
 	doc.text("Entro maggio riceverai un'altra e-mail con ulteriori informazioni.");
-	doc.moveDown(1);
+	doc.moveDown(0.5);
 	doc.text("I tuoi genitori sono pregati di controllare i dati sottostanti e di versare la quota d'iscrizione sul nostro conto corrente entro il 21.03.2021:");
-	doc.moveDown(1).moveDown(1);
+	doc.moveDown(1);
 	doc.text("Jugenddienst Unterland – Raiffeisenkasse Salurn");
-	doc.moveDown(0.5);
+	doc.moveDown(0.2);
 	doc.text("IBAN: IT 27 T 08220 58371000304204042");
-	doc.moveDown(0.5);
+	doc.moveDown(0.2);
 	doc.text("con l‘oggetto: cognome nome comune di residenza");
 	doc.moveDown(1);
 	doc.text("Non vediamo l'ora che il JD-SUMMER inizi a gonfie vele e speriamo in un bel tempo. Nel frattempo vi auguriamo tanto divertimento.");
-	doc.moveDown(1);
+	doc.moveDown(0.5);
 	doc.text("Il Vostro Team del Jugenddienst Unterland");
 
-	doc.moveDown(1).moveDown(1).moveDown(1);
+	doc.moveDown(1);
+
+	doc.addPage();
+	let grad3 = doc.linearGradient(0, 0, 30, 0);
+	grad3.stop(0, '#ffa500').stop(1, '#ffd27f');
+	doc.rect(0, 0, 30, 950);
+	doc.fill(grad3);
+	doc.font('Helvetica').fontSize(10).fillAndStroke("black", "#000");
 	doc.text("Programm / programma - Woche / settimana (Preis / prezzo in €)");
-	doc.moveDown(1);
+	doc.moveDown(0.2);
 	doc.text("----------------------------------------------------------------------------");
-	doc.moveDown(1);
+	doc.moveDown(1).moveDown(1);
 	for(let act of activities) {
 		doc.text(act.eventId.location, {continued: true}).text(" - ", {continued: true}).text(act.eventId.name, {continued: true}).text(" / ", {continued: true}).text(act.eventId.name_it, {continued: true}).text(" - ", {continued: true}).text(act.name, {continued: true}).text(" (", {continued: true}).text(act.eventId.feePerWeek, {continued: true}).text(" €)");
-		doc.moveDown(1);
+		doc.moveDown(0.2);
 	}
+
+	doc.moveDown(1).moveDown(1);
+	doc.text("Vorname | nome: ", { continued: true}).text(reservation.firstNameChild);
+	doc.moveDown(0.2);
+	doc.text("Nachname | cognome: ", { continued: true}).text(reservation.lastNameChild);
+	doc.moveDown(0.2);
+	doc.text("Geburtsdatum | data di nascita: ", { continued: true}).text(moment(reservation.birthdayChild).format("DD.MM.YYYY"));
+	doc.moveDown(0.2);
+	doc.text("Besuchte Klasse | classe di frequentata: ", { continued: true}).text(reservation.schoolChild);
+	doc.moveDown(0.2);
+	doc.text("Vorname Eltern | nome genitori: ", { continued: true}).text(reservation.firstNameParent);
+	doc.moveDown(0.2);
+	doc.text("Nachname Eltern | cognome genitori: ", { continued: true}).text(reservation.lastNameParent);
+	doc.moveDown(0.2);
+	doc.text("Email: ", { continued: true}).text(reservation.emailParent);
+	doc.moveDown(0.2);
+	doc.text("Telefon: ", { continued: true}).text(reservation.phoneNumberParent);
+	doc.moveDown(0.2);
+	doc.moveDown(1);
 
 
 	doc.end();
+	//doc.pipe(fs.createWriteStream('./output.pdf'));
 	return doc;
 }
 
@@ -545,6 +587,11 @@ const getReservationAttachmentWaitingList = function(firstNameChild, activities)
 	doc.moveDown(1);
 	doc.text("Euer Jugenddienst Unterland Team");
 
+	doc.addPage();
+	let grad2 = doc.linearGradient(0, 0, 30, 0);
+	grad2.stop(0, '#ffa500').stop(1, '#ffd27f');
+	doc.rect(0, 0, 30, 950);
+	doc.fill(grad2);
 
 	doc.fontSize(26).fillAndStroke("#ffa500", "#000");
 	doc.moveDown(1).moveDown(1);
@@ -561,16 +608,46 @@ const getReservationAttachmentWaitingList = function(firstNameChild, activities)
 	doc.moveDown(1);
 	doc.text("Il Vostro Team del Jugenddienst Unterland");
 
-	doc.moveDown(1).moveDown(1).moveDown(1);
+	doc.moveDown(1);
+
+	doc.addPage();
+	let grad3 = doc.linearGradient(0, 0, 30, 0);
+	grad3.stop(0, '#ffa500').stop(1, '#ffd27f');
+	doc.rect(0, 0, 30, 950);
+	doc.fill(grad3);
+	doc.font('Helvetica').fontSize(10).fillAndStroke("black", "#000");
 	doc.text("Programm / programma - Woche / settimana (Preis / prezzo in €)");
-	doc.moveDown(1);
+	doc.moveDown(0.2);
 	doc.text("----------------------------------------------------------------------------");
-	doc.moveDown(1);
+	doc.moveDown(1).moveDown(1);
 	for(let act of activities) {
 		doc.text(act.eventId.location, {continued: true}).text(" - ", {continued: true}).text(act.eventId.name, {continued: true}).text(" / ", {continued: true}).text(act.eventId.name_it, {continued: true}).text(" - ", {continued: true}).text(act.name, {continued: true}).text(" (", {continued: true}).text(act.eventId.feePerWeek, {continued: true}).text(" €)");
-		doc.moveDown(1);
+		doc.moveDown(0.2);
 	}
+
+	doc.moveDown(1).moveDown(1);
+	doc.text("Vorname | nome: ", { continued: true}).text(reservation.firstNameChild);
+	doc.moveDown(0.2);
+	doc.text("Nachname | cognome: ", { continued: true}).text(reservation.lastNameChild);
+	doc.moveDown(0.2);
+	doc.text("Geburtsdatum | data di nascita: ", { continued: true}).text(moment(reservation.birthdayChild).format("DD.MM.YYYY"));
+	doc.moveDown(0.2);
+	doc.text("Besuchte Klasse | classe di frequentata: ", { continued: true}).text(reservation.schoolChild);
+	doc.moveDown(0.2);
+	doc.text("Vorname Eltern | nome genitori: ", { continued: true}).text(reservation.firstNameParent);
+	doc.moveDown(0.2);
+	doc.text("Nachname Eltern | cognome genitori: ", { continued: true}).text(reservation.lastNameParent);
+	doc.moveDown(0.2);
+	doc.text("Email: ", { continued: true}).text(reservation.emailParent);
+	doc.moveDown(0.2);
+	doc.text("Telefon: ", { continued: true}).text(reservation.phoneNumberParent);
+	doc.moveDown(0.2);
+	doc.moveDown(1);
+
+
 	doc.end();
+
+
 	return doc;
 }
 

@@ -13,7 +13,7 @@ exports.sendTxtMail = function(recipient, firstNameChild, lastNameChild, type, a
 		from: fromEmail,
 		to: recipient,
 		subject: subjectEmail,
-		attachment: mailbuilder.getAttachment(body, instance, firstNameChild, activities, false)
+		attachment: mailbuilder.getAttachment(body, instance, firstNameChild, activities, false, reservation)
 	}, function(err, message) {console.log(err||message); });
 };
 
@@ -27,7 +27,7 @@ exports.sendTxtMailWaiting = function(recipient, firstNameChild, lastNameChild, 
 	from: fromEmail,
 	to: recipient,
 	subject: subjectEmail,
-	attachment: mailbuilder.getAttachment(body, instance, firstNameChild, activities, true)
+	attachment: mailbuilder.getAttachment(body, instance, firstNameChild, activities, true, reservation)
 }, function(err, message) {console.log(err||message); });
 };
 
