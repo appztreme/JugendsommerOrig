@@ -441,7 +441,7 @@ const getReservationAttachment = function(firstNameChild, activities, reservatio
 	const doc = new pdf();
 
 	doc.image(config.logo, {
-		fit: [150, 250],
+		fit: [75, 125],
 		align: 'right',
 		valign: 'top'
 	});
