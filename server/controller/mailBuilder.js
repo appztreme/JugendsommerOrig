@@ -455,7 +455,7 @@ const getReservationAttachment = function(firstNameChild, activities, reservatio
 	doc.moveDown(0.2);
 	doc.text(config.internet);
 	doc.fontSize(26).fillAndStroke("#ffa500", "#000");
-	doc.moveDown(1).moveDown(1);
+	doc.moveDown(1);
 	doc.font('Helvetica-Bold').text("Anmeldebestätigung", { align: 'center', width: 430 });
 	doc.font('Helvetica').fontSize(10).fillAndStroke("black", "#000");
 	doc.moveDown(1).moveDown(1);
@@ -484,7 +484,7 @@ const getReservationAttachment = function(firstNameChild, activities, reservatio
 	// doc.fill(grad2);
 
 	doc.fontSize(26).fillAndStroke("#ffa500", "#000");
-	doc.moveDown(1).moveDown(1);
+	doc.moveDown(1);
 	doc.font('Helvetica-Bold').text("Conferma d'iscrizione", { align: 'center', width: 430 });
 	doc.font('Helvetica').fontSize(10).fillAndStroke("black", "#000");
 	doc.moveDown(1).moveDown(1);
