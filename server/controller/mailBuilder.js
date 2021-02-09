@@ -559,7 +559,7 @@ const getReservationAttachmentWaitingList = function(firstNameChild, activities)
 	const doc = new pdf();
 
 	doc.image(config.logo, {
-		fit: [150, 250],
+		fit: [75, 125],
 		align: 'right',
 		valign: 'top'
 	});
@@ -573,42 +573,36 @@ const getReservationAttachmentWaitingList = function(firstNameChild, activities)
 	doc.moveDown(0.2);
 	doc.text(config.internet);
 	doc.fontSize(26).fillAndStroke("#ffa500", "#000");
-	doc.moveDown(1).moveDown(1);
+	doc.moveDown(1);
 	doc.font('Helvetica-Bold').text("Warteliste", { align: 'center', width: 430 });
 	doc.font('Helvetica').fontSize(10).fillAndStroke("black", "#000");
 	doc.moveDown(1).moveDown(1);
 	doc.text("Liebe/r ", {continued: true}).text(firstNameChild, {continued: true}).text(',');
 	doc.moveDown(1);
 	doc.text("leider ist das von Ihnen gewünschte Programm bereits ausgebucht.");
-	doc.moveDown(1);
+	doc.moveDown(0.5);
 	doc.text("Sie sind jedoch auf der Warteliste. Sollte ein Platz frei werden, melden wir uns innerhalb 21.03.2021 bei Ihnen.");
-	doc.moveDown(1);
+	doc.moveDown(0.5);
 	doc.text("Mit freundlichen Grüßen");
 	doc.moveDown(1);
 	doc.text("Euer Jugenddienst Unterland Team");
 
-	doc.addPage();
-	let grad2 = doc.linearGradient(0, 0, 30, 0);
-	grad2.stop(0, '#ffa500').stop(1, '#ffd27f');
-	doc.rect(0, 0, 30, 950);
-	doc.fill(grad2);
 
 	doc.fontSize(26).fillAndStroke("#ffa500", "#000");
-	doc.moveDown(1).moveDown(1);
+	doc.moveDown(1);
 	doc.font('Helvetica-Bold').text("Lista d'attesa", { align: 'center', width: 430 });
 	doc.font('Helvetica').fontSize(10).fillAndStroke("black", "#000");
 	doc.moveDown(1).moveDown(1);
 	doc.text("Cara/o ", {continued: true}).text(firstNameChild, {continued: true}).text(",");
 	doc.moveDown(1);
 	doc.text("purtroppo è già pieno il programma da lei scelto.");
-	doc.moveDown(1);
+	doc.moveDown(0.5);
 	doc.text("La sua iscrizione si trova sulla lista d‘ attesa. Se dovesse liberarsi un posto, La contatteremmo entro il  21.03.2021.");
-	doc.moveDown(1);
+	doc.moveDown(0.5);
 	doc.text("Cordiali saluti");
 	doc.moveDown(1);
 	doc.text("Il Vostro Team del Jugenddienst Unterland");
 
-	doc.moveDown(1);
 
 	doc.addPage();
 	let grad3 = doc.linearGradient(0, 0, 30, 0);
