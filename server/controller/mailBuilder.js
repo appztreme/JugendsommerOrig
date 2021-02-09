@@ -158,17 +158,11 @@ exports.getAttachment = function(body, instance, firstNameChild, activities, isW
 		} else {
 			doc = getReservationAttachment(firstNameChild, activities);
 		}
-		//console.log("pdf", pdf);
 		return [{ data: body, alternative: true },
 				{ path:"public/assets/button_ente.png", type:"image/jpg", headers:{"Content-ID":"<my-image>"} },
 				{ stream: doc, type:"application/pdf", name: 'Bestaetigung.pdf' }];
 	} else {
-		//var doc = new pdf();
-		//doc = getReservationAttachment(firstNameChild, activities);
-		// console.log("pdf", pdf);
 		return [{ data: body, alternative: true }];
-			//{ path:"public/assets/jdul_ente.png", type:"image/jpg", headers:{"Content-ID":"<my-image>"} },
-			//{ stream: doc, type:"application/pdf", name: 'Bestaetigung.pdf' }];
 	}
 }
 
@@ -538,7 +532,7 @@ const getReservationAttachmentWaitingList = function(firstNameChild, activities)
 	doc.text(config.internet);
 	doc.fontSize(26).fillAndStroke("#ffa500", "#000");
 	doc.moveDown(1).moveDown(1);
-	doc.font('Helvetica-Bold').text("Anmeldebestätigung", { align: 'center', width: 430 });
+	doc.font('Helvetica-Bold').text("Warteliste", { align: 'center', width: 430 });
 	doc.font('Helvetica').fontSize(10).fillAndStroke("black", "#000");
 	doc.moveDown(1).moveDown(1);
 	doc.text("Liebe/r ", {continued: true}).text(firstNameChild, {continued: true}).text(',');
@@ -554,7 +548,7 @@ const getReservationAttachmentWaitingList = function(firstNameChild, activities)
 
 	doc.fontSize(26).fillAndStroke("#ffa500", "#000");
 	doc.moveDown(1).moveDown(1);
-	doc.font('Helvetica-Bold').text("Conferma d'iscrizione", { align: 'center', width: 430 });
+	doc.font('Helvetica-Bold').text("Lista d'attesa", { align: 'center', width: 430 });
 	doc.font('Helvetica').fontSize(10).fillAndStroke("black", "#000");
 	doc.moveDown(1).moveDown(1);
 	doc.text("Cara/o ", {continued: true}).text(firstNameChild, {continued: true}).text(",");
