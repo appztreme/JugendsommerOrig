@@ -43,11 +43,11 @@ var txtEndJDUL_it = " Entro maggio riceverai un'altra e-mail con ulteriori infor
 // var htmlMiddleJDUL_it = ",<br />Grazie mille per l’iscrizione.<br />I tuoi genitori riceveranno entro l'08.06.2020 una conferma di avvenuta iscrizione, se hai ottenuto un posto.";
 // var htmlEndJDUL_it = ".<br />In quell’occasione vi comunicheremo anche le modalità di pagamento. Inoltre preghiamo i genitori di controllare i dati sottostanti.<br /><br />Nel frattempo, vi auguriamo tutto il bene e a presto.<br />Cordiali saluti<br />Il Team del<br />Jugenddienst Unterland";
 var htmlStartJDUL_de = "<html><body><h2>Anmeldebestätigung</h2>Liebe/r ";
-var htmlMiddleJDUL_de = ",<br />es freut uns, dass du heuer im Sommer bei unserem JD-SUMMER Programm in  ";
-var htmlEndJDUL_de = " dabei sein wirst!<br />Du erhältst innerhalb Mai noch eine weitere E-Mail mit detaillierteren Informationen.<br /><br />Deine Eltern sind gebeten die untenstehenden Daten zu kontrollieren und die Teilnahmegebühr bis zum <strong>21.03.2021</strong> auf folgendes Konto zu überweisen:<br /><br />Jugenddienst Unterland – Raiffeisenkasse Salurn<br />IBAN: IT 27 T 08220 58371000304204042<br />mit dem Betreff: Nachname Vorname Wohnort<br /><br />Wir freuen uns jetzt schon auf den JD-SUMMER mit dir, hoffen auf schönes Wetter und wünschen euch noch eine tolle Zeit bis zum Sommer.<br /><br />Euer Jugenddienst Unterland Team";
+var htmlMiddleJDUL_de = ",<br />es freut uns, dass du heuer im Sommer bei unserem JD-SUMMER Programm";
+var htmlEndJDUL_de = " dabei sein wirst!<br />Du erhälst innerhalb Mai noch eine weitere E-Mail mit detaillierteren Informationen.<br /><br />Deine Eltern sind gebeten die untenstehenden Daten zu kontrollieren und die Teilnahmegebühr bis zum <strong>21.03.2021</strong> auf folgendes Konto zu überweisen:<br /><br />Jugenddienst Unterland – Raiffeisenkasse Salurn<br />IBAN: IT 27 T 08220 58371000304204042<br />mit dem Betreff: Nachname Vorname Wohnort<br /><br />Wir freuen uns jetzt schon auf den JD-SUMMER mit dir, hoffen auf schönes Wetter und wünschen euch noch eine tolle Zeit bis zum Sommer.<br /><br />Euer Jugenddienst Unterland Team";
 var htmlFinalJDUL = "</body></html>";
 var htmlStartJDUL_it = "<h2>Conferma d‘iscrizione</h2>Cara/o ";
-var htmlMiddleJDUL_it = ",<br />Siamo contenti che parteciperai al nostro programma JD-SUMMER a ";
+var htmlMiddleJDUL_it = ",<br />Siamo contenti che parteciperai al nostro programma JD-SUMMER";
 var htmlEndJDUL_it = ".<br />Entro maggio riceverai un'altra e-mail con ulteriori informazioni.<br /><br />I tuoi genitori sono pregati di controllare i dati sottostanti e di versare la quota d'iscrizione sul nostro conto corrente entro il <strong>21.03.2021:</strong><br /><br />Jugenddienst Unterland – Raiffeisenkasse Salurn<br />IBAN: IT 27 T 08220 58371000304204042<br />con l‘oggetto: cognome nome comune di residenza<br /><br />Non vediamo l'ora che il JD-SUMMER inizi a gonfie vele e speriamo in un bel tempo. Nel frattempo vi auguriamo tanto divertimento.<br /><br />Il Vostro Team del Jugenddienst Unterland";
 var txtWaitingListJDUL = "Guten Tag,/r/nleider ist das von Ihnen gewünschte Programm bereits ausgebucht./r/nSie sind jedoch auf der Warteliste. Sollte ein Platz frei werden, melden wir uns innerhalb 21.03.2021 bei Ihnen./r/nMit freundlichen Grüßen/r/nDas Team des Jugenddienst Unterland/r/n/r/n/r/n";
 var txtWaitingListJDUL_it = "Buon giorno,/r/npurtroppo è già pieno il programma da lei scelto./r/nLa sua iscrizione si trova sulla lista d‘ attesa. Se dovesse liberarsi un posto, La contatteremmo entro il  21.03.2021./r/nCordiali saluti/r/nIl Team del Jugenddienst Unterland";
@@ -463,7 +463,7 @@ const getReservationAttachment = function(firstNameChild, activities, reservatio
 	doc.moveDown(0.5);
 	doc.text("es freut uns, dass du heuer im Sommer bei unserem JD-SUMMER Programm dabei sein wirst!");
 	doc.moveDown(0.5);
-	doc.text("Du erhältst innerhalb Mai noch eine weitere E-Mail mit detaillierteren Informationen.");
+	doc.text("Du erhälst innerhalb Mai noch eine weitere E-Mail mit detaillierteren Informationen.");
 	doc.moveDown(0.5);
 	doc.text("Deine Eltern sind gebeten die untenstehenden Daten zu kontrollieren und die Teilnahmegebühr bis zum 21.03.2021 auf folgendes Konto zu überweisen:");
 	doc.moveDown(1);
@@ -477,11 +477,11 @@ const getReservationAttachment = function(firstNameChild, activities, reservatio
 	doc.moveDown(0.5);
 	doc.text("Euer Jugenddienst Unterland Team");
 
-	doc.addPage();
-	let grad2 = doc.linearGradient(0, 0, 30, 0);
-	grad2.stop(0, '#ffa500').stop(1, '#ffd27f');
-	doc.rect(0, 0, 30, 950);
-	doc.fill(grad2);
+	// doc.addPage();
+	// let grad2 = doc.linearGradient(0, 0, 30, 0);
+	// grad2.stop(0, '#ffa500').stop(1, '#ffd27f');
+	// doc.rect(0, 0, 30, 950);
+	// doc.fill(grad2);
 
 	doc.fontSize(26).fillAndStroke("#ffa500", "#000");
 	doc.moveDown(1).moveDown(1);
