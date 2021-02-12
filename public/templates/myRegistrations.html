@@ -26,7 +26,7 @@
 					<button type="button" ng-class='{"btn-info": confirmationLang == "it"}' class="btn btn-default btn-xs" ng-click="setConfirmationLang('it')">it</button>
 				</div>
 			</th>
-			<!--<th ng-show='platform.isJDUL() || platform.isTest()'></th>-->
+			<th ng-show='platform.isJDUL() || platform.isTest()'></th>
 		</tr>
 		<tr ng-repeat='reg in registrations | filter:filterReport(reg) | orderBy:colNameSort'>
 			<td>{{reg.activityId.eventId.location}} - {{reg.activityId.eventId.name}}</td>
@@ -47,7 +47,7 @@
 				<button  ng-class='{"disabled": !reg.isPaymentDone}' class="btn btn-info btn-small glyphicon glyphicon-file" type="button" ng-click="downloadConfirmation(reg._id, confirmationLang)"><div style="font-size:60%"><br />Download</div></button>
 			</td>
 
-			<!--<td ng-show='platform.isJDUL() || platform.isTest()'><button type="button" class="btn glyphicon glyphicon-trash" ng-click='deleteRegistration(reg._id)'></button></td>-->
+			<td ng-show='platform.isJDUL() || platform.isTest()'><button type="button" class="btn glyphicon glyphicon-trash" ng-click='deleteRegistration(reg._id)'></button></td>
 		</tr>
 	</table>
 </div>
