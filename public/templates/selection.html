@@ -2,7 +2,7 @@
 <div class='row'>
     <div class='col-sm-10'>
         <h2 ng-show="!platform.isKiso()" class='text-orange'>{{'SELECTION.TITLE' | translate}}</h2>
-        <h2 ng-show="platform.isKiso()" class='text-orange'>{{'SELECTION.TITLE_KISO' | translate}}</h2>
+        <!--<h2 ng-show="platform.isKiso()" class='text-orange'>{{'SELECTION.TITLE_KISO' | translate}}</h2>-->
     </div>
     <div class='col-sm-2' ng-show='iSvc.isAuthorized("admin")'>
         <a class='btn btn-success btn-block' href='/#/newEvent' role='button'>Neu</a>
@@ -26,6 +26,11 @@
     </div>
 </div> -->
 
+<div ng-show="platform.isKiso() && canReserveKiso()">
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSepf8YXPV14N7INGV6pnC9Ox12uDwwB-r1Dy291gqm5_bIHbA/viewform?embedded=true" width="640" height="1832" frameborder="0" marginheight="0" marginwidth="0">Wird geladen…</iframe>
+</div>
+
+<div ng-show="!platform.isKiso()">
 <div ng-repeat='loc in locations'>
     <div class='card-orange'>
         <a class='invisible-link' href='#/events/{{encodeFullURI(loc._id)}}'>
@@ -50,5 +55,5 @@
         </a>
     </div>
 </div>
-
+</div>
 </div>

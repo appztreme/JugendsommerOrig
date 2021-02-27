@@ -14,6 +14,18 @@ app.controller('GeoSelectionCtrl', function($scope, $location, GeoSvc, $rootScop
 		return encodeURI(encoded);
 	}
 
+    $scope.canReserveKiso = function() {
+		if(IdentitySvc.isAdmin()) return true;
+		else {
+			var visible = new Date("2021-03-02");
+			visible.setHours(19,0,0);
+			var deadline = new Date(ev.visibleTo);
+			console.log("visible", visible, deadline, new Date(Date.now()));
+			if(Date.now() > visible.getTime()) return true;
+			return false;
+		}
+	}
+
     const addNameProp = function (ar) {
         for(var i = 0; i < ar.length; i++) {
             if(ar[i].name === 'club') {
