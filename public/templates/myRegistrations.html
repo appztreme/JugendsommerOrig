@@ -11,7 +11,7 @@
 			<th>{{"MYRESERVATION.LABEL_ACTIVITY" | translate}}</th>
 			<th ng-show='!platform.isKiso()'>{{"MYRESERVATION.LABEL_ACCEPT" | translate}}</th>
 			<th>{{"MYRESERVATION.LABEL_PAYED" | translate}}</th>
-			<!-- <th>{{"MYRESERVATION.LABEL_WAITLIST" | translate}}</th> -->
+			<!--<th ng-show='platform.isJugendsommer()'>{{"MYRESERVATION.LABEL_WAITLIST" | translate}}</th>-->
 			<th>{{"MYRESERVATION.LABEL_FIRSTNAME_CHILD" | translate}}</th>
 			<th>{{"MYRESERVATION.LABEL_LASTNAME_CHILD" | translate}}</th>
 			<th>{{"MYRESERVATION.LABEL_BIRTHDAY_CHILD" | translate}}</th>
@@ -33,7 +33,7 @@
 			<td>{{reg.activityId.name}}</td>
 			<td ng-show='!platform.isKiso()' class='bg-success'>{{formatBool(true)}}</td>
 			<td ng-class='{"bg-success": reg.isPaymentDone, "bg-danger": !reg.isPaymentDone}'>{{formatBool(reg.isPaymentDone)}}</td>
-			<!-- <td ng-show="platform.isJugendsommer()">{{formatBool()}}</td> -->
+			<!--<td ng-show="platform.isJugendsommer()">{{formatBool()}}</td>-->
 			<td>{{reg.firstNameChild}}</td>
 			<td>{{reg.lastNameChild}}</td>
 			<td>{{reg.birthdayChild | date: 'dd/MM/yyyy'}}</td>
@@ -44,7 +44,7 @@
 			<td><a href='/#/editOwnRegistration/{{reg._id}}' class="btn btn-success btn-small glyphicon glyphicon-pencil" type="button"><div style="font-size: 60%"><br />Editieren</div></a></td>
 			<td ng-show='!(platform.isJDUL() || platform.isTest())'><button  ng-class='{"disabled": !reg.isPaymentDone}' class="btn btn-info btn-small glyphicon glyphicon-file" type="button" ng-click="downloadConfirmation(reg._id, 'de')"><div style="font-size:60%"><br />Download</div></button></td>
 			<td ng-show='(platform.isJDUL()  || platform.isTest())'>
-				<button  ng-class='{"disabled": !reg.isPaymentDone}' class="btn btn-info btn-small glyphicon glyphicon-file" type="button" ng-click="downloadConfirmation(reg._id, confirmationLang)"><div style="font-size:60%"><br />Download</div></button>
+				<button  ng-class='{"disabled": !reg.isPaymentDone && Date.now() > new Date("2021-03-21")}' class="btn btn-info btn-small glyphicon glyphicon-file" type="button" ng-click="downloadConfirmation(reg._id, confirmationLang)"><div style="font-size:60%"><br />Download</div></button>
 			</td>
 
 			<td ng-show='platform.isJDUL() || platform.isTest()'><button type="button" class="btn glyphicon glyphicon-trash" ng-click='deleteRegistration(reg._id)'></button></td>
