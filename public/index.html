@@ -62,5 +62,10 @@
 	<script src='lib/isteven-angular-multiselect/isteven-multi-select.js'></script>
 	<script src='env.js'></script>
 	<script src='build/app.js'></script>
+	​​​<script>
+		$(document).ready(function() {
+			jQuery('iframe').load(function(){jQuery('html,body').animate({scrollTop: 0}, 'slow');});
+		});
+	</script>
 </body>
 </html>
