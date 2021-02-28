@@ -27,14 +27,12 @@
 </div> -->
 
 <div ng-show="(platform.isKiso() && canReserveKiso() && lang == 'de') || platform.isTest()">
-    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdT1RbfCzE31cYqC_RsK8EtySSRaPDZlhmmqF6RQzSxRm595A/viewform?embedded=true" width="640" height="1832" frameborder="0" marginheight="0" marginwidth="0" onload="scroll(0,0)">Wird geladen…</iframe>
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdT1RbfCzE31cYqC_RsK8EtySSRaPDZlhmmqF6RQzSxRm595A/viewform?embedded=true" width="640" height="100%" frameborder="0" marginheight="0" marginwidth="0" onload="scroll(0,0)">Wird geladen…</iframe>
 </div>
 
 <div ng-show="(platform.isKiso() && canReserveKiso() && lang == 'it') || platform.isTest()">
-    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSepf8YXPV14N7INGV6pnC9Ox12uDwwB-r1Dy291gqm5_bIHbA/viewform?embedded=true" width="640" height="1832" frameborder="0" marginheight="0" marginwidth="0" onload="scroll(0,0)">Wird geladen…</iframe>
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSepf8YXPV14N7INGV6pnC9Ox12uDwwB-r1Dy291gqm5_bIHbA/viewform?embedded=true" width="640" height="100%" frameborder="0" marginheight="0" marginwidth="0" onload="scroll(0,0)">Wird geladen…</iframe>
 </div>
-
-<script>jQuery('iframe').load(function(){jQuery('html,body').animate({scrollTop: 0}, 'slow');});</script>
 
 <div ng-show="!platform.isKiso()">
 <div ng-repeat='loc in locations'>
