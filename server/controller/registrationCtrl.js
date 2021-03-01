@@ -327,6 +327,7 @@ exports.updateProperty = (req, res, next) => {
 }
 
 exports.sendPaymentMail = async(req, res, next) => {
+	console.log("payment all");
 	try {
 		let activityIds = undefined;
 		if(req.params.eventId) {
@@ -357,6 +358,7 @@ exports.sendPaymentMail = async(req, res, next) => {
 }
 
 exports.sendSinglePaymentMail = async(req, res, next) => {
+	console.log("single payment");
 	try {
 		let reg = await RegistrationRepo.findById(req.params.registrationId);
 		if(reg) {
