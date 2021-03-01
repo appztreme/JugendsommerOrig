@@ -26,12 +26,16 @@
     </div>
 </div> -->
 
-<div ng-show="(platform.isKiso() && canReserveKiso() && lang == 'de') || platform.isTest()" style="min-height:750px;">
+<div ng-show="(platform.isKiso() && canReserveKiso() && lang == 'de') || (platform.isTest() && lang == 'de')" style="min-height:750px;">
     <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdT1RbfCzE31cYqC_RsK8EtySSRaPDZlhmmqF6RQzSxRm595A/viewform?embedded=true" width="640" height="1500" frameborder="0" marginheight="0" marginwidth="0" onload="scroll(0,0)">Wird geladen…</iframe>
+    <br />
+    <button class="btn btn-primary" ng-click="reload()">neues Formular öffnen</button>
 </div>
 
-<div ng-show="(platform.isKiso() && canReserveKiso() && lang == 'it') || platform.isTest()" style="min-height:750px;">
+<div ng-show="(platform.isKiso() && canReserveKiso() && lang == 'it') || (platform.isTest() && lang == 'it')" style="min-height:750px;">
     <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSepf8YXPV14N7INGV6pnC9Ox12uDwwB-r1Dy291gqm5_bIHbA/viewform?embedded=true" width="640" height="1500" frameborder="0" marginheight="0" marginwidth="0" onload="scroll(0,0)">Wird geladen…</iframe>
+    <br />
+    <button class="btn btn-primary" ng-click="reload()">neues Formular öffnen</button>
 </div>
 
 <div ng-show="!platform.isKiso()">

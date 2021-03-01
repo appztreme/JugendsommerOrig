@@ -1,6 +1,6 @@
 var app = angular.module('js');
 
-app.controller('GeoSelectionCtrl', function($scope, $location, GeoSvc, $rootScope, $translate, IdentitySvc, PlatformSvc) {
+app.controller('GeoSelectionCtrl', function($scope, $location, $route, GeoSvc, $rootScope, $translate, IdentitySvc, PlatformSvc) {
     $scope.busyPromise = GeoSvc.getSelection();
     $scope.platform = PlatformSvc;
     $scope.lang = $translate.proposedLanguage() || $translate.user();
@@ -13,6 +13,10 @@ app.controller('GeoSelectionCtrl', function($scope, $location, GeoSvc, $rootScop
 		var encoded = str.replace('/', '%2F');
 		return encodeURI(encoded);
 	}
+
+    $scope.reload = function() {
+        $route.reload();
+    }
 
     $scope.canReserveKiso = function() {
 		if(IdentitySvc.isAdmin()) return true;
