@@ -11,7 +11,7 @@
 			<th>{{"MYRESERVATION.LABEL_ACTIVITY" | translate}}</th>
 			<th ng-show='!platform.isKiso()'>{{"MYRESERVATION.LABEL_ACCEPT" | translate}}</th>
 			<th>{{"MYRESERVATION.LABEL_PAYED" | translate}}</th>
-			<!--<th ng-show='platform.isJugendsommer()'>{{"MYRESERVATION.LABEL_WAITLIST" | translate}}</th>-->
+			<th ng-show='platform.isJugendsommer()'>{{"MYRESERVATION.LABEL_WAITLIST" | translate}}</th>
 			<th>{{"MYRESERVATION.LABEL_FIRSTNAME_CHILD" | translate}}</th>
 			<th>{{"MYRESERVATION.LABEL_LASTNAME_CHILD" | translate}}</th>
 			<th>{{"MYRESERVATION.LABEL_BIRTHDAY_CHILD" | translate}}</th>
@@ -33,7 +33,7 @@
 			<td>{{reg.activityId.name}}</td>
 			<td ng-show='!platform.isKiso()' class='bg-success'>{{formatBool(true)}}</td>
 			<td ng-class='{"bg-success": reg.isPaymentDone, "bg-danger": !reg.isPaymentDone}'>{{formatBool(reg.isPaymentDone)}}</td>
-			<!--<td ng-show="platform.isJugendsommer()">{{formatBool()}}</td>-->
+			<td ng-show="platform.isJugendsommer()">{{formatBool(reg.wasWaiting)}}</td>
 			<td>{{reg.firstNameChild}}</td>
 			<td>{{reg.lastNameChild}}</td>
 			<td>{{reg.birthdayChild | date: 'dd/MM/yyyy'}}</td>
