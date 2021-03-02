@@ -35,6 +35,7 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
             		$scope.emails = _.uniq(_.map($scope.registrations, function(r) {
                 		return r.emailParent;
 					})).join(';');
+					$scope.distinctCount = _.uniq(_.map($scope.registrations, function(r) { return r.firstNameChild.toUpperCase() + r.lastNameChild.toUpperCase() + r.birthdayChild.toString()})).length;
 					$scope.updateMasterIsPaymentDone();
     			});
 	//.error(function(err) {
@@ -317,7 +318,11 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 		{dbName: "registrationDate", colName: "Anmeldedatum"},
 		{dbName: "isPaymentDone", colName: "Bezahlt"},
 		{dbName: "isEmailNotified", colName: "Benachrichtigt"},
-		{dbName: "receiptNumber", colName: "Überweisungsnummer"}
+		{dbName: "receiptNumber", colName: "Überweisungsnummer"},
+		{dbName: "hasHealthIssues", colName: "Gesundheitliche Probleme"},
+		{dbName: "hasDisability", colName: "Beeinträchtigung"},
+		{dbName: "emailParent", colName: "Email Eltern"},
+		{dbName: "acceptsMediaPublication", colName: "Media"}
 	);
 
 	if(ReportCacheSvc.hasEventFilterParameter()) {
