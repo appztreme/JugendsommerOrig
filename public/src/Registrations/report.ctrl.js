@@ -322,7 +322,8 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 		{dbName: "hasHealthIssues", colName: "Gesundheitliche Probleme"},
 		{dbName: "hasDisability", colName: "Beeinträchtigung"},
 		{dbName: "emailParent", colName: "Email Eltern"},
-		{dbName: "acceptsMediaPublication", colName: "Media"}
+		{dbName: "acceptsMediaPublication", colName: "Media"},
+		{dbName: "schoolChild", colName: "Schulstufe"}
 	);
 
 	if(ReportCacheSvc.hasEventFilterParameter()) {

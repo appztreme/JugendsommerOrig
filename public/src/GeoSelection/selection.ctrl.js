@@ -4,6 +4,7 @@ app.controller('GeoSelectionCtrl', function($scope, $location, $route, GeoSvc, $
     $scope.busyPromise = GeoSvc.getSelection();
     $scope.platform = PlatformSvc;
     $scope.lang = $translate.proposedLanguage() || $translate.user();
+    $scope.iSvc = IdentitySvc;
 
     $rootScope.$on('$translateChangeSuccess', function() {
         $scope.lang = $translate.proposedLanguage() || $translate.user();

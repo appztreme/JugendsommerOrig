@@ -358,13 +358,15 @@ exports.sendPaymentMail = async(req, res, next) => {
 }
 
 exports.sendSinglePaymentMail = async(req, res, next) => {
-	console.log("single payment");
+	//console.log("single payment");
 	try {
 		let reg = await RegistrationRepo.findById(req.params.registrationId);
+		//console.log("single reg", reg);
 		if(reg) {
 			let instance = platform.getPlatform(req.get('host'));
 			let receiptNr = await SequenceRepo.nextReceipt();
 			mail.sendReceiptMail(reg.emailParent, [reg], receiptNr.seq, instance);
+			//console.log("sent mail");
 
 			res.status(201).json({ success: "true" });
 		}

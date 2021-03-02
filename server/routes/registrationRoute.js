@@ -18,7 +18,7 @@ router.delete('/:registrationId', auth.requiresRole("admin"), RegistrationContro
 
 router.post('/', auth.requiresApiLogin, RegistrationController.create);
 
-router.get('/send/receipt/single/:registrationId', auth.requiresRole('admin'), RegistrationController.sendSinglePaymentMail);
+router.get('/send/singlereceipt/:registrationId', auth.requiresRole('admin'), RegistrationController.sendSinglePaymentMail);
 
 router.get('/send/receipts/:eventId', auth.requiresRole('admin'), RegistrationController.sendPaymentMail);
 
