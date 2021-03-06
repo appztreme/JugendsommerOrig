@@ -22,6 +22,50 @@ function parseGender(local_gender) {
     else throw new Error(local_gender + " does not exist");
 }
 
+function parseSiblingReservation(siblingStr, lang) {
+    if(lang == 'de') {
+        if(siblingStr == 'Ja') return true;
+        else if(siblingStr == 'Nein') return false;
+        else if(siblingStr == '') return false;
+        else throw new Error(siblingStr + ' is not supported in parseSiblingReservation with lang ' + lang);
+    }
+    else if(lang == 'it') {
+        if(siblingStr == 'si') return true;
+        else if(siblingStr == 'no') return false;
+        else if(siblingStr == '') return false;
+        else throw new Error(siblingStr + ' is not supported in parseSiblingReservation with lang ' + lang);
+    }
+    else throw new Error(lang + ' is not supported in parseSiblingReservation');
+}
+
+function parseTShirtSize(shirtStr, lang) {
+    const sizes = [
+        {"name": '3-4 Jahre/89-104cm',             "name_it": '3-4 anni/89-104cm'},
+        {"name": '5-6 Jahre/110-116cm',            "name_it": '5-6 anni/110-116cm'},
+        {"name": '7-8 Jahre/122-128cm',            "name_it": '7-8 anni/122-128cm'},
+        {"name": '9-10 Jahre/134-140cm',           "name_it": '9-10 anni/134-140cm'},
+        {"name": '11-12 Jahre/146-152cm',          "name_it": '11-12 anni/146-152cm'},
+        {"name": '12-14 Jahre/152-164cm',          "name_it": '12-14 anni/152-164cm'},
+        {"name": 'Erwachsenengröße S',             "name_it": 'Taglia adulto S'},
+        {"name": 'Erwachsenengröße M',             "name_it": 'Taglia adulto M'},
+        {"name": 'Erwachsenengröße L',             "name_it": 'Misura adulti L'},
+        {"name": 'Erwachsenengröße XL',            "name_it": 'Misura adulti XL'},
+    ]
+    if(lang == 'de') {
+        for(var i=0; i < sizes.length; i++) {
+            if(sizes[i].name == shirtStr) return sizes[i].name;
+        }
+        throw new Error(shirtStr + ' is not supported in parseTShirtSize with lang ' + lang);
+    }
+    else if(lang == 'it') {
+        for(var i=0; i < sizes.length; i++) {
+            if(sizes[i].name_it == shirtStr) return sizes[i].name;
+        }
+        throw new Error(shirtStr + ' is not supported in parseTShirtSize with lang ' + lang);
+    }
+    else throw new Error(lang + ' is not supported in parseTShirtSize'); 
+}
+
 function parseRegDate(strDate) {
     const regDate = moment(strDate, "YYYY/MM/DD h:m:s");
     return regDate;
@@ -86,6 +130,9 @@ const transformSchemaDE = (row) => {
         nameContact2: row["Notfallkontakt 2"],
         telContact2: row["Telefon 2"],
         activityId: parseActivity2021(row["Kiso - Kindersommer"], 'de'),
+        tShirtSize: parseTShirtSize(row["T-Shirt Size"], 'de'),
+        isSiblingReservation: parseSiblingReservation(row["Handelt es sich um ein Geschwisterkind, das an der selben KiSo-Woche teilnimmt? (=Skonto 10 Euro)"], 'de'),
+        preferredFellow: row["Freund*in des Kindes (für Gruppeneinteilung - ohne Gewähr)"],
     }
 }
 
@@ -110,6 +157,9 @@ const transformSchemaIT = (row) => {
         nameContact2: row["Nome contatto emergenza 2"],
         telContact2: row["Telefono 2"],
         activityId: parseActivity2021(row["KiSo"], 'it'),
+        tShirtSize: parseTShirtSize(row["T-Shirt Size"], 'it'),
+        isSiblingReservation: parseSiblingReservation(row["Si tratta di un fratello/sorella che partecipa alla stessa settimana KiSo? (= sconto di 10 Euro)"], 'it'),
+        preferredFellow: row["Amico/a del bambino/della bambina (per il ragruppamento - senza garanzia)"]
     }
 }
 
