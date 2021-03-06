@@ -150,11 +150,13 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 		})
 	}
 
-	$scope.resendPaymentMail = function(receiptNumber) {
+	$scope.resendPaymentMail = function(receiptNumber, event) {
 		ReportCacheSvc.lastVerticalScrollPosition = window.pageYOffset || document.documentElement.scrollTop;
-		RegistrationSvc.resendPaymentMail(receiptNumber).then(function(err, res) {
-			$location.path('/report/');
-		})	
+		if(!event.detail || event.detail == 1){
+			RegistrationSvc.resendPaymentMail(receiptNumber).then(function(err, res) {
+				$location.path('/report/');
+			})
+		}		
 	}
 
 	$scope.setWaitlistFilter = function(b) {

@@ -216,7 +216,7 @@
 		<tr ng-repeat='reg in registrations | orderBy:[colNameSort,colNameSort2]'>
 			<td ng-class='{"bg-warning": isOnWait(reg), "bg-danger": isAfterDeadline(reg)}'><button class="btn glyphicon glyphicon-pencil" ng-disabled='!iSvc.isAuthorized("admin")' type="button" ng-click='editRegistration(reg._id)'></button></td>
 			<td ng-class='{"bg-warning": isOnWait(reg), "bg-danger": isAfterDeadline(reg)}'>
-				<button class="btn glyphicon glyphicon-euro btn-info" ng-show='iSvc.isAuthorized("admin") && !isEmailSent(reg) && (platform.isJugendsommer() || platform.isTest())' type="button" ng-click='sendPaymentMail(reg._id)'></button>
+				<button class="btn glyphicon glyphicon-euro btn-info" ng-show='iSvc.isAuthorized("admin") && !isEmailSent(reg) && (platform.isJugendsommer() || platform.isTest())' type="button" ng-click='sendPaymentMail(reg._id, $event)'></button>
 				<button class="btn glyphicon glyphicon-euro btn-warning" ng-show='iSvc.isAuthorized("admin") && isEmailSent(reg) && (platform.isJugendsommer() || platform.isTest())' type="button" ng-click='resendPaymentMail(reg.receiptNumber)'></button>
 			</td>
 			<td ng-class='{"bg-warning": isOnWait(reg), "bg-danger": isAfterDeadline(reg)}'><button type="button" class="btn glyphicon glyphicon-trash" ng-disabled='!iSvc.isAuthorized("admin")' ng-click='deleteRegistration(reg._id)'></button></td>

@@ -786,7 +786,7 @@ function getReceiptTable(res, rnumber) {
 		var fee = calculateReceiptFee(res[i], res[i].activityId);
 		sum += fee;
 		//console.log("sum", sum);
-		tblStart += '<tr><td style="border: 1px solid gray; padding: 2px;">' + res[i].activityId.eventId.location + ' - ' + res[i].activityId.eventId.name + '<br />' + res[i].activityId.eventId.location_it + ' - ' + res[i].activityId.eventId.name_it + '</td><td style="border: 1px solid gray; padding: 2px">' + res[i].activityId.name + '<br />' + res[i].activityId.name_it + '</td><td style="border: 1px solid gray; padding: 2px;">' + res[i].firstNameChild + ' ' + res[i].lastNameChild +'</td><td style="border: 1px solid gray; padding: 2px;">' + fee + '</td></tr>';
+		tblStart += '<tr><td style="border: 1px solid gray; padding: 2px;">' + res[i].activityId.eventId.location + ' - ' + res[i].activityId.eventId.name + '<br />' + res[i].activityId.eventId.location_it + ' - ' + res[i].activityId.eventId.name_it + '</td><td style="border: 1px solid gray; padding: 2px">' + res[i].activityId.name + '<br />' + res[i].activityId.name_it + '<br />' + moment(res[i].activityId.startDate).format("DD.MM") + ' - ' + moment(res[i].activityId.endDate).format("DD.MM") + '</td><td style="border: 1px solid gray; padding: 2px;">' + res[i].firstNameChild + ' ' + res[i].lastNameChild +'</td><td style="border: 1px solid gray; padding: 2px;">' + fee + '</td></tr>';
 		//console.log("html", tblStart);
 	}
 	tblStart += '<tr style="background-color:#ffa500"><td style="border:1px solid gray; padding: 2px;"><strong>Summe | somma in €</strong></td><td style="border: 1px solid gray;"></td><td style="border: 1px solid gray;"></td><td style="border: 1px solid gray; padding: 2px;">' + sum + '</td></tr>'
