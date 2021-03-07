@@ -163,6 +163,7 @@
 			<th>Betrag</th>
 			<th ng-show='platform.isKiso()'>Aufpreis</th>
 			<th ng-show='platform.isKiso()'>Geschwister</th>
+			<th ng-show='platform.isKiso()'>Reduktion</th>
 			<th>Geburtstag
 				<div ng-show="isBatchUpdateAllowed()" class="input-group"><ng-combo-date-picker ng-model="masterBirthdayChild" ng-min-date="2000-01-01" required></ng-combo-date-picker><div class="input-group-btn"><button type="button" class="btn btn-success" ng-click="updateBatchProperty('birthdayChild', masterBirthdayChild)">U</button></div> </div>
 			</th>
@@ -242,6 +243,7 @@
 			<td align="right">{{calculateFee(reg)}}</td>
 			<td ng-show='platform.isKiso()'>{{formatBool(reg.acceptsOptionalFee)}}</td>
 			<td ng-show='platform.isKiso()'>{{formatBool(reg.isSiblingReservation)}}</td>
+			<td ng-show='platform.isKiso()'>{{formatBool(reg.asksForReduction}}</td>
 			<td>{{reg.birthdayChild | date: 'dd/MM/yyyy'}}</td>
 			<td>{{reg.schoolChild}}</td>
 			<!-- <td>{{reg.healthChild}}</td> -->

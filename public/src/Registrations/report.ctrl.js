@@ -63,9 +63,13 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 		if(reg.isSiblingReservation) {
 			fee = fee - reg.activityId.eventId.siblingDiscount;
 		}
+		if(reg.asksForReduction) {
+			fee = fee - 10;
+		}
 		if(reg.activityId.eventId.deadline) {
 			if((moment(reg.activityId.eventId.deadline).hour(23).minute(59).second(59)).isBefore(moment(reg.registrationDate))) fee = fee + reg.activityId.eventId.penalty;	
 		}
+		
 		return fee;
 	}
 
