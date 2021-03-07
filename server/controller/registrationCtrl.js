@@ -182,6 +182,7 @@ exports.create = async(req, res, next) => {
 			canGoHomeAllone: req.body.canGoHomeAllone,
 			isSiblingReservation: req.body.isSiblingReservation,
 			acceptsOptionalFee: req.body.acceptsOptionalFee,
+			asksForReduction: req.body.asksForReduction,
 			acceptsNewsletter: req.body.acceptsNewsletter,
 			acceptsMediaPublication: req.body.acceptsMediaPublication,
 			commentInternal: req.body.commentInternal,
@@ -274,6 +275,7 @@ exports.update = (req, res, next) => {
 		reg.acceptsMediaPublication = req.body.acceptsMediaPublication;
 		reg.acceptsNewsletter = req.body.acceptsNewsletter;
 		reg.acceptsOptionalFee = req.body.acceptsOptionalFee;
+		reg.asksForReduction = req.body.asksForReduction;
 		reg.isSiblingReservation = req.body.isSiblingReservation;
 		reg.commentInternal = req.body.commentInternal;
 		reg.preferredFellow = req.body.preferredFellow;

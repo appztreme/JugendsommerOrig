@@ -140,6 +140,7 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 	$scope.acceptsNewsletter = false;
 	$scope.diagnosticDescription = null;
 	$scope.acceptsMediaPublication = false;
+	$scope.asksForReduction = false;
 	$scope.hasOwnEBike = undefined;
 
 	$scope.isEmailEqual = function() {
@@ -286,6 +287,7 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 				canGoHomeAllone: $scope.canGoHomeAllone,
 				isSiblingReservation: $scope.isSiblingReservation,
 				acceptsOptionalFee: $scope.acceptsOptionalFee,
+				asksForReduction: $scope.asksForReduction,
 				acceptsMediaPublication: $scope.acceptsMediaPublication,
 				acceptsNewsletter: $scope.acceptsNewsletter,
 				preferredFellow: $scope.preferredFellow,
@@ -337,6 +339,7 @@ app.controller('RegistrationCtrl', function($scope, $routeParams, $filter, $loca
 				$scope.heightChild = 0;
 				$scope.canSwim = false;
 				$scope.acceptsOptionalFee = false;
+				$scope.asksForReduction = false;
 				$scope.acceptsMediaPublication = false;
 				$scope.acceptsNewsletter = false;
 				$scope.isSiblingReservation = false;

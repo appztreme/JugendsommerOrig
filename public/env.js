@@ -230,7 +230,8 @@
             "LABEL_COVID_PRIO_START": "Ich erkläre, dass:",
             "LABEL_COVID_PRIO_WORK": "ich berufstätig (Homeoffice eingeschlossen!) bin und KEINE andere Möglichkeit zur Betreuung des Kindes/der Kinder durch einen zweiten Elternteil bzw. Erziehungsverantwortlichen, eine/n Partner/in oder nahe Angehörige habe.",
             "LABEL_COVID_PRIO_SOCIAL": "eine prekäre familiäre Situation vorliegt, die vom Sozialsprengel bestätigt werden kann.",
-            "LABEL_COVID_PRIO_NONE": "Keiner der beiden oberen Punkte zutrifft."
+            "LABEL_COVID_PRIO_NONE": "Keiner der beiden oberen Punkte zutrifft.",
+            "LABEL_ASKREDUCTION": "10 EUR Rabatt (unsere Unterstützung bei Bedürftigkeit)"
         },
         "MYRESERVATION": {
             "TITLE": "Reservierungen",
@@ -430,7 +431,8 @@
             "LABEL_COVID_PRIO_START": "Io dichiaro che:",
             "LABEL_COVID_PRIO_WORK": "Sono impiegato/a (questo vale anche per il lavoro da casa) e non ho NESSUNA possibilità di assistere il bambino attraverso il secondo genitore, attraverso un partner, un responsabile dell’educazione oppure un parente stretto.",
             "LABEL_COVID_PRIO_SOCIAL": "La situazione famigliare è precaria e questa situazione viene confermata dal distretto sociale.",
-            "LABEL_COVID_PRIO_NONE": "Nessuno dei due punti soprastanti mi riguarda."
+            "LABEL_COVID_PRIO_NONE": "Nessuno dei due punti soprastanti mi riguarda.",
+            "LABEL_ASKREDUCTION": "10 EUR sconto (il nostro sostegno in caso di bisogno)"
         },
         "MYRESERVATION": {
             "TITLE": "Prenotazioni",
