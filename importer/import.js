@@ -2,11 +2,11 @@ const parse = require('csv-parse');
 const path = require('path');
 const fs = require('fs');
 const users = require('./data/users.json');
-
+var mongoose = require('mongoose');
 const moment = require('moment');
 
-const Event = require('./../server/models/event');
-const Activity = require('./../server/models/activity');
+//const Event = require('./../server/models/event');
+//const Activity = require('./../server/models/activity');
 const Registration = require('./../server/models/registration');
 
 const chalk = require('chalk');
@@ -68,14 +68,21 @@ function parseTShirtSize(shirtStr, lang) {
 
 function parseRegDate(strDate) {
     const regDate = moment(strDate, "YYYY/MM/DD h:m:s");
-    return regDate;
+    return regDate.toDate();
 }
 
-function parseUser(userName) {
+function parseUser(userName, Email) {
     for(var i=0; i < users.length; i++) {
         if(users[i].userName == userName) return users[i]._id;
+        if(users[i].userEmail == userName) return users[i]._id;
+        if(users[i].firstName + ' ' + users[i].lastName == userName) return users[i]._id;
+        if(users[i].userName.replace(' ','') == userName.trim()) return users[i]._id;
+        if(users[i].userName.toLowerCase() == userName.toLowerCase()) return users[i]._id;
+        if(users[i].userEmail == Email) return users[i]._id;
+        if(users[i].userEmail.toLowerCase() == Email.toLowerCase()) return users[i]._id;
+        if(users[i].userEmail.toLowerCase().replace(' ','') == Email.toLowerCase().replace(' ','')) return users[i]._id;
     }
-    console.log(chalk.red(userName + ' not found in repo 2021'));
+    console.log(chalk.red(userName + ' (' + Email + ') ' + ' not found in repo 2021'));
 }
 
 function findWeek(weeks, weekStr, lang) {
@@ -88,6 +95,38 @@ function findWeek(weeks, weekStr, lang) {
         }
     }
     throw new Error(weekStr + ' not found in repo for lang: ' + lang);
+}
+
+function parseHasIssues(issueStr, lang) {
+    if(lang == 'de') {
+        if(issueStr == '') return false;
+        else if(issueStr.trim().toLowerCase() == 'no') return false;
+        else if(issueStr.trim().toLowerCase() == 'nein') return false;
+        else if(issueStr.trim().toLowerCase() == 'keine') return false;
+        else if(issueStr.trim() == '-') return false;
+        else if(issueStr.trim() == '/') return false;
+        else if(issueStr.trim().toLowerCase() == 'nien') return false;
+        else if(issueStr.trim().toLowerCase() == 'kein') return false;
+        else if(issueStr.trim().toLowerCase() == 'non conosciuti') return false;
+        else {
+            console.log(chalk.blue(issueStr));
+            return true;
+        }  
+    }
+    else if(lang == 'it') {
+        if(issueStr == '') return false;
+        else if(issueStr.trim().toLowerCase() == 'no') return false;
+        else if(issueStr.trim().toLowerCase() == 'nessuno') return false;
+        else if(issueStr.trim().toLowerCase() == 'niente') return false;
+        else if(issueStr.trim().toLowerCase() == 'non conosciuti') return false;
+        else if(issueStr.trim() == '-') return false;
+        else if(issueStr.trim() == '/') return false;
+        else {
+            console.log(chalk.blue(issueStr));
+            return true;
+        }
+    }
+    else throw new Error(lang + ' is not supported in parseHasHealthIssues');
 }
 
 function parseActivity2021(strWeek, lang) {
@@ -109,9 +148,63 @@ function parseActivity2021(strWeek, lang) {
     else throw new Error(lang + ' is not supported in parseActivity2021');
 }
 
+function parseMedia(str, lang) {
+    if(lang == 'de') {
+        if(str.includes("Ich willige mittels Anklicken des entsprechenden Buttons ein, dass Name und Nachnamen sowie Lichtbild für die in Punkt 10 der Datenschutzerklärung genannten Zwecke in den dort genannten Medien verwendet werden können.")) return true;
+        else return false;
+    }
+    else if(lang == 'it') {
+        if(str.includes("Cliccando il pulsante corrispondente, accetto che il mio nome e cognome e la mia fotografia possano essere utilizzati per gli")) return true;
+        else {
+            //console.log(chalk.yellow(str));
+            return false;
+        }
+        
+    }
+    else throw new Error(lang + ' is not supported in parseMedia');
+}
+
+function parseNews(str, lang) {
+    if(lang == 'de') {
+        if(str.includes("Ich möchte über altersspezifische Projekte für mein Kind Informiert werden.")) return true;
+        else return false;
+        //console.log(chalk.yellow(str));
+    }
+    else if(lang == 'it') {
+        if(str.includes("Vorrei essere informato sui progetti specifici per l'età del/la mio/a figlio/a.")) return true;
+        else return false;
+        //console.log(chalk.yellow(str));
+    }
+    else throw new Error(lang + ' is not supported in parseMedia');
+}
+
+function parseOptional(str, lang) {
+    if(lang == 'de') {
+        if(str.includes("10 EUR Spende")) return true;
+        else return false;
+    }
+    else if(lang == 'it') {
+        if(str.includes("10 EUR donazione")) return true;
+        else return false;
+    }
+    else throw new Error(lang + ' is not supported in parseOptional');
+}
+
+function parseReduction(str, lang) {
+    if(lang == 'de') {
+        if(str.includes("10 EUR Rabatt")) return true;
+        else return false;
+    }
+    else if(lang == 'it') {
+        if(str.includes("10 EUR sconto")) return true;
+        else return false;
+    }
+    else throw new Error(lang + ' is not supported in parseReduction'); 
+}
+
 const transformSchemaDE = (row) => {
     return {
-        userName: parseUser(row["Benutzername des angelegten Kontos auf www.kiso.bz.it"]),
+        userId: mongoose.Types.ObjectId(parseUser(row["Benutzername des angelegten Kontos auf www.kiso.bz.it"], row["Email"])),
         registrationDate: parseRegDate(row["Zeitstempel"]),
         firstNameParent: row["Vorname Elternteil"],
         lastNameParent: row["Familienname Elternteil"],
@@ -129,16 +222,24 @@ const transformSchemaDE = (row) => {
         telContact1: row["Telefon 1"],
         nameContact2: row["Notfallkontakt 2"],
         telContact2: row["Telefon 2"],
-        activityId: parseActivity2021(row["Kiso - Kindersommer"], 'de'),
+        activityId: mongoose.Types.ObjectId(parseActivity2021(row["Kiso - Kindersommer"], 'de')),
         tShirtSize: parseTShirtSize(row["T-Shirt Size"], 'de'),
         isSiblingReservation: parseSiblingReservation(row["Handelt es sich um ein Geschwisterkind, das an der selben KiSo-Woche teilnimmt? (=Skonto 10 Euro)"], 'de'),
         preferredFellow: row["Freund*in des Kindes (für Gruppeneinteilung - ohne Gewähr)"],
+        hasHealthIssues: parseHasIssues(row["Gesundheitliche Probleme (Unverträglichkeiten, etc.)?"], 'de'),
+        healthIllnes: row["Gesundheitliche Probleme (Unverträglichkeiten, etc.)?"],
+        hasDisability: parseHasIssues(row["Kind mit Beeinträchtigung?"], 'de'),
+        disabilityDescription: row["Kind mit Beeinträchtigung?"],
+        acceptsMediaPublication: parseMedia(row["Mit dem Anklicken eines Kästchen bestätigen Sie die jeweilige Aussage."], 'de'),
+        acceptsNewsletter: parseNews(row["Mit dem Anklicken eines Kästchen bestätigen Sie die jeweilige Aussage."], 'de'),
+        acceptsOptionalFee: parseOptional(row["freiwillige monetäre Hilfe:"], 'de'),
+        asksForReduction: parseReduction(row["freiwillige monetäre Hilfe:"], 'de'),
     }
 }
 
 const transformSchemaIT = (row) => {
     return {
-        userName: parseUser(row["Nome utente del account creato su www.kiso.bz.it"]),
+        userId: mongoose.Types.ObjectId(parseUser(row["Nome utente del account creato su www.kiso.bz.it"], row["Email"])),
         registrationDate: parseRegDate(row["Zeitstempel"]),
         firstNameParent: row["Nome genitore"],
         lastNameParent: row["Cognome genitore"],
@@ -156,10 +257,18 @@ const transformSchemaIT = (row) => {
         telContact1: row["Telefono 1"],
         nameContact2: row["Nome contatto emergenza 2"],
         telContact2: row["Telefono 2"],
-        activityId: parseActivity2021(row["KiSo"], 'it'),
+        activityId: mongoose.Types.ObjectId(parseActivity2021(row["KiSo"], 'it')),
         tShirtSize: parseTShirtSize(row["T-Shirt Size"], 'it'),
         isSiblingReservation: parseSiblingReservation(row["Si tratta di un fratello/sorella che partecipa alla stessa settimana KiSo? (= sconto di 10 Euro)"], 'it'),
-        preferredFellow: row["Amico/a del bambino/della bambina (per il ragruppamento - senza garanzia)"]
+        preferredFellow: row["Amico/a del bambino/della bambina (per il ragruppamento - senza garanzia)"],
+        hasHealthIssues: parseHasIssues(row["Problemi di salute (es. intolleranze alimentari)?"],'it'),
+        healthIllnes: row["Problemi di salute (es. intolleranze alimentari)?"],
+        hasDisability: parseHasIssues(row["Bambino/a con menomazioni?"], 'it'),
+        disabilityDescription: row["Bambino/a con menomazioni?"],
+        acceptsMediaPublication: parseMedia(row["Cliccando su una casella si conferma la rispettiva dichiarazione."], 'it'),
+        acceptsNewsletter: parseNews(row["Cliccando su una casella si conferma la rispettiva dichiarazione."], 'it'),
+        acceptsOptionalFee: parseOptional(row["Aiuto monetario (volontario):"], 'it'),
+        asksForReduction: parseReduction(row["Aiuto monetario (volontario):"], 'it'),
     }
 }
 
@@ -184,8 +293,50 @@ const loadCSV = async () => {
 }
 
 (async () => {
-    const records = await loadCSV();
-    //console.info(records);
+    let records = await loadCSV();
+    records.sort((a,b) => a.registrationDate - b.registrationDate);
+    for(let rec of records) {
+        let r = new Registration();
+        r.userId = rec.UserId;
+        r.registrationDate = rec.registrationDate;
+        r.firstNameParent = rec.firstNameParent;
+        r.lastNameParent = rec.lastNameParent;
+        r.phoneNumberParent = rec.phoneNumberParent;
+        r.emailParent = rec.emailParent;
+        r.firstNameChild = rec.firstNameChild;
+        r.lastNameChild = rec.lastNameChild;
+        r.gender = rec.gender;
+        r.birthdayChild = rec.birthdayChild;
+        r.schoolChild = rec.schoolChild;
+        r.addressChild = rec.addressChild;
+        r.cityChild = rec.cityChild;
+        r.taxNumber = rec.taxNumber;
+        r.nameContact1 = rec.nameContact1;
+        r.telContact1 = rec.telContact1;
+        r.nameContact2 = rec.nameContact2;
+        r.telContact2 = rec.telContact2;
+        r.activityId = rec.activityId;
+        r.tShirtSize = rec.tShirtSize;
+        r.isSiblingReservation = rec.isSiblingReservation;
+        r.preferredFellow = rec.preferredFellow;
+        r.hasHealthIssues = rec.hasHealthIssues;
+        r.healthIllnes = rec.healthIllnes;
+        r.hasDisability = rec.hasDisability;
+        r.disabilityDescription = rec.disabilityDescription;
+        r.acceptsMediaPublication = rec.acceptsMediaPublication;
+        r.acceptsNewsletter = rec.acceptsNewsletter;
+        r.acceptsOptionalFee = rec.acceptsOptionalFee;
+        r.asksForReduction = rec.asksForReduction;
+        //console.log(r);
+        let errorVal = r.validateSync();
+        if(errorVal) console.log(chalk.blue(errorVal));
+        try {
+            await r.save();
+        } catch(errSave) {
+            console.log(chalk.red(errSave));
+        }
+    }
+    console.log(chalk.blue("END"));
 })()
 
 

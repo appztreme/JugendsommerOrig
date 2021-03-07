@@ -39,6 +39,7 @@
     "redis": "2.6.5"
   },
   "devDependencies": {
+    "csv-parse": "4.15.3",
     "expect": "1.20.2",
     "expect-express": "1.2.0",
     "gulp": "3.9.1",
