@@ -13,10 +13,10 @@ app.controller('MyRegistrationsCtrl', function($scope, FileSaver, Blob, $locatio
 	}
 
 	$scope.isDownloadDisabled = function(reg) {
-		if(reg.isPaymentDone) return false;
+		if(!reg.isPaymentDone) return true;
 		else {
-			if(Date.now() < new Date("2021-03-21")) return false;
-			else return true;
+			if(Date.now() < new Date("2021-03-21")) return true;
+			else return false;
 		}
 	}
 
