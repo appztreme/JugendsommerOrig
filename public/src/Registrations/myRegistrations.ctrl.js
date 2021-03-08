@@ -37,7 +37,8 @@ app.controller('MyRegistrationsCtrl', function($scope, FileSaver, Blob, $locatio
 		});
 	};
 
-	$scope.downloadConfirmation = function(registrationId, lang) {
+	$scope.downloadConfirmation = function(reg, registrationId, lang) {
+		if($scope.isDownloadDisabled(reg)) return;
 		RegistrationSvc.getMyConfirmation(registrationId, lang)
 			.success(function(pdf) {
 				var blob = new Blob([pdf], {type: 'application/pdf'});
