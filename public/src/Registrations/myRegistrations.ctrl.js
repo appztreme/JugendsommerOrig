@@ -12,6 +12,14 @@ app.controller('MyRegistrationsCtrl', function($scope, FileSaver, Blob, $locatio
 		$scope.confirmationLang = l;
 	}
 
+	$scope.isDownloadDisabled = function(reg) {
+		if(reg.isPaymentDone) return false;
+		else {
+			if(Date.now() < new Date("2021-03-21")) return false;
+			else return true;
+		}
+	}
+
 	$scope.lang = $translate.proposedLanguage() || $translate.user();
 
     $rootScope.$on('$translateChangeSuccess', function() {
