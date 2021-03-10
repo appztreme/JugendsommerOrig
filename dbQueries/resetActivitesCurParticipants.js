@@ -15,13 +15,13 @@ const main = async() => {
         const activities = await Activity.find().where('eventId').equals(ev._id);
         for(let j = 0; j < activities.length; j++) {
             const act = activities[j];
-            if(act.name.subString(0,4) == "1. W") { act.curParticipants = 49; }
-            if(act.name.subString(0,4) == "2. W") { act.curParticipants = 58; }
-            if(act.name.subString(0,4) == "3. W") { act.curParticipants = 59; }
-            if(act.name.subString(0,4) == "4. W") { act.curParticipants = 56; }
-            if(act.name.subString(0,4) == "5. W") { act.curParticipants = 54; }
-            if(act.name.subString(0,4) == "6. W") { act.curParticipants = 47; }
-            if(act.name.subString(0,4) == "7. W") { act.curParticipants = 36; }
+            if(act.name.startsWith("1. W")) { act.curParticipants = 49; }
+            if(act.name.startsWith("2. W")) { act.curParticipants = 58; }
+            if(act.name.startsWith("3. W")) { act.curParticipants = 59; }
+            if(act.name.startsWith("4. W")) { act.curParticipants = 56; }
+            if(act.name.startsWith("5. W")) { act.curParticipants = 54; }
+            if(act.name.startsWith("6. W")) { act.curParticipants = 47; }
+            if(act.name.startsWith("7. W")) { act.curParticipants = 36; }
 
             
             if(verbose) {
