@@ -36,28 +36,29 @@ const main = async() => {
                     isRefunded: false,
                     gender: 'male',
                     wasWaiting: false,
-                    _id: mongoose.Types.ObjectId("604815c86cd56d710de28014"),
-                    registrationDate: new Date("2021-03-02T06:15:11.000Z"),
+                    _id: mongoose.Types.ObjectId("604815c86cd56d710de28015"),
+                    registrationDate: new Date("2021-03-02T06:18:01.000Z"),
                     firstNameParent: 'Lukas',
                     lastNameParent: 'Steinmair',
                     phoneNumberParent: '3479569832',
                     emailParent: 'lukas.steinmair@hotmail.com',
-                    firstNameChild: 'Benno',
+                    firstNameChild: 'David',
                     lastNameChild: 'Steinmair',
-                    birthdayChild: new Date("2012-09-10T00:00:00.000Z"),
-                    schoolChild: '3. Klasse Grundschule',
-                    taxNumber: 'STNBNN12P10B220X',
+                    birthdayChild: new Date("010-11-25T00:00:00.000Z"),
+                    schoolChild: '5. Klasse Grundschule',
+                    taxNumber: 'STNDVD10S25A952V',
                     nameContact1: 'Anna Maria Bogana',
                     telContact1: '3396103134',
                     nameContact2: 'Steffi Fink',
                     telContact2: '3396785319',
-                    activityId: mongoose.Types.ObjectId("6038abe37252de909162d31c"),
+                    activityId: mongoose.Types.ObjectId("6038aeea1b6ec0909019ab15"),
                     tShirtSize: '9-10 Jahre/134-140cm',
                     preferredFellow: '',
                     healthIllnes: 'nein',
                     disabilityDescription: 'nein',
                     userId: mongoose.Types.ObjectId("6034dd98584ebf0334d7a5e1")
-      }) 
+                  }
+    ); 
     let valErr = reg.validateSync();
     console.log("error", valErr);
     await reg.save();
