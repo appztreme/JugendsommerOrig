@@ -2,7 +2,7 @@ const parse = require('csv-parse');
 const path = require('path');
 const fs = require('fs');
 const users = require('./data/users.json');
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 const moment = require('moment');
 
 //const Event = require('./../server/models/event');
@@ -292,12 +292,20 @@ const loadCSV = async () => {
     return result;
 }
 
+const loadMissing = async () => {
+    let result = [];
+    let fde = await processFile(path.resolve(__dirname, 'data', "kiso_2021_de_missing.csv"), transformSchemaDE);
+    for(let rde of fde) { result.push(rde); }
+    return result; 
+}
+
 (async () => {
-    let records = await loadCSV();
+    let records = await loadMissing();
     records.sort((a,b) => a.registrationDate - b.registrationDate);
+    //console.info(records);
     for(let rec of records) {
         let r = new Registration();
-        r.userId = rec.UserId;
+        r.userId = rec.userId;
         r.registrationDate = rec.registrationDate;
         r.firstNameParent = rec.firstNameParent;
         r.lastNameParent = rec.lastNameParent;
@@ -327,15 +335,15 @@ const loadCSV = async () => {
         r.acceptsNewsletter = rec.acceptsNewsletter;
         r.acceptsOptionalFee = rec.acceptsOptionalFee;
         r.asksForReduction = rec.asksForReduction;
-        //console.log(r);
         let errorVal = r.validateSync();
         if(errorVal) console.log(chalk.blue(errorVal));
-        try {
-            await r.save();
-        } catch(errSave) {
-            console.log(chalk.red(errSave));
-        }
-    }
+        console.log(r);
+    //     // try {
+    //     //     await r.save();
+    //     // } catch(errSave) {
+    //     //     console.log(chalk.red(errSave));
+    //     // }
+     }
     console.log(chalk.blue("END"));
 })()
 
