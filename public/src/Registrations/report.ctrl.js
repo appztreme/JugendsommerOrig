@@ -26,6 +26,7 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
     	RegistrationSvc.find($scope.eventIdFilter, $scope.activityIdFilter, $scope.yearFilter, $scope.nameFilter, $scope.firstnameFilter, $scope.receiptFilter, $scope.cityFilter)
 				.success(function (regs) {
 					$scope.registrations = regs;
+					console.log(regs);
 					if($scope.waitlistFilter === true) {
 						$scope.registrations = _.filter(regs, function(x) { return $scope.isOnWait(x); });
 					} else if ($scope.waitlistFilter === false) {
