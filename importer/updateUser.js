@@ -13,10 +13,11 @@ const main = async() => {
             //.where('emailParent').equals(up.emailParent)
             .where('activityId').equals(mongoose.Types.ObjectId(up.activityId));
 
-        if(! reg[0] && reg.length != 1) { console.log(chalk.red(`${up.firstNameChild} + ${up.lastNameChild} birthday ${up.birthdayChild} emailParent: ${up.emailParent} in ${up.activityId} not found!`))}
+        if(! reg[0] && reg.length != 1 && !reg.userId) { console.log(chalk.red(`${up.firstNameChild} + ${up.lastNameChild} birthday ${up.birthdayChild} emailParent: ${up.emailParent} in ${up.activityId} not found!`))}
         else {
-            // reg.userId = mongoose.Types.ObjectId(up.userId);
-            // await reg.save();
+            reg.userId = mongoose.Types.ObjectId(up.userId);
+            await reg.save();
+            console.log(chalk.blue("updated " + up.lastNameChild));
         }
     }
     console.log(chalk.green("Done"));
