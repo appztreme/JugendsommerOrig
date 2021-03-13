@@ -10,7 +10,7 @@ const main = async() => {
             .where('firstNameChild').equals(up.firstNameChild)
             .where('lastNameChild').equals(up.lastNameChild)
             .where('birthdayChild').equals(new Date(up.birthdayChild))
-            .where('emailParent').equals(up.emailParent)
+            //.where('emailParent').equals(up.emailParent)
             .where('activityId').equals(mongoose.Types.ObjectId(up.activityId));
 
         if(! reg[0] && reg.length != 1) { console.log(chalk.red(`${up.firstNameChild} + ${up.lastNameChild} birthday ${up.birthdayChild} emailParent: ${up.emailParent} in ${up.activityId} not found!`))}
