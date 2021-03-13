@@ -15,8 +15,8 @@ const main = async() => {
 
         if(! reg[0] && reg.length != 1 && !reg.userId) { console.log(chalk.red(`${up.firstNameChild} + ${up.lastNameChild} birthday ${up.birthdayChild} emailParent: ${up.emailParent} in ${up.activityId} not found!`))}
         else {
-            reg.userId = mongoose.Types.ObjectId(up.userId);
-            await reg.save();
+            reg[0].userId = mongoose.Types.ObjectId(up.userId);
+            await reg[0].save();
             console.log(chalk.blue("updated " + up.lastNameChild));
         }
     }
