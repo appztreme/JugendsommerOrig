@@ -548,7 +548,7 @@ const getReservationAttachment = function(firstNameChild, activities, reservatio
 	return doc;
 }
 
-const getReservationAttachmentWaitingList = function(firstNameChild, activities){
+const getReservationAttachmentWaitingList = function(firstNameChild, activities, reservation){
 	const config = {
 		logo: "public/assets/jdul_logo.png",
 		address: "Widumdurchgang 1 | 39044 Neumarkt | Tel.: +39 0471 812717",
