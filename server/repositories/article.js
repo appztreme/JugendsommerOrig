@@ -1,28 +1,41 @@
 'use strict';
 const { aggregate } = require('./../models/article');
 const Article = require('./../models/article');
+const Loan = require('./../models/loan');
+
+const curYear = (new Date().getMonth() >= 10) ? new Date().getFullYear()+1 : new Date().getFullYear();
+const startCurYear = new Date(curYear+"-1-1");
 
 exports.count = () => {
     return Article.count({});
 }
 
-exports.findAll = () => {
-    return Article
-        //.find({})
-        .aggregate([
-            { $lookup: {
-                    from: "loans",
-                    localField: "_id",
-                    foreignField: "article",
-                    as: "loans"
-                }
-             },
-             { $sort: {
-                type: 1, name: 1, code: 1
-             }}
-        ])
-        //.sort({type: 1, name: 1, code: 1})
-        .exec();
+exports.findAll = async () => {
+    let result = [];
+    let articles = await Article.find({}).sort({type: 1, name: 1, code: 1}).exec();
+    for (var i = 0; i < articles.length; i++) {
+        let loans = await Loan.find({ article: articles[i]._id, to: { $gte: startCurYear }}, { from: 1, to: 1}).exec();
+        let r = articles[i].toJSON();
+        r.loans = loans;
+        result.push(r);
+    }
+    return result;
+    // return Article
+    //     //.find({})
+    //     .aggregate([
+    //         { $lookup: {
+    //                 from: "loans",
+    //                 localField: "_id",
+    //                 foreignField: "article",
+    //                 as: "loans"
+    //             }
+    //          },
+    //          { $sort: {
+    //             type: 1, name: 1, code: 1
+    //          }}
+    //     ])
+    //     //.sort({type: 1, name: 1, code: 1})
+    //     .exec();
 }
 
 exports.findById = (id) => {
