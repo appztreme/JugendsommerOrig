@@ -20,6 +20,15 @@ exports.create = async (req, res, next) => {
     }
 }
 
+exports.createById = async(req, res, next) => {
+    try {
+        const loan = await LoanRepo.createById(req.body.articleId, req.body.lender, req.body.phoneNumber, req.body.from, req.body.to, req.body.maxDuration);
+        res.status(201).json(loan);
+    } catch(err) {
+        next(err);
+    } 
+}
+
 exports.delete = async (req, res, next) => {
     try {
         const loan = await LoanRepo.findById(req.params.loanId);

@@ -28,6 +28,16 @@ app.service('LoansSvc', function($http) {
                                             });
 	};
 
+    this.createById = function(articleId, lender, phoneNumber, from, to, maxDuration) {
+        return $http.post('/api/loans/byId', { articleId: articleId,
+                                             lender: lender,
+                                             phoneNumber: phoneNumber,
+                                             from: from,
+                                             to: to,
+                                             maxDuration: maxDuration
+                                            });
+	};
+
 	this.delete = function(loanId) {
 		return $http.delete('/api/loans/' + loanId);
 	};

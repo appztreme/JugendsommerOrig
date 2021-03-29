@@ -1,4 +1,5 @@
 'use strict';
+const { aggregate } = require('./../models/article');
 const Article = require('./../models/article');
 
 exports.count = () => {
@@ -7,8 +8,20 @@ exports.count = () => {
 
 exports.findAll = () => {
     return Article
-        .find({})
-        .sort({type: 1, name: 1, code: 1})
+        //.find({})
+        .aggregate([
+            { $lookup: {
+                    from: "loans",
+                    localField: "_id",
+                    foreignField: "article",
+                    as: "loans"
+                }
+             },
+             { $sort: {
+                type: 1, name: 1, code: 1
+             }}
+        ])
+        //.sort({type: 1, name: 1, code: 1})
         .exec();
 }
 

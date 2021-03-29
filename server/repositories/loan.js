@@ -2,6 +2,7 @@
 const Loan = require('./../models/loan');
 const Article = require('./../models/article');
 const moment = require('moment');
+// const { catch } = require('../db_shop');
 
 exports.find = (from, to, articleId, location, lender) => {
     //console.log("params", from, to, articleId, location, lender);
@@ -119,6 +120,33 @@ exports.create = async (articleName, location, lender, phoneNumber, from, to, st
     }
     else {
         throw new Error(`Artikel dieses Typs sind in den Zeitraum von ${moment(from).format('YYYY-MM-DD')} bis ${moment(to).format('YYYY-MM-DD')} nicht verfügbar`);
+    }
+}
+
+exports.createById = async (articleId, lender, phoneNumber, from, to, maxDuration) => {
+    console.log(articleId, from, to, lender, phoneNumber, maxDuration);
+    // console.log("from", moment(from).isSameOrAfter(moment("2018-03-04")));
+    if(!isFromGteNow(from))
+        throw new Error(`Es kann nicht in die Vergangenheit gebucht werden. Anfangsdatum: ${moment(from).format('YYYY-MM-DD')}`);
+    if(!isFromLteTo(from,to))
+        throw new Error('Das Anfangsdatum muß kleiner/gleich den Enddatum sein.');
+    if(!isDurationValid(from, to, maxDuration))
+        throw new Error(`Der Artikel kann nicht länger als ${maxDuration} Tage reserviert werden.`);
+
+    const l = new Loan({
+            location: '-',
+            lender,
+            phoneNumberLender: phoneNumber,
+            from,
+            to,
+            article: articleId
+        });
+    try {
+        const newLoan = await l.save();
+        return findLoanById(newLoan._id);
+    } catch(errSave) {
+        console.log(errSave);
+        throw errSave;
     }
 }
 
