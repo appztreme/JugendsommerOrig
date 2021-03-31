@@ -51,6 +51,7 @@ app.use('/api/locations', require('./server/routes/locationRoute'));
 app.use('/api/contact', require('./server/routes/contactRoute'));
 app.use('/api/articles', require('./server/routes/articleRoute'));
 app.use('/api/loans', require('./server/routes/loanRoute'));
+app.use('/api/presence', require('./server/routes/presenceRoute'));
 
 require('./server/passport.config')();
 

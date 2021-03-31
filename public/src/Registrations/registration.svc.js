@@ -106,4 +106,12 @@ app.service('RegistrationSvc', function($http) {
 	this.getChildrenPerEvent = function(eventId) {
 		return $http.get('/api/registrations/children/'+eventId);
 	}
+
+	this.getPresencePerActivity = function(activityId) {
+		return $http.get('/api/presence/'+activityId);
+	}
+
+	this.updatePresence = function(_id, registrationId, date, isPresent) {
+		return $http.post('/api/presence/updateIsPresent', { _id: _id, registrationId: registrationId, date: date, isPresent: isPresent });
+	}
 });

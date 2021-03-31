@@ -53,7 +53,7 @@
 			<th>Nachname</th>
 			<th>Geburtstag</th>
 			<th ng-repeat='d in grp[0].eventDuration'>
-				{{d}}
+				{{d.label}}
 			</th>
 		</tr>
 		</thead>
@@ -64,7 +64,12 @@
 				<td>{{reg.firstNameChild}}</td>
 				<td>{{reg.lastNameChild}}</td>
 				<td>{{reg.birthdayChild | date: 'dd/MM/yyyy'}}</td>
-				<td ng-repeat='d in reg.eventDuration'> </td>
+				<td ng-repeat='d in reg.eventDuration' ng-mouseover="menuopen=true" ng-mouseleave="menuopen=false" ng-class="{'bg-success': d.isPresent, 'bg-warning': !d.isPresent }">
+					<div class="btn-group" role="group" ng-show="menuopen" aria-label="..." >
+						<button type="button" class="btn btn-default" ng-class='{"btn-info": d.isPresent}' ng-click="updatePresence(d, true, reg._id)">+</button>
+						<button type="button" class="btn btn-default" ng-class='{"btn-info": !d.isPresent}' ng-click="updatePresence(d, false, reg._id)">-</button>
+					  </div>
+				</td>
 			</tr>
 		</tbody>
 	</table>
