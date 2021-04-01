@@ -77,7 +77,7 @@ app.controller('ShopReservationCtrl', function($scope, $routeParams, IdentitySvc
                 overv.ticked = false;
                 overv.icon = '<span class="glyphicon glyphicon-th-large"  />';
                 overv.disabled = $scope.isDisabledArticle(overv);
-                result.push(overv);
+                if(!overv.isDisabledArticle) { result.push(overv); }
                 lastType = overv.type;
             }
         }
