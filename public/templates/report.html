@@ -305,7 +305,11 @@
 			<th>Kontak2</th>
 			<th>Tel. Kontakt2</th>
 			<th>T-Shirt</th>
-			<th>Beeinträchtigung</th>
+			<th ng-show='!platform.isJDUL()'>Gesundheit. Probleme</th>
+			<th>Unverträglichkeiten</th>
+			<th>Allergien</th>
+			<th>Medikamente</th>
+			<th ng-show='!platform.isJDUL()'>Beeinträchtigung</th>
 			<th>Diagnose</th>
 			<th ng-show='platform.isJDUL()'>Kann Schwimmen</th>
 			<th ng-show='platform.isJDUL()'>Darf allein nach Hause</th>
@@ -341,7 +345,11 @@
 			<td>{{reg.nameContact2}}</td>
 			<td>{{reg.telContact2}}</td>
 			<td>{{reg.tShirtSize}}</td>
-			<td>{{formatBool(reg.hasDisability)}}</td>
+			<td ng-show='!platform.isJDUL()'>{{formatBool(reg.hasHealthIssues)}}</td>
+			<td>{{reg.healthIncompatibility}}</td>
+			<td>{{reg.healthAllergy}}</td>
+			<td>{{reg.healthIllnes}}</td>
+			<td ng-show='!platform.isJDUL()'>{{formatBool(reg.hasDisability)}}</td>
 			<td>{{reg.disabilityDescription}}</td>
 			<td ng-show='platform.isJDUL()'>{{formatBool(reg.canSwim)}}</td>
 			<td ng-show='platform.isJDUL()'>{{formatBool(reg.canGoHomeAllone)}}</td>
