@@ -12,7 +12,7 @@ exports.count = () => {
 
 exports.findAll = async () => {
     let result = [];
-    let articles = await Article.find({}).sort({type: 1, name: 1, code: 1}).exec();
+    let articles = await Article.find({}).sort({type: 1, name: 1}).exec();
     for (var i = 0; i < articles.length; i++) {
         let loans = await Loan.find({ article: articles[i]._id, to: { $gte: startCurYear }}, { from: 1, to: 1}).exec();
         let r = articles[i].toJSON();
@@ -58,16 +58,18 @@ exports.findOverview = (search) => {
                     ]
                 }
             },
+            { $sort: { 'name': 1 }},
             { $group:
                 { _id: "$type",
                   count: { $sum: 1 },
                   children: { $push: { _id: "$_id", code: "$code", name: "$name", description: "$description", location: "$location", status: "$status", isInSet: "$isInSet" }}
                 }
             },
-            { $sort: {_id: 1, 'children.name': 1 }}
+            { $sort: { 'children.name': 1 }}
         ]).exec();
     } else {
     return Article.aggregate([
+        { $sort: { 'name': 1 }},
         { $group:
             { _id: "$type",
               count: { $sum: 1 },

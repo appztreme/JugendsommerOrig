@@ -3,6 +3,7 @@ var app = angular.module('js');
 app.controller('ArticleNewCtrl', function($scope, $location, ArticlesSvc, NotificationSvc) {
 	$scope.title = 'Artikel hinzufügen';
 	$scope.articles = [];
+	$scope.location = ' ';
 
 	$scope.save = function() {
 		if($scope.name) {

@@ -41,7 +41,7 @@
                         <div ng-repeat="c in grp.children" class="list-group-item list-group-item-warning">
                             <div style="width: 25px; height: 25px; border: 2px solid grey; border-radius: 25px; margin-left: 5px" ng-class="{'pull-left': true, 'bg-success': c.status === 'free', 'bg-danger': c.status === 'lent', 'bg-gray': c.status === 'blocked'}"></div>
                             <span style="margin-left: 10px" class="list-group-item-heading pull-left"><strong>{{c.name}}</strong></span>
-                            <span style="margin-left: 10px" class="list-group-item-text pull-left">{{c.location}}</span>
+                            <!--<span style="margin-left: 10px" class="list-group-item-text pull-left">{{c.location}}</span>-->
                             <a ng-show="iSvc.isAuthorized('admin')" href="/#/shop/editArticle/{{c._id}}" role="button" class="btn btn-lg btn-default pull-right" style="margin-right: 5px"><span class="glyphicon glyphicon-pencil"></span></a>
                             <button ng-show="iSvc.isAuthorized('admin')" class="btn btn-lg btn-default glyphicon glyphicon-ban-circle pull-right" style="margin-right: 5px" ng-click="toggleBlock(c._id, c.status)"></button>
                             <button ng-show="iSvc.isAuthorized('admin')" class="btn btn-lg btn-default glyphicon glyphicon-trash pull-right" style="margin-right: 5px" ng-click="deleteArticle(c._id)"></button>
