@@ -4,21 +4,21 @@ const chalk = require('chalk');
 const mongoose = require('mongoose');
 
 const main = async() => {
-    const fromActivityId = mongoose.Types.ObjectId("5fea00153c7e6aa25a6e3b01");
-    const toActivityId = mongoose.Types.ObjectId("5fe9ff7870559ba25e40cce6");
+    const w5RittenJSActivityId = mongoose.Types.ObjectId("6007f2fbe6146a8dab8c9b29");
+    const w5RittenAktivActivityId = mongoose.Types.ObjectId("6007f39811614b82bd00c703");
 
-    const fromActivity = await Activity.findById(fromActivityId);
-    const toActivity = await Activity.findById(toActivityId);
+    const w5RittenJSActivity = await Activity.findById(w5RittenJSActivityId);
+    const w5RittenAktivActivity = await Activity.findById(w5RittenAktivActivityId);
 
-    // fromActivity.curParticipants = 0;
-    // toActivity.curParticipants = 18;
+    w5RittenJSActivity.curParticipants = 21;
+    w5RittenAktivActivity.curParticipants = 18;
 
-    // await fromActivity.save();
-    // await toActivity.save();
+    await w5RittenJSActivity.save();
+    await w5RittenAktivActivity.save();
 
-    const reg = await Registration.findById(mongoose.Types.ObjectId("602ac72ffbd219b240426984"));
-    reg.activityId = toActivityId;
-    await reg.save();
+    // const reg = await Registration.findById(mongoose.Types.ObjectId("602ac72ffbd219b240426984"));
+    // reg.activityId = toActivityId;
+    // await reg.save();
 
 
 
