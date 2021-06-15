@@ -17,7 +17,7 @@ const main = async() => {
     // await toActivity.save();
 
     const reg = await Registration.findById(mongoose.Types.ObjectId("602ac72ffbd219b240426984"));
-    reg.activityId = toActivity;
+    reg.activityId = toActivityId;
     await reg.save();
 
 
