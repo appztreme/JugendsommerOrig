@@ -33,14 +33,18 @@
 			<th>Woche</th>
 			<th>Vorname</th>
 			<th>Nachname</th>
-			<th>FrühBetreuung</th>
+			<!-- <th>FrühBetreuung</th> -->
 			<th>Geburtstag</th>
 			<th>Schulstufe</th>
-			<th>Gesundheit</th>
+			<!-- <th>Gesundheit</th> -->
+			<th>Unverträglichkeiten</th>
+			<th>Allergien</th>
+			<th>Medikamente</th>
+			<th>Diagnose</th>
 			<th ng-show='platform.isJDUL()'>Kann Schwimmen</th>
 			<th ng-show='platform.isJDUL()'>Darf allein nach Hause</th>
 			<th ng-show='platform.isJDUL()'>Kommentar Intern</th>
-			<th>Adresse</th>
+			<!-- <th>Adresse</th> -->
 			<th>Wohnort</th>
 			<th>Vorname Eltern</th>
 			<th>Nachname Eltern</th>
@@ -50,6 +54,7 @@
 			<th>Tel. Kontakt1</th>
 			<th>Kontak2</th>
 			<th>Tel. Kontakt2</th>
+			<th>Media</th>
 			<th>Anmeldedatum</th>
 		</tr>
 		<tr ng-repeat='reg in registrations | orderBy:colNameSort'>
@@ -57,14 +62,18 @@
 			<td>{{reg.activityId.name}}</td>
 			<td>{{reg.firstNameChild}}</td>
 			<td>{{reg.lastNameChild}}</td>
-			<td>{{formatBool(reg.needsPreCare)}}</td>
+			<!-- <td>{{formatBool(reg.needsPreCare)}}</td> -->
 			<td>{{reg.birthdayChild | date: 'dd/MM/yyyy'}}</td>
 			<td>{{reg.schoolChild}}</td>
-			<td>{{reg.healthChild}}</td>
+			<td>{{reg.healthIncompatibility}}</td>
+			<td>{{reg.healthAllergy}}</td>
+			<td>{{reg.healthIllnes}}</td>
+			<td>{{reg.disabilityDescription}}</td>
+			<!-- <td>{{reg.healthChild}}</td> -->
 			<td ng-show='platform.isJDUL()'>{{formatBool(reg.canSwim)}}</td>
 			<td ng-show='platform.isJDUL()'>{{formatBool(reg.canGoHomeAllone)}}</td>
 			<td ng-show='platform.isJDUL()'>{{reg.commentInternal}}</td>
-			<td>{{reg.addressChild}}</td>
+			<!-- <td>{{reg.addressChild}}</td> -->
 			<td>{{reg.cityChild}}</td>
 			<td>{{reg.firstNameParent}}</td>
 			<td>{{reg.lastNameParent}}</td>
@@ -74,6 +83,7 @@
 			<td>{{reg.telContact1}}</td>
 			<td>{{reg.nameContact2}}</td>
 			<td>{{reg.telContact2}}</td>
+			<td>{{formatBool(reg.acceptsMediaPublication)}}</td>
 			<td>{{reg.registrationDate | date: 'dd/MM/yyyy : hh.mm.ss'}}</td>
 		</tr>
 	</table>
@@ -86,8 +96,12 @@
 			<th>Nachname</th>
 			<th>Geburtstag</th>
 			<th>Schulstufe</th>
-			<th>Gesundheit</th>
-			<th>Adresse</th>
+			<th>Unverträglichkeiten</th>
+			<th>Allergien</th>
+			<th>Medikamente</th>
+			<th>Diagnose</th>
+			<!-- <th>Gesundheit</th> -->
+			<!-- <th>Adresse</th> -->
 			<th>Wohnort</th>
 			<th>Vorname Eltern</th>
 			<th>Nachname Eltern</th>
@@ -97,6 +111,7 @@
 			<th>Tel. Kontakt1</th>
 			<th>Kontak2</th>
 			<th>Tel. Kontakt2</th>
+			<th>Media</th>
 			<th>Anmeldedatum</th>
 		</tr>
 		<tr ng-repeat='reg in registrations | orderBy:colNameSort'>
@@ -106,8 +121,12 @@
 			<td>{{reg.lastNameChild}}</td>
 			<td>{{reg.birthdayChild | date: 'dd/MM/yyyy'}}</td>
 			<td>{{reg.schoolChild}}</td>
-			<td>{{reg.healthChild}}</td>
-			<td>{{reg.addressChild}}</td>
+			<td>{{reg.healthIncompatibility}}</td>
+			<td>{{reg.healthAllergy}}</td>
+			<td>{{reg.healthIllnes}}</td>
+			<td>{{reg.disabilityDescription}}</td>
+			<!-- <td>{{reg.healthChild}}</td> -->
+			<!-- <td>{{reg.addressChild}}</td> -->
 			<td>{{reg.cityChild}}</td>
 			<td>{{reg.firstNameParent}}</td>
 			<td>{{reg.lastNameParent}}</td>
@@ -117,6 +136,7 @@
 			<td>{{reg.telContact1}}</td>
 			<td>{{reg.nameContact2}}</td>
 			<td>{{reg.telContact2}}</td>
+			<td>{{formatBool(reg.acceptsMediaPublication)}}</td>
 			<td>{{reg.registrationDate | date: 'dd/MM/yyyy : hh.mm.ss'}}</td>
 		</tr>
 	</table>
