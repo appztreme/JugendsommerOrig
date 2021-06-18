@@ -138,6 +138,7 @@
 			<th></th>
 			<th></th>
 			<th></th>
+			<th></th>
 			<th>Programm</th>
 			<th>Woche</th>
 			<th>Vorname
@@ -220,6 +221,7 @@
 				<a class="btn glyphicon glyphicon-euro btn-info" ng-show='iSvc.isAuthorized("admin") && !isEmailSent(reg) && (platform.isJugendsommer() || platform.isTest())' type="button" ng-click='sendPaymentMail(reg._id, $event)'></a>
 				<a class="btn glyphicon glyphicon-euro btn-warning" ng-show='iSvc.isAuthorized("admin") && isEmailSent(reg) && (platform.isJugendsommer() || platform.isTest())' type="button" ng-click='resendPaymentMail(reg.receiptNumber)'></a>
 			</td>
+			<td ng-show='!(platform.isJDUL())' ng-class='{"bg-warning": isOnWait(reg), "bg-danger": isAfterDeadline(reg)}'><button  ng-class='{"disabled": !reg.isPaymentDone}' class="btn btn-info btn-small glyphicon glyphicon-file" type="button" ng-click="downloadConfirmation(reg, reg._id, 'de')"><div style="font-size:25%"><br />Download</div></button></td>
 			<td ng-class='{"bg-warning": isOnWait(reg), "bg-danger": isAfterDeadline(reg)}'><button type="button" class="btn glyphicon glyphicon-trash" ng-disabled='!iSvc.isAuthorized("admin")' ng-click='deleteRegistration(reg._id)'></button></td>
 			<td ng-class='{"bg-warning": isOnWait(reg), "bg-danger": isAfterDeadline(reg)}'></td>
 			<td>{{reg.activityId.eventId.location}} - {{reg.activityId.eventId.name}}</td>

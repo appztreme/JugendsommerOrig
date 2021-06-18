@@ -1,6 +1,6 @@
 var app = angular.module('js');
 
-app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc, NotificationSvc, ReportCacheSvc, PlatformSvc) {
+app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc, NotificationSvc, ReportCacheSvc, PlatformSvc, FileSaver) {
 	$scope.busyPromise = RegistrationSvc.find() || RegistrationSvc.updateIsPaymentDone();
 
 	var host = $location.$$host.toLowerCase();
@@ -162,6 +162,20 @@ app.controller('ReportCtrl', function($scope, $location, $route, RegistrationSvc
 				$location.path('/report/');
 			})
 		}		
+	}
+
+	$scope.downloadConfirmation = function(reg, registrationId, lang) {
+		RegistrationSvc.getMyConfirmation(registrationId, lang)
+			.success(function(pdf) {
+				var blob = new Blob([pdf], {type: 'application/pdf'});
+				//var txt = await blob.text();
+				//console.log("blob",  blob.size)
+				NotificationSvc.notify("Download");
+             	FileSaver.saveAs(blob, "confirmation.pdf");
+			}).error(function(err) {
+				NotificationSvc.warn(err);
+				//console.log("err", err);
+			})
 	}
 
 	$scope.setWaitlistFilter = function(b) {
