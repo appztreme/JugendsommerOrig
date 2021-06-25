@@ -5,7 +5,7 @@ app.factory('PlatformSvc', function(conf) {
 	return {
                 host: undefined,
 
-                isKiso: function() { return !!this.host && this.host.indexOf('kiso') !== -1; },
+                isKiso: function() { return !!this.host && (this.host.indexOf('kiso') !== -1 || this.host.indexOf('projects-jd.bz') !== -1 ); },
 
                 isJugendsommer: function() { return !!this.host && this.host.indexOf('jugendsommer') !== -1; },
 
