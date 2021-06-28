@@ -248,7 +248,7 @@ exports.getConfirmationPDF = async function(instance, reservations, lang) {
 		doc.moveDown(1);
 		doc.font('Helvetica-Bold').text(child, { align: 'center', width: 430 });
 		doc.moveDown(1);
-		doc.font('Helvetica').text("an folgenden Sommerprogrammen des " + config.member + " " + new Date().getFullYear() + " teilgenommen hat:", { align: 'left', width: 430 });
+		doc.font('Helvetica').text("an folgenden Sommerprogrammen des " + config.member + " " + registrationsPerChild[0].registrationDate.getFullYear() + " teilgenommen hat:", { align: 'left', width: 430 });
 		doc.moveDown(1);
 		let fee = 0;
 		for(let reg of registrationsPerChild) {

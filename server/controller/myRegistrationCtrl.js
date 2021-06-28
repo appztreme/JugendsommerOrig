@@ -16,7 +16,7 @@ const startPrevYear = new Date(prevYear, 0, 1);
 exports.find = (req, res, next) => {
 	const instance = platform.getPlatform(req.hostname);
 	//console.log(instance);
-	const minDate = instance.isKiso ? startCurYear : startCurYear;
+	const minDate = instance.isKiso ? startPrevYear : startCurYear;
 	Registration.find({ userId: req.params.userId })
 	    .where('registrationDate').gte(minDate)
 		.populate({path: 'activityId', populate: {path: 'eventId'}})
