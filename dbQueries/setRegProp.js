@@ -5,10 +5,10 @@ const mongoose = require('mongoose');
 const moment = require('moment');
 
 const main = async() => {
-    let activityFrom = await Activity.findById(mongoose.Types.ObjectId("6007f28c11614b82bd00c701"));
-    let activityTo = await Activity.findById(mongoose.Types.ObjectId("6007f33e5747a38d9c9c3ddb"));
+    let activityFrom = await Activity.findById(mongoose.Types.ObjectId("6007f2ace6146a8dab8c9b28"));
+    let activityTo = await Activity.findById(mongoose.Types.ObjectId("6007f35c11614b82bd00c702"));
     
-    let reg = await Registration.findById(mongoose.Types.ObjectId("6056ef75d858d9260c57d5bd"));
+    let reg = await Registration.findById(mongoose.Types.ObjectId("6056ef75d858d9260c57d5be"));
     reg.activityId = activityTo._id;
 
     await reg.save();
